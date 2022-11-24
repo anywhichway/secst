@@ -1,0 +1,77 @@
+h1[The Joy of SECST]
+
+SECST is a semantic, extensible, computational, styleable tagged markup language. You can use it to joyfully
+create compelling, interactive documents backed by HTML.
+
+h1[Design Objectives]
+
+Easy to understand, simple syntax, semantic
+Easy to learn, limited syntax, semantic
+Easy to extend uniform syntax, declarative language elements
+Secure
+Performant - simple syntax
+Small - simple syntax
+Configurable - declarative language elements
+Comprehensive - all of semantic HTML and more (extendable)
+Programmable - simple event handling plus API
+Computational - Reactivity built in, advanced math built in, simple user input mechanisms
+Styleable - optional capability
+Portable - HTML output
+SEO Friendly - browser or server rendering
+
+
+h1[For Markdown Authors]
+
+h1[For Designers]
+
+h1[For Programmers]
+
+h2[In Document Programing]
+
+h2[Extending and Meta Document]
+
+h1[Architecture]
+
+h1[Security]
+
+code(language="latex" run)[Lift = \frac{1}{2} \rho v^2 S C_L\]
+
+This is plain text
+with a underline[single] line break
+
+This had double
+
+p[This is a simple paragraph]
+
+p(#id1 align="left")[This is a paragraph with strong[strong] content.
+   And, a newline with a quoted tag "strong[strong]" and a tag with no space after strong[strong].
+]
+style(selector="#id1")[
+ float:right;
+]
+listeners(selector="#id1")[
+ attributeChanged(event) {
+  console.log(event)
+ },
+ disconnected(event) {
+  console.log(event)
+ },
+ click() { alert("clicked") }
+]
+ol(type="I")[
+ li[item one]
+]
+
+hr[]
+p[
+ value(#v1 visible autosize format="$${value}")[$(#v2) + $(#v3)]
+ value(#v2 visible autosize format="$${value}" extract="\$([\d.]*)")[1]
+ value(#v3 visible autosize type="currency-usd")[2]
+ 
+ 
+ value(#v4 visible  src="./sample.json5")[]
+ value(#v5 visible src="./sample.json5")[]
+]
+script[
+ (() => { console.log(["foo"]); })();
+]

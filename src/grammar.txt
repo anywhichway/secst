@@ -1,0 +1,123 @@
+ {
+
+    }
+    start
+        = _ content:content* _ { return content }
+
+    content
+        = script / expression / stringcontent
+
+    expression
+        = tag:tag options:options? "[" _ content:content* _ "]" space:_? {
+            if(space.length>0) content.push(space.join(""));
+            const {attributes, classes, id } = options||{};
+            return {tag, content, id, attributes, classes, location:location()};
+        }
+
+    script "script"
+        = "script" bracketed:bracketed { return {tag:"script", content:[bracketed.substring(1,bracketed.length-1)] } }
+
+    bracketed "bracketed"
+        = BRACKETOPEN text:(not_bracketed/bracketed)* BRACKETCLOSE { return "[" + text.join("") + "]" }
+
+    not_bracketed
+        = not:(!BRACKETCLOSE !BRACKETOPEN.) { return not.join("");}
+
+    BRACKETOPEN = '['
+
+    BRACKETCLOSE = ']'
+
+    stringcontent
+        = quoted / (start:nonreturnchars rest:(escapequoted / anything)* {return start + rest.join("")})
+
+    escapequoted
+        = string:quoted {return ' "' + string + '"'}
+
+    nonreturnchars "nonreturn or tab chars"
+        = !expression char:[ a-z0-9_\-~`!@#$%^&*()_+=\{\}|\\;:"'<,>.?/]i { return char; }
+
+    anything "anything but bracket"
+        = !expression char:[ a-z0-9_\-`~!@#$%^&*()_+=\{\}|\\;:"'<,>.?/\n\r\t]i  { return char; }
+
+    tag
+        = token
+
+    options "options"
+        = "(" _ id:id? _ attributes:attributelist? _ classes:class* _ ")" {
+            var o = {};
+            o.id=id;
+            o.classList = classes;
+            o.attributes = (attributes||[]).reduce((attributes,[name,value]) => { attributes[name] = value; return attributes; },{}); return o;
+        }
+
+    id "id"
+        = "#" token:token { return token }
+
+    class
+        = "." cls:token { return cls }
+
+    keyvaluelist "key value list"
+        = first:keyvalue rest:( _ "," keyvalue)* { return [first,...rest.map((value) => value.pop())] }
+
+    keyvalue "key value pair"
+        = key:token _ ":" _ ["] value:[ a-z0-9_\-~`!@#$%^&*()_+=\[\]|\;'<>.?/]i* ["] { return [key,value.join("")]; }
+
+    attributelist
+        = attribute:(unaryattribute / attribute) _ attributelist:attributelist* { return [attribute].concat(...attributelist) }
+
+    attribute
+        =  name:token _ "=" _ value:quoted { return [name,value] }
+
+    unaryattribute
+        = hidden / checked / selected / visible / reversed / readonly / run / disabled / static / autosize /url
+
+    hidden
+        = "hidden" { return ["hidden",""] }
+
+    checked
+        = "checked" { return ["checked",""] }
+
+    selected
+        = "selected" { return ["selected",""] }
+
+    visible
+        = "visible" { return ["visible",""] }
+
+    reversed
+        = "reversed" { return ["reversed",""] }
+
+    readonly
+        = "readonly" { return ["readonly",""] }
+
+    run
+        = "run" { return ["run",""] }
+
+    disabled
+        = "disabled" { return ["disabled",""] }
+
+    static
+        = "static" { return ["static",""] }
+
+    autosize
+        = "autosize" { return ["autosize",""] }
+
+    url "url"
+        = prefix:urlprefix path:[a-z0-9_\-~`!@#$%^&*_+=\{\}\[\]|\\:;'<,>.?/]i* {
+            try { new URL(path.join(),document.baseURI); return ["url",prefix+path.join("")]; }
+            catch(e) { error(e+"") }
+        }
+
+    urlprefix
+        = "https://" / "./"
+
+    token "token"
+        = start:[a-z~!$%&*:@#]i rest:[a-z$%&*:@#0-9_\-]i* { return start + rest.join("") }
+
+    quoted "quoted"
+       = [\"] value:string [\"] { return value }
+
+    string "string"
+        = value:[ a-z0-9_\-~`!@#$%^&*()_+=\{\}\[\]|\\:;'<,>.?/]i* { return value.join("") }
+
+    _ "whitespace"
+        = [ \t\n\r]*

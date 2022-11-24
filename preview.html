@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pegjs/0.9.0/peg.min.js"></script>
+    <script src="./src/parser.js"></script>
+    <script src="./secst.js"></script>
+</head>
+<body>
+
+<script type="module">
+    //import _ from "./index.js";
+    document.addEventListener("DOMContentLoaded",async ()=> {
+        let markup;
+        const render = async () => {
+            const newmarkup = await fetch("./markup.txt").then((response) => response.text());
+            if(markup!==newmarkup) {
+                const {dom,errors} = await SECST.transform(await parser(),markup=newmarkup,{styleAllowed:"*"});
+                console.log(errors);
+                await SECST.resolve(dom.body);
+                document.body.innerHTML = "";
+                while(dom.body.firstChild) {
+                    document.body.appendChild(dom.body.firstChild)
+                }
+            }
+        }
+        await render();
+        Object.entries(SECST.listeners).forEach(([key,value]) => {
+            document.body.addEventListener(key,value);
+        });
+        setInterval(render,1000);
+    })
+</script>
+</body>
+</html>

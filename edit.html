@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/codemirror.min.css" integrity="sha512-uf06llspW44/LZpHzHT6qBOIVODjWtv4MxCricRxkzvopAlSWnTf6hpZTFxuuZcuNE9CBQhqE0Seu1CoRk84nQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/codemirror.min.js" integrity="sha512-8RnEqURPUc5aqFEN04aQEiPlSAdE0jlFS/9iGgUyNtwFnSKCXhmB6ZTNl7LnDtDWKabJIASzXrzD0K+LYexU9g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pegjs/0.9.0/peg.min.js"></script>
+    <script src="./parser.js"></script>
+    <script type="text/javascript" async="" src="https://cdn.jsdelivr.net/npm/@anywhichway/quick-component@0.0.12" component="https://cdn.jsdelivr.net/npm/@anywhichway/math-science-formula@0.0.5"></script>
+</head>
+<body>
+<style>
+    .CodeMirror {
+        flex: auto;
+        height: auto;
+        width: auto;
+        border: solid black 1px;
+        margin-left: 18px;
+        max-width: 33%;
+        float:left;
+    }
+</style>
+<textarea id="code">
+
+</textarea>
+<div id="output" style="float:right">
+
+</div>
+<script>
+    let markup;
+    document.addEventListener("DOMContentLoaded",async ()=> {
+        const styleAllowed = "*",
+            code = document.getElementById("code");
+        code.innerHTML = markup = await fetch("./markup.txt").then((response) => response.text());
+        const editor = CodeMirror.fromTextArea(code,{scrollbarStyle:"native",lineWrapping:true,lineNumbers:true});
+        editor.on("change",async () => {
+            await transform(editor.getValue(),{styleAllowed})
+        });
+        document.getElementById("output").addEventListener("change",(event) => {
+            const template = event.target.getAttribute("data-template");
+            if(event.target.tagName==="INPUT" && template!==null && (event.target.value+"")!=="[object Promise]") {
+                if(event.target.type==="checkbox") {
+                    if(event.target.value!==event.target.checked+"") {
+                        event.target.value = event.target.checked+"";
+                    }
+                }
+                event.target.setAttribute("data-template",extractValue(event.target));
+                [...event.target.dependents||[]].forEach(async (el) => {
+                    el.rawValue = await resolveDataTemplate(el.getAttribute("data-template"));
+                    el.value = formatValue(el);
+                    if(el.hasAttribute("data-autosize")) {
+                        el.style.width = Math.min(80,Math.max(1,el.value.length))+"ch";
+                    }
+                })
+            }
+        });
+        document.getElementById("output").addEventListener("click",(event) => {
+            if(event.target.tagName==="INPUT" && event.target.type==="checkbox") {
+                if(event.target.value!==event.target.checked+"") {
+                    event.target.value = event.target.checked+"";
+                }
+            }
+        });
+        document.getElementById("output").addEventListener("input",(event) => {
+            const template = event.target.getAttribute("data-template");
+            if(event.target.tagName==="INPUT" && template!==null) {
+                event.target.setAttribute("data-template",extractValue(event.target));
+                event.target.style.width = Math.min(80,Math.max(1,event.target.value.length))+"ch";
+                [...event.target.dependents||[]].forEach(async (el) => {
+                    el.rawValue = await resolveDataTemplate(el.getAttribute("data-template"));
+                    el.value = formatValue(el);
+                    if(el.hasAttribute("data-autosize")) {
+                        el.style.width = Math.min(80,Math.max(1,el.value.length))+"ch";
+                    }
+                })
+            }
+        });
+        await transform(code.value,{styleAllowed});
+        setInterval(async () => {
+            const newmarkup = await fetch("./markup.txt").then((response) => response.text());
+            if(markup!==newmarkup) {
+                code.innerHTML = markup = markup;
+            }
+        },1000)
+    })
+</script>
+<script type="module">
+    import replaceAsync from "https://cdn.jsdelivr.net/npm/string-replace-async@3.0.2";
+    import {tags, universalAttributes} from "./tags.js";
+
+    window.tagupObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            const target = mutation.target;
+            if (mutation.type === "attributes") {
+                const event = new Event("attributeChanged");
+                event.attributeName = mutation.attributeName;
+                event.attributeNamespace = mutation.attributeNamespace;
+                event.oldValue = mutation.oldValue;
+                event.value = target.getAttribute(event.attributeName);
+                target.dispatchEvent(event);
+            } else if(mutation.type==="childList") {
+                [...mutation.removedNodes].forEach((el) => {
+                    const event = new Event("disconnected");
+                    el.dispatchEvent(event);
+                })
+            }
+        });
+    });
+
+    window.extractValue = (el) => {
+        const extract = el.getAttribute("data-extract");
+        if(extract) {
+            const match = [...el.value.matchAll(new RegExp(extract,"g"))][0];
+            if(match) {
+                return match[1];
+            }
+        }
+        return el.value;
+    }
+    window.formatValue = (el) => {
+        const template = el.getAttribute("data-format");
+        if(template) {
+            return (new Function("value","return `" + template + "`"))(el.rawValue)
+        }
+        return el.rawValue;
+    };
+
+    const patchTopLevel = (tree) => {
+        let previous;
+        return tree.reduce((result,node) => {
+            if(typeof(node)==="string") {
+                const paragraphs = node.split("\n\n");
+                paragraphs.forEach((paragraph,i) => {
+                    if(i===0 && previous) {
+                        previous.content.push(paragraph);
+                    } else {
+                        previous = {tag:"p",content:[paragraph]};
+                        result.push(previous)
+                    }
+                })
+            } else if(previous && !tags[node.tag]?.allowAsRoot) {
+                previous.content.push(node);
+            } else {
+                previous = null;
+                result.push(node);
+            }
+            return result;
+        },[]);
+    }
+
+    const validateNode = async ({node,path=[],errors=[]}) => {
+            if(!node || typeof(node)!=="object") {
+                return;
+            }
+            const tag = node.tag;
+            let config = tags[node.tag];
+            if(!config) {
+                node.drop = true;
+                errors.push(new parser.SyntaxError(`Dropping unknown tag ${tag}`,null,null,node.location));
+                return errors;
+            }
+            if(path.length===0 && !config.allowAsRoot) {
+                node.drop = true;
+               errors.push(new parser.SyntaxError(`${tag} is not permitted as a root level element`,null,null,node.location));
+               return errors;
+            }
+            if(config.parentRequired && (path.length==0 || !config.parentRequired.includes(path[path.length-1].tag))) {
+                node.drop = true;
+                errors.push(new parser.SyntaxError(`${tag} required parent to be one of`,JSON.stringify(config.parentRequired),path[path.length-1].tag,node.location));
+                return errors;
+            }
+
+            let ancestorIndex;
+            if(path.length>0 && !config.indirectChildAllowed && Array.isArray(config.contentAllowed) && !config.contentAllowed.includes(tag) && (ancestorIndex = path.findIndex((ancestor) => ancestor.tag===tag)!==-1)) {
+                node.drop = true;
+                const ancestor = path[ancestorIndex+1];
+                ancestor.content.splice(ancestor.content.findIndex((node) => node.tag===tag),1,...node.content);
+                errors.push(new parser.SyntaxError(`${tag} is not permitted as a nested element of self. Elevating content.`,null,null,node.location));
+            }
+
+            node.options ||= {};
+            node.options.attributes ||= {};
+
+            if(config.transform) {
+                await config.transform(node);
+            }
+            if(node.content.length>0 && !config.contentAllowed) {
+                while(node.content.length) { // try remove whitespace
+                    const item = node.content[0];
+                    if(typeof(item)!=="string" || item.trim().length!==0) {
+                        break;
+                    }
+                    node.content.shift();
+                }
+                if(node.content.length>0) {
+                    errors.push(new parser.SyntaxError(`${tag} is not permitted to have any content. Dropping content.`,null,JSON.stringify(node.content),node.location));
+                    node.content = [];
+                }
+            }
+            node.content = await node.content.reduce(async (content,child) => {
+                content = await content;
+                const type = typeof(child);
+                if(type==="string") {
+                    if(config.contentAllowed) {
+                        content.push(child);
+                        return content;
+                    }
+                    errors.push(new parser.SyntaxError(`${tag} does not allow string child. Dropping child.`,null,null,node.location))
+                }
+                if(child && type==="object") {
+                    if(!config.contentAllowed.includes(child.tag)) {
+                        errors.push(new parser.SyntaxError(`${tag} does not allow child ${child.tag}. Dropping child.`,null,null,node.location))
+                    } else {
+                        await validateNode({node:child,path:[...path,node],errors})
+                        if(!child.drop)  {
+                            content.push(child);
+                            // elevate trailing space to parent
+                            if(child.content[child.content.length-1]===" ") {
+                               content.push(child.content.pop());
+                            }
+                        }
+                    }
+                    return content;
+                }
+                errors.push(new parser.SyntaxError(`${tag} has unexpected child type ${type} ${child}. Dropping child.`,null,null,node.location));
+                return content;
+            },[]);
+            config.attributesAllowed ||= {};
+            Object.entries(node.options?.attributes||{}).forEach(([key,value]) => {
+                const attributeAllowed = universalAttributes[key] || config.attributesAllowed[key],
+                    type = typeof(attributeAllowed);
+                if(type==="function") {
+                    const result = attributeAllowed(value,node);
+                    delete node.options.attributes[key];
+                    if(result) {
+                        Object.assign(node.options.attributes,result);
+                    }
+
+                } else if(attributeAllowed && type==="object") {
+                    if(attributeAllowed.transform) {
+                        const result = attributeAllowed.transform(value,node);
+                        delete node.options.attributes[key];
+                        if(result) {
+                            Object.assign(node.options.attributes,result);
+                        }
+                    }
+                    if(attributeAllowed.default && node.options?.attributes[key] == null) {
+                        node.options.attributes[key] = attributeAllowed.default;
+                    }
+                    if (attributeAllowed.required && node.options?.attributes[key] == null) {
+                        errors.push(new parser.SyntaxError(`${tag} is required to have attribute '${key}'`,null,null,node.location));
+                        return;
+                    }
+                    if(attributeAllowed.validate) {
+                        let valid;
+                        try {
+                            valid = attributeAllowed.validate(value,node);
+                        } catch(e) {
+                            valid = e+"";
+                        }
+                        if(valid!==true) {
+                            delete node.options.attributes[key];
+                            errors.push(new parser.SyntaxError(`${tag} the value of attribute '${key}' is invalid`,valid,value,node.location));
+                        }
+                    }
+                } else if(attributeAllowed!==true) {
+                    delete node.options.attributes[key];
+                    errors.push(new parser.SyntaxError(`${tag} does not allow attribute ${key}`,null,JSON.stringify(value),node.location))
+                }
+            })
+            if(node.options?.attributes.style) {
+                const styleAllowed = config.styleAllowed;
+                if(typeof(styleAllowed)==="function") {
+                    node.options.style = styleAllowed(node.options.style,node);
+                } else if(!styleAllowed) {
+                    delete node.options.style;
+                    errors.push(new parser.SyntaxError(`${tag} does not allow styling. Dropping style`,null,null,node.location))
+                }
+            }
+            if(tag!==node.tag) { // node was transformed to a different node type, so validate that also
+                await validateNode({node,path,errors});
+            }
+            return errors;
+        };
+    const toDOMNodes = (nodes,parentConfig) => {
+        return nodes.reduce((domNodes,node) => {
+            if(typeof(node)==="string") {
+                if(parentConfig && parentConfig.breakOnNewline) {
+                    const lines = node.split("\n");
+                    lines.forEach((line,i) => {
+                        domNodes.push(new Text(line));
+                        if(i<lines.length-1) {
+                            domNodes.push(document.createElement("br"))
+                        }
+                    })
+                } else {
+                    domNodes.push(new Text(node));
+                }
+            } else if(!node.drop) {
+                const config = tags[node.tag],
+                    el = document.createElement(node.tag),
+                    {id,classes,attributes} = node.options||{};
+                if(id) el.id = id;
+                (classes||[]).forEach((className) => el.classList.add(className));
+                Object.entries(attributes||{}).forEach(([key,value]) => { // style mapping done here so that it bypasses earlier sanitation
+                    const attributeAllowed = config.attributesAllowed[key];
+                    if(key==="style" && value && typeof(value)==="object") {
+                        Object.entries(value).forEach(([key,value]) => {
+                            key.includes("-") ? el.style.setProperty(key,value) : el.style[key] = value;
+                        })
+                    } else if(attributeAllowed?.styleMap) {
+                       const styleName = attributeAllowed.styleMap;
+                       styleName.includes("-") ? el.style.setProperty(styleName,value) : el.style[styleName] = value;
+                    } else {
+                        el.setAttribute(key,value);
+                    }
+                });
+                if(node.tag==="script") {
+                    el.setAttribute("type","module");
+                }
+                toDOMNodes(node.content,config).forEach((node) => {
+                    el.appendChild(node);
+                });
+                domNodes.push(el);
+                const listeners = Object.entries(config.listeners||{});
+                if(listeners.length>0) {
+                    const script = document.createElement("script");
+                    script.innerHTML = listeners.reduce((string,[name,f]) => {
+                            let fstring = f +"";
+                            if(fstring.startsWith(`${name}(`)) {
+                                fstring = fstring.replace(`${name}(`,"function(")
+                            }
+                            string += `document.currentScript.previousElementSibling.addEventListener("${name}",${fstring});\n`;
+                            if(name==="attributeChanged") {
+                                string += "tagupObserver.observe(document.currentScript.previousElementSibling,{attributes:true,attributeOldValue:true}});\n";
+                            } else if(name==="disconnected") {
+                                 string += "tagupObserver.observe(document.currentScript.previousElementSibling.parentElement,{childList:true}});\n";
+                            }
+                            return string;
+                        },"");
+                    domNodes.push(script);
+                }
+            }
+            return domNodes;
+        },[])
+    },
+    configureStyles = (tags,styleAllowed) => {
+        if(styleAllowed==="*") {
+            Object.values(tags).forEach((config) => {
+                config.styleAllowed ||= true;
+            })
+        } else if(typeof(styleAllowed)==="function") {
+            Object.values(tags).forEach((config) => {
+                config.styleAllowed ||= styleAllowed;
+            })
+        } else {
+            Object.entries(styleAllowed||[]).forEach(([key,value]) => {
+                let config;
+                if(typeof(value)==="function") {
+                    config = tags[key];
+                    config.styleAllowed ||= value;
+                } else {
+                    config = tags[value];
+                    config.styleAllowed ||= true;
+                }
+                if(!config) {
+                    console.error(new parser.SyntaxError(`${key} is not a defined tag and can't be styled`,null,null,node.location))
+                }
+            })
+        }
+    };
+    window.transform = async (text,{styleAllowed}={}) => {
+        if(styleAllowed) {
+            configureStyles(tags,styleAllowed);
+        }
+        const tree = patchTopLevel(parser.parse(text,{
+            tags,
+            styleAllowed: {
+                img(style) { return style }
+            }
+            //img(https://www.google.com)[]
+        }));
+        const errors = await tree.reduce(async (errors,node) => {
+            return [...await errors,...await validateNode({node})]
+        },[]);
+        console.log(tree,errors)
+        const output = document.getElementById("output");
+        output.innerHTML = "";
+        toDOMNodes(tree).forEach((node) => {
+            output.appendChild(node);
+        })
+        const resolveValueElements = async (node=document.body) => {
+            const valueEls = [...node.querySelectorAll("input[data-template]")];
+            for(const el of valueEls) {
+                const template = el.getAttribute("data-template");
+                el.value = resolveDataTemplate(template,el).then((value) => {
+                    el.rawValue = value;
+                    el.value = formatValue(el);
+                    if(el.hasAttribute("data-autosize")) {
+                        el.style.width = Math.min(80,Math.max(1,el.value.length))+"ch";
+                    }
+                    if(value===template) {
+                        el.removeAttribute("disabled");
+                    } else {
+                        el.setAttribute("disabled","");
+                    }
+                });
+                await el.value; // awaiting after the assignment prevent getting stuck in an Inifnite wait due to recursive resolves
+            }
+        };
+        const AsyncFunction = (async function () {}).constructor;
+        window.resolveDataTemplate = async (string,requestor) => {
+            if(!string) return;
+            const text = await replaceAsync(string,/\$\(([^)]*)\)/g,async (match,selector) => {
+                let els,
+                    expectsArray;
+                if(selector.endsWith("[]")) {
+                    expectsArray = true;
+                    els = [...document.querySelectorAll(selector)].filter((el) => {
+                        if(el.tagName==="INPUT" && el.hasAttribute("data-template")) {
+                            return true;
+                        }
+                    });
+                } else {
+                    const el = document.querySelector(selector);
+                    if(el.tagName==="INPUT" && el.hasAttribute("data-template")) {
+                        els = [el];
+                    }
+                }
+                for(const el of els) {
+                    el.dependents ||= new Set();
+                    if(requestor) el.dependents.add(requestor);
+                    if(el.rawValue==null) {
+                        el.rawValue = "";
+                    }
+                    if(el.value==="" || !requestor) {
+                        el.rawValue = await resolveDataTemplate(el.getAttribute("data-template"),el);
+                        el.value = formatValue(el);
+                        if(el.hasAttribute("data-autosize")) {
+                            el.style.width = Math.min(80,Math.max(1,el.value.length))+"ch";
+                        }
+                    }
+                }
+                const result = expectsArray ? els.map(el => el.rawValue) : els[0].rawValue
+                return result && typeof(result)==="object" && !(result instanceof Promise) ? JSON.stringify(result) : result;
+            });
+            return (new AsyncFunction("return `${" + text + "}`"))();
+        };
+        await resolveValueElements();
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<html><head><script src="./secst.js?run"></script></head><body><h1>The Joy of SECST
+
+</h1><p>SECST is a semantic, extensible, computational, styleable tagged markup language. You can use it to joyfully<br>create compelling, interactive documents backed by HTML.<br><br></p><h1>Design Objectives
+
+</h1><p>Easy to understand, simple syntax, semantic<br>Easy to learn, limited syntax, semantic<br>Easy to extend uniform syntax, declarative language elements<br>Secure<br>Performant - simple syntax<br>Small - simple syntax<br>Configurable - declarative language elements<br>Comprehensive - all of semantic HTML and more (extendable)<br>Programmable - simple event handling plus API<br>Computational - Reactivity built in, advanced math built in, simple user input mechanisms<br>Styleable - optional capability<br>Portable - HTML output<br>SEO Friendly - browser or server rendering<br><br><br></p><h1>For Markdown Authors
+
+</h1><h1>For Designers
+
+</h1><h1>For Programmers
+
+</h1><h2>In Document Programing
+
+</h2><h2>Extending and Meta Document
+
+</h2><h1>Architecture
+
+</h1><h1>Security
+
+</h1><script type="application/javascript" src="https://cdn.jsdelivr.net/npm/@anywhichway/quick-component@0.0.12" async="" component="https://cdn.jsdelivr.net/npm/@anywhichway/math-science-formula@0.0.5"></script><math-science-formula>Lift = \frac{1}{2} \rho v^2 S C_L\
+
+
+</math-science-formula><p>This is plain text<br>with a <underline style="text-decoration: underline;">single</underline> line break<br><br>This had double<br><br></p><p>This is a simple paragraph<br><br></p><p id="id1" style="text-align: left;">This is a paragraph with <strong>strong</strong> content.<br>   And, a newline with a quoted tag  "strong[strong]" and a tag with no space after <strong>strong</strong>.<br><br></p><style>#id1 { float:right;
+;
+ }</style><script type="module">[...document.querySelectorAll("#id1")].forEach((el) => {
+                        const listeners = { 
+                            attributeChanged(event) {
+  console.log(event)
+ },
+ disconnected(event) {
+  console.log(event)
+ },
+ click() { alert( "clicked") }
+
+
+
+                        };
+                        Object.entries(listeners).forEach(([event,listener]) => {
+                            el.addEventListener(event,listener);
+                            if(event==="attributeChanged") {
+                               secstObserver.observe(el,{attributes:true,attributeOldValue:true});
+                            } else if(event==="disconnected") {
+                               secstObserver.observe(el.parentElement,{childList:true});
+                            }
+                        });
+                    })</script><ol type="I"><li>item one<br></li><script>document.currentScript.previousElementSibling.addEventListener("click",function() {
+                    alert("ok")
+                });
+</script><li><br><br></li><script>document.currentScript.previousElementSibling.addEventListener("click",function() {
+                    alert("ok")
+                });
+</script></ol><hr><p><input id="v1" data-default="" data-template="$(#v2) + $(#v3)" value="$3" data-autosize="" data-format="$${value}" disabled="" style="width: 4ch;"><input id="v2" data-default="" data-template="1" value="$1" data-autosize="" data-format="$${value}" data-extract="\$([\d.]*)" style="width: 4ch;"><input id="v3" data-default="" data-template="2" value="$2" data-autosize="" data-format="$${value}" data-extract="\$([\d.]*)" type="text" style="width: 4ch;"><input id="v4" data-default="" data-template="await (async () =&gt; { 
+                            const response = await fetch(&quot;./sample.json5&quot;);
+                            return await response.text();
+                            })()"><input id="v5" data-default="" data-template="await (async () =&gt; { 
+                            const response = await fetch(&quot;./sample.json5&quot;);
+                            return await response.text();
+                            })()"><br></p><script type="module">
+ (() => { console.log(["foo"]); })();
+</script></body></html>
