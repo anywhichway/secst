@@ -35,12 +35,12 @@ const resolve = async (node=document.body,ifNull) => {
                 }
                 el.setAttribute("value",value=formatValue(el));
                 if(el.hasAttribute("data-autosize")) {
-                    el.style.width = Math.min(80,Math.max(1,value.length+2))+"ch";
+                    el.style.width = Math.min(80,Math.max(1,value.length+1))+"ch";
                 }
             });
             await el.rawValue; // awaiting after the assignment prevent getting stuck in an Inifnite wait due to recursive resolves
         } catch(e) {
-
+            //console.error(e);
         }
     }
 };

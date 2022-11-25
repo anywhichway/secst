@@ -959,9 +959,313 @@ const formatValue = (el) => {
 };
 
 
+;// CONCATENATED MODULE: ./node_modules/@anywhichway/quick-worker/index.js
+const body = `
+    const _fetch = fetch;
+    fetch = (urlOrRequest,options) => {
+        if(document.baseURI) {
+            if(urlOrRequest && typeof(urlOrRequest)==="object") {
+                options = Object.assign({},urlOrRequest);
+                urlOrRequest = options.url;
+                delete options.url;
+            } else {
+                urlOrRequest = new URL(urlOrRequest,document.baseURI);
+            }
+        }
+        try {
+            return _fetch(urlOrRequest,options);
+        } catch(e) {
+            console.error(e);
+            if(!document.baseURI) console.error("Pass baseURI as part of document for QuickWorker");
+            throw e;
+        }
+    };
+    const properties = {};
+    let document;
+    self.addEventListener('message',async (event) => {
+    const directive = JSON.parse(event.data);
+    let result;
+      // debugger;
+    try {
+        if(directive.type==="importScripts") {
+            self.importScripts(...directive.args);
+        } else if(directive.type==="freeze") {
+           Object.freeze(properties);
+        } else if(directive.type==="delete") {
+            const [propertyName] = directive.args;
+            delete properties[propertyName];
+        } else if(directive.type==="get") {
+            const [propertyName] = directive.args;
+            result = properties[propertyName];
+        } else if(directive.type==="set") {
+            const [propertyName,value] = directive.args;
+            const valueType = directive.valueType;
+            properties[propertyName] = valueType==="function" ? (new Function("return " + value))() : value;
+            document = properties.document;
+        }  else if(directive.type==="apply") {
+            const [propertyName,...args] = directive.args;
+            result = await properties[propertyName](...args);
+        }
+    } catch(e) {
+        result = e+"";
+    }
+    if(typeof(result)==="function") {
+        result = "()=>{}";
+    }
+    if([Infinity,-Infinity,NaN,undefined].some((value) => value+""===result+"")) {
+        result += "";
+    }
+    self.postMessage(JSON.stringify({eventId:directive.eventId,value:result}))
+})`;
+const QuickWorker = async ({properties={},imports=[],freeze,timeout=1000,name="anonymous",timeoutRestart=true,type}={}) => {
+    const url = URL.createObjectURL(new Blob([body], {type: 'application/javascript'})),
+        createTimeout = (promise,reject) => {
+            return setTimeout(() => {
+                const error = new EvalError(`Restarted worker ${name} on timeout of ${timeout}ms`);
+                console.error(error);
+                worker.terminate();
+                if(timeoutRestart) {
+                    worker = new Worker(url);
+                }
+                reject(error);
+            },timeout);
+        },
+        coerce = (value,property) => {
+            if(!value) return value;
+            if(typeof(value)==="string") {
+                if(value==="()=>{}") {
+                    return async (...args) => {
+                        await promise;
+                        promise = new Promise((resolve,reject) => {
+                            const timeout = createTimeout(promise, reject),
+                                id = Math.random(),
+                                listener = (event) => {
+                                    const {value, eventId} = JSON.parse(event.data);
+                                    if (eventId !== id) return;
+                                    worker.removeEventListener("message", listener)
+                                    clearTimeout(timeout);
+                                    resolve(coerce(value, property));
+                                };
+                            worker.addEventListener("message", (event) => {
+                                listener(event);
+                            });
+                            worker.postMessage(JSON.stringify({type:"apply",args:[property,...args],eventId:id}));
+                        })
+                        return await promise;
+                    }
+                }
+                try {
+                    value = JSON.parse(value);
+                    if(value==="Infinity") return Infinity;
+                    if(value==="-Infinity") return -Infinity;
+                    if(value==="NaN") return NaN;
+                    if(value==="undefined") return undefined;
+                    return value;
+                } catch(e) {
+                    return value;
+                }
+            }
+            return value;
+        };
+    let promise,
+        worker = new Worker(url,{type});
+    const functions = {
+        async delete(property) {
+            await promise;
+            return promise = new Promise((resolve,reject) => {
+                const timeout = createTimeout(promise,reject);
+                const listener = (event) => {
+                    worker.removeEventListener("message",listener)
+                    clearTimeout(timeout);
+                    const value = JSON.parse(event.data);
+                    resolve(coerce(value,property));
+                }
+                worker.addEventListener("message",(event) => {
+                    listener(event);
+                });
+                worker.postMessage(JSON.stringify({type:"delete",args:[property]}));
+            });
+        },
+        async freeze() {
+            await promise;
+            return promise = new Promise((resolve,reject) => {
+                const timeout = createTimeout(promise,reject);
+                const listener = (event) => {
+                    worker.removeEventListener("message",listener)
+                    clearTimeout(timeout);
+                    const value = JSON.parse(event.data);
+                    resolve(coerce(value));
+                }
+                worker.addEventListener("message",(event) => {
+                    listener(event);
+                });
+                worker.postMessage(JSON.stringify({type:"freeze"}));
+            });
+        },
+        async get(property) {
+            if(promise && property==="then") {
+                return promise.then;
+            }
+            await promise;
+            return promise = new Promise((resolve,reject) => {
+                const timeout = createTimeout(promise, reject),
+                    id = Math.random(),
+                    listener = (event) => {
+                        const {value, eventId} = JSON.parse(event.data);
+                        if (eventId !== id) return;
+                        worker.removeEventListener("message", listener)
+                        clearTimeout(timeout);
+                        resolve(coerce(value, property));
+                    };
+                worker.addEventListener("message", (event) => {
+                    listener(event);
+                });
+                worker.postMessage(JSON.stringify({type: "get", args: [property], eventId: id}));
+            });
+        },
+        async importScripts(...scripts) {
+            await promise;
+            return promise = new Promise((resolve,reject) => {
+                const timeout = createTimeout(promise, reject),
+                    id = Math.random(),
+                    listener = (event) => {
+                        const {value, eventId} = JSON.parse(event.data);
+                        if (eventId !== id) return;
+                        worker.removeEventListener("message", listener)
+                        clearTimeout(timeout);
+                        resolve(coerce(value));
+                    };
+                worker.addEventListener("message", (event) => {
+                    listener(event);
+                });
+                worker.postMessage(JSON.stringify({type:"importScripts",args:scripts,eventId:id}));
+            });
+        },
+        async set(property,value,valueType=typeof(value)) {
+            await promise;
+            return promise = new Promise((resolve,reject) => {
+                const timeout = createTimeout(promise, reject),
+                    id = Math.random(),
+                    listener = (event) => {
+                        const {value, eventId} = JSON.parse(event.data);
+                        if (eventId !== id) return;
+                        worker.removeEventListener("message", listener)
+                        clearTimeout(timeout);
+                        resolve(coerce(value, property));
+                    };
+                worker.addEventListener("message", (event) => {
+                    listener(event);
+                });
+                if(valueType==="function") {
+                    value += "";
+                }
+                worker.postMessage(JSON.stringify({type:"set",args:[property,value],valueType,eventId:id}));
+            });
+        },
+        async call(property,...args) {
+            return (await this.get(property))(...args);
+        },
+        async apply(property,args) {
+            return (await this.get(property))(...args);
+        }
+    }
+    for(const [propertyName,value] of Object.entries(properties)) {
+        await functions.set(propertyName,value);
+    }
+    if(imports.length>0) {
+        await functions.importScripts(...imports)
+    }
+    if(freeze) {
+        await functions.freeze();
+    }
+    return new Proxy(functions,{
+        async get(target,property) {
+            let value = target[property];
+            if(value!==undefined) return value;
+            return target.get(property);
+        },
+        async set(target,property) {
+            const value = target[property];
+            if(value!==undefined) {
+                throw new Error(`Can't set primary property ${property} on worker ${name}` )
+            }
+            return target.set(property,value);
+        },
+        async delete(target,property) {
+            let value = target[property];
+            if(value!==undefined) {
+                throw new Error(`Can't delete primary property ${property} on worker ${name}` )
+            }
+            await target.delete(property);
+        }
+    })
+}
+
+
+;// CONCATENATED MODULE: ./src/string-template-eval.js
+
+
+const stringTemplateEval = async (stringTemplate,requestor) => {
+    if(!stringTemplateEval.evaluator) {
+        stringTemplateEval.evaluator = await QuickWorker({
+            properties: {
+                document: {
+                    data: Object.entries(document.data||{}).reduce((data, [key, value]) => {
+                        if (key !== "urls") {
+                            data[key] = value;
+                        }
+                        return data;
+                    }, {}),
+                    baseURI: document.baseURI
+                },
+                evaluate: async (stringTemplate) => { // remember this function can't use closures, it is passed to the worker as a string
+                    // todo add table formatter
+                    const ul = (data = {}, format = (data) => data && typeof (data) === "object" ? JSON.stringify(data) : data) => {
+                            return "<ul>" + Object.values(data).reduce((items,item) => items += ("<li>" + format(item) + "</li>\n"),"") + "</ul>"
+                        },
+                        ol = (data = {}, format = (data) => data && typeof (data) === "object" ? JSON.stringify(data) : data) => {
+                            return "<ol>" + Object.values(data).reduce((items,item) => items += ("<li>" + format(item) + "</li>\n"),"") + "</ol>"
+                        },
+                        solve = (formula, args) => {
+                            formula = formula+"";// MathJS sends in an object that stringifies to the forumla
+                            Object.entries(args).forEach(([variable, value]) => {
+                                formula = formula.replaceAll(new RegExp(variable, "g"), value);
+                            })
+                            return new Function("return " + formula)();
+                        },
+                        functions = {
+                            ul,
+                            ol,
+                            solve
+                        }
+                    try {
+                        const AsyncFunction = (async ()=>{}).constructor;
+                        return await (new AsyncFunction("functions", "math", "globalThis", "with(functions) { with(math) { return `" + stringTemplate + "`}}")).call(null, functions, self.math); //always 2 args so globalThis is undefined
+                    } catch (e) {
+                        return {stringTemplateError: e + ""}
+                    }
+                },
+            },
+            timeout:1000,
+            imports:['https://cdn.jsdelivr.net/npm/mathjs@11.3.2/lib/browser/math.min.js']})
+    }
+    /*const original = stringTemplate;
+    stringTemplate = await replaceReferences(stringTemplate,requestor);
+    if(stringTemplate!==original && XRegExp.matchRecursive(stringTemplate, '\\!\\[', '\\]', 'g',{unbalanced:"skip"}).length>0) {
+        const message = `Error processing ${original}. Check for loop in dependencies.`;
+        console.error(new EvalError(message));
+        requestor.classList.add("chtml-error");
+        return `${message}`
+    } else {*/
+        return (await stringTemplateEval.evaluator.evaluate)(stringTemplate);
+    //}
+}
+
+
 ;// CONCATENATED MODULE: ./src/resolve-data-template.js
 
 const AsyncFunction = (async function () {}).constructor;
+
 
 
 const resolveDataTemplate = async (root,string,requestor) => {
@@ -997,9 +1301,18 @@ const resolveDataTemplate = async (root,string,requestor) => {
             }
         }
         const result = expectsArray ? els.map(el => el.rawValue) : els[0].rawValue
-        return result && typeof(result)==="object" && !(result instanceof Promise) ? JSON.stringify(result) : result;
+        return result && typeof(result)==="object" && !(result instanceof Promise) ? JSON.stringify(result) : result===undefined ? "" : result;
     });
-    return (new AsyncFunction("return `${" + text + "}`"))();
+    if(typeof(Worker)==="function") {
+        const result =  await stringTemplateEval("${" + text + "}"),
+            type = typeof(result);
+        if(result && type==="object" && result.stringTemplateError) {
+            throw new Error(result.stringTemplateError);
+        }
+        return result && type==="object" ? JSON.stringify(result) : result+"";
+    } else {
+        return (new AsyncFunction("return `${" + text + "}`"))();
+    }
 }
 
 
@@ -1008,35 +1321,45 @@ const resolveDataTemplate = async (root,string,requestor) => {
 
 
 
+const update = async (target) => {
+    if(target.type==="checkbox") {
+        if(target.value!==target.checked+"") {
+            target.value = target.checked+"";
+        }
+    } else {
+        target.rawValue = extractValue(target);
+        target.setAttribute("data-template", target.rawValue);
+        const value = formatValue(target);
+        if(target.value!==value) {
+            target.value = value;
+            target.setAttribute("value",value); // both are needed, or Chrome breaks
+        }
+    }
+    for(const el of [...target.dependents||[]]) {
+        el.rawValue = await resolveDataTemplate(document.body,el.getAttribute("data-template"));
+        const value = formatValue(el);
+        if(el.value!==value) {
+            el.value = value;
+            el.setAttribute("value",value); // both are needed, or Chrome breaks
+        }
+    }
+}
+
+const updateWidths = () => {
+    requestAnimationFrame(() => {
+        [...document.querySelectorAll('input[data-autosize]')].forEach((el) => {
+            const value = el.getAttribute("value")||"";
+            el.style.width = Math.min(80,Math.max(1,value.length+1))+"ch";
+        })
+    })
+}
+
 const listeners = {
-    change(event) {
+    async change(event) {
         const template = event.target.getAttribute("data-template");
         if(event.target.tagName==="INPUT" && template!==null && (event.target.value+"")!=="[object Promise]") {
-            if(event.target.type==="checkbox") {
-                if(event.target.value!==event.target.checked+"") {
-                    event.target.value = event.target.checked+"";
-                }
-            } else {
-                event.target.rawValue = extractValue(event.target);
-                event.target.setAttribute("data-template", event.target.rawValue);
-                const value = formatValue(event.target);
-                if(event.target.value!==value) {
-                    event.target.value = formatValue(event.target);
-                    if( event.target.hasAttribute("data-autosize")) {
-                        event.target.style.width = Math.min(80,Math.max(1,event.target.value.length+1))+"ch";
-                    }
-                }
-            }
-            [...event.target.dependents||[]].forEach(async (el) => {
-                el.rawValue = await resolveDataTemplate(document.body,el.getAttribute("data-template"));
-                const value = formatValue(el);
-                if(el.value!==value) {
-                    el.value = formatValue(el);
-                    if(el.hasAttribute("data-autosize")) {
-                        el.style.width = Math.min(80,Math.max(1,el.value.length+1))+"ch";
-                    }
-                }
-            })
+            await update(event.target);
+            updateWidths();
         }
     },
     click() {
@@ -1046,26 +1369,10 @@ const listeners = {
             }
         }
     },
-    input(event) {
-        const template = event.target.getAttribute("data-template");
-        if(event.target.tagName==="INPUT" && template!==null) {
-            event.target.rawValue = extractValue(event.target);
-            event.target.setAttribute("data-template", event.target.rawValue);
-            event.target.value = formatValue(event.target);
-            if( event.target.hasAttribute("data-autosize")) {
-                event.target.style.width = Math.min(80,Math.max(1,event.target.value.length+1))+"ch";
-            }
-            event.target.style.width = Math.min(80,Math.max(1,event.target.value.length+1))+"ch";
-            [...event.target.dependents||[]].forEach(async (el) => {
-                el.rawValue = await resolveDataTemplate(document.body,el.getAttribute("data-template"));
-                const value = formatValue(el);
-                if(el.value !== value) {
-                    el.value = value;
-                    if(el.hasAttribute("data-autosize")) {
-                        el.style.width = Math.min(80,Math.max(1,el.value.length))+"ch";
-                    }
-                }
-            })
+    async input(event) {
+        if(event.target.tagName==="INPUT" && event.target.getAttribute("data-template")!==null) {
+           await update(event.target);
+           updateWidths();
         }
     }
 }
@@ -1109,12 +1416,12 @@ const resolve = async (node=document.body,ifNull) => {
                 }
                 el.setAttribute("value",value=formatValue(el));
                 if(el.hasAttribute("data-autosize")) {
-                    el.style.width = Math.min(80,Math.max(1,value.length+2))+"ch";
+                    el.style.width = Math.min(80,Math.max(1,value.length+1))+"ch";
                 }
             });
             await el.rawValue; // awaiting after the assignment prevent getting stuck in an Inifnite wait due to recursive resolves
         } catch(e) {
-
+            //console.error(e);
         }
     }
 };

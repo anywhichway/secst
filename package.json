@@ -5,10 +5,7 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "build": "(npm run build-browser || npm run build-server) &&  npm run build-server",
-    "build-browser": "webpack --config=webpack.browser.config.cjs",
-    "build-server": "cp ./src/index.js ./index.js",
-    "transform": "node transform",
+    "build": "node transform && webpack --config=webpack.browser.config.cjs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -30,6 +27,7 @@
   },
   "homepage": "https://github.com/anywhichway/secst#readme",
   "dependencies": {
+    "@anywhichway/quick-worker": "^0.0.3",
     "@types/node": "^18.11.9",
     "cross-fetch": "^3.1.5",
     "happy-dom": "^7.7.0",

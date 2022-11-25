@@ -1,6 +1,7 @@
 import replaceAsync from "string-replace-async";
 const AsyncFunction = (async function () {}).constructor;
 import {formatValue} from "./format-value.js";
+import {stringTemplateEval} from "./string-template-eval.js";
 
 const resolveDataTemplate = async (root,string,requestor) => {
     if(!string) return;
@@ -35,9 +36,18 @@ const resolveDataTemplate = async (root,string,requestor) => {
             }
         }
         const result = expectsArray ? els.map(el => el.rawValue) : els[0].rawValue
-        return result && typeof(result)==="object" && !(result instanceof Promise) ? JSON.stringify(result) : result;
+        return result && typeof(result)==="object" && !(result instanceof Promise) ? JSON.stringify(result) : result===undefined ? "" : result;
     });
-    return (new AsyncFunction("return `${" + text + "}`"))();
+    if(typeof(Worker)==="function") {
+        const result =  await stringTemplateEval("${" + text + "}"),
+            type = typeof(result);
+        if(result && type==="object" && result.stringTemplateError) {
+            throw new Error(result.stringTemplateError);
+        }
+        return result && type==="object" ? JSON.stringify(result) : result+"";
+    } else {
+        return (new AsyncFunction("return `${" + text + "}`"))();
+    }
 }
 
 export {resolveDataTemplate}

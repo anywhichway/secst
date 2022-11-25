@@ -14,7 +14,7 @@
     document.addEventListener("DOMContentLoaded",async ()=> {
         let markup;
         const render = async () => {
-            const newmarkup = await fetch("./markup.txt").then((response) => response.text());
+            const newmarkup = await fetch("./index.sec").then((response) => response.text());
             if(markup!==newmarkup) {
                 const {dom,errors} = await SECST.transform(await parser(),markup=newmarkup,{styleAllowed:"*"});
                 console.log(errors);

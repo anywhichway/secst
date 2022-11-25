@@ -16,17 +16,20 @@ const parser = peg.generate(grammar);
 global.window = new Window(),
 global.document = window.document;
 global.URL = URL;
-global.fetch = window.fetch;
+global.fetch = (url,...args) => {
+    url = "http://localhost:63342/secst/" + url;
+    return window.fetch(url,...args);
+}
 global.Text = window.Text;
 global.MutationObserver = window.MutationObserver;
 
 // document.baseURI
 
-const text = await fs.readFile("./markup.txt",{ encoding: 'utf8' }),
+const text = await fs.readFile("./index.sec",{ encoding: 'utf8' }),
     {dom,errors} = await transform(parser,text,{styleAllowed:"*"}),
     script = document.createElement("script");
 script.setAttribute("src","./secst.js?run");
 dom.head.appendChild(script);
 await resolve(dom.body);
-await fs.writeFile("./markup.html",`<html><head>${dom.head.innerHTML}</head><body>${dom.body.innerHTML}</body></html>`,{ encoding: 'utf8' })
+await fs.writeFile("./index.html",`<html><head>${dom.head.innerHTML}</head><body>${dom.body.innerHTML}</body></html>`,{ encoding: 'utf8' })
 
