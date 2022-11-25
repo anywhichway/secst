@@ -5,7 +5,8 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "build": "node transform && webpack --config=webpack.browser.config.cjs",
+    "build": "node transform && webpack --mode=production",
+    "build-dev": "node transform && webpack --mode=development --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

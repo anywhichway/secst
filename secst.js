@@ -1,1472 +1,186 @@
+/*
+ * ATTENTION: The "eval" devtool has been used (maybe by default in mode: "development").
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
 /******/ (() => { // webpackBootstrap
 /******/ 	"use strict";
-var __webpack_exports__ = {};
+/******/ 	var __webpack_modules__ = ({
 
-;// CONCATENATED MODULE: ./src/tags.js
-const universalAttributes = {
-        hidden: true,
-        dir: {
-            validate(value) {
-                if(["ltr","rtl","auto"].includes(value)) {
-                    return true;
-                }
-                throw new TypeError(`${value} is not a valid text directionality`)
-            }
-        },
-        inert: true,
-        is: true,
-        title: true
-    },
-    blockContent = ["article","audio","blockquote","code","dl","figure","hr","img","listeners","ol","p","picture","script","style","table","ul","video","latex","math-science-formula"],
-    simpleContent = ["a","abbr","bdi","bdo","br","del","i","ins","kbd","strong","sub","sup","time","var","wbr","underline","#","@linkedin"],
-    structuredContent = ["address","aside","bdi","cite","code","details","input","output","value"],
-    inlineContent = [...simpleContent,...structuredContent];
+/***/ "./node_modules/@anywhichway/quick-worker/index.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/@anywhichway/quick-worker/index.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-    for(let i=1;i<=8;i++) {
-        blockContent.push("h"+i)
-    }
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ QuickWorker)\n/* harmony export */ });\nconst body = `\r\n    const _fetch = fetch;\r\n    fetch = (urlOrRequest,options) => {\r\n        if(document.baseURI) {\r\n            if(urlOrRequest && typeof(urlOrRequest)===\"object\") {\r\n                options = Object.assign({},urlOrRequest);\r\n                urlOrRequest = options.url;\r\n                delete options.url;\r\n            } else {\r\n                urlOrRequest = new URL(urlOrRequest,document.baseURI);\r\n            }\r\n        }\r\n        try {\r\n            return _fetch(urlOrRequest,options);\r\n        } catch(e) {\r\n            console.error(e);\r\n            if(!document.baseURI) console.error(\"Pass baseURI as part of document for QuickWorker\");\r\n            throw e;\r\n        }\r\n    };\r\n    const properties = {};\r\n    let document;\r\n    self.addEventListener('message',async (event) => {\r\n    const directive = JSON.parse(event.data);\r\n    let result;\r\n      // debugger;\r\n    try {\r\n        if(directive.type===\"importScripts\") {\r\n            self.importScripts(...directive.args);\r\n        } else if(directive.type===\"freeze\") {\r\n           Object.freeze(properties);\r\n        } else if(directive.type===\"delete\") {\r\n            const [propertyName] = directive.args;\r\n            delete properties[propertyName];\r\n        } else if(directive.type===\"get\") {\r\n            const [propertyName] = directive.args;\r\n            result = properties[propertyName];\r\n        } else if(directive.type===\"set\") {\r\n            const [propertyName,value] = directive.args;\r\n            const valueType = directive.valueType;\r\n            properties[propertyName] = valueType===\"function\" ? (new Function(\"return \" + value))() : value;\r\n            document = properties.document;\r\n        }  else if(directive.type===\"apply\") {\r\n            const [propertyName,...args] = directive.args;\r\n            result = await properties[propertyName](...args);\r\n        }\r\n    } catch(e) {\r\n        result = e+\"\";\r\n    }\r\n    if(typeof(result)===\"function\") {\r\n        result = \"()=>{}\";\r\n    }\r\n    if([Infinity,-Infinity,NaN,undefined].some((value) => value+\"\"===result+\"\")) {\r\n        result += \"\";\r\n    }\r\n    self.postMessage(JSON.stringify({eventId:directive.eventId,value:result}))\r\n})`;\r\nconst QuickWorker = async ({properties={},imports=[],freeze,timeout=1000,name=\"anonymous\",timeoutRestart=true,type}={}) => {\r\n    const url = URL.createObjectURL(new Blob([body], {type: 'application/javascript'})),\r\n        createTimeout = (promise,reject) => {\r\n            return setTimeout(() => {\r\n                const error = new EvalError(`Restarted worker ${name} on timeout of ${timeout}ms`);\r\n                console.error(error);\r\n                worker.terminate();\r\n                if(timeoutRestart) {\r\n                    worker = new Worker(url);\r\n                }\r\n                reject(error);\r\n            },timeout);\r\n        },\r\n        coerce = (value,property) => {\r\n            if(!value) return value;\r\n            if(typeof(value)===\"string\") {\r\n                if(value===\"()=>{}\") {\r\n                    return async (...args) => {\r\n                        await promise;\r\n                        promise = new Promise((resolve,reject) => {\r\n                            const timeout = createTimeout(promise, reject),\r\n                                id = Math.random(),\r\n                                listener = (event) => {\r\n                                    const {value, eventId} = JSON.parse(event.data);\r\n                                    if (eventId !== id) return;\r\n                                    worker.removeEventListener(\"message\", listener)\r\n                                    clearTimeout(timeout);\r\n                                    resolve(coerce(value, property));\r\n                                };\r\n                            worker.addEventListener(\"message\", (event) => {\r\n                                listener(event);\r\n                            });\r\n                            worker.postMessage(JSON.stringify({type:\"apply\",args:[property,...args],eventId:id}));\r\n                        })\r\n                        return await promise;\r\n                    }\r\n                }\r\n                try {\r\n                    value = JSON.parse(value);\r\n                    if(value===\"Infinity\") return Infinity;\r\n                    if(value===\"-Infinity\") return -Infinity;\r\n                    if(value===\"NaN\") return NaN;\r\n                    if(value===\"undefined\") return undefined;\r\n                    return value;\r\n                } catch(e) {\r\n                    return value;\r\n                }\r\n            }\r\n            return value;\r\n        };\r\n    let promise,\r\n        worker = new Worker(url,{type});\r\n    const functions = {\r\n        async delete(property) {\r\n            await promise;\r\n            return promise = new Promise((resolve,reject) => {\r\n                const timeout = createTimeout(promise,reject);\r\n                const listener = (event) => {\r\n                    worker.removeEventListener(\"message\",listener)\r\n                    clearTimeout(timeout);\r\n                    const value = JSON.parse(event.data);\r\n                    resolve(coerce(value,property));\r\n                }\r\n                worker.addEventListener(\"message\",(event) => {\r\n                    listener(event);\r\n                });\r\n                worker.postMessage(JSON.stringify({type:\"delete\",args:[property]}));\r\n            });\r\n        },\r\n        async freeze() {\r\n            await promise;\r\n            return promise = new Promise((resolve,reject) => {\r\n                const timeout = createTimeout(promise,reject);\r\n                const listener = (event) => {\r\n                    worker.removeEventListener(\"message\",listener)\r\n                    clearTimeout(timeout);\r\n                    const value = JSON.parse(event.data);\r\n                    resolve(coerce(value));\r\n                }\r\n                worker.addEventListener(\"message\",(event) => {\r\n                    listener(event);\r\n                });\r\n                worker.postMessage(JSON.stringify({type:\"freeze\"}));\r\n            });\r\n        },\r\n        async get(property) {\r\n            if(promise && property===\"then\") {\r\n                return promise.then;\r\n            }\r\n            await promise;\r\n            return promise = new Promise((resolve,reject) => {\r\n                const timeout = createTimeout(promise, reject),\r\n                    id = Math.random(),\r\n                    listener = (event) => {\r\n                        const {value, eventId} = JSON.parse(event.data);\r\n                        if (eventId !== id) return;\r\n                        worker.removeEventListener(\"message\", listener)\r\n                        clearTimeout(timeout);\r\n                        resolve(coerce(value, property));\r\n                    };\r\n                worker.addEventListener(\"message\", (event) => {\r\n                    listener(event);\r\n                });\r\n                worker.postMessage(JSON.stringify({type: \"get\", args: [property], eventId: id}));\r\n            });\r\n        },\r\n        async importScripts(...scripts) {\r\n            await promise;\r\n            return promise = new Promise((resolve,reject) => {\r\n                const timeout = createTimeout(promise, reject),\r\n                    id = Math.random(),\r\n                    listener = (event) => {\r\n                        const {value, eventId} = JSON.parse(event.data);\r\n                        if (eventId !== id) return;\r\n                        worker.removeEventListener(\"message\", listener)\r\n                        clearTimeout(timeout);\r\n                        resolve(coerce(value));\r\n                    };\r\n                worker.addEventListener(\"message\", (event) => {\r\n                    listener(event);\r\n                });\r\n                worker.postMessage(JSON.stringify({type:\"importScripts\",args:scripts,eventId:id}));\r\n            });\r\n        },\r\n        async set(property,value,valueType=typeof(value)) {\r\n            await promise;\r\n            return promise = new Promise((resolve,reject) => {\r\n                const timeout = createTimeout(promise, reject),\r\n                    id = Math.random(),\r\n                    listener = (event) => {\r\n                        const {value, eventId} = JSON.parse(event.data);\r\n                        if (eventId !== id) return;\r\n                        worker.removeEventListener(\"message\", listener)\r\n                        clearTimeout(timeout);\r\n                        resolve(coerce(value, property));\r\n                    };\r\n                worker.addEventListener(\"message\", (event) => {\r\n                    listener(event);\r\n                });\r\n                if(valueType===\"function\") {\r\n                    value += \"\";\r\n                }\r\n                worker.postMessage(JSON.stringify({type:\"set\",args:[property,value],valueType,eventId:id}));\r\n            });\r\n        },\r\n        async call(property,...args) {\r\n            return (await this.get(property))(...args);\r\n        },\r\n        async apply(property,args) {\r\n            return (await this.get(property))(...args);\r\n        }\r\n    }\r\n    for(const [propertyName,value] of Object.entries(properties)) {\r\n        await functions.set(propertyName,value);\r\n    }\r\n    if(imports.length>0) {\r\n        await functions.importScripts(...imports)\r\n    }\r\n    if(freeze) {\r\n        await functions.freeze();\r\n    }\r\n    return new Proxy(functions,{\r\n        async get(target,property) {\r\n            let value = target[property];\r\n            if(value!==undefined) return value;\r\n            return target.get(property);\r\n        },\r\n        async set(target,property) {\r\n            const value = target[property];\r\n            if(value!==undefined) {\r\n                throw new Error(`Can't set primary property ${property} on worker ${name}` )\r\n            }\r\n            return target.set(property,value);\r\n        },\r\n        async delete(target,property) {\r\n            let value = target[property];\r\n            if(value!==undefined) {\r\n                throw new Error(`Can't delete primary property ${property} on worker ${name}` )\r\n            }\r\n            await target.delete(property);\r\n        }\r\n    })\r\n}\r\n\r\n\n\n//# sourceURL=webpack://secst/./node_modules/@anywhichway/quick-worker/index.js?");
 
-    const tags = {
-        "@linkedin": {
-            attributesAllowed: {
-                href: true
-            },
-            contentAllowed: true,
-            transform(node) {
-                node.tag = "a";
-                node.attributes.href = `https://linkedin.com/${node.content[0].trim()}`
-            }
-        },
-        "#": {
-            contentAllowed: true,
-            transform(node) {
-                node.tag = "a";
-                const hash = node.content[0].trim();
-                node.id = hash;
-                node.content = ["#"+hash];
-            }
-        },
-        "math-science-formula": {
-            requires: [
-                {
-                    tag: "script",
-                    attributes: {
-                        type:"application/javascript",
-                        src:"https://cdn.jsdelivr.net/npm/@anywhichway/quick-component@0.0.12",
-                        async: "",
-                        component: "https://cdn.jsdelivr.net/npm/@anywhichway/math-science-formula@0.0.5"
-                    }
-                }
-            ],
-            contentAllowed: true
-        },
-        a: {
-            attributesAllowed: {
-                href: {
-                    validate(value) {
-                        try {
-                            new URL(value);
-                            return true;
-                        } catch {
-                            throw new TypeError(`${value} is not a valid URL for href`)
-                        }
-                    }
-                },
-                ping: {
-                    validate(value) {
-                        const urls = value.split(" ");
-                        urls.forEach((url) => {
-                            try {
-                                new URL(url);
-                            } catch {
-                                throw new TypeError(`${url} is not a valid url for ping`)
-                            }
-                        });
-                        return true;
-                    }
-                },
-                referrerpolicy: {
-                    validate(value) {
-                        const policies = ["no-referrer","no-referrer-when-downgrade","origin","origin-when-cross-origin","same-origin",
-                            "strict-origin","strict-origin-when-cross-origin"];
-                        if(policies.includes(value)) {
-                            return true;
-                        }
-                        throw new TypeError(`referrer policy ${value} is not one of ${JSON.stringify(policies)}`)
-                    }
-                },
-                type: {
-                    validate(value) {
-                        const parts = value.split("/");
-                        if(parts.length!==2 || parts[0].length<1 || parts[1].length<1) {
-                            throw new TypeError(`${value} is not a valid MIME type`)
-                        }
-                        return true;
-                    }
-                }
-            },
-            contentAllowed: [...simpleContent]
-        },
-        article: {
-            contentAllowed: [...blockContent,...inlineContent]
-        },
-        audio: {
-            attributesAllowed: {
-                src: true,
-                controls: true
-            },
-            contentAllowed: ["source","track"]
-        },
-        bdo: {
-            attributesAllowed: {
-                dir: {
-                    validate(value) {
-                        return ["ltr","rtl"].includes(value)
-                    }
-                }
-            }
-        },
-        blockquote: {
-            allowAsRoot: true,
-            contentAllowed: inlineContent,
-            attributesAllowed: {
-                cite: {
-                    validate(value) {
-                        new URL(value);
-                        return true;
-                    }
-                }
-            }
-        },
-        br: {
+/***/ }),
 
-        },
-        caption: {
-            parentRequired: ["figure","table"],
-            contentAllowed: simpleContent,
-            transform(node,parent) {
-                // if parent .tag = table, ensure it is first
-                // if parent .tag = fig, change to fig caption
-            }
-        },
-        code: {
-            attributesAllowed: {
-                language: true, // todo validate with list
-                run: true
-            },
-            contentAllowed: true,
-            transform(node) {
-                const language = node.attributes.language,
-                    run = node.attributes.run;
-                if(run!=null && language==="latex") {
-                    node.tag = "math-science-formula";
-                    node.content = [node.content.join("\n")]
-                }
-                delete  node.attributes.language;
-                delete node.attributes.run;
-            }
-        },
-        dl: {
-            contentAllowed: ["dt"]
-        },
-        dt: {
-            contentAllowed: simpleContent
-        },
-        figure: {
-            contentAllowed:[...blockContent,...inlineContent,"caption"].filter((item) => item!=="figure")
-        },
-        hr: {
-            allowAsRoot: true
-        },
-        input: {
-            attributesAllowed: {
-                "data-autosize": true,
-                "data-default": true,
-                "data-extract": true,
-                "data-template": true,
-                "data-format": true,
-                default(value) {
-                    return {
-                        "data-default": value
-                    }
-                },
-                disabled: true,
-                template(value) {
-                    return {
-                        "data-template": value
-                    }
-                },
-                title: {
-                    required: true
-                },
-                type: true,
-                value:true
-            }
-        },
-        img: {
-            allowAsRoot: true,
-            attributesAllowed: {
-                alt:true,
-                url(value) {
-                    return {
-                        src: value
-                    }
-                }
-            },
-            transform(node) {
-                if (node.content[0]) {
-                    node.attributes.title ||= node.content[0];
-                    node.attributes.alt ||= node.content[0];
-                    node.content.shift();
-                }
-            }
-        },
-        li: {
-            breakOnNewline: true,
-            attributesAllowed: {
-                value: {
-                    validate(value) {
-                        if (parseInt(value) == value) return true;
-                        return "a number"
-                    }
-                },
-                type: {
-                    validate(value) {
-                        if ("aAiI1".includes(value) && value.length === 1) return true;
-                        return "one of 'aAiI1`"
-                    }
-                }
-            },
-            contentAllowed: ["ol","ul",...inlineContent.filter((item) => item!=="li")],
-            listeners: {
-                click() {
-                    alert("ok")
-                }
-            }
-        },
-        listeners: {
-            allowAsRoot: true,
-            contentAllowed: true,
-            transform(node) {
-                node.tag = "script";
-                node.content = [
-                    `[...document.querySelectorAll("${node.attributes.selector}")].forEach((el) => {
-                        const listeners = { 
-                            ${node.content.join("\n")}
-                        };
-                        Object.entries(listeners).forEach(([event,listener]) => {
-                            el.addEventListener(event,listener);
-                            if(event==="attributeChanged") {
-                               secstObserver.observe(el,{attributes:true,attributeOldValue:true});
-                            } else if(event==="disconnected") {
-                               secstObserver.observe(el.parentElement,{childList:true});
-                            }
-                        });
-                    })`
-                ]
-                delete node.attributes.selector;
-            }
-        },
-        ol: {
-            indirectChildAllowed: true,
-            allowAsRoot: true,
-            attributesAllowed: {
-                reversed: true,
-                start: {
-                    validate(value) {
-                        if (parseInt(value) == value) return true;
-                        return "a number"
-                    }
-                },
-                type: {
-                    validate(value) {
-                        if ("aAiI1".includes(value) && value.length === 1) return true;
-                        return "one of 'aAiI1`"
-                    }
-                }
-            },
-            contentAllowed: ["li"],
-            transform(node) {
-                node.content = node.content.reduce((content,item) => {
-                    if(typeof(item)==="string") {
-                        const lines = item.split("\n");
-                        let listitem = "";
-                        lines.forEach((line,i) => {
-                            line = line.trim();
-                            const num = parseInt(line),
-                                nl = i<lines.length-1 ? "\n" : "";
-                            if(typeof(num)==="number" && !isNaN(num)) {
-                                line = line.substring((num+".").length);
-                                if(num!==1 && node.attributes.start==null) {
-                                    node.attributes.start = num;
-                                }
-                                if(listitem.length>0) {
-                                    content.push({tag:"li",content:[listitem]});
-                                    listitem = line + nl;
-                                } else {
-                                    listitem += line + nl;
-                                }
-                            } else if(line.startsWith("- ")) {
-                                line = line.substring(2);
-                                if(listitem.length>0) {
-                                    content.push({tag:"li",content:[listitem]});
-                                    listitem = line + nl;
-                                } else {
-                                    listitem += line + nl;
-                                }
-                            } else {
-                                listitem += line + nl;
-                            }
-                        })
-                        if(listitem.length>0) {
-                            content.push({tag:"li",content:[listitem]});
-                        }
-                    } else {
-                        content.push(item);
-                    }
-                    return content;
-                },[])
-            }
-        },
-        p: {
-            allowAsRoot: true,
-            breakOnNewline: true,
-            contentAllowed: [...inlineContent],
-            attributesAllowed: {
-                align: {
-                    mapStyle: "text-align"
-                }
-            }
-        },
-        picture: {
-            contentAllowed: ["img","source"]
-        },
-        script: {
-            allowAsRoot: true,
-            contentAllowed: true
-        },
-        source: {
-            attributesAllowed: {
-                type:true,
-                height: {
-                    validate(value) {
-                        return parseInt(value)===value+"";
-                        /*
-                        Allowed if the source element's parent is a <picture> element, but not allowed if the source element's parent is an <audio> or <video> element.
-                         */
-                    }
-                },
-                media: {
-                    validate(value) {
-                        return true;
-                        /*
-                        Allowed if the source element's parent is a <picture> element, but not allowed if the source element's parent is an <audio> or <video> element.
-                         */
-                    }
-                },
-                sizes: {
-                    validate(value) {
-                        return true;
-                        /*
-                        Allowed if the source element's parent is a <picture> element, but not allowed if the source element's parent is an <audio> or <video> element.
-                         */
-                    }
-                },
-                src: {
-                    validate(value) {
-                        return true;
-                        /*
-                        Required if the source element's parent is an <audio> and <video> element, but not allowed if the source element's parent is a <picture> element.
-                         */
-                    }
-                },
-                srcset: {
-                    validate(value) {
-                        return true;
-                        /*
-                        Required if the source element's parent is a <picture> element, but not allowed if the source element's parent is an <audio> or <video> element.
-                         */
-                    }
-                },
-                width: {
-                    validate(value) {
-                        return parseInt(value)===value+"";
-                        /*
-                        Allowed if the source element's parent is a <picture> element, but not allowed if the source element's parent is an <audio> or <video> element.
-                         */
-                    }
-                }
-            },
-            parentRequired: ["audio","picture","video"]
-        },
-        style: {
-            allowAsRoot: true,
-            contentAllowed: true,
-            transform(node) {
-                if(node.attributes.selector) {
-                    node.content = [`${node.attributes.selector} { ${node.content.join(";")} }`]
-                    delete node.attributes.selector;
-                } else if(node.id) {
-                    node.content = [`#${node.id} { ${node.content.join(";")} }`]
-                    delete node.id;
-                } else {
-                    node.content = [node.content.join(";")]
-                }
-            }
-        },
-        table: {
-            contentAllowed:["thead","tbody","tfoot","caption","tr"]
-        },
-        td: {
-            attributesAllowed: {
-                colspan: {
-                    validate(value) {
-                        return parseInt(value)===value+"";
-                    }
-                }
-            },
-            contentAllowed: inlineContent
-        },
-        th: {
-            attributesAllowed: {
-                colspan: {
-                    validate(value) {
-                        return parseInt(value)===value+"";
-                    }
-                }
-            },
-            contentAllowed: simpleContent
-        },
-        tr: {
-            attributesAllowed: {
-                rowspan: {
-                    validate(value) {
-                        return parseInt(value)===value+"";
-                    }
-                }
-            },
-            contentAllowed: ["td","th"]
-        },
-        track: {
-          parentRequired: ["audio","video"],
-          attributesAllowed: {
-              default: {
-                  validate(value,node) {
-                      return true;
-                      /*
-                      This may only be used on one track element per media element.
-                       */
-                  }
-              },
-              kind: {
-                  validate(value) {
-                      return true;
-                  }
-              },
-              label: true,
-              src: {
-                  validate(value) {
-                      new URL(value);
-                      /*
-                      This attribute must be specified and its URL value must have the same origin as the document — unless the <audio> or <video> parent element of the track element has a crossorigin attribute.
-                       */
-                  }
-              },
-              srclang: {
-                  validate(value) {
-                      return true;
-                  }
-              }
-          }
-        },
-        ul: {
-            allowAsRoot: true,
-            indirectChildAllowed: true,
-            contentAllowed: ["li"]
-        },
-        underline: {
-            attributesAllowed: {
-                style: true
-            },
-            contentAllowed: inlineContent,
-            styleAllowed() { return {"text-decoration":"underline"}},
-            transform(node) {
-                node.attributes.style =  {"text-decoration":"underline"};
-            }
-        },
-        value: {
-            allowAsRoot: true,
-            attributesAllowed: {
-                "data-autosize": true,
-                "data-default": true,
-                "data-extract": true,
-                "data-format": true,
-                "data-template": true,
-                autosize() {
-                    return {
-                        "data-autosize": ""
-                    }
-                },
-                default(value) {
-                    return {
-                        "data-default": value
-                    }
-                },
-                disabled() {
-                    return {
-                        disabled: ""
-                    }
-                },
-                extract(value) {
-                    return {
-                        "data-extract": value
-                    }
-                },
-                format(value) {
-                  return {
-                      "data-format": value
-                  }
-                },
-                readonly() {
-                    return {
-                        readonly: ""
-                    }
-                },
-                static: true,
-                template(value) {
-                    return {
-                        "data-template": value
-                    }
-                },
-                title: {
-                    required: true
-                },
-                type: {
-                    default: "text",
-                    transform(value,node) {
-                        if(value==="currency-usd") {
-                            node.attributes["data-format"] = "$${value}";
-                            node.attributes["data-extract"] = "\\$([\\d.]*)";
-                            return {
-                                type: "text"
-                            }
-                        }
-                        if(value==="boolean") {
-                            return {
-                                type: "checkbox"
-                            }
-                        }
-                    },
-                    validate(value, node) {
-                        return ["checkbox","color","date","datetime-local","email","file",
-                            "hidden","month","number","password","radio","range","tel","text",
-                            "time","url","week","currency-usd","boolean"].includes(value)
-                    }
-                },
-                value: true
-            },
-            async transform(node) {
-                node.tag = "input";
-                node.attributes ||= {};
-                node.attributes.hidden = "";
-                if (node.attributes.visible == "") {
-                    delete node.attributes.hidden;
-                    delete node.attributes.visible;
-                }
-                if (node.attributes["data-default"] == null) {
-                    node.attributes["data-default"] = "";
-                }
-                if(node.attributes.src) {
-                    if(node.attributes.static!=null) {
-                        delete node.attributes.static;
-                        const response = await fetch(node.attributes.src);
-                        node.attributes.value = await response.text();
-                    } else {
-                        const f = `await (async () => { 
-                            const response = await fetch("${node.attributes.src}");
-                            return await response.text();
-                            })()`;
-                        node.attributes["data-template"] = f;
-                    }
-                    delete node.attributes.src;
-                } else {
-                    node.attributes["data-template"] = node.content.join("").trim();
-                    node.attributes.value = node.attributes["data-default"]
-                }
-                node.content = [];
-                return node;
-            }
-        },
-        video: {
-            attributesAllowed: {
-                src: true,
-                controls: true
-            },
-            contentAllowed: ["source","track"]
-        }
-    };
+/***/ "./node_modules/string-replace-async/index.js":
+/*!****************************************************!*\
+  !*** ./node_modules/string-replace-async/index.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-for(let i=1;i<=8;i++) {
-    tags["h"+i] = {
-        contentAllowed: simpleContent
-    }
-}
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ replaceAsync)\n/* harmony export */ });\nfunction replaceAsync(string, searchValue, replacer) {\n  try {\n    if (typeof replacer === \"function\") {\n      // 1. Run fake pass of `replace`, collect values from `replacer` calls\n      // 2. Resolve them with `Promise.all`\n      // 3. Run `replace` with resolved values\n      var values = [];\n      String.prototype.replace.call(string, searchValue, function () {\n        values.push(replacer.apply(undefined, arguments));\n        return \"\";\n      });\n      return Promise.all(values).then(function (resolvedValues) {\n        return String.prototype.replace.call(string, searchValue, function () {\n          return resolvedValues.shift();\n        });\n      });\n    } else {\n      return Promise.resolve(\n        String.prototype.replace.call(string, searchValue, replacer)\n      );\n    }\n  } catch (error) {\n    return Promise.reject(error);\n  }\n}\n\n\n//# sourceURL=webpack://secst/./node_modules/string-replace-async/index.js?");
 
-inlineContent.forEach((tag) => {
-    if(!tags[tag]) {
-        tags[tag] = {
-            contentAllowed: inlineContent.filter((item) => item!==tag)
-        }
-    }
-})
-Object.entries(tags).forEach(([key,value]) => {
-    value.tag = key;
-    value.allowAsRoot ||= blockContent.includes(key);
-})
+/***/ }),
 
+/***/ "./src/extract-value.js":
+/*!******************************!*\
+  !*** ./src/extract-value.js ***!
+  \******************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"extractValue\": () => (/* binding */ extractValue)\n/* harmony export */ });\nconst extractValue = (el) => {\r\n    const extract = el.getAttribute(\"data-extract\");\r\n    if(extract) {\r\n        const match = [...el.value.matchAll(new RegExp(extract,\"g\"))][0];\r\n        if(match) {\r\n            return match[1];\r\n        }\r\n    }\r\n    return el.value;\r\n}\r\n\r\n\n\n//# sourceURL=webpack://secst/./src/extract-value.js?");
 
+/***/ }),
 
+/***/ "./src/format-value.js":
+/*!*****************************!*\
+  !*** ./src/format-value.js ***!
+  \*****************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-;// CONCATENATED MODULE: ./src/transform.js
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"formatValue\": () => (/* binding */ formatValue)\n/* harmony export */ });\nconst formatValue = (el) => {\r\n    const template = el.getAttribute(\"data-format\");\r\n    if(template) {\r\n        return (new Function(\"value\",\"return `\" + template + \"`\"))(new String(el.rawValue.replace(/\\$/g,\"\\$\")))\r\n    }\r\n    return el.rawValue;\r\n};\r\n\r\n\n\n//# sourceURL=webpack://secst/./src/format-value.js?");
 
+/***/ }),
 
-const patchTopLevel = (tree) => {
-    let previous;
-    return tree.reduce((result,node) => {
-        if(typeof(node)==="string") {
-            const paragraphs = node.split("\n\n");
-            paragraphs.forEach((paragraph,i) => {
-                if(i===0 && previous) {
-                    previous.content.push(paragraph);
-                } else {
-                    previous = {tag:"p",content:[paragraph]};
-                    result.push(previous)
-                }
-            })
-        } else if(previous && !tags[node.tag]?.allowAsRoot) {
-            previous.content.push(node);
-        } else {
-            previous = null;
-            result.push(node);
-        }
-        return result;
-    },[]);
-}
+/***/ "./src/index.js":
+/*!**********************!*\
+  !*** ./src/index.js ***!
+  \**********************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-const validateNode = async ({parser,node,path=[],errors=[]}) => {
-    if(!node || typeof(node)!=="object") {
-        return;
-    }
-    const tag = node.tag;
-    let config = tags[node.tag];
-    if(!config) {
-        node.drop = true;
-        errors.push(new parser.SyntaxError(`Dropping unknown tag ${tag}`,null,null,node.location));
-        return errors;
-    }
-    if(path.length===0 && !config.allowAsRoot) {
-        node.drop = true;
-        errors.push(new parser.SyntaxError(`${tag} is not permitted as a root level element`,null,null,node.location));
-        return errors;
-    }
-    if(config.parentRequired && (path.length==0 || !config.parentRequired.includes(path[path.length-1].tag))) {
-        node.drop = true;
-        errors.push(new parser.SyntaxError(`${tag} required parent to be one of`,JSON.stringify(config.parentRequired),path[path.length-1].tag,node.location));
-        return errors;
-    }
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _transform_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./transform.js */ \"./src/transform.js\");\n/* harmony import */ var _listeners_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./listeners.js */ \"./src/listeners.js\");\n/* harmony import */ var _resolve_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./resolve.js */ \"./src/resolve.js\");\n\r\n\r\n\r\n\r\nif(document.currentScript?.getAttribute(\"src\").endsWith(\"?run\")) {\r\n    if(typeof(window)===\"object\" && typeof(MutationObserver)==\"function\") {\r\n        window.secstObserver ||= new MutationObserver(function(mutations) {\r\n            mutations.forEach(function(mutation) {\r\n                const target = mutation.target;\r\n                if (mutation.type === \"attributes\") {\r\n                    const event = new Event(\"attributeChanged\");\r\n                    event.attributeName = mutation.attributeName;\r\n                    event.attributeNamespace = mutation.attributeNamespace;\r\n                    event.oldValue = mutation.oldValue;\r\n                    event.value = target.getAttribute(event.attributeName);\r\n                    target.dispatchEvent(event);\r\n                } else if(mutation.type===\"childList\") {\r\n                    [...mutation.removedNodes].forEach((el) => {\r\n                        const event = new Event(\"disconnected\");\r\n                        el.dispatchEvent(event);\r\n                    })\r\n                }\r\n            });\r\n        });\r\n    }\r\n    document.addEventListener(\"DOMContentLoaded\",()=> {\r\n        Object.entries(_listeners_js__WEBPACK_IMPORTED_MODULE_1__.listeners).forEach(([key,value]) => {\r\n            document.body.addEventListener(key,value);\r\n        });\r\n        (0,_resolve_js__WEBPACK_IMPORTED_MODULE_2__.resolve)();\r\n    })\r\n}\r\n\r\nwindow.SECST = {\r\n    transform: _transform_js__WEBPACK_IMPORTED_MODULE_0__.transform,\r\n    listeners: _listeners_js__WEBPACK_IMPORTED_MODULE_1__.listeners,\r\n    resolve: _resolve_js__WEBPACK_IMPORTED_MODULE_2__.resolve\r\n}\r\n\r\n\n\n//# sourceURL=webpack://secst/./src/index.js?");
 
-    let ancestorIndex;
-    if(path.length>0 && !config.indirectChildAllowed && Array.isArray(config.contentAllowed) && !config.contentAllowed.includes(tag) && (ancestorIndex = path.findIndex((ancestor) => ancestor.tag===tag)!==-1)) {
-        node.drop = true;
-        const ancestor = path[ancestorIndex+1];
-        ancestor.content.splice(ancestor.content.findIndex((node) => node.tag===tag),1,...node.content);
-        errors.push(new parser.SyntaxError(`${tag} is not permitted as a nested element of self. Elevating content.`,null,null,node.location));
-    }
+/***/ }),
 
-    node.attributes ||= {};
+/***/ "./src/listeners.js":
+/*!**************************!*\
+  !*** ./src/listeners.js ***!
+  \**************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-    if(config.transform) {
-        await config.transform(node);
-    }
-    if(node.content.length>0 && !config.contentAllowed) {
-        while(node.content.length) { // try remove whitespace
-            const item = node.content[0];
-            if(typeof(item)!=="string" || item.trim().length!==0) {
-                break;
-            }
-            node.content.shift();
-        }
-        if(node.content.length>0) {
-            errors.push(new parser.SyntaxError(`${tag} is not permitted to have any content. Dropping content.`,null,JSON.stringify(node.content),node.location));
-            node.content = [];
-        }
-    }
-    node.content = await node.content.reduce(async (content,child) => {
-        content = await content;
-        const type = typeof(child);
-        if(type==="string") {
-            if(config.contentAllowed) {
-                content.push(child);
-                return content;
-            }
-            errors.push(new parser.SyntaxError(`${tag} does not allow string child. Dropping child.`,null,null,node.location))
-        }
-        if(child && type==="object") {
-            if(!config.contentAllowed.includes(child.tag)) {
-                errors.push(new parser.SyntaxError(`${tag} does not allow child ${child.tag}. Dropping child.`,null,null,node.location))
-            } else {
-                await validateNode({parser,node:child,path:[...path,node],errors})
-                if(!child.drop)  {
-                    content.push(child);
-                    // elevate trailing space to parent
-                    if(child.content[child.content.length-1]===" ") {
-                        content.push(child.content.pop());
-                    }
-                }
-            }
-            return content;
-        }
-        errors.push(new parser.SyntaxError(`${tag} has unexpected child type ${type} ${child}. Dropping child.`,null,null,node.location));
-        return content;
-    },[]);
-    config.attributesAllowed ||= {};
-    Object.entries(node.attributes||{}).forEach(([key,value]) => {
-        const attributeAllowed = universalAttributes[key] || config.attributesAllowed[key],
-            type = typeof(attributeAllowed);
-        if(type==="function") {
-            const result = attributeAllowed(value,node);
-            delete node.attributes[key];
-            if(result) {
-                Object.assign(node.attributes,result);
-            }
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"listeners\": () => (/* binding */ listeners)\n/* harmony export */ });\n/* harmony import */ var _extract_value_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./extract-value.js */ \"./src/extract-value.js\");\n/* harmony import */ var _resolve_data_template_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./resolve-data-template.js */ \"./src/resolve-data-template.js\");\n/* harmony import */ var _format_value_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./format-value.js */ \"./src/format-value.js\");\n\r\n\r\n\r\n\r\nconst update = async (target) => {\r\n    if(target.type===\"checkbox\") {\r\n        if(target.value!==target.checked+\"\") {\r\n            target.value = target.checked+\"\";\r\n        }\r\n    } else {\r\n        target.rawValue = (0,_extract_value_js__WEBPACK_IMPORTED_MODULE_0__.extractValue)(target);\r\n        target.setAttribute(\"data-template\", target.rawValue);\r\n        const value = (0,_format_value_js__WEBPACK_IMPORTED_MODULE_2__.formatValue)(target);\r\n        if(target.value!==value) {\r\n            target.value = value;\r\n            target.setAttribute(\"value\",value); // both are needed, or Chrome breaks\r\n        }\r\n    }\r\n    for(const el of [...target.dependents||[]]) {\r\n        el.rawValue = await (0,_resolve_data_template_js__WEBPACK_IMPORTED_MODULE_1__.resolveDataTemplate)(document.body,el.getAttribute(\"data-template\"));\r\n        const value = (0,_format_value_js__WEBPACK_IMPORTED_MODULE_2__.formatValue)(el);\r\n        if(el.value!==value) {\r\n            el.value = value;\r\n            el.setAttribute(\"value\",value); // both are needed, or Chrome breaks\r\n        }\r\n    }\r\n}\r\n\r\nconst updateWidths = () => {\r\n    requestAnimationFrame(() => {\r\n        [...document.querySelectorAll('input[data-autosize]')].forEach((el) => {\r\n            const value = el.getAttribute(\"value\")||\"\";\r\n            el.style.width = Math.min(80,Math.max(1,value.length+1))+\"ch\";\r\n        })\r\n    })\r\n}\r\n\r\nconst listeners = {\r\n    async change(event) {\r\n        const template = event.target.getAttribute(\"data-template\");\r\n        if(event.target.tagName===\"INPUT\" && template!==null && (event.target.value+\"\")!==\"[object Promise]\") {\r\n            await update(event.target);\r\n            updateWidths();\r\n        }\r\n    },\r\n    click() {\r\n        if(event.target.tagName===\"INPUT\" && event.target.type===\"checkbox\") {\r\n            if(event.target.value!==event.target.checked+\"\") {\r\n                event.target.value = event.target.checked+\"\";\r\n            }\r\n        }\r\n    },\r\n    async input(event) {\r\n        if(event.target.tagName===\"INPUT\" && event.target.getAttribute(\"data-template\")!==null) {\r\n           await update(event.target);\r\n           updateWidths();\r\n        }\r\n    }\r\n}\r\n\r\n\n\n//# sourceURL=webpack://secst/./src/listeners.js?");
 
-        } else if(attributeAllowed && type==="object") {
-            if(attributeAllowed.transform) {
-                const result = attributeAllowed.transform(value,node);
-                delete node.attributes[key];
-                if(result) {
-                    Object.assign(node.attributes,result);
-                }
-            }
-            if(attributeAllowed.default && node.attributes[key] == null) {
-                node.attributes[key] = attributeAllowed.default;
-            }
-            if (attributeAllowed.required && node.attributes[key] == null) {
-                errors.push(new parser.SyntaxError(`${tag} is required to have attribute '${key}'`,null,null,node.location));
-                return;
-            }
-            if(attributeAllowed.validate) {
-                let valid;
-                try {
-                    valid = attributeAllowed.validate(value,node);
-                } catch(e) {
-                    valid = e+"";
-                }
-                if(valid!==true) {
-                    delete node.attributes[key];
-                    errors.push(new parser.SyntaxError(`${tag} the value of attribute '${key}' is invalid`,valid,value,node.location));
-                }
-            }
-        } else if(attributeAllowed!==true) {
-            delete node.attributes[key];
-            errors.push(new parser.SyntaxError(`${tag} does not allow attribute ${key}`,null,JSON.stringify(value),node.location))
-        }
-    })
-    if(node.attributes.style) {
-        const styleAllowed = config.styleAllowed;
-        if(typeof(styleAllowed)==="function") {
-            node.attributes.style = styleAllowed(node.attributes.style,node);
-        } else if(!styleAllowed) {
-            delete node.attributes.style;
-            errors.push(new parser.SyntaxError(`${tag} does not allow styling. Dropping style`,null,null,node.location))
-        }
-    }
-    if(tag!==node.tag) { // node was transformed to a different node type, so validate that also
-        await validateNode({parser,node,path,errors});
-    }
-    return errors;
-};
-const required = new Set();
-const toDOMNodes = (nodes,parentConfig) => {
-        return nodes.reduce((domNodes,node) => {
-            if(typeof(node)==="string") {
-                if(parentConfig && parentConfig.breakOnNewline) {
-                    const lines = node.split("\n");
-                    lines.forEach((line,i) => {
-                        domNodes.push(new Text(line));
-                        if(i<lines.length-1) {
-                            domNodes.push(document.createElement("br"))
-                        }
-                    })
-                } else {
-                    domNodes.push(new Text(node));
-                }
-            } else if(!node.drop) {
-                const  {tag,id,classes,attributes} = node,
-                    config = tags[tag],
-                    el = document.createElement(tag);
-                if(id) el.id = id;
-                if(config.requires && !required.has(config.requires)) {
-                    required.add(config.required);
-                    config.requires.forEach(({tag,attributes={}}) => {
-                        const el = document.createElement(tag);
-                        Object.entries(attributes).forEach(([key,value]) => {
-                            el.setAttribute(key,value);
-                        });
-                        domNodes.push(el);
-                    });
-                }
-                (classes||[]).forEach((className) => el.classList.add(className));
-                Object.entries(attributes||{}).forEach(([key,value]) => { // style mapping done here so that it bypasses earlier sanitation
-                    const attributeAllowed = config.attributesAllowed[key];
-                    if(key==="style" && value && typeof(value)==="object") {
-                        Object.entries(value).forEach(([key,value]) => {
-                            key.includes("-") ? el.style.setProperty(key,value) : el.style[key] = value;
-                        })
-                    } else if(attributeAllowed?.mapStyle) {
-                        const styleName = attributeAllowed.mapStyle;
-                        styleName.includes("-") ? el.style.setProperty(styleName,value) : el.style[styleName] = value;
-                    } else {
-                        el.setAttribute(key,value);
-                    }
-                });
-                if(node.tag==="script") {
-                    el.setAttribute("type","module");
-                }
-                toDOMNodes(node.content,config).forEach((node) => {
-                    el.appendChild(node);
-                });
-                domNodes.push(el);
-                const listeners = Object.entries(config.listeners||[]);
-                if(listeners.length>0) {
-                    const script = document.createElement("script");
-                    script.innerHTML = listeners.reduce((string,[name,f]) => {
-                        let fstring = f +"";
-                        if(fstring.startsWith(`${name}(`)) {
-                            fstring = fstring.replace(`${name}(`,"function(")
-                        }
-                        string += `document.currentScript.previousElementSibling.addEventListener("${name}",${fstring});\n`;
-                        if(name==="attributeChanged") {
-                            string += "secstObserver.observe(document.currentScript.previousElementSibling,{attributes:true,attributeOldValue:true}});\n";
-                        } else if(name==="disconnected") {
-                            string += "secstObserver.observe(document.currentScript.previousElementSibling.parentElement,{childList:true}});\n";
-                        }
-                        return string;
-                    },"");
-                    domNodes.push(script);
-                }
-            }
-            return domNodes;
-        },[])
-    };
-toDOMNodes.reset = () => required.clear();
+/***/ }),
 
-const configureStyles = (tags,styleAllowed) => {
-        if(styleAllowed==="*") {
-            Object.values(tags).forEach((config) => {
-                config.styleAllowed ||= true;
-            })
-        } else if(typeof(styleAllowed)==="function") {
-            Object.values(tags).forEach((config) => {
-                config.styleAllowed ||= styleAllowed;
-            })
-        } else {
-            Object.entries(styleAllowed||[]).forEach(([key,value]) => {
-                let config;
-                if(typeof(value)==="function") {
-                    config = tags[key];
-                    config.styleAllowed ||= value;
-                } else {
-                    config = tags[value];
-                    config.styleAllowed ||= true;
-                }
-                if(!config) {
-                    console.error(new parser.SyntaxError(`${key} is not a defined tag and can't be styled`,null,null,node.location))
-                }
-            })
-        }
-    };
+/***/ "./src/resolve-data-template.js":
+/*!**************************************!*\
+  !*** ./src/resolve-data-template.js ***!
+  \**************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-const transform = async (parser,text,{styleAllowed}={}) => {
-    if(styleAllowed) {
-        configureStyles(tags,styleAllowed);
-    }
-    console.log(text)
-    const transformed = patchTopLevel(parser.parse(text));
-    const parsed = JSON.parse(JSON.stringify(transformed));
-    const errors = await transformed.reduce(async (errors,node) => {
-        return [...await errors,...await validateNode({parser,node})]
-    },[]);
-    const dom = document.createDocumentFragment();
-    dom.appendChild(dom.head=document.createElement("head"));
-    dom.appendChild(dom.body = document.createElement("body"));
-    toDOMNodes(transformed).forEach((node) => {
-        dom.body.appendChild(node);
-    })
-    return {dom,errors,parsed,transformed};
-}
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"resolveDataTemplate\": () => (/* binding */ resolveDataTemplate)\n/* harmony export */ });\n/* harmony import */ var string_replace_async__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! string-replace-async */ \"./node_modules/string-replace-async/index.js\");\n/* harmony import */ var _format_value_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./format-value.js */ \"./src/format-value.js\");\n/* harmony import */ var _string_template_eval_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./string-template-eval.js */ \"./src/string-template-eval.js\");\n\r\nconst AsyncFunction = (async function () {}).constructor;\r\n\r\n\r\n\r\nconst resolveDataTemplate = async (root,string,requestor) => {\r\n    if(!string) return;\r\n    const text = await (0,string_replace_async__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(string,/\\$\\(([^)]*)\\)/g,async (match,selector) => {\r\n        let els,\r\n            expectsArray;\r\n        if(selector.endsWith(\"[]\")) {\r\n            expectsArray = true;\r\n            els = [...root.querySelectorAll(selector)].filter((el) => {\r\n                if(el.tagName===\"INPUT\" && el.hasAttribute(\"data-template\")) {\r\n                    return true;\r\n                }\r\n            });\r\n        } else {\r\n            const el = root.querySelector(selector);\r\n            if(el.tagName===\"INPUT\" && el.hasAttribute(\"data-template\")) {\r\n                els = [el];\r\n            }\r\n        }\r\n        for(const el of els) {\r\n            el.dependents ||= new Set();\r\n            if(requestor) el.dependents.add(requestor);\r\n            if(el.rawValue==null) {\r\n                el.rawValue = \"\";\r\n            }\r\n            if(el.value===\"\" || !requestor) {\r\n                el.rawValue = await resolveDataTemplate(root,el.getAttribute(\"data-template\"),el);\r\n                el.setAttribute(\"value\",(0,_format_value_js__WEBPACK_IMPORTED_MODULE_1__.formatValue)(el));\r\n                if(el.hasAttribute(\"data-autosize\")) {\r\n                    el.style.width = Math.min(80,Math.max(1,el.value.length))+\"ch\";\r\n                }\r\n            }\r\n        }\r\n        const result = expectsArray ? els.map(el => el.rawValue) : els[0].rawValue\r\n        return result && typeof(result)===\"object\" && !(result instanceof Promise) ? JSON.stringify(result) : result===undefined ? \"\" : result;\r\n    });\r\n    if(typeof(Worker)===\"function\") {\r\n        const result =  await (0,_string_template_eval_js__WEBPACK_IMPORTED_MODULE_2__.stringTemplateEval)(\"${\" + text + \"}\"),\r\n            type = typeof(result);\r\n        if(result && type===\"object\" && result.stringTemplateError) {\r\n            throw new Error(result.stringTemplateError);\r\n        }\r\n        return result && type===\"object\" ? JSON.stringify(result) : result+\"\";\r\n    } else {\r\n        return (new AsyncFunction(\"return `${\" + text + \"}`\"))();\r\n    }\r\n}\r\n\r\n\n\n//# sourceURL=webpack://secst/./src/resolve-data-template.js?");
 
+/***/ }),
 
+/***/ "./src/resolve.js":
+/*!************************!*\
+  !*** ./src/resolve.js ***!
+  \************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-;// CONCATENATED MODULE: ./src/extract-value.js
-const extractValue = (el) => {
-    const extract = el.getAttribute("data-extract");
-    if(extract) {
-        const match = [...el.value.matchAll(new RegExp(extract,"g"))][0];
-        if(match) {
-            return match[1];
-        }
-    }
-    return el.value;
-}
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"resolve\": () => (/* binding */ resolve)\n/* harmony export */ });\n/* harmony import */ var _resolve_data_template_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./resolve-data-template.js */ \"./src/resolve-data-template.js\");\n/* harmony import */ var _format_value_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./format-value.js */ \"./src/format-value.js\");\n\r\n\r\n\r\nconst resolve = async (node=document.body,ifNull) => {\r\n    if(!window.secstObserver) {\r\n        window.secstObserver = new MutationObserver(function(mutations) {\r\n            mutations.forEach(function(mutation) {\r\n                const target = mutation.target;\r\n                if (mutation.type === \"attributes\") {\r\n                    const event = new Event(\"attributeChanged\");\r\n                    event.attributeName = mutation.attributeName;\r\n                    event.attributeNamespace = mutation.attributeNamespace;\r\n                    event.oldValue = mutation.oldValue;\r\n                    event.value = target.getAttribute(event.attributeName);\r\n                    target.dispatchEvent(event);\r\n                } else if(mutation.type===\"childList\") {\r\n                    [...mutation.removedNodes].forEach((el) => {\r\n                        const event = new Event(\"disconnected\");\r\n                        el.dispatchEvent(event);\r\n                    })\r\n                }\r\n            });\r\n        });\r\n    }\r\n    const valueEls = [...node.querySelectorAll(\"input[data-template]\")];\r\n    for(const el of valueEls) {\r\n        const template = el.getAttribute(\"data-template\");\r\n        try {\r\n            el.rawValue = (0,_resolve_data_template_js__WEBPACK_IMPORTED_MODULE_0__.resolveDataTemplate)(node,template,el).then((value) => {\r\n                el.rawValue = value;\r\n                if(value===template) {\r\n                    el.removeAttribute(\"disabled\");\r\n                } else {\r\n                    el.setAttribute(\"disabled\",\"\"); // the value was a computation\r\n                }\r\n                el.setAttribute(\"value\",value=(0,_format_value_js__WEBPACK_IMPORTED_MODULE_1__.formatValue)(el));\r\n                if(el.hasAttribute(\"data-autosize\")) {\r\n                    el.style.width = Math.min(80,Math.max(1,value.length+1))+\"ch\";\r\n                }\r\n            });\r\n            await el.rawValue; // awaiting after the assignment prevent getting stuck in an Inifnite wait due to recursive resolves\r\n        } catch(e) {\r\n            //console.error(e);\r\n        }\r\n    }\r\n};\r\n\r\n\n\n//# sourceURL=webpack://secst/./src/resolve.js?");
 
+/***/ }),
 
-;// CONCATENATED MODULE: ./node_modules/string-replace-async/index.js
-function replaceAsync(string, searchValue, replacer) {
-  try {
-    if (typeof replacer === "function") {
-      // 1. Run fake pass of `replace`, collect values from `replacer` calls
-      // 2. Resolve them with `Promise.all`
-      // 3. Run `replace` with resolved values
-      var values = [];
-      String.prototype.replace.call(string, searchValue, function () {
-        values.push(replacer.apply(undefined, arguments));
-        return "";
-      });
-      return Promise.all(values).then(function (resolvedValues) {
-        return String.prototype.replace.call(string, searchValue, function () {
-          return resolvedValues.shift();
-        });
-      });
-    } else {
-      return Promise.resolve(
-        String.prototype.replace.call(string, searchValue, replacer)
-      );
-    }
-  } catch (error) {
-    return Promise.reject(error);
-  }
-}
+/***/ "./src/string-template-eval.js":
+/*!*************************************!*\
+  !*** ./src/string-template-eval.js ***!
+  \*************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-;// CONCATENATED MODULE: ./src/format-value.js
-const formatValue = (el) => {
-    const template = el.getAttribute("data-format");
-    if(template) {
-        return (new Function("value","return `" + template + "`"))(new String(el.rawValue.replace(/\$/g,"\$")))
-    }
-    return el.rawValue;
-};
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"stringTemplateEval\": () => (/* binding */ stringTemplateEval)\n/* harmony export */ });\n/* harmony import */ var _anywhichway_quick_worker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @anywhichway/quick-worker */ \"./node_modules/@anywhichway/quick-worker/index.js\");\n\r\n\r\nconst stringTemplateEval = async (stringTemplate,requestor) => {\r\n    if(!stringTemplateEval.evaluator) {\r\n        stringTemplateEval.evaluator = await (0,_anywhichway_quick_worker__WEBPACK_IMPORTED_MODULE_0__[\"default\"])({\r\n            properties: {\r\n                document: {\r\n                    data: Object.entries(document.data||{}).reduce((data, [key, value]) => {\r\n                        if (key !== \"urls\") {\r\n                            data[key] = value;\r\n                        }\r\n                        return data;\r\n                    }, {}),\r\n                    baseURI: document.baseURI\r\n                },\r\n                evaluate: async (stringTemplate) => { // remember this function can't use closures, it is passed to the worker as a string\r\n                    // todo add table formatter\r\n                    const ul = (data = {}, format = (data) => data && typeof (data) === \"object\" ? JSON.stringify(data) : data) => {\r\n                            return \"<ul>\" + Object.values(data).reduce((items,item) => items += (\"<li>\" + format(item) + \"</li>\\n\"),\"\") + \"</ul>\"\r\n                        },\r\n                        ol = (data = {}, format = (data) => data && typeof (data) === \"object\" ? JSON.stringify(data) : data) => {\r\n                            return \"<ol>\" + Object.values(data).reduce((items,item) => items += (\"<li>\" + format(item) + \"</li>\\n\"),\"\") + \"</ol>\"\r\n                        },\r\n                        solve = (formula, args) => {\r\n                            formula = formula+\"\";// MathJS sends in an object that stringifies to the forumla\r\n                            Object.entries(args).forEach(([variable, value]) => {\r\n                                formula = formula.replaceAll(new RegExp(variable, \"g\"), value);\r\n                            })\r\n                            return new Function(\"return \" + formula)();\r\n                        },\r\n                        functions = {\r\n                            ul,\r\n                            ol,\r\n                            solve\r\n                        }\r\n                    try {\r\n                        const AsyncFunction = (async ()=>{}).constructor;\r\n                        return await (new AsyncFunction(\"functions\", \"math\", \"globalThis\", \"with(functions) { with(math) { return `\" + stringTemplate + \"`}}\")).call(null, functions, self.math); //always 2 args so globalThis is undefined\r\n                    } catch (e) {\r\n                        return {stringTemplateError: e + \"\"}\r\n                    }\r\n                },\r\n            },\r\n            timeout:1000,\r\n            imports:['https://cdn.jsdelivr.net/npm/mathjs@11.3.2/lib/browser/math.min.js']})\r\n    }\r\n    /*const original = stringTemplate;\r\n    stringTemplate = await replaceReferences(stringTemplate,requestor);\r\n    if(stringTemplate!==original && XRegExp.matchRecursive(stringTemplate, '\\\\!\\\\[', '\\\\]', 'g',{unbalanced:\"skip\"}).length>0) {\r\n        const message = `Error processing ${original}. Check for loop in dependencies.`;\r\n        console.error(new EvalError(message));\r\n        requestor.classList.add(\"chtml-error\");\r\n        return `${message}`\r\n    } else {*/\r\n        return (await stringTemplateEval.evaluator.evaluate)(stringTemplate);\r\n    //}\r\n}\r\n\r\n\n\n//# sourceURL=webpack://secst/./src/string-template-eval.js?");
 
+/***/ }),
 
-;// CONCATENATED MODULE: ./node_modules/@anywhichway/quick-worker/index.js
-const body = `
-    const _fetch = fetch;
-    fetch = (urlOrRequest,options) => {
-        if(document.baseURI) {
-            if(urlOrRequest && typeof(urlOrRequest)==="object") {
-                options = Object.assign({},urlOrRequest);
-                urlOrRequest = options.url;
-                delete options.url;
-            } else {
-                urlOrRequest = new URL(urlOrRequest,document.baseURI);
-            }
-        }
-        try {
-            return _fetch(urlOrRequest,options);
-        } catch(e) {
-            console.error(e);
-            if(!document.baseURI) console.error("Pass baseURI as part of document for QuickWorker");
-            throw e;
-        }
-    };
-    const properties = {};
-    let document;
-    self.addEventListener('message',async (event) => {
-    const directive = JSON.parse(event.data);
-    let result;
-      // debugger;
-    try {
-        if(directive.type==="importScripts") {
-            self.importScripts(...directive.args);
-        } else if(directive.type==="freeze") {
-           Object.freeze(properties);
-        } else if(directive.type==="delete") {
-            const [propertyName] = directive.args;
-            delete properties[propertyName];
-        } else if(directive.type==="get") {
-            const [propertyName] = directive.args;
-            result = properties[propertyName];
-        } else if(directive.type==="set") {
-            const [propertyName,value] = directive.args;
-            const valueType = directive.valueType;
-            properties[propertyName] = valueType==="function" ? (new Function("return " + value))() : value;
-            document = properties.document;
-        }  else if(directive.type==="apply") {
-            const [propertyName,...args] = directive.args;
-            result = await properties[propertyName](...args);
-        }
-    } catch(e) {
-        result = e+"";
-    }
-    if(typeof(result)==="function") {
-        result = "()=>{}";
-    }
-    if([Infinity,-Infinity,NaN,undefined].some((value) => value+""===result+"")) {
-        result += "";
-    }
-    self.postMessage(JSON.stringify({eventId:directive.eventId,value:result}))
-})`;
-const QuickWorker = async ({properties={},imports=[],freeze,timeout=1000,name="anonymous",timeoutRestart=true,type}={}) => {
-    const url = URL.createObjectURL(new Blob([body], {type: 'application/javascript'})),
-        createTimeout = (promise,reject) => {
-            return setTimeout(() => {
-                const error = new EvalError(`Restarted worker ${name} on timeout of ${timeout}ms`);
-                console.error(error);
-                worker.terminate();
-                if(timeoutRestart) {
-                    worker = new Worker(url);
-                }
-                reject(error);
-            },timeout);
-        },
-        coerce = (value,property) => {
-            if(!value) return value;
-            if(typeof(value)==="string") {
-                if(value==="()=>{}") {
-                    return async (...args) => {
-                        await promise;
-                        promise = new Promise((resolve,reject) => {
-                            const timeout = createTimeout(promise, reject),
-                                id = Math.random(),
-                                listener = (event) => {
-                                    const {value, eventId} = JSON.parse(event.data);
-                                    if (eventId !== id) return;
-                                    worker.removeEventListener("message", listener)
-                                    clearTimeout(timeout);
-                                    resolve(coerce(value, property));
-                                };
-                            worker.addEventListener("message", (event) => {
-                                listener(event);
-                            });
-                            worker.postMessage(JSON.stringify({type:"apply",args:[property,...args],eventId:id}));
-                        })
-                        return await promise;
-                    }
-                }
-                try {
-                    value = JSON.parse(value);
-                    if(value==="Infinity") return Infinity;
-                    if(value==="-Infinity") return -Infinity;
-                    if(value==="NaN") return NaN;
-                    if(value==="undefined") return undefined;
-                    return value;
-                } catch(e) {
-                    return value;
-                }
-            }
-            return value;
-        };
-    let promise,
-        worker = new Worker(url,{type});
-    const functions = {
-        async delete(property) {
-            await promise;
-            return promise = new Promise((resolve,reject) => {
-                const timeout = createTimeout(promise,reject);
-                const listener = (event) => {
-                    worker.removeEventListener("message",listener)
-                    clearTimeout(timeout);
-                    const value = JSON.parse(event.data);
-                    resolve(coerce(value,property));
-                }
-                worker.addEventListener("message",(event) => {
-                    listener(event);
-                });
-                worker.postMessage(JSON.stringify({type:"delete",args:[property]}));
-            });
-        },
-        async freeze() {
-            await promise;
-            return promise = new Promise((resolve,reject) => {
-                const timeout = createTimeout(promise,reject);
-                const listener = (event) => {
-                    worker.removeEventListener("message",listener)
-                    clearTimeout(timeout);
-                    const value = JSON.parse(event.data);
-                    resolve(coerce(value));
-                }
-                worker.addEventListener("message",(event) => {
-                    listener(event);
-                });
-                worker.postMessage(JSON.stringify({type:"freeze"}));
-            });
-        },
-        async get(property) {
-            if(promise && property==="then") {
-                return promise.then;
-            }
-            await promise;
-            return promise = new Promise((resolve,reject) => {
-                const timeout = createTimeout(promise, reject),
-                    id = Math.random(),
-                    listener = (event) => {
-                        const {value, eventId} = JSON.parse(event.data);
-                        if (eventId !== id) return;
-                        worker.removeEventListener("message", listener)
-                        clearTimeout(timeout);
-                        resolve(coerce(value, property));
-                    };
-                worker.addEventListener("message", (event) => {
-                    listener(event);
-                });
-                worker.postMessage(JSON.stringify({type: "get", args: [property], eventId: id}));
-            });
-        },
-        async importScripts(...scripts) {
-            await promise;
-            return promise = new Promise((resolve,reject) => {
-                const timeout = createTimeout(promise, reject),
-                    id = Math.random(),
-                    listener = (event) => {
-                        const {value, eventId} = JSON.parse(event.data);
-                        if (eventId !== id) return;
-                        worker.removeEventListener("message", listener)
-                        clearTimeout(timeout);
-                        resolve(coerce(value));
-                    };
-                worker.addEventListener("message", (event) => {
-                    listener(event);
-                });
-                worker.postMessage(JSON.stringify({type:"importScripts",args:scripts,eventId:id}));
-            });
-        },
-        async set(property,value,valueType=typeof(value)) {
-            await promise;
-            return promise = new Promise((resolve,reject) => {
-                const timeout = createTimeout(promise, reject),
-                    id = Math.random(),
-                    listener = (event) => {
-                        const {value, eventId} = JSON.parse(event.data);
-                        if (eventId !== id) return;
-                        worker.removeEventListener("message", listener)
-                        clearTimeout(timeout);
-                        resolve(coerce(value, property));
-                    };
-                worker.addEventListener("message", (event) => {
-                    listener(event);
-                });
-                if(valueType==="function") {
-                    value += "";
-                }
-                worker.postMessage(JSON.stringify({type:"set",args:[property,value],valueType,eventId:id}));
-            });
-        },
-        async call(property,...args) {
-            return (await this.get(property))(...args);
-        },
-        async apply(property,args) {
-            return (await this.get(property))(...args);
-        }
-    }
-    for(const [propertyName,value] of Object.entries(properties)) {
-        await functions.set(propertyName,value);
-    }
-    if(imports.length>0) {
-        await functions.importScripts(...imports)
-    }
-    if(freeze) {
-        await functions.freeze();
-    }
-    return new Proxy(functions,{
-        async get(target,property) {
-            let value = target[property];
-            if(value!==undefined) return value;
-            return target.get(property);
-        },
-        async set(target,property) {
-            const value = target[property];
-            if(value!==undefined) {
-                throw new Error(`Can't set primary property ${property} on worker ${name}` )
-            }
-            return target.set(property,value);
-        },
-        async delete(target,property) {
-            let value = target[property];
-            if(value!==undefined) {
-                throw new Error(`Can't delete primary property ${property} on worker ${name}` )
-            }
-            await target.delete(property);
-        }
-    })
-}
+/***/ "./src/tags.js":
+/*!*********************!*\
+  !*** ./src/tags.js ***!
+  \*********************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"tags\": () => (/* binding */ tags),\n/* harmony export */   \"universalAttributes\": () => (/* binding */ universalAttributes)\n/* harmony export */ });\nconst universalAttributes = {\r\n        hidden: true,\r\n        dir: {\r\n            validate(value) {\r\n                if([\"ltr\",\"rtl\",\"auto\"].includes(value)) {\r\n                    return true;\r\n                }\r\n                throw new TypeError(`${value} is not a valid text directionality`)\r\n            }\r\n        },\r\n        inert: true,\r\n        is: true,\r\n        title: true\r\n    },\r\n    blockContent = [\"article\",\"audio\",\"blockquote\",\"code\",\"dl\",\"figure\",\"hr\",\"img\",\"listeners\",\"ol\",\"p\",\"picture\",\"script\",\"style\",\"table\",\"ul\",\"video\",\"latex\",\"math-science-formula\"],\r\n    simpleContent = [\"a\",\"abbr\",\"bdi\",\"bdo\",\"br\",\"del\",\"i\",\"ins\",\"kbd\",\"strong\",\"sub\",\"sup\",\"time\",\"var\",\"wbr\",\"underline\",\"#\",\"@linkedin\"],\r\n    structuredContent = [\"address\",\"aside\",\"bdi\",\"cite\",\"code\",\"details\",\"input\",\"output\",\"value\"],\r\n    inlineContent = [...simpleContent,...structuredContent];\r\n\r\n    for(let i=1;i<=8;i++) {\r\n        blockContent.push(\"h\"+i)\r\n    }\r\n\r\n    const tags = {\r\n        \"@linkedin\": {\r\n            attributesAllowed: {\r\n                href: true\r\n            },\r\n            contentAllowed: true,\r\n            transform(node) {\r\n                node.tag = \"a\";\r\n                node.attributes.href = `https://linkedin.com/${node.content[0].trim()}`\r\n            }\r\n        },\r\n        \"#\": {\r\n            contentAllowed: true,\r\n            transform(node) {\r\n                node.tag = \"a\";\r\n                const hash = node.content[0].trim();\r\n                node.id = hash;\r\n                node.content = [\"#\"+hash];\r\n            }\r\n        },\r\n        \"math-science-formula\": {\r\n            requires: [\r\n                {\r\n                    tag: \"script\",\r\n                    attributes: {\r\n                        type:\"application/javascript\",\r\n                        src:\"https://cdn.jsdelivr.net/npm/@anywhichway/quick-component@0.0.12\",\r\n                        async: \"\",\r\n                        component: \"https://cdn.jsdelivr.net/npm/@anywhichway/math-science-formula@0.0.5\"\r\n                    }\r\n                }\r\n            ],\r\n            contentAllowed: true\r\n        },\r\n        a: {\r\n            attributesAllowed: {\r\n                href: {\r\n                    validate(value) {\r\n                        try {\r\n                            new URL(value);\r\n                            return true;\r\n                        } catch {\r\n                            throw new TypeError(`${value} is not a valid URL for href`)\r\n                        }\r\n                    }\r\n                },\r\n                ping: {\r\n                    validate(value) {\r\n                        const urls = value.split(\" \");\r\n                        urls.forEach((url) => {\r\n                            try {\r\n                                new URL(url);\r\n                            } catch {\r\n                                throw new TypeError(`${url} is not a valid url for ping`)\r\n                            }\r\n                        });\r\n                        return true;\r\n                    }\r\n                },\r\n                referrerpolicy: {\r\n                    validate(value) {\r\n                        const policies = [\"no-referrer\",\"no-referrer-when-downgrade\",\"origin\",\"origin-when-cross-origin\",\"same-origin\",\r\n                            \"strict-origin\",\"strict-origin-when-cross-origin\"];\r\n                        if(policies.includes(value)) {\r\n                            return true;\r\n                        }\r\n                        throw new TypeError(`referrer policy ${value} is not one of ${JSON.stringify(policies)}`)\r\n                    }\r\n                },\r\n                type: {\r\n                    validate(value) {\r\n                        const parts = value.split(\"/\");\r\n                        if(parts.length!==2 || parts[0].length<1 || parts[1].length<1) {\r\n                            throw new TypeError(`${value} is not a valid MIME type`)\r\n                        }\r\n                        return true;\r\n                    }\r\n                }\r\n            },\r\n            contentAllowed: [...simpleContent]\r\n        },\r\n        article: {\r\n            contentAllowed: [...blockContent,...inlineContent]\r\n        },\r\n        audio: {\r\n            attributesAllowed: {\r\n                src: true,\r\n                controls: true\r\n            },\r\n            contentAllowed: [\"source\",\"track\"]\r\n        },\r\n        bdo: {\r\n            attributesAllowed: {\r\n                dir: {\r\n                    validate(value) {\r\n                        return [\"ltr\",\"rtl\"].includes(value)\r\n                    }\r\n                }\r\n            }\r\n        },\r\n        blockquote: {\r\n            allowAsRoot: true,\r\n            contentAllowed: inlineContent,\r\n            attributesAllowed: {\r\n                cite: {\r\n                    validate(value) {\r\n                        new URL(value);\r\n                        return true;\r\n                    }\r\n                }\r\n            }\r\n        },\r\n        br: {\r\n\r\n        },\r\n        caption: {\r\n            parentRequired: [\"figure\",\"table\"],\r\n            contentAllowed: simpleContent,\r\n            transform(node,parent) {\r\n                // if parent .tag = table, ensure it is first\r\n                // if parent .tag = fig, change to fig caption\r\n            }\r\n        },\r\n        code: {\r\n            attributesAllowed: {\r\n                language: true, // todo validate with list\r\n                run: true\r\n            },\r\n            contentAllowed: true,\r\n            transform(node) {\r\n                const language = node.attributes.language,\r\n                    run = node.attributes.run;\r\n                if(run!=null && language===\"latex\") {\r\n                    node.tag = \"math-science-formula\";\r\n                    node.content = [node.content.join(\"\\n\")]\r\n                }\r\n                delete  node.attributes.language;\r\n                delete node.attributes.run;\r\n            }\r\n        },\r\n        dl: {\r\n            contentAllowed: [\"dt\"]\r\n        },\r\n        dt: {\r\n            contentAllowed: simpleContent\r\n        },\r\n        figure: {\r\n            contentAllowed:[...blockContent,...inlineContent,\"caption\"].filter((item) => item!==\"figure\")\r\n        },\r\n        hr: {\r\n            allowAsRoot: true\r\n        },\r\n        input: {\r\n            attributesAllowed: {\r\n                \"data-autosize\": true,\r\n                \"data-default\": true,\r\n                \"data-extract\": true,\r\n                \"data-template\": true,\r\n                \"data-format\": true,\r\n                default(value) {\r\n                    return {\r\n                        \"data-default\": value\r\n                    }\r\n                },\r\n                disabled: true,\r\n                template(value) {\r\n                    return {\r\n                        \"data-template\": value\r\n                    }\r\n                },\r\n                title: {\r\n                    required: true\r\n                },\r\n                type: true,\r\n                value:true\r\n            }\r\n        },\r\n        img: {\r\n            allowAsRoot: true,\r\n            attributesAllowed: {\r\n                alt:true,\r\n                url(value) {\r\n                    return {\r\n                        src: value\r\n                    }\r\n                }\r\n            },\r\n            transform(node) {\r\n                if (node.content[0]) {\r\n                    node.attributes.title ||= node.content[0];\r\n                    node.attributes.alt ||= node.content[0];\r\n                    node.content.shift();\r\n                }\r\n            }\r\n        },\r\n        li: {\r\n            breakOnNewline: true,\r\n            attributesAllowed: {\r\n                value: {\r\n                    validate(value) {\r\n                        if (parseInt(value) == value) return true;\r\n                        return \"a number\"\r\n                    }\r\n                },\r\n                type: {\r\n                    validate(value) {\r\n                        if (\"aAiI1\".includes(value) && value.length === 1) return true;\r\n                        return \"one of 'aAiI1`\"\r\n                    }\r\n                }\r\n            },\r\n            contentAllowed: [\"ol\",\"ul\",...inlineContent.filter((item) => item!==\"li\")],\r\n            listeners: {\r\n                click() {\r\n                    alert(\"ok\")\r\n                }\r\n            }\r\n        },\r\n        listeners: {\r\n            allowAsRoot: true,\r\n            contentAllowed: true,\r\n            transform(node) {\r\n                node.tag = \"script\";\r\n                node.content = [\r\n                    `[...document.querySelectorAll(\"${node.attributes.selector}\")].forEach((el) => {\r\n                        const listeners = { \r\n                            ${node.content.join(\"\\n\")}\r\n                        };\r\n                        Object.entries(listeners).forEach(([event,listener]) => {\r\n                            el.addEventListener(event,listener);\r\n                            if(event===\"attributeChanged\") {\r\n                               secstObserver.observe(el,{attributes:true,attributeOldValue:true});\r\n                            } else if(event===\"disconnected\") {\r\n                               secstObserver.observe(el.parentElement,{childList:true});\r\n                            }\r\n                        });\r\n                    })`\r\n                ]\r\n                delete node.attributes.selector;\r\n            }\r\n        },\r\n        ol: {\r\n            indirectChildAllowed: true,\r\n            allowAsRoot: true,\r\n            attributesAllowed: {\r\n                reversed: true,\r\n                start: {\r\n                    validate(value) {\r\n                        if (parseInt(value) == value) return true;\r\n                        return \"a number\"\r\n                    }\r\n                },\r\n                type: {\r\n                    validate(value) {\r\n                        if (\"aAiI1\".includes(value) && value.length === 1) return true;\r\n                        return \"one of 'aAiI1`\"\r\n                    }\r\n                }\r\n            },\r\n            contentAllowed: [\"li\"],\r\n            transform(node) {\r\n                node.content = node.content.reduce((content,item) => {\r\n                    if(typeof(item)===\"string\") {\r\n                        const lines = item.split(\"\\n\");\r\n                        let listitem = \"\";\r\n                        lines.forEach((line,i) => {\r\n                            line = line.trim();\r\n                            const num = parseInt(line),\r\n                                nl = i<lines.length-1 ? \"\\n\" : \"\";\r\n                            if(typeof(num)===\"number\" && !isNaN(num)) {\r\n                                line = line.substring((num+\".\").length);\r\n                                if(num!==1 && node.attributes.start==null) {\r\n                                    node.attributes.start = num;\r\n                                }\r\n                                if(listitem.length>0) {\r\n                                    content.push({tag:\"li\",content:[listitem]});\r\n                                    listitem = line + nl;\r\n                                } else {\r\n                                    listitem += line + nl;\r\n                                }\r\n                            } else if(line.startsWith(\"- \")) {\r\n                                line = line.substring(2);\r\n                                if(listitem.length>0) {\r\n                                    content.push({tag:\"li\",content:[listitem]});\r\n                                    listitem = line + nl;\r\n                                } else {\r\n                                    listitem += line + nl;\r\n                                }\r\n                            } else {\r\n                                listitem += line + nl;\r\n                            }\r\n                        })\r\n                        if(listitem.length>0) {\r\n                            content.push({tag:\"li\",content:[listitem]});\r\n                        }\r\n                    } else {\r\n                        content.push(item);\r\n                    }\r\n                    return content;\r\n                },[])\r\n            }\r\n        },\r\n        p: {\r\n            allowAsRoot: true,\r\n            breakOnNewline: true,\r\n            contentAllowed: [...inlineContent],\r\n            attributesAllowed: {\r\n                align: {\r\n                    mapStyle: \"text-align\"\r\n                }\r\n            }\r\n        },\r\n        picture: {\r\n            contentAllowed: [\"img\",\"source\"]\r\n        },\r\n        script: {\r\n            allowAsRoot: true,\r\n            contentAllowed: true\r\n        },\r\n        source: {\r\n            attributesAllowed: {\r\n                type:true,\r\n                height: {\r\n                    validate(value) {\r\n                        return parseInt(value)===value+\"\";\r\n                        /*\r\n                        Allowed if the source element's parent is a <picture> element, but not allowed if the source element's parent is an <audio> or <video> element.\r\n                         */\r\n                    }\r\n                },\r\n                media: {\r\n                    validate(value) {\r\n                        return true;\r\n                        /*\r\n                        Allowed if the source element's parent is a <picture> element, but not allowed if the source element's parent is an <audio> or <video> element.\r\n                         */\r\n                    }\r\n                },\r\n                sizes: {\r\n                    validate(value) {\r\n                        return true;\r\n                        /*\r\n                        Allowed if the source element's parent is a <picture> element, but not allowed if the source element's parent is an <audio> or <video> element.\r\n                         */\r\n                    }\r\n                },\r\n                src: {\r\n                    validate(value) {\r\n                        return true;\r\n                        /*\r\n                        Required if the source element's parent is an <audio> and <video> element, but not allowed if the source element's parent is a <picture> element.\r\n                         */\r\n                    }\r\n                },\r\n                srcset: {\r\n                    validate(value) {\r\n                        return true;\r\n                        /*\r\n                        Required if the source element's parent is a <picture> element, but not allowed if the source element's parent is an <audio> or <video> element.\r\n                         */\r\n                    }\r\n                },\r\n                width: {\r\n                    validate(value) {\r\n                        return parseInt(value)===value+\"\";\r\n                        /*\r\n                        Allowed if the source element's parent is a <picture> element, but not allowed if the source element's parent is an <audio> or <video> element.\r\n                         */\r\n                    }\r\n                }\r\n            },\r\n            parentRequired: [\"audio\",\"picture\",\"video\"]\r\n        },\r\n        style: {\r\n            allowAsRoot: true,\r\n            contentAllowed: true,\r\n            transform(node) {\r\n                if(node.attributes.selector) {\r\n                    node.content = [`${node.attributes.selector} { ${node.content.join(\";\")} }`]\r\n                    delete node.attributes.selector;\r\n                } else if(node.id) {\r\n                    node.content = [`#${node.id} { ${node.content.join(\";\")} }`]\r\n                    delete node.id;\r\n                } else {\r\n                    node.content = [node.content.join(\";\")]\r\n                }\r\n            }\r\n        },\r\n        table: {\r\n            contentAllowed:[\"thead\",\"tbody\",\"tfoot\",\"caption\",\"tr\"]\r\n        },\r\n        td: {\r\n            attributesAllowed: {\r\n                colspan: {\r\n                    validate(value) {\r\n                        return parseInt(value)===value+\"\";\r\n                    }\r\n                }\r\n            },\r\n            contentAllowed: inlineContent\r\n        },\r\n        th: {\r\n            attributesAllowed: {\r\n                colspan: {\r\n                    validate(value) {\r\n                        return parseInt(value)===value+\"\";\r\n                    }\r\n                }\r\n            },\r\n            contentAllowed: simpleContent\r\n        },\r\n        tr: {\r\n            attributesAllowed: {\r\n                rowspan: {\r\n                    validate(value) {\r\n                        return parseInt(value)===value+\"\";\r\n                    }\r\n                }\r\n            },\r\n            contentAllowed: [\"td\",\"th\"]\r\n        },\r\n        track: {\r\n          parentRequired: [\"audio\",\"video\"],\r\n          attributesAllowed: {\r\n              default: {\r\n                  validate(value,node) {\r\n                      return true;\r\n                      /*\r\n                      This may only be used on one track element per media element.\r\n                       */\r\n                  }\r\n              },\r\n              kind: {\r\n                  validate(value) {\r\n                      return true;\r\n                  }\r\n              },\r\n              label: true,\r\n              src: {\r\n                  validate(value) {\r\n                      new URL(value);\r\n                      /*\r\n                      This attribute must be specified and its URL value must have the same origin as the document — unless the <audio> or <video> parent element of the track element has a crossorigin attribute.\r\n                       */\r\n                  }\r\n              },\r\n              srclang: {\r\n                  validate(value) {\r\n                      return true;\r\n                  }\r\n              }\r\n          }\r\n        },\r\n        ul: {\r\n            allowAsRoot: true,\r\n            indirectChildAllowed: true,\r\n            contentAllowed: [\"li\"]\r\n        },\r\n        underline: {\r\n            attributesAllowed: {\r\n                style: true\r\n            },\r\n            contentAllowed: inlineContent,\r\n            styleAllowed() { return {\"text-decoration\":\"underline\"}},\r\n            transform(node) {\r\n                node.attributes.style =  {\"text-decoration\":\"underline\"};\r\n            }\r\n        },\r\n        value: {\r\n            allowAsRoot: true,\r\n            attributesAllowed: {\r\n                \"data-autosize\": true,\r\n                \"data-default\": true,\r\n                \"data-extract\": true,\r\n                \"data-format\": true,\r\n                \"data-template\": true,\r\n                autosize() {\r\n                    return {\r\n                        \"data-autosize\": \"\"\r\n                    }\r\n                },\r\n                default(value) {\r\n                    return {\r\n                        \"data-default\": value\r\n                    }\r\n                },\r\n                disabled() {\r\n                    return {\r\n                        disabled: \"\"\r\n                    }\r\n                },\r\n                extract(value) {\r\n                    return {\r\n                        \"data-extract\": value\r\n                    }\r\n                },\r\n                format(value) {\r\n                  return {\r\n                      \"data-format\": value\r\n                  }\r\n                },\r\n                readonly() {\r\n                    return {\r\n                        readonly: \"\"\r\n                    }\r\n                },\r\n                static: true,\r\n                template(value) {\r\n                    return {\r\n                        \"data-template\": value\r\n                    }\r\n                },\r\n                title: {\r\n                    required: true\r\n                },\r\n                type: {\r\n                    default: \"text\",\r\n                    transform(value,node) {\r\n                        if(value===\"currency-usd\") {\r\n                            node.attributes[\"data-format\"] = \"$${value}\";\r\n                            node.attributes[\"data-extract\"] = \"\\\\$([\\\\d.]*)\";\r\n                            return {\r\n                                type: \"text\"\r\n                            }\r\n                        }\r\n                        if(value===\"boolean\") {\r\n                            return {\r\n                                type: \"checkbox\"\r\n                            }\r\n                        }\r\n                    },\r\n                    validate(value, node) {\r\n                        return [\"checkbox\",\"color\",\"date\",\"datetime-local\",\"email\",\"file\",\r\n                            \"hidden\",\"month\",\"number\",\"password\",\"radio\",\"range\",\"tel\",\"text\",\r\n                            \"time\",\"url\",\"week\",\"currency-usd\",\"boolean\"].includes(value)\r\n                    }\r\n                },\r\n                value: true\r\n            },\r\n            async transform(node) {\r\n                node.tag = \"input\";\r\n                node.attributes ||= {};\r\n                node.attributes.hidden = \"\";\r\n                if (node.attributes.visible == \"\") {\r\n                    delete node.attributes.hidden;\r\n                    delete node.attributes.visible;\r\n                }\r\n                if (node.attributes[\"data-default\"] == null) {\r\n                    node.attributes[\"data-default\"] = \"\";\r\n                }\r\n                if(node.attributes.src) {\r\n                    if(node.attributes.static!=null) {\r\n                        delete node.attributes.static;\r\n                        const response = await fetch(node.attributes.src);\r\n                        node.attributes.value = await response.text();\r\n                    } else {\r\n                        const f = `await (async () => { \r\n                            const response = await fetch(\"${node.attributes.src}\");\r\n                            return await response.text();\r\n                            })()`;\r\n                        node.attributes[\"data-template\"] = f;\r\n                    }\r\n                    delete node.attributes.src;\r\n                } else {\r\n                    node.attributes[\"data-template\"] = node.content.join(\"\").trim();\r\n                    node.attributes.value = node.attributes[\"data-default\"]\r\n                }\r\n                node.content = [];\r\n                return node;\r\n            }\r\n        },\r\n        video: {\r\n            attributesAllowed: {\r\n                src: true,\r\n                controls: true\r\n            },\r\n            contentAllowed: [\"source\",\"track\"]\r\n        }\r\n    };\r\n\r\nfor(let i=1;i<=8;i++) {\r\n    tags[\"h\"+i] = {\r\n        contentAllowed: simpleContent\r\n    }\r\n}\r\n\r\ninlineContent.forEach((tag) => {\r\n    if(!tags[tag]) {\r\n        tags[tag] = {\r\n            contentAllowed: inlineContent.filter((item) => item!==tag)\r\n        }\r\n    }\r\n})\r\nObject.entries(tags).forEach(([key,value]) => {\r\n    value.tag = key;\r\n    value.allowAsRoot ||= blockContent.includes(key);\r\n})\r\n\r\n\r\n\r\n\r\n\n\n//# sourceURL=webpack://secst/./src/tags.js?");
 
-;// CONCATENATED MODULE: ./src/string-template-eval.js
+/***/ }),
 
+/***/ "./src/transform.js":
+/*!**************************!*\
+  !*** ./src/transform.js ***!
+  \**************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-const stringTemplateEval = async (stringTemplate,requestor) => {
-    if(!stringTemplateEval.evaluator) {
-        stringTemplateEval.evaluator = await QuickWorker({
-            properties: {
-                document: {
-                    data: Object.entries(document.data||{}).reduce((data, [key, value]) => {
-                        if (key !== "urls") {
-                            data[key] = value;
-                        }
-                        return data;
-                    }, {}),
-                    baseURI: document.baseURI
-                },
-                evaluate: async (stringTemplate) => { // remember this function can't use closures, it is passed to the worker as a string
-                    // todo add table formatter
-                    const ul = (data = {}, format = (data) => data && typeof (data) === "object" ? JSON.stringify(data) : data) => {
-                            return "<ul>" + Object.values(data).reduce((items,item) => items += ("<li>" + format(item) + "</li>\n"),"") + "</ul>"
-                        },
-                        ol = (data = {}, format = (data) => data && typeof (data) === "object" ? JSON.stringify(data) : data) => {
-                            return "<ol>" + Object.values(data).reduce((items,item) => items += ("<li>" + format(item) + "</li>\n"),"") + "</ol>"
-                        },
-                        solve = (formula, args) => {
-                            formula = formula+"";// MathJS sends in an object that stringifies to the forumla
-                            Object.entries(args).forEach(([variable, value]) => {
-                                formula = formula.replaceAll(new RegExp(variable, "g"), value);
-                            })
-                            return new Function("return " + formula)();
-                        },
-                        functions = {
-                            ul,
-                            ol,
-                            solve
-                        }
-                    try {
-                        const AsyncFunction = (async ()=>{}).constructor;
-                        return await (new AsyncFunction("functions", "math", "globalThis", "with(functions) { with(math) { return `" + stringTemplate + "`}}")).call(null, functions, self.math); //always 2 args so globalThis is undefined
-                    } catch (e) {
-                        return {stringTemplateError: e + ""}
-                    }
-                },
-            },
-            timeout:1000,
-            imports:['https://cdn.jsdelivr.net/npm/mathjs@11.3.2/lib/browser/math.min.js']})
-    }
-    /*const original = stringTemplate;
-    stringTemplate = await replaceReferences(stringTemplate,requestor);
-    if(stringTemplate!==original && XRegExp.matchRecursive(stringTemplate, '\\!\\[', '\\]', 'g',{unbalanced:"skip"}).length>0) {
-        const message = `Error processing ${original}. Check for loop in dependencies.`;
-        console.error(new EvalError(message));
-        requestor.classList.add("chtml-error");
-        return `${message}`
-    } else {*/
-        return (await stringTemplateEval.evaluator.evaluate)(stringTemplate);
-    //}
-}
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"transform\": () => (/* binding */ transform)\n/* harmony export */ });\n/* harmony import */ var _tags_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./tags.js */ \"./src/tags.js\");\n\r\n\r\nconst patchTopLevel = (tree) => {\r\n    let previous;\r\n    return tree.reduce((result,node) => {\r\n        if(typeof(node)===\"string\") {\r\n            const paragraphs = node.split(\"\\n\\n\");\r\n            paragraphs.forEach((paragraph,i) => {\r\n                if(i===0 && previous) {\r\n                    previous.content.push(paragraph);\r\n                } else {\r\n                    previous = {tag:\"p\",content:[paragraph]};\r\n                    result.push(previous)\r\n                }\r\n            })\r\n        } else if(previous && !_tags_js__WEBPACK_IMPORTED_MODULE_0__.tags[node.tag]?.allowAsRoot) {\r\n            previous.content.push(node);\r\n        } else {\r\n            previous = null;\r\n            result.push(node);\r\n        }\r\n        return result;\r\n    },[]);\r\n}\r\n\r\nconst validateNode = async ({parser,node,path=[],errors=[]}) => {\r\n    if(!node || typeof(node)!==\"object\") {\r\n        return;\r\n    }\r\n    const tag = node.tag;\r\n    let config = _tags_js__WEBPACK_IMPORTED_MODULE_0__.tags[node.tag];\r\n    if(!config) {\r\n        node.drop = true;\r\n        errors.push(new parser.SyntaxError(`Dropping unknown tag ${tag}`,null,null,node.location));\r\n        return errors;\r\n    }\r\n    if(path.length===0 && !config.allowAsRoot) {\r\n        node.drop = true;\r\n        errors.push(new parser.SyntaxError(`${tag} is not permitted as a root level element`,null,null,node.location));\r\n        return errors;\r\n    }\r\n    if(config.parentRequired && (path.length==0 || !config.parentRequired.includes(path[path.length-1].tag))) {\r\n        node.drop = true;\r\n        errors.push(new parser.SyntaxError(`${tag} required parent to be one of`,JSON.stringify(config.parentRequired),path[path.length-1].tag,node.location));\r\n        return errors;\r\n    }\r\n\r\n    let ancestorIndex;\r\n    if(path.length>0 && !config.indirectChildAllowed && Array.isArray(config.contentAllowed) && !config.contentAllowed.includes(tag) && (ancestorIndex = path.findIndex((ancestor) => ancestor.tag===tag)!==-1)) {\r\n        node.drop = true;\r\n        const ancestor = path[ancestorIndex+1];\r\n        ancestor.content.splice(ancestor.content.findIndex((node) => node.tag===tag),1,...node.content);\r\n        errors.push(new parser.SyntaxError(`${tag} is not permitted as a nested element of self. Elevating content.`,null,null,node.location));\r\n    }\r\n\r\n    node.attributes ||= {};\r\n\r\n    if(config.transform) {\r\n        await config.transform(node);\r\n    }\r\n    if(node.content.length>0 && !config.contentAllowed) {\r\n        while(node.content.length) { // try remove whitespace\r\n            const item = node.content[0];\r\n            if(typeof(item)!==\"string\" || item.trim().length!==0) {\r\n                break;\r\n            }\r\n            node.content.shift();\r\n        }\r\n        if(node.content.length>0) {\r\n            errors.push(new parser.SyntaxError(`${tag} is not permitted to have any content. Dropping content.`,null,JSON.stringify(node.content),node.location));\r\n            node.content = [];\r\n        }\r\n    }\r\n    node.content = await node.content.reduce(async (content,child) => {\r\n        content = await content;\r\n        const type = typeof(child);\r\n        if(type===\"string\") {\r\n            if(config.contentAllowed) {\r\n                content.push(child);\r\n                return content;\r\n            }\r\n            errors.push(new parser.SyntaxError(`${tag} does not allow string child. Dropping child.`,null,null,node.location))\r\n        }\r\n        if(child && type===\"object\") {\r\n            if(!config.contentAllowed.includes(child.tag)) {\r\n                errors.push(new parser.SyntaxError(`${tag} does not allow child ${child.tag}. Dropping child.`,null,null,node.location))\r\n            } else {\r\n                await validateNode({parser,node:child,path:[...path,node],errors})\r\n                if(!child.drop)  {\r\n                    content.push(child);\r\n                    // elevate trailing space to parent\r\n                    if(child.content[child.content.length-1]===\" \") {\r\n                        content.push(child.content.pop());\r\n                    }\r\n                }\r\n            }\r\n            return content;\r\n        }\r\n        errors.push(new parser.SyntaxError(`${tag} has unexpected child type ${type} ${child}. Dropping child.`,null,null,node.location));\r\n        return content;\r\n    },[]);\r\n    config.attributesAllowed ||= {};\r\n    Object.entries(node.attributes||{}).forEach(([key,value]) => {\r\n        const attributeAllowed = _tags_js__WEBPACK_IMPORTED_MODULE_0__.universalAttributes[key] || config.attributesAllowed[key],\r\n            type = typeof(attributeAllowed);\r\n        if(type===\"function\") {\r\n            const result = attributeAllowed(value,node);\r\n            delete node.attributes[key];\r\n            if(result) {\r\n                Object.assign(node.attributes,result);\r\n            }\r\n\r\n        } else if(attributeAllowed && type===\"object\") {\r\n            if(attributeAllowed.transform) {\r\n                const result = attributeAllowed.transform(value,node);\r\n                delete node.attributes[key];\r\n                if(result) {\r\n                    Object.assign(node.attributes,result);\r\n                }\r\n            }\r\n            if(attributeAllowed.default && node.attributes[key] == null) {\r\n                node.attributes[key] = attributeAllowed.default;\r\n            }\r\n            if (attributeAllowed.required && node.attributes[key] == null) {\r\n                errors.push(new parser.SyntaxError(`${tag} is required to have attribute '${key}'`,null,null,node.location));\r\n                return;\r\n            }\r\n            if(attributeAllowed.validate) {\r\n                let valid;\r\n                try {\r\n                    valid = attributeAllowed.validate(value,node);\r\n                } catch(e) {\r\n                    valid = e+\"\";\r\n                }\r\n                if(valid!==true) {\r\n                    delete node.attributes[key];\r\n                    errors.push(new parser.SyntaxError(`${tag} the value of attribute '${key}' is invalid`,valid,value,node.location));\r\n                }\r\n            }\r\n        } else if(attributeAllowed!==true) {\r\n            delete node.attributes[key];\r\n            errors.push(new parser.SyntaxError(`${tag} does not allow attribute ${key}`,null,JSON.stringify(value),node.location))\r\n        }\r\n    })\r\n    if(node.attributes.style) {\r\n        const styleAllowed = config.styleAllowed;\r\n        if(typeof(styleAllowed)===\"function\") {\r\n            node.attributes.style = styleAllowed(node.attributes.style,node);\r\n        } else if(!styleAllowed) {\r\n            delete node.attributes.style;\r\n            errors.push(new parser.SyntaxError(`${tag} does not allow styling. Dropping style`,null,null,node.location))\r\n        }\r\n    }\r\n    if(tag!==node.tag) { // node was transformed to a different node type, so validate that also\r\n        await validateNode({parser,node,path,errors});\r\n    }\r\n    return errors;\r\n};\r\nconst required = new Set();\r\nconst toDOMNodes = (nodes,parentConfig) => {\r\n        return nodes.reduce((domNodes,node) => {\r\n            if(typeof(node)===\"string\") {\r\n                if(parentConfig && parentConfig.breakOnNewline) {\r\n                    const lines = node.split(\"\\n\");\r\n                    lines.forEach((line,i) => {\r\n                        domNodes.push(new Text(line));\r\n                        if(i<lines.length-1) {\r\n                            domNodes.push(document.createElement(\"br\"))\r\n                        }\r\n                    })\r\n                } else {\r\n                    domNodes.push(new Text(node));\r\n                }\r\n            } else if(!node.drop) {\r\n                const  {tag,id,classes,attributes} = node,\r\n                    config = _tags_js__WEBPACK_IMPORTED_MODULE_0__.tags[tag],\r\n                    el = document.createElement(tag);\r\n                if(id) el.id = id;\r\n                if(config.requires && !required.has(config.requires)) {\r\n                    required.add(config.required);\r\n                    config.requires.forEach(({tag,attributes={}}) => {\r\n                        const el = document.createElement(tag);\r\n                        Object.entries(attributes).forEach(([key,value]) => {\r\n                            el.setAttribute(key,value);\r\n                        });\r\n                        domNodes.push(el);\r\n                    });\r\n                }\r\n                (classes||[]).forEach((className) => el.classList.add(className));\r\n                Object.entries(attributes||{}).forEach(([key,value]) => { // style mapping done here so that it bypasses earlier sanitation\r\n                    const attributeAllowed = config.attributesAllowed[key];\r\n                    if(key===\"style\" && value && typeof(value)===\"object\") {\r\n                        Object.entries(value).forEach(([key,value]) => {\r\n                            key.includes(\"-\") ? el.style.setProperty(key,value) : el.style[key] = value;\r\n                        })\r\n                    } else if(attributeAllowed?.mapStyle) {\r\n                        const styleName = attributeAllowed.mapStyle;\r\n                        styleName.includes(\"-\") ? el.style.setProperty(styleName,value) : el.style[styleName] = value;\r\n                    } else {\r\n                        el.setAttribute(key,value);\r\n                    }\r\n                });\r\n                if(node.tag===\"script\") {\r\n                    el.setAttribute(\"type\",\"module\");\r\n                }\r\n                toDOMNodes(node.content,config).forEach((node) => {\r\n                    el.appendChild(node);\r\n                });\r\n                domNodes.push(el);\r\n                const listeners = Object.entries(config.listeners||[]);\r\n                if(listeners.length>0) {\r\n                    const script = document.createElement(\"script\");\r\n                    script.innerHTML = listeners.reduce((string,[name,f]) => {\r\n                        let fstring = f +\"\";\r\n                        if(fstring.startsWith(`${name}(`)) {\r\n                            fstring = fstring.replace(`${name}(`,\"function(\")\r\n                        }\r\n                        string += `document.currentScript.previousElementSibling.addEventListener(\"${name}\",${fstring});\\n`;\r\n                        if(name===\"attributeChanged\") {\r\n                            string += \"secstObserver.observe(document.currentScript.previousElementSibling,{attributes:true,attributeOldValue:true}});\\n\";\r\n                        } else if(name===\"disconnected\") {\r\n                            string += \"secstObserver.observe(document.currentScript.previousElementSibling.parentElement,{childList:true}});\\n\";\r\n                        }\r\n                        return string;\r\n                    },\"\");\r\n                    domNodes.push(script);\r\n                }\r\n            }\r\n            return domNodes;\r\n        },[])\r\n    };\r\ntoDOMNodes.reset = () => required.clear();\r\n\r\nconst configureStyles = (tags,styleAllowed) => {\r\n        if(styleAllowed===\"*\") {\r\n            Object.values(tags).forEach((config) => {\r\n                config.styleAllowed ||= true;\r\n            })\r\n        } else if(typeof(styleAllowed)===\"function\") {\r\n            Object.values(tags).forEach((config) => {\r\n                config.styleAllowed ||= styleAllowed;\r\n            })\r\n        } else {\r\n            Object.entries(styleAllowed||[]).forEach(([key,value]) => {\r\n                let config;\r\n                if(typeof(value)===\"function\") {\r\n                    config = tags[key];\r\n                    config.styleAllowed ||= value;\r\n                } else {\r\n                    config = tags[value];\r\n                    config.styleAllowed ||= true;\r\n                }\r\n                if(!config) {\r\n                    console.error(new parser.SyntaxError(`${key} is not a defined tag and can't be styled`,null,null,node.location))\r\n                }\r\n            })\r\n        }\r\n    };\r\n\r\nconst transform = async (parser,text,{styleAllowed}={}) => {\r\n    if(styleAllowed) {\r\n        configureStyles(_tags_js__WEBPACK_IMPORTED_MODULE_0__.tags,styleAllowed);\r\n    }\r\n    console.log(text)\r\n    const transformed = patchTopLevel(parser.parse(text));\r\n    const parsed = JSON.parse(JSON.stringify(transformed));\r\n    const errors = await transformed.reduce(async (errors,node) => {\r\n        return [...await errors,...await validateNode({parser,node})]\r\n    },[]);\r\n    const dom = document.createDocumentFragment();\r\n    dom.appendChild(dom.head=document.createElement(\"head\"));\r\n    dom.appendChild(dom.body = document.createElement(\"body\"));\r\n    toDOMNodes(transformed).forEach((node) => {\r\n        dom.body.appendChild(node);\r\n    })\r\n    return {dom,errors,parsed,transformed};\r\n}\r\n\r\n\r\n\n\n//# sourceURL=webpack://secst/./src/transform.js?");
 
+/***/ })
 
-;// CONCATENATED MODULE: ./src/resolve-data-template.js
-
-const AsyncFunction = (async function () {}).constructor;
-
-
-
-const resolveDataTemplate = async (root,string,requestor) => {
-    if(!string) return;
-    const text = await replaceAsync(string,/\$\(([^)]*)\)/g,async (match,selector) => {
-        let els,
-            expectsArray;
-        if(selector.endsWith("[]")) {
-            expectsArray = true;
-            els = [...root.querySelectorAll(selector)].filter((el) => {
-                if(el.tagName==="INPUT" && el.hasAttribute("data-template")) {
-                    return true;
-                }
-            });
-        } else {
-            const el = root.querySelector(selector);
-            if(el.tagName==="INPUT" && el.hasAttribute("data-template")) {
-                els = [el];
-            }
-        }
-        for(const el of els) {
-            el.dependents ||= new Set();
-            if(requestor) el.dependents.add(requestor);
-            if(el.rawValue==null) {
-                el.rawValue = "";
-            }
-            if(el.value==="" || !requestor) {
-                el.rawValue = await resolveDataTemplate(root,el.getAttribute("data-template"),el);
-                el.setAttribute("value",formatValue(el));
-                if(el.hasAttribute("data-autosize")) {
-                    el.style.width = Math.min(80,Math.max(1,el.value.length))+"ch";
-                }
-            }
-        }
-        const result = expectsArray ? els.map(el => el.rawValue) : els[0].rawValue
-        return result && typeof(result)==="object" && !(result instanceof Promise) ? JSON.stringify(result) : result===undefined ? "" : result;
-    });
-    if(typeof(Worker)==="function") {
-        const result =  await stringTemplateEval("${" + text + "}"),
-            type = typeof(result);
-        if(result && type==="object" && result.stringTemplateError) {
-            throw new Error(result.stringTemplateError);
-        }
-        return result && type==="object" ? JSON.stringify(result) : result+"";
-    } else {
-        return (new AsyncFunction("return `${" + text + "}`"))();
-    }
-}
-
-
-;// CONCATENATED MODULE: ./src/listeners.js
-
-
-
-
-const update = async (target) => {
-    if(target.type==="checkbox") {
-        if(target.value!==target.checked+"") {
-            target.value = target.checked+"";
-        }
-    } else {
-        target.rawValue = extractValue(target);
-        target.setAttribute("data-template", target.rawValue);
-        const value = formatValue(target);
-        if(target.value!==value) {
-            target.value = value;
-            target.setAttribute("value",value); // both are needed, or Chrome breaks
-        }
-    }
-    for(const el of [...target.dependents||[]]) {
-        el.rawValue = await resolveDataTemplate(document.body,el.getAttribute("data-template"));
-        const value = formatValue(el);
-        if(el.value!==value) {
-            el.value = value;
-            el.setAttribute("value",value); // both are needed, or Chrome breaks
-        }
-    }
-}
-
-const updateWidths = () => {
-    requestAnimationFrame(() => {
-        [...document.querySelectorAll('input[data-autosize]')].forEach((el) => {
-            const value = el.getAttribute("value")||"";
-            el.style.width = Math.min(80,Math.max(1,value.length+1))+"ch";
-        })
-    })
-}
-
-const listeners = {
-    async change(event) {
-        const template = event.target.getAttribute("data-template");
-        if(event.target.tagName==="INPUT" && template!==null && (event.target.value+"")!=="[object Promise]") {
-            await update(event.target);
-            updateWidths();
-        }
-    },
-    click() {
-        if(event.target.tagName==="INPUT" && event.target.type==="checkbox") {
-            if(event.target.value!==event.target.checked+"") {
-                event.target.value = event.target.checked+"";
-            }
-        }
-    },
-    async input(event) {
-        if(event.target.tagName==="INPUT" && event.target.getAttribute("data-template")!==null) {
-           await update(event.target);
-           updateWidths();
-        }
-    }
-}
-
-
-;// CONCATENATED MODULE: ./src/resolve.js
-
-
-
-const resolve = async (node=document.body,ifNull) => {
-    if(!window.secstObserver) {
-        window.secstObserver = new MutationObserver(function(mutations) {
-            mutations.forEach(function(mutation) {
-                const target = mutation.target;
-                if (mutation.type === "attributes") {
-                    const event = new Event("attributeChanged");
-                    event.attributeName = mutation.attributeName;
-                    event.attributeNamespace = mutation.attributeNamespace;
-                    event.oldValue = mutation.oldValue;
-                    event.value = target.getAttribute(event.attributeName);
-                    target.dispatchEvent(event);
-                } else if(mutation.type==="childList") {
-                    [...mutation.removedNodes].forEach((el) => {
-                        const event = new Event("disconnected");
-                        el.dispatchEvent(event);
-                    })
-                }
-            });
-        });
-    }
-    const valueEls = [...node.querySelectorAll("input[data-template]")];
-    for(const el of valueEls) {
-        const template = el.getAttribute("data-template");
-        try {
-            el.rawValue = resolveDataTemplate(node,template,el).then((value) => {
-                el.rawValue = value;
-                if(value===template) {
-                    el.removeAttribute("disabled");
-                } else {
-                    el.setAttribute("disabled",""); // the value was a computation
-                }
-                el.setAttribute("value",value=formatValue(el));
-                if(el.hasAttribute("data-autosize")) {
-                    el.style.width = Math.min(80,Math.max(1,value.length+1))+"ch";
-                }
-            });
-            await el.rawValue; // awaiting after the assignment prevent getting stuck in an Inifnite wait due to recursive resolves
-        } catch(e) {
-            //console.error(e);
-        }
-    }
-};
-
-
-;// CONCATENATED MODULE: ./src/index.js
-
-
-
-
-if(document.currentScript?.getAttribute("src").endsWith("?run")) {
-    if(typeof(window)==="object" && typeof(MutationObserver)=="function") {
-        window.secstObserver ||= new MutationObserver(function(mutations) {
-            mutations.forEach(function(mutation) {
-                const target = mutation.target;
-                if (mutation.type === "attributes") {
-                    const event = new Event("attributeChanged");
-                    event.attributeName = mutation.attributeName;
-                    event.attributeNamespace = mutation.attributeNamespace;
-                    event.oldValue = mutation.oldValue;
-                    event.value = target.getAttribute(event.attributeName);
-                    target.dispatchEvent(event);
-                } else if(mutation.type==="childList") {
-                    [...mutation.removedNodes].forEach((el) => {
-                        const event = new Event("disconnected");
-                        el.dispatchEvent(event);
-                    })
-                }
-            });
-        });
-    }
-    document.addEventListener("DOMContentLoaded",()=> {
-        Object.entries(listeners).forEach(([key,value]) => {
-            document.body.addEventListener(key,value);
-        });
-        resolve();
-    })
-}
-
-window.SECST = {
-    transform: transform,
-    listeners: listeners,
-    resolve: resolve
-}
-
-
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module can't be inlined because the eval devtool is used.
+/******/ 	var __webpack_exports__ = __webpack_require__("./src/index.js");
+/******/ 	
 /******/ })()
 ;
