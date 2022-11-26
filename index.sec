@@ -144,7 +144,7 @@ p[
     SECST tagging inside of code[code[]] is automatically escaped, e.g. code[code[strong[text]]]. If you wish to escape it elsewhere, wrap the entire tag expression with double quotes.
 ]
 
-h1([Basic Computational Authoring]
+h1[Basic Computational Authoring]
 
 h1[Styling Content]
 
