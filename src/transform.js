@@ -28,11 +28,17 @@ const validateNode = async ({parser,node,path=[],errors=[]}) => {
         return;
     }
     const tag = node.tag;
-    let config = tags[node.tag];
+    let config = tags[tag];
     if(!config) {
-        node.drop = true;
-        errors.push(new parser.SyntaxError(`Dropping unknown tag ${tag}`,null,null,node.location));
-        return errors;
+        if(tag.startsWith(":")) {
+           config = tags.emoticon;
+           node.attributes ||= {};
+           node.attributes.name = tag.substring(1);
+        } else {
+            node.drop = true;
+            errors.push(new parser.SyntaxError(`Dropping unknown tag ${tag}`,null,null,node.location));
+            return errors;
+        }
     }
     if(path.length===0 && !config.allowAsRoot) {
         node.drop = true;
@@ -156,12 +162,16 @@ const validateNode = async ({parser,node,path=[],errors=[]}) => {
     }
     return errors;
 };
-const required = new Set();
+const required = new Set(),
+    domParser = typeof(DOMParser)==="function" ? new DOMParser() : null;
 const toDOMNodes = (nodes,parentConfig) => {
         return nodes.reduce((domNodes,node) => {
             if(typeof(node)==="string") {
                 if(parentConfig && parentConfig.breakOnNewline) {
                     const lines = node.split("\n");
+                    while(lines[lines.length-1]==="") {
+                        lines.pop(); // remove trailing whitespaces
+                    }
                     lines.forEach((line,i) => {
                         domNodes.push(new Text(line));
                         if(i<lines.length-1) {
@@ -169,12 +179,12 @@ const toDOMNodes = (nodes,parentConfig) => {
                         }
                     })
                 } else {
-                    domNodes.push(new Text(node));
+                    domNodes.push(node); // new Text(node) sanitize?
                 }
             } else if(!node.drop) {
-                const  {tag,id,classes,attributes} = node,
+                const  {tag,id,classList,attributes} = node,
                     config = tags[tag],
-                    el = document.createElement(tag);
+                    el = node.toText ? document.createElement("span") : document.createElement(tag);
                 if(id) el.id = id;
                 if(config.requires && !required.has(config.requires)) {
                     required.add(config.required);
@@ -186,26 +196,42 @@ const toDOMNodes = (nodes,parentConfig) => {
                         domNodes.push(el);
                     });
                 }
-                (classes||[]).forEach((className) => el.classList.add(className));
-                Object.entries(attributes||{}).forEach(([key,value]) => { // style mapping done here so that it bypasses earlier sanitation
-                    const attributeAllowed = config.attributesAllowed[key];
-                    if(key==="style" && value && typeof(value)==="object") {
-                        Object.entries(value).forEach(([key,value]) => {
-                            key.includes("-") ? el.style.setProperty(key,value) : el.style[key] = value;
-                        })
-                    } else if(attributeAllowed?.mapStyle) {
-                        const styleName = attributeAllowed.mapStyle;
-                        styleName.includes("-") ? el.style.setProperty(styleName,value) : el.style[styleName] = value;
-                    } else {
-                        el.setAttribute(key,value);
+                (classList||[]).forEach((className) => el.classList.add(className));
+                if(config.toText) {
+                    el.innerText = config.toText(node);
+                } else {
+                    Object.entries(attributes||{}).forEach(([key,value]) => { // style mapping done here so that it bypasses earlier sanitation
+                        const attributeAllowed = config.attributesAllowed[key];
+                        if(key==="style" && value && typeof(value)==="object") {
+                            Object.entries(value).forEach(([key,value]) => {
+                                key.includes("-") ? el.style.setProperty(key,value) : el.style[key] = value;
+                            })
+                        } else if(attributeAllowed?.mapStyle) {
+                            const styleName = attributeAllowed.mapStyle;
+                            styleName.includes("-") ? el.style.setProperty(styleName,value) : el.style[styleName] = value;
+                        } else {
+                            el.setAttribute(key,value);
+                        }
+                    });
+                    if(node.tag==="script") {
+                        el.setAttribute("type","module");
                     }
-                });
-                if(node.tag==="script") {
-                    el.setAttribute("type","module");
+                    toDOMNodes(node.content,config).forEach((node) => {
+                        if(typeof(node)==="string") {
+                            const body = domParser ? domParser.parseFromString(node,"text/html").body : document.createElement("div");
+                            if(body.tagName==="div") body.innerHTML = node;
+                            if(el.lastChild) {
+                                while(body.lastChild) {
+                                    el.appendChild(body.lastChild)
+                                }
+                            } else {
+                                el.innerHTML = node;
+                            }
+                        } else {
+                            el.appendChild(node);
+                        }
+                    });
                 }
-                toDOMNodes(node.content,config).forEach((node) => {
-                    el.appendChild(node);
-                });
                 domNodes.push(el);
                 const listeners = Object.entries(config.listeners||[]);
                 if(listeners.length>0) {

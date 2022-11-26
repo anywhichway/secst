@@ -63,12 +63,12 @@
         = key:token _ ":" _ ["] value:[ a-z0-9_\-~`!@#$%^&*()_+=\[\]|\;'<>.?/]i* ["] { return [key,value.join("")]; }
 
     attributelist
-        = attribute:(unaryattribute / attribute) _ attributelist:attributelist* { return [attribute].concat(...attributelist) }
+        = attribute:(binaryattribute / attribute) _ attributelist:attributelist* { return [attribute].concat(...attributelist) }
 
     attribute
         =  name:token _ "=" _ value:quoted { return [name,value] }
 
-    unaryattribute
+    binaryattribute
         = hidden / checked / selected / visible / reversed / readonly / run / disabled / static / autosize /url
 
     hidden

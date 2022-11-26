@@ -22,6 +22,8 @@ global.fetch = (url,...args) => {
 }
 global.Text = window.Text;
 global.MutationObserver = window.MutationObserver;
+global.DOMParser = window.DOMParser;
+Object.defineProperty(global.document,"baseURI",{configurable:true,writable:true,value:"http://localhost:63342/secst/"});
 
 // document.baseURI
 
@@ -32,4 +34,6 @@ script.setAttribute("src","./secst.js?run");
 dom.head.appendChild(script);
 await resolve(dom.body);
 await fs.writeFile("./index.html",`<html><head>${dom.head.innerHTML}</head><body>${dom.body.innerHTML}</body></html>`,{ encoding: 'utf8' })
+await fs.writeFile("./index.txt",text,{ encoding: 'utf8' })
+
 
