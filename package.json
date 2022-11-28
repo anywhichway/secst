@@ -34,7 +34,8 @@
     "happy-dom": "^7.7.0",
     "jsdom": "^20.0.3",
     "pegjs": "^0.10.0",
-    "string-replace-async": "^3.0.2"
+    "string-replace-async": "^3.0.2",
+    "xregexp": "^5.1.1"
   },
   "devDependencies": {
     "@rollup/plugin-json": "^5.0.1",

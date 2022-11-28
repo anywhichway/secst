@@ -12,11 +12,11 @@ const universalAttributes = {
         is: true,
         title: true
     },
-    blockContent = ["article","audio","blockquote","code","dl","figure","hr","img","listeners","ol","p","picture","script","style","table","ul","video","latex","math-science-formula"],
-    simpleContent = ["a","abbr","bdi","bdo","br","del","code","em","footnote","ins","kbd","strong","sub","sup","time","var","wbr","underline","#","@linkedin"],
-    structuredContent = ["address","aside","bdi","cite","details","input","output","value"],
+    blockContent = ["article","audio","blockquote","code","dl","figure","hr","img","listeners","ol","p","picture","pre","script","style","table","toc","ul","video","latex","math-science-formula"],
+    simpleContent = ["a","abbr","bdi","bdo","br","del","code","em","emoticon","error","footnote","hashtag","ins","kbd","strong","sub","sup","time","var","wbr","u","@facebook","@github","@linkedin","@twitter","latex"],
+    structuredContent = ["address","aside","bdi","cite","details","input","ol","output","ruby","ul","value"],
     inlineContent = [...simpleContent,...structuredContent],
-    tagToText = (tag) => {
+    tagToText = (tag,pre) => {
         const type = typeof(tag);
         if(type==="string") return tag.replace(/</g,"&lt;").replace(/>/g,"&gt;");
         if(tag && type==="object") {
@@ -25,9 +25,9 @@ const universalAttributes = {
                 classList = tag.classList
             let text = tag.tag;
             if(tag.id || classList?.length>0 || attributes?.length>0) {
-                text += `(${tag.id ? "#" + tag.id + " " : ""}${classList ? classList.join(" ") + " " : ""}${binaryAttributes?.length>0 ? binaryAttributes.join(" ") + " " : ""}${attributes?.length>0 ? attributes.join(" ") : ""})`
+                text += `(${tag.id ? "#" + tag.id + " " : ""}${classList ? classList.join(" ") + " " : ""}${binaryAttributes?.length>0 ? binaryAttributes.join(" ") + " " : ""}${attributes?.length>0 ? attributes.join(" ") : ""})${pre ? "\n" : ""}`
             }
-            return text + `[${tag.content.map((item) => tagToText(item)).join(",")}]`
+            return text + `[${pre ? "\n" : ""}${tag.content.reduce((text,item,index,array) => { text += tagToText(item,pre); return index<array.length-2 ? text += "," : text; },"")}]`
         }
         return tag;
     };
@@ -37,23 +37,52 @@ for(let i=1;i<=8;i++) {
 }
 
 const tags = {
-    "@linkedin": {
+    "@facebook": {
         attributesAllowed: {
-            href: true
+            href: true,
+            target: true
         },
         contentAllowed: true,
         transform(node) {
             node.tag = "a";
-            node.attributes.href = `https://linkedin.com/${node.content[0].trim()}`
+            node.attributes.target ||= "_tab";
+            node.attributes.href = `https://facebook.com/${node.content[0].trim()}`
         }
     },
-    "#": {
+    "@github": {
+        attributesAllowed: {
+            href: true,
+            target: true
+        },
         contentAllowed: true,
         transform(node) {
             node.tag = "a";
-            const hash = node.content[0].trim();
-            node.id = hash;
-            node.content = ["#"+hash];
+            node.attributes.target ||= "_tab";
+            node.attributes.href = `https://github.com/${node.content[0].trim()}`
+        }
+    },
+    "@linkedin": {
+        attributesAllowed: {
+            href: true,
+            target: true
+        },
+        contentAllowed: true,
+        transform(node) {
+            node.tag = "a";
+            node.attributes.target ||= "_tab";
+            node.attributes.href = `https://linkedin.com/in/${node.content[0].trim()}`
+        }
+    },
+    "@twitter": {
+        attributesAllowed: {
+            href: true,
+            target: true
+        },
+        contentAllowed: true,
+        transform(node) {
+            node.tag = "a";
+            node.attributes.target ||= "_tab";
+            node.attributes.href = `https://twitter.com/${node.content[0].trim()}`
         }
     },
     "math-science-formula": {
@@ -62,13 +91,31 @@ const tags = {
                 tag: "script",
                 attributes: {
                     type:"application/javascript",
-                    src:"https://cdn.jsdelivr.net/npm/@anywhichway/quick-component@0.0.12",
+                    src:"https://cdn.jsdelivr.net/npm/@anywhichway/quick-component@0.0.14",
                     async: "",
-                    component: "https://cdn.jsdelivr.net/npm/@anywhichway/math-science-formula@0.0.5"
+                    component: "./math-science-formula"  //"https://cdn.jsdelivr.net/npm/@anywhichway/math-science-formula@0.0.5"
                 }
             }
         ],
-        contentAllowed: true
+        contentAllowed: true,
+        toText(node) {
+            return node.content.join("")
+        }
+    },
+    latex: {
+        contentAllowed: true,
+        transform(node) {
+            node.content = [node.content.join("\n")]
+            node.tag = "math-science-formula";
+        }
+    },
+    "&": {
+        contentAllowed: true,
+        transform(node) {
+            node.tag = "span";
+            node.content = ["&"+node.content[0]+";"];
+            node.skipRevalidation = true;
+        }
     },
     a: {
         attributesAllowed: {
@@ -121,6 +168,17 @@ const tags = {
             if(node.attributes.url) {
                 node.attributes.href = node.attributes.url;
                 delete node.attributes.url
+            } else {
+                const href = node.content[0];
+                if(href.startsWith("https:") || href.startsWith("./") || href.startsWith("../")) {
+                    try {
+                        new URL(href,document.baseURI);
+                        node.attributes.href = node.content[0];
+                        node.attributes.target = "_tab";
+                    } catch {
+
+                    }
+                }
             }
         }
     },
@@ -177,9 +235,23 @@ const tags = {
                 run = node.attributes.run,
                 content = [...node.content];
             if(run==null) {
-                node.content = content.map((item) => tagToText(item))
+                const block = node.content.some((item) => typeof(item)==="string" && item.includes("\n"));
+                node.content = content.map((item) => tagToText(item,block));
+                if(block) {
+                    const lastline = node.content[node.content.length-1];
+                    if(lastline.endsWith("\n")) {
+                        node.content[node.content.length-1] = lastline.substring(0,lastline.length-1)
+                    }
+                    const code = JSON.parse(JSON.stringify(node));
+                    node.tag = "pre";
+                    node.attributes = {};
+                    node.classList = [];
+                    node.id = null;
+                    node.content = [code];
+                    node.skipContent = true;
+                }
             } else {
-                node.content = [content.map((item) => tagToText(item)).join("\n")]
+                node.content = [node.content.join("\n")]
                 if(language==="latex") {
                     node.tag = "math-science-formula";
                 }
@@ -197,26 +269,57 @@ const tags = {
     dt: {
         contentAllowed: simpleContent
     },
+    error: {
+        contentAllowed: "*",
+        transform(node) {
+            node.tag = "span";
+            node.classList.add("secst-error");
+            node.content = node.content.map((item) => tagToText(item,true)).join("");
+            node.skipRevalidation = true;
+        }
+    },
     emoticon: {
-        attributesAllowed: {
-            name: true
-        },
+        contentAllowed: true,
         toText(node) {
-            return ":" + node.attributes.name;
+            return node.content.reduce((tags,item) => {
+                item.split(" ").forEach((tag) => tags.push(":" + tag));
+                return tags;
+            },[]).join(", ")
         }
     },
     footnote: {
-        contentAllowed: [...blockContent,...inlineContent].filter((item) => item!=="footnote")
+        contentAllowed: [...blockContent,...inlineContent].filter((item) => item!=="footnote"),
+        attributesAllowed: {
+            href: true
+        },
+        transform(node) {
+            node.tag = "sup";
+            node.classList ||= [];
+            node.classList.push("secst-footnote")
+            node.skipRevalidation = true;
+        }
     },
     figure: {
         contentAllowed:[...blockContent,...inlineContent,"caption"].filter((item) => item!=="figure")
+    },
+    hashtag: {
+        contentAllowed: true,
+        transform(node) {
+            // push to meta tags here
+        },
+        toText(node) {
+            return node.content.reduce((tags,item) => {
+               item.split(" ").forEach((tag) => tags.push("#" + tag));
+               return tags;
+            },[]).join(", ")
+        }
     },
     hr: {
         allowAsRoot: true
     },
     input: {
         attributesAllowed: {
-            "data-autosize": true,
+            "data-fitcontent": true,
             "data-default": true,
             "data-extract": true,
             "data-template": true,
@@ -378,6 +481,12 @@ const tags = {
     picture: {
         contentAllowed: ["img","source"]
     },
+    pre: {
+        contentAllowed: true
+    },
+    ruby: {
+        contentAllowed: [...simpleContent,"rp","rt"]
+    },
     script: {
         allowAsRoot: true,
         contentAllowed: true
@@ -474,6 +583,19 @@ const tags = {
         },
         contentAllowed: simpleContent
     },
+    toc: {
+        contentAllowed: true,
+        transform(node) {
+            node.tag = "h1";
+            node.classList ||= [];
+            if(!node.classList.includes("toc")) {
+                node.classList.push("toc");
+            }
+            if(node.content.length===0) {
+                node.content = ["Table of Contents"]
+            }
+        }
+    },
     tr: {
         attributesAllowed: {
             rowspan: {
@@ -564,14 +686,14 @@ const tags = {
     value: {
         allowAsRoot: true,
         attributesAllowed: {
-            "data-autosize": true,
+            "data-fitcontent": true,
             "data-default": true,
             "data-extract": true,
             "data-format": true,
             "data-template": true,
-            autosize() {
+            fitcontent() {
                 return {
-                    "data-autosize": ""
+                    "data-fitcontent": ""
                 }
             },
             default(value) {

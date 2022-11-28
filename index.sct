@@ -1,0 +1,298 @@
+h1[The Joy of SECST]
+
+p[
+
+latex[Lift = \frac{1}{2} \rho v^2 S C_L\]
+
+    abbr[SECST] is a strong[S]emantic, strong[E]xtensible, strong[C]omputational, strong[S]tyleable strong[T]ag oriented markup language. You can use it to joyfully create compelling, interactive documents backed by HTML.
+
+    The SECST language and the reference HTML transpiler and runtime support implementations are currently in ALPHA.
+]
+
+toc[Table Of Contents]
+
+h1[Why Another Language]
+
+ul[
+   li[HTML is verbose and its legacy allows the creation of documents with security flaws. Ensuring that HTML documents are meaningful for textual analysis or supportive of assistive software is hard.]
+   li[Markdown is not semantic, you must learn the different annotations to format your document and the resulting HTML is not necessarily meaningful to textual analysis or assistive software. It is also cumbersome to extend.]
+   li[The built-in self creating a(href="#tables-of-contents")[document navigation] capabilities of HTML and Markdown are limited.]
+   li[Markdown provides no intrinsic a(href="#basic-computation")[computational capability]. You must use something like Jupyter Notebook to support computation.]
+   li[HTML's computational capabilities require programming skills. Using SECST computation is no harder than writing Excel formulas.]
+]
+
+SECST provides:
+
+ul[
+    li[a consistent terse representation that is translated to safe HTML constructs to limit the chance of XSS and other attacks.]
+    li[semantic tags, which makes it easier to learn and remember than Markdown.]
+    li[easier to extend approaches than Markdown. Expertice in parsers or regular expressions is not required.]
+    li[extensive, built-in navigation generation for tables of contents and footnotes (more than Markdown).]
+    li[built-in computational ability for math and text expressions.]
+]
+
+h1(#basic-authoring)[Basic Authoring]
+
+p[
+Authors write documents using em[semantic tags] with the format code["<tag>[<content>]"] or code["<tag>(<parameters>)[<content>]"].
+]
+
+dl[
+    dt[Semantic Tag]
+    dd[A tag that has meaning and which is not just used to facilitate document layout]
+]
+
+For example:
+ul[
+    li[code["strong[bolded important content]"] produces strong[bolded important content]]
+    li[code["em[italicized emphasized content]"] produces em[italicized emphasized content]]
+]
+
+h2[Semantic Tags With HTML Names]
+
+p[
+Almost every semantic tag supported by HTML5 is one of the a(href="#tags")[tags supported by SECST]. Most non-semantic tags are excluded from SECST, e.g. code[<div>] and code[<span>]. Exceptions are code[<hr>], code[<style>], code[<table>] and code[<ol>] and code[<ul>], .
+]
+
+p[
+    Sometimes, e.g. with links, you need to specify more than content. This is provided using parameters in parentheses, e.g.
+
+    code["a(./index.txt target='_tab')[SECST]"] yields a(./index.txt target="_tab")[SECST] , where you can access the source of this document.
+
+    This being said, you can also specify links with just a content value, e.g. code[a[./index.txt]] renders as a[./index.txt] with a default target of another tab.
+
+    All tags that take more than just content are fully documented in the a(href="#tags")[complete list of tags].
+]
+
+p[
+    For authors, most parameters in parentheses take the form code[<attribute name>="<value>"]. However, for links you can also include a url as shown immediately above. Additional parameters are often used by designers or programmers. See a[#advanced-authoring].
+]
+
+p[
+    Headings automatically get ids you can use for the destination of links. The id is the same as the text content in lower case with spaces replaced by dashes. To make it more convenient, you can also provide your own ids, e.g. code[h1(#myheading)[My Heading]] with link code[a(href="#myheading")[Go To My Heading]].
+
+    strong[Note]: em[All tags can optionally take an id starting with code[#]. If an id is present, it must be the first parameter.]
+]
+
+p[
+    Both ordered and unordered lists are supported using code[ol] and code[ul] tags with code[li] tags.
+
+    There is also a shorthand:
+    code[
+        ul[
+            - LinkedIn
+            - Facebook
+            - Twitter
+        ]
+    ]
+    em[Note: When shorthand is used it strong[cannot] contain any markup.]
+
+    The same shorthand also works for code[ol]. Since SECST already knows the list is ordered, numbers are inserted. The main utility of using numbers, is to reset numbering:
+    code[
+        ol[
+            2. LinkedIn
+            - Facebook
+            - Twitter
+        ]
+    ]
+    The standard HTML attributes for setting number style are also supported:
+
+]
+
+p[
+Contents wrapped in code[code[]] will be inline unless the contents contain a newline, in which case the code will be displayed in paragraph format.
+
+If you have a single line you wish to show as a paragraph, end it with a newline.
+]
+
+h2[Core Tags Without HTML Names]
+
+h3[HTML Entities and Special Characters]
+
+p[
+    Special characters can be consistently displayed using code["&[<character-id>]"]. a(https://www.toptal.com/designers/htmlarrows/ target="_tag")[Toptal] has a great reference for this. Just leave of the leading "&" and trailing ";" Toptal shows for any special character.
+
+    The code code[&[#x263B]] renders as &[#x263B].
+]
+
+h3[Hashtags]
+
+p[
+    Hashtags can take the form code["#<value>[]"] or code["#[<value>...]"], where code["<value>..."] is a space separated list of words to hashtag. em[Note: The first form strong[must] be followed by square braces.]
+
+    code["#sects-is-great[]"] renders as #sects-is-great[].
+
+    code["#[sects-is-great javascript-is-great]"] renders as #[sects-is-great javascript-is-great].
+
+    Hashtags are automatically added to the meta tags in the head of a document for indexing and SEO purposes.
+]
+
+h3[Emoticons]
+
+p[
+    Emoticons can take the form code[":<emoticon-name>[]"] or code[":[<emoticon-name>...]"], where code[<emoticon-name>...] is a space separated list of emoticon names. em[Note: The first form strong[must] be followed by square braces.]
+
+    code[:smile[]"] renders as :smile[].
+
+    code[":[smile frown]"] renders as :[smile frown].
+]
+
+h3(#tables-of-contents)[Tables of Contents]
+
+p[
+Tables of contents are placed at the location of the tag code["toc[<title>]"]. If you do not provide a title, "Table of Contents" is used. All content after the tag is analyzed for headings and used for the table. Navigation links are automatically created. Only the first occurence of code[toc] is used, others are ignored.
+
+After transpilation, each heading in the document will have an &[#9783] icon preceding it. When this icon is clicked, the table of contents will hover over the heading until something in the document is clicked. Each heading will have up and down arrows placed after it to facilitate jumping to the previous and next section.
+]
+
+h3[Footnotes]
+
+p[
+Footnotes are inserted with the code["footnote[<footnote-text>]"] tag. The content between the braces is used as the footnote and placed at the end of the document. Auto-numbering is done so that authors do not have to keep updating footnotes as the document changes footnote(#markdown-footnote)[Markdown does not autonumber footnotes, which makes them hard to maintain. Although, it does create back-references.].
+
+The source for the above footnote is: code["footnote(#markdown-footnote)[Markdown does not autonumber footnotes, which makes them hard to maintain. Although, it does create back-references.]"].
+
+To re-use a footnote, give the first occurence an id. Then, give the subsequent uses an code[href] attribute using the id and leave the content section between the braces empty. This will override the anchors for numbered links generated by the SECST transpiler, but not break ordering footnote(href="#markdown-footnote")[]. If you do provide content when reusing, it will be ignored.
+
+The source for the second footnote is: code["footnote(href='#markdown-footnote')]"].
+
+And, here is a third that just gets numbered: code["footnote[Footnote management doe not get much easier!]"].footnote[Footnote management doe not get much easier!].
+]
+
+h2[Non-Core Semantic Tags Without HTML Names]
+
+h3[Social Media And Other Mentions]
+
+p[
+Not part of core SECST, but provided in the reference implementation are @mentions for several social media and other platforms. These take the form code["@<platform>[<space separated profile-names>]"]. The target for mentions will always be another browser tab, unless a code[target] attribute is provided.
+
+The mark-up code[@github[anywhichway]] renders as @github[anywhichway].
+
+The supported platforms are:
+]
+
+ul[
+    - LinkedIn
+    - Facebook
+    - GitHub
+    - Twitter
+]
+
+h3[Latex]
+
+p[
+Latex processing is part of the reference implementation to show how custom elements can be added and used as tags.
+
+ul[
+     li[code[code(language="latex" run)[Lift = \frac{1}{2} \rho v^2 S C_L\]]]
+     li[code[latex[Lift = \frac{1}{2} \rho v^2 S C_L\]]]
+ ]
+
+ both render as latex[Lift = \frac{1}{2} \rho v^2 S C_L\]
+]
+
+h2[Escaping SECST]
+
+p[
+    Except when it contains &[gt] or &[lt], SECST tagging inside of code[code[]] is automatically escaped, e.g. code[code[strong[text]]]. If you wish to escape it elsewhere or if it contains  &[gt] or &[lt], wrap the entire tag expression inside the content area with double quotes, e.g. code[code[\"&lt;some-text&gt;\"]].
+]
+
+h1(#basic-computation)[Basic Computational Authoring]
+
+p[
+    SECST supports the tag code[value[]] for adding reactive variables and macros to documents.
+    ul[
+        li[All values strong[MUST] be identified by an id.]
+        li[By default values are hidden. Use the boolean attribute code[visible] to display them.]
+        li[The value of a code[value[]] is the content, i.e the stuff between the code[&lsqb;&rsqb;]. It should be is either a literal value or a formula.]
+    ]
+    dl[
+        dt[You can reference values in formulas using code["$(#<id>)"].]
+        dd[code[value(#v1 visible)[$(#v2) + $(#v3)]] = code[value(#v2 visible)[1]] + code[value(#v3 visible)[2]]]
+        dd[value(#v1 visible)[$(#v2) + $(#v3)] = value(#v2 visible)[1] + value(#v3 visible)[2]]
+        dt[You can set values to fitcontent]
+        dd[code[value(#v1a visible fitcontent)[$(#v2a) + $(#v3a)]] = code[value(#v2a visible fitcontent)[1]] + code[value(#v3a visible fitcontent)[2]]]
+        dd[value(#v1a visible fitcontent)[$(#v2a) + $(#v3a)] = value(#v2a visible fitcontent)[1] + value(#v3a visible fitcontent)[2]]
+        dt[You can perform symbolic math manipulation.]
+        dd[code[value(#v1b visible fitcontent)[derivative('x^2 + x', 'x')]]]
+        dd[value(#v1b visible fitcontent)[derivative('x^2 + x', 'x')]]
+        dt[You cansolve symbolic equations.]
+        dd[code[value(#v1c visible fitcontent)[solve('Math.pow(r,2)',{r:3})}]]]
+        dd[value(#v1c visible fitcontent)[solve('Math.pow(r,2)',{r:3})]]
+        dt[You can even give your readers the opportunity to provide the values for which to solve.]
+        dd[Math.pow(r,2) where r = code[value(#v1d visible fitcontent)[0]] is code[value(#v2d visible fitcontent)[solve('Math.pow(r,2)',{r:$(#v1d)})]]]
+        dd[Math.pow(r,2) where r = value(#v1d visible fitcontent)[0] is value(#v2d visible fitcontent)[solve('Math.pow(r,2)',{r:$(#v1d)})]]
+    ]
+]
+
+h1[Advanced Authoring]
+
+h2[Styling Content]
+
+h2[Advanced Computational Authoring]
+
+h2[Extending and Meta Document Programming]
+
+h1(#tags)[Complete List Of Tags]
+
+h1[Design Objectives]
+
+Easy to understand, simple syntax, semantic
+Easy to learn, limited syntax, semantic
+Easy to extend uniform syntax, declarative language elements
+Secure
+Performant - simple syntax
+Small - simple syntax
+Configurable - declarative language elements
+Comprehensive - all of semantic HTML and more (extendable)
+Programmable - simple event handling plus API
+Computational - Reactivity built in, advanced math built in, simple user input mechanisms
+Styleable - optional capability
+Portable - HTML output
+SEO Friendly - browser or server rendering
+
+h1[Grammar]
+
+All SECST markup takes one of two forms:
+
+ul[
+    li[
+        code[<tag>&lsqb;<content>&rsqb;]
+    ]
+    li[
+        code[<tag>(#<id>:optional .<class>... (<unaryattribute> || <attribute>="<value>")...)&lsqb;<content>&rsqb;]
+    ]
+]
+
+
+h1[Architecture]
+
+h1[Security and Reliability]
+
+p[
+XSS
+prevents DOM clobbering by ensuring ids do not conflict with key DOM components, e.g. code[head], code[body].
+Does not allow the use of variables for attribute values.
+Executes all macros in WebWorkers that will timeout if they take too long.
+Does not support "on" event handlers and limits the use of style=ing directly on HTML elements.
+Sanitizes CSS content used in the code[style[]] tag.
+]
+
+
+
+
+style(selector="#id1")[
+ float:right;
+]
+listeners(selector="#id1")[
+ attributeChanged(event) {
+  console.log(event)
+ },
+ disconnected(event) {
+  console.log(event)
+ },
+ click() { alert("clicked") }
+]
+ol(type="I")[
+ li[item one]
+]

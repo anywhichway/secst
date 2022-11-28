@@ -1,17 +1,44 @@
  {
-
+        function* flattenContent(content) {
+            if(Array.isArray(content)) {
+                for(const item of content) {
+                    if(Array.isArray(item)) {
+                        for(const flat of flattenContent(item)) {
+                            yield flat;
+                        }
+                    } else {
+                        if(item.content) {
+                            item.content = [...flattenContent(item.content)].reduce((array,item,i) => {
+                                if(typeof(item)==="string" && typeof(array[i-1])==="string") {
+                                    array[i-1] += item;
+                                } else {
+                                    array.push(item);
+                                }
+                                return array;
+                            },[]);
+                        }
+                        yield item;
+                    }
+                }
+            }
+            return content;
+        }
     }
     start
-        = _ content:content* _ { return content }
+        = _ content:content* _ {
+                return [...flattenContent(content)];
+            }
 
     content
-        = script / expression / stringcontent
+        = script / (expression _?) / stringcontent
 
     expression
-        = tag:tag options:options? "[" _ content:content* _ "]" space:_? {
-            if(space.length>0) content.push(space.join(""));
-            const {attributes, classes, id } = options||{};
-            return {tag, content, id, attributes, classes, location:location()};
+        = tag:tag options:options? "[" _ content:content* _ "]"  {
+
+            const {attributes, classes, id } = options||{},
+                expression = {tag, content, id, attributes, classes};
+            Object.defineProperty(expression,"location",{value:location()});
+            return expression;
         }
 
     script "script"
@@ -69,7 +96,7 @@
         =  name:token _ "=" _ value:quoted { return [name,value] }
 
     binaryattribute
-        = hidden / checked / selected / visible / reversed / readonly / run / disabled / static / autosize /url
+        = hidden / checked / selected / visible / reversed / readonly / run / disabled / static / fitcontent /url
 
     hidden
         = "hidden" { return ["hidden",""] }
@@ -98,8 +125,8 @@
     static
         = "static" { return ["static",""] }
 
-    autosize
-        = "autosize" { return ["autosize",""] }
+    fitcontent
+        = "fitcontent" { return ["fitcontent",""] }
 
     url "url"
         = prefix:urlprefix path:[a-z0-9_\-~`!@#$%^&*_+=\{\}\[\]|\\:;'<,>.?/]i* {
@@ -120,4 +147,4 @@
         = value:[ a-z0-9_\-~`!@#$%^&*()_+=\{\}\[\]|\\:;'<,>.?/]i* { return value.join("") }
 
     _ "whitespace"
-        = [ \t\n\r]*
+        = whitespace:[ \t\n\r]* { return whitespace.join("") }

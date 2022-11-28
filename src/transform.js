@@ -1,4 +1,5 @@
 import {tags, universalAttributes} from "./tags.js";
+import {extractTOC} from "./extract-toc.js";
 
 const patchTopLevel = (tree) => {
     let previous;
@@ -8,7 +9,7 @@ const patchTopLevel = (tree) => {
             paragraphs.forEach((paragraph,i) => {
                 if(i===0 && previous) {
                     previous.content.push(paragraph);
-                } else {
+                } else if(paragraph.trim()!=="") {
                     previous = {tag:"p",content:[paragraph]};
                     result.push(previous)
                 }
@@ -30,10 +31,20 @@ const validateNode = async ({parser,node,path=[],errors=[]}) => {
     const tag = node.tag;
     let config = tags[tag];
     if(!config) {
-        if(tag.startsWith(":")) {
-           config = tags.emoticon;
-           node.attributes ||= {};
-           node.attributes.name = tag.substring(1);
+        if (tag.startsWith(":")) {
+            node.tag = "emoticon";
+            config = tags.emoticon;
+            const name = tag.substring(1);
+            if(name) {
+                node.content = [name]
+            }
+        } else if (tag.startsWith("#")) {
+            node.tag = "hashtag";
+            config = tags.hashtag;
+            const name = tag.substring(1);
+            if(name) {
+                node.content = [name]
+            }
         } else {
             node.drop = true;
             errors.push(new parser.SyntaxError(`Dropping unknown tag ${tag}`,null,null,node.location));
@@ -77,34 +88,37 @@ const validateNode = async ({parser,node,path=[],errors=[]}) => {
             node.content = [];
         }
     }
-    node.content = await node.content.reduce(async (content,child) => {
-        content = await content;
-        const type = typeof(child);
-        if(type==="string") {
-            if(config.contentAllowed) {
-                content.push(child);
-                return content;
-            }
-            errors.push(new parser.SyntaxError(`${tag} does not allow string child. Dropping child.`,null,null,node.location))
-        }
-        if(child && type==="object") {
-            if(!config.contentAllowed.includes(child.tag)) {
-                errors.push(new parser.SyntaxError(`${tag} does not allow child ${child.tag}. Dropping child.`,null,null,node.location))
-            } else {
-                await validateNode({parser,node:child,path:[...path,node],errors})
-                if(!child.drop)  {
+    if(!node.skipContent) {
+        node.content = await node.content.reduce(async (content,child) => {
+            content = await content;
+            const type = typeof(child);
+            if(type==="string") {
+                if(config.contentAllowed) {
                     content.push(child);
-                    // elevate trailing space to parent
-                    if(child.content[child.content.length-1]===" ") {
-                        content.push(child.content.pop());
+                    return content;
+                }
+                errors.push(new parser.SyntaxError(`${tag} does not allow string child. Dropping child.`,null,child,node.location))
+            }
+            if(child && type==="object") {
+                if(!config.contentAllowed || (!config.contentAllowed==="*" && Array.isArray(config.contentAllowed) && !config.contentAllowed.includes(child.tag))) {
+                    errors.push(new parser.SyntaxError(`${tag} does not allow child ${child.tag}.`,null,JSON.stringify(child),node.location));
+                    child.tag = "error";
+                } else {
+                    await validateNode({parser,node:child,path:[...path,node],errors})
+                    if(!child.drop)  {
+                        content.push(child);
+                        // elevate trailing space to parent
+                       /* if(child.content[child.content.length-1]===" ") {
+                            content.push(child.content.pop());
+                        }*/
                     }
                 }
+                return content;
             }
+            errors.push(new parser.SyntaxError(`${tag} has unexpected child type ${type} ${child}. Dropping child.`,null,JSON.stringify(child),node.location));
             return content;
-        }
-        errors.push(new parser.SyntaxError(`${tag} has unexpected child type ${type} ${child}. Dropping child.`,null,null,node.location));
-        return content;
-    },[]);
+        },[]);
+    }
     config.attributesAllowed ||= {};
     Object.entries(node.attributes||{}).forEach(([key,value]) => {
         const attributeAllowed = universalAttributes[key] || config.attributesAllowed[key],
@@ -157,15 +171,16 @@ const validateNode = async ({parser,node,path=[],errors=[]}) => {
             errors.push(new parser.SyntaxError(`${tag} does not allow styling. Dropping style`,null,null,node.location))
         }
     }
-    if(tag!==node.tag) { // node was transformed to a different node type, so validate that also
+    if(tag!==node.tag && !node.skipRevalidation) { // node was transformed to a different node type, so validate that also
         await validateNode({parser,node,path,errors});
     }
     return errors;
 };
 const required = new Set(),
     domParser = typeof(DOMParser)==="function" ? new DOMParser() : null;
+    //decoder = document.createElement("textarea");
 const toDOMNodes = (nodes,parentConfig) => {
-        return nodes.reduce((domNodes,node) => {
+        return nodes.reduce((domNodes,node,i) => {
             if(typeof(node)==="string") {
                 if(parentConfig && parentConfig.breakOnNewline) {
                     const lines = node.split("\n");
@@ -179,14 +194,16 @@ const toDOMNodes = (nodes,parentConfig) => {
                         }
                     })
                 } else {
-                    domNodes.push(node); // new Text(node) sanitize?
+                    const decoder = document.createElement("textarea");
+                    decoder.innerHTML = node;
+                    domNodes.push(new Text(decoder.innerText)); // new Text(node) sanitize?
                 }
             } else if(!node.drop) {
                 const  {tag,id,classList,attributes} = node,
                     config = tags[tag],
                     el = node.toText ? document.createElement("span") : document.createElement(tag);
                 if(id) el.id = id;
-                if(config.requires && !required.has(config.requires)) {
+                if(config?.requires && !required.has(config.requires)) {
                     required.add(config.required);
                     config.requires.forEach(({tag,attributes={}}) => {
                         const el = document.createElement(tag);
@@ -197,25 +214,25 @@ const toDOMNodes = (nodes,parentConfig) => {
                     });
                 }
                 (classList||[]).forEach((className) => el.classList.add(className));
-                if(config.toText) {
+                Object.entries(attributes||{}).forEach(([key,value]) => { // style mapping done here so that it bypasses earlier sanitation
+                    const attributeAllowed = (config?.attributesAllowed||{})[key];
+                    if(key==="style" && value && typeof(value)==="object") {
+                        Object.entries(value).forEach(([key,value]) => {
+                            key.includes("-") ? el.style.setProperty(key,value) : el.style[key] = value;
+                        })
+                    } else if(attributeAllowed?.mapStyle) {
+                        const styleName = attributeAllowed.mapStyle;
+                        styleName.includes("-") ? el.style.setProperty(styleName,value) : el.style[styleName] = value;
+                    } else {
+                        el.setAttribute(key,value);
+                    }
+                });
+                if(node.tag==="script") {
+                    el.setAttribute("type","module");
+                }
+                if(config?.toText) {
                     el.innerText = config.toText(node);
                 } else {
-                    Object.entries(attributes||{}).forEach(([key,value]) => { // style mapping done here so that it bypasses earlier sanitation
-                        const attributeAllowed = config.attributesAllowed[key];
-                        if(key==="style" && value && typeof(value)==="object") {
-                            Object.entries(value).forEach(([key,value]) => {
-                                key.includes("-") ? el.style.setProperty(key,value) : el.style[key] = value;
-                            })
-                        } else if(attributeAllowed?.mapStyle) {
-                            const styleName = attributeAllowed.mapStyle;
-                            styleName.includes("-") ? el.style.setProperty(styleName,value) : el.style[styleName] = value;
-                        } else {
-                            el.setAttribute(key,value);
-                        }
-                    });
-                    if(node.tag==="script") {
-                        el.setAttribute("type","module");
-                    }
                     toDOMNodes(node.content,config).forEach((node) => {
                         if(typeof(node)==="string") {
                             const body = domParser ? domParser.parseFromString(node,"text/html").body : document.createElement("div");
@@ -233,7 +250,7 @@ const toDOMNodes = (nodes,parentConfig) => {
                     });
                 }
                 domNodes.push(el);
-                const listeners = Object.entries(config.listeners||[]);
+                const listeners = Object.entries(config?.listeners||[]);
                 if(listeners.length>0) {
                     const script = document.createElement("script");
                     script.innerHTML = listeners.reduce((string,[name,f]) => {
@@ -287,17 +304,99 @@ const transform = async (parser,text,{styleAllowed}={}) => {
     if(styleAllowed) {
         configureStyles(tags,styleAllowed);
     }
-    console.log(text)
     const transformed = patchTopLevel(parser.parse(text));
     const parsed = JSON.parse(JSON.stringify(transformed));
     const errors = await transformed.reduce(async (errors,node) => {
         return [...await errors,...await validateNode({parser,node})]
     },[]);
     const dom = document.createDocumentFragment();
-    dom.appendChild(dom.head=document.createElement("head"));
+    dom.appendChild(dom.head = document.createElement("head"));
     dom.appendChild(dom.body = document.createElement("body"));
+    dom.body.innerHTML = "<style>span.toc-nav a {all: unset} span.toc-nav-up-down a {font-size: 80%; vertical-align:text-top}</style>";
     toDOMNodes(transformed).forEach((node) => {
         dom.body.appendChild(node);
+    });
+
+    // set heading ids move to tags.js?
+    for(let i=0;i<=10;i++) {
+        [...dom.body.querySelectorAll("h"+i)].forEach((heading) => {
+            if(heading.id.length===0) {
+                heading.setAttribute("id",heading.textContent.split(" ").map((word) => word.toLowerCase()).join("-"));
+            }
+            heading.classList.add("html-heading-element")
+        })
+    }
+
+    const headings = [...dom.body.querySelectorAll(".html-heading-element")];
+    const toTOC = (headings,toc,previousLevel,previousHeading) => {
+        const originalHeadings = [...headings],
+            ul = document.createElement("ol");
+        let previousLI;
+        while(headings.length>0) {
+            const heading = headings[0],
+                level = parseInt(heading.tagName.substring(1));
+            previousLevel ||= level;
+            if(level<previousLevel) {
+               return ul;
+            }
+            if(level>previousLevel) {
+                previousLI.appendChild(toTOC(headings,toc,level,previousHeading));
+            } else {
+                previousLI = document.createElement("li");
+                previousLI.innerHTML = `<a href="#${heading.id}">${heading.innerHTML}</a>`;
+                previousLI.classList.add("toc-nav");
+                ul.appendChild(previousLI);
+                const headingEl = dom.body.querySelector("#"+heading.id),
+                    navspan = document.createElement("span"),
+                    tocspan = document.createElement('span'),
+                    nextHeading = headings[1];
+                navspan.classList.add("toc-nav");
+                navspan.classList.add("toc-nav-up-down");
+                tocspan.classList.add("toc-nav");
+                navspan.innerHTML = (previousHeading ? ` <a href="#${previousHeading.id}">&uarr;</a>` : '') + (nextHeading && !headingEl.classList.contains("toc") ?  ` <a href="#${nextHeading.id}">&darr;</a>` :'');
+                tocspan.innerHTML = `<a href="#${toc.id}">&#9783;</a> `;
+                previousHeading = headings.shift();
+                headingEl.insertBefore(tocspan,headingEl.firstChild);
+                headingEl.appendChild(navspan);
+            }
+            //previousLI = li;
+        }
+        return ul;
+    }
+    while(!headings[0]?.classList.contains("toc") && headings.length>0) {
+        headings.shift();
+    }
+    const tocEl = dom.body.querySelector(".toc"),
+        toc = toTOC(headings,tocEl);
+    tocEl.insertAdjacentElement("afterend",toc);
+
+    const footnotes = [...dom.body.querySelectorAll(".secst-footnote")];
+    footnotes.forEach((footnote,i) => {
+        i++; // numbering starts at 1
+        const href = footnote.getAttribute("href"),
+            p = href ? dom.body.querySelector(href)  || document.createElement("p") : document.createElement("p");
+        p.id ||= (footnote.id || `footnote${i}`);
+        footnote.id = `footnote-ref${i}`;
+        footnote.removeAttribute("href");
+        const numbers = p.firstElementChild || document.createElement("span");
+        if(numbers!=p.firstElementChild) p.appendChild(numbers);
+        const backref = document.createElement("a");
+        backref.setAttribute("href","#"+footnote.id);
+        backref.innerHTML = i;
+        if(numbers.childNodes.length>0) {
+            numbers.appendChild(new Text(", "))
+        }
+        numbers.appendChild(backref);
+        if(p.children.length===1) {
+            p.appendChild(new Text(" "));
+            while(footnote.firstChild) {
+                p.appendChild(footnote.firstChild)
+            }
+        }
+        footnote.innerHTML = `<a href="${href || '#'+p.id}">${i}</a>`;
+        if(!dom.body.querySelector("#"+p.id)) {
+            dom.body.appendChild(p)
+        }
     })
     return {dom,errors,parsed,transformed};
 }

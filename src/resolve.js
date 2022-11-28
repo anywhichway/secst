@@ -28,13 +28,13 @@ const resolve = async (node=document.body,ifNull) => {
         try {
             el.rawValue = resolveDataTemplate(node,template,el).then((value) => {
                 el.rawValue = value;
-                if(value===template) {
+                if(value==template) { // used relaxed equality because results may be numbers
                     el.removeAttribute("disabled");
                 } else {
                     el.setAttribute("disabled",""); // the value was a computation
                 }
                 el.setAttribute("value",value=formatValue(el));
-                if(el.hasAttribute("data-autosize")) {
+                if(el.hasAttribute("data-fitcontent")) {
                     el.style.width = Math.min(80,Math.max(1,value.length+1))+"ch";
                 }
             });

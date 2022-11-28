@@ -14,7 +14,7 @@
     document.addEventListener("DOMContentLoaded",async ()=> {
         let markup;
         const render = async () => {
-            const newmarkup = await fetch("./index.sec").then((response) => response.text());
+            const newmarkup = await fetch("./index.sct").then((response) => response.text());
             if(markup!==newmarkup) {
                 const {dom,errors} = await SECST.transform(await parser(),markup=newmarkup,{styleAllowed:"*"});
                 console.log(errors);
@@ -23,13 +23,16 @@
                 while(dom.body.firstChild) {
                     document.body.appendChild(dom.body.firstChild)
                 }
+                [...document.body.querySelectorAll('input[data-fitcontent]')].forEach((el) => {
+                    el.style.width = Math.min(80,Math.max(1,el.value.length+1))+"ch";
+                })
             }
         }
         await render();
         Object.entries(SECST.listeners).forEach(([key,value]) => {
             document.body.addEventListener(key,value);
         });
-        setInterval(render,1000);
+       // setInterval(render,1000);
     })
 </script>
 </body>
