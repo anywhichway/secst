@@ -1,6 +1,6 @@
 h1[The Joy of SECST]
 
-script(static visible type="application/json" src="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson")[]
+value(static visible fitcontent type="application/json" src="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson")[]
 
 p[
     abbr[SECST] is a strong[S]emantic, strong[E]xtensible, strong[C]omputational, strong[S]tyleable strong[T]ag oriented markup language. You can use it to joyfully create compelling, interactive documents backed by HTML.

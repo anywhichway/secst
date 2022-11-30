@@ -349,7 +349,18 @@ const transform = async (parser,text,{styleAllowed}={}) => {
     const dom = document.createDocumentFragment();
     dom.appendChild(dom.head = document.createElement("head"));
     dom.appendChild(dom.body = document.createElement("body"));
-    dom.body.innerHTML = "<style>span.autohelm-nav a {all: unset} span.autohelm-nav-up-down a {font-size: 80%; vertical-align:text-top} mark.secst-error { background: red } </style>";
+    dom.body.innerHTML = `<style>
+        span.autohelm-nav a {all: unset} 
+        span.autohelm-nav-up-down a {font-size: 80%; vertical-align:text-top} 
+        mark.secst-error { background: red }
+        textarea.secst-value {
+                display: block;
+                unicode-bidi: embed;
+                font-family: monospace;
+                white-space: pre;
+            }
+        }
+        </style>`;
     const nodes = await toDOMNodes(transformed);
     nodes.forEach((node) => {
         dom.body.appendChild(node);

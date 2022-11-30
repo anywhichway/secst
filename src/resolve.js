@@ -22,7 +22,7 @@ const resolve = async (node=document.body,ifNull) => {
             });
         });
     }
-    const valueEls = [...node.querySelectorAll("input[data-template]")];
+    const valueEls = [...node.querySelectorAll("textarea[data-template]"),...node.querySelectorAll("input[data-template]")];
     for(const el of valueEls) {
         const template = el.getAttribute("data-template");
         try {
@@ -33,9 +33,20 @@ const resolve = async (node=document.body,ifNull) => {
                 } else {
                     el.setAttribute("disabled",""); // the value was a computation
                 }
-                el.setAttribute("value",value=formatValue(el));
-                if(el.hasAttribute("data-fitcontent")) {
-                    el.style.width = Math.min(80,Math.max(1,value.length+1))+"ch";
+                const formatted = formatValue(el);
+                el.value = formatted;
+                if(el.tagName==="TEXTAREA") {
+                    el.innerHTML = formatted;
+                    if(el.hasAttribute("data-fitcontent")) {
+                        const lines = el.value.split("\n");
+                        el.style.height = (Math.min(20, lines.length) * 1.5) + "em";
+                        el.style.width = Math.min(80, lines.reduce((len, line) => Math.max(len, line.length), 0)) + "ch";
+                    }
+                } else {
+                    el.setAttribute("value",formatted);
+                    if(el.hasAttribute("data-fitcontent")) {
+                        el.style.width = Math.min(80,Math.max(1,value.length+1))+"ch";
+                    }
                 }
             });
             await el.rawValue; // awaiting after the assignment prevent getting stuck in an Inifnite wait due to recursive resolves

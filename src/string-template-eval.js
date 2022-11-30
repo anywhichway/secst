@@ -44,16 +44,7 @@ const stringTemplateEval = async (stringTemplate,requestor) => {
             timeout:1000,
             imports:['https://cdn.jsdelivr.net/npm/mathjs@11.3.2/lib/browser/math.min.js']})
     }
-    /*const original = stringTemplate;
-    stringTemplate = await replaceReferences(stringTemplate,requestor);
-    if(stringTemplate!==original && XRegExp.matchRecursive(stringTemplate, '\\!\\[', '\\]', 'g',{unbalanced:"skip"}).length>0) {
-        const message = `Error processing ${original}. Check for loop in dependencies.`;
-        console.error(new EvalError(message));
-        requestor.classList.add("chtml-error");
-        return `${message}`
-    } else {*/
-        return (await stringTemplateEval.evaluator.evaluate)(stringTemplate);
-    //}
+    return (await stringTemplateEval.evaluator.evaluate)(stringTemplate);
 }
 
 export {stringTemplateEval}

@@ -13,7 +13,14 @@ const update = async (target) => {
         const value = formatValue(target);
         if(target.value!==value) {
             target.value = value;
-            target.setAttribute("value",value); // both are needed, or Chrome breaks
+            if(target.tagName==="TEXTAREA") {
+                target.innerHTML = value;
+                const lines = value.split("\n");
+                el.style.height = (Math.min(20,lines.length)*1.5) + "em";
+                el.style.width = Math.min(80,lines.reduce((len,line) => Math.max(len,line.length),0)) + "ch";
+            } else {
+                target.setAttribute("value",value); // both .value and attribute are needed, or Chrome breaks
+            }
         }
     }
     for(const el of [...target.dependents||[]]) {
@@ -21,7 +28,16 @@ const update = async (target) => {
         const value = formatValue(el);
         if(el.value!==value) {
             el.value = value;
-            el.setAttribute("value",value); // both are needed, or Chrome breaks
+            if(el.tagName==="TEXTAREA") {
+                el.innerHTML = value;
+                if(el.hasAttribute("fitcontent")) {
+                    const lines = value.split("\n");
+                    el.style.height = (Math.min(20, lines.length) * 1.5) + "em";
+                    el.style.width = Math.min(80, lines.reduce((len, line) => Math.max(len, line.length), 0)) + "ch";
+                }
+            } else {
+                el.setAttribute("value",value); // both .value and attribute are needed, or Chrome breaks
+            }
         }
     }
 }
@@ -31,6 +47,12 @@ const updateWidths = () => {
         [...document.querySelectorAll('input[data-fitcontent]')].forEach((el) => {
             const value = el.getAttribute("value")||"";
             el.style.width = Math.min(80,Math.max(1,value.length+1))+"ch";
+        });
+        [...document.querySelectorAll('textarea[data-fitcontent]')].forEach((el) => {
+            const value = el.innerText;;
+            const lines = value.split("\n");
+            el.style.height = (Math.min(20, lines.length) * 1.5) + "em";
+            el.style.width = Math.min(80, lines.reduce((len, line) => Math.max(len, line.length), 0)) + "ch";
         })
     })
 }

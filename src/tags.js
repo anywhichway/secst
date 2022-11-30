@@ -14,13 +14,10 @@ if(init) {
     initEmojiMart = init;
     EmojiMartSearchIndex = SearchIndex;
 } else {
-    const deflt = __em__.default;
     const {init:_initEmojiMart, SearchIndex:_EmojiMartSearchIndex} = __em__.default;
     initEmojiMart = _initEmojiMart;
     EmojiMartSearchIndex = _EmojiMartSearchIndex;
 }
-
-const domParser = typeof(DOMParser)==="function" ? new DOMParser() : null;
 
 const universalAttributes = {
         hidden: true,
@@ -37,15 +34,15 @@ const universalAttributes = {
         title: true
     },
     blockContent = ["article","audio","blockquote","code","dl","figure","hr","img","script","listeners","ol","p","picture","pre","script","style","table","toc","ul","video","latex","math-science-formula"],
-    simpleContent = ["a","abbr","bdi","bdo","br","del","code","em","emoji","error","footnote","hashtag","ins","kbd","meter","strong","sub","sup","time","var","wbr","u","@facebook","@github","@linkedin","@twitter","latex"],
-    structuredContent = ["address","aside","bdi","cite","details","input","script","ol","output","ruby","ul","value","summary"],
-    inlineContent = [...simpleContent,...structuredContent],
+    singleLineContent = ["a","abbr","bdi","bdo","br","del","code","em","emoji","error","footnote","hashtag","ins","kbd","meter","strong","sub","sup","time","value","var","wbr","u","@facebook","@github","@linkedin","@twitter","latex"],
+    multiLineContent = ["address","aside","bdi","cite","details","input","script","ol","output","ruby","ul","summary","textarea"],
+    inlineContent = [...singleLineContent,...multiLineContent],
     tagToText = (tag,pre) => {
         const type = typeof(tag);
         if(type==="string") return tag.replace(/</g,"&lt;").replace(/>/g,"&gt;");
         if(tag && type==="object") {
             const attributes = tag.attributes ? Object.entries(tag.attributes).filter(([_,value]) => value!=="").map(([key,value]) => key + '="' + value + '"') : null,
-                binaryAttributes = tag.attributes ? Object.entries(tag.attributes).filter(([_,value]) => value==="").map(([key,value]) => key) : null,
+                binaryAttributes = tag.attributes ? Object.entries(tag.attributes).filter(([_,value]) => value==="").map(([key]) => key) : null,
                 classList = tag.classList
             let text = tag.tag;
             if(tag.id || classList?.length>0 || attributes?.length>0) {
@@ -218,7 +215,7 @@ const tags = {
                 }
             }
         },
-        contentAllowed: [...simpleContent],
+        contentAllowed: [...singleLineContent],
         transform(node) {
             if(node.attributes.url) {
                 node.attributes.href = node.attributes.url;
@@ -273,7 +270,7 @@ const tags = {
     },
     caption: {
         parentRequired: ["figure","table"],
-        contentAllowed: simpleContent,
+        contentAllowed: singleLineContent,
         transform(node,parent) {
             // if parent .tag = table, ensure it is first
             // if parent .tag = fig, change to fig caption
@@ -316,7 +313,7 @@ const tags = {
         }
     },
     details: {
-        contentAllowed: [...simpleContent,...structuredContent],
+        contentAllowed: [...singleLineContent,...multiLineContent],
         validate(node) {
             return node.firstElementChild?.tagName==="SUMMARY";
         }
@@ -328,7 +325,7 @@ const tags = {
         contentAllowed: ["dt","dd"]
     },
     dt: {
-        contentAllowed: simpleContent
+        contentAllowed: singleLineContent
     },
     error: {
         contentAllowed: "*",
@@ -395,12 +392,14 @@ const tags = {
         allowAsRoot: true
     },
     input: {
+        allowAsRoot: true,
         attributesAllowed: {
             "data-fitcontent": true,
             "data-default": true,
-            "data-extract": true,
+            "data-extract": true, // toto add validation
             "data-template": true,
             "data-format": true,
+            "data-mime-type": true, // toto add validation
             default(value) {
                 return {
                     "data-default": value
@@ -596,7 +595,7 @@ const tags = {
         contentAllowed: true
     },
     ruby: {
-        contentAllowed: [...simpleContent,"rp","rt"]
+        contentAllowed: [...singleLineContent,"rp","rt"]
     },
     script: {
         attributesAllowed: {
@@ -748,6 +747,31 @@ const tags = {
         },
         contentAllowed: inlineContent
     },
+    textarea: {
+        allowAsRoot: true,
+        contentAllowed:true,
+        attributesAllowed: {
+            "data-fitcontent": true,
+            "data-default": true,
+            "data-extract": true, // toto add validation
+            "data-template": true,
+            "data-format": true,
+            "data-mime-type": true, // toto add validation
+            disabled: true,
+            value: true
+        },
+        render(node,el) {
+            el.innerHTML = node.attributes.value || node.content[0];
+            if(el.hasAttribute("data-fitcontent")) {
+                const lines = el.innerText.split("\n");
+                el.style.height = (Math.min(20,lines.length)*1.5) + "em";
+                el.style.width = Math.min(80,lines.reduce((len,line) => Math.max(len,line.length),0)) + "ch";
+            }
+        },
+        transform(node) {
+            node.content = [node.content.join("\n")];
+        }
+    },
     th: {
         attributesAllowed: {
             colspan: {
@@ -756,7 +780,7 @@ const tags = {
                 }
             }
         },
-        contentAllowed: simpleContent
+        contentAllowed: singleLineContent
     },
     toc: {
         contentAllowed: true,
@@ -896,6 +920,13 @@ const tags = {
                     readonly: ""
                 }
             },
+            src: {
+                validate(value) {
+                    if(new URL(value,document.baseURI)) {
+                        return true;
+                    }
+                }
+            },
             static: true,
             template(value) {
                 return {
@@ -920,35 +951,83 @@ const tags = {
                             type: "checkbox"
                         }
                     }
+                    if([
+                        "application/json",
+                        "text/plain",
+                        "text/csv"
+                    ].includes(value)) {
+                        node.attributes["data-mime-type"] = value;
+                        return {
+                            type: "text"
+                        }
+                    }
                 },
                 validate(value, node) {
-                    return ["checkbox","color","date","datetime-local","email","file",
+                    const values = ["checkbox","color","date","datetime-local","email","file",
                         "hidden","month","number","password","radio","range","tel","text",
-                        "time","url","week","currency-usd","boolean"].includes(value)
+                        "time","url","week","currency-usd","boolean",
+                        "application/json","text/plain","text/csv"
+                    ]
+                    if(!values.includes(value)) {
+                        throw new TypeError(`value for script type ${value} must be one of ${JSON.stringify(values)}`);
+                    }
+                    return true;
                 }
             },
             value: true
         },
         async transform(node) {
-            node.tag = "input";
-            node.attributes ||= {};
+            let type = node.attributes.type;
+            if(["application/json","text/plain","text/csv"].includes(type)) {
+                node.tag = "textarea";
+                node.classList ||= [];
+                node.classList.push("secst-value");
+                node.skipContent;
+                delete node.attributes.type;
+            } else {
+                node.tag = "input";
+            }
             node.attributes.hidden = "";
             if (node.attributes.visible == "") {
                 delete node.attributes.hidden;
                 delete node.attributes.visible;
             }
+            if(node.attributes.url) {
+                node.attributes.src = node.attributes.url;
+                delete node.attributes.url;
+            }
             if (node.attributes["data-default"] == null) {
                 node.attributes["data-default"] = "";
             }
             if(node.attributes.src) {
-                if(node.attributes.static!=null) {
+                if (node.attributes.static != null) {
                     delete node.attributes.static;
                     const response = await fetch(node.attributes.src);
-                    node.attributes.value = await response.text();
+                    if (response.status == 200) {
+                        try {
+                            let text = await response.text();
+                            if (type === "application/json") {
+                                text = JSON.stringify(JSON5.parse(text), null, 2);
+                            }
+                            node.attributes.value = text;
+                        } catch (e) {
+                            node.attributes.value = e + "";
+                        }
+                    } else {
+                        node.value = response.statusText
+                    }
                 } else {
                     const f = `await (async () => { 
                         const response = await fetch("${node.attributes.src}");
-                        return await response.text();
+                        if(response.status===200) {
+                            try {
+                                return await response.text();
+                            } catch(e) {
+                                return e+"";
+                            }
+                        } else {
+                            return response.statusText;
+                        }
                         })()`;
                     node.attributes["data-template"] = f;
                 }
@@ -957,7 +1036,9 @@ const tags = {
                 node.attributes["data-template"] = node.content.join("").trim();
                 node.attributes.value = node.attributes["data-default"]
             }
-            node.content = [];
+            if(node.tag==="input") {
+                node.content = [];
+            }
         }
     },
     video: {
@@ -971,7 +1052,7 @@ const tags = {
 
 for(let i=1;i<=8;i++) {
     tags["h"+i] = {
-        contentAllowed: simpleContent
+        contentAllowed: singleLineContent
     }
 }
 
