@@ -1,3 +1,27 @@
+import katex from "katex";
+await import("katex/contrib/mhchem");
+
+import JSON5 from "json5";
+
+let emojiMartData,
+    initEmojiMart,
+    EmojiMartSearchIndex;
+const __em__ = await import("emoji-mart");
+// this craziness required because emoji-mart exports no default but is common JS on server but esm on client and conditions are inside emoji-mart code
+// as a result, standard webpack handling breaks
+const {init,SearchIndex} = __em__;
+if(init) {
+    initEmojiMart = init;
+    EmojiMartSearchIndex = SearchIndex;
+} else {
+    const deflt = __em__.default;
+    const {init:_initEmojiMart, SearchIndex:_EmojiMartSearchIndex} = __em__.default;
+    initEmojiMart = _initEmojiMart;
+    EmojiMartSearchIndex = _EmojiMartSearchIndex;
+}
+
+const domParser = typeof(DOMParser)==="function" ? new DOMParser() : null;
+
 const universalAttributes = {
         hidden: true,
         dir: {
@@ -12,9 +36,9 @@ const universalAttributes = {
         is: true,
         title: true
     },
-    blockContent = ["article","audio","blockquote","code","dl","figure","hr","img","listeners","ol","p","picture","pre","script","style","table","toc","ul","video","latex","math-science-formula"],
-    simpleContent = ["a","abbr","bdi","bdo","br","del","code","em","emoticon","error","footnote","hashtag","ins","kbd","strong","sub","sup","time","var","wbr","u","@facebook","@github","@linkedin","@twitter","latex"],
-    structuredContent = ["address","aside","bdi","cite","details","input","ol","output","ruby","ul","value"],
+    blockContent = ["article","audio","blockquote","code","dl","figure","hr","img","script","listeners","ol","p","picture","pre","script","style","table","toc","ul","video","latex","math-science-formula"],
+    simpleContent = ["a","abbr","bdi","bdo","br","del","code","em","emoji","error","footnote","hashtag","ins","kbd","meter","strong","sub","sup","time","var","wbr","u","@facebook","@github","@linkedin","@twitter","latex"],
+    structuredContent = ["address","aside","bdi","cite","details","input","script","ol","output","ruby","ul","value","summary"],
     inlineContent = [...simpleContent,...structuredContent],
     tagToText = (tag,pre) => {
         const type = typeof(tag);
@@ -104,10 +128,41 @@ const tags = {
     },
     latex: {
         contentAllowed: true,
+        requires: [
+            {
+                tag: "link",
+                attributes: {
+                    rel: "stylesheet",
+                    href: "https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css",
+                    integrity: "sha384-Juol1FqnotbkyZUT5Z7gUPjQ9gzlwCENvUZTpQBAPxtusdwFLRy382PSDx5UUJ4/",
+                    crossOrigin: "anonymous"
+                }
+            }
+            ],
         transform(node) {
-            node.content = [node.content.join("\n")]
-            node.tag = "math-science-formula";
+            const content = node.content.join("\n");
+            if(content.endsWith("\n")) {
+                node.tag = "div";
+            } else {
+                node.tag = "span";
+            }
+            node.content = [content];
+            node.skipRevalidation = true;
+            node.skipContent = true;
+        },
+        toHTML(node) {
+            return katex.renderToString(node.content[0],{
+                throwOnError: false
+            })
         }
+        /*render(node,el) {
+            return katex.render(node.content[0],el)
+        }
+        connected(el) {
+            katex.render(el.innerText, el, {
+                throwOnError: false
+            });
+        }*/
     },
     "&": {
         contentAllowed: true,
@@ -260,6 +315,12 @@ const tags = {
             delete node.attributes.run;
         }
     },
+    details: {
+        contentAllowed: [...simpleContent,...structuredContent],
+        validate(node) {
+            return node.firstElementChild?.tagName==="SUMMARY";
+        }
+    },
     dd: {
         contentAllowed: inlineContent
     },
@@ -272,19 +333,35 @@ const tags = {
     error: {
         contentAllowed: "*",
         transform(node) {
-            node.tag = "span";
+            node.tag = "mark";
             node.classList.add("secst-error");
-            node.content = node.content.map((item) => tagToText(item,true)).join("");
-            node.skipRevalidation = true;
         }
     },
-    emoticon: {
+    emoji: {
         contentAllowed: true,
-        toText(node) {
-            return node.content.reduce((tags,item) => {
-                item.split(" ").forEach((tag) => tags.push(":" + tag));
-                return tags;
-            },[]).join(", ")
+        async toHTML(node) {
+            emojiMartData ||= await fetch(
+                'https://cdn.jsdelivr.net/npm/@emoji-mart/data',
+            ).then((response) => response.json());
+            initEmojiMart({emojiMartData});
+            const emojis = []
+            for(const item of node.content) {
+                for(const tag of item.split(" ")) {
+                    try {
+                        const found = await EmojiMartSearchIndex.search(tag);
+                        if(found[0]?.id===tag) {
+                            const unified = found[0].skins[0].unified;
+                            emojis.push("&#x" + unified.split("-").shift() + ";")
+                            //emojis.push(found[0].skins[0].native)
+                        } else {
+                            emojis.push(":" + tag)
+                        }
+                    } catch(e) {
+                        console.log(e)
+                    }
+                }
+            }
+            return emojis.join(", ")
         }
     },
     footnote: {
@@ -295,7 +372,7 @@ const tags = {
         transform(node) {
             node.tag = "sup";
             node.classList ||= [];
-            node.classList.push("secst-footnote")
+            node.classList.push("autohelm-footnote")
             node.skipRevalidation = true;
         }
     },
@@ -360,6 +437,7 @@ const tags = {
             }
         }
     },
+
     li: {
         breakOnNewline: true,
         attributesAllowed: {
@@ -404,6 +482,39 @@ const tags = {
                 })`
             ]
             delete node.attributes.selector;
+        }
+    },
+    meter: {
+      attributesAllowed: {
+          min: {
+              validate(value) {
+                  return (value==parseFloat(value) || value==parseInt(value))
+              }
+          },
+          max: {
+              validate(value) {
+                  return (value==parseFloat(value) || value==parseInt(value))
+              }
+          },
+          low: {
+              validate(value) {
+                  return (value==parseFloat(value) || value==parseInt(value))
+              }
+          },
+          high: {
+              validate(value) {
+                  return (value==parseFloat(value) || value==parseInt(value))
+              }
+          },
+          optimum: {
+              validate(value) {
+                  return (value==parseFloat(value) || value==parseInt(value))
+              }
+          }
+      },
+        validate(node) {
+          // todo see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meter
+          return true;
         }
     },
     ol: {
@@ -488,8 +599,72 @@ const tags = {
         contentAllowed: [...simpleContent,"rp","rt"]
     },
     script: {
+        attributesAllowed: {
+            type: {
+                validate(value) {
+                    const values = [
+                        "application/json",
+                        "text/plain",
+                        "text/csv"
+                    ];
+                    if(values.includes(value)) {
+                        return true;
+                    }
+                    throw new TypeError(`value for script type ${value} must be one of ${JSON.stringify(values)}`);
+                }
+            },
+            src: {
+                validate(value) {
+                    if(new URL(value,document.baseURI)) {
+                        return true;
+                    }
+                }
+            },
+            static: true,
+            visible: {
+                mapStyle: {
+                    display: "block",
+                    fontFamily: "monospace",
+                    whiteSpace: "pre",
+                    unicodeBidi: "embed"
+                }
+            }
+        },
         allowAsRoot: true,
-        contentAllowed: true
+        contentAllowed: true,
+        toHTML(node) {
+            return node.content[0]
+        },
+        async transform(node) {
+            if(node.attributes.url) {
+                node.attributes.src = node.attributes.url;
+                delete node.attributes.url;
+            }
+            if(node.attributes.src && node.attributes.static!=null) {
+                const response = await fetch(node.attributes.src);
+                if(response.status==200) {
+                    try {
+                        let text = await response.text();
+                        if(node.attributes.type==="application/json") {
+                           text = JSON.stringify(JSON5.parse(text),null,2);
+                        }
+                        node.content = [text]
+                    } catch(e) {
+                        node.content = [e+""]
+                    }
+                } else {
+                    node.contents = [response.statusText]
+                }
+                delete node.attributes.src;
+                delete node.attributes.static
+            }
+        },
+        validate(node) {
+            if(!node.attributes.type) {
+                return false;
+            }
+            return true;
+        }
     },
     source: {
         attributesAllowed: {
@@ -673,7 +848,7 @@ const tags = {
             },[])
         }
     },
-    underline: {
+    u: {
         attributesAllowed: {
             style: true
         },
@@ -783,7 +958,6 @@ const tags = {
                 node.attributes.value = node.attributes["data-default"]
             }
             node.content = [];
-            return node;
         }
     },
     video: {

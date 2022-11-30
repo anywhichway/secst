@@ -1,5 +1,6 @@
+import {init as initAutohelm} from "@anywhichway/autohelm";
+
 import {tags, universalAttributes} from "./tags.js";
-import {extractTOC} from "./extract-toc.js";
 
 const patchTopLevel = (tree) => {
     let previous;
@@ -28,12 +29,12 @@ const validateNode = async ({parser,node,path=[],errors=[]}) => {
     if(!node || typeof(node)!=="object") {
         return;
     }
-    const tag = node.tag;
-    let config = tags[tag];
+    let tag = node.tag,
+        config = tags[tag];
     if(!config) {
         if (tag.startsWith(":")) {
-            node.tag = "emoticon";
-            config = tags.emoticon;
+            node.tag = "emoji";
+            config = tags.emoji;
             const name = tag.substring(1);
             if(name) {
                 node.content = [name]
@@ -71,9 +72,19 @@ const validateNode = async ({parser,node,path=[],errors=[]}) => {
     }
 
     node.attributes ||= {};
-
+    node.requires ||= [];
+    if(config.requires) node.requires.push(config.requires);
+    node.connected = config.connected;
+    node.toHTML = config.toHTML;
+    node.toText = config.toText;
+    node.render = config.render;
+    let transformed;
     if(config.transform) {
-        await config.transform(node);
+        transformed = await config.transform(node);
+        if(transformed) {
+            config = transformed;
+            tag = node.tag;
+        }
     }
     if(node.content.length>0 && !config.contentAllowed) {
         while(node.content.length) { // try remove whitespace
@@ -179,98 +190,124 @@ const validateNode = async ({parser,node,path=[],errors=[]}) => {
 const required = new Set(),
     domParser = typeof(DOMParser)==="function" ? new DOMParser() : null;
     //decoder = document.createElement("textarea");
-const toDOMNodes = (nodes,parentConfig) => {
-        return nodes.reduce((domNodes,node,i) => {
-            if(typeof(node)==="string") {
-                if(parentConfig && parentConfig.breakOnNewline) {
-                    const lines = node.split("\n");
-                    while(lines[lines.length-1]==="") {
-                        lines.pop(); // remove trailing whitespaces
-                    }
-                    lines.forEach((line,i) => {
-                        domNodes.push(new Text(line));
-                        if(i<lines.length-1) {
-                            domNodes.push(document.createElement("br"))
+const toDOMNodes = async (nodes,parentConfig,mounts=[]) => {
+    const domNodes = [];
+    for(let i=0;i<nodes.length;i++) {
+        const node = nodes[i];
+                if(typeof(node)==="string") {
+                    if(parentConfig && parentConfig.breakOnNewline) {
+                        const lines = node.split("\n");
+                        while(lines[lines.length-1]==="") {
+                            lines.pop(); // remove trailing whitespaces
                         }
-                    })
-                } else {
-                    const decoder = document.createElement("textarea");
-                    decoder.innerHTML = node;
-                    domNodes.push(new Text(decoder.innerText)); // new Text(node) sanitize?
-                }
-            } else if(!node.drop) {
-                const  {tag,id,classList,attributes} = node,
-                    config = tags[tag],
-                    el = node.toText ? document.createElement("span") : document.createElement(tag);
-                if(id) el.id = id;
-                if(config?.requires && !required.has(config.requires)) {
-                    required.add(config.required);
-                    config.requires.forEach(({tag,attributes={}}) => {
-                        const el = document.createElement(tag);
-                        Object.entries(attributes).forEach(([key,value]) => {
-                            el.setAttribute(key,value);
-                        });
-                        domNodes.push(el);
-                    });
-                }
-                (classList||[]).forEach((className) => el.classList.add(className));
-                Object.entries(attributes||{}).forEach(([key,value]) => { // style mapping done here so that it bypasses earlier sanitation
-                    const attributeAllowed = (config?.attributesAllowed||{})[key];
-                    if(key==="style" && value && typeof(value)==="object") {
-                        Object.entries(value).forEach(([key,value]) => {
-                            key.includes("-") ? el.style.setProperty(key,value) : el.style[key] = value;
+                        lines.forEach((line,i) => {
+                            domNodes.push(new Text(line));
+                            if(i<lines.length-1) {
+                                domNodes.push(document.createElement("br"))
+                            }
                         })
-                    } else if(attributeAllowed?.mapStyle) {
-                        const styleName = attributeAllowed.mapStyle;
-                        styleName.includes("-") ? el.style.setProperty(styleName,value) : el.style[styleName] = value;
                     } else {
-                        el.setAttribute(key,value);
+                        const decoder = document.createElement("textarea");
+                        decoder.innerHTML = node;
+                        domNodes.push(new Text(decoder.innerText)); // new Text(node) sanitize?
                     }
-                });
-                if(node.tag==="script") {
-                    el.setAttribute("type","module");
-                }
-                if(config?.toText) {
-                    el.innerText = config.toText(node);
-                } else {
-                    toDOMNodes(node.content,config).forEach((node) => {
-                        if(typeof(node)==="string") {
-                            const body = domParser ? domParser.parseFromString(node,"text/html").body : document.createElement("div");
-                            if(body.tagName==="div") body.innerHTML = node;
-                            if(el.lastChild) {
-                                while(body.lastChild) {
-                                    el.appendChild(body.lastChild)
+                } else if(!node.drop) {
+                    const {tag, id, classList, attributes} = node,
+                        config = tags[tag];
+                    let el = node.toText ? document.createElement("span") : document.createElement(tag);
+                    el.mounts ||= [];
+                    if (id) el.id = id;
+                    node.requires?.forEach((require) => {
+                        if (!required.has(require)) {
+                            required.add(require);
+                            require.forEach(({tag, attributes = {}, innerText, innerHTML}) => {
+                                const el = document.createElement(tag);
+                                Object.entries(attributes).forEach(([key, value]) => {
+                                    el.setAttribute(key, value);
+                                });
+                                if (innerText) {
+                                    el.innerText = innerText;
+                                } else if (innerHTML) {
+                                    el.innerHTML = innerHTML;
                                 }
+                                domNodes.push(el);
+                            });
+                        }
+                    });
+                    (classList || []).forEach((className) => el.classList.add(className));
+                    Object.entries(attributes || {}).forEach(([key, value]) => { // style mapping done here so that it bypasses earlier sanitation
+                        const attributeAllowed = (config?.attributesAllowed || {})[key];
+                        if (key === "style" && value && typeof (value) === "object") {
+                            Object.entries(value).forEach(([key, value]) => {
+                                key.includes("-") ? el.style.setProperty(key, value) : el.style[key] = value;
+                            })
+                        } else if (attributeAllowed?.mapStyle) {
+                            const style = attributeAllowed.mapStyle;
+                            if(typeof(style)==="string") {
+                                style.includes("-") ? el.style.setProperty(style, value) : el.style[style] = value;
                             } else {
-                                el.innerHTML = node;
+                                Object.entries(style).forEach(([style,value]) => {
+                                    style.includes("-") ? el.style.setProperty(style, value) : el.style[style] = value;
+                                })
                             }
                         } else {
-                            el.appendChild(node);
+                            el.setAttribute(key, value);
                         }
                     });
+                    if (node.tag === "script" && !node.attributes.type) {
+                        el.setAttribute("type", "module");
+                    }
+                    if (node?.toHTML) {
+                        el.innerHTML = await node.toHTML(node);
+                    } else if (node?.toText) {
+                        el.innerText = await node.toText(node);
+                    } else if(node.render) {
+                        await node.render(node,el);
+                    } else {
+                        (await toDOMNodes(node.content,config,mounts)).forEach((node) => {
+                            if(typeof(node)==="string") {
+                                const body = domParser ? domParser.parseFromString(node,"text/html").body : document.createElement("div");
+                                if(body.tagName==="div" || body.tagName==="span") {
+                                    body.innerHTML = node;
+                                }
+                                if(el.lastChild) {
+                                    while(body.lastChild) {
+                                        el.appendChild(body.lastChild)
+                                    }
+                                } else {
+                                    el.innerHTML = node;
+                                }
+                            } else {
+                                el.appendChild(node);
+                            }
+                        });
+                    }
+                    if(node.connected) {
+                       mounts.push(() => node.connected(el));
+                    }
+                    domNodes.push(el);
+                    const listeners = Object.entries(config?.listeners||[]);
+                    if(listeners.length>0) {
+                        const script = document.createElement("script");
+                        script.innerHTML = listeners.reduce((string,[name,f]) => {
+                            let fstring = f +"";
+                            if(fstring.startsWith(`${name}(`)) {
+                                fstring = fstring.replace(`${name}(`,"function(")
+                            }
+                            string += `document.currentScript.previousElementSibling.addEventListener("${name}",${fstring});\n`;
+                            if(name==="attributeChanged") {
+                                string += "secstObserver.observe(document.currentScript.previousElementSibling,{attributes:true,attributeOldValue:true}});\n";
+                            } else if(name==="disconnected") {
+                                string += "secstObserver.observe(document.currentScript.previousElementSibling.parentElement,{childList:true}});\n";
+                            }
+                            return string;
+                        },"");
+                        domNodes.push(script);
+                    }
                 }
-                domNodes.push(el);
-                const listeners = Object.entries(config?.listeners||[]);
-                if(listeners.length>0) {
-                    const script = document.createElement("script");
-                    script.innerHTML = listeners.reduce((string,[name,f]) => {
-                        let fstring = f +"";
-                        if(fstring.startsWith(`${name}(`)) {
-                            fstring = fstring.replace(`${name}(`,"function(")
-                        }
-                        string += `document.currentScript.previousElementSibling.addEventListener("${name}",${fstring});\n`;
-                        if(name==="attributeChanged") {
-                            string += "secstObserver.observe(document.currentScript.previousElementSibling,{attributes:true,attributeOldValue:true}});\n";
-                        } else if(name==="disconnected") {
-                            string += "secstObserver.observe(document.currentScript.previousElementSibling.parentElement,{childList:true}});\n";
-                        }
-                        return string;
-                    },"");
-                    domNodes.push(script);
-                }
-            }
-            return domNodes;
-        },[])
+            };
+        domNodes.mounts = mounts;
+        return domNodes;
     };
 toDOMNodes.reset = () => required.clear();
 
@@ -312,92 +349,15 @@ const transform = async (parser,text,{styleAllowed}={}) => {
     const dom = document.createDocumentFragment();
     dom.appendChild(dom.head = document.createElement("head"));
     dom.appendChild(dom.body = document.createElement("body"));
-    dom.body.innerHTML = "<style>span.toc-nav a {all: unset} span.toc-nav-up-down a {font-size: 80%; vertical-align:text-top}</style>";
-    toDOMNodes(transformed).forEach((node) => {
+    dom.body.innerHTML = "<style>span.autohelm-nav a {all: unset} span.autohelm-nav-up-down a {font-size: 80%; vertical-align:text-top} mark.secst-error { background: red } </style>";
+    const nodes = await toDOMNodes(transformed);
+    nodes.forEach((node) => {
         dom.body.appendChild(node);
     });
-
-    // set heading ids move to tags.js?
-    for(let i=0;i<=10;i++) {
-        [...dom.body.querySelectorAll("h"+i)].forEach((heading) => {
-            if(heading.id.length===0) {
-                heading.setAttribute("id",heading.textContent.split(" ").map((word) => word.toLowerCase()).join("-"));
-            }
-            heading.classList.add("html-heading-element")
-        })
-    }
-
-    const headings = [...dom.body.querySelectorAll(".html-heading-element")];
-    const toTOC = (headings,toc,previousLevel,previousHeading) => {
-        const originalHeadings = [...headings],
-            ul = document.createElement("ol");
-        let previousLI;
-        while(headings.length>0) {
-            const heading = headings[0],
-                level = parseInt(heading.tagName.substring(1));
-            previousLevel ||= level;
-            if(level<previousLevel) {
-               return ul;
-            }
-            if(level>previousLevel) {
-                previousLI.appendChild(toTOC(headings,toc,level,previousHeading));
-            } else {
-                previousLI = document.createElement("li");
-                previousLI.innerHTML = `<a href="#${heading.id}">${heading.innerHTML}</a>`;
-                previousLI.classList.add("toc-nav");
-                ul.appendChild(previousLI);
-                const headingEl = dom.body.querySelector("#"+heading.id),
-                    navspan = document.createElement("span"),
-                    tocspan = document.createElement('span'),
-                    nextHeading = headings[1];
-                navspan.classList.add("toc-nav");
-                navspan.classList.add("toc-nav-up-down");
-                tocspan.classList.add("toc-nav");
-                navspan.innerHTML = (previousHeading ? ` <a href="#${previousHeading.id}">&uarr;</a>` : '') + (nextHeading && !headingEl.classList.contains("toc") ?  ` <a href="#${nextHeading.id}">&darr;</a>` :'');
-                tocspan.innerHTML = `<a href="#${toc.id}">&#9783;</a> `;
-                previousHeading = headings.shift();
-                headingEl.insertBefore(tocspan,headingEl.firstChild);
-                headingEl.appendChild(navspan);
-            }
-            //previousLI = li;
-        }
-        return ul;
-    }
-    while(!headings[0]?.classList.contains("toc") && headings.length>0) {
-        headings.shift();
-    }
-    const tocEl = dom.body.querySelector(".toc"),
-        toc = toTOC(headings,tocEl);
-    tocEl.insertAdjacentElement("afterend",toc);
-
-    const footnotes = [...dom.body.querySelectorAll(".secst-footnote")];
-    footnotes.forEach((footnote,i) => {
-        i++; // numbering starts at 1
-        const href = footnote.getAttribute("href"),
-            p = href ? dom.body.querySelector(href)  || document.createElement("p") : document.createElement("p");
-        p.id ||= (footnote.id || `footnote${i}`);
-        footnote.id = `footnote-ref${i}`;
-        footnote.removeAttribute("href");
-        const numbers = p.firstElementChild || document.createElement("span");
-        if(numbers!=p.firstElementChild) p.appendChild(numbers);
-        const backref = document.createElement("a");
-        backref.setAttribute("href","#"+footnote.id);
-        backref.innerHTML = i;
-        if(numbers.childNodes.length>0) {
-            numbers.appendChild(new Text(", "))
-        }
-        numbers.appendChild(backref);
-        if(p.children.length===1) {
-            p.appendChild(new Text(" "));
-            while(footnote.firstChild) {
-                p.appendChild(footnote.firstChild)
-            }
-        }
-        footnote.innerHTML = `<a href="${href || '#'+p.id}">${i}</a>`;
-        if(!dom.body.querySelector("#"+p.id)) {
-            dom.body.appendChild(p)
-        }
-    })
+    nodes.mounts.forEach((connected) => {
+        setTimeout(connected,1000)
+    });
+    initAutohelm({tocSelector:".toc",dom:dom.body});
     return {dom,errors,parsed,transformed};
 }
 

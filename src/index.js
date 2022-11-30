@@ -1,6 +1,7 @@
 import {transform} from "./transform.js";
 import {listeners} from "./listeners.js";
 import {resolve} from "./resolve.js";
+import {engage} from "@anywhichway/autohelm";
 
 if(document.currentScript?.getAttribute("src").endsWith("?run")) {
     if(typeof(window)==="object" && typeof(MutationObserver)=="function") {
@@ -27,13 +28,14 @@ if(document.currentScript?.getAttribute("src").endsWith("?run")) {
         Object.entries(listeners).forEach(([key,value]) => {
             document.body.addEventListener(key,value);
         });
+        engage()
         resolve();
     })
 }
 
 window.SECST = {
     transform,
-    listeners,
-    resolve
+    resolve,
+    listeners
 }
 

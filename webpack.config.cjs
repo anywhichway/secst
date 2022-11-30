@@ -8,7 +8,11 @@ module.exports = {
         path: __dirname,
         chunkFormat: "module"
     },
-    optimization: {
-        minimize: false
+    resolve: {
+        //extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.css', '.scss'],
+        modules: ['./node_modules']
+    },
+    experiments: {
+        topLevelAwait: true
     }
 };

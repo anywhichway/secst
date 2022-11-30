@@ -7,7 +7,9 @@ global.window = new Window(),
     global.document = window.document;
 global.URL = URL;
 global.fetch = (url,...args) => {
-    url = "http://localhost:63342/secst/" + url;
+    if(!url.includes("://")) {
+        url = "http://localhost:63342/secst/" + url;
+    }
     return window.fetch(url,...args);
 }
 global.Text = window.Text;

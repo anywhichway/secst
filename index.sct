@@ -1,34 +1,37 @@
 h1[The Joy of SECST]
 
+script(static visible type="application/json" src="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson")[]
+
 p[
-
-latex[Lift = \frac{1}{2} \rho v^2 S C_L\]
-
     abbr[SECST] is a strong[S]emantic, strong[E]xtensible, strong[C]omputational, strong[S]tyleable strong[T]ag oriented markup language. You can use it to joyfully create compelling, interactive documents backed by HTML.
 
-    The SECST language and the reference HTML transpiler and runtime support implementations are currently in ALPHA.
+    The SECST language and reference HTML transpiler and runtime support implementations are currently in ALPHA.
 ]
 
 toc[Table Of Contents]
 
 h1[Why Another Language]
 
+h2[HTML and Markdown Issues]
+
 ul[
-   li[HTML is verbose and its legacy allows the creation of documents with security flaws. Ensuring that HTML documents are meaningful for textual analysis or supportive of assistive software is hard.]
+   li[HTML is verbose and its legacy allows the creation of documents with security flaws.]
+   li[Ensuring that HTML documents are meaningful for textual analysis or supportive of assistive software is hard.]
    li[Markdown is not semantic, you must learn the different annotations to format your document and the resulting HTML is not necessarily meaningful to textual analysis or assistive software. It is also cumbersome to extend.]
-   li[The built-in self creating a(href="#tables-of-contents")[document navigation] capabilities of HTML and Markdown are limited.]
-   li[Markdown provides no intrinsic a(href="#basic-computation")[computational capability]. You must use something like Jupyter Notebook to support computation.]
-   li[HTML's computational capabilities require programming skills. Using SECST computation is no harder than writing Excel formulas.]
+   li[The built-in self creating document navigation capabilities of HTML and Markdown are limited.]
+   li[Markdown provides no intrinsic computational capability. You must use something like Jupyter Notebook to support computation.]
+   li[Using HTML's computational capabilities, i.e. JavaScript, requires programming skills.]
 ]
 
-SECST provides:
+h2[SECST Benefits]
 
 ul[
-    li[a consistent terse representation that is translated to safe HTML constructs to limit the chance of XSS and other attacks.]
-    li[semantic tags, which makes it easier to learn and remember than Markdown.]
-    li[easier to extend approaches than Markdown. Expertice in parsers or regular expressions is not required.]
-    li[extensive, built-in navigation generation for tables of contents and footnotes (more than Markdown).]
-    li[built-in computational ability for math and text expressions.]
+    li[A consistent terse representation that is translated to safe HTML constructs to limit the chance of XSS and other attacks.]
+    li[Semantic tags, which make it easier to learn and remember than Markdown.]
+    li[Easier to extend than HTML. Expertice in programming custom elements is not required.]
+    li[Easier to extend than Markdown. Expertice in parsers or regular expressions is not required.]
+    li[Extensive, built-in a(href="#tables-of-contents")[document navigation] for tables of contents and footnotes (more than Markdown).]
+    li[Using SECST's built-in a(href="#basic-computation")[computational capability] for math and text expressions is no harder than writing Excel formulas.]
 ]
 
 h1(#basic-authoring)[Basic Authoring]
@@ -65,7 +68,7 @@ p[
 ]
 
 p[
-    For authors, most parameters in parentheses take the form code[<attribute name>="<value>"]. However, for links you can also include a url as shown immediately above. Additional parameters are often used by designers or programmers. See a[#advanced-authoring].
+    For authors, most parameters in parentheses take the form code[<attribute name>="<value>"]. However, for links you can also include a url as shown immediately above. Additional parameters are often used by designers or programmers. See a(href="#advanced-authoring")[Advanced Authoring].
 ]
 
 p[
@@ -127,14 +130,18 @@ p[
     Hashtags are automatically added to the meta tags in the head of a document for indexing and SEO purposes.
 ]
 
-h3[Emoticons]
+h3[Emojis]
 
 p[
-    Emoticons can take the form code[":<emoticon-name>[]"] or code[":[<emoticon-name>...]"], where code[<emoticon-name>...] is a space separated list of emoticon names. em[Note: The first form strong[must] be followed by square braces.]
+    Emojis can take the form code[":<emoji-name>[]"] or code[":[<emoji-name>...]"], where code[<emoji-name>...] is a space separated list of emoji names. em[Note: The first form strong[must] be followed by square braces.]
 
-    code[:smile[]"] renders as :smile[].
+    There are over 1,800 emojis. If a match for the emoji name can't be found, it is displayed as plain text.
 
-    code[":[smile frown]"] renders as :[smile frown].
+    code[":smile[]"] renders as :smile[].
+
+    code[":[smile frowning jumping]"] renders as :[smile frowning jumping].
+
+
 ]
 
 h3(#tables-of-contents)[Tables of Contents]
@@ -145,7 +152,7 @@ Tables of contents are placed at the location of the tag code["toc[<title>]"]. I
 After transpilation, each heading in the document will have an &[#9783] icon preceding it. When this icon is clicked, the table of contents will hover over the heading until something in the document is clicked. Each heading will have up and down arrows placed after it to facilitate jumping to the previous and next section.
 ]
 
-h3[Footnotes]
+h3[Footnotes/Endnotes]
 
 p[
 Footnotes are inserted with the code["footnote[<footnote-text>]"] tag. The content between the braces is used as the footnote and placed at the end of the document. Auto-numbering is done so that authors do not have to keep updating footnotes as the document changes footnote(#markdown-footnote)[Markdown does not autonumber footnotes, which makes them hard to maintain. Although, it does create back-references.].
@@ -181,14 +188,21 @@ ul[
 h3[Latex]
 
 p[
-Latex processing is part of the reference implementation to show how custom elements can be added and used as tags.
+Latex processing is part of the reference implementation to show how new tags can be create using third party libraries.
 
 ul[
      li[code[code(language="latex" run)[Lift = \frac{1}{2} \rho v^2 S C_L\]]]
      li[code[latex[Lift = \frac{1}{2} \rho v^2 S C_L\]]]
  ]
 
- both render as latex[Lift = \frac{1}{2} \rho v^2 S C_L\]
+ both render as latex[Lift = \frac{1}{2} \rho v^2 S C_L]
+]
+
+h3[Music (ABC Notation)]
+
+p[
+ABC notation processing is part of the reference implementation to show how new tags can be create using custom elements.
+
 ]
 
 h2[Escaping SECST]
@@ -198,7 +212,6 @@ p[
 ]
 
 h1(#basic-computation)[Basic Computational Authoring]
-
 p[
     SECST supports the tag code[value[]] for adding reactive variables and macros to documents.
     ul[
@@ -216,7 +229,7 @@ p[
         dt[You can perform symbolic math manipulation.]
         dd[code[value(#v1b visible fitcontent)[derivative('x^2 + x', 'x')]]]
         dd[value(#v1b visible fitcontent)[derivative('x^2 + x', 'x')]]
-        dt[You cansolve symbolic equations.]
+        dt[You can solve symbolic equations.]
         dd[code[value(#v1c visible fitcontent)[solve('Math.pow(r,2)',{r:3})}]]]
         dd[value(#v1c visible fitcontent)[solve('Math.pow(r,2)',{r:3})]]
         dt[You can even give your readers the opportunity to provide the values for which to solve.]
