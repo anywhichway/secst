@@ -1,9 +1,9 @@
 h1[The Joy of SECST]
 
-value(static visible fitcontent type="application/json" src="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson")[]
-
 p[
     abbr[SECST] is a strong[S]emantic, strong[E]xtensible, strong[C]omputational, strong[S]tyleable strong[T]ag oriented markup language. You can use it to joyfully create compelling, interactive documents backed by HTML.
+
+    SECST is intended to be a modern, more powerful, but easier to learn, use and extend alternative to Markdown.
 
     The SECST language and reference HTML transpiler and runtime support implementations are currently in ALPHA.
 ]
@@ -15,23 +15,32 @@ h1[Why Another Language]
 h2[HTML and Markdown Issues]
 
 ul[
-   li[HTML is verbose and its legacy allows the creation of documents with security flaws.]
+   li[HTML is verbose.]
+   li[Markdown's goal is simplicity, for which it sacrifices a lot of expressive power. This sacrifice is the result of a non-uniform, non-semantic syntax use dto support its simplicity.]
    li[Ensuring that HTML documents are meaningful for textual analysis or supportive of assistive software is hard.]
-   li[Markdown is not semantic, you must learn the different annotations to format your document and the resulting HTML is not necessarily meaningful to textual analysis or assistive software. It is also cumbersome to extend.]
+   li[Markdown is not semantic, you must learn the different annotations to format your document and the resulting HTML is not necessarily meaningful to textual analysis or assistive software. When Markdown initially had a very limited number of ways to format documents, its syntax was a benefit, it is now becoming a burden.]
+   li[Neither Markdown or HTML enforce what are effectively required attributes for some markup to work or for accessiblility purposes.]
+   li[Some Markdown syntax is invisible, e.g. spaces for line breaks]
    li[The built-in self creating document navigation capabilities of HTML and Markdown are limited.]
-   li[Markdown provides no intrinsic computational capability. You must use something like Jupyter Notebook to support computation.]
    li[Using HTML's computational capabilities, i.e. JavaScript, requires programming skills.]
+   li[Markdown provides no intrinsic computational capability. You must use something like Jupyter Notebook to support computation.]
+   li[Markdown provided no way to bundle assets for delivery. HTML supports asset bundling through the use of data URLs, but it is not automatic.]
+   li[Both HTML and Markdown are require specialized programming skills to extend.]
+   li[HTML's legacy allows the creation of documents with security flaws.]
 ]
 
 h2[SECST Benefits]
 
 ul[
-    li[A consistent terse representation that is translated to safe HTML constructs to limit the chance of XSS and other attacks.]
-    li[Semantic tags, which make it easier to learn and remember than Markdown.]
-    li[Easier to extend than HTML. Expertice in programming custom elements is not required.]
-    li[Easier to extend than Markdown. Expertice in parsers or regular expressions is not required.]
+    li[A consistent, uniform terse representation. Where SECST can become un-necessarily verbose, it has shorthand notation similar to Markdown.]
+    li[Semantic tags, which make it easier to learn and remember than Markdown and encourages more meaningful documents than straight HTML. Many tags are named after their HTML counterparts to make SECST easier to learn, maintain, and extend.]
+    li[Enforcement of required attributes for proper behavior or accessibility reasons.]
     li[Extensive, built-in a(href="#tables-of-contents")[document navigation] for tables of contents and footnotes (more than Markdown).]
     li[Using SECST's built-in a(href="#basic-computation")[computational capability] for math and text expressions is no harder than writing Excel formulas.]
+    li[A predominantly declarative extension technique make SECTS easier to extend than HTML. Expertise in programming custom elements is not required.]
+    li[Asset bundling via the use of the attribute code[static] on code[audio], code[img], code[video] and code[value] tags.]
+    li[SECST is easier to extend than Markdown. Expertise in parsers or regular expressions is not required.]
+    li[SECST is translated to safe HTML constructs to limit the chance of XSS and other attacks.]
 ]
 
 h1(#basic-authoring)[Basic Authoring]
@@ -51,34 +60,149 @@ ul[
     li[code["em[italicized emphasized content]"] produces em[italicized emphasized content]]
 ]
 
-h2[Semantic Tags With HTML Names]
+h2[Markdown Equivalency]
+
+If you only need basic Markdown, then SECST is probably not for you.
+
+If you need extended Markdown, then SECST may be a good option.
+
+If you need more than Markdown, then SECST may be your only option short of HTML, CSS, and JavaScript.
+
+h3[Basic Markdown]
 
 p[
-Almost every semantic tag supported by HTML5 is one of the a(href="#tags")[tags supported by SECST]. Most non-semantic tags are excluded from SECST, e.g. code[<div>] and code[<span>]. Exceptions are code[<hr>], code[<style>], code[<table>] and code[<ol>] and code[<ul>], .
+em[Note: Where SECST can become un-necessarily verbose, e.g. lists items and table cells, it has shorthand notation similar to Markdown.]
+
+See a[https://www.markdownguide.org/basic-syntax/].
 ]
 
+table[
+    thead[
+        Document Item | Markdown | SECST
+    ]
+    tr[
+        headings | td[code["h# heading text"]] td[code["h#[heading text]"]]
+    ]
+    tr[
+        line breaks | 2 spaces | just line breaks
+    ]
+    tr[
+        bold | td[code["**text**"]] td[code["strong[text]"]]
+    ]
+    tr[
+        italics | td[code["*text*"]] td[code["em[text]"]]
+    ]
+    tr[
+        blockquote | td[code["> quote text"]] td[code["blockquote[quote text]"]]
+    ]
+    tr[
+        nested blockquote | td[code["> quote text"] kbd[Enter] code[">> nested quote text"]] td[code["blockquote[quote text blockquote[nested quote text]]"]]
+    ]
+    tr[
+        code | td[code['the code']]  td[code["code[the code]"]]
+    ]
+    tr[
+        horizontal rule | td[code[***]] td[code["hr[]"]]
+    ]
+]
+
+Also see a(href="#lists")[Lists], a(href="#code")[Code], a(href="#links")[Links], a(href="#images")[Images].
+
+h3[Extended Markdown]
+
+See a[https://www.markdownguide.org/extended-syntax/].
+
+table[
+    thead[
+        Document Item | Markdown | SECST
+    ]
+    tr[
+        footnotes | td[:emoji-name:] td[code[":emoji-name[]"]]
+    ]
+    tr[
+        heading ids | td[:emoji-name:] td[code[":emoji-name[]"]]
+    ]
+     tr[
+         definition lists | td[:emoji-name:] td[code[":emoji-name[]"]]
+     ]
+     tr[
+         strikethrough | td[:emoji-name:] td[code[":emoji-name[]"]]
+     ]
+     tr[
+         task lists | td[:emoji-name:] td[code[":emoji-name[]"]]
+     ]
+     tr[
+         emojis | td[:emoji-name:] td[code[":emoji-name[]"]]
+     ]
+     tr[
+          highlight | td[:emoji-name:] td[code[":emoji-name[]"]]
+      ]
+      tr[
+          subscript | td[:emoji-name:] td[code[":emoji-name[]"]]
+      ]
+      tr[
+          superscript | td[:emoji-name:] td[code[":emoji-name[]"]]
+      ]
+      tr[
+            automatic URL linking | td[:emoji-name:] td[code[":emoji-name[]"]]
+        ]
+]
+
+
+h3[Markdown Gaps]
+
+ul[
+    - &at;<social site> (link to profile on a social site)
+    - hashtag (also &hash;)
+    - audio
+    - video
+    - ins (inserted, &plus; sign and green background) and del
+    - table of contents
+]
+
+h2[Markup Tags With HTML Names]
+
+p[
+Almost every semantic tag supported by HTML5 is one of the a(href="#tags")[tags supported by SECST]. Most non-semantic tags are excluded from SECST, e.g. code[<div>] and code[<span>]. Exceptions are code[<hr>], code[<style>], code[<table>] and code[<ol>] and code[<ul>].
+
+A few tags of note are documented below to illustrate the use of SECST or highlight special features.
+]
+
+h3[Tags of Note]
+
+h4[Links]
 p[
     Sometimes, e.g. with links, you need to specify more than content. This is provided using parameters in parentheses, e.g.
 
-    code["a(./index.txt target='_tab')[SECST]"] yields a(./index.txt target="_tab")[SECST] , where you can access the source of this document.
+    code["a(href="./index.txt" target='_tab')[SECST]"] yields a(href="./index.txt" target="_tab")[SECST] , where you can access the source of this document.
 
-    This being said, you can also specify links with just a content value, e.g. code[a[./index.txt]] renders as a[./index.txt] with a default target of another tab.
+    For convenience, any tag that can accept a url (either code[src] or code[href] in HTML) does not require the attribute, just provide the URL, e.g.
 
-    All tags that take more than just content are fully documented in the a(href="#tags")[complete list of tags].
+     code["a(./index.txt target='_tab')[SECST]"] yields a(./index.txt target="_tab")[SECST].
+
+    You can also specify links with just a content value, e.g. code[a[./index.txt]] renders as a[./index.txt] with a default target of another tab.
+
+    All tags that take more than just content are fully documented in the a(href="#tags")[complete list of tags]. Also see a(href="#advanced-authoring")[Advanced Authoring].
 ]
 
+h4[Headings]
 p[
-    For authors, most parameters in parentheses take the form code[<attribute name>="<value>"]. However, for links you can also include a url as shown immediately above. Additional parameters are often used by designers or programmers. See a(href="#advanced-authoring")[Advanced Authoring].
+    Headings automatically get ids you can use for the destination of links. The id is the same as the text content in lower case with spaces and special characters replaced by dashes. To make it more convenient, you can also provide your own ids, e.g. code[h1(#myheading)[My Heading]] with link code[a(href="#myheading")[Go To My Heading]].
+
+    em[Note: All tags can optionally take an id starting with code[#]. If an id is present, it must be the first parameter.]
 ]
 
-p[
-    Headings automatically get ids you can use for the destination of links. The id is the same as the text content in lower case with spaces replaced by dashes. To make it more convenient, you can also provide your own ids, e.g. code[h1(#myheading)[My Heading]] with link code[a(href="#myheading")[Go To My Heading]].
-
-    strong[Note]: em[All tags can optionally take an id starting with code[#]. If an id is present, it must be the first parameter.]
-]
-
+h4[Lists]
 p[
     Both ordered and unordered lists are supported using code[ol] and code[ul] tags with code[li] tags.
+
+    code["ul[li[LinkedIn] li[Facebook] li[Twitter]]"]
+
+    ul[
+        li[LinkedIn]
+        li[Facebook]
+        li[Twitter]
+        ]
 
     There is also a shorthand:
     code[
@@ -88,7 +212,7 @@ p[
             - Twitter
         ]
     ]
-    em[Note: When shorthand is used it strong[cannot] contain any markup.]
+    em[Note: When shorthand is used, the lines starting with code[-] strong[cannot] contain any other markup and must be only one line.]
 
     The same shorthand also works for code[ol]. Since SECST already knows the list is ordered, numbers are inserted. The main utility of using numbers, is to reset numbering:
     code[
@@ -98,19 +222,47 @@ p[
             - Twitter
         ]
     ]
-    The standard HTML attributes for setting number style are also supported:
+
+    The standard HTML attributes for configuring ordered lists, code[reversed], code[start], code[type] are a(https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ol target="_tab")[also supported].
 
 ]
 
+h4[Code]
 p[
 Contents wrapped in code[code[]] will be inline unless the contents contain a newline, in which case the code will be displayed in paragraph format.
 
 If you have a single line you wish to show as a paragraph, end it with a newline.
 ]
 
-h2[Core Tags Without HTML Names]
+h4[Multimedia]
+
+h5[Images]
+
+p[
+Since SECST has a focus on semantics, images must be specified with alt text.
+
+code["img(static https://www.anywhichway.com/assets/images/anywhichway_mobius_125.png)[]"] will not transpile.
+
+Images can be loaded statically at transpile time and delivered bundled into the output HTML.
+
+ul[
+    li[The tag code["img(static https://www.anywhichway.com/assets/images/anywhichway_mobius_125.png)[Test]"]]
+    li[renders as img(static https://www.anywhichway.com/assets/images/anywhichway_mobius_125.png)[Test]]
+    li[instead of a reference there is a data url in code[src] attribute of the details[summary[generated HTML.]  transpiled[img(static https://www.anywhichway.com/assets/images/anywhichway_mobius_125.png)[Test]]]]
+]
+]
+
+h5[Audio]
+
+h5[Video]
 
 h3[HTML Entities and Special Characters]
+
+h3[Other Tags]
+
+h2[Markup Without HTML Names]
+
+h3[Core]
 
 p[
     Special characters can be consistently displayed using code["&[<character-id>]"]. a(https://www.toptal.com/designers/htmlarrows/ target="_tag")[Toptal] has a great reference for this. Just leave of the leading "&" and trailing ";" Toptal shows for any special character.
@@ -118,7 +270,7 @@ p[
     The code code[&[#x263B]] renders as &[#x263B].
 ]
 
-h3[Hashtags]
+h4[Hashtags]
 
 p[
     Hashtags can take the form code["#<value>[]"] or code["#[<value>...]"], where code["<value>..."] is a space separated list of words to hashtag. em[Note: The first form strong[must] be followed by square braces.]
@@ -130,7 +282,7 @@ p[
     Hashtags are automatically added to the meta tags in the head of a document for indexing and SEO purposes.
 ]
 
-h3[Emojis]
+h4[Emojis]
 
 p[
     Emojis can take the form code[":<emoji-name>[]"] or code[":[<emoji-name>...]"], where code[<emoji-name>...] is a space separated list of emoji names. em[Note: The first form strong[must] be followed by square braces.]
@@ -144,7 +296,7 @@ p[
 
 ]
 
-h3(#tables-of-contents)[Tables of Contents]
+h4(#tables-of-contents)[Tables of Contents]
 
 p[
 Tables of contents are placed at the location of the tag code["toc[<title>]"]. If you do not provide a title, "Table of Contents" is used. All content after the tag is analyzed for headings and used for the table. Navigation links are automatically created. Only the first occurence of code[toc] is used, others are ignored.
@@ -152,7 +304,7 @@ Tables of contents are placed at the location of the tag code["toc[<title>]"]. I
 After transpilation, each heading in the document will have an &[#9783] icon preceding it. When this icon is clicked, the table of contents will hover over the heading until something in the document is clicked. Each heading will have up and down arrows placed after it to facilitate jumping to the previous and next section.
 ]
 
-h3[Footnotes/Endnotes]
+h4[Footnotes/Endnotes]
 
 p[
 Footnotes are inserted with the code["footnote[<footnote-text>]"] tag. The content between the braces is used as the footnote and placed at the end of the document. Auto-numbering is done so that authors do not have to keep updating footnotes as the document changes footnote(#markdown-footnote)[Markdown does not autonumber footnotes, which makes them hard to maintain. Although, it does create back-references.].
@@ -166,9 +318,9 @@ The source for the second footnote is: code["footnote(href='#markdown-footnote')
 And, here is a third that just gets numbered: code["footnote[Footnote management doe not get much easier!]"].footnote[Footnote management doe not get much easier!].
 ]
 
-h2[Non-Core Semantic Tags Without HTML Names]
+h3[Non-Core]
 
-h3[Social Media And Other Mentions]
+h4[Social Media And Other Mentions]
 
 p[
 Not part of core SECST, but provided in the reference implementation are @mentions for several social media and other platforms. These take the form code["@<platform>[<space separated profile-names>]"]. The target for mentions will always be another browser tab, unless a code[target] attribute is provided.
@@ -185,7 +337,7 @@ ul[
     - Twitter
 ]
 
-h3[Latex]
+h4[Latex]
 
 p[
 Latex processing is part of the reference implementation to show how new tags can be create using third party libraries.
@@ -198,7 +350,7 @@ ul[
  both render as latex[Lift = \frac{1}{2} \rho v^2 S C_L]
 ]
 
-h3[Music (ABC Notation)]
+h4[Music (ABC Notation)]
 
 p[
 ABC notation processing is part of the reference implementation to show how new tags can be create using custom elements.
@@ -208,7 +360,7 @@ ABC notation processing is part of the reference implementation to show how new 
 h2[Escaping SECST]
 
 p[
-    Except when it contains &[gt] or &[lt], SECST tagging inside of code[code[]] is automatically escaped, e.g. code[code[strong[text]]]. If you wish to escape it elsewhere or if it contains  &[gt] or &[lt], wrap the entire tag expression inside the content area with double quotes, e.g. code[code[\"&lt;some-text&gt;\"]].
+    Except when it contains &[gt] or &[lt], SECST tagging inside of code[code[]] is automatically escaped, e.g. code[code[strong[text]]]. If you wish to escape it elsewhere or if it contains  &[gt] or &[lt], wrap the entire tag expression inside the content area with double quotes, e.g. code[code[\"&lt;some-text&gt;\"]]. When wrapping in quotes, there can be no line breaks inside the quotes. em[Note: This is a fairly severe limitation and it is being worked on to relax.]
 ]
 
 h1(#basic-computation)[Basic Computational Authoring]
@@ -236,6 +388,10 @@ p[
         dd[Math.pow(r,2) where r = code[value(#v1d visible fitcontent)[0]] is code[value(#v2d visible fitcontent)[solve('Math.pow(r,2)',{r:$(#v1d)})]]]
         dd[Math.pow(r,2) where r = value(#v1d visible fitcontent)[0] is value(#v2d visible fitcontent)[solve('Math.pow(r,2)',{r:$(#v1d)})]]
     ]
+
+    value(static visible fitcontent type="application/json" src="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson")[]
+
+    value(visible fitcontent type="application/json" src="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson")[]
 ]
 
 h1[Advanced Authoring]

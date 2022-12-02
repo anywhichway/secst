@@ -15,6 +15,7 @@ global.fetch = (url,...args) => {
 global.Text = window.Text;
 global.MutationObserver = window.MutationObserver;
 global.DOMParser = window.DOMParser;
+global.FileReader = window.FileReader;
 Object.defineProperty(global.document,"baseURI",{configurable:true,writable:true,value:"http://localhost:63342/secst/"});
 
 import peg from "pegjs";

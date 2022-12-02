@@ -29,6 +29,9 @@ const validateNode = async ({parser,node,path=[],errors=[]}) => {
     if(!node || typeof(node)!=="object") {
         return;
     }
+    node.attributes ||= {};
+    node.classList ||= [];
+    node.content ||= [];
     let tag = node.tag,
         config = tags[tag];
     if(!config) {
@@ -74,10 +77,11 @@ const validateNode = async ({parser,node,path=[],errors=[]}) => {
     node.attributes ||= {};
     node.requires ||= [];
     if(config.requires) node.requires.push(config.requires);
-    node.connected = config.connected;
-    node.toHTML = config.toHTML;
-    node.toText = config.toText;
-    node.render = config.render;
+    Object.entries(config).forEach(([key,value]) => {
+        if(typeof(value)==="function" && key!=="transform") {
+            node[key] = value;
+        }
+    })
     let transformed;
     if(config.transform) {
         transformed = await config.transform(node);
@@ -118,10 +122,6 @@ const validateNode = async ({parser,node,path=[],errors=[]}) => {
                     await validateNode({parser,node:child,path:[...path,node],errors})
                     if(!child.drop)  {
                         content.push(child);
-                        // elevate trailing space to parent
-                       /* if(child.content[child.content.length-1]===" ") {
-                            content.push(child.content.pop());
-                        }*/
                     }
                 }
                 return content;
@@ -282,6 +282,9 @@ const toDOMNodes = async (nodes,parentConfig,mounts=[]) => {
                             }
                         });
                     }
+                    if(node.mounted) {
+                        node.mounted(el);
+                    }
                     if(node.connected) {
                        mounts.push(() => node.connected(el));
                     }
@@ -353,7 +356,31 @@ const transform = async (parser,text,{styleAllowed}={}) => {
         span.autohelm-nav a {all: unset} 
         span.autohelm-nav-up-down a {font-size: 80%; vertical-align:text-top} 
         mark.secst-error { background: red }
-        textarea.secst-value {
+        details {
+            display: inline
+        }
+        kbd {
+            background-color: whitesmoke;
+            border: 1px solid darkgray;
+            border-radius: 2px;
+            unicode-bidi: embed;
+            font-family: monospace;
+            white-space: pre;
+            padding-left: 2px;
+            padding-right: 2px;
+        }
+        table.secst {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        .secst th {
+            background-color: whitesmoke;
+        }
+        .secst th, td {
+            border: 1px solid black;
+            padding: 5px;
+        }
+        textarea.secst {
                 display: block;
                 unicode-bidi: embed;
                 font-family: monospace;

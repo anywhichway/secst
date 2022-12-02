@@ -43,6 +43,7 @@ const update = async (target) => {
 }
 
 const updateWidths = () => {
+    // not targetted to a specific element because dependency calcs may have updated many
     requestAnimationFrame(() => {
         [...document.querySelectorAll('input[data-fitcontent]')].forEach((el) => {
             const value = el.getAttribute("value")||"";
@@ -60,7 +61,7 @@ const updateWidths = () => {
 const listeners = {
     async change(event) {
         const template = event.target.getAttribute("data-template");
-        if(event.target.tagName==="INPUT" && template!==null && (event.target.value+"")!=="[object Promise]") {
+        if(["INPUT","TEXTAREA"].includes(event.target.tagName) && template!==null && (event.target.value+"")!=="[object Promise]") {
             await update(event.target);
             updateWidths();
         }
@@ -73,7 +74,7 @@ const listeners = {
         }
     },
     async input(event) {
-        if(event.target.tagName==="INPUT" && event.target.getAttribute("data-template")!==null) {
+        if(["INPUT","TEXTAREA"].includes(event.target.tagName) && event.target.getAttribute("data-template")!==null) {
            await update(event.target);
            updateWidths();
         }
