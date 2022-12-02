@@ -479,11 +479,6 @@ const tags = {
             }
         },
         contentAllowed: ["ol","ul",...inlineContent.filter((item) => item!=="li")],
-        listeners: {
-            click() {
-                alert("ok")
-            }
-        }
     },
     listeners: {
         allowAsRoot: true,
