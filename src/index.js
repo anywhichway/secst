@@ -28,7 +28,7 @@ if(document.currentScript?.getAttribute("src").endsWith("?run")) {
         Object.entries(listeners).forEach(([key,value]) => {
             document.body.addEventListener(key,value);
         });
-        engage()
+        engage(".toc")
         resolve();
     })
 }
