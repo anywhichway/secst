@@ -7,6 +7,7 @@
   "scripts": {
     "build": "node transform && webpack --mode=production",
     "build-dev": "node transform && webpack --mode=development --watch",
+    "build-client-dev": "webpack --mode=development --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -28,7 +29,7 @@
   },
   "homepage": "https://github.com/anywhichway/secst#readme",
   "dependencies": {
-    "@anywhichway/autohelm": "^0.0.3",
+    "@anywhichway/autohelm": "^0.0.25",
     "@anywhichway/quick-worker": "^0.0.3",
     "@types/node": "^18.11.9",
     "cross-fetch": "^3.1.5",

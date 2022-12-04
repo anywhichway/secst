@@ -96,7 +96,7 @@
         =  name:token _ "=" _ value:quoted { return [name,value] }
 
     binaryattribute
-        = hidden / checked / selected / visible / reversed / readonly / run / disabled / static / fitcontent /url
+        = hidden / checked / disabled / fitcontent/ open / readonly / reversed / run / selected / static / toggle / url / visible
 
     hidden
         = "hidden" { return ["hidden",""] }
@@ -104,35 +104,41 @@
     checked
         = "checked" { return ["checked",""] }
 
-    selected
-        = "selected" { return ["selected",""] }
+    disabled
+        = "disabled" { return ["disabled",""] }
 
-    visible
-        = "visible" { return ["visible",""] }
-
-    reversed
-        = "reversed" { return ["reversed",""] }
+    fitcontent
+        = "fitcontent" { return ["fitcontent",""] }
 
     readonly
         = "readonly" { return ["readonly",""] }
 
+    reversed
+        = "reversed" { return ["reversed",""] }
+
     run
         = "run" { return ["run",""] }
 
-    disabled
-        = "disabled" { return ["disabled",""] }
+    open
+        = "open" { return ["open",""] }
+
+    selected
+        = "selected" { return ["selected",""] }
 
     static
         = "static" { return ["static",""] }
 
-    fitcontent
-        = "fitcontent" { return ["fitcontent",""] }
+    toggle
+        = "toggle" { return ["toggle",""] }
 
     url "url"
         = prefix:urlprefix path:[a-z0-9_\-~`!@#$%^&*_+=\{\}\[\]|\\:;'<,>.?/]i* {
             try { new URL(path.join(),document.baseURI); return ["url",prefix+path.join("")]; }
             catch(e) { error(e+"") }
         }
+
+    visible
+        = "visible" { return ["visible",""] }
 
     urlprefix
         = "https://" / "./"

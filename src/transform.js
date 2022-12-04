@@ -168,7 +168,7 @@ const validateNode = async ({parser,node,path=[],errors=[]}) => {
                     errors.push(new parser.SyntaxError(`${tag} the value of attribute '${key}' is invalid`,valid,value,node.location));
                 }
             }
-        } else if(attributeAllowed!==true) {
+        } else if(attributeAllowed!==true && !key.startsWith("data-")) {
             delete node.attributes[key];
             errors.push(new parser.SyntaxError(`${tag} does not allow attribute ${key}`,null,JSON.stringify(value),node.location))
         }
@@ -318,6 +318,8 @@ const configureStyles = (tags,styleAllowed) => {
         if(styleAllowed==="*") {
             Object.values(tags).forEach((config) => {
                 config.styleAllowed ||= true;
+                config.attributesAllowed ||= {};
+                config.attributesAllowed.style = true;
             })
         } else if(typeof(styleAllowed)==="function") {
             Object.values(tags).forEach((config) => {

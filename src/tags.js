@@ -33,7 +33,7 @@ const universalAttributes = {
         is: true,
         title: true
     },
-    blockContent = ["article","audio","blockquote","code","dl","figure","hr","img","script","listeners","ol","p","picture","pre","script","style","table","toc","ul","video","latex","math-science-formula"],
+    blockContent = ["article","audio","blockquote","code","dl","figure","hr","img","script","listeners","meta","ol","p","picture","pre","script","style","table","toc","ul","video","latex","math-science-formula"],
     singleLineContent = ["a","abbr","bdi","bdo","br","del","code","em","emoji","error","footnote","hashtag","ins","kbd","meter","strong","sub","sup","time","value","var","wbr","u","@facebook","@github","@linkedin","@twitter","latex"],
     multiLineContent = ["address","aside","bdi","cite","details","input","script","ol","output","ruby","ul","summary","textarea","transpiled"],
     inlineContent = [...singleLineContent,...multiLineContent],
@@ -503,6 +503,16 @@ const tags = {
             delete node.attributes.selector;
         }
     },
+    meta: {
+        contentAllowed: true,
+        attributesAllowed: {
+            name: true,
+            content: true
+        },
+        transform(node) {
+            node.attributes.content = node.content.join("");
+        }
+    },
     meter: {
       attributesAllowed: {
           min: {
@@ -839,6 +849,10 @@ const tags = {
             if(!node.classList.includes("toc")) {
                 node.classList.push("toc");
             }
+            if(node.attributes.toggle!=null) {
+                node.attributes["data-toggle"] = "";
+                delete node.attributes.toggle;
+            }
             if(node.content.length===0) {
                 node.content = ["Table of Contents"]
             }
@@ -912,7 +926,7 @@ const tags = {
     transpiled: {
         contentAllowed: "*",
         mounted(el) {
-            el.innerHTML = el.innerHTML.replace(/</g,"&lt;").replace(/>/g,"&gt;");
+            el.innerHTML = `<code>${el.innerHTML.replace(/</g,"&lt;").replace(/>/g,"&gt;")}</code>`;
         }
     },
     ul: {
@@ -1081,31 +1095,39 @@ const tags = {
             if(node.attributes.src) {
                 if (node.attributes.static != null) {
                     delete node.attributes.static;
-                    const response = await fetch(node.attributes.src);
-                    if (response.status == 200) {
-                        try {
-                            let text = await response.text();
-                            if (type === "application/json") {
-                                text = JSON.stringify(JSON5.parse(text), null, 2);
-                            }
-                            node.attributes.value = text;
-                        } catch (e) {
-                            node.attributes.value = e + "";
-                        }
-                    } else {
-                        node.value = response.statusText
-                    }
-                } else {
-                    const f = `await (async () => { 
-                        const response = await fetch("${node.attributes.src}");
-                        if(response.status===200) {
+                    try {
+                        const response = await fetch(node.attributes.src);
+                        if (response.status == 200) {
                             try {
-                                return await response.text();
-                            } catch(e) {
-                                return e+"";
+                                let text = await response.text();
+                                if (type === "application/json") {
+                                    text = JSON.stringify(JSON5.parse(text), null, 2);
+                                }
+                                node.attributes.value = text;
+                            } catch (e) {
+                                node.attributes.value = e + "";
                             }
                         } else {
-                            return response.statusText;
+                            node.value = response.statusText
+                        }
+                    } catch(e) {
+                        node.value = e+"";
+                    }
+                } else {
+                    const f = `await (async () => {
+                        try {
+                            const response = await fetch("${node.attributes.src}");
+                            if(response.status===200) {
+                                try {
+                                    return await response.text();
+                                } catch(e) {
+                                    return e+"";
+                                }
+                            } else {
+                                return response.statusText;
+                            }
+                        } catch(e) {
+                            return e+"";
                         }
                         })()`;
                     node.attributes["data-template"] = f;

@@ -12,7 +12,7 @@
 <script type="module">
     import {engage} from "./node_modules/@anywhichway/autohelm/index.js";
     document.addEventListener("DOMContentLoaded",async ()=> {
-        engage();
+        engage(".toc");
         let markup;
         const render = async () => {
             const newmarkup = await fetch("./index.sct").then((response) => response.text());
@@ -30,6 +30,7 @@
             }
         }
         await render();
+
         Object.entries(SECST.listeners).forEach(([key,value]) => {
             document.body.addEventListener(key,value);
         });
