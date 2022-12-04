@@ -96,13 +96,16 @@
         =  name:token _ "=" _ value:quoted { return [name,value] }
 
     binaryattribute
-        = hidden / checked / disabled / fitcontent/ open / readonly / reversed / run / selected / static / toggle / url / visible
+        = hidden / checked / disabled / editable / fitcontent/ open / readonly / reversed / run / selected / static / toggle / url / visible
 
     hidden
         = "hidden" { return ["hidden",""] }
 
     checked
         = "checked" { return ["checked",""] }
+
+    editable
+        = "editable" { return ["editable",""] }
 
     disabled
         = "disabled" { return ["disabled",""] }

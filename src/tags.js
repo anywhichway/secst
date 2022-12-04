@@ -68,7 +68,9 @@ const tags = {
         transform(node) {
             node.tag = "a";
             node.attributes.target ||= "_tab";
-            node.attributes.href = `https://facebook.com/${node.content[0].trim()}`
+            const user = node.attributes.user || node.content[0].trim();
+            node.attributes.href = `https://facebook.com/${user}`;
+            delete node.attributes.user;
         }
     },
     "@github": {
@@ -80,7 +82,9 @@ const tags = {
         transform(node) {
             node.tag = "a";
             node.attributes.target ||= "_tab";
-            node.attributes.href = `https://github.com/${node.content[0].trim()}`
+            const user = node.attributes.user || node.content[0].trim();
+            node.attributes.href = `https://github.com/${user}`;
+            delete node.attributes.user;
         }
     },
     "@linkedin": {
@@ -92,7 +96,9 @@ const tags = {
         transform(node) {
             node.tag = "a";
             node.attributes.target ||= "_tab";
-            node.attributes.href = `https://linkedin.com/in/${node.content[0].trim()}`
+            const user = node.attributes.user || node.content[0].trim();
+            node.attributes.href = `https://linkedin.com/in/${user}`;
+            delete node.attributes.user
         }
     },
     "@twitter": {
@@ -104,7 +110,9 @@ const tags = {
         transform(node) {
             node.tag = "a";
             node.attributes.target ||= "_tab";
-            node.attributes.href = `https://twitter.com/${node.content[0].trim()}`
+            const user = node.attributes.user || node.content[0].trim();
+            node.attributes.href = `https://twitter.com/${user}`
+            delete node.attributes.user;
         }
     },
     "math-science-formula": {
@@ -983,6 +991,7 @@ const tags = {
             "data-format": true,
             "data-template": true,
             "data-mime-type": true,
+            "data-editable": true,
             fitcontent() {
                 return {
                     "data-fitcontent": ""
@@ -997,6 +1006,11 @@ const tags = {
                 return {
                     disabled: ""
                 }
+            },
+            editable() {
+              return {
+                  "data-editable": true
+              }
             },
             extract(value) {
                 return {

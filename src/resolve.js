@@ -28,7 +28,7 @@ const resolve = async (node=document.body,ifNull) => {
         try {
             el.rawValue = resolveDataTemplate(node,template,el).then((value) => {
                 el.rawValue = value;
-                if(value==template) { // used relaxed equality because results may be numbers
+                if(value==template || el.hasAttribute("data-editable")) { // used relaxed equality because results may be numbers
                     el.removeAttribute("disabled");
                 } else {
                     el.setAttribute("disabled",""); // the value was a computation
