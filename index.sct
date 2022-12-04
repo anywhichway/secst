@@ -3,7 +3,7 @@ h1[The Joy of SECST]
 p[
     abbr[SECST] is a strong[S]emantic, strong[E]xtensible, strong[C]omputational, strong[S]tyleable strong[T]ag oriented markup language. You can use it to joyfully create compelling, interactive documents backed by HTML.
 
-    SECST is intended to be a more powerful, but just as easy to learn and use alternative to Markdown while being easier to extend.
+    SECST is intended to be a more powerful, but just as easy to learn and use, alternative to Markdown while being easier to extend.
 
     The SECST language and reference HTML transpiler and runtime support implementations are currently in strong[ALPHA].
 
