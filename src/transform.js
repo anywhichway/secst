@@ -397,7 +397,11 @@ const transform = async (parser,text,{styleAllowed}={}) => {
     nodes.mounts.forEach((connected) => {
         setTimeout(connected,1000)
     });
-    initAutohelm({tocSelector:".toc",dom:dom.body});
+    try {
+        initAutohelm({tocSelector:".toc",dom:dom.body});
+    } catch(e) {
+
+    }
     return {dom,errors,parsed,transformed};
 }
 

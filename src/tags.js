@@ -173,9 +173,22 @@ const tags = {
     "&": {
         contentAllowed: true,
         transform(node) {
+            const values = node.content[0].split(" ");
             node.tag = "span";
-            node.content = ["&"+node.content[0]+";"];
+            node.content = [values.map((item) => "&"+item+";").join("")];
             node.skipRevalidation = true;
+        }
+    },
+    "#": {
+        contentAllowed: true,
+            transform(node) {
+            // push to meta tags here
+        },
+        toText(node) {
+            return node.content.reduce((tags,item) => {
+                item.split(" ").forEach((tag) => tags.push("#" + tag));
+                return tags;
+            },[]).join(", ")
         }
     },
     a: {
@@ -381,18 +394,6 @@ const tags = {
     },
     figure: {
         contentAllowed:[...blockContent,...inlineContent,"caption"].filter((item) => item!=="figure")
-    },
-    hashtag: {
-        contentAllowed: true,
-        transform(node) {
-            // push to meta tags here
-        },
-        toText(node) {
-            return node.content.reduce((tags,item) => {
-               item.split(" ").forEach((tag) => tags.push("#" + tag));
-               return tags;
-            },[]).join(", ")
-        }
     },
     hr: {
         allowAsRoot: true

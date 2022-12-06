@@ -1,513 +1,520 @@
-h1[The Joy of SECST]
+:h1[The Joy of SECST]
 
-p[
-    abbr[SECST] is a strong[S]emantic, strong[E]xtensible, strong[C]omputational, strong[S]tyleable strong[T]ag oriented markup language. You can use it to joyfully create compelling, interactive documents backed by HTML.
+:p[
+    :abbr[SECST] is a :strong[S]emantic, :strong[E]xtensible, :strong[C]omputational, :strong[S]tyleable :strong[T]ag oriented markup language. You can use it to joyfully create compelling, interactive documents backed by HTML.
 
     SECST is intended to be a more powerful, but just as easy to learn and use, alternative to Markdown while being easier to extend.
 
-    The SECST language and reference HTML transpiler and runtime support implementations are currently in strong[ALPHA].
+    The SECST language and reference HTML transpiler and runtime support implementations are currently in :strong[ALPHA].
 
     This site's navigation, footnotes, computations, special styles like kbd[Key] formatting and imported data are built entirely using SECST markup.
 ]
 
-toc(toggle)[Table Of Contents]
+:toc(toggle)[Table Of Contents]
 
-h1[Why Another Language]
+:h1[Why Another Language]
 
-h2[HTML and Markdown Issues]
+:h2[HTML and Markdown Issues]
 
-dl[
-    dt[Semantic Tag]
-    dd[A tag that has meaning and which is not just used to facilitate document layout adn style.]
-    dd[code["<b>"] for bold is not semantic code["<strong>"] for indicating importance and rendering as bold is semantic.]
+:ul[
+   :li[HTML is verbose.]
+   :li[Markdown's goal is simplicity, for which it sacrifices a lot of expressive power. This sacrifice is the result of a non-uniform, non-semantic syntax used to support its simplicity.]
+   :li[Ensuring that HTML documents are meaningful for textual analysis or supportive of assistive software is hard.]
+   :li[Markdown is not semantic, you must learn the different annotations to format your document and the resulting HTML is not necessarily meaningful to textual analysis or assistive software. When Markdown initially had a very limited number of ways to format documents, its syntax was a benefit, for some it is now becoming a burden.]
+   :li[Neither Markdown or HTML enforce what are effectively required attributes for some markup to work or for accessiblility purposes.]
+   :li[Some Markdown syntax is invisible, e.g. spaces for line breaks]
+   :li[The built-in self creating document navigation capabilities of HTML and Markdown are limited.]
+   :li[Using HTML's computational capabilities, i.e. JavaScript, requires programming skills.]
+   :li[Markdown provides no intrinsic computational capability. You must use something like Jupyter Notebook to support computation.]
+   :li[Markdown provides no way to bundle assets for delivery. HTML supports asset bundling through the use of data URLs, but it is rather obscure and not automatic.]
+   :li[Both HTML and Markdown are require specialized programming skills to extend.]
+   :li[HTML's legacy allows the creation of documents with security flaws.]
 ]
 
-ul[
-   li[HTML is verbose.]
-   li[Markdown's goal is simplicity, for which it sacrifices a lot of expressive power. This sacrifice is the result of a non-uniform, non-semantic syntax used to support its simplicity.]
-   li[Ensuring that HTML documents are meaningful for textual analysis or supportive of assistive software is hard.]
-   li[Markdown is not semantic, you must learn the different annotations to format your document and the resulting HTML is not necessarily meaningful to textual analysis or assistive software. When Markdown initially had a very limited number of ways to format documents, its syntax was a benefit, for some it is now becoming a burden.]
-   li[Neither Markdown or HTML enforce what are effectively required attributes for some markup to work or for accessiblility purposes.]
-   li[Some Markdown syntax is invisible, e.g. spaces for line breaks]
-   li[The built-in self creating document navigation capabilities of HTML and Markdown are limited.]
-   li[Using HTML's computational capabilities, i.e. JavaScript, requires programming skills.]
-   li[Markdown provides no intrinsic computational capability. You must use something like Jupyter Notebook to support computation.]
-   li[Markdown provides no way to bundle assets for delivery. HTML supports asset bundling through the use of data URLs, but it is rather obscure and not automatic.]
-   li[Both HTML and Markdown are require specialized programming skills to extend.]
-   li[HTML's legacy allows the creation of documents with security flaws.]
+:h2[SECST Benefits]
+
+:dl[
+    :dt[Semantic Tag]
+    :dd[A tag that has meaning beyond that used to facilitate document layout and style.]
+    :dd[:code[<b>] for bold is not semantic, but :code[<strong>] for indicating importance and rendering as bold is semantic.]
 ]
 
-h2[SECST Benefits]
-
-ul[
-    li[A consistent, uniform compact representation. Where SECST can become verbose, it has shorthand notation similar to Markdown.]
-    li[Semantic tags, which make it easier to learn and remember than Markdown and encourages more meaningful documents than straight HTML. Many tags are named after their semantic HTML counterparts to make SECST easier to learn, maintain, and extend.]
-    li[Enforcement of required attributes and valid values for proper behavior or accessibility reasons.]
-    li[Extensive, built-in a(href="#tables-of-contents")[document navigation] for tables of contents and footnotes (more than Markdown).]
-    li[Using SECST's built-in a(href="#basic-computation")[computational capability] for math and text expressions is no harder than writing Excel formulas.]
-    li[A predominantly declarative extension technique make SECTS easier to extend than HTML. Expertise in programming custom elements is not required.]
-    li[Asset bundling via the use of the attribute code[static] on code[audio], code[img], code[video] and code[value] tags.]
-    li[SECST is easier to extend than Markdown. Expertise in parsers or regular expressions is not required.]
-    li[SECST is translated to safe HTML constructs to limit the chance of XSS and other attacks.]
+:ul[
+    :li[A consistent, uniform compact representation. Where SECST can become verbose, it has shorthand notation similar to Markdown.]
+    :li[Semantic tags, which make it easier to learn and remember than Markdown and encourages more meaningful documents than straight HTML. Many tags are named after their semantic HTML counterparts to make SECST easier to learn, maintain, and extend.]
+    :li[Enforcement of required attributes and valid values for proper behavior or accessibility reasons.]
+    :li[Extensive, built-in :a(href="#tables-of-contents")[document navigation] for tables of contents and footnotes (more than Markdown).]
+    :li[Using SECST's built-in :a(href="#basic-computation")[computational capability] for math and text expressions is no harder than writing Excel formulas.]
+    :li[A predominantly declarative extension technique make SECTS easier to extend than HTML. Expertise in programming custom elements is not required.]
+    :li[Asset bundling via the use of the attribute :code[static] on :code[audio], :code[img], :code[video] and :code[value] tags.]
+    :li[SECST is easier to extend than Markdown. Expertise in parsers or regular expressions is not required.]
+    :li[SECST is translated to safe HTML constructs to limit the chance of XSS and other attacks.]
 ]
 
-h1(#basic-authoring)[Basic Authoring]
+:h1(#basic-authoring)[Basic Authoring]
 
-p[
-Authors write documents using semantic tags with the format code["<tag>[<content>]"] or code["<tag>(<parameters>)[<content>]"].
+:p[
+Authors write documents using semantic tags with the format :code[<tag>[<content>]] or :code[<tag>(<parameters>)[<content>]].
 ]
 
 For example:
-ul[
-    li[code["strong[bolded important content]"] produces strong[bolded important content]]
-    li[code["em[italicized emphasized content]"] produces em[italicized emphasized content]]
+:ul[
+    :li[:code[:strong[bolded important content]] produces :strong[bolded important content]]
+    :li[:code[:em[italicized emphasized content]] produces :em[italicized emphasized content]]
 ]
 
-h2[When To Use SECST]
+:h2[When To Use SECST]
 
+:p[
 If you only need basic Markdown, then SECST is probably not for you.
 
 If you need extended Markdown, then SECST may be a good option.
 
 If you need more than Markdown, then SECST may be your only option short of HTML, CSS, and JavaScript so long as you are focused on interactive document authoring. If you are building an application use Svelte, VUE, React or some other framework.
-
-h3[Basic Markdown]
-
-p[
-em[Note: Where SECST can become un-necessarily verbose, e.g. lists items and table cells, it has shorthand notation similar to Markdown.]
-
-See a[https://www.markdownguide.org/basic-syntax/].
 ]
 
-table[
-    thead[
+:h3[Basic Markdown]
+
+:p[
+:em[Note: Where SECST can become un-necessarily verbose, e.g. lists items and table cells, it has shorthand notation similar to Markdown.]
+
+See :a[https://www.markdownguide.org/basic-syntax/].
+]
+
+:table[
+    :thead[
         Document Item | Markdown | SECST
     ]
-    tr[
-        headings | td[code["h# heading text"]] td[code["h#[heading text]"]]
+    :tr[
+        headings | :td[:code[h# heading text]] :td[:code[h#[heading text]]]
     ]
-    tr[
+    :tr[
         line breaks | 2 spaces | just line breaks
     ]
-    tr[
-        bold | td[code["**text**"]] td[code["strong[text]"]]
+    :tr[
+        bold | :td[:code[**text**]] :td[:code[:strong[text]]]
     ]
-    tr[
-        italics | td[code["*text*"]] td[code["em[text]"]]
+    :tr[
+        italics | :td[:code[*text*]] :td[:code[:em[text]]]
     ]
-    tr[
-        blockquote | td[code["> quote text"]] td[code["blockquote[quote text]"]]
+    :tr[
+        blockquote | :td[:code[> quote text]] :td[:code[blockquote[quote text]]]
     ]
-    tr[
-        nested blockquote | td[code["> quote text"] kbd[Enter] code[">> nested quote text"]] td[code["blockquote[quote text blockquote[nested quote text]]"]]
+    :tr[
+        nested blockquote | :td[:code[> quote text] kbd[Enter] :code[>> nested quote text]] :td[:code[blockquote[quote text blockquote[nested quote text]]]]
     ]
-    tr[
-        code | td[code['the code']]  td[code["code[the code]"]]
+    :tr[
+        code | :td[:code['the code']]  :td[:code[:code[the code]]]
     ]
-    tr[
-        horizontal rule | td[code[***]] td[code["hr[]"]]
+    :tr[
+        horizontal rule | :td[:code[***]] :td[:code[hr[]]]
     ]
 ]
 
-Also see a(href="#lists")[Lists], a(href="#code")[Code], a(href="#links")[Links], a(href="#images")[Images].
+Also see :a(href="#lists")[Lists], :a(href="#code")[Code], :a(href="#links")[Links], :a(href="#images")[Images].
 
-h3[Extended Markdown]
+:h3[Extended Markdown]
 
-See a[https://www.markdownguide.org/extended-syntax/].
+See :a[https://www.markdownguide.org/extended-syntax/].
 
-table[
-    thead[
+:table[
+    :thead[
         Document Item | Markdown | SECST
     ]
-    tr[
-        footnotes | td[code["[number]"]] td[code["footnote[number] or footnote[] for automatic numbering"]]
+    :tr[
+        footnotes | :td[:code[[number]]] :td[:code[:footnote[number] or :footnote[] for automatic numbering]]
     ]
-    tr[
-        heading ids | td[code["# My Heading {#my-id}"]] td[code["h1(#my-id)[My Heading]"]]
+    :tr[
+        heading ids | :td[:code[# My Heading {#my-id}]] :td[:code[:h1(#my-id)[My Heading]]]
     ]
-     tr[
-         definition lists | td[see a(href="#definition-lists")[definition lists]]
+     :tr[
+         definition lists | :td[see :a(href="#definition-lists")[definition lists]]
      ]
-     tr[
-         strikethrough | td[code[~~struck out~~]] td[code["strike[struck out]"]]
+     :tr[
+         strikethrough | :td[:code[~~struck out~~]] :td[:code[strike[struck out]]]
      ]
-     tr[
-         task lists | td[see a(href="#task-lists")[task lists]]
+     :tr[
+         task lists | :td[see :a(href="#task-lists")[task lists]]
      ]
-     tr[
-         emojis | td[code[:emoji-name:]] td[code[":emoji-name[]"]]
+     :tr[
+         emojis | :td[:code[:emoji-name:]] :td[:code[:emoji-name[]]]
      ]
-     tr[
-          highlight | td[code[==marked words==]] td[code["mark[marked words]"]]
+     :tr[
+          highlight | :td[:code[==marked words==]] :td[:code[mark[marked words]]]
       ]
-      tr[
-          subscript | td[code[H~2~O]] td[code["H sub[2] 0"]]
+      :tr[
+          subscript | :td[:code[H~2~O]] :td[:code[H :sub[2] 0]]
       ]
-      tr[
-          superscript | td[code[X^2^]] td[code["X sup[2]"]]
+      :tr[
+          superscript | :td[:code[X^2^]] :td[:code[X :sup[2]]]
       ]
-      tr[
-            automatic URL linking | td[code[https://my.url.com]] td[code["a[https://my.url.com]"]]
+      :tr[
+            automatic URL linking | :td[:code[https://my.url.com]] :td[:code[:a[https://my.url.com]]]
         ]
 ]
 
 
-h3[Markdown Gaps]
+:h3[Markdown Gaps]
 
-ul[
-    li[a(href="#hashtags")[hashtags]]
-    li[a(href="#audio")[audio]]
-    li[a(href="#video")[video]]
-    li[ins[inserted] and del[deleted], see a(href="inserted-and-deleted")[inserted and deleted]]
-    li[a(href="#tables-of-contents")[tables of contents]]
-    li[a(href="#social-media-and-other-mentions")[social media and other mentions]]
+:ul[
+    :li[:a(href="#hashtags")[hashtags]]
+    :li[:a(href="#audio")[audio]]
+    :li[:a(href="#video")[video]]
+    :li[:ins[inserted] and :del[deleted], see :a(href="inserted-and-deleted")[inserted and deleted]]
+    :li[:a(href="#tables-of-contents")[tables of contents]]
+    :li[:a(href="#social-media-and-other-mentions")[social media and other mentions]]
 ]
 
-h2[Markup Tags With HTML Names]
+:h2[Markup Tags With HTML Names]
 
-p[
-Almost every semantic tag supported by HTML5 is one of the a(href="#tags")[tags supported by SECST]. Most non-semantic tags are excluded from SECST, e.g. code[<div>] and code[<span>]. Exceptions are code[<hr>], code[<style>], code[<table>] and code[<ol>] and code[<ul>].
+:p[
+Almost every semantic tag supported by HTML5 is one of the :a(href="#tags")[tags supported by SECST]. Most non-semantic tags are excluded from SECST, e.g. :code[<div>] and :code[<span>]. Exceptions are :code[<hr>], :code[<style>], :code[<table>] and :code[<ol>] and :code[<ul>].
 
 A few tags of note are documented below to illustrate the use of SECST or highlight special features.
 ]
 
-h3[Tags of Note]
+:h3[Tags of Note]
 
-h4[Paragraph]
+:h4[Paragraph]
 
-p[
-SECST will treat two newlines in sequence as a paragraph break. There is also a paragraph tag code[p[]]. Two newlines inside a code[p] tag will produce separate HTML code["<p>"] elements behind the scenes. A code[p] tag is not strictly necessary for really simple content. A SECST parser/transpiler will do a reasonable job of figuring out where paragraph breaks are required; however behavior may vary from implementation to implementation. In general code[p] tags should be used when any multi-line tag specifications are intended to be inside the same paragraph and always when a code[code[]] tag is used.
+:p[
+SECST will treat two newlines in sequence as a paragraph break. There is also a paragraph tag :code[:p[]]. Two newlines inside a :code[p] tag will produce separate HTML :code[<p>] elements behind the scenes. A :code[p] tag is not strictly necessary for really simple content. A SECST parser/transpiler will do a reasonable job of figuring out where paragraph breaks are required; however behavior may vary from implementation to implementation. In general :code[p] tags should be used when any multi-line tag specifications are intended to be inside the same paragraph and always when a :code[:code[]] tag is used.
 
-If you get an unexpected document layout look for an opportunity to put content inside a code[p[]] tag.
+If you get an unexpected document layout look for an opportunity to put content inside a :code[:p[]] tag.
 ]
 
-h4[Code]
-p[
-Contents wrapped in code[code[]] will be inline unless the contents contain a newline, in which case the code will be displayed in paragraph format.
+:h4[Code]
+:p[
+Contents wrapped in :code[:code[]] will be inline unless the contents contain a newline, in which case the code will be displayed in paragraph format.
 
 If you have a single line you wish to show as a paragraph, end it with a newline.
 ]
 
 
-h4[Headings]
-p[
-    Headings automatically get ids you can use for the destination of links. The id is the same as the text content in lower case with spaces and special characters replaced by dashes. To make it more convenient, you can also provide your own ids, e.g. code[h1(#myheading)[My Heading]] with link code[a(href="#myheading")[Go To My Heading]].
+:h4[Headings]
+:p[
+    Headings automatically get ids you can use for the destination of links. The id is the same as the text content in lower case with spaces and special characters replaced by dashes. To make it more convenient, you can also provide your own ids, e.g. :code[:h1(#myheading)[My Heading]] with link :code[:a(href="#myheading")[Go To My Heading]].
 
-    em[Note: All tags can optionally take an id starting with code[#]. If an id is present, it must be the first parameter.]
+    :em[Note: All tags can optionally take an id starting with :code[#]. If an id is present, it must be the first parameter.]
 ]
 
-h4[Links]
-p[
+:h4[Links]
+:p[
     Sometimes, e.g. with links, you need to specify more than content. This is provided using parameters in parentheses, e.g.
 
-    code["a(href="./index.txt" target='_tab')[SECST]"] yields a(href="./index.txt" target="_tab")[SECST] , where you can access the source of this document.
+    :code[:a(href="./index.txt" target='_tab')[SECST]] yields :a(href="./index.txt" target="_tab")[SECST] , where you can access the source of this document.
 
-    For convenience, any tag that can accept a url (either code[src] or code[href] in HTML) does not require the attribute, just provide the URL, e.g.
+    For convenience, any tag that can accept a url (either :code[src] or :code[href] in HTML) does not require the attribute, just provide the URL, e.g.
 
-     code["a(./index.txt target='_tab')[SECST]"] yields a(./index.txt target="_tab")[SECST].
+     :code[:a(./index.txt target='_tab')[SECST]] yields :a(./index.txt target="_tab")[SECST].
 
-    You can also specify links with just a content value, e.g. code[a[./index.txt]] renders as a[./index.txt] with a default target of another tab.
+    You can also specify links with just a content value, e.g. :code[:a[./index.txt]] renders as :a[./index.txt] with a default target of another tab.
 
-    All tags that take more than just content are fully documented in the a(href="#tags")[complete list of tags]. Also see a(href="#advanced-authoring")[Advanced Authoring].
+    All tags that take more than just content are fully documented in the :a(href="#tags")[complete list of tags]. Also see :a(href="#advanced-authoring")[Advanced Authoring].
 ]
 
-h4[Lists]
+:h4[Lists]
 
-h5[Unordered And Ordered]
-p[
-    Both ordered and unordered lists are supported using code[ol] and code[ul] tags with code[li] tags.
+:h5[Unordered And Ordered]
+:p[
+    Both ordered and unordered lists are supported using :code[ol] and :code[ul] tags with :code[li] tags.
 
-    code["ul[li[LinkedIn] li[Facebook] li[Twitter]]"]
+    :code[:ul[:li[LinkedIn] :li[Facebook] :li[Twitter]]]
 
-    ul[
-        li[LinkedIn]
-        li[Facebook]
-        li[Twitter]
+    :ul[
+        :li[LinkedIn]
+        :li[Facebook]
+        :li[Twitter]
         ]
 
     There is also a shorthand:
-    code[
-        ul[
+    :code[
+        :ul[
             - LinkedIn
             - Facebook
             - Twitter
         ]
     ]
-    em[Note: When shorthand is used, the lines starting with code[-] strong[cannot] contain any other markup and must be only one line.]
+    :em[Note: When shorthand is used, the lines starting with :code[-] :strong[cannot] contain any other markup and must be only one line.]
 
-    The same shorthand also works for code[ol]. Since SECST already knows the list is ordered, numbers are inserted. The main utility of using numbers, is to reset numbering:
-    code[
-        ol[
+    The same shorthand also works for :code[ol]. Since SECST already knows the list is ordered, numbers are inserted. The main utility of using numbers, is to reset numbering:
+    :code[
+        :ol[
             2. LinkedIn
             - Facebook
             - Twitter
         ]
     ]
 
-    The standard HTML attributes for configuring ordered lists, code[reversed], code[start], code[type] are a(https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ol target="_tab")[also supported].
+    The standard HTML attributes for configuring ordered lists, :code[reversed], :code[start], :code[type] are :a(https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ol target="_tab")[also supported].
 ]
 
-h5[Definition Lists]
+:h5[Definition Lists]
 
-h5[Task Lists]
+:h5[Task Lists]
 
-h4[Metadata]
+:h4[Metadata]
 
-p[
-    The code[meta[]] tag inserts values into the head of a document. It takes the form code["meta(name='my-name')[my value]"], e.g. code[meta(name="author")[John Jones]] injects the HTML transpiled[meta(name="author")[John Jones]].
+:p[
+    The :code[:meta[]] tag inserts values into the head of a document. It takes the form :code[:meta(name='my-name')[my value]], e.g. :code[:meta(name="author")[John Jones]] injects the HTML :transpiled[:meta(name="author")[John Jones]].
 ]
 
-h4[Multimedia]
+:h4[Multimedia]
 
-h5[Images]
+:h5[Images]
 
-p[
+:p[
 Since SECST has a focus on semantics, images must be specified with alt text.
 
-code["img(static ./anywhichway_mobius_138.png)[]"] will not transpile.
+:code[:img(static ./anywhichway_mobius_138.png)[]] will not transpile.
 
 Images can be loaded statically at transpile time and delivered bundled into the output HTML.
 
-ul[
-    li[The tag code["img(static ./anywhichway_mobius_138.png)[Test]"]]
-    li[renders as img(static ./anywhichway_mobius_138.png)[Test]]
-    li[instead of a reference there is a data url in code[src] attribute of the details[summary[generated HTML.]  transpiled[img(static ./anywhichway_mobius_138.png)[Test]]]]
+:ul[
+    :li[The tag :code[:img(static ./anywhichway_mobius_138.png)[Test]]]
+    :li[renders as :img(static ./anywhichway_mobius_138.png)[Test]]
+    :li[instead of a reference there is a data url in :code[src] attribute of the details[summary[generated HTML.]  :transpiled[:img(static ./anywhichway_mobius_138.png)[Test]]]]
 ]
 ]
 
-h5[Audio]
+:h5[Audio]
 
-h5[Video]
+:h5[Video]
 
-h3[HTML Entities and Special Characters]
+:h3[HTML Entities and Special Characters]
 
-h3[Other Tags]
+:p[
+    :a(https://www.toptal.com/designers/htmlarrows/ target="_tag")[Toptal] has a great reference for this.
 
-h4[Inserted And Deleted]
+    Special characters and symbols can be displayed using either :code[&<character-id>]:code[;] or :code[:&[<character-id>...]]. The second form can display multiple characters or symbols, just leave off the leading "&" and trailing ";" in the listed items.
 
-p[
-    code[ins[inserted]] renders a ins[inserted]
+    The code :code[&]:code[#x263B]:code[;] renders as &#x263B; .
 
-    code[del[deleted]] renders a del[deleted]
+    The code :code[:&[female male #9893]] renders as :&[female male #9893].
+]
+
+:h3[Other Tags]
+
+:h4[Inserted And Deleted]
+
+:p[
+    :code[:ins[inserted]] renders as :ins[inserted]
+
+    :code[:del[deleted]] renders as :del[deleted]
 ]
 
 
-h2[Markup Without HTML Names]
+:h2[Markup Without HTML Names]
 
-h3[Core]
+:h3[Core]
 
-p[
-    Special characters can be consistently displayed using code["&[<character-id>]"]. a(https://www.toptal.com/designers/htmlarrows/ target="_tag")[Toptal] has a great reference for this. Just leave of the leading "&" and trailing ";" Toptal shows for any special character.
+:h4[Hashtags]
 
-    The code code[&[#x263B]] renders as &[#x263B].
-]
+:p[
+    Hashtags can take the form :code[#<value>[]] or :code[#[<value>...]], where :code[<value>...] is a space separated list of words to hashtag. :em[Note: The first form :strong[must] be followed by square braces.]
 
-h4[Hashtags]
+    :code[#sects-is-great[]] renders as #sects-is-great[].
 
-p[
-    Hashtags can take the form code["#<value>[]"] or code["#[<value>...]"], where code["<value>..."] is a space separated list of words to hashtag. em[Note: The first form strong[must] be followed by square braces.]
-
-    code["#sects-is-great[]"] renders as #sects-is-great[].
-
-    code["#[sects-is-great javascript-is-great]"] renders as #[sects-is-great javascript-is-great].
+    :code[#[sects-is-great javascript-is-great]] renders as #[sects-is-great javascript-is-great].
 
     Hashtags are automatically added to the meta tags in the head of a document for indexing and SEO purposes.
 ]
 
-h4[Emojis]
+:h4[Emojis]
 
-p[
-    Emojis can take the form code[":<emoji-name>[]"] or code[":[<emoji-name>...]"], where code[<emoji-name>...] is a space separated list of emoji names. em[Note: The first form strong[must] be followed by square braces.]
+:p[
+    Emojis can take the form :code[:<emoji-name>[]] or :code[:[<emoji-name>...]], where :code[<emoji-name>...] is a space separated list of emoji names. :em[Note: The first form :strong[must] be followed by square braces.]
 
     There are over 1,800 emojis. If a match for the emoji name can't be found, it is displayed as plain text.
 
-    code[":smile[]"] renders as :smile[].
+    :code[:smile[]] renders as :smile[].
 
-    code[":[smile frowning jumping]"] renders as :[smile frowning jumping].
+    :code[:[smile frowning jumping]] renders as :[smile frowning jumping].
 
 
 ]
 
-h4(#tables-of-contents)[Tables of Contents]
+:h4(#tables-of-contents)[Tables of Contents]
 
-p[
-Tables of contents are placed at the location of the tag code["toc[<title>]"]. If you do not provide a title, "Table of Contents" is used. All content after the tag is analyzed for headings and used for the table. Navigation links are automatically created. Only the first occurrence of code[toc] is used, others are ignored.
+:p[
+Tables of contents are placed at the location of the tag :code[toc[<title>]]. If you do not provide a title, "Table of Contents" is used. All content after the tag is analyzed for headings and used for the table. Navigation links are automatically created. Only the first occurrence of :code[toc] is used, others are ignored.
 
 After transpilation, each heading in the document will have an &[#9783] icon preceding it. When this icon is clicked, the table of contents will hover over the heading until something in the document is clicked. Each heading will have up and down arrows placed after it to facilitate jumping to the previous and next section.
 
-The tag can take the boolean attribute code[toggle] to collapse the table of contents into an a(https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details target="_tab")[HTML details element].
+The tag can take the boolean attribute :code[toggle] to collapse the table of contents into an :a(https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details target="_tab")[HTML details element].
 ]
 
-h4[Footnotes/Endnotes]
+:h4[Footnotes/Endnotes]
 
-p[
-Footnotes are inserted with the code["footnote[<footnote-text>]"] tag. The content between the braces is used as the footnote and placed at the end of the document. Auto-numbering is done so that authors do not have to keep updating footnotes as the document changes footnote(#markdown-footnote)[Markdown does not autonumber footnotes, which makes them hard to maintain. Although, it does create back-references.].
+:p[
+Footnotes are inserted with the :code[:footnote[<footnote-text>]] tag. The content between the braces is used as the footnote and placed at the end of the document. Auto-numbering is done so that authors do not have to keep updating footnotes as the document changes :footnote(#markdown-footnote)[Markdown does not autonumber footnotes, which makes them hard to maintain. Although, it does create back-references.].
 
-The source for the above footnote is: code["footnote(#markdown-footnote)[Markdown does not autonumber footnotes, which makes them hard to maintain. Although, it does create back-references.]"].
+The source for the above footnote is: :code[:footnote(#markdown-footnote)[Markdown does not autonumber footnotes, which makes them hard to maintain. Although, it does create back-references.]].
 
-To re-use a footnote, give the first occurence an id. Then, give the subsequent uses an code[href] attribute using the id and leave the content section between the braces empty. This will override the anchors for numbered links generated by the SECST transpiler, but not break ordering footnote(href="#markdown-footnote")[]. If you do provide content when reusing, it will be ignored.
+To re-use a footnote, give the first occurrence an id. Then, give the subsequent uses an :code[href] attribute using the id and leave the content section between the braces empty. This will override the anchors for numbered links generated by the SECST transpiler, but not break ordering :footnote(href="#markdown-footnote")[]. If you do provide content when reusing, it will be ignored.
 
-The source for the second footnote is: code["footnote(href='#markdown-footnote')]"].
+The source for the second footnote is: :code[:footnote(href='#markdown-footnote')]].
 
-And, here is a third that just gets numbered: code["footnote[Footnote management doe not get much easier!]"].footnote[Footnote management doe not get much easier!].
+And, here is a third, :code[:footnote[Footnote management does not get much easier!]], that just gets numbered: :footnote[Footnote management does not get much easier]
+
 ]
 
-h4[Transpiled SECST]
+:h4[Transpiled SECST]
 
-p[
-The HTML of transpiled SECST can be displayed as plain text, e.g. code["transpiled[strong[test]]]"] renders as transpiled[strong[test]].
+:p[
+The HTML of transpiled SECST can be displayed as plain text, e.g. :code[:transpiled[:strong[test]]]] renders as :transpiled[:strong[test]].
 ]
 
-h3[Non-Core]
+:h3[Non-Core]
 
-h4[Social Media And Other Mentions]
+:h4[Social Media And Other Mentions]
 
-p[
-Several platforms provide code[@mention] capability, but only for their users, e.g. GitHub and StackExchange.
+:p[
+Several platforms provide :code[@mention] capability, but only for their users, e.g. GitHub and StackExchange.
 
-Not part of core SECST, but provided in the reference implementation are generic @mentions for several social media and other platforms. These take the form code["@<platform>[<space separated profile-names>]"]. The target for mentions will always be another browser tab, unless a code[target] attribute is provided.
+Not part of core SECST, but provided in the reference implementation are generic @mentions for several social media and other platforms. These take the form :code[@<platform>[<space separated profile-names>]]. The target for mentions will always be another browser tab, unless a :code[target] attribute is provided.
 
-The mark-up code[@github[anywhichway]] renders as @github[anywhichway].
+The mark-up :code[@github[anywhichway]] renders as @github[anywhichway].
 
-Alternatively you can name the user, e.g. code[@github(user="anywhichway")[AnyWhichWay]] renders as @github(user="anywhichway")[AnyWhichWay].
+Alternatively you can name the user, e.g. :code[@github(user="anywhichway")[AnyWhichWay]] renders as @github(user="anywhichway")[AnyWhichWay].
 
 The supported platforms are:
 ]
 
-ul[
+:ul[
     - LinkedIn
     - Facebook
     - GitHub
     - Twitter
 ]
 
-h4[Latex]
+:h4[Latex]
 
-p[
+:p[
 Latex processing is part of the reference implementation to show how new tags can be create using third party libraries.
 
-ul[
-     li[code[code(language="latex" run)[Lift = \frac{1}{2} \rho v^2 S C_L\]]]
-     li[code[latex[Lift = \frac{1}{2} \rho v^2 S C_L\]]]
+:ul[
+     :li[:code[:code(language="latex" run)[Lift = \frac{1}{2} \rho v^2 S C_L\]]]
+     :li[:code[:latex[Lift = \frac{1}{2} \rho v^2 S C_L\]]]
  ]
 
- both render as latex[Lift = \frac{1}{2} \rho v^2 S C_L]
+ both render as :latex[Lift = \frac{1}{2} \rho v^2 S C_L]
 ]
 
-h4[Music (ABC Notation)]
+:h4[Music (ABC Notation)]
 
-p[
+:p[
 ABC notation processing is part of the reference implementation to show how new tags can be create using custom elements.
 
 ]
 
-h2[Escaping SECST]
+:h2[Escaping SECST]
 
-p[
-    Except when it contains &[gt] or &[lt], SECST tagging inside of code[code[]] is automatically escaped, e.g. code[code[strong[text]]]. If you wish to escape it elsewhere or if it contains  &[gt] or &[lt], wrap the entire tag expression inside the content area with double quotes, e.g. code[code[\"&lt;some-text&gt;\"]]. When wrapping in quotes, there can be no line breaks inside the quotes. em[Note: This is a fairly severe limitation and it is being worked on to relax.]
+:p[
+   SECST tagging inside of :code[:code[]] is automatically escaped, e.g. :code[:code[:strong[text]]] renders as :code[:strong[text]]. If you wish to escape it elsewhere use the tag :code[:escape[]].
 ]
 
-h1(#basic-computation)[Basic Computational Authoring]
+:h1(#basic-computation)[Basic Computational Authoring]
 
-h2[Formulas]
-p[
-    SECST supports the tag code[value[]] for adding reactive variables and macros to documents.
-    ul[
-        li[All values strong[MUST] be identified by an id.]
-        li[By default values are hidden. Use the boolean attribute code[visible] to display them.]
-        li[The value of a code[value[]] is the content, i.e the stuff between the code[&lsqb;&rsqb;]. It should be is either a literal value or a macro.]
-        li[Macro's are specified using string templates.]
-        li[Values computed from macros are readonly unless the boolean attribute code[editable] is provided.]
+:h2[Formulas]
+:p[
+    SECST supports the tag :code[:value[]] for adding reactive variables and macros to documents.
+    :ul[
+        :li[All values :strong[MUST] be identified by an id.]
+        :li[By default values are hidden. Use the boolean attribute :code[visible] to display them.]
+        :li[The value of a :code[:value[]] is the content, i.e the stuff between the :code[&lsqb;&rsqb;]. It should be is either a literal value or a macro.]
+        :li[Macro's are specified using string templates.]
+        :li[Values computed from macros are readonly unless the boolean attribute :code[editable] is provided.]
     ]
-    dl[
-        dt[You can reference values in formulas using code["$(#<id>)"].]
-        dd[code[value(#v1 visible)[$(#v2) + $(#v3)]] = code[value(#v2 visible)[1]] + code[value(#v3 visible)[2]]]
-        dd[value(#v1 visible)[$(#v2) + $(#v3)] = value(#v2 visible)[1] + value(#v3 visible)[2]]
-        dt[You can set values to fitcontent]
-        dd[code[value(#v1a visible fitcontent)[$(#v2a) + $(#v3a)]] = code[value(#v2a visible fitcontent)[1]] + code[value(#v3a visible fitcontent)[2]]]
-        dd[value(#v1a visible fitcontent)[$(#v2a) + $(#v3a)] = value(#v2a visible fitcontent)[1] + value(#v3a visible fitcontent)[2]]
-        dt[You can perform symbolic math manipulation.]
-        dd[code[value(#v1b visible fitcontent)[derivative('x^2 + x', 'x')]]]
-        dd[value(#v1b visible fitcontent)[derivative('x^2 + x', 'x')]]
-        dt[You can solve symbolic equations.]
-        dd[code[value(#v1c visible fitcontent)[solve('Math.pow(r,2)',{r:3})}]]]
-        dd[value(#v1c visible fitcontent)[solve('Math.pow(r,2)',{r:3})]]
-        dt[You can even give your readers the opportunity to provide the values for which to solve.]
-        dd[Math.pow(r,2) where r = code[value(#v1d visible fitcontent)[0]] is code[value(#v2d visible fitcontent)[solve('Math.pow(r,2)',{r:$(#v1d)})]]]
-        dd[Math.pow(r,2) where r = value(#v1d visible fitcontent)[0] is value(#v2d visible fitcontent)[solve('Math.pow(r,2)',{r:$(#v1d)})]]
+    :dl[
+        :dt[You can reference values in formulas using :code[$(#<id>)].]
+        :dd[:code[:value(#v1 visible)[$(#v2) + $(#v3)]] = :code[:value(#v2 visible)[1]] + :code[:value(#v3 visible)[2]]]
+        :dd[:value(#v1 visible)[$(#v2) + $(#v3)] = :value(#v2 visible)[1] + :value(#v3 visible)[2]]
+        :dt[You can set values to fitcontent]
+        :dd[:code[:value(#v1a visible fitcontent)[$(#v2a) + $(#v3a)]] = :code[:value(#v2a visible fitcontent)[1]] + :code[:value(#v3a visible fitcontent)[2]]]
+        :dd[:value(#v1a visible fitcontent)[$(#v2a) + $(#v3a)] = :value(#v2a visible fitcontent)[1] + :value(#v3a visible fitcontent)[2]]
+        :dt[You can perform symbolic math manipulation.]
+        :dd[:code[:value(#v1b visible fitcontent)[derivative('x^2 + x', 'x')]]]
+        :dd[:value(#v1b visible fitcontent)[derivative('x^2 + x', 'x')]]
+        :dt[You can solve symbolic equations.]
+        :dd[:code[:value(#v1c visible fitcontent)[solve('Math.pow(r,2)',{r:3})}]]]
+        :dd[:value(#v1c visible fitcontent)[solve('Math.pow(r,2)',{r:3})]]
+        :dt[You can even give your readers the opportunity to provide the values for which to solve.]
+        :dd[Math.pow(r,2) where r = :code[:value(#v1d visible fitcontent)[0]] is :code[:value(#v2d visible fitcontent)[solve('Math.pow(r,2)',{r:$(#v1d)})]]]
+        :dd[Math.pow(r,2) where r = :value(#v1d visible fitcontent)[0] is :value(#v2d visible fitcontent)[solve('Math.pow(r,2)',{r:$(#v1d)})]]
     ]
 ]
 
-h2[Importing Data]
-p[
-    Values can included imported data using the code[src] attribute and a mime type provided in the code[type] attribute. Static data is imported at transpile time and so long as it is visible (see above), it is editable by users unless the boolean attribute code[readonly] is provided.
+:h2[Importing Data]
+:p[
+    Values can included imported data using the :code[src] attribute and a mime type provided in the :code[type] attribute. Static data is imported at transpile time and so long as it is visible (see above), it is editable by users unless the boolean attribute :code[readonly] is provided.
 
-    JSON is formatted for readability and a(https://json5.org target="_tab")[JSON5] is supported to make it easier to handle remote data.
+    JSON is formatted for readability and :a(https://json5.org target="_tab")[JSON5] is supported to make it easier to handle remote data.
 
-    value(static visible fitcontent type="application/json" src="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson")[]
+    :value(static visible fitcontent type="application/json" src="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson")[]
 
-    Dynamically imported data is readonly because it is essentially a computation. To make it editable, then use the attribute code[editable].
+    Dynamically imported data is readonly because it is essentially a computation. To make it editable, then use the attribute :code[editable].
 
-    value(#id-of-data visible fitcontent type="application/json" src="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson")[]
+    :value(#id-of-data visible fitcontent type="application/json" src="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson")[]
 
-    value(#id-of-data visible fitcontent editable type="application/json" src="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson")[]
+    :value(#id-of-data visible fitcontent editable type="application/json" src="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson")[]
 
-    It is also possible to use url shorthand for the code[src] attribute:
+    It is also possible to use url shorthand for the :code[src] attribute:
 
-    value(#id-of-data https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson visible fitcontent type="application/json")[]
+    :value(#id-of-data https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson visible fitcontent type="application/json")[]
 
 ]
 
-h1[Styling Content]
+:h1[Styling Content]
 
-p[
-The ability to use styling can be configured using API options and command line arguments. See a(#document-programming)[document programming] below. Hence, not all styling may be available in all environments that provide a SECST editor.
+:p[
+The ability to use styling can be configured using API options and command line arguments. See :a(#document-programming)[document programming] below. Hence, not all styling may be available in all environments that provide a SECST editor.
 
-Content can be styled using CSS classes loaded using the code[style[]] tag. This tag can be used in multiple ways. If a url is provided, i.e. code[style(./my-css-url.css)[]], then an HTML link element of type style is created behind the scenes. If CSS is placed between the square braces, i.e. code["style[.my-class { background-color: red}]"], then a style element with CSS content is created behind the scenes. If both are provided, then two elements are generated, one of each. code["link(<some url> type='style')[]"] tag.
+Content can be styled using CSS classes loaded using the :code[style[]] tag. This tag can be used in multiple ways. If a url is provided, i.e. :code[style(./my-css-url.css)[]], then an HTML link element of type style is created behind the scenes. If CSS is placed between the square braces, i.e. :code[style[.my-class { background-color: red}]], then a style element with CSS content is created behind the scenes. If both are provided, then two elements are generated, one of each. :code[link(<some url> type='style')[]] tag.
 
-CSS classes are applied to content using code[".<class-name>"] inside the parenthetical configuration part of a tag, e.g. code["p(.my-class1 .my-class2)[My content]"].
+CSS classes are applied to content using :code[.<class-name>] inside the parenthetical configuration part of a tag, e.g. :code[:p(.my-class1 .my-class2)[My content]].
 
-Style can also be applied using the code[style] attribute of a tag. The style attribute can be in string or JSON format. If in JSON format, it can use either camelCase or hyphenated versions of CSS property names. The property names do not need to be in quotes even if they are hyphenated, i.e. code["p(style='width:200px;text-align:right;float:right')[My right content]"],  code["p(style='{width:200px;text-align:right,float:right}')[My right content]"],  and code["p(style='{width:200px;textAlign:right,float:right}')[My right content]"] all produce the same output.
+Style can also be applied using the :code[style] attribute of a tag. The style attribute can be in string or JSON format. If in JSON format, it can use either camelCase or hyphenated versions of CSS property names. The property names do not need to be in quotes even if they are hyphenated, i.e. :code[:p(style='width:200px;text-align:right;float:right')[My right content]],  :code[:p(style='{width:200px;text-align:right,float:right}')[My right content]],  and :code[:p(style='{width:200px;textAlign:right,float:right}')[My right content]] all produce the same output.
 ]
 
-p(style="text-align:left;float:right")[My right content]
-p[
+:p(style="text-align:left;float:right")[My right content]
+:p[
 Left Content
 More left content
 ]
 
 
-h1[Advanced Computational Authoring]
+:h1[Advanced Computational Authoring]
 
 As pointed out above, the SECST macro evaluator supports regular and advanced math. It also supports some utility functions.
 
-h2[Macro List Formatting]
+:h2[Macro List Formatting]
 
-h2[JavaScript]
+:h2[JavaScript]
 
-You can use any JavaScript that is available in a(https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API target="_tab")[WebWorkers] inside a macro. A special read-only code[document] object is also made available. This object has title, baseURI, location, and navigator properties along with a property for each meta tag name and value.
+You can use any JavaScript that is available in :a(https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API target="_tab")[WebWorkers] inside a macro. A special read-only :code[document] object is also made available. This object has title, baseURI, location, and navigator properties along with a property for each meta tag name and value.
 
-h1[Configuring, Extending, And Programming]
+:h1[Configuring, Extending, And Programming]
 
-h2[Basic Configuration]
+:h2[Basic Configuration]
 
-h3[Semantic Options]
+:h3[Semantic Options]
 
-h3[Error Handling]
+:h3[Error Handling]
 
 cancel, collect, text, correct
 
-h2[Tag Configuration]
+:h2[Tag Configuration]
 
-h2[Custom Tags]
+:h2[Custom Tags]
 
-h2[Custom Methods]
+:h2[Custom Methods]
 
-h3[Event Listeners]
+:h3[Event Listeners]
 
-h1(#tags)[Complete List Of Tags]
+:h1(#tags)[Complete List Of Tags]
 
-h1[Design Objectives]
+:h1[Design Objectives]
 
 Easy to understand, simple syntax, semantic
 Easy to learn, limited syntax, semantic
@@ -523,29 +530,25 @@ Styleable - optional capability
 Portable - HTML output
 SEO Friendly - browser or server rendering
 
-h1[Grammar]
+:h1[Grammar]
 
-p[
+:p[
 All SECST markup takes one of two forms:
 ]
 
-ul[
-    li[
-        code[<tag>&lsqb;<content>&rsqb;]
-    ]
-    li[
-        code[<tag>(#<id>:optional .<class>... (<unaryattribute> || <attribute>="<value>")...)&lsqb;<content>&rsqb;]
-    ]
+:ul[
+    :li[:code[:<tag>[<content>...]]]
+    :li[:code[:<tag>(#<id>:optional .<class>... (<unaryattribute> || <attribute>="<value>")...)[<content>...]]]
 ]
 
 
-h1[Architecture]
+:h1[Architecture]
 
-h1[Security and Reliability]
+:h1[Security and Reliability]
 
-p[
+:p[
 XSS
-prevents DOM clobbering by ensuring ids do not conflict with key DOM components, e.g. code[head], code[body].
+prevents DOM clobbering by ensuring ids do not conflict with key DOM components, e.g. :code[head], :code[body].
 
 Does not allow the use of variables for attribute values.
 
@@ -553,7 +556,7 @@ Executes all macros in WebWorkers that will timeout if they take too long.
 
 Does not support "on" event handlers and limits the use of style=ing directly on HTML elements.
 
-Sanitizes CSS content used in the code[style[]] tag.
+Sanitizes CSS content used in the :code[style[]] tag.
 ]
 
 

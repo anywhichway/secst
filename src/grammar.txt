@@ -6,8 +6,8 @@
                         for(const flat of flattenContent(item)) {
                             yield flat;
                         }
-                    } else {
-                        if(item.content) {
+                    } else if(item!==undefined) {
+                        if(item?.content) {
                             item.content = [...flattenContent(item.content)].reduce((array,item,i) => {
                                 if(typeof(item)==="string" && typeof(array[i-1])==="string") {
                                     array[i-1] += item;
@@ -23,6 +23,37 @@
             }
             return content;
         }
+
+        class Tag {
+            constructor({tag,options,content,location}) {
+                const {attributes, classes, id } = options||{};
+                Object.assign(this,{tag,id,classes,attributes,content});
+                Object.defineProperty(this,"location",{value:location});
+            }
+            toString() {
+                let string = ":" + this.tag;
+                if(this.tag.startsWith("@")) {
+                    string = this.tag;
+                }
+                const attributes = Object.entries(this.attributes||{}),
+                    classes = this.classes || [];
+                if(this.id || classes.length>0 || attributes.length>0) {
+                    string += "(";
+                    if(this.id) string += "#" + this.id + " ";
+                    if(classes.length>0) {
+                        classes.forEach((className) => string += className + " ");
+                    }
+                    if(attributes.length>0) {
+                        attributes.forEach(([key,value]) => {
+                            string += (value==="" ? key : `${key}="${value}"`) + " ";
+                        });
+                    }
+                    string = string.trim() + ")";
+                }
+                string += "[" + this.content.map((item) => typeof(item)==="string" ? item : item.toString()).join(" ") + "]";
+                return string;
+            }
+        }
     }
     start
         = _ content:content* _ {
@@ -30,44 +61,102 @@
             }
 
     content
-        = script / (expression _?) / stringcontent
+        = (&ampersand symbol) / (&hash hashtag) / (&at mention) / script / code /  (&colon expression _?) / backtickquoted / [ a-z0-9_\-~!@#$%^&*()_+=\[\{\]\}|\\;:"'<,>.?/\n\r\t]i
+
+    colon
+        = ":"
 
     expression
-        = tag:tag options:options? "[" _ content:content* _ "]"  {
-
-            const {attributes, classes, id } = options||{},
-                expression = {tag, content, id, attributes, classes};
-            Object.defineProperty(expression,"location",{value:location()});
-            return expression;
+        = &colon tag:tag options:options?  content:bracketed  {
+             return new Tag({tag,options,content,location:location()});
         }
 
     script "script"
-        = "script" bracketed:bracketed { return {tag:"script", content:[bracketed.substring(1,bracketed.length-1)] } }
+        = ":script" options:options? bracketed:bracketed {
+             const content = [bracketed.map((item) => typeof(item)==="string" ? item : item.toString()).join("")] ;
+             return new Tag({tag:"script",options,content,location:location()});
+        }
+
+    code "code"
+        = ":code" options:options? bracketed:bracketed {
+             const content = [bracketed.map((item) => typeof(item)==="string" ? item : item.toString()).join("")] ;
+             return new Tag({tag:"code",options,content,location:location()});
+        }
+
+    symbol "symbol"
+        = ampersand special:[\#a-z0-9]i* ";" {;
+            return new Tag({tag:"&",content:[special.join("")],location:location()})
+        }
+
+    ampersand "ampersand"
+        = "&"
+
+
+    hashtag "hashtag"
+        = hash tag:[a-z0-9\-]i* options:options? content:bracketed {
+            return new Tag({tag:"#",options,content:tag.length>0 ? [tag.join("")] : content,location:location()})
+        }
+
+    hash "hash"
+        = "#"
+
+    mention "mention"
+        = at site:[a-z0-9]i* options:options? content:bracketed {
+            return new Tag({tag:"@"+site.join(""),options,content,location:location()});
+        }
+
+    at "at"
+        = "@"
 
     bracketed "bracketed"
-        = BRACKETOPEN text:(not_bracketed/bracketed)* BRACKETCLOSE { return "[" + text.join("") + "]" }
+        = BRACKETOPEN value:(symbol/hashtag/mention/script/code/expression/not_bracketed/bracketed)* BRACKETCLOSE {
+            if(Array.isArray(value) && value.every((item) => typeof(item)==="string")) {
+                return [value.join("")];
+            }
+            const result = [];
+            for(let i=0;i<value.length;i++) {
+                const item = value[i];
+                if(Array.isArray(item)) {
+                    const text = "[" + item.join(" ") + "]";
+                    if(typeof(result[result.length-1])!=="string") {
+                        result.push(text);
+                    } else {
+                         result[result.length-1] += text;
+                    }
+                } else if(item && typeof(item)==="object") {
+                    result.push(item);
+                } else {
+                    if(typeof(result[result.length-1])!=="string") {
+                        result.push(item);
+                    } else {
+                        result[result.length-1] += item;
+                    }
+                }
+            }
+            return result;
+        }
 
     not_bracketed
-        = not:(!BRACKETCLOSE !BRACKETOPEN.) { return not.join("");}
+        = not:(!BRACKETCLOSE !BRACKETOPEN.) {
+                return not.join("");
+        }
 
     BRACKETOPEN = '['
 
     BRACKETCLOSE = ']'
 
-    stringcontent
-        = quoted / (start:nonreturnchars rest:(escapequoted / anything)* {return start + rest.join("")})
+    backtickquoted "backtickquoted"
+            = BACKTICKOPEN text:(not_backtickquoted/backtickquoted)*  BACKTICKCLOSE { return text.join("") }
 
-    escapequoted
-        = string:quoted {return ' "' + string + '"'}
+        not_backtickquoted
+            = not:(!BACKTICKOPEN !BACKTICKOPEN.) { return not.join("");}
 
-    nonreturnchars "nonreturn or tab chars"
-        = !expression char:[ a-z0-9_\-~`!@#$%^&*()_+=\{\}|\\;:"'<,>.?/]i { return char; }
+        BACKTICKOPEN = '`'
 
-    anything "anything but bracket"
-        = !expression char:[ a-z0-9_\-`~!@#$%^&*()_+=\{\}|\\;:"'<,>.?/\n\r\t]i  { return char; }
+        BACKTICKCLOSE = '`'
 
     tag
-        = token
+        = colon token:token { return token }
 
     options "options"
         = "(" _ id:id? _ attributes:attributelist? _ classes:class* _ ")" {
