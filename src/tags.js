@@ -33,9 +33,9 @@ const universalAttributes = {
         is: true,
         title: true
     },
-    blockContent = ["article","audio","blockquote","code","dl","figure","hr","img","script","listeners","meta","ol","p","picture","pre","script","style","table","toc","ul","video","latex","math-science-formula"],
-    singleLineContent = ["a","abbr","bdi","bdo","br","del","code","em","emoji","error","footnote","hashtag","ins","kbd","meter","strong","sub","sup","time","value","var","wbr","u","@facebook","@github","@linkedin","@twitter","latex"],
-    multiLineContent = ["address","aside","bdi","cite","details","input","script","ol","output","ruby","ul","summary","textarea","transpiled"],
+    blockContent = ["article","audio","blockquote","code","dl","figure","hr","img","script","listeners","meta","ol","p","picture","pre","script","style","table","toc","ul","video","latex","math-science-formula","NewsArticle","Person"],
+    singleLineContent = ["a","abbr","bdi","bdo","br","del","code","em","emoji","error","escape","footnote","hashtag","ins","kbd","mark","meta","meter","strike","strong","sub","sup","time","value","var","wbr","u","@facebook","@github","@linkedin","@twitter","latex","name"],
+    multiLineContent = ["address","aside","bdi","cite","details","input","script","ol","output","ruby","ul","summary","textarea","transpiled","author"],
     inlineContent = [...singleLineContent,...multiLineContent],
     tagToText = (tag,pre) => {
         const type = typeof(tag);
@@ -48,7 +48,7 @@ const universalAttributes = {
             if(tag.id || classList?.length>0 || attributes?.length>0) {
                 text += `(${tag.id ? "#" + tag.id + " " : ""}${classList ? classList.join(" ") + " " : ""}${binaryAttributes?.length>0 ? binaryAttributes.join(" ") + " " : ""}${attributes?.length>0 ? attributes.join(" ") : ""})${pre ? "\n" : ""}`
             }
-            return (text + `[${pre ? "\n" : ""}${tag.content.reduce((text,item,index,array) => { text += tagToText(item,pre); return index<array.length-2 ? text += "," : text; },"")}]`)
+            return (text + `{${pre ? "\n" : ""}${tag.content.reduce((text,item,index,array) => { text += tagToText(item,pre); return index<array.length-2 ? text += "," : text; },"")}}`)
                 .replace(/[\r\n][\s\t]*(.*)/g,"\n$1")
         }
         return tag;
@@ -59,6 +59,58 @@ for(let i=1;i<=8;i++) {
 }
 
 const tags = {
+    NewsArticle: {
+        allowAsRoot: true,
+        contentAllowed: ["headline","image","datePublished","author",...inlineContent,...blockContent],
+        transform(node) {
+            node.jsonld = {};
+        },
+        connected(el,node) {
+            console.log(node.jsonld);
+        }
+    },
+    headline: {
+        contentAllowed: true,
+        transform(node,path) {
+            const newsArticle = path.find((item) => item.tag==="NewsArticle");
+            newsArticle.jsonld.headline = node.content[0];
+        }
+    },
+    image: {
+        transform(node,path) {
+            const newsArticle = path.find((item) => item.tag==="NewsArticle");
+            newsArticle.jsonld.images ||= [];
+            newsArticle.jsonld.images.push(node.attributes.url);
+            node.tag = "img";
+            return node;
+        }
+    },
+    datePublished: {
+        contentAllowed: true,
+        transform(node,path) {
+            const newsArticle = path.find((item) => item.tag==="NewsArticle");
+            newsArticle.jsonld.datePublished = node.content[0];
+            node.tag = "span";
+            node.skipRevalidation = true;
+        }
+    },
+    author: {
+        contentAllowed: ["Person"],
+        transform(node,path) {
+            const newsArticle = path.find((item) => item.tag==="NewsArticle");
+            newsArticle.jsonld.author ||= [];
+            node.content.forEach((item) => {
+                newsArticle.jsonld.author.push(item);
+            })
+        }
+    },
+    Person: {
+        allowAsRoot: true,
+        contentAllowed: ["name"]
+    },
+    name: {
+      contentAllowed: true
+    },
     "@facebook": {
         attributesAllowed: {
             href: true,
@@ -70,6 +122,9 @@ const tags = {
             node.attributes.target ||= "_tab";
             const user = node.attributes.user || node.content[0].trim();
             node.attributes.href = `https://facebook.com/${user}`;
+            if(!node.attributes.user) {
+                node.content[0] = node.content[0] + "@facebook";
+            }
             delete node.attributes.user;
         }
     },
@@ -84,6 +139,9 @@ const tags = {
             node.attributes.target ||= "_tab";
             const user = node.attributes.user || node.content[0].trim();
             node.attributes.href = `https://github.com/${user}`;
+            if(!node.attributes.user) {
+                node.content[0] = node.content[0] + "@github";
+            }
             delete node.attributes.user;
         }
     },
@@ -98,6 +156,9 @@ const tags = {
             node.attributes.target ||= "_tab";
             const user = node.attributes.user || node.content[0].trim();
             node.attributes.href = `https://linkedin.com/in/${user}`;
+            if(!node.attributes.user) {
+                node.content[0] = node.content[0] + "@linkedin";
+            }
             delete node.attributes.user
         }
     },
@@ -112,6 +173,9 @@ const tags = {
             node.attributes.target ||= "_tab";
             const user = node.attributes.user || node.content[0].trim();
             node.attributes.href = `https://twitter.com/${user}`
+            if(!node.attributes.user) {
+                node.content[0] = node.content[0] + "@twitter";
+            }
             delete node.attributes.user;
         }
     },
@@ -179,18 +243,6 @@ const tags = {
             node.skipRevalidation = true;
         }
     },
-    "#": {
-        contentAllowed: true,
-            transform(node) {
-            // push to meta tags here
-        },
-        toText(node) {
-            return node.content.reduce((tags,item) => {
-                item.split(" ").forEach((tag) => tags.push("#" + tag));
-                return tags;
-            },[]).join(", ")
-        }
-    },
     a: {
         attributesAllowed: {
             href: {
@@ -244,7 +296,7 @@ const tags = {
                 delete node.attributes.url
             } else {
                 const href = node.content[0];
-                if(href.startsWith("https:") || href.startsWith("./") || href.startsWith("../")) {
+                if(typeof(href)==="string" && (href.startsWith("https:") || href.startsWith("./") || href.startsWith("../"))) {
                     try {
                         new URL(href,document.baseURI);
                         node.attributes.href = node.content[0];
@@ -257,7 +309,7 @@ const tags = {
         }
     },
     article: {
-        contentAllowed: [...blockContent,...inlineContent]
+        contentAllowed: "*"
     },
     audio: {
         attributesAllowed: {
@@ -334,8 +386,17 @@ const tags = {
     },
     details: {
         contentAllowed: [...singleLineContent,...multiLineContent],
-        validate(node) {
-            return node.firstElementChild?.tagName==="SUMMARY";
+        transform(node) {
+            if(node.content[0].tag!=="summary") {
+                const parts = node.content[0].split(" ");
+                node.content.unshift(
+                    {
+                        tag:"summary",
+                        content:[parts.shift()]
+                    }
+                );
+                node.content[1] = parts.join(" ");
+            }
         }
     },
     dd: {
@@ -355,8 +416,16 @@ const tags = {
         }
     },
     emoji: {
+        attributesAllowed: {
+            colored() {
+                return {
+                    filter: "none"
+                }
+            },
+            filter: true
+        },
         contentAllowed: true,
-        async toHTML(node) {
+        async toElement(node) {
             emojiMartData ||= await fetch(
                 'https://cdn.jsdelivr.net/npm/@emoji-mart/data',
             ).then((response) => response.json());
@@ -378,7 +447,21 @@ const tags = {
                     }
                 }
             }
-            return emojis.join(", ")
+            const span = document.createElement("span");
+            span.style.filter = node.attributes.filter  || "grayscale(100%)";
+            span.innerHTML = emojis.join(" ");
+            return span;
+        }
+    },
+    escape: {
+        contentAllowed: true,
+        transform(node) {
+            if(node.content[0].includes("\n")) {
+                node.tag = "div";
+            } else {
+                node.tag = "span";
+            }
+            node.skipRevalidation = true;
         }
     },
     footnote: {
@@ -394,6 +477,24 @@ const tags = {
     },
     figure: {
         contentAllowed:[...blockContent,...inlineContent,"caption"].filter((item) => item!=="figure")
+    },
+    hashtag: {
+        contentAllowed: true,
+        transform(node) {
+            // push to meta tags here
+        },
+        toText(node) {
+            return node.content.reduce((tags,item) => {
+                item.split(" ").forEach((tag) => tags.push("#" + tag));
+                return tags;
+            },[]).join(", ")
+        },
+        connected(el) {
+            const tags = el.innerText.split(","),
+                meta = document.createElement("meta");
+            meta.setAttribute("name","keywords");
+            meta.setAttribute("value",tags.join(","))
+        }
     },
     hr: {
         allowAsRoot: true
@@ -470,7 +571,6 @@ const tags = {
             }
         }
     },
-
     li: {
         breakOnNewline: true,
         attributesAllowed: {
@@ -512,6 +612,9 @@ const tags = {
             delete node.attributes.selector;
         }
     },
+    mark: {
+        contentAllowed: [...singleLineContent]
+    },
     meta: {
         contentAllowed: true,
         attributesAllowed: {
@@ -520,6 +623,9 @@ const tags = {
         },
         transform(node) {
             node.attributes.content = node.content.join("");
+        },
+        connected(el) {
+            document.head.appendChild(el);
         }
     },
     meter: {
@@ -621,6 +727,12 @@ const tags = {
         allowAsRoot: true,
         breakOnNewline: true,
         contentAllowed: [...inlineContent],
+        transform(node) {
+            // ignore first return
+            if(typeof(node.content[0])==="string" && node.content[0]) {
+                node.content[0] =  node.content[0].trimLeft();
+            }
+        },
         attributesAllowed: {
             align: {
                 mapStyle: "text-align"
@@ -758,6 +870,9 @@ const tags = {
         },
         parentRequired: ["audio","picture","video"]
     },
+    strike: {
+        contentAllowed: [...singleLineContent]
+    },
     style: {
         allowAsRoot: true,
         contentAllowed: true,
@@ -801,7 +916,8 @@ const tags = {
             "data-format": true,
             "data-mime-type": true, // toto add validation
             disabled: true,
-            value: true
+            value: true,
+            readonly: true
         },
         render(node,el) {
             el.innerHTML = node.attributes.value || node.content[0];

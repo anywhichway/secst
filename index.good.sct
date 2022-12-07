@@ -3,11 +3,11 @@
 :p[
     :abbr[SECST] is a :strong[S]emantic, :strong[E]xtensible, :strong[C]omputational, :strong[S]tyleable :strong[T]ag oriented markup language. You can use it to joyfully create compelling, interactive documents backed by HTML.
 
-    SECST is intended to be a more expressive, but just as easy to learn and use, alternative to Markdown while also being computational and easier to extend.
+    SECST is intended to be a more expressive, but just as easy to learn and use, alternative to Markdown while being easier to extend.
 
     The SECST language and reference HTML transpiler and runtime support implementations are currently in :strong[ALPHA].
 
-    This site's navigation, footnotes, computations, special styles like :kbd[Key] formatting and imported data are built entirely using SECST markup.
+    This site's navigation, footnotes, computations, special styles like kbd[Key] formatting and imported data are built entirely using SECST markup.
 ]
 
 :toc(toggle)[Table Of Contents]
@@ -98,10 +98,10 @@ See :a[https://www.markdownguide.org/basic-syntax/].
         italics | :td[:code[*text*]] :td[:code[:em[text]]] :td[:em[text]]
     ]
     :tr[
-        blockquote | :td[:code[> quote text]] :td[:code[:blockquote[quote text]]] :td[]
+        blockquote | :td[:code[> quote text]] :td[:code[blockquote[quote text]]] :td[]
     ]
     :tr[
-        nested blockquote | :td[:code[> quote text] :kbd[Enter] :code[>> nested quote text]] :td[:code[:blockquote[quote text :blockquote[nested quote text]]]] :td[]
+        nested blockquote | :td[:code[> quote text] :kbd[Enter] :code[>> nested quote text]] :td[:code[blockquote[quote text blockquote[nested quote text]]]] :td[]
     ]
     :tr[
         code | :td[:code['the code']]  :td[:code[:code[the code]]] :td[:code[the code]]
@@ -291,7 +291,7 @@ Images can be loaded statically at transpile time and delivered bundled into the
     :li[instead of a reference there is a data url in :code[src] attribute of the :details[:summary[generated HTML.]  :transpiled[:img(static ./anywhichway_mobius_138.png)[Test]]]]
 ]
 p[
-The callout for the generated HTML above is implemented using the :a(href="#details")[details tag].
+The callout for the generated HTML above is implemented using the :a(href="#details")[:code[:details[]] tag].
 ]
 
 :h5[Audio]
@@ -507,8 +507,8 @@ This is best explained through an example.
 
      :code[
         :NewsArticle[
-            :headline[Pinky and The Brain Plan For Mars]
-            :image(https://example.com/photos/1x1/photo.jpg)
+            :title[Pinky and The Brain Plan For Mars]
+            :img(https://example.com/photos/1x1/photo.jpg)
             :p[
                 We, Pinky and The Brain, will soon announce plans to partner with one of the world's billionaires to take over Mars.
             ]
@@ -550,16 +550,20 @@ This is best explained through an example.
     while rendering this content
 
     :NewsArticle[
-        :headline[Pinky and The Brain Plan For Mars]
-        :image(https://example.com/photos/1x1/photo.jpg)
-        :article[
+        :title[Pinky and The Brain Plan For Mars]
+        :img(https://example.com/photos/1x1/photo.jpg)
+        :p[
             We, Pinky and The Brain, will soon announce plans to partner with one of the world's billionaires to take over Mars.
         ]
-        :author[
-            :Person[:name[Pinky]],
-            :Person[:name[The Brain]]
+        :Author[
+            :Person[
+                :name[Pinky]
+            ],
+            :Person[
+                :name[The Brain]
+            ]
         ]
-        :datePublished[2022-12-20TT08:00:00+08:00]
+        datePublished[2022-12-20TT08:00:00+08:00]
     ]
 
     The ordering of the tags inside :code[:NewsArticle[]] is only relevant to the layout.

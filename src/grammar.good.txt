@@ -35,7 +35,7 @@
                 if(this.tag.startsWith("@")) {
                     string = this.tag;
                 }
-                if(this.tag==="hashtag") {
+                if(this.tag.startsWith("#")) {
                     return this.content.reduce((tags,item) => {
                        item.split(" ").forEach((tag) => tags.push("#" + tag.trim()));
                        return tags;
