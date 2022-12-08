@@ -1,6 +1,7 @@
 import {extractValue} from "./extract-value.js";
 import {resolveDataTemplate} from "./resolve-data-template.js";
 import {formatValue} from "./format-value.js";
+import {updateValueWidths} from "./update-value-widths.js";
 
 const update = async (target) => {
     if(target.type==="checkbox") {
@@ -42,28 +43,11 @@ const update = async (target) => {
     }
 }
 
-const updateWidths = () => {
-    // not targetted to a specific element because dependency calcs may have updated many
-    requestAnimationFrame(() => {
-        [...document.querySelectorAll('input[data-fitcontent]')].forEach((el) => {
-            const value = el.getAttribute("value")||"";
-            el.style.width = Math.min(80,Math.max(1,value.length+1))+"ch";
-        });
-        [...document.querySelectorAll('textarea[data-fitcontent]')].forEach((el) => {
-            const value = el.innerText;;
-            const lines = value.split("\n");
-            el.style.height = (Math.min(20, lines.length) * 1.5) + "em";
-            el.style.width = Math.min(80, lines.reduce((len, line) => Math.max(len, line.length), 0)) + "ch";
-        })
-    })
-}
-
 const listeners = {
     async change(event) {
-        const template = event.target.getAttribute("data-template");
-        if(["INPUT","TEXTAREA"].includes(event.target.tagName) && template!==null && (event.target.value+"")!=="[object Promise]") {
+        if(["INPUT","TEXTAREA"].includes(event.target.tagName) && event.target.getAttribute("data-template")!==null && (event.target.value+"")!=="[object Promise]") {
             await update(event.target);
-            updateWidths();
+            updateValueWidths();
         }
     },
     click(event) {
@@ -76,8 +60,11 @@ const listeners = {
     async input(event) {
         if(["INPUT","TEXTAREA"].includes(event.target.tagName) && event.target.getAttribute("data-template")!==null) {
            await update(event.target);
-           updateWidths();
+           updateValueWidths();
         }
+    },
+    resize() {
+        updateValueWidths();
     }
 }
 

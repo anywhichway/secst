@@ -42,7 +42,7 @@ const stringTemplateEval = async (stringTemplate,requestor) => {
                 },
             },
             timeout:1000,
-            imports:['https://cdn.jsdelivr.net/npm/mathjs@11.3.2/lib/browser/math.min.js']})
+            imports:['https://cdn.jsdelivr.net/npm/mathjs@11.3.2/lib/browser/math.min.js','https://cdn.jsdelivr.net/npm/json5@2.2.1/dist/index.min.js']})
     }
     return (await stringTemplateEval.evaluator.evaluate)(stringTemplate);
 }

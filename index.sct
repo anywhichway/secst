@@ -1,7 +1,7 @@
 :h1[The Joy of SECST]
 
 :p[
-    :abbr[SECST] is a :strong[S]emantic, :strong[E]xtensible, :strong[C]omputational, :strong[S]tyleable :strong[T]ag oriented markup language. You can use it to joyfully create compelling, interactive documents backed by HTML.
+    :abbr[SECST] is a :strong[S]emantic, :strong[E]xtensible, :strong[C]omputational, :strong[S]tyleable :strong[T]ag oriented markup language. You can use it to joyfully create compelling, interactive, SEO enabled documents backed by HTML.
 
     SECST is intended to be a more expressive, but just as easy to learn and use, alternative to Markdown while also being computational and easier to extend.
 
@@ -137,7 +137,7 @@ See :a[https://www.markdownguide.org/extended-syntax/].
          task lists | :td[see :a(href="#task-lists")[task lists]] :td[] :td[]
      ]
      :tr[
-         emojis | :td[:code[:]:code[emoji-name:]] :td[:code[:]:code[emoji-name:]] :td[:smile:]
+         emojis | :td[:code[:]:code[emoji-name:]] :td[:code[:emoji[emoji-name]]] :td[:emoji[smile]]
      ]
      :tr[
           highlight | :td[:code[==marked words==]] :td[:code[:mark[marked words]]] :td[:mark[marked words]]
@@ -290,7 +290,7 @@ Images can be loaded statically at transpile time and delivered bundled into the
     :li[renders as :img(static ./anywhichway_mobius_138.png)[Test]]
     :li[instead of a reference there is a data url in :code[src] attribute of the :details[:summary[generated HTML.]  :transpiled[:img(static ./anywhichway_mobius_138.png)[Test]]]]
 ]
-p[
+:p[
 The callout for the generated HTML above is implemented using the :a(href="#details")[details tag].
 ]
 
@@ -352,17 +352,17 @@ The callout for the generated HTML above is implemented using the :a(href="#deta
 :h4[Emojis]
 
 :p[
-    Emojis can take the form :code[:<emoji-name>:] or :code[:emoji[<emoji-name>...]], where :code[<emoji-name>...] is a space separated list of emoji names.
+    Emojis can take the form :code[:emoji[<emoji-name>...]], where :code[<emoji-name>...] is a space separated list of emoji names.
 
     There are over 1,800 emojis. If a match for the emoji name can't be found, it is displayed as plain text.
 
-    :code[:]:code[smile:] renders as :smile:.
+    :code[:emoji[smile]] renders as :smile:.
 
     :code[:emoji[smile frowning jumping]] renders as :emoji[smile frowning jumping].
 
     Since most documents are black and white, emoji's are color filtered to grayscale by default. You can use colored emojis by providing the attribute :code[colored].
 
-    :code[:smile]:code[:(colored)] renders as :smile:(colored).
+    :code[:emoji(colored)[smile]] renders as :emoji(colored)[smile].
 
     :code[:emoji(colored)[smile frowning jumping]] renders as :emoji(colored)[smile frowning jumping].
 ]
@@ -461,54 +461,71 @@ ABC notation processing is part of the reference implementation to show how new 
 
 :h2[Structured Data]
 
-SECST can save time generating JSON-LD by extracting it from structured SECST markup. For select JSON-LD types, SECST provides a tag that expects contained markup to somewhat parallel JSON-LD.
+For select tags, SECST can generate JSON-LD directly from SECST markup. Content, layout, and SEO optimization will always be in sync.
 
-This is best explained through an example.
+This is best covered by an example based on :a(https://developers.google.com/search/docs/appearance/structured-data/article target="_tab")[Google's documentation for a news article].
 
 :h3[News Article]
 
 :p[
-    SECST supports a tag :code[:newsarticle[]]. This tag can contain regular SECST tags as well as tags that parallel established JSON-LD schema like :code[:headline[]] and :code[:author[]].
+    The SECST tag :code[:NewsArticle[]] can contain regular SECST as well as tags that parallel established JSON-LD schema like :code[:headline[]], :code[:author[]] and :code[:Person[]]. Where there are trivially equivalent tags and attribute names, e.g. :code[image] and :code[img], the native SECST tag is used.
 
     :code[
-        :newsarticle[
-            :title[Pinky Conquers The World]
+        :NewsArticle[
+            :headline[Pinky Conquers The World]
             :img(https://example.com/photos/1x1/photo.jpg)
             :p[
                 Today Pinky finally conquered the world! Next up will be Mars. Watch out billionaires!
             ]
-            :author[The Brain] datePublished[2022-12-20TT08:00:00+08:00]
+            :author[The Brain]
+            :datePublished(format="")[2022-12-20T08:00:00+08:00]
         ]
     ]
 ]
 
 :p[
-    Where JSON-LD names elements accept sub-types, e.g. :code[:person[]], those can also be used:
+    Where JSON-LD names elements accept sub-types, e.g. :code[:Person[]], those can also be used:
 
     :code[
-        :newsarticle[
-            :title[Pinky Conquers The World]
-            :img(https://example.com/photos/1x1/photo.jpg)
+        :NewsArticle[
+            :headline[Pinky Conquers The World]
+            :img(https://example.com/photos/1x1/photo.jpg)[The World]
             :p[
-                Today Pinky finally conquered the world! Next up will be Mars. Watch out billionaires!
+               Today Pinky finally conquered the world! Next up will be Mars. Watch out billionaires!
             ]
             :author[
-                :person[
+                :Person[
                     :name[The Brain]
                 ]
             ]
-            datePublished[2022-12-20TT08:00:00+08:00]
+            :datePublished(format="")[2022-12-20T08:00:00+08:00]
         ]
     ]
+
+    renders as
+]
+
+:NewsArticle[
+    :headline[Pinky Conquers The World]
+    :img(https://example.com/photos/1x1/photo.jpg)[The World]
+   :p[
+       Today Pinky finally conquered the world! Next up will be Mars. Watch out billionaires!
+   ]
+    :author[
+        :Person[
+            :name[The Brain]
+        ]
+    ]
+    :datePublished[2022-12-20T08:00:00+08:00]
 ]
 
 :p[
-    SECST knows which tags to collect into arrays for JSON-LD and how to map similar SECST or HTML semantics to JSON-LD:
+    SECST knows which tags to collect into arrays for JSON-LD and how to map similar SECST or HTML semantics to JSON-LD and some JSON-LD attributes mapped to tags can have attributes, e.g. :code[:heading(level=2)[]]. Also note below the use of Date formatting based on :a(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat target="_top")[Javascript date and time format functionality].
 
      :code[
         :NewsArticle[
-            :headline[Pinky and The Brain Plan For Mars]
-            :image(https://example.com/photos/1x1/photo.jpg)
+            :headline(level="2")[Pinky and The Brain Plan For Mars]
+            :img(https://example.com/photos/1x1/photo.jpg)[Mars]
             :p[
                 We, Pinky and The Brain, will soon announce plans to partner with one of the world's billionaires to take over Mars.
             ]
@@ -520,7 +537,7 @@ This is best explained through an example.
                     :name[The Brain]
                 ]
             ]
-            datePublished[2022-12-20TT08:00:00+08:00]
+            :datePublished(format="{dateStyle:'full',timeStyle:'long'}")[2022-12-20T08:00:00+08:00]
         ]
     ]
 
@@ -535,7 +552,7 @@ This is best explained through an example.
           "image": [
             "https://example.com/photos/1x1/photo.jpg"
            ],
-          "datePublished": "2022-12-20TT08:00:00+08:00",
+          "datePublished": "2022-12-20T08:00:00+08:00",
           "author": [{
               "@type": "Person",
               "name": "Pinky",
@@ -548,21 +565,70 @@ This is best explained through an example.
     ]
 
     while rendering this content
+]
+:NewsArticle[
+    :headline(level="2")[Pinky and The Brain Plan For Mars]
+    :img(https://example.com/photos/1x1/photo.jpg)[Mars]
+    :p[
+        We, Pinky and The Brain, will soon announce plans to partner with one of the world's billionaires to take over Mars.
+    ]
+    :author[
+        :Person[:name[Pinky]],
+        :Person[:name[The Brain]]
+    ]
+    :datePublished(format="{dateStyle:'full',timeStyle:'long'}")[2022-12-20T08:00:00+08:00]
+]
+:p[
+    The ordering of the tags inside :code[:NewsArticle[]] is only relevant to the display layout. This generates equivalent JSON-LD:
 
-    :NewsArticle[
-        :headline[Pinky and The Brain Plan For Mars]
-        :image(https://example.com/photos/1x1/photo.jpg)
-        :article[
-            We, Pinky and The Brain, will soon announce plans to partner with one of the world's billionaires to take over Mars.
+    :code[
+        :NewsArticle[
+            :headline(level="2")[Pinky and The Brain Plan For Mars]
+            :author[
+                :Person[:name[Pinky]],
+                :Person[:name[The Brain]]
+            ]
+            :datePublished(format="{dateStyle:'full',timeStyle:'long'}")[2022-12-20T08:00:00+08:00]
+            :img(https://example.com/photos/1x1/photo.jpg)[Mars]
+            :p[
+                We, Pinky and The Brain, will soon announce plans to partner with one of the world's billionaires to take over Mars.
+            ]
         ]
-        :author[
-            :Person[:name[Pinky]],
-            :Person[:name[The Brain]]
-        ]
-        :datePublished[2022-12-20TT08:00:00+08:00]
     ]
 
-    The ordering of the tags inside :code[:NewsArticle[]] is only relevant to the layout.
+    but renders as:
+]
+
+ :NewsArticle[
+    :headline(level="2")[Pinky and The Brain Plan For Mars]
+    :author[
+        :Person[:name[Pinky]],
+        :Person[:name[The Brain]]
+    ]
+    :datePublished(format="{dateStyle:'full',timeStyle:'long'}")[2022-12-20T08:00:00+08:00]
+    :img(https://example.com/photos/1x1/photo.jpg)[Mars]
+    :p[
+        We, Pinky and The Brain, will soon announce plans to partner with one of the world's billionaires to take over Mars.
+    ]
+]
+
+:p[
+    The generated HTML also contains styles, so a style sheet can be used to modify the displayed content.
+
+    :transpiled[
+        :NewsArticle[
+            :headline[Pinky and The Brain Plan For Mars]
+            :author[
+                :Person[:name[Pinky]],
+                :Person[:name[The Brain]]
+            ]
+            :datePublished(format="{dateStyle:'full',timeStyle:'long'}")[2022-12-20T08:00:00+08:00]
+            :img(https://example.com/photos/1x1/photo.jpg)[Mars]
+            :p[
+                We, Pinky and The Brain, will soon announce plans to partner with one of the world's billionaires to take over Mars.
+            ]
+        ]
+    ]
 ]
 
 :h2[Server Transpilation]
@@ -602,7 +668,7 @@ This is best explained through an example.
 
 :h2[Importing Data]
 :p[
-    Values can included imported data using the :code[src] attribute and a mime type provided in the :code[type] attribute. Static data is imported at transpile time and so long as it is visible (see above), it is editable by users unless the boolean attribute :code[readonly] is provided.
+    Values can included imported data using the :code[src] attribute and a mime type provided in the :code[type] attribute. The trailing :code[[]] are optional. Static data is imported at transpile time.
 
     JSON is formatted for readability and :a(https://json5.org target="_tab")[JSON5] is supported to make it easier to handle remote data.
 
@@ -610,7 +676,7 @@ This is best explained through an example.
 
     :value(static visible fitcontent type="application/json" src="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson")
 
-    Dynamically imported data is readonly because it is essentially a computation. To make it editable, then use the attribute :code[editable].
+    Imported data is readonly because it is essentially a computation. To make it editable, then use the attribute :code[editable].
 
     :code[:value(visible fitcontent type="application/json" src="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson")]
 

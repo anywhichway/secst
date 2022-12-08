@@ -8,7 +8,7 @@ const formatValue = (el) => {
         try {
             return JSON.stringify(JSON5.parse(el.rawValue), null, 2);
         } catch(e) {
-            console.error(e);
+            //console.error(e);
         }
     }
     return el.rawValue;

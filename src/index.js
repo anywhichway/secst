@@ -1,5 +1,8 @@
+import JSON5 from "json5";
+
 import {transform} from "./transform.js";
 import {listeners} from "./listeners.js";
+import {updateValueWidths} from "./update-value-widths.js";
 import {resolve} from "./resolve.js";
 import {engage} from "@anywhichway/autohelm";
 
@@ -26,16 +29,18 @@ if(document.currentScript?.getAttribute("src").endsWith("?run")) {
     }
     document.addEventListener("DOMContentLoaded",()=> {
         Object.entries(listeners).forEach(([key,value]) => {
-            document.body.addEventListener(key,value);
+            window.addEventListener(key,value);
         });
         engage(".toc")
         resolve();
     })
 }
 
+window.JSON5 = JSON5;
 window.SECST = {
     transform,
     resolve,
-    listeners
+    listeners,
+    updateValueWidths: updateValueWidths
 }
 

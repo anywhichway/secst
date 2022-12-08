@@ -28,11 +28,12 @@
                     el.style.width = Math.min(80,Math.max(1,el.value.length+1))+"ch";
                 })
             }
+            SECST.updateValueWidths();
         }
         await render();
 
         Object.entries(SECST.listeners).forEach(([key,value]) => {
-            document.body.addEventListener(key,value);
+            window.addEventListener(key,value);
         });
     })
 </script>

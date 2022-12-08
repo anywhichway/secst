@@ -3,6 +3,9 @@ await import("katex/contrib/mhchem");
 
 import JSON5 from "json5";
 
+import {updateValueWidths} from "./update-value-widths.js";
+
+
 let emojiMartData,
     initEmojiMart,
     EmojiMartSearchIndex;
@@ -19,6 +22,10 @@ if(init) {
     EmojiMartSearchIndex = _EmojiMartSearchIndex;
 }
 
+const deferedTags = (tagArray) => {
+    return tagArray.reduce((deferedTags,tag) => { deferedTags[tag] = () => tags[tag]; return deferedTags},{})
+}
+
 const universalAttributes = {
         hidden: true,
         dir: {
@@ -33,10 +40,10 @@ const universalAttributes = {
         is: true,
         title: true
     },
-    blockContent = ["article","audio","blockquote","code","dl","figure","hr","img","script","listeners","meta","ol","p","picture","pre","script","style","table","toc","ul","video","latex","math-science-formula","NewsArticle","Person"],
-    singleLineContent = ["a","abbr","bdi","bdo","br","del","code","em","emoji","error","escape","footnote","hashtag","ins","kbd","mark","meta","meter","strike","strong","sub","sup","time","value","var","wbr","u","@facebook","@github","@linkedin","@twitter","latex","name"],
-    multiLineContent = ["address","aside","bdi","cite","details","input","script","ol","output","ruby","ul","summary","textarea","transpiled","author"],
-    inlineContent = [...singleLineContent,...multiLineContent],
+    blockContent = deferedTags(["article","audio","blockquote","code","dl","figure","h1","h2","h3","h4","h5","h6","hr","img","script","listeners","meta","ol","p","picture","pre","script","style","table","toc","ul","video","latex","math-science-formula","NewsArticle","Person"]),
+    singleLineContent = deferedTags(["&","a","abbr","bdi","bdo","br","del","code","em","emoji","error","escape","footnote","hashtag","ins","kbd","mark","meta","meter","strike","strong","sub","sup","time","value","var","wbr","u","@facebook","@github","@linkedin","@twitter","latex","name"]),
+    multiLineContent = deferedTags(["address","aside","bdi","cite","details","input","script","ol","output","ruby","ul","textarea","transpiled","author","NewsArticle"]),
+    inlineContent = {...singleLineContent,...multiLineContent},
     tagToText = (tag,pre) => {
         const type = typeof(tag);
         if(type==="string") return tag.replace(/</g,"&lt;").replace(/>/g,"&gt;");
@@ -54,62 +61,122 @@ const universalAttributes = {
         return tag;
     };
 
-for(let i=1;i<=8;i++) {
-    blockContent.push("h"+i)
-}
 
 const tags = {
     NewsArticle: {
         allowAsRoot: true,
-        contentAllowed: ["headline","image","datePublished","author",...inlineContent,...blockContent],
-        transform(node) {
-            node.jsonld = {};
+        contentAllowed: {
+            headline: {
+                attributesAllowed: {
+                    level: true
+                },
+                contentAllowed: true,
+                minCount: 0,
+                maxCount: 1,
+                toJSONLD(node) {
+                    return node.content[0]
+                },
+                beforeMount(node) {
+                    const level = node.attributes.level || 1;
+                    node.tag = "h" + level;
+                    delete node.attributes.level;
+                }
+            },
+            p() {
+                return tags.p;
+            },
+            datePublished: {
+                attributesAllowed:{
+                    "data-format": true,
+                    lang: true,
+                    format(value) {
+                        return {
+                            "data-format": value
+                        }
+                    }
+                },
+                contentAllowed: Date,
+                minCount: 0,
+                maxCount: 1,
+                toText(node) {
+                    const lang = node.attributes.lang || document.documentElement.getAttribute("lang") || "en",
+                        options = node.attributes["data-format"] ? JSON5.parse(node.attributes["data-format"]) : undefined,
+                        formatted = new Intl.DateTimeFormat(lang,options).format(new Date(node.content[0]));
+                    return formatted;
+                }
+            },
+            author: {
+                contentAllowed: {
+                    name: {
+                        contentAllowed: true,
+                        toJSONLD(node) {
+                            node.classList.push("JSON-LD-author-name");
+                            return {name:node.content[0]}
+                        },
+                        beforeMount(node) {
+                            node.tag = "span"
+                        }
+                    },
+                    Person() { return tags.Person }
+                },
+                beforeMount(node) {
+                    node.tag = "span"
+                },
+                minCount: 1,
+                toJSONLD(node) {
+                    const author = node.getContentByTagName("name")[0] || node.getContentByTagName("Person")[0];
+                    if(author) return author.toJSONLD(author);
+                }
+            },
+            img() {
+                return tags.img;
+            }
         },
-        connected(el,node) {
-            console.log(node.jsonld);
-        }
-    },
-    headline: {
-        contentAllowed: true,
-        transform(node,path) {
-            const newsArticle = path.find((item) => item.tag==="NewsArticle");
-            newsArticle.jsonld.headline = node.content[0];
-        }
-    },
-    image: {
-        transform(node,path) {
-            const newsArticle = path.find((item) => item.tag==="NewsArticle");
-            newsArticle.jsonld.images ||= [];
-            newsArticle.jsonld.images.push(node.attributes.url);
-            node.tag = "img";
-            return node;
-        }
-    },
-    datePublished: {
-        contentAllowed: true,
-        transform(node,path) {
-            const newsArticle = path.find((item) => item.tag==="NewsArticle");
-            newsArticle.jsonld.datePublished = node.content[0];
-            node.tag = "span";
-            node.skipRevalidation = true;
-        }
-    },
-    author: {
-        contentAllowed: ["Person"],
-        transform(node,path) {
-            const newsArticle = path.find((item) => item.tag==="NewsArticle");
-            newsArticle.jsonld.author ||= [];
-            node.content.forEach((item) => {
-                newsArticle.jsonld.author.push(item);
-            })
+        toJSONLD(node) {
+            node.classList.push("JSON-LD-NewsArticle");
+            const headlines = node.getContentByTagName("headline"),
+                images = node.getContentByTagName("img"),
+                authors = node.getContentByTagName("author"),
+                headline = headlines.length===1 ? headlines[0] : null;
+            const jsonld = {
+                headline: headline.content[0],
+                images: images.reduce((images,img) => {
+                    const src = img.toJSONLD(img);
+                    if(src) images.push(src);
+                    return images;
+                },[]),
+                author: authors.map((author) => author.toJSONLD(author))
+            }
+            console.log(jsonld);
+        },
+        beforeMount(node) {
+            node.tag = "div";
         }
     },
     Person: {
         allowAsRoot: true,
-        contentAllowed: ["name"]
-    },
-    name: {
-      contentAllowed: true
+        contentAllowed: {
+            name: {
+                contentAllowed: true,
+                minCount: 1,
+                maxCount: 1,
+                toJSONLD(node) {
+                    node.classList.push("JSON-LD-Person-name");
+                    return {name:node.content[0]};
+                }
+            }
+        },
+        toJSONLD(node) {
+            node.classList.push("JSON-LD-Person");
+            const name = node.getContentByTagName("name")[0];
+            return {
+                "@type": "Person",
+                name: name.toJSONLD(name).name
+            }
+        },
+        beforeMount(node) {
+            node.tag = "span";
+        }
     },
     "@facebook": {
         attributesAllowed: {
@@ -126,6 +193,7 @@ const tags = {
                 node.content[0] = node.content[0] + "@facebook";
             }
             delete node.attributes.user;
+            return node;
         }
     },
     "@github": {
@@ -143,6 +211,7 @@ const tags = {
                 node.content[0] = node.content[0] + "@github";
             }
             delete node.attributes.user;
+            return node;
         }
     },
     "@linkedin": {
@@ -160,6 +229,7 @@ const tags = {
                 node.content[0] = node.content[0] + "@linkedin";
             }
             delete node.attributes.user
+            return node;
         }
     },
     "@twitter": {
@@ -177,6 +247,7 @@ const tags = {
                 node.content[0] = node.content[0] + "@twitter";
             }
             delete node.attributes.user;
+            return node;
         }
     },
     "math-science-formula": {
@@ -210,86 +281,71 @@ const tags = {
             }
             ],
         transform(node) {
-            const content = node.content.join("\n");
-            if(content.endsWith("\n")) {
+            node.content = [node.content.join("\n")];
+            node.skipContent = true;
+            return node;
+        },
+        beforeMount(node) {
+            if(node.content[0].endsWith("\n")) {
                 node.tag = "div";
             } else {
                 node.tag = "span";
             }
-            node.content = [content];
-            node.skipRevalidation = true;
-            node.skipContent = true;
         },
         toHTML(node) {
             return katex.renderToString(node.content[0],{
                 throwOnError: false
             })
         }
-        /*render(node,el) {
-            return katex.render(node.content[0],el)
-        }
-        connected(el) {
-            katex.render(el.innerText, el, {
-                throwOnError: false
-            });
-        }*/
     },
     "&": {
         contentAllowed: true,
         transform(node) {
             const values = node.content[0].split(" ");
-            node.tag = "span";
             node.content = [values.map((item) => "&"+item+";").join("")];
-            node.skipRevalidation = true;
+            return node;
+        },
+        beforeMount(node) {
+            node.tag = "span";
         }
     },
     a: {
         attributesAllowed: {
-            href: {
-                validate(value) {
+            url(value) {
+                this.href(value);
+                return {
+                    href: value
+                }
+            },
+            href(value) {
+                new URL(value,document?.baseURI);
+            },
+            ping(value) {
+                const urls = value.split(" ");
+                urls.forEach((url) => {
                     try {
-                        new URL(value,document.baseURI);
-                        return true;
+                        new URL(url);
                     } catch {
-                        throw new TypeError(`${value} is not a valid URL for href`)
+                        throw new TypeError(`${url} is not a valid url for ping`)
                     }
-                }
+                });
             },
-            ping: {
-                validate(value) {
-                    const urls = value.split(" ");
-                    urls.forEach((url) => {
-                        try {
-                            new URL(url);
-                        } catch {
-                            throw new TypeError(`${url} is not a valid url for ping`)
-                        }
-                    });
-                    return true;
-                }
-            },
-            referrerpolicy: {
-                validate(value) {
-                    const policies = ["no-referrer","no-referrer-when-downgrade","origin","origin-when-cross-origin","same-origin",
-                        "strict-origin","strict-origin-when-cross-origin"];
-                    if(policies.includes(value)) {
-                        return true;
-                    }
+            referrerpolicy(value) {
+                const policies = ["no-referrer","no-referrer-when-downgrade","origin","origin-when-cross-origin","same-origin",
+                    "strict-origin","strict-origin-when-cross-origin"];
+                if(!policies.includes(value)) {
                     throw new TypeError(`referrer policy ${value} is not one of ${JSON.stringify(policies)}`)
                 }
             },
             target: true,
-            type: {
-                validate(value) {
-                    const parts = value.split("/");
-                    if(parts.length!==2 || parts[0].length<1 || parts[1].length<1) {
-                        throw new TypeError(`${value} is not a valid MIME type`)
-                    }
-                    return true;
+            type(value) {
+                const parts = value.split("/");
+                if(parts.length!==2 || parts[0].length<1 || parts[1].length<1) {
+                    throw new TypeError(`${value} is not a valid MIME type`)
                 }
             }
         },
-        contentAllowed: [...singleLineContent],
+        contentAllowed: {...singleLineContent},
         transform(node) {
             if(node.attributes.url) {
                 node.attributes.href = node.attributes.url;
@@ -298,7 +354,7 @@ const tags = {
                 const href = node.content[0];
                 if(typeof(href)==="string" && (href.startsWith("https:") || href.startsWith("./") || href.startsWith("../"))) {
                     try {
-                        new URL(href,document.baseURI);
+                        new URL(href,document?.baseURI);
                         node.attributes.href = node.content[0];
                         node.attributes.target = "_tab";
                     } catch {
@@ -306,49 +362,50 @@ const tags = {
                     }
                 }
             }
+            return node;
         }
+    },
+    abbr: {
+      contentAllowed: {...singleLineContent}
     },
     article: {
         contentAllowed: "*"
     },
     audio: {
         attributesAllowed: {
-            src: true,
+            url(value) {
+                new URL(value,document?.baseURI);
+                return {
+                    src: value
+                }
+            },
             controls: true
         },
-        contentAllowed: ["source","track"]
+        contentAllowed: deferedTags(["source","track"]),
+        transform(node) {
+            return node;
+        }
     },
     bdo: {
         attributesAllowed: {
-            dir: {
-                validate(value) {
-                    return ["ltr","rtl"].includes(value)
+            dir(value) {
+                if(!["ltr","rtl"].includes(value)) {
+                    throw new TypeError(`${value} is not one of ["ltr","rtl"] for bdo`)
                 }
             }
         }
     },
     blockquote: {
         allowAsRoot: true,
-        contentAllowed: [...inlineContent, "blockquote"],
+        contentAllowed: {...inlineContent, blockquote() { return tags.blockquote}},
         attributesAllowed: {
-            cite: {
-                validate(value) {
-                    new URL(value);
-                    return true;
-                }
+            cite(value) {
+                new URL(value)
             }
         }
     },
     br: {
 
-    },
-    caption: {
-        parentRequired: ["figure","table"],
-        contentAllowed: singleLineContent,
-        transform(node,parent) {
-            // if parent .tag = table, ensure it is first
-            // if parent .tag = fig, change to fig caption
-        }
     },
     code: {
         attributesAllowed: {
@@ -369,7 +426,6 @@ const tags = {
                         node.content[node.content.length-1] = lastline.substring(0,lastline.length-1)
                     }
                     const code = JSON.parse(JSON.stringify(node));
-                    node.tag = "pre";
                     node.id = null;
                     node.content = [code];
                     node.skipContent = true;
@@ -382,10 +438,25 @@ const tags = {
             }
             delete node.attributes.language;
             delete node.attributes.run;
+            return node;
+        },
+        beforeMount(node) {
+            if(node.attributes.run==null && node.content.some((item) => typeof(item)==="string" && item.includes("\n"))) {
+                node.tag = "pre"
+            }
         }
     },
+    del: {
+        contentAllowed: {...singleLineContent}
+    },
     details: {
-        contentAllowed: [...singleLineContent,...multiLineContent],
+        contentAllowed: {
+            summary: {
+                contentAllowed:{...singleLineContent}
+            },
+            ...singleLineContent,
+            ...multiLineContent
+        },
         transform(node) {
             if(node.content[0].tag!=="summary") {
                 const parts = node.content[0].split(" ");
@@ -397,23 +468,30 @@ const tags = {
                 );
                 node.content[1] = parts.join(" ");
             }
+            return node;
         }
     },
-    dd: {
-        contentAllowed: inlineContent
-    },
     dl: {
-        contentAllowed: ["dt","dd"]
-    },
-    dt: {
-        contentAllowed: singleLineContent
+        allowAsRoot: true,
+        contentAllowed: {
+            dt: {
+                contentAllowed:singleLineContent
+            },
+            dd: {
+                contentAllowed: singleLineContent
+            }
+        }
     },
     error: {
         contentAllowed: "*",
         transform(node) {
             node.tag = "mark";
             node.classList.add("secst-error");
+            return node;
         }
+    },
+    em: {
+        contentAllowed: {...singleLineContent}
     },
     emoji: {
         attributesAllowed: {
@@ -455,33 +533,45 @@ const tags = {
     },
     escape: {
         contentAllowed: true,
-        transform(node) {
-            if(node.content[0].includes("\n")) {
+        beforeMount(node) {
+            if(node.content.some((item) => item.includes("\n"))) {
                 node.tag = "div";
             } else {
                 node.tag = "span";
             }
-            node.skipRevalidation = true;
         }
     },
     footnote: {
-        contentAllowed: [...blockContent,...inlineContent].filter((item) => item!=="footnote"),
+        contentAllowed: {...blockContent,...inlineContent},
         attributesAllowed: {
-            href: true
+            href(value) {
+                if(value[0]!=="#") {
+                    throw new TypeError(`Footnote href ${value} must start with a #`)
+                }
+            }
         },
         transform(node) {
-            node.tag = "sup";
             node.classList.push("autohelm-footnote")
-            node.skipRevalidation = true;
+            return node;
+        },
+        beforeMount(node) {
+            node.tag = "sup";
         }
     },
     figure: {
-        contentAllowed:[...blockContent,...inlineContent,"caption"].filter((item) => item!=="figure")
+        contentAllowed:{
+            ...blockContent,
+            ...inlineContent,
+            caption: {
+                contentAllowed:true
+            }
+        }
     },
     hashtag: {
         contentAllowed: true,
         transform(node) {
             // push to meta tags here
+            return node;
         },
         toText(node) {
             return node.content.reduce((tags,item) => {
@@ -526,13 +616,19 @@ const tags = {
             value:true
         }
     },
+    ins: {
+        contentAllowed: {...singleLineContent}
+    },
     img: {
         allowAsRoot: true,
         attributesAllowed: {
             alt:true,
             static:true,
-            src: true,
+            src(value) {
+                new URL(value,document.baseURI);
+            },
             url(value) {
+                this.src(value);
                 return {
                     src: value
                 }
@@ -569,25 +665,37 @@ const tags = {
 
                 }
             }
+            return node;
+        },
+        toJSONLD(node) {
+           if(!node.attributes.src?.startsWith("data:")) {
+               return node.attributes.src
+           }
         }
+    },
+    kbd: {
+        contentAllowed: {...singleLineContent}
     },
     li: {
         breakOnNewline: true,
         attributesAllowed: {
-            value: {
-                validate(value) {
-                    if (parseInt(value) == value) return true;
-                    return "a number"
+            value(value) {
+                if (parseInt(value) !== value) {
+                    throw new TypeError(`Attribute "value" for li must be a number not ${value}`)
                 }
             },
-            type: {
-                validate(value) {
-                    if ("aAiI1".includes(value) && value.length === 1) return true;
-                    return "one of 'aAiI1`"
+            type(value) {
+                if (!("aAiI1".includes(value) && value.length === 1)) {
+                    throw new TypeError(`Attribute "type" must be one of these letters: aAiI1`)
                 }
             }
         },
-        contentAllowed: ["ol","ul",...inlineContent.filter((item) => item!=="li")],
+        contentAllowed: {
+            ol() { return tags.ol },
+            li() { return tags.li },
+            img() { return tags.img },
+            ...inlineContent
+        },
     },
     listeners: {
         allowAsRoot: true,
@@ -610,10 +718,11 @@ const tags = {
                 })`
             ]
             delete node.attributes.selector;
+            return node;
         }
     },
     mark: {
-        contentAllowed: [...singleLineContent]
+        contentAllowed: {...singleLineContent}
     },
     meta: {
         contentAllowed: true,
@@ -623,39 +732,40 @@ const tags = {
         },
         transform(node) {
             node.attributes.content = node.content.join("");
+            return node;
         },
         connected(el) {
             document.head.appendChild(el);
         }
     },
     meter: {
-      attributesAllowed: {
-          min: {
-              validate(value) {
-                  return (value==parseFloat(value) || value==parseInt(value))
+        attributesAllowed: {
+          min(value) {
+              if(!(value==parseFloat(value) || value==parseInt(value))) {
+                  throw new TypeError(`${value} must be a number`)
               }
           },
-          max: {
-              validate(value) {
-                  return (value==parseFloat(value) || value==parseInt(value))
+          max(value) {
+              if(!(value==parseFloat(value) || value==parseInt(value))) {
+                  throw new TypeError(`${value} must be a number`)
               }
           },
-          low: {
-              validate(value) {
-                  return (value==parseFloat(value) || value==parseInt(value))
+          low(value) {
+              if(!(value==parseFloat(value) || value==parseInt(value))) {
+                  throw new TypeError(`${value} must be a number`)
               }
           },
-          high: {
-              validate(value) {
-                  return (value==parseFloat(value) || value==parseInt(value))
+          high(value) {
+              if(!(value==parseFloat(value) || value==parseInt(value))) {
+                  throw new TypeError(`${value} must be a number`)
               }
           },
-          optimum: {
-              validate(value) {
-                  return (value==parseFloat(value) || value==parseInt(value))
+          optimum(value) {
+              if(!(value==parseFloat(value) || value==parseInt(value))) {
+                  throw new TypeError(`${value} must be a number`)
               }
           }
-      },
+        },
         validate(node) {
           // todo see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meter
           return true;
@@ -666,16 +776,14 @@ const tags = {
         allowAsRoot: true,
         attributesAllowed: {
             reversed: true,
-            start: {
-                validate(value) {
-                    if (parseInt(value) == value) return true;
-                    return "a number"
+            start(value) {
+                if (parseInt(value) !== value) {
+                    throw new TypeError(`${value} must be a number`)
                 }
             },
-            type: {
-                validate(value) {
-                    if ("aAiI1".includes(value) && value.length === 1) return true;
-                    return "one of 'aAiI1`"
+            type(value) {
+                if (!("aAiI1".includes(value) && value.length === 1)) {
+                    throw new TypeError(`Attribute "type" must be one of these letters: aAiI1`)
                 }
             }
         },
@@ -721,17 +829,19 @@ const tags = {
                 }
                 return content;
             },[])
+            return node;
         }
     },
     p: {
         allowAsRoot: true,
         breakOnNewline: true,
-        contentAllowed: [...inlineContent],
+        contentAllowed: {...inlineContent},
         transform(node) {
             // ignore first return
             if(typeof(node.content[0])==="string" && node.content[0]) {
                 node.content[0] =  node.content[0].trimLeft();
             }
+            return node;
         },
         attributesAllowed: {
             align: {
@@ -740,35 +850,45 @@ const tags = {
         }
     },
     picture: {
-        contentAllowed: ["img","source"]
+        contentAllowed: {
+            img() { return tags.img },
+            source() { return tags.source }
+        }
     },
     pre: {
         contentAllowed: true
     },
     ruby: {
-        contentAllowed: [...singleLineContent,"rp","rt"]
+        contentAllowed: {
+            rp: {
+                contentAllowed:true,
+            },
+            rt: {
+                contentAllowed: true
+            },
+            ...singleLineContent
+        }
     },
     script: {
         attributesAllowed: {
-            type: {
-                validate(value) {
-                    const values = [
-                        "application/json",
-                        "text/plain",
-                        "text/csv"
-                    ];
-                    if(values.includes(value)) {
-                        return true;
-                    }
+            type(value) {
+                const values = [
+                    "application/json",
+                    "text/plain",
+                    "text/csv"
+                ];
+                if(!values.includes(value)) {
                     throw new TypeError(`value for script type ${value} must be one of ${JSON.stringify(values)}`);
                 }
             },
-            src: {
-                validate(value) {
-                    if(new URL(value,document.baseURI)) {
-                        return true;
-                    }
+            url(value) {
+                this.src(value);
+                return {
+                    src: value
                 }
+            },
+            src(value) {
+                new URL(value,document.baseURI);
             },
             static: true,
             visible: {
@@ -786,10 +906,6 @@ const tags = {
             return node.content[0]
         },
         async transform(node) {
-            if(node.attributes.url) {
-                node.attributes.src = node.attributes.url;
-                delete node.attributes.url;
-            }
             if(node.attributes.src && node.attributes.static!=null) {
                 const response = await fetch(node.attributes.src);
                 if(response.status==200) {
@@ -808,6 +924,7 @@ const tags = {
                 delete node.attributes.src;
                 delete node.attributes.static
             }
+            return node;
         },
         validate(node) {
             if(!node.attributes.type) {
@@ -819,59 +936,50 @@ const tags = {
     source: {
         attributesAllowed: {
             type:true,
-            height: {
-                validate(value) {
-                    return parseInt(value)===value+"";
-                    /*
-                    Allowed if the source element's parent is a <picture> element, but not allowed if the source element's parent is an <audio> or <video> element.
-                     */
+            height(value) {
+                if(parseInt(value)!==value+"") {
+                    throw TypeError("must be a number")
                 }
+                /*
+                Allowed if the source element's parent is a <picture> element, but not allowed if the source element's parent is an <audio> or <video> element.
+                 */
             },
-            media: {
-                validate(value) {
-                    return true;
-                    /*
-                    Allowed if the source element's parent is a <picture> element, but not allowed if the source element's parent is an <audio> or <video> element.
-                     */
-                }
+            media(value) {
+                /*
+                Allowed if the source element's parent is a <picture> element, but not allowed if the source element's parent is an <audio> or <video> element.
+                 */
             },
-            sizes: {
-                validate(value) {
-                    return true;
-                    /*
-                    Allowed if the source element's parent is a <picture> element, but not allowed if the source element's parent is an <audio> or <video> element.
-                     */
-                }
+            sizes(value) {
+                /*
+                Allowed if the source element's parent is a <picture> element, but not allowed if the source element's parent is an <audio> or <video> element.
+                 */
             },
-            src: {
-                validate(value) {
-                    return true;
-                    /*
-                    Required if the source element's parent is an <audio> and <video> element, but not allowed if the source element's parent is a <picture> element.
-                     */
-                }
+            src(value) {
+                /*
+                Required if the source element's parent is an <audio> and <video> element, but not allowed if the source element's parent is a <picture> element.
+                 */
             },
-            srcset: {
-                validate(value) {
-                    return true;
-                    /*
-                    Required if the source element's parent is a <picture> element, but not allowed if the source element's parent is an <audio> or <video> element.
-                     */
-                }
+            srcset(value) {
+                /*
+                Required if the source element's parent is a <picture> element, but not allowed if the source element's parent is an <audio> or <video> element.
+                 */
             },
-            width: {
-                validate(value) {
-                    return parseInt(value)===value+"";
-                    /*
-                    Allowed if the source element's parent is a <picture> element, but not allowed if the source element's parent is an <audio> or <video> element.
-                     */
+            width(value) {
+                if(parseInt(value)!==value+"") {
+                    throw TypeError("must be a number")
                 }
+                /*
+                Allowed if the source element's parent is a <picture> element, but not allowed if the source element's parent is an <audio> or <video> element.
+                 */
             }
         },
         parentRequired: ["audio","picture","video"]
     },
     strike: {
-        contentAllowed: [...singleLineContent]
+        contentAllowed: {...singleLineContent}
+    },
+    strong: {
+        contentAllowed: {...singleLineContent}
     },
     style: {
         allowAsRoot: true,
@@ -886,20 +994,70 @@ const tags = {
             } else {
                 node.content = [node.content.join(";")]
             }
+            return node;
         }
     },
+    sub: {
+        contentAllowed:true
+    },
+    sup: {
+        contentAllowed:true
+    },
     table: {
-        contentAllowed:["thead","tbody","tfoot","caption","tr"],
+        allowAsRoot: true,
+        contentAllowed: {
+            tbody: {
+                contentAllowed: {
+                    tr() { return tags.tr }
+                }
+            },
+            tfoot: {
+                contentAllowed: "*"
+            },
+            thead: {
+                contentAllowed: {
+                    td() { return tags.td; },
+                    th() { return tags.th; }
+                },
+                transform(node) {
+                    const line = [];
+                    node.content.forEach((item,i,content) => {
+                        if(typeof(item)==="string") {
+                            const items = item.split("|").map((item) => item.trim());
+                            for(let i=0;i<items.length;i++) {
+                                if(items[i]==="") {
+                                    if(typeof(items[i+1])==="string") {
+                                        lines.push(items[i]);
+                                    }
+                                } else {
+                                    line.push(items[i]);
+                                }
+                            }
+                        } else {
+                            line.push(item);
+                        }
+                    });
+                    node.content = line.map((item) => {
+                        if(typeof(item)==="string") return {tag:"th", content:[item]};
+                        return item;
+                    })
+                    return node;
+                }
+            },
+            caption() { return tags.caption },
+            tr() { return tags.tr }
+        },
         transform(node) {
             node.classList.push("secst");
+            return node;
             // todo: normalize table so all rows have length of max length row
         }
     },
     td: {
         attributesAllowed: {
-            colspan: {
-                validate(value) {
-                    return parseInt(value)===value+"";
+            colspan(value) {
+                if(parseInt(value)!==value+"") {
+                    throw new TypeError("must be a numebr");
                 }
             }
         },
@@ -929,45 +1087,21 @@ const tags = {
         },
         transform(node) {
             node.content = [node.content.join("\n")];
+            return node;
         }
     },
     th: {
         attributesAllowed: {
-            colspan: {
-                validate(value) {
-                    return parseInt(value)===value+"";
+            colspan(value) {
+                if(parseInt(value)!==value+"") {
+                    throw new TypeError("must be a numebr");
                 }
             }
         },
         contentAllowed: singleLineContent
     },
-    thead: {
-        contentAllowed:["td","th"],
-        transform(node) {
-            const line = [];
-            node.content.forEach((item,i,content) => {
-                if(typeof(item)==="string") {
-                    const items = item.split("|").map((item) => item.trim());
-                    for(let i=0;i<items.length;i++) {
-                        if(items[i]==="") {
-                            if(typeof(items[i+1])==="string") {
-                                lines.push(items[i]);
-                            }
-                        } else {
-                            line.push(items[i]);
-                        }
-                    }
-                } else {
-                    line.push(item);
-                }
-            });
-            node.content = line.map((item) => {
-                if(typeof(item)==="string") return {tag:"th", content:[item]};
-                return item;
-            })
-        }
-    },
     toc: {
+        allowAsRoot: true,
         contentAllowed: true,
         transform(node) {
             node.tag = "h1";
@@ -981,17 +1115,21 @@ const tags = {
             if(node.content.length===0) {
                 node.content = ["Table of Contents"]
             }
+            return node;
         }
     },
     tr: {
         attributesAllowed: {
-            rowspan: {
-                validate(value) {
-                    return parseInt(value)===value+"";
-                }
+            rowspan(value) {
+                   if(parseInt(value)!==value+"") {
+                       throw new TypeError("must be a number")
+                   }
             }
         },
-        contentAllowed: ["td","th"],
+        contentAllowed: {
+            td() { return tags.td; },
+            th() { return tags.th; }
+        },
         transform(node) {
             const line = [];
             node.content.forEach((item,i,content) => {
@@ -1014,37 +1152,35 @@ const tags = {
                 if(typeof(item)==="string") return {tag:"td", content:[item]};
                 return item;
             })
+            return node;
         }
     },
     track: {
       parentRequired: ["audio","video"],
       attributesAllowed: {
-          default: {
-              validate(value,node) {
-                  return true;
-                  /*
-                  This may only be used on one track element per media element.
-                   */
-              }
+          default(value,node) {
+              /*
+              This may only be used on one track element per media element.
+               */
           },
-          kind: {
-              validate(value) {
-                  return true;
-              }
+          kind(value) {
+
           },
           label: true,
-          src: {
-              validate(value) {
-                  new URL(value);
-                  /*
-                  This attribute must be specified and its URL value must have the same origin as the document — unless the <audio> or <video> parent element of the track element has a crossorigin attribute.
-                   */
-              }
+          url(value) {
+            this.src(value);
+            return {
+                src: value
+            }
           },
-          srclang: {
-              validate(value) {
-                  return true;
-              }
+          src(value) {
+              new URL(value,document.baseURI);
+              /*
+              This attribute must be specified and its URL value must have the same origin as the document — unless the <audio> or <video> parent element of the track element has a crossorigin attribute.
+               */
+          },
+          srclang(value) {
+
           }
       }
     },
@@ -1057,7 +1193,9 @@ const tags = {
     ul: {
         allowAsRoot: true,
         indirectChildAllowed: true,
-        contentAllowed: ["li"],
+        contentAllowed: {
+            li() { return tags.li }
+        },
         transform(node) {
             node.content = node.content.reduce((content,item) => {
                 if(typeof(item)==="string") {
@@ -1087,6 +1225,7 @@ const tags = {
                 }
                 return content;
             },[])
+            return node;
         }
     },
     u: {
@@ -1097,6 +1236,7 @@ const tags = {
         styleAllowed() { return {"text-decoration":"underline"}},
         transform(node) {
             node.attributes.style =  {"text-decoration":"underline"};
+            return node;
         }
     },
     value: {
@@ -1144,12 +1284,14 @@ const tags = {
                     readonly: ""
                 }
             },
-            src: {
-                validate(value) {
-                    if(new URL(value,document.baseURI)) {
-                        return true;
-                    }
+            url(value) {
+                this.src(value);
+                return {
+                    src: value
                 }
+            },
+            src(value) {
+                new URL(value,document.baseURI)
             },
             static: true,
             template(value) {
@@ -1200,34 +1342,32 @@ const tags = {
             },
             value: true
         },
+        contentAllowed: true,
         async transform(node) {
             let type = node.attributes.type;
             if(["application/json","text/plain","text/csv"].includes(type)) {
-                node.tag = "textarea";
                 node.classList.push("secst");
                 node.attributes["data-mime-type"] = type;
                 node.skipContent;
                 delete node.attributes.type;
-            } else {
-                node.tag = "input";
             }
             node.attributes.hidden = "";
             if (node.attributes.visible == "") {
                 delete node.attributes.hidden;
                 delete node.attributes.visible;
             }
-            if(node.attributes.url) {
-                node.attributes.src = node.attributes.url;
-                delete node.attributes.url;
-            }
             if (node.attributes["data-default"] == null) {
                 node.attributes["data-default"] = "";
             }
-            if(node.attributes.src) {
+            const url = node.attributes.url || node.attributes.src;
+            if(url) {
                 if (node.attributes.static != null) {
                     delete node.attributes.static;
+                    if(node.attributes.editable==null) {
+                        node.attributes.disabled = "";
+                    }
                     try {
-                        const response = await fetch(node.attributes.src);
+                        const response = await fetch(url);
                         if (response.status == 200) {
                             try {
                                 let text = await response.text();
@@ -1247,10 +1387,14 @@ const tags = {
                 } else {
                     const f = `await (async () => {
                         try {
-                            const response = await fetch("${node.attributes.src}");
+                            const response = await fetch("${url}");
                             if(response.status===200) {
                                 try {
-                                    return await response.text();
+                                    let text = await response.text();
+                                    if("${type}"==="application/json") {
+                                        text = JSON.stringify(JSON5.parse(text), null, 2);
+                                    }
+                                    return text;
                                 } catch(e) {
                                     return e+"";
                                 }
@@ -1263,13 +1407,31 @@ const tags = {
                         })()`;
                     node.attributes["data-template"] = f;
                 }
-                delete node.attributes.src;
+                delete node.attributes.url;
             } else {
                 node.attributes["data-template"] = node.content.join("").trim();
                 node.attributes.value = node.attributes["data-default"]
             }
             if(node.tag==="input") {
                 node.content = [];
+            }
+            return node;
+        },
+        beforeMount(node) {
+            if(node.attributes["data-mime-type"]) {
+                node.tag = "textarea";
+            } else {
+                node.tag = "input";
+            }
+        },
+        connected(el,node) {
+            const value = el.getAttribute("value");
+            if(node.tag==="textarea") {
+                if(el.innerHTML!==value) {
+                    el.innerHTML = value;
+                }
+                el.removeAttribute("value");
+                updateValueWidths([el]);
             }
         }
     },
@@ -1278,27 +1440,32 @@ const tags = {
             src: true,
             controls: true
         },
-        contentAllowed: ["source","track"]
+        contentAllowed: {
+            source() { return tags.source; },
+            track() { return tags.track; }
+        }
     }
 };
 
 for(let i=1;i<=8;i++) {
     tags["h"+i] = {
+        allowAsRoot: true,
         contentAllowed: singleLineContent
     }
 }
 
-inlineContent.forEach((tag) => {
+// need to reintroduce, stops tags from nesting in self
+/*inlineContent.forEach((tag) => {
     if(!tags[tag]) {
         tags[tag] = {
             contentAllowed: inlineContent.filter((item) => item!==tag)
         }
     }
-})
-Object.entries(tags).forEach(([key,value]) => {
+})*/
+/*Object.entries(tags).forEach(([key,value]) => {
     value.tag = key;
     value.allowAsRoot ||= blockContent.includes(key);
-})
+})*/
 
 
 

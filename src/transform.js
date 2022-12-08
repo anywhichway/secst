@@ -2,6 +2,23 @@ import {init as initAutohelm} from "@anywhichway/autohelm";
 
 import {tags, universalAttributes} from "./tags.js";
 
+const getContentByTagName = function(node,tagName,results=[]) {
+    if(node.content) {
+        node.content.reduce((results,item) => {
+            if(item.tag===tagName) {
+                results.push(item)
+            }
+            if(item.content) {
+                item.content.forEach((node) => {
+                    getContentByTagName(node,tagName,results);
+                })
+            }
+            return results;
+        },results)
+    }
+    return results;
+};
+
 const patchTopLevel = (tree) => {
     let previous;
     return tree.reduce((result,node) => {
@@ -48,6 +65,12 @@ const toElement = async (node,{domNodes,connects,parentConfig}) => {
             domNodes.push(new Text(decoder.innerText)); // new Text(node) sanitize?
         }
     } else if(!node.drop) {
+        if(node.toJSONLD) {
+           // console.log(node.toJSONLD(node))
+        }
+        if(node.beforeMount) {
+            node.beforeMount(node)
+        }
         const {tag, id, classList, attributes} = node,
             config = tags[tag];
         let el = node.toText ? document.createElement("span") : document.createElement(tag);
@@ -148,33 +171,51 @@ const toElement = async (node,{domNodes,connects,parentConfig}) => {
     }
 }
 
-const validateNode = async ({parser,node,path=[],errors=[]}) => {
+const validateNode = async ({parser,node,path=[],contentAllowed= tags,errors=[]}) => {
     if(!node || typeof(node)!=="object") {
         return;
+    }
+    node.getContentByTagName = getContentByTagName.bind(node,node);
+    if(contentAllowed==="*") {
+        contentAllowed = tags;
+    } else if(typeof(contentAllowed)==="function") {
+        contentAllowed = contentAllowed();
     }
     node.attributes ||= {};
     node.classList ||= [];
     node.content ||= [];
     let tag = node.tag,
-        config = tags[tag];
+        config = contentAllowed[tag] || tags[tag];
     if(!config) {
         node.drop = true;
         errors.push(new parser.SyntaxError(`Dropping unknown tag ${tag}`,null,null,node.location));
-        return errors;
+        return {node,errors};
     }
     if(path.length===0 && !config.allowAsRoot) {
         node.drop = true;
         errors.push(new parser.SyntaxError(`${tag} is not permitted as a root level element`,null,null,node.location));
-        return errors;
+        return {node,errors};
     }
-    if(config.parentRequired && (path.length==0 || !config.parentRequired.includes(path[path.length-1].tag))) {
+    if(config.parentRequired && (path.length===0 || !config.parentRequired.includes(path[path.length-1].tag))) {
         node.drop = true;
         errors.push(new parser.SyntaxError(`${tag} required parent to be one of`,JSON.stringify(config.parentRequired),path[path.length-1].tag,node.location));
-        return errors;
+        return {node,errors};
     }
-
+    if(!config.initialized) {
+        config.initialized = true;
+        if(config.contentAllowed) {
+            config.contentAllowed = typeof(config.contentAllowed)==="function" ? config.contentAllowed() : config.contentAllowed;
+            if(typeof(config.contentAllowed)==="object") {
+                Object.entries(config.contentAllowed).forEach(([key,value]) => {
+                    if(typeof(value)==="function") {
+                        config.contentAllowed[key] = value();
+                    }
+                })
+            }
+        }
+    }
     let ancestorIndex;
-    if(path.length>0 && !config.indirectChildAllowed && Array.isArray(config.contentAllowed) && !config.contentAllowed.includes(tag) && (ancestorIndex = path.findIndex((ancestor) => ancestor.tag===tag)!==-1)) {
+    if(path.length>0 && !config.indirectChildAllowed && config.contentAllowed && typeof(config.contentAllowed)==="object" && !config.contentAllowed[tag] && (ancestorIndex = path.findIndex((ancestor) => ancestor.tag===tag)!==-1)) {
         node.drop = true;
         const ancestor = path[ancestorIndex+1];
         ancestor.content.splice(ancestor.content.findIndex((node) => node.tag===tag),1,...node.content);
@@ -191,11 +232,12 @@ const validateNode = async ({parser,node,path=[],errors=[]}) => {
     })
     let transformed;
     if(config.transform) {
-        transformed = await config.transform(node,path);
-        if(transformed) {
-            tag = node.tag;
-            config = tags[tag];
+        const transformed = await config.transform(node,path);
+        if(transformed===undefined) {
+            debugger;
         }
+        node = transformed;
+        config = config.contentAllowed ? config.contentAllowed[node.tag] || contentAllowed[node.tag] : contentAllowed[node.tag];
     }
     if(node.content.length>0 && !config.contentAllowed) {
         while(node.content.length) { // try remove whitespace
@@ -211,73 +253,76 @@ const validateNode = async ({parser,node,path=[],errors=[]}) => {
         }
     }
     if(!node.skipContent) {
-        node.content = await node.content.reduce(async (content,child) => {
-            content = await content;
+        const content = [];
+        for(let child of node.content) {
             const type = typeof(child);
             if(type==="string") {
                 if(config.contentAllowed) {
                     content.push(child);
-                    return content;
+                } else {
+                    errors.push(new parser.SyntaxError(`${tag} does not allow string child. Dropping child.`,null,child,node.location))
                 }
-                errors.push(new parser.SyntaxError(`${tag} does not allow string child. Dropping child.`,null,child,node.location))
-            }
-            if(child && type==="object") {
-                if(!config.contentAllowed || (!config.contentAllowed==="*" && Array.isArray(config.contentAllowed) && !config.contentAllowed.includes(child.tag))) {
+            } else if(child && type==="object") {
+                if(!config.contentAllowed || (config.contentAllowed!=="*" && !config.contentAllowed[child.tag])) {
                     errors.push(new parser.SyntaxError(`${tag} does not allow child ${child.tag}.`,null,JSON.stringify(child),node.location));
                     child.tag = "error";
                 } else {
-                    await validateNode({parser,node:child,path:[...path,node],errors})
+                    const result = await validateNode({parser,node:child,path:[...path,node],contentAllowed:config.contentAllowed,errors});
+                    child = result.node;
                     if(!child.drop)  {
                         content.push(child);
                     }
                 }
-                return content;
+            } else {
+                errors.push(new parser.SyntaxError(`${tag} has unexpected child type ${type} ${child}. Dropping child.`,null,JSON.stringify(child),node.location));
             }
-            errors.push(new parser.SyntaxError(`${tag} has unexpected child type ${type} ${child}. Dropping child.`,null,JSON.stringify(child),node.location));
-            return content;
-        },[]);
+        }
+        node.content = content;
     }
     config.attributesAllowed ||= {};
     Object.entries(node.attributes||{}).forEach(([key,value]) => {
-        const attributeAllowed = universalAttributes[key] || config.attributesAllowed[key],
-            type = typeof(attributeAllowed);
-        if(type==="function") {
-            const result = attributeAllowed(value,node);
-            delete node.attributes[key];
-            if(result) {
-                Object.assign(node.attributes,result);
-            }
-
-        } else if(attributeAllowed && type==="object") {
-            if(attributeAllowed.transform) {
-                const result = attributeAllowed.transform(value,node);
-                delete node.attributes[key];
-                if(result) {
+        try {
+            const attributeAllowed = universalAttributes[key] || config.attributesAllowed[key],
+                type = typeof(attributeAllowed);
+            if(type==="function") {
+                const result = attributeAllowed(value,node);
+                if(result && typeof(result)==="object") {
+                    delete node.attributes[key];
                     Object.assign(node.attributes,result);
                 }
-            }
-            if(attributeAllowed.default && node.attributes[key] == null) {
-                node.attributes[key] = attributeAllowed.default;
-            }
-            if (attributeAllowed.required && node.attributes[key] == null) {
-                errors.push(new parser.SyntaxError(`${tag} is required to have attribute '${key}'`,null,null,node.location));
-                return;
-            }
-            if(attributeAllowed.validate) {
-                let valid;
-                try {
-                    valid = attributeAllowed.validate(value,node);
-                } catch(e) {
-                    valid = e+"";
+            } else if(attributeAllowed && type==="object") {
+                if(attributeAllowed.transform) {
+                    const result = attributeAllowed.transform(value,node);
+                    if(result && typeof(result)==="object") {
+                        delete node.attributes[key];
+                        Object.assign(node.attributes,result);
+                    }
                 }
-                if(valid!==true) {
-                    delete node.attributes[key];
-                    errors.push(new parser.SyntaxError(`${tag} the value of attribute '${key}' is invalid`,valid,value,node.location));
+                if(attributeAllowed.default && node.attributes[key] == null) {
+                    node.attributes[key] = attributeAllowed.default;
                 }
+                if (attributeAllowed.required && node.attributes[key] == null) {
+                    errors.push(new parser.SyntaxError(`${tag} is required to have attribute '${key}'`,null,null,node.location));
+                    return;
+                }
+                if(attributeAllowed.validate) {
+                    let valid;
+                    try {
+                        valid = attributeAllowed.validate(value,node);
+                    } catch(e) {
+                        valid = e+"";
+                    }
+                    if(valid!==true) {
+                        delete node.attributes[key];
+                        errors.push(new parser.SyntaxError(`${tag} the value of attribute '${key}' is invalid`,valid,value,node.location));
+                    }
+                }
+            } else if(attributeAllowed!==true && !key.startsWith("data-")) {
+                delete node.attributes[key];
+                errors.push(new parser.SyntaxError(`${tag} does not allow attribute ${key}`,null,JSON.stringify(value),node.location))
             }
-        } else if(attributeAllowed!==true && !key.startsWith("data-")) {
-            delete node.attributes[key];
-            errors.push(new parser.SyntaxError(`${tag} does not allow attribute ${key}`,null,JSON.stringify(value),node.location))
+        } catch(e) {
+            errors.push(new parser.SyntaxError(`${tag}:${key} ${e.message}`,null,JSON.stringify(value),node.location))
         }
     })
     if(node.attributes.style) {
@@ -289,16 +334,13 @@ const validateNode = async ({parser,node,path=[],errors=[]}) => {
             errors.push(new parser.SyntaxError(`${tag} does not allow styling. Dropping style`,null,null,node.location))
         }
     }
-    if(tag!==node.tag && !node.skipRevalidation) { // node was transformed to a different node type, so validate that also
-        await validateNode({parser,node,path,errors});
-    }
-    return errors;
+    return {node,errors};
 };
 
 const toDOMNodes = async (nodes,parentConfig,connects=[]) => {
     const domNodes = [];
-    for(let i=0;i<nodes.length;i++) {
-        await toElement(nodes[i],{domNodes,connects,parentConfig});
+    for(const node of nodes) {
+        await toElement(node,{domNodes,connects,parentConfig});
     }
     domNodes.connects = connects;
     return domNodes;
@@ -340,7 +382,8 @@ const transform = async (parser,text,{styleAllowed}={}) => {
     const transformed = patchTopLevel(parser.parse(text));
     const parsed = JSON.parse(JSON.stringify(transformed));
     const errors = await transformed.reduce(async (errors,node) => {
-        return [...await errors,...await validateNode({parser,node})]
+        const result = await validateNode({parser,node})
+        return [...await errors,...result.errors]
     },[]);
     const dom = document.createDocumentFragment();
     dom.appendChild(dom.head = document.createElement("head"));
@@ -389,7 +432,7 @@ const transform = async (parser,text,{styleAllowed}={}) => {
         setTimeout(connected,1000)
     });
     try {
-        initAutohelm({tocSelector:".toc",dom:dom.body});
+        initAutohelm({tocSelector:".toc",dom:dom.body,directChildren:true});
     } catch(e) {
 
     }
