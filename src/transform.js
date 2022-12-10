@@ -1,5 +1,6 @@
+import JSON5 from "json5";
 import {init as initAutohelm} from "@anywhichway/autohelm";
-
+import Tag from "./tag.js";
 import {tags, universalAttributes} from "./tags.js";
 
 const getContentByTagName = function(node,tagName,results=[]) {
@@ -66,6 +67,7 @@ const toElement = async (node,{domNodes,connects,parentConfig}) => {
         }
     } else if(!node.drop) {
         if(node.toJSONLD) {
+            node.toJSONLD(node)
            // console.log(node.toJSONLD(node))
         }
         if(node.beforeMount) {
@@ -285,7 +287,7 @@ const validateNode = async ({parser,node,path=[],contentAllowed= tags,errors=[]}
             const attributeAllowed = universalAttributes[key] || config.attributesAllowed[key],
                 type = typeof(attributeAllowed);
             if(type==="function") {
-                const result = attributeAllowed(value,node);
+                const result = attributeAllowed.call(config.attributesAllowed,value,node); // using config.attributesAlllowed as this ok with universal attributes
                 if(result && typeof(result)==="object") {
                     delete node.attributes[key];
                     Object.assign(node.attributes,result);
@@ -379,14 +381,16 @@ const transform = async (parser,text,{styleAllowed}={}) => {
     if(styleAllowed) {
         configureStyles(tags,styleAllowed);
     }
-    const transformed = patchTopLevel(parser.parse(text));
+    const transformed = parser.parse(text,{Tag,JSON5}); //patchTopLevel(parser.parse(text,{Tag,JSON5}));
     const parsed = JSON.parse(JSON.stringify(transformed));
     const errors = await transformed.reduce(async (errors,node) => {
+        if(typeof(node)==="string") return errors;
         const result = await validateNode({parser,node})
         return [...await errors,...result.errors]
     },[]);
     const dom = document.createDocumentFragment();
     dom.appendChild(dom.head = document.createElement("head"));
+    dom.head.innerHTML = `<meta name="viewport" content="width=device-width, initial-scale=1" />`;
     dom.appendChild(dom.body = document.createElement("body"));
     dom.body.innerHTML = `<style>
         span.autohelm-nav a {all: unset} 
@@ -422,6 +426,10 @@ const transform = async (parser,text,{styleAllowed}={}) => {
                 font-family: monospace;
                 white-space: pre;
             }
+        }
+        code {
+            white-space: pre;
+            unicode-bidi: embed;
         }
         </style>`;
     const nodes = await toDOMNodes(transformed);

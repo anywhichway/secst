@@ -47,6 +47,9 @@ const listeners = {
     async change(event) {
         if(["INPUT","TEXTAREA"].includes(event.target.tagName) && event.target.getAttribute("data-template")!==null && (event.target.value+"")!=="[object Promise]") {
             await update(event.target);
+            if(event.target.value+""==="undefined") {
+                event.target.value = "";
+            }
             updateValueWidths();
         }
     },
@@ -60,6 +63,9 @@ const listeners = {
     async input(event) {
         if(["INPUT","TEXTAREA"].includes(event.target.tagName) && event.target.getAttribute("data-template")!==null) {
            await update(event.target);
+           if(event.target.value+""==="undefined") {
+               event.target.value = "";
+           }
            updateValueWidths();
         }
     },

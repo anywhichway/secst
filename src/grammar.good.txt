@@ -23,8 +23,44 @@
             }
             return content;
         }
-        var Tag = options.Tag;
-        var JSON5 = options.JSON5;
+
+        class Tag {
+            constructor({tag,options,content,location}) {
+                const {attributes, classes, id } = options||{};
+                Object.assign(this,{tag,id,classes,attributes,content});
+                Object.defineProperty(this,"location",{value:location});
+            }
+            toString() {
+                let string = ":" + this.tag;
+                if(this.tag.startsWith("@")) {
+                    string = this.tag;
+                }
+                if(this.tag==="hashtag") {
+                    return this.content.reduce((tags,item) => {
+                       item.split(" ").forEach((tag) => tags.push("#" + tag.trim()));
+                       return tags;
+                   },[]).join(", ").trim()
+                }
+                const attributes = Object.entries(this.attributes||{}),
+                    classes = this.classes || [];
+                if(this.id || classes.length>0 || attributes.length>0) {
+                    string += "(";
+                    if(this.id) string += "#" + this.id + " ";
+                    if(classes.length>0) {
+                        classes.forEach((className) => string += className + " ");
+                    }
+                    if(attributes.length>0) {
+                        attributes.forEach(([key,value]) => {
+                            string += (value==="" ? key : `${key}="${value}"`) + " ";
+                        });
+                    }
+                    string = string.trim() + ")";
+                }
+                const bracket = this.content.length>0;
+                string += (bracket ? "[" : "") + this.content.map((item) => typeof(item)==="string" ? item : item.toString()).join(" ") + (bracket ? "]" : "");
+                return string;
+            }
+        }
     }
     start
         = _ content:content* _ {
@@ -32,7 +68,7 @@
             }
 
     content
-        = backtickquoted / escape / script / code /  value / hr / br / (&colon expression _?) / [ a-z0-9_\-~!@#$%^&*()_+=\[\{\]\}|\\;:"'<,>.?/\n\r\t]i
+        = escape / script / code /  value / hr / br / (&colon expression _?) / backtickquoted / [ a-z0-9_\-~!@#$%^&*()_+=\[\{\]\}|\\;:"'<,>.?/\n\r\t]i
 
     colon
         = ":"
@@ -98,11 +134,11 @@
             return new Tag({tag:"@"+site.join(""),options,content,location:location()});
         }
 
-    at
+    at "at"
         = "@"
 
-    bracketed
-        = BRACKETOPEN value:(backtickquoted/symbol/hashtag/mention/escape/script/code/value/hr/br/expression/not_bracketed/bracketed)* BRACKETCLOSE {
+    bracketed "bracketed"
+        = BRACKETOPEN value:(symbol/hashtag/mention/escape/script/code/value/hr/br/expression/not_bracketed/bracketed)* BRACKETCLOSE {
             if(Array.isArray(value) && value.every((item) => typeof(item)==="string")) {
                 return [value.join("")];
             }
@@ -138,21 +174,7 @@
 
     BRACKETCLOSE = ']'
 
-    braced
-        = BRACEOPEN value:(not_braced/braced)* BRACECLOSE {
-            return "{" + value.join("") + "}"
-        }
-
-    not_braced
-        = not:(!BRACECLOSE !BRACEOPEN.) {
-                return not.join("");
-        }
-
-    BRACEOPEN = '{'
-
-    BRACECLOSE = '}'
-
-    backtickquoted
+    backtickquoted "backtickquoted"
             = BACKTICKOPEN text:(not_backtickquoted/backtickquoted)*  BACKTICKCLOSE { return text.join("") }
 
         not_backtickquoted
@@ -165,33 +187,34 @@
     tag
         = colon token:token { return token }
 
-    options
-        = "(" _ id:id? _ classList:class*  _ binaryAttributes:binaryattribute* _ attributes:braced? _ ")" {
+    options "options"
+        = "(" _ id:id? _ attributes:attributelist? _ classes:class* _ ")" {
             var o = {};
             o.id=id;
-            o.classList = classList;
-            try {
-                o.attributes = JSON5.parse(attributes) || {};
-            } catch(e) {
-                error("Unable to parse attributes. Check for missing commas or quotes.")
-            }
-            binaryAttributes.forEach(([key,value]) => {
-                   o.attributes[key] = value;
-            });
-            return o;
+            o.classList = classes;
+            o.attributes = (attributes||[]).reduce((attributes,[name,value]) => { attributes[name] = value; return attributes; },{}); return o;
         }
 
     id
         = "#" token:token { return token }
 
     class
-        = "." cls:classname { return cls }
+        = "." cls:token { return cls }
 
-    classname
-        = hyphen:"-"? start:[_a-z]i rest:[\w]i* { return (hyphen || "") + start + rest.join("") }
+    keyvaluelist "key value list"
+        = first:keyvalue rest:( _ "," keyvalue)* { return [first,...rest.map((value) => value.pop())] }
+
+    keyvalue "key value pair"
+        = key:token _ ":" _ ["] value:[ a-z0-9_\-~`!@#$%^&*()_+=\[\]|\;'<>.?/]i* ["] { return [key,value.join("")]; }
+
+    attributelist
+        = attribute:(binaryattribute / attribute) _ attributelist:attributelist* { return [attribute].concat(...attributelist) }
+
+    attribute
+        =  name:token _ "=" _ value:quoted { return [name,value] }
 
     binaryattribute
-        = attr:(_ hidden _ / _ checked _ / _ colored _ / _ disabled _ / _ editable _ / _ fitcontent _ / _ literal _ / _ open _ / _ readonly _ / _ reversed _ / _ run _ / _ selected _ / _ static _ / _ toggle _ / _ url _ / _ visible _) { return attr[1] }
+        = hidden / checked / colored / disabled / editable / fitcontent/ open / readonly / reversed / run / selected / static / toggle / url / visible
 
     hidden
         = "hidden" { return ["hidden",""] }
@@ -210,9 +233,6 @@
 
     fitcontent
         = "fitcontent" { return ["fitcontent",""] }
-
-    literal
-        = "literal" { return ["literal",""] }
 
     readonly
         = "readonly" { return ["readonly",""] }
@@ -237,22 +257,15 @@
 
     url
         = prefix:urlprefix path:[a-z0-9_\-~`!@#$%^&*_+=\{\}\[\]|\\:;'<,>.?/]i* {
-            if(prefix.startsWith(".#")) {
-                return ["url","#"+path.join("")]
-            }
-            try {
-                new URL(path.join(),document.baseURI);
-                return ["url",prefix+path.join("")];
-            } catch(e) {
-                error(e+"")
-            }
+            try { new URL(path.join(),document.baseURI); return ["url",prefix+path.join("")]; }
+            catch(e) { error(e+"") }
         }
 
     visible
         = "visible" { return ["visible",""] }
 
     urlprefix
-        = "https://" / "./" / ".#"
+        = "https://" / "./"
 
     token
         = start:[a-z~!$%&*:@#]i rest:[a-z$%&*:@#0-9_\-]i* { return start + rest.join("") }
@@ -261,9 +274,7 @@
        = [\"] value:string [\"] { return value }
 
     string
-        = value:[ a-z0-9_\-~`!@#$%^&*()_+=\{\}\[\]|\\:;'<,>.?/]i* {
-            return value.join("")
-        }
+        = value:[ a-z0-9_\-~`!@#$%^&*()_+=\{\}\[\]|\\:;'<,>.?/]i* { return value.join("") }
 
     _ "whitespace"
         = whitespace:[ \t\n\r]* { return whitespace.join("") }

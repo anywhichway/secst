@@ -3,6 +3,7 @@ await import("katex/contrib/mhchem");
 
 import JSON5 from "json5";
 
+import Tag from "./tag.js";
 import {updateValueWidths} from "./update-value-widths.js";
 
 
@@ -40,8 +41,8 @@ const universalAttributes = {
         is: true,
         title: true
     },
-    blockContent = deferedTags(["article","audio","blockquote","code","dl","figure","h1","h2","h3","h4","h5","h6","hr","img","script","listeners","meta","ol","p","picture","pre","script","style","table","toc","ul","video","latex","math-science-formula","NewsArticle","Person"]),
-    singleLineContent = deferedTags(["&","a","abbr","bdi","bdo","br","del","code","em","emoji","error","escape","footnote","hashtag","ins","kbd","mark","meta","meter","strike","strong","sub","sup","time","value","var","wbr","u","@facebook","@github","@linkedin","@twitter","latex","name"]),
+    blockContent = deferedTags(["article","audio","blockquote","code","dl","figure","h1","h2","h3","h4","h5","h6","hr","script","listeners","meta","ol","p","picture","pre","section","script","style","table","toc","ul","video","latex","math-science-formula","NewsArticle","Person"]),
+    singleLineContent = deferedTags(["&","a","abbr","bdi","bdo","br","del","code","em","emoji","error","escape","footnote","hashtag","img","ins","kbd","mark","meta","meter","strike","strong","sub","sup","time","value","var","wbr","u","@facebook","@github","@linkedin","@twitter","latex","name"]),
     multiLineContent = deferedTags(["address","aside","bdi","cite","details","input","script","ol","output","ruby","ul","textarea","transpiled","author","NewsArticle"]),
     inlineContent = {...singleLineContent,...multiLineContent},
     tagToText = (tag,pre) => {
@@ -147,7 +148,7 @@ const tags = {
                 },[]),
                 author: authors.map((author) => author.toJSONLD(author))
             }
-            console.log(jsonld);
+            //console.log(jsonld);
         },
         beforeMount(node) {
             node.tag = "div";
@@ -347,19 +348,14 @@ const tags = {
         },
         contentAllowed: {...singleLineContent},
         transform(node) {
-            if(node.attributes.url) {
-                node.attributes.href = node.attributes.url;
-                delete node.attributes.url
-            } else {
-                const href = node.content[0];
-                if(typeof(href)==="string" && (href.startsWith("https:") || href.startsWith("./") || href.startsWith("../"))) {
-                    try {
-                        new URL(href,document?.baseURI);
-                        node.attributes.href = node.content[0];
-                        node.attributes.target = "_tab";
-                    } catch {
-
-                    }
+            let href = node.attributes.url || node.attributes.href;
+            if(!href) {
+                href = node.attributes.href = (node.content[0]||"").trim();
+            }
+            if(href) {
+                new URL(href,document?.baseURI);
+                if(!node.attributes.target && !href.startsWith(".") && !href.startsWith("#")) {
+                    node.attributes.target = "_tab";
                 }
             }
             return node;
@@ -441,9 +437,7 @@ const tags = {
             return node;
         },
         beforeMount(node) {
-            if(node.attributes.run==null && node.content.some((item) => typeof(item)==="string" && item.includes("\n"))) {
-                node.tag = "pre"
-            }
+            node.attributes.style = "white-space: pre;" + (node.attributes.style||"")
         }
     },
     del: {
@@ -541,6 +535,39 @@ const tags = {
             }
         }
     },
+    forEach: {
+        attributesAllowed:{
+            "data-iterable": true,
+            iterable(value) {
+                try {
+                    const iterable = JSON5.parse(value);
+                    if(Array.isArray(iterable)) {
+                        return {
+                            "data-iterable": value
+                        }
+                    }
+                    throw new TypeError(`${value} is not iterable`)
+                } catch(e) {
+                    throw e;
+                }
+            }
+        },
+        contentAllowed: "*",
+        transform(node) {
+            node.contents = [node.contents.join("")]
+        },
+        mounted(el,node) {
+            const parent = el.parentElement,
+                iterable = JSON5.parse(el.getAttribute("data-iterable")),
+                template = node.contents[0];
+            iterable.forEach((item,index,iterable) => {
+                // todo: move to web worker
+                const html = (new Function("item","index","iterable","with(item) { return `" + template + "` }"))(item,index,iterable);
+                el.insertAdjacentHTML("beforebegin",html)
+            });
+            el.remove()
+        }
+    },
     footnote: {
         contentAllowed: {...blockContent,...inlineContent},
         attributesAllowed: {
@@ -592,23 +619,6 @@ const tags = {
     input: {
         allowAsRoot: true,
         attributesAllowed: {
-            "data-fitcontent": true,
-            "data-default": true,
-            "data-extract": true, // toto add validation
-            "data-template": true,
-            "data-format": true,
-            "data-mime-type": true, // toto add validation
-            default(value) {
-                return {
-                    "data-default": value
-                }
-            },
-            disabled: true,
-            template(value) {
-                return {
-                    "data-template": value
-                }
-            },
             title: {
                 required: true
             },
@@ -620,7 +630,6 @@ const tags = {
         contentAllowed: {...singleLineContent}
     },
     img: {
-        allowAsRoot: true,
         attributesAllowed: {
             alt:true,
             static:true,
@@ -835,6 +844,7 @@ const tags = {
     p: {
         allowAsRoot: true,
         breakOnNewline: true,
+        indirectChildAllowed: true,
         contentAllowed: {...inlineContent},
         transform(node) {
             // ignore first return
@@ -931,6 +941,34 @@ const tags = {
                 return false;
             }
             return true;
+        }
+    },
+    section: {
+        allowAsRoot: true,
+        contentAllowed: "*",
+        transform(node) {
+            const location = node.location;
+            let {start,end} = node.location;
+            const content = [];
+            for(let i=0;i<node.content.length;i++) {
+                let item = node.content[i];
+                if(i===0 || (typeof(item)==="string" && item.match(/[\n\r].*/))) {
+                    let p = item.tag==="p" ? item : new Tag({tag:"p",content:[],location});
+                    item = node.content[++i];
+                    while(i<node.content.length && (typeof(item)!=="string" || !item.match(/[\n\r].*/)) && item.tag!=="p") {
+                        p.content.push(item);
+                        item = node.content[++i];
+                        if(typeof(item)==="string" && item.match(/[\n\r].*/)) {
+                            p = new Tag({tag:"p",content:[],location});
+                        }
+                    }
+                    content.push(p);
+                } else {
+                    content.push(item)
+                }
+            }
+            node.content = content;
+            return node;
         }
     },
     source: {
@@ -1067,12 +1105,6 @@ const tags = {
         allowAsRoot: true,
         contentAllowed:true,
         attributesAllowed: {
-            "data-fitcontent": true,
-            "data-default": true,
-            "data-extract": true, // toto add validation
-            "data-template": true,
-            "data-format": true,
-            "data-mime-type": true, // toto add validation
             disabled: true,
             value: true,
             readonly: true
@@ -1190,44 +1222,6 @@ const tags = {
             el.innerHTML = `<code>${el.innerHTML.replace(/</g,"&lt;").replace(/>/g,"&gt;")}</code>`;
         }
     },
-    ul: {
-        allowAsRoot: true,
-        indirectChildAllowed: true,
-        contentAllowed: {
-            li() { return tags.li }
-        },
-        transform(node) {
-            node.content = node.content.reduce((content,item) => {
-                if(typeof(item)==="string") {
-                    const lines = item.split("\n");
-                    let listitem = "";
-                    lines.forEach((line,i) => {
-                        line = line.trim();
-                        if(line.length===0) return;
-                        const nl = i<lines.length-1 ? "\n" : "";
-                        if(line.startsWith("- ")) {
-                            line = line.substring(2);
-                            if(listitem.length>0) {
-                                content.push({tag:"li",content:[listitem]});
-                                listitem = line + nl;
-                            } else {
-                                listitem += line + nl;
-                            }
-                        } else {
-                            listitem += line + nl;
-                        }
-                    })
-                    if(listitem.length>0) {
-                        content.push({tag:"li",content:[listitem]});
-                    }
-                } else {
-                    content.push(item);
-                }
-                return content;
-            },[])
-            return node;
-        }
-    },
     u: {
         attributesAllowed: {
             style: true
@@ -1236,6 +1230,52 @@ const tags = {
         styleAllowed() { return {"text-decoration":"underline"}},
         transform(node) {
             node.attributes.style =  {"text-decoration":"underline"};
+            return node;
+        }
+    },
+    ul: {
+        allowAsRoot: true,
+        indirectChildAllowed: true,
+        contentAllowed: {
+            li() { return tags.li }
+        },
+        transform(node) {
+            let currentli;
+            node.content = node.content.reduce((content,item) => {
+                if(typeof(item)==="string") {
+                    const lines = item.split("\n");
+                    lines.forEach((line,i) => {
+                        if(line.trim().length===0) {
+                            return;
+                        }
+                        if(line.match(/\s*-/)) {
+                            line = line.trimLeft().substring(1);
+                            if(!currentli || currentli.content.length>0) {
+                                currentli = {tag:"li",content:[]};
+                                content.push(currentli);
+                            }
+                            if(line.length>0) {
+                                currentli.content.push(line);
+                            }
+                        } else if(!currentli) {
+                            currentli ||= {tag: "li", content: [line]};
+                            content.push(currentli);
+                        } else {
+                            currentli.content.push(line);
+                        }
+                    })
+                } else if(item.tag!=="li") {
+                    if(!currentli) {
+                        currentli = {tag:"li",content:[]}
+                        content.push(currentli);
+                    }
+                    currentli.content.push(item);
+                } else {
+                    currentli = item;
+                    content.push(item);
+                }
+                return content;
+            },[])
             return node;
         }
     },
@@ -1249,6 +1289,7 @@ const tags = {
             "data-template": true,
             "data-mime-type": true,
             "data-editable": true,
+            "data-literal": true,
             fitcontent() {
                 return {
                     "data-fitcontent": ""
@@ -1264,14 +1305,19 @@ const tags = {
                     disabled: ""
                 }
             },
-            editable() {
-              return {
-                  "data-editable": true
-              }
-            },
             extract(value) {
                 return {
                     "data-extract": value
+                }
+            },
+            editable() {
+                return {
+                    "data-editable": ""
+                }
+            },
+            literal() {
+                return {
+                    "data-literal": ""
                 }
             },
             format(value) {
@@ -1293,7 +1339,7 @@ const tags = {
             src(value) {
                 new URL(value,document.baseURI)
             },
-            static: true,
+            static:true,
             template(value) {
                 return {
                     "data-template": value
@@ -1342,7 +1388,7 @@ const tags = {
             },
             value: true
         },
-        contentAllowed: true,
+        contentAllowed: "*",
         async transform(node) {
             let type = node.attributes.type;
             if(["application/json","text/plain","text/csv"].includes(type)) {
@@ -1352,7 +1398,10 @@ const tags = {
                 delete node.attributes.type;
             }
             node.attributes.hidden = "";
-            if (node.attributes.visible == "") {
+            if(node.attributes.editable==="") {
+                node.attributes.visible = "";
+            }
+            if (node.attributes.visible === "") {
                 delete node.attributes.hidden;
                 delete node.attributes.visible;
             }
@@ -1410,11 +1459,15 @@ const tags = {
                 delete node.attributes.url;
             } else {
                 node.attributes["data-template"] = node.content.join("").trim();
-                node.attributes.value = node.attributes["data-default"]
+                node.attributes.value = node.attributes["data-default"];
+                if(node.attributes["data-mime-type"]) {
+                    node.attributes.literal = "";
+                }
             }
             if(node.tag==="input") {
                 node.content = [];
             }
+            delete node.attributes.visible;
             return node;
         },
         beforeMount(node) {
@@ -1423,10 +1476,12 @@ const tags = {
             } else {
                 node.tag = "input";
             }
+            node.attributes.spellcheck = "false";
         },
         connected(el,node) {
-            const value = el.getAttribute("value");
+            let value =el.getAttribute("value");
             if(node.tag==="textarea") {
+                value ||= el.hasAttribute("data-literal") ? el.getAttribute("data-template") : value;
                 if(el.innerHTML!==value) {
                     el.innerHTML = value;
                 }

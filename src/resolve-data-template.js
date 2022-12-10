@@ -1,5 +1,6 @@
 import replaceAsync from "string-replace-async";
 import XRegExp from "xregexp";
+import JSON5 from "json5";
 const AsyncFunction = (async function () {}).constructor;
 import {formatValue} from "./format-value.js";
 import {stringTemplateEval} from "./string-template-eval.js";
@@ -16,17 +17,17 @@ const validateSelector = (selector) => {
 const valueOf = async (root,selector,requestor) => {
     let els,
         expectsArray;
-    if(selector.endsWith("[]")) {
+    if(selector.endsWith("[]") || selector.includes(",")) {
         expectsArray = true;
         els = [...root.querySelectorAll(selector)].filter((el) => {
-            if(el.tagName==="INPUT" && el.hasAttribute("data-template")) {
+            if(["INPUT","TEXTAREA"].includes(el.tagName) && el.hasAttribute("data-template")) {
                 return true;
             }
         });
     } else {
-        const el = root.querySelector(selector);
-        if(el.tagName==="INPUT" && el.hasAttribute("data-template")) {
-            els = [el];
+        els = [root.querySelector(selector)];
+        if(els[0]==null) {
+            return els[0]
         }
     }
     for(const el of els) {
@@ -35,8 +36,11 @@ const valueOf = async (root,selector,requestor) => {
         if(el.rawValue==null) {
             el.rawValue = "";
         }
-        if(el.value==="" || !requestor) {
-            el.rawValue = await resolveDataTemplate(root,el.getAttribute("data-template"),el);
+        if(["INPUT","TEXTAREA"].includes(el.tagName)) {
+            if(el.value==="" || !requestor) {
+                const template = el.getAttribute("data-template");
+                el.rawValue = await resolveDataTemplate(root,template,el);
+            }
             const formatted = formatValue(el);
             el.value = formatted;
             if(el.tagName==="TEXTAREA") {
@@ -52,10 +56,16 @@ const valueOf = async (root,selector,requestor) => {
                     el.style.width = Math.min(80,Math.max(1,el.value.length))+"ch";
                 }
             }
+        } else {
+            try {
+                el.rawValue = JSON5.parse(el.innerText)
+            } catch(e) {
+                el.rawValue = el.innerText;
+            }
         }
     }
     const result = expectsArray ? els.map(el => el.rawValue) : els[0].rawValue
-    return result && typeof(result)==="object" && !(result instanceof Promise) ? JSON.stringify(result) : result===undefined ? "" : result;
+    return result && typeof(result)==="object" && !(result instanceof Promise) ? result : result===undefined ? "" : result; // JSON.stringify(result)
 }
 
 const replaceReferences = async (root,string,requestor) => {
@@ -96,11 +106,14 @@ const replaceReferences = async (root,string,requestor) => {
 const resolveDataTemplate = async (root,string,requestor) => {
     if(!string) return;
     const text = await replaceReferences(root,string,requestor);
-    if(typeof(Worker)==="function") {
+    if(requestor?.hasAttribute("data-literal")) {
+        return text;
+    } else if(typeof(Worker)==="function") {
         const result =  await stringTemplateEval("${" + text + "}"),
             type = typeof(result);
         if(result && type==="object" && result.stringTemplateError) {
-            throw new Error(result.stringTemplateError);
+            if(requestor) throw new Error(result.stringTemplateError);
+            return "";
         }
         return result && type==="object" ? JSON.stringify(result) : result;
     } else {
