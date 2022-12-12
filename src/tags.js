@@ -42,7 +42,7 @@ const universalAttributes = {
         title: true
     },
     blockContent = deferedTags(["article","audio","blockquote","code","dl","figure","h1","h2","h3","h4","h5","h6","hr","script","listeners","meta","ol","p","picture","pre","section","script","style","table","toc","ul","video","latex","math-science-formula","NewsArticle","Person"]),
-    singleLineContent = deferedTags(["&","a","abbr","bdi","bdo","br","del","code","em","emoji","error","escape","footnote","hashtag","img","ins","kbd","mark","meta","meter","strike","strong","sub","sup","time","value","var","wbr","u","@facebook","@github","@linkedin","@twitter","latex","name"]),
+    singleLineContent = deferedTags(["&","a","abbr","bdi","bdo","br","del","code","em","emoji","error","escape","footnote","hashtag","img","ins","input","kbd","mark","meta","meter","strike","strong","sub","sup","time","value","var","wbr","u","@facebook","@github","@linkedin","@twitter","latex","name"]),
     multiLineContent = deferedTags(["address","aside","bdi","cite","details","input","script","ol","output","ruby","ul","textarea","transpiled","author","NewsArticle"]),
     inlineContent = {...singleLineContent,...multiLineContent},
     tagToText = (tag,pre) => {
@@ -81,6 +81,7 @@ const tags = {
                     const level = node.attributes.level || 1;
                     node.tag = "h" + level;
                     delete node.attributes.level;
+                    return node;
                 }
             },
             p() {
@@ -115,13 +116,15 @@ const tags = {
                             return {name:node.content[0]}
                         },
                         beforeMount(node) {
-                            node.tag = "span"
+                            node.tag = "span";
+                            return node;
                         }
                     },
                     Person() { return tags.Person }
                 },
                 beforeMount(node) {
-                    node.tag = "span"
+                    node.tag = "span";
+                    return node;
                 },
                 minCount: 1,
                 toJSONLD(node) {
@@ -152,6 +155,7 @@ const tags = {
         },
         beforeMount(node) {
             node.tag = "div";
+            return node;
         }
     },
     Person: {
@@ -177,6 +181,7 @@ const tags = {
         },
         beforeMount(node) {
             node.tag = "span";
+            return node;
         }
     },
     "@facebook": {
@@ -292,6 +297,7 @@ const tags = {
             } else {
                 node.tag = "span";
             }
+            return node;
         },
         toHTML(node) {
             return katex.renderToString(node.content[0],{
@@ -308,6 +314,7 @@ const tags = {
         },
         beforeMount(node) {
             node.tag = "span";
+            return node;
         }
     },
     a: {
@@ -405,6 +412,7 @@ const tags = {
     },
     code: {
         attributesAllowed: {
+            disabled: true,
             language: true, // todo validate with list
             run: true,
             fitcontent() {
@@ -441,6 +449,7 @@ const tags = {
                 node.classList.push("secst-code");
                 node.content[0] = node.content[0].trim();
             }
+            return node;
         },
         connected(el) {
             updateValueWidths([el]);
@@ -540,6 +549,7 @@ const tags = {
             } else {
                 node.tag = "span";
             }
+            return node;
         }
     },
     forEach: {
@@ -590,6 +600,7 @@ const tags = {
         },
         beforeMount(node) {
             node.tag = "sup";
+            return node;
         }
     },
     figure: {
@@ -630,7 +641,7 @@ const tags = {
                 required: true
             },
             type: true,
-            value:true
+            value:true,
         }
     },
     ins: {
@@ -1144,12 +1155,12 @@ const tags = {
         contentAllowed: true,
         transform(node) {
             node.tag = "h1";
-            if(!node.classList.includes("toc")) {
-                node.classList.push("toc");
-            }
             if(node.attributes.toggle!=null) {
                 node.attributes["data-toggle"] = "";
                 delete node.attributes.toggle;
+            }
+            if(!node.classList.includes("toc")) {
+                node.classList.push("toc");
             }
             if(node.content.length===0) {
                 node.content = ["Table of Contents"]
@@ -1332,6 +1343,7 @@ const tags = {
                   "data-format": value
               }
             },
+            hidden: true,
             readonly() {
                 return {
                     readonly: ""
@@ -1343,6 +1355,7 @@ const tags = {
                     src: value
                 }
             },
+            plaintext: true,
             src(value) {
                 new URL(value,document.baseURI)
             },
@@ -1405,14 +1418,6 @@ const tags = {
                 node.skipContent;
                 delete node.attributes.type;
             }
-            node.attributes.hidden = "";
-            if(node.attributes.editable==="") {
-                node.attributes.visible = "";
-            }
-            if (node.attributes.visible === "") {
-                delete node.attributes.hidden;
-                delete node.attributes.visible;
-            }
             if (node.attributes["data-default"] == null) {
                 node.attributes["data-default"] = "";
             }
@@ -1464,28 +1469,33 @@ const tags = {
                         })()`;
                     node.attributes["data-template"] = f;
                 }
+                node.attributes.title ||= url;
                 delete node.attributes.url;
             } else {
                 node.attributes["data-template"] = node.content.join("").trim();
                 node.attributes.value = node.attributes["data-default"];
+                node.attributes.title ||=  node.attributes["data-template"];
             }
             if(node.tag==="input") {
                 node.content = [];
             }
-            delete node.attributes.visible;
             return node;
         },
         beforeMount(node) {
+            if(node.attributes.hidden!=null) {
+                delete node.attributes.hidden;
+                node.attributes.style = "display: none;" + (node.attributes.style||"");
+            }
+            if(node.attributes.plaintext!=null) {
+                node.classList.push("secst-plaintext");
+            }
             if(node.attributes["data-mime-type"]) {
                 node.tag = "textarea";
-                if(node.attributes.hidden!=null) {
-                    delete node.attributes.hidden;
-                    node.attributes.style = "display: none;" + (node.attributes.style||"");
-                }
             } else {
                 node.tag = "input";
             }
             node.attributes.spellcheck = "false";
+            return node;
         },
         connected(el,node) {
             let value =el.getAttribute("value");

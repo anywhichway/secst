@@ -119,10 +119,11 @@
                 } else if(item && typeof(item)==="object") {
                     result.push(item);
                 } else {
-                    if(typeof(result[result.length-1])!=="string") {
-                        result.push(item);
-                    } else {
+                    const prevtype = typeof(result[result.length-1]);
+                    if(prevtype==="string" && typeof(item)==="string") {
                         result[result.length-1] += item;
+                    } else {
+                        result.push(item);
                     }
                 }
             }
@@ -196,7 +197,7 @@
         = hyphen:"-"? start:[_a-z]i rest:[\w]i* { return (hyphen || "") + start + rest.join("") }
 
     binaryattribute
-        = attr:(_ hidden _ / _ checked _ / _ colored _ / _ disabled _ / _ editable _ / _ fitcontent _ / _ literal _ / _ open _ / _ readonly _ / _ reversed _ / _ run _ / _ selected _ / _ static _ / _ toggle _ / _ url _ / _ visible _) { return attr[1] }
+        = attr:(_ hidden _ / _ checked _ / _ colored _ / _ disabled _ / _ editable _ / _ fitcontent _ / _ literal _ / _ open _ / _ plaintext _ / _ readonly _ / _ reversed _ / _ run _ / _ selected _ / _ static _ / _ toggle _ / _ url _ / _ visible _) { return attr[1] }
 
     hidden
         = "hidden" { return ["hidden",""] }
@@ -218,6 +219,9 @@
 
     literal
         = "literal" { return ["literal",""] }
+
+     plaintext
+            = "plaintext" { return ["plaintext",""] }
 
     readonly
         = "readonly" { return ["readonly",""] }

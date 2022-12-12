@@ -25,7 +25,7 @@ import {resolve} from "./src/resolve.js";
 const text = await fs.readFile("./index.sct",{ encoding: 'utf8' }),
     grammar = await fs.readFile("./src/grammar.txt",{ encoding: 'utf8' }),
     parser = peg.generate(grammar),
-    {dom,errors} = await transform(parser,text,{styleAllowed:"*"}),
+    {dom,errors,parsed,transformed} = await transform(parser,text,{styleAllowed:"*"}),
     script = document.createElement("script");
 script.setAttribute("src","./secst.js?run");
 dom.head.appendChild(script);

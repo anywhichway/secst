@@ -13,8 +13,9 @@ const updateValueWidths = (els) => {
                         el.style.width = (lines.reduce((len, line) => Math.max(len, line.length), 0) + 2) + "ch";
                     }
                 } else {
-                    const value = el.getAttribute("value")||"";
-                    el.style.width = Math.max(1,value.length+1)+"ch";
+                    const value = el.getAttribute("value")||"",
+                        pad = !el.hasAttribute("readonly") && !el.hasAttribute("disabled") ? 1 : 0;
+                    el.style.width = Math.max(1,value.length+pad)+"ch";
                 }
                 el.style.maxWidth = document.body.getBoundingClientRect().width + "px";
             });

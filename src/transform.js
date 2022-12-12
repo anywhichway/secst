@@ -70,11 +70,16 @@ const toElement = async (node,{domNodes,connects,parentConfig}) => {
             node.toJSONLD(node)
            // console.log(node.toJSONLD(node))
         }
+        let config = parentConfig?.contentAllowed ? (parentConfig.contentAllowed==="*" ? tags[node.tag] : parentConfig.contentAllowed[node.tag]) : tags[node.tag];
         if(node.beforeMount) {
-            node.beforeMount(node)
+            node = node.beforeMount(node)
         }
-        const {tag, id, classList, attributes} = node,
-            config = tags[tag];
+        const {tag, id, classList, attributes} = node;
+        if(!["span","div"].includes(tag)) {
+            config = parentConfig?.contentAllowed ? (parentConfig.contentAllowed==="*" ? tags[node.tag] : parentConfig.contentAllowed[node.tag]||tags[node.tag]) : tags[node.tag]; // node may have been mapped to a new tag, which may be global and not just local content
+        }
+        const  attributesAllowed = config.attributesAllowed||{};
+
         let el = node.toText ? document.createElement("span") : document.createElement(tag);
         el.connects ||= [];
         if (id) el.id = id;
@@ -96,23 +101,25 @@ const toElement = async (node,{domNodes,connects,parentConfig}) => {
             }
         });
         (classList || []).forEach((className) => el.classList.add(className));
-        Object.entries(attributes || {}).forEach(([key, value]) => { // style mapping done here so that it bypasses earlier sanitation
-            const attributeAllowed = (config?.attributesAllowed || {})[key];
-            if (key === "style" && value && typeof (value) === "object") {
-                Object.entries(value).forEach(([key, value]) => {
-                    key.includes("-") ? el.style.setProperty(key, value) : el.style[key] = value;
-                })
-            } else if (attributeAllowed?.mapStyle) {
-                const style = attributeAllowed.mapStyle;
-                if(typeof(style)==="string") {
-                    style.includes("-") ? el.style.setProperty(style, value) : el.style[style] = value;
-                } else {
-                    Object.entries(style).forEach(([style,value]) => {
-                        style.includes("-") ? el.style.setProperty(style, value) : el.style[style] = value;
+        Object.entries(attributes || {}).forEach(([key, value]) => {
+            const attributeAllowed = attributesAllowed[key] || key.includes("-");
+            if(attributeAllowed) {
+                if (key === "style" && value && typeof (value) === "object") { // style mapping done here so that it bypasses earlier sanitation
+                    Object.entries(value).forEach(([key, value]) => {
+                        key.includes("-") ? el.style.setProperty(key, value) : el.style[key] = value;
                     })
+                } else if (attributeAllowed?.mapStyle) {
+                    const style = attributeAllowed.mapStyle;
+                    if(typeof(style)==="string") {
+                        style.includes("-") ? el.style.setProperty(style, value) : el.style[style] = value;
+                    } else {
+                        Object.entries(style).forEach(([style,value]) => {
+                            style.includes("-") ? el.style.setProperty(style, value) : el.style[style] = value;
+                        })
+                    }
+                } else {
+                    el.setAttribute(key, value);
                 }
-            } else {
-                el.setAttribute(key, value);
             }
         });
         if (node.tag === "script" && !node.attributes.type) {
@@ -127,7 +134,8 @@ const toElement = async (node,{domNodes,connects,parentConfig}) => {
         } else if(node.render) {
             await node.render(node,el);
         } else {
-            (await toDOMNodes(node.content,config,connects)).forEach((node) => {
+            const {domNodes} = await toDOMNodes(node.content,config,connects)
+            domNodes.forEach((node) => {
                 if(typeof(node)==="string") {
                     const body = domParser ? domParser.parseFromString(node,"text/html").body : document.createElement("div");
                     if(body.tagName==="div" || body.tagName==="span") {
@@ -149,7 +157,7 @@ const toElement = async (node,{domNodes,connects,parentConfig}) => {
             node.mounted(el,node);
         }
         if(node.connected) {
-            connects.push(() => node.connected(el,node));
+            connects.push(async () => await node.connected(el,node));
         }
         domNodes.push(el);
         const listeners = Object.entries(config?.listeners||[]);
@@ -341,11 +349,11 @@ const validateNode = async ({parser,node,path=[],contentAllowed= tags,errors=[]}
 
 const toDOMNodes = async (nodes,parentConfig,connects=[]) => {
     const domNodes = [];
+    let i= 0;
     for(const node of nodes) {
         await toElement(node,{domNodes,connects,parentConfig});
     }
-    domNodes.connects = connects;
-    return domNodes;
+    return {domNodes,connects};
 };
 toDOMNodes.reset = () => required.clear();
 
@@ -423,6 +431,12 @@ const transform = async (parser,text,{styleAllowed}={}) => {
         .secst-pre-line {
             white-space: pre-line;
         }
+        .secst-plaintext {
+            background-color: unset;
+            border: unset;
+            padding: unset;
+            color: unset;
+        }
         textarea.secst {
             display: block;
             unicode-bidi: embed;
@@ -442,13 +456,13 @@ const transform = async (parser,text,{styleAllowed}={}) => {
             unicode-bidi: embed;
         }
         </style>`;
-    const nodes = await toDOMNodes(transformed);
-    nodes.forEach((node) => {
+    const {domNodes,connects} = await toDOMNodes(transformed,dom);
+    domNodes.forEach((node) => {
         dom.body.appendChild(node);
     });
-    nodes.connects.forEach((connected) => {
-        setTimeout(connected,1000)
-    });
+    for(const connected of connects) {
+        await connected();
+    }
     try {
         initAutohelm({tocSelector:".toc",dom:dom.body,directChildren:true});
     } catch(e) {

@@ -40,7 +40,6 @@ const stringTemplateEval = async (stringTemplate,requestor) => {
                     } catch (e) {
                         try { // try as JavaScript expression
                             const result = await (new AsyncFunction("functions", "math", "globalThis", "with(functions) { with(math) { return " + stringTemplate + "}}")).call(null, functions, self.math);
-                            console.log(stringTemplate,result)
                             return result && typeof(result.isOperatorNode)!=="undefined" ? result.toString() : result;
                         } catch(e) {
                             return {stringTemplateError: e + ""}

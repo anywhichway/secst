@@ -80,7 +80,7 @@ const tags = {
                 beforeMount(node) {
                     const level = node.attributes.level || 1;
                     node.tag = "h" + level;
-                    delete node.attributes.level;
+                    return node;
                 }
             },
             p() {
@@ -115,13 +115,15 @@ const tags = {
                             return {name:node.content[0]}
                         },
                         beforeMount(node) {
-                            node.tag = "span"
+                            node.tag = "span";
+                            return node;
                         }
                     },
                     Person() { return tags.Person }
                 },
                 beforeMount(node) {
-                    node.tag = "span"
+                    node.tag = "span";
+                    return node;
                 },
                 minCount: 1,
                 toJSONLD(node) {
@@ -152,6 +154,7 @@ const tags = {
         },
         beforeMount(node) {
             node.tag = "div";
+            return node;
         }
     },
     Person: {
@@ -177,6 +180,7 @@ const tags = {
         },
         beforeMount(node) {
             node.tag = "span";
+            return node;
         }
     },
     "@facebook": {
@@ -292,6 +296,7 @@ const tags = {
             } else {
                 node.tag = "span";
             }
+            return node;
         },
         toHTML(node) {
             return katex.renderToString(node.content[0],{
@@ -308,6 +313,7 @@ const tags = {
         },
         beforeMount(node) {
             node.tag = "span";
+            return node;
         }
     },
     a: {
@@ -440,6 +446,7 @@ const tags = {
                 node.classList.push("secst-code");
                 node.content[0] = node.content[0].trim();
             }
+            return node;
         },
         connected(el) {
             updateValueWidths([el]);
@@ -539,6 +546,7 @@ const tags = {
             } else {
                 node.tag = "span";
             }
+            return node;
         }
     },
     forEach: {
@@ -589,6 +597,7 @@ const tags = {
         },
         beforeMount(node) {
             node.tag = "sup";
+            return node;
         }
     },
     figure: {
@@ -1481,6 +1490,7 @@ const tags = {
                 node.tag = "input";
             }
             node.attributes.spellcheck = "false";
+            return node;
         },
         connected(el,node) {
             let value =el.getAttribute("value");
