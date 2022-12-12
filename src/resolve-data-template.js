@@ -116,7 +116,7 @@ const resolveDataTemplate = async (root,string,requestor) => {
     if(requestor?.hasAttribute("data-literal")) {
         return text;
     } else if(typeof(Worker)==="function") {
-        let result =  await stringTemplateEval("${" + text + "}"),
+        let result =  await stringTemplateEval(text), //"${" + text + "}"
             type = typeof(result);
         if(result && type==="object" && result.stringTemplateError) {
             if(requestor) throw new Error(result.stringTemplateError);

@@ -32,13 +32,19 @@ const stringTemplateEval = async (stringTemplate,requestor) => {
                             ul,
                             ol,
                             solve
-                        }
-                    try {
-                        const AsyncFunction = (async ()=>{}).constructor,
-                            result = await (new AsyncFunction("functions", "math", "globalThis", "with(functions) { with(math) { return `" + stringTemplate + "`}}")).call(null, functions, self.math); //always 2 args so globalThis is undefined
-                        return result;
+                        },
+                        AsyncFunction = (async ()=>{}).constructor;
+                    try { // try as math expression
+                        const result = await (new AsyncFunction("functions", "math", "globalThis", "with(functions) { with(math) { return math.evaluate(\"" + stringTemplate + "\") }}")).call(null, functions, self.math); //always 2 args so globalThis is undefined
+                        return result && typeof(result.isOperatorNode)!=="undefined" ? result.toString() : result;
                     } catch (e) {
-                        return {stringTemplateError: e + ""}
+                        try { // try as JavaScript expression
+                            const result = await (new AsyncFunction("functions", "math", "globalThis", "with(functions) { with(math) { return " + stringTemplate + "}}")).call(null, functions, self.math);
+                            console.log(stringTemplate,result)
+                            return result && typeof(result.isOperatorNode)!=="undefined" ? result.toString() : result;
+                        } catch(e) {
+                            return {stringTemplateError: e + ""}
+                        }
                     }
                 },
             },

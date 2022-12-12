@@ -9,7 +9,7 @@
         - Support for almost all HTML tags.
         - :a(.#tables-of-contents)[Table of contents] and :a(.#footnotes)[footnote management].
         - :a(.#hashtags)[Hashtag] and social media :a(.#mentions)[support].
-        - Reactive :a(.#formulas)[formulas and data import] that are no more complex than Excel formulas, e.g. :code[:value[2 * 2]] = :value(visible)[2 * 2].
+        - Reactive :a(.#values-and-formulas)[formulas and data import] that are no more complex than Excel formulas, e.g. :code[:value[2 * 2]] = :value(visible)[2 * 2].
         - The use of JSON-LD :a(.#structured-data)[structured data] for both content generation/layout and SEO optimization.
         - :a(.#images)[Asset bundling] for images, video, and audio.
         - Server and client side well structured HTML output resistant to XSS attacks.
@@ -30,7 +30,7 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
         - Support for almost all HTML tags.
         - :a(.#tables-of-contents)[Table of contents] and :a(.#footnotes)[footnote management].
         - :a(.#hashtags)[Hashtag] and social media :a(.#mentions)[support].
-        - Reactive :a(.#formulas)[formulas and data import] that are no more complex than Excel formulas, e.g. :code[:value[2 * 2]] = :value(visible)[2 * 2].
+        - Reactive :a(.#values-and-formulas)[formulas and data import] that are no more complex than Excel formulas, e.g. :code[:value[2 * 2]] = :value(visible)[2 * 2].
         - The use of JSON-LD :a(.#structured-data)[structured data] for both content generation/layout and SEO optimization.
         - :a(.#images)[Asset bundling] for images, video, and audio.
         - Server and client side well structured HTML output resistant to XSS attacks.
@@ -498,18 +498,37 @@ ABC notation processing is part of the reference implementation to show how new 
 
 :h1(#basic-computation)[Basic Computational Authoring]
 
-:h2[Formulas]
+:h2[Values and Formulas]
+
+:h3[Values]
+
 :p[
     SECST supports the tag :code[:value[]] for adding reactive variables and formulas to documents.
+
+    :ul[
+         :li[By default values are hidden. Use the boolean attribute :code[visible] to display them.]
+          :li[The value of a :code[:value[]] is the content, i.e the text between the :code[[]]. It should be either a literal value or a formula.]
+    ]
+
 ]
+
+:h3[Formulas]
+
 :ul[
-    :li[To use a value in a formula it :strong[MUST] be identified by an id.]
-    :li[By default values are hidden. Use the boolean attribute :code[visible] to display them.]
-    :li[The value of a :code[:value[]] is the content, i.e the text between the :code[[]]. It should be either a literal value or a formula.]
-    :li[Formulas work similar to :a(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals)[template strings], except the outermost part is not surrounded with :code[${}].]
+    :li[To use a value in a formula the value tag :strong[MUST] be identified by an id.]
     :li[Values computed from formulas are readonly unless the boolean attribute :code[editable] is provided, which automatically makes the value visible.]
     :li[Use the attribute :code[literal] if you want to prevent the evaluation of the content between the :code[[]], i.e. if it is not intended to be a formula itself but looks like a formula. See the last example below.]
 ]
+
+:p[
+    Formulas are actually just valid JavaScript expressions that also support standard math notation. They can be quite simple, here are some examples:
+
+    :ul[
+        - :code[2 * 3] = :value(visible)[2 * 3],
+        - :code[2^3] when used as part of a math expression:footnote[If the expression cannot be parsed as math, then 2^3 will be treated as XOR as it is in regular JavaScript], is the same as :code[2**3], which is the same as :code[pow(2,3)], which is the same as :code[Math.pow(2,3)] = :value(visible)[2^3]
+    ]
+ ]
+
 :dl[
     :dt[You can reference values in formulas using :code[$(#<id>)] or more generally :code[$(<css-selector>)], which allows the selection of multiple ids into an array by separating them wih a comma.]
     :dd[:code[:value(#v1 visible)[$(#v2) + $(#v3)]] = :code[:value(#v2 visible)[1]] + :code[:value(#v3 visible)[2]]]
@@ -566,9 +585,9 @@ The type can also be a mime-type, e.g. :code[text/plain], :code[application/json
 :value(visible)[$(#earthquake-data).metadata]
     ]
 
-   :value(#earthquake-data https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson {type:"application/json"})
+   :value(#earthquake-data https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson visible {type:"application/json"})
 
-   :value(visible {type:"application/json"})[JSON.stringify($(#earthquake-data).metadata,null,2)]
+   :value(visible {type:"application/json"})[$(#earthquake-data).metadata]
 ]
 
 :h1(#seo)[Search Engine Optimization]
