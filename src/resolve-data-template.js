@@ -4,6 +4,7 @@ import JSON5 from "json5";
 const AsyncFunction = (async function () {}).constructor;
 import {formatValue} from "./format-value.js";
 import {stringTemplateEval} from "./string-template-eval.js";
+import {updateValueWidths} from "./update-value-widths.js";
 
 const validateSelector = (selector) => {
     try {
@@ -46,14 +47,12 @@ const valueOf = async (root,selector,requestor) => {
             if(el.tagName==="TEXTAREA") {
                 el.innerHTML = formatted;
                 if(el.hasAttribute("data-fitcontent")) {
-                    const lines = el.value.split("\n");
-                    el.style.height = (Math.min(20, lines.length) * 1.5) + "em";
-                    el.style.width = Math.min(80, lines.reduce((len, line) => Math.max(len, line.length), 0)) + "ch";
+                    updateValueWidths([el]);
                 }
             } else {
                 el.setAttribute("value",formatted);
                 if(el.hasAttribute("data-fitcontent")) {
-                    el.style.width = Math.min(80,Math.max(1,el.value.length))+"ch";
+                    updateValueWidths([el]);
                 }
             }
         } else {
@@ -78,20 +77,28 @@ const replaceReferences = async (root,string,requestor) => {
                     bracketAdded = true;
                 }
                 try {
-                    const value = selector==="document.data" ? {...document.data||{}} : await valueOf(root,selector,requestor),
+                    let value = selector==="document.data" ? {...document.data||{}} : await valueOf(root,selector,requestor),
                         type = typeof(value);
                     if(type==="string") {
-                        return "`" + value + "`";
+                        try {
+                            value = JSON5.parse(value);
+                            type = typeof(value);
+                        } catch(e) {
+
+                        }
+                        if(type==="string") {
+                            return "`" + value + "`";
+                        }
                     }
                     if(value && type==="object") {
                         if(selector==="document.data") {
                             delete value.urls; // really big and should not need in worker
                         }
-                        const text = JSON.stringify(value);
+                        let text = value;
                         if(bracketAdded && text.endsWith("]")) { // a HACK because matchRecursive drops the last "]"
-                            return text.substring(0,text.length-1);
+                            text = text.substring(0,text.length-1);
                         }
-                        return text;
+                        return "(" + JSON.stringify(text) + ")";
                     }
                     return value;
                 } catch(e) {
@@ -109,13 +116,21 @@ const resolveDataTemplate = async (root,string,requestor) => {
     if(requestor?.hasAttribute("data-literal")) {
         return text;
     } else if(typeof(Worker)==="function") {
-        const result =  await stringTemplateEval("${" + text + "}"),
+        let result =  await stringTemplateEval("${" + text + "}"),
             type = typeof(result);
         if(result && type==="object" && result.stringTemplateError) {
             if(requestor) throw new Error(result.stringTemplateError);
             return "";
         }
-        return result && type==="object" ? JSON.stringify(result) : result;
+        if(type==="string") {
+            try {
+                result = JSON5.parse(result);
+                type = typeof(result);
+            } catch(e) {
+
+            }
+        }
+        return result && type==="object" ? JSON.stringify(result,null,2) : result;
     } else {
         return (new AsyncFunction("return `${" + text + "}`"))();
     }

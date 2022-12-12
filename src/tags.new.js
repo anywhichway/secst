@@ -419,25 +419,24 @@ const tags = {
                 run = node.attributes.run,
                 content = [...node.content];
             if(run==null) {
-                //console.log(node)
+
             } else {
                 node.content = [node.content.join("\n")]
                 if(language==="latex") {
                     node.tag = "math-science-formula";
                 }
             }
-            delete node.attributes.language;
+            //delete node.attributes.language; chenge to insert highlight js language style
             delete node.attributes.run;
             return node;
         },
         beforeMount(node) {
             //node.attributes.style = "white-space: pre;" + (node.attributes.style||"");
-            //console.log(node.content)
             if(node.content[0]?.includes("\n")) {
-                node.tag = "textarea";
                 node.attributes.disabled = "";
                 node.attributes.readonly = "";
                 node.attributes.spellcheck = "false";
+                node.tag = "textarea";
                 node.classList.push("secst-code");
                 node.content[0] = node.content[0].trim();
             }
@@ -534,7 +533,7 @@ const tags = {
     escape: {
         contentAllowed: true,
         beforeMount(node) {
-            if(node.content.some((item) => item.includes("\n"))) {
+            if(node.content[0]?.includes("\n")) {
                 node.tag = "div";
                 node.classList.push("secst-pre-line");
             } else {
@@ -1476,12 +1475,8 @@ const tags = {
             return node;
         },
         beforeMount(node) {
-            if(node.attributes["data-mime-type"]) {
+            if(node.attributes["data-mime-type"] || node.content[0]?.includes("\n")) {
                 node.tag = "textarea";
-                if(node.attributes.hidden!=null) {
-                    delete node.attributes.hidden;
-                    node.attributes.style = "display: none;" + (node.attributes.style||"");
-                }
             } else {
                 node.tag = "input";
             }

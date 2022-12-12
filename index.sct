@@ -9,7 +9,7 @@
         - Support for almost all HTML tags.
         - :a(.#tables-of-contents)[Table of contents] and :a(.#footnotes)[footnote management].
         - :a(.#hashtags)[Hashtag] and social media :a(.#mentions)[support].
-        - Reactive :a(.#formulas)[formulas and data import] that are no more complex than Excel formulas, e.g. :code[:value[2 * 2]] = :value(visible fitcontent)[2 * 2].
+        - Reactive :a(.#formulas)[formulas and data import] that are no more complex than Excel formulas, e.g. :code[:value[2 * 2]] = :value(visible)[2 * 2].
         - The use of JSON-LD :a(.#structured-data)[structured data] for both content generation/layout and SEO optimization.
         - :a(.#images)[Asset bundling] for images, video, and audio.
         - Server and client side well structured HTML output resistant to XSS attacks.
@@ -21,7 +21,7 @@
 :p[
     This is the source for the introduction above:
 
-    :value(visible fitcontent readonly {type:"text/plain"})[`
+    :code[
 :abbr[SECST] is a :strong[S]emantic, :strong[E]xtensible, :strong[C]omputational, :strong[S]tyleable :strong[T]ag oriented markup language. You can use it to joyfully create compelling, interactive, SEO enabled documents backed by HTML.
 
 SECST is intended to be a more expressive, but just as easy to learn and use, alternative to Markdown. It provides these features:
@@ -30,13 +30,13 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
         - Support for almost all HTML tags.
         - :a(.#tables-of-contents)[Table of contents] and :a(.#footnotes)[footnote management].
         - :a(.#hashtags)[Hashtag] and social media :a(.#mentions)[support].
-        - Reactive :a(.#formulas)[formulas and data import] that are no more complex than Excel formulas, e.g. :code[:value[2 * 2]] = :value(visible fitcontent)[2 * 2].
+        - Reactive :a(.#formulas)[formulas and data import] that are no more complex than Excel formulas, e.g. :code[:value[2 * 2]] = :value(visible)[2 * 2].
         - The use of JSON-LD :a(.#structured-data)[structured data] for both content generation/layout and SEO optimization.
         - :a(.#images)[Asset bundling] for images, video, and audio.
         - Server and client side well structured HTML output resistant to XSS attacks.
     ]
 
-This site's navigation, footnotes, computations, special styles like :kbd[Key] formatting and imported data are built entirely using SECST markup.`
+This site's navigation, footnotes, computations, special styles like :kbd[Key] formatting and imported data are built entirely using SECST markup.
     ]
 
     The SECST language and reference HTML transpiler and runtime support implementations are currently in :strong[ALPHA].
@@ -268,22 +268,25 @@ If you have a single line you wish to show as a paragraph, end it with a newline
         ]
 
     There is also a shorthand:
+
     :code[
-        :ul[
-            - LinkedIn
-            - Facebook
-            - Twitter
-        ]
+:ul[
+    - LinkedIn
+    - Facebook
+    - Twitter
+]
     ]
+
     :em[Note: When shorthand is used, the lines starting with :code[-] :strong[cannot] contain any other markup and must be only one line.]
 
     The same shorthand also works for :code[ol]. Since SECST already knows the list is ordered, numbers are inserted. The main utility of using numbers, is to reset numbering:
+
     :code[
-        :ol[
-            2. LinkedIn
-            - Facebook
-            - Twitter
-        ]
+:ol[
+    2. LinkedIn
+    - Facebook
+    - Twitter
+]
     ]
 
     The standard HTML attributes for configuring ordered lists, :code[reversed], :code[start], :code[type] are :a(https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ol)[also supported].
@@ -380,9 +383,9 @@ The callout for the generated HTML above is implemented using the :a({href:"#det
 :p[
     Hashtags can take the form :code[#<value>[]] or :code[#[<value>...]], or :code[:hashtag[<value>...]] where :code[<value>...] is a space separated list of words to hashtag. The short form :strong[MUST] be followed by :code[[]] to distinguish them from ids used to identify :code[:value[]] and other tags in the document.
 
-    :code[`#sects-is-great[]`] renders as #sects-is-great[].
+    :code[#sects-is-great[]] renders as #sects-is-great[].
 
-    :code[`#[sects-is-great javascript-is-great]`] renders as #[sects-is-great javascript-is-great].
+    :code[#[sects-is-great javascript-is-great]] renders as #[sects-is-great javascript-is-great].
 
     :code[:hashtag[sects-is-great javascript-is-great]] renders as :hashtag[sects-is-great javascript-is-great].
 
@@ -504,7 +507,7 @@ ABC notation processing is part of the reference implementation to show how new 
     :li[By default values are hidden. Use the boolean attribute :code[visible] to display them.]
     :li[The value of a :code[:value[]] is the content, i.e the text between the :code[[]]. It should be either a literal value or a formula.]
     :li[Formulas work similar to :a(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals)[template strings], except the outermost part is not surrounded with :code[${}].]
-    :li[Values computed from formulas are readonly unless the boolean attribute :code[editable] is provided, which automatically makes the value visible]
+    :li[Values computed from formulas are readonly unless the boolean attribute :code[editable] is provided, which automatically makes the value visible.]
     :li[Use the attribute :code[literal] if you want to prevent the evaluation of the content between the :code[[]], i.e. if it is not intended to be a formula itself but looks like a formula. See the last example below.]
 ]
 :dl[
@@ -515,19 +518,16 @@ ABC notation processing is part of the reference implementation to show how new 
     :dd[:value(#v1 visible)[$(#v2,#v3).reduce((sum,value) => sum + value,0)] (Reduced sum of above)]
     :dt[A value reference :code[$(css-selector)] can end in :code[[]] to indicate multiple values should be returned as an array if the selector does not contain a comma. This allows tables to be treated somewhat like spreadsheets.]
     :dd[INSERT EXAMPLE]
-    :dt[You can set values to fitcontent]
-    :dd[:code[:value(#v1a visible fitcontent)[$(#v2a) + $(#v3a)]] = :code[:value(#v2a visible fitcontent)[1]] + :code[:value(#v3a visible fitcontent)[2]]]
-    :dd[:value(#v1a visible fitcontent)[$(#v2a) + $(#v3a)] = :value(#v2a visible fitcontent)[1] + :value(#v3a visible fitcontent)[2]]
     :dt[You can perform symbolic math manipulation.]
-    :dd[:code[:value(#v1b visible fitcontent)[derivative('x^2 + x', 'x')]]]
-    :dd[:value(#v1b visible fitcontent)[derivative('x^2 + x', 'x')]]
+    :dd[:code[:value(#v1b visible)[derivative('x^2 + x', 'x')]]]
+    :dd[:value(#v1b visible)[derivative('x^2 + x', 'x')]]
     :dt[You can solve symbolic equations.]
-    :dd[:code[:value(#v1c visible fitcontent)[solve('Math.pow(r,2)',{r:3})}]]]
-    :dd[:value(#v1c visible fitcontent)[solve('Math.pow(r,2)',{r:3})]]
+    :dd[:code[:value(#v1c visible)[solve('Math.pow(r,2)',{r:3})}]]]
+    :dd[:value(#v1c visible)[solve('Math.pow(r,2)',{r:3})]]
     :dt[You can even give your readers the opportunity to provide the values for which to solve.]
-    :dd[Math.pow(r,2) where r = :code[:value(#v1d visible fitcontent)[0]] is :code[:value(#v2d visible fitcontent)[solve('Math.pow(r,2)',{r:$(#v1d)})]]]
-    :dd[Math.pow(r,2) where r = :value(#v1d visible fitcontent)[0] is :value(#v2d visible fitcontent)[solve('Math.pow(r,2)',{r:$(#v1d)})]]
-    :dd[The derivative of :value(#formula visible fitcontent literal)[x^2 + x] for :value(#variable visible fitcontent literal)[x] is :value(#derivative visible)[derivative($(#formula),$(#variable))]]
+    :dd[Math.pow(r,2) where r = :code[:value(#v1d visible)[0]] is :code[:value(#v2d visible)[solve('Math.pow(r,2)',{r:$(#v1d)})]]]
+    :dd[Math.pow(r,2) where r = :value(#v1d visible)[0] is :value(#v2d visible)[solve('Math.pow(r,2)',{r:$(#v1d)})]]
+    :dd[The derivative of :value(#formula visible literal)[x^2 + x] for :value(#variable visible literal)[x] is :value(#derivative visible)[derivative($(#formula),$(#variable))]]
 ]
 
 :h2[Typing Data]
@@ -544,28 +544,31 @@ The type can also be a mime-type, e.g. :code[text/plain], :code[application/json
 
     JSON is formatted for readability and :a(https://json5.org)[JSON5] is supported to make it easier to handle remote data.
 
-    :code[:value(static visible fitcontent {type:"application/json", src:"https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson"})]
+    :code[
+:value(https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson static visible {type:"application/json"})
+    ]
 
-    :value(static visible fitcontent {type:"application/json", src:"https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson"})
+:value(https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson static visible {type:"application/json"})
 
     Imported data is readonly because it is essentially a computation. To make it editable, use the attribute :code[editable].
 
-    :code[:value(visible fitcontent {type:"application/json", src:"https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson")}]
+     :code[
+ :value(https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson editable {type:"application/json"})
+     ]
 
-    :value(visible fitcontent {type:"application/json", src:"https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson")
+:value(https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson editable {type:"application/json"})
 
-     :code[:value(editable fitcontent {type:"application/json", src:"https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson")}]
+    If an id is added, the data can be used in a computation.
 
-    :value(fitcontent editable {type:"application/json", src:"https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson"})
+    :code[
+:value(#earthquake-data https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson {type:"application/json"})
 
-    It is also possible to use url shorthand for the :code[src] attribute and you can provide an id so the data can be referenced in formulas:
+:value(visible)[$(#earthquake-data).metadata]
+    ]
 
-    :code[:value(#id-of-data
-    https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson
-    visible fitcontent {type:"application/json")}]
+   :value(#earthquake-data https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson {type:"application/json"})
 
-    :value(#id-of-data https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson visible fitcontent {type:"application/json"})
-
+   :value(visible {type:"application/json"})[JSON.stringify($(#earthquake-data).metadata,null,2)]
 ]
 
 :h1(#seo)[Search Engine Optimization]
@@ -610,19 +613,19 @@ This is best covered by an example based on :a(https://developers.google.com/sea
     Where JSON-LD names elements accept sub-types, e.g. :code[:Person[]], those can also be used:
 
     :code[
-        :NewsArticle[
-            :headline[Pinky Conquers The World]
-            :img(https://example.com/photos/1x1/photo.jpg)[The World]
-            :p[
-               Today Pinky finally conquered the world! Next up will be Mars. Watch out billionaires!
-            ]
-            :author[
-                :Person[
-                    :name[The Brain]
-                ]
-            ]
-            :datePublished({format:""})[2022-12-20T08:00:00+08:00]
+:NewsArticle[
+    :headline[Pinky Conquers The World]
+    :img(https://example.com/photos/1x1/photo.jpg)[The World]
+    :p[
+       Today Pinky finally conquered the world! Next up will be Mars. Watch out billionaires!
+    ]
+    :author[
+        :Person[
+            :name[The Brain]
         ]
+    ]
+    :datePublished({format:""})[2022-12-20T08:00:00+08:00]
+]
     ]
 
     renders as
@@ -650,45 +653,45 @@ This is best covered by an example based on :a(https://developers.google.com/sea
     Also note below the use of Date formatting based on :a(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat)[Javascript date and time format functionality].
 
      :code[
-        :NewsArticle[
-            :headline({level:"2"})[Pinky and The Brain Plan For Mars]
-            :img(https://example.com/photos/1x1/photo.jpg)[Mars]
-            :p[
-                We, Pinky and The Brain, will soon announce plans to partner with one of the world's billionaires to take over Mars.
-            ]
-            :Author[
-                :Person[
-                    :name[Pinky]
-                ],
-                :Person[
-                    :name[The Brain]
-                ]
-            ]
-            :datePublished({format:"{dateStyle:'full',timeStyle:'long'}"})[2022-12-20T08:00:00+08:00]
+:NewsArticle[
+    :headline({level:"2"})[Pinky and The Brain Plan For Mars]
+    :img(https://example.com/photos/1x1/photo.jpg)[Mars]
+    :p[
+        We, Pinky and The Brain, will soon announce plans to partner with one of the world's billionaires to take over Mars.
+    ]
+    :Author[
+        :Person[
+            :name[Pinky]
+        ],
+        :Person[
+            :name[The Brain]
         ]
+    ]
+    :datePublished({format:"{dateStyle:'full',timeStyle:'long'}"})[2022-12-20T08:00:00+08:00]
+]
     ]
 
     will generate this JSON-LD and insert it into the head of the document:
 
     :code[
-        <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-          "@type": "NewsArticle",
-          "headline": "Pinky and The Brain Plan For Mars",
-          "image": [
-            "https://example.com/photos/1x1/photo.jpg"
-           ],
-          "datePublished": "2022-12-20T08:00:00+08:00",
-          "author": [{
-              "@type": "Person",
-              "name": "Pinky",
-            },{
-              "@type": "Person",
-              "name": "The Brain"
-          }]
-        }
-        </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "NewsArticle",
+  "headline": "Pinky and The Brain Plan For Mars",
+  "image": [
+    "https://example.com/photos/1x1/photo.jpg"
+   ],
+  "datePublished": "2022-12-20T08:00:00+08:00",
+  "author": [{
+      "@type": "Person",
+      "name": "Pinky",
+    },{
+      "@type": "Person",
+      "name": "The Brain"
+  }]
+}
+</script>
     ]
 
     while rendering this content
@@ -709,18 +712,18 @@ This is best covered by an example based on :a(https://developers.google.com/sea
     The ordering of the tags inside :code[:NewsArticle[]] is only relevant to the display layout. This generates equivalent JSON-LD:
 
     :code[
-        :NewsArticle[
-            :headline({level:"2"})[Pinky and The Brain Plan For Mars]
-            :author[
-                :Person[:name[Pinky]],
-                :Person[:name[The Brain]]
-            ]
-            :datePublished({format:"{dateStyle:'full',timeStyle:'long'}"})[2022-12-20T08:00:00+08:00]
-            :img(https://example.com/photos/1x1/photo.jpg)[Mars]
-            :p[
-                We, Pinky and The Brain, will soon announce plans to partner with one of the world's billionaires to take over Mars.
-            ]
-        ]
+:NewsArticle[
+    :headline({level:"2"})[Pinky and The Brain Plan For Mars]
+    :author[
+        :Person[:name[Pinky]],
+        :Person[:name[The Brain]]
+    ]
+    :datePublished({format:"{dateStyle:'full',timeStyle:'long'}"})[2022-12-20T08:00:00+08:00]
+    :img(https://example.com/photos/1x1/photo.jpg)[Mars]
+    :p[
+        We, Pinky and The Brain, will soon announce plans to partner with one of the world's billionaires to take over Mars.
+    ]
+]
     ]
 
     but renders as:
@@ -743,18 +746,18 @@ This is best covered by an example based on :a(https://developers.google.com/sea
     The generated HTML also contains styles, so a style sheet can be used to modify the displayed content.
 
     :transpiled[
-        :NewsArticle[
-            :headline[Pinky and The Brain Plan For Mars]
-            :author[
-                :Person[:name[Pinky]],
-                :Person[:name[The Brain]]
-            ]
-            :datePublished({format:"{dateStyle:'full',timeStyle:'long'}"})[2022-12-20T08:00:00+08:00]
-            :img(https://example.com/photos/1x1/photo.jpg)[Mars]
-            :p[
-                We, Pinky and The Brain, will soon announce plans to partner with one of the world's billionaires to take over Mars.
-            ]
-        ]
+:NewsArticle[
+    :headline[Pinky and The Brain Plan For Mars]
+    :author[
+        :Person[:name[Pinky]],
+        :Person[:name[The Brain]]
+    ]
+    :datePublished({format:"{dateStyle:'full',timeStyle:'long'}"})[2022-12-20T08:00:00+08:00]
+    :img(https://example.com/photos/1x1/photo.jpg)[Mars]
+    :p[
+        We, Pinky and The Brain, will soon announce plans to partner with one of the world's billionaires to take over Mars.
+    ]
+]
     ]
 ]
 
@@ -863,7 +866,7 @@ All SECST markup takes one of two forms:
 
     The reference implementation uses a :a(https://pegjs.org/)[PEG parser] and this grammar:
 
-    :value(./src/grammar.txt static visible fitcontent disabled {type:"text/plain"})
+    :value(./src/grammar.txt static visible disabled {type:"text/plain"})
 ]
 
 :h1[Architecture]

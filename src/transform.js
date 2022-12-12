@@ -420,12 +420,22 @@ const transform = async (parser,text,{styleAllowed}={}) => {
             border: 1px solid black;
             padding: 5px;
         }
+        .secst-pre-line {
+            white-space: pre-line;
+        }
         textarea.secst {
-                display: block;
-                unicode-bidi: embed;
-                font-family: monospace;
-                white-space: pre;
-            }
+            display: block;
+            unicode-bidi: embed;
+            font-family: monospace;
+            white-space: pre;
+        }
+        textarea.secst-code {
+            unicode-bidi: embed;
+            font-family: monospace;
+            white-space: pre;
+            min-width: 100%;
+            max-width: 100%;
+            resize: none;
         }
         code {
             white-space: pre;

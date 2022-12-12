@@ -38,42 +38,42 @@
         = ":"
 
     expression
-        = &colon tag:tag options:options?  bracketed:bracketed  {
-             const content = bracketed || [];
+        = &colon tag:tag options:options?  bracketed_SECST:bracketed_SECST  {
+             const content = bracketed_SECST || [];
              return new Tag({tag,options,content,location:location()});
         }
 
     hr
-     = ":hr" options:options? bracketed:bracketed? {
+     = ":hr" options:options? bracketed_SECST:bracketed_SECST? {
         return new Tag({tag:"hr",options,location:location()})
      }
 
     br
-      = ":br" options:options? bracketed:bracketed? {
+      = ":br" options:options? bracketed_SECST:bracketed_SECST? {
          return new Tag({tag:"br",options,location:location()})
       }
 
     value
         = ":value" options:options?  bracketed:bracketed?  {
-             const content = bracketed || [];
+             const content = bracketed ? [`${bracketed.substring(1,bracketed.length-1)}`] : [];
              return new Tag({tag:"value",options,content,location:location()});
         }
 
     escape
             = ":escape" options:options? bracketed:bracketed {
-                 const content = [bracketed.map((item) => typeof(item)==="string" ? item : item.toString()).join("")] ;
+                 const content = [`${bracketed.substring(1,bracketed.length-1)}`] ;
                  return new Tag({tag:"escape",options,content,location:location()});
             }
 
     script
         = ":script" options:options? bracketed:bracketed {
-             const content = [bracketed.map((item) => typeof(item)==="string" ? item : item.toString()).join("")] ;
+              const content = [`${bracketed.substring(1,bracketed.length-1)}`] ;
              return new Tag({tag:"script",options,content,location:location()});
         }
 
     code
         = ":code" options:options? bracketed:bracketed {
-             const content = [bracketed.map((item) => typeof(item)==="string" ? item : item.toString()).join("")] ;
+              const content = [`${bracketed.substring(1,bracketed.length-1)}`] ;
              return new Tag({tag:"code",options,content,location:location()});
         }
 
@@ -86,7 +86,7 @@
         = "&"
 
     hashtag
-        = hash tag:[a-z0-9\-]i* options:options? content:bracketed {
+        = hash tag:[a-z0-9\-]i* options:options? content:bracketed_SECST {
             return new Tag({tag:"hashtag",options,content:tag.length>0 ? [tag.join("")] : content,location:location()})
         }
 
@@ -94,15 +94,15 @@
         = "#"
 
     mention
-        = at site:[a-z0-9]i* options:options? content:bracketed {
+        = at site:[a-z0-9]i* options:options? content:bracketed_SECST {
             return new Tag({tag:"@"+site.join(""),options,content,location:location()});
         }
 
     at
         = "@"
 
-    bracketed
-        = BRACKETOPEN value:(backtickquoted/symbol/hashtag/mention/escape/script/code/value/hr/br/expression/not_bracketed/bracketed)* BRACKETCLOSE {
+    bracketed_SECST
+        = BRACKETOPEN value:(backtickquoted/symbol/hashtag/mention/escape/script/code/value/hr/br/expression/not_bracketed/bracketed_SECST)* BRACKETCLOSE {
             if(Array.isArray(value) && value.every((item) => typeof(item)==="string")) {
                 return [value.join("")];
             }
@@ -127,6 +127,11 @@
                 }
             }
             return result;
+        }
+
+    bracketed
+        = BRACKETOPEN value:(not_bracketed/bracketed)* BRACKETCLOSE {
+            return "[" + value.join("") + "]"
         }
 
     not_bracketed

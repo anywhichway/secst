@@ -34,8 +34,9 @@ const stringTemplateEval = async (stringTemplate,requestor) => {
                             solve
                         }
                     try {
-                        const AsyncFunction = (async ()=>{}).constructor;
-                        return await (new AsyncFunction("functions", "math", "globalThis", "with(functions) { with(math) { return `" + stringTemplate + "`}}")).call(null, functions, self.math); //always 2 args so globalThis is undefined
+                        const AsyncFunction = (async ()=>{}).constructor,
+                            result = await (new AsyncFunction("functions", "math", "globalThis", "with(functions) { with(math) { return `" + stringTemplate + "`}}")).call(null, functions, self.math); //always 2 args so globalThis is undefined
+                        return result;
                     } catch (e) {
                         return {stringTemplateError: e + ""}
                     }

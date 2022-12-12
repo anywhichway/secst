@@ -2,18 +2,19 @@ const updateValueWidths = (els) => {
     // not targetted to a specific element because dependency calcs may have updated many
     if(typeof(requestAnimationFrame)==="function") {
         requestAnimationFrame(() => {
-            els ||= [...document.querySelectorAll('input[data-fitcontent]'),...document.querySelectorAll('textarea[data-fitcontent]')];
+            els ||= [...document.querySelectorAll('[data-fitcontent]')];
             [...els].forEach((el) => {
-                if(el.tagName==="input") {
-                    const value = el.getAttribute("value")||"";
-                    el.style.width = Math.max(1,value.length+1)+"ch";
-                } else if(el.tagName==="TEXTAREA") {
-                    const value = el.innerHTML || el.innerText;
+                if(el.tagName==="TEXTAREA") {
+                    const value = el.innerHTML || el.innerText || el.value;
                     if(value) {
-                        const lines = value.split("\n");
-                        el.style.height = (Math.min(20, lines.length) * 1.5) + "em";
+                        const lines = value.split("\n"),
+                            height = Math.round((Math.min(20, lines.length-1) * 1.5));
+                        el.style.height = (height < 3 ? 3 : (height < 4 ? 5 : height)) + "em";
                         el.style.width = (lines.reduce((len, line) => Math.max(len, line.length), 0) + 2) + "ch";
                     }
+                } else {
+                    const value = el.getAttribute("value")||"";
+                    el.style.width = Math.max(1,value.length+1)+"ch";
                 }
                 el.style.maxWidth = document.body.getBoundingClientRect().width + "px";
             });
