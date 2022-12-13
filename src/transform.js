@@ -56,7 +56,7 @@ const toElement = async (node,{parent,connects,parentConfig}) => {
             }
             lines.forEach((line,i) => {
                 //domNodes.push(new Text(line));
-                parent.appendChild(new Text(line))
+                parent.insertAdjacentHTML("beforeend",line.replaceAll(/</g,"&lt;").replaceAll(/>/g,"&gt;"));
                 if(i<lines.length-1) {
                    // domNodes.push(document.createElement("br"))
                     parent.appendChild(document.createElement("br"))
@@ -66,7 +66,7 @@ const toElement = async (node,{parent,connects,parentConfig}) => {
             //const decoder = document.createElement("textarea");
             //decoder.innerHTML = node;
             //domNodes.push(new Text(decoder.innerText)); // new Text(node) sanitize?
-            parent.appendChild(new Text(node))
+            parent.insertAdjacentHTML("beforeend",node.replaceAll(/</g,"&lt;").replaceAll(/>/g,"&gt;"));
         }
     } else if(!node.drop) {
         if(node.toJSONLD) {

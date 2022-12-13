@@ -1,7 +1,7 @@
 :h1[The Joy of SECST]
 
 :p[
-    :abbr[SECST] is a :strong[S]emantic, :strong[E]xtensible, :strong[C]omputational, :strong[S]tyleable :strong[T]ag oriented markup language. You can use it to joyfully create compelling, interactive, SEO enabled documents backed by HTML.
+    :abbr[SECST] is a :strong[S]emantic, :strong[E]xtensible, :strong[C]omputational, :strong[S]tyleable :strong[T]ag oriented markup language. You can use it to joyfully create compelling, interactive HTML SEO enabled documents.
 
     SECST is intended to be a more expressive, but just as easy to learn and use, alternative to Markdown. It provides these features:
 
@@ -15,6 +15,12 @@
         - Server and client side well structured HTML output resistant to XSS attacks.
     ]
 
+    :dl[
+        :dt[Semantic Tag]
+        :dd[A tag that has meaning beyond that used to facilitate document layout and style.]
+        :dd[:code[<b>] for bold is not semantic, but :code[<strong>] for indicating importance and rendering as bold is semantic.]
+    ]
+
     This site's navigation, footnotes, computations, special styles like :kbd[Key] formatting and imported data are built entirely using SECST markup.
 ]
 
@@ -26,15 +32,21 @@
 
 SECST is intended to be a more expressive, but just as easy to learn and use, alternative to Markdown. It provides these features:
 
- :ul[
-        - Support for almost all HTML tags.
-        - :a(.#tables-of-contents)[Table of contents] and :a(.#footnotes)[footnote management].
-        - :a(.#hashtags)[Hashtag] and social media :a(.#mentions)[support].
-        - Reactive :a(.#values-and-formulas)[formulas and data import] that are no more complex than Excel formulas, e.g. :code[:value[2 * 2]] = :value[2 * 2].
-        - The use of JSON-LD :a(.#structured-data)[structured data] for both content generation/layout and SEO optimization.
-        - :a(.#images)[Asset bundling] for images, video, and audio.
-        - Server and client side well structured HTML output resistant to XSS attacks.
-    ]
+:ul[
+    - Support for almost all HTML tags.
+    - :a(.#tables-of-contents)[Table of contents] and :a(.#footnotes)[footnote management].
+    - :a(.#hashtags)[Hashtag] and social media :a(.#mentions)[support].
+    - Reactive :a(.#values-and-formulas)[formulas and data import] that are no more complex than Excel formulas, e.g. :code[:value[2 * 2]] = :value[2 * 2].
+    - The use of JSON-LD :a(.#structured-data)[structured data] for both content generation/layout and SEO optimization.
+    - :a(.#images)[Asset bundling] for images, video, and audio.
+    - Server and client side well structured HTML output resistant to XSS attacks.
+]
+
+:dl[
+    :dt[Semantic Tag]
+    :dd[A tag that has meaning beyond that used to facilitate document layout and style.]
+    :dd[:code[<b>] for bold is not semantic, but :code[<strong>] for indicating importance and rendering as bold is semantic.]
+]
 
 This site's navigation, footnotes, computations, special styles like :kbd[Key] formatting and imported data are built entirely using SECST markup.
     ]
@@ -64,12 +76,6 @@ This site's navigation, footnotes, computations, special styles like :kbd[Key] f
 ]
 
 :h2[SECST Benefits]
-
-:dl[
-    :dt[Semantic Tag]
-    :dd[A tag that has meaning beyond that used to facilitate document layout and style.]
-    :dd[:code[<b>] for bold is not semantic, but :code[<strong>] for indicating importance and rendering as bold is semantic.]
-]
 
 :ul[
     :li[A consistent, uniform compact representation. Where SECST can become verbose, it has shorthand notation similar to Markdown.]

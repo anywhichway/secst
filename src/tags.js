@@ -43,7 +43,7 @@ const universalAttributes = {
     },
     blockContent = deferedTags(["article","audio","blockquote","code","dl","figure","h1","h2","h3","h4","h5","h6","hr","script","listeners","meta","ol","p","picture","pre","section","script","style","table","toc","ul","video","latex","math-science-formula","NewsArticle","Person"]),
     singleLineContent = deferedTags(["&","a","abbr","bdi","bdo","br","del","code","em","emoji","error","escape","footnote","hashtag","img","ins","input","kbd","mark","meta","meter","strike","strong","sub","sup","time","value","var","wbr","u","@facebook","@github","@linkedin","@twitter","latex","name"]),
-    multiLineContent = deferedTags(["address","aside","bdi","cite","details","input","script","ol","output","ruby","ul","textarea","transpiled","author","NewsArticle"]),
+    multiLineContent = deferedTags(["address","aside","bdi","cite","details","dl","input","script","ol","output","ruby","ul","textarea","transpiled","author","NewsArticle"]),
     inlineContent = {...singleLineContent,...multiLineContent},
     tagToText = (tag,pre) => {
         const type = typeof(tag);
