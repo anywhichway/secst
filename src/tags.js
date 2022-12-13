@@ -413,6 +413,7 @@ const tags = {
     code: {
         attributesAllowed: {
             disabled: true,
+            readonly: true,
             language: true, // todo validate with list
             run: true,
             fitcontent() {
@@ -424,8 +425,7 @@ const tags = {
         contentAllowed: true,
         transform(node) {
             const language = node.attributes.language,
-                run = node.attributes.run,
-                content = [...node.content];
+                run = node.attributes.run;
             if(run==null) {
                 //console.log(node)
             } else {
@@ -434,17 +434,18 @@ const tags = {
                     node.tag = "math-science-formula";
                 }
             }
+            if(node.content[0]?.includes("\n")) {
+                node.attributes.disabled = "";
+                node.attributes.readonly = "";
+                node.attributes.fitcontent = "";
+            }
             delete node.attributes.language;
             delete node.attributes.run;
             return node;
         },
         beforeMount(node) {
-            //node.attributes.style = "white-space: pre;" + (node.attributes.style||"");
-            //console.log(node.content)
             if(node.content[0]?.includes("\n")) {
                 node.tag = "textarea";
-                node.attributes.disabled = "";
-                node.attributes.readonly = "";
                 node.attributes.spellcheck = "false";
                 node.classList.push("secst-code");
                 node.content[0] = node.content[0].trim();
@@ -588,10 +589,17 @@ const tags = {
     footnote: {
         contentAllowed: {...blockContent,...inlineContent},
         attributesAllowed: {
+            url(value) {
+                this.href(value);
+                return {
+                    href: value
+                }
+            },
             href(value) {
                 if(value[0]!=="#") {
                     throw new TypeError(`Footnote href ${value} must start with a #`)
                 }
+                new URL(value,document?.baseURI);
             }
         },
         transform(node) {
@@ -599,7 +607,7 @@ const tags = {
             return node;
         },
         beforeMount(node) {
-            node.tag = "sup";
+            node.tag = "span";
             return node;
         }
     },
@@ -1493,6 +1501,9 @@ const tags = {
                 node.tag = "textarea";
             } else {
                 node.tag = "input";
+                if(node.attributes.plaintext==null) {
+                    node.attributes.style = "font-family: monospace;" + (node.attributes.style||"");
+                }
             }
             node.attributes.spellcheck = "false";
             return node;

@@ -31,8 +31,9 @@ if(document.currentScript?.getAttribute("src").endsWith("?run")) {
         Object.entries(listeners).forEach(([key,value]) => {
             window.addEventListener(key,value);
         });
-        engage(".toc")
+        engage(".toc");
         resolve();
+        updateValueWidths();
     })
 }
 

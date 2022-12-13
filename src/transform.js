@@ -84,7 +84,6 @@ const toElement = async (node,{parent,connects,parentConfig}) => {
         const  attributesAllowed = config.attributesAllowed||{};
 
         let el = node.toText ? document.createElement("span") : document.createElement(tag);
-        el.connects ||= [];
         if (id) el.id = id;
         node.requires?.forEach((require) => {
             if (!required.has(require)) {
@@ -398,6 +397,7 @@ const transform = async (parser,text,{styleAllowed}={}) => {
     dom.body.innerHTML = `<style>
         span.autohelm-nav a {all: unset} 
         span.autohelm-nav-up-down a {font-size: 80%; vertical-align:text-top} 
+        span.autohelm-footnote {position:relative; font-size:small; top:-.5em}
         mark.secst-error { background: red }
         details {
             display: inline
@@ -431,6 +431,7 @@ const transform = async (parser,text,{styleAllowed}={}) => {
             border: unset;
             padding: unset;
             color: unset;
+            font-family: unset;
         }
         textarea.secst {
             display: block;
