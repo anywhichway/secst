@@ -631,7 +631,7 @@ The type can also be one of the mime-types :code[text/plain], :code[text/csv], :
 :h4[Advanced Formulas]
 
 :p[
-You can use almost any :a(https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors)[CCS selector] in place of :code[:value[$(#<id>)]]. The value returned will be the value property on the element or (if not available) the value attribute or the :code[innerText].
+You can use almost any :a(https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors)[CSS selector] in place of :code[#id] in :code[$(#<id>)]. The value returned will be the contents of the value property on the element or (if not available) the value attribute or the :code[innerText].
 
 You can use commas to select multiple identifier named elements, e.g. :code[:value[$(#id1, #id2, #id3)]] is an array of the values associated with the elements :code[:value(#id1)[3]], :code[:value(#id2)[2]], :code[:value(#id3)[1]] and will be :code[[3,2,1]].
 
@@ -693,7 +693,7 @@ This is best covered by an example based on :a(https://developers.google.com/sea
     :code[
         :NewsArticle[
             :headline[Pinky Conquers The World]
-            :img(https://example.com/photos/1x1/photo.jpg)
+            :img(./assets/images/The_Blue_Marble.jpg {height:50})[Earth]
             :p[
                 Today Pinky finally conquered the world! Next up will be Mars. Watch out billionaires!
             ]
@@ -709,7 +709,7 @@ This is best covered by an example based on :a(https://developers.google.com/sea
     :code[
 :NewsArticle[
     :headline[Pinky Conquers The World]
-    :img(https://example.com/photos/1x1/photo.jpg)[The World]
+    :img(./assets/images/The_Blue_Marble.jpg {height:50,align:"left"})[Earth]
     :p[
        Today Pinky finally conquered the world! Next up will be Mars. Watch out billionaires!
     ]
@@ -727,7 +727,7 @@ This is best covered by an example based on :a(https://developers.google.com/sea
 
 :NewsArticle[
     :headline[Pinky Conquers The World]
-    :img(https://example.com/photos/1x1/photo.jpg)[The World]
+    :img(./assets/images/The_Blue_Marble.jpg {height:50,align:"left"})[Earth]
    :p[
        Today Pinky finally conquered the world! Next up will be Mars. Watch out billionaires!
    ]
@@ -749,7 +749,7 @@ This is best covered by an example based on :a(https://developers.google.com/sea
      :code[
 :NewsArticle[
     :headline({level:"2"})[Pinky and The Brain Plan For Mars]
-    :img(https://example.com/photos/1x1/photo.jpg)[Mars]
+    :img(./assets/images/mars.jpg {height:50,align:"left"})[Mars]
     :p[
         We, Pinky and The Brain, will soon announce plans to partner with one of the world's billionaires to take over Mars.
     ]
@@ -774,7 +774,7 @@ This is best covered by an example based on :a(https://developers.google.com/sea
   "@type": "NewsArticle",
   "headline": "Pinky and The Brain Plan For Mars",
   "image": [
-    "https://example.com/photos/1x1/photo.jpg"
+    "./assets/images/mars.jpg"
    ],
   "datePublished": "2022-12-20T08:00:00+08:00",
   "author": [{
@@ -792,7 +792,7 @@ This is best covered by an example based on :a(https://developers.google.com/sea
 ]
 :NewsArticle[
     :headline({level:2})[Pinky and The Brain Plan For Mars]
-    :img(https://example.com/photos/1x1/photo.jpg)[Mars]
+    :img(./assets/images/mars.jpg {height:50,align:"left"})[Mars]
     :p[
         We, Pinky and The Brain, will soon announce plans to partner with one of the world's billionaires to take over Mars.
     ]
@@ -813,14 +813,14 @@ This is best covered by an example based on :a(https://developers.google.com/sea
         :Person[:name[The Brain]]
     ]
     :datePublished({format:"{dateStyle:'full',timeStyle:'long'}"})[2022-12-20T08:00:00+08:00]
-    :img(https://example.com/photos/1x1/photo.jpg)[Mars]
+    :img(./assets/images/mars.jpg {height:50,align:"left"})[Mars]
     :p[
         We, Pinky and The Brain, will soon announce plans to partner with one of the world's billionaires to take over Mars.
     ]
 ]
     ]
 
-    but renders as:
+    but renders with a smaller heading and the attribution at the start:
 ]
 
  :NewsArticle[
@@ -830,7 +830,8 @@ This is best covered by an example based on :a(https://developers.google.com/sea
         :Person[:name[The Brain]]
     ]
     :datePublished({format:"{dateStyle:'full',timeStyle:'long'}"})[2022-12-20T08:00:00+08:00]
-    :img(https://example.com/photos/1x1/photo.jpg)[Mars]
+    :p[]
+    :img(./assets/images/mars.jpg {height:50,align:"left"})[Mars]
     :p[
         We, Pinky and The Brain, will soon announce plans to partner with one of the world's billionaires to take over Mars.
     ]
@@ -847,7 +848,8 @@ This is best covered by an example based on :a(https://developers.google.com/sea
         :Person[:name[The Brain]]
     ]
     :datePublished({format:"{dateStyle:'full',timeStyle:'long'}"})[2022-12-20T08:00:00+08:00]
-    :img(https://example.com/photos/1x1/photo.jpg)[Mars]
+    :p[]
+    :img(./assets/images/mars.jpg {height:50,align:"left"})[Mars]
     :p[
         We, Pinky and The Brain, will soon announce plans to partner with one of the world's billionaires to take over Mars.
     ]

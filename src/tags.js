@@ -345,7 +345,7 @@ const tags = {
                     throw new TypeError(`referrer policy ${value} is not one of ${JSON.stringify(policies)}`)
                 }
             },
-            target: true,
+            target: "string",
             type(value) {
                 const parts = value.split("/");
                 if(parts.length!==2 || parts[0].length<1 || parts[1].length<1) {
@@ -510,7 +510,7 @@ const tags = {
                     filter: "none"
                 }
             },
-            filter: true
+            filter: "string"
         },
         contentAllowed: true,
         async toElement(node) {
@@ -648,7 +648,7 @@ const tags = {
             title: {
                 required: true
             },
-            type: true,
+            type: ["checkbox","color","date","datetime-local","email","month","number","password","radio","range","tel","text","time","url","week"],
             value:true,
         }
     },
@@ -659,6 +659,13 @@ const tags = {
         attributesAllowed: {
             alt:true,
             static:true,
+            height:"number",
+            width:"number",
+            align:["top","middle","bottom","left","right"],
+            decoding:true,
+            ismap:true,
+            type:true,
+            loading:["eager","lazy"],
             src(value) {
                 new URL(value,document.baseURI);
             },
@@ -699,6 +706,19 @@ const tags = {
                 } catch(e) {
 
                 }
+            }
+            return node;
+        },
+        beforeMount(node) {
+            if(node.attributes.align) {
+                const styles = {
+                    top: "vertical-align: text-top;",
+                    middle: "vertical-align: -moz-middle-with-baseline;",
+                    bottom: "vertical-align: unset;",
+                    left: "float: left;",
+                    right: "float: right;"
+                }
+                node.attributes.style = styles[node.attributes.align] + (node.attributes.style||"");
             }
             return node;
         },
@@ -1137,11 +1157,12 @@ const tags = {
         },
         render(node,el) {
             el.innerHTML = node.attributes.value || node.content[0];
-            if(el.hasAttribute("data-fitcontent")) {
+            updateValueWidths([el]);
+           /* if(el.hasAttribute("data-fitcontent")) {
                 const lines = el.innerText.split("\n");
                 el.style.height = (Math.min(20,lines.length)*1.5) + "em";
                 el.style.width = Math.min(80,lines.reduce((len,line) => Math.max(len,line.length),0)) + "ch";
-            }
+            }*/
         },
         transform(node) {
             node.content = [node.content.join("\n")];

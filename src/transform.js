@@ -290,6 +290,14 @@ const validateNode = async ({parser,node,path=[],contentAllowed= tags,errors=[]}
                     delete node.attributes[key];
                     Object.assign(node.attributes,result);
                 }
+            } else if(type==="string") {
+                if(typeof(value)!==attributeAllowed) {
+                    errors.push(new parser.SyntaxError(`${tag} the value ${key}:${value} type`,attributeAllowed,typeof(value),node.location));
+                }
+            } else if(Array.isArray(attributeAllowed)) {
+                if(!attributeAllowed.some((item) => item===value)) {
+                    errors.push(new parser.SyntaxError(`${tag} the value ${key}:${value} should be one of`,JSON.stringify(attributeAllowed),value,node.location));
+                }
             } else if(attributeAllowed && type==="object") {
                 if(attributeAllowed.transform) {
                     const result = attributeAllowed.transform(value,node);
