@@ -87,13 +87,17 @@ This site's navigation, footnotes, computations, special styles like :kbd[Key] f
 
 :p[
 Authors write documents using semantic tags with the format :code[<tag>[<content>]] or :code[<tag>(<parameters>)[<content>]].
-]
 
 For example:
+
 :ul[
     :li[:code[:strong[bolded important content]] produces :strong[bolded important content]]
     :li[:code[:em[italicized emphasized content]] produces :em[italicized emphasized content]]
 ]
+
+]
+
+
 
 :h2[When To Use SECST]
 
@@ -204,7 +208,7 @@ See :a[https://www.markdownguide.org/basic-syntax/].
 :h2[Markup Tags With HTML Names]
 
 :p[
-Almost every semantic tag supported by HTML5 is one of the :a({href:"#tags"})[tags supported by SECST]. Most non-semantic tags are excluded from SECST, e.g. :code[<div>] and :code[<span>]. Exceptions are :code[<hr>], :code[<style>], :code[<table>] and :code[<ol>] and :code[<ul>].
+Almost every semantic tag supported by HTML5 is one of the :a({href:"#tags"})[tags supported by SECST]. Most non-semantic tags are excluded from SECST, e.g. :code[<div>] and :code[<span>]. Exceptions are :code[<hr>], :code[<table>], :code[<ol>], :code[<ul>] and :code[<style>].
 
 A few tags of note are documented below to illustrate the use of SECST or highlight special features.
 ]
@@ -305,16 +309,16 @@ If you have a single line you wish to show as a paragraph, end it with a newline
 ]
 
 :ul({title:"suggested meta tag names"})[
-    :li[:em[keywords], comma separated key words, but consider using :a({href:"#hashtags"})[Hashtags]]
-    :li[:em[description] for a description of the document]
-    :li[:em[publisher] for the publisher of the document]
-    :li[:em[author] for the author of the document]
-    :li[:em[copyright] for a copyright notice of the document]
-    :li[:em[robots] with the comma separated values of :code[index] or :code[noindex] and :code[follow] or :code[nofollow].]
+    - :em[keywords], comma separated key words, but consider using :a({href:"#hashtags"})[Hashtags]
+    - :em[description] for a description of the document
+    - :em[publisher] for the publisher of the document
+    - :em[author] for the author of the document
+    - :em[copyright] for a copyright notice of the document
+    - :em[robots] with the comma separated values of :code[index] or :code[noindex] and :code[follow] or :code[nofollow].
 ]
 
 :p[
-Also see the section :a({href:"#microdata"})[Microdata] under :a({href:"#seo"})[SEO].
+Also see the section :a(."#structured-data")[Structured Data] under :a(.#seo)[SEO].
 ]
 
 :h4[Multimedia]
@@ -876,7 +880,9 @@ More left content
 
 :h1[Advanced Computational Authoring]
 
+:p[
 As pointed out above, the SECST macro evaluator supports regular and advanced math. It also supports some utility functions.
+]
 
 :h2[Macro List Formatting]
 
@@ -894,14 +900,16 @@ You can use any JavaScript that is available in :a(https://developer.mozilla.org
 
 :h3[Error Handling]
 
-p:[
-Depending on your use case, the reference transpiler can be set to do one of the following when errors are encountered:
-]
+:p[
+Depending on your use case, the reference transpiler can be set to do one of the following when errors are encountered.
+
 :ul[
     - cancel, stop processing and throw and errors when the first problem is detected
     - collect, collect all the errors and return them with line numbers (if you are writing an editor)
     - leave the text version of the error generating mark-up in place (also collects the errors)
     - try to correct the errors (collects the errors and also returns a parse tree with corrected markup)
+]
+
 ]
 
 :h2[Tag Configuration]
@@ -918,34 +926,38 @@ Depending on your use case, the reference transpiler can be set to do one of the
 
 :p[
     :em[Note, not all design objectives are fully implemented].
+
+    :ul[
+    - Easy to understand, simple syntax, semantic
+    - Easy to learn, limited syntax, semantic
+    - Forgiving, auto corrects nesting, table column count, etc.
+    - Easy to extend, uniform syntax, declarative language elements
+    li[Secure, transpiler ensures security, also see :a({href:"#security"})[Security]]
+    - Performant, simple syntax reduces parser work, although iterating over tag object definitions can take time
+    - Small, simple syntax reduces parser size, although tag object definitions can take up memory
+    - Configurable, declarative language elements
+    - Comprehensive, all of semantic HTML and more (extensible)
+    - Computational, reactivity built-in, advanced math built in, simple user input mechanisms
+    - Programmable, simple event handling plus API
+    - Styled, code highlighting built-in, optional CSS capability
+    - Portable, HTML output with asset bundling options
+    li[SEO Friendly, browser or server rendering, meta tags driven by hashtags and an explicit :code[:keywords[]] tag]
+    ]
 ]
-:ul[
-- Easy to understand, simple syntax, semantic
-- Easy to learn, limited syntax, semantic
-- Forgiving, auto corrects nesting, table column count, etc.
-- Easy to extend, uniform syntax, declarative language elements
-li[Secure, transpiler ensures security, also see :a({href:"#security"})[Security]]
-- Performant, simple syntax reduces parser work, although iterating over tag object definitions can take time
-- Small, simple syntax reduces parser size, although tag object definitions can take up memory
-- Configurable, declarative language elements
-- Comprehensive, all of semantic HTML and more (extensible)
-- Computational, reactivity built-in, advanced math built in, simple user input mechanisms
-- Programmable, simple event handling plus API
-- Styled, code highlighting built-in, optional CSS capability
-- Portable, HTML output with asset bundling options
-li[SEO Friendly, browser or server rendering, meta tags driven by hashtags and an explicit :code[:keywords[]] tag]
-]
+
 
 :h1[Grammar]
 
 :p[
 All SECST markup takes one of two forms:
-]
 
 :ul[
     :li[:code[:<tag>[<content>...]] where code:[<content>] is SECST markup ans text.]
     :li[:code[:<tag>(#<id> .<class>... <unaryattribute>... <attributes>...)[<content>...]] where  :code[<id>],  :code[<class>] space separated list,  :code[<unaryattribute>] space separated list, :code[<attributes>] JSON5 object are all optional, but must be provided in that order if present.]
 ]
+
+]
+
 
 :p[
     In some cases, e.g. for :code[:hr], :code[:br], and :code[:value] the trailing :code[[]] are optional.
@@ -970,7 +982,7 @@ All SECST markup takes one of two forms:
 - Only passes attributes to HTML that are valid for the associated tag
 ]
 
-
+:value(hidden)[
 style({selector:"#id1"})[
  float:right;
 ]
@@ -982,6 +994,7 @@ listeners({selector:"#id1"})[
   console.log(event)
  },
  click() { alert("clicked") }
+]
 ]
 
 

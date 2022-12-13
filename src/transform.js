@@ -47,7 +47,7 @@ const required = new Set(),
     domParser = typeof(DOMParser)==="function" ? new DOMParser() : null;
 //decoder = document.createElement("textarea");
 
-const toElement = async (node,{domNodes,connects,parentConfig}) => {
+const toElement = async (node,{parent,connects,parentConfig}) => {
     if(typeof(node)==="string") {
         if(parentConfig && parentConfig.breakOnNewline) {
             const lines = node.split("\n");
@@ -55,15 +55,18 @@ const toElement = async (node,{domNodes,connects,parentConfig}) => {
                 lines.pop(); // remove trailing whitespaces
             }
             lines.forEach((line,i) => {
-                domNodes.push(new Text(line));
+                //domNodes.push(new Text(line));
+                parent.appendChild(new Text(line))
                 if(i<lines.length-1) {
-                    domNodes.push(document.createElement("br"))
+                   // domNodes.push(document.createElement("br"))
+                    parent.appendChild(document.createElement("br"))
                 }
             })
         } else {
-            const decoder = document.createElement("textarea");
-            decoder.innerHTML = node;
-            domNodes.push(new Text(decoder.innerText)); // new Text(node) sanitize?
+            //const decoder = document.createElement("textarea");
+            //decoder.innerHTML = node;
+            //domNodes.push(new Text(decoder.innerText)); // new Text(node) sanitize?
+            parent.appendChild(new Text(node))
         }
     } else if(!node.drop) {
         if(node.toJSONLD) {
@@ -96,7 +99,8 @@ const toElement = async (node,{domNodes,connects,parentConfig}) => {
                     } else if (innerHTML) {
                         el.innerHTML = innerHTML;
                     }
-                    domNodes.push(el);
+                    //domNodes.push(el);
+                    parent.appendChild(el);
                 });
             }
         });
@@ -126,7 +130,7 @@ const toElement = async (node,{domNodes,connects,parentConfig}) => {
             el.setAttribute("type", "module");
         }
         if(node?.toElement) {
-            el = await node.toElement(node,{domNodes,connects,parentConfig:config});
+            el = await node.toElement(node,{parentConfig:config});
         } else if(node?.toHTML) {
             el.innerHTML = await node.toHTML(node,el);
         } else if (node?.toText) {
@@ -134,32 +138,18 @@ const toElement = async (node,{domNodes,connects,parentConfig}) => {
         } else if(node.render) {
             await node.render(node,el);
         } else {
-            const {domNodes} = await toDOMNodes(node.content,config,connects)
-            domNodes.forEach((node) => {
-                if(typeof(node)==="string") {
-                    const body = domParser ? domParser.parseFromString(node,"text/html").body : document.createElement("div");
-                    if(body.tagName==="div" || body.tagName==="span") {
-                        body.innerHTML = node;
-                    }
-                    if(el.lastChild) {
-                        while(body.lastChild) {
-                            el.appendChild(body.lastChild)
-                        }
-                    } else {
-                        el.innerHTML = node;
-                    }
-                } else {
-                    el.appendChild(node);
-                }
-            });
+            for(const child of node.content) {
+                await toElement(child,{parent:el,parentConfig:config});
+            }
         }
         if(node.mounted) {
             node.mounted(el,node);
         }
         if(node.connected) {
-            connects.push(async () => await node.connected(el,node));
+            el.connected = async () => await node.connected(el,node);
         }
-        domNodes.push(el);
+        //domNodes.push(el);
+        parent.appendChild(el);
         const listeners = Object.entries(config?.listeners||[]);
         if(listeners.length>0) {
             const script = document.createElement("script");
@@ -176,7 +166,8 @@ const toElement = async (node,{domNodes,connects,parentConfig}) => {
                 }
                 return string;
             },"");
-            domNodes.push(script);
+           // domNodes.push(script);
+            parent.appendChild(script);
         }
     }
 }
@@ -347,15 +338,19 @@ const validateNode = async ({parser,node,path=[],contentAllowed= tags,errors=[]}
     return {node,errors};
 };
 
-const toDOMNodes = async (nodes,parentConfig,connects=[]) => {
-    const domNodes = [];
-    let i= 0;
-    for(const node of nodes) {
-        await toElement(node,{domNodes,connects,parentConfig});
+const connect = async (el,parent) => {
+    if(!el.isConnected && [Node.TEXT_NODE,Node.ELEMENT_NODE,Node.COMMENT_NODE,Node.CDATA_SECTION_NODE].includes(el.nodeType)) {
+        parent.appendChild(el);
     }
-    return {domNodes,connects};
-};
-toDOMNodes.reset = () => required.clear();
+    if([Node.ELEMENT_NODE,Node.DOCUMENT_FRAGMENT_NODE].includes(el.nodeType)) {
+        for(const child of [...el.childNodes]) {
+            await connect(child,el);
+        }
+    }
+    if(el.connected) {
+        await el.connected();
+    }
+}
 
 const configureStyles = (tags,styleAllowed) => {
         if(styleAllowed==="*") {
@@ -456,13 +451,10 @@ const transform = async (parser,text,{styleAllowed}={}) => {
             unicode-bidi: embed;
         }
         </style>`;
-    const {domNodes,connects} = await toDOMNodes(transformed,dom);
-    domNodes.forEach((node) => {
-        dom.body.appendChild(node);
-    });
-    for(const connected of connects) {
-        await connected();
+    for(const node of transformed) {
+        await toElement(node,{parent:dom.body})
     }
+    connect(dom,document);
     try {
         initAutohelm({tocSelector:".toc",dom:dom.body,directChildren:true});
     } catch(e) {
