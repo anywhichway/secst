@@ -1,9 +1,12 @@
 import JSON5 from "json5";
 import {init as initAutohelm} from "@anywhichway/autohelm";
 import Tag from "./tag.js";
-//import tags from "./tags.js";
 import bodyContent from "./tags/body-content.js";
 import universalAttributes from "./universal-attributes.js";
+
+if(typeof(window)!=="undefined") {
+    window.JSON5 = JSON5;
+}
 
 const getContentByTagName = function(node,tagName,results=[]) {
     if(node.content) {
