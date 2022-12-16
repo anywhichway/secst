@@ -707,13 +707,13 @@ This site's navigation, footnotes, computations, special styles like :kbd[Key] f
 
             SECST knows which tags to collect into arrays for JSON-LD and how to map similar SECST or HTML semantics to JSON-LD.
 
-            Some JSON-LD attributes mapped to tags can have attributes, e.g. :code[:heading(level=2)[]].
+            Some JSON-LD attributes mapped to tags can have attributes, e.g. :code[:heading({level:2})[]].
 
             Also note below the use of Date formatting based on :a(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat)[Javascript date and time format functionality].
 
              :code[
                 :NewsArticle[
-                    :headline({level:"2"})[Pinky and The Brain Plan For Mars]
+                    :headline({level:2})[Pinky and The Brain Plan For Mars]
                     :img(./assets/images/mars.jpg {height:50,align:"left"})[Mars]
                     :p[
                         We, Pinky and The Brain, will soon announce plans to partner with one of the world's billionaires to take over Mars.

@@ -5,6 +5,10 @@ const blockContent = {
     ...flowContent
 }
 
-Object.keys(phrasingContent).forEach((key) => delete blockContent[key]);
+Object.keys(phrasingContent).forEach((key) => {
+    if(key!=="img") {
+        delete blockContent[key]
+    }
+});
 
 export {blockContent,blockContent as default}

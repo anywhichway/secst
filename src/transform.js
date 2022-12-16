@@ -4,10 +4,6 @@ import Tag from "./tag.js";
 import bodyContent from "./tags/body-content.js";
 import universalAttributes from "./universal-attributes.js";
 
-if(typeof(window)!=="undefined") {
-    window.JSON5 = JSON5;
-}
-
 const getContentByTagName = function(node,tagName,results=[]) {
     if(node.content) {
         node.content.reduce((results,item) => {

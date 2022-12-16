@@ -1,71 +1,79 @@
-import blockContent from "../block-content.js";
 import JSON5 from "json5";
 import Person from "./person.js";
 
-const NewsArticle = {
+const headline = {
+    attributesAllowed: {
+        level: true
+    },
+    contentAllowed: true,
+    minCount: 0,
+    maxCount: 1,
+    toJSONLD(node) {
+        return node.content[0]
+    },
+    beforeMount(node) {
+        const level = node.attributes.level || 1;
+        node.tag = "h" + level;
+        delete node.attributes.level;
+        return node;
+    }
+}
+
+const datePublished = {
+    attributesAllowed:{
+        "data-format": true,
+        lang: true,
+        format(value) {
+            return {
+                "data-format": value
+            }
+        }
+    },
+    contentAllowed: Date,
+    minCount: 0,
+    maxCount: 1,
+    toText(node) {
+        const lang = node.attributes.lang || document.documentElement.getAttribute("lang") || "en",
+            options = node.attributes["data-format"] ? JSON5.parse(node.attributes["data-format"]) : undefined,
+            formatted = new Intl.DateTimeFormat(lang,options).format(new Date(node.content.join(":")));
+        return formatted;
+    }
+}
+
+const author = {
     contentAllowed: {
-        headline: {
-            attributesAllowed: {
-                level: true
-            },
+        name: {
             contentAllowed: true,
-            minCount: 0,
-            maxCount: 1,
             toJSONLD(node) {
-                return node.content[0]
-            },
-            beforeMount(node) {
-                const level = node.attributes.level || 1;
-                node.tag = "h" + level;
-                delete node.attributes.level;
-                return node;
-            }
-        },
-        ...blockContent,
-        datePublished: {
-            attributesAllowed:{
-                "data-format": true,
-                lang: true,
-                format(value) {
-                    return {
-                        "data-format": value
-                    }
-                }
-            },
-            contentAllowed: Date,
-            minCount: 0,
-            maxCount: 1,
-            toText(node) {
-                const lang = node.attributes.lang || document.documentElement.getAttribute("lang") || "en",
-                    options = node.attributes["data-format"] ? JSON5.parse(node.attributes["data-format"]) : undefined,
-                    formatted = new Intl.DateTimeFormat(lang,options).format(new Date(node.content.join(":")));
-                return formatted;
-            }
-        },
-        author: {
-            contentAllowed: {
-                name: {
-                    contentAllowed: true,
-                    toJSONLD(node) {
-                        node.classList.push("JSON-LD-author-name");
-                        return {name:node.content.join("")}
-                    },
-                    beforeMount(node) {
-                        node.tag = "span";
-                        return node;
-                    }
-                },
-                Person
+                node.classList.push("JSON-LD-author-name");
+                return {name:node.content.join("")}
             },
             beforeMount(node) {
                 node.tag = "span";
                 return node;
-            },
-            minCount: 1,
-            toJSONLD(node) {
-                const author = node.getContentByTagName("name")[0] || node.getContentByTagName("Person")[0];
-                if(author) return author.toJSONLD(author);
             }
+        },
+        Person
+    },
+    beforeMount(node) {
+        node.tag = "span";
+        return node;
+    },
+    minCount: 1,
+    toJSONLD(node) {
+        const author = node.getContentByTagName("name")[0] || node.getContentByTagName("Person")[0];
+        if(author) return author.toJSONLD(author);
+    }
+}
+
+const NewsArticle = {
+    async contentAllowed() {
+        const {blockContent} = await import("../block-content.js");
+        return this.contentAllowed = {
+            author,
+            ...blockContent,
+            datePublished,
+            headline
         }
     },
     toJSONLD(node) {
