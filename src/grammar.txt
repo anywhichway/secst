@@ -32,7 +32,7 @@
             }
 
     content
-        = backtickquoted / escape / script / code /  value / hr / br / (&colon expression _?) / [ a-z0-9_\-~!@#$%^&*()_+=\[\{\]\}|\\;:"'<,>.?/\n\r\t]i
+        = backtickquoted / escape / script / code /  value / hr / br / emoji / (&colon expression _?) / [ a-z0-9_\-~!@#$%^&*()_+=\[\{\]\}|\\;:"'<,>.?/\n\r\t]i
 
     colon
         = ":"
@@ -85,6 +85,11 @@
     ampersand
         = "&"
 
+    emoji
+        = colon first:[a-z] rest:[a-z0-9]i* colon {
+            return new Tag({tag:"emoji",content:[first+rest.join("")]})
+        }
+
     hashtag
         = hash tag:[a-z0-9\-]i* options:options? content:bracketed_SECST {
             return new Tag({tag:"hashtag",options,content:tag.length>0 ? [tag.join("")] : content,location:location()})
@@ -102,7 +107,7 @@
         = "@"
 
     bracketed_SECST
-        = BRACKETOPEN value:(backtickquoted/symbol/hashtag/mention/escape/script/code/value/hr/br/expression/not_bracketed/bracketed_SECST)* BRACKETCLOSE {
+        = BRACKETOPEN value:(backtickquoted/symbol/hashtag/mention/escape/script/code/value/hr/br/emoji/expression/not_bracketed/bracketed_SECST)* BRACKETCLOSE {
             if(Array.isArray(value) && value.every((item) => typeof(item)==="string")) {
                 return [value.join("")];
             }
@@ -197,7 +202,7 @@
         = hyphen:"-"? start:[_a-z]i rest:[\w]i* { return (hyphen || "") + start + rest.join("") }
 
     binaryattribute
-        = attr:(_ hidden _ / _ checked _ / _ colored _ / _ disabled _ / _ editable _ / _ fitcontent _ / _ literal _ / _ open _ / _ plaintext _ / _ readonly _ / _ reversed _ / _ run _ / _ selected _ / _ static _ / _ toggle _ / _ url _ / _ visible _) { return attr[1] }
+        = attr:(_ hidden _ / _ checked _ / _ grayscale _ / _ greyscale _ / _ disabled _ / _ editable _ / _ fitcontent _ / _ literal _ / _ open _ / _ plaintext _ / _ readonly _ / _ reversed _ / _ run _ / _ selected _ / _ static _ / _ toggle _ / _ url _ / _ visible _) { return attr[1] }
 
     hidden
         = "hidden" { return ["hidden",""] }
@@ -205,8 +210,11 @@
     checked
         = "checked" { return ["checked",""] }
 
-    colored
-            = "colored" { return ["colored",""] }
+    grayscale
+            = "grayscale" { return ["grayscale",""] }
+
+    greyscale
+                = "greyscale" { return ["greyscale",""] }
 
     editable
         = "editable" { return ["editable",""] }

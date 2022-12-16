@@ -1,7 +1,9 @@
 import JSON5 from "json5";
 import {init as initAutohelm} from "@anywhichway/autohelm";
 import Tag from "./tag.js";
-import {tags, universalAttributes} from "./tags.js";
+//import tags from "./tags.js";
+import bodyContent from "./tags/body-content.js";
+import universalAttributes from "./universal-attributes.js";
 
 const getContentByTagName = function(node,tagName,results=[]) {
     if(node.content) {
@@ -33,7 +35,7 @@ const patchTopLevel = (tree) => {
                     result.push(previous)
                 }
             })
-        } else if(previous && !tags[node.tag]?.allowAsRoot) {
+        } else if(previous && !bodyContent[node.tag]?.allowAsRoot) {
             previous.content.push(node);
         } else {
             previous = null;
@@ -73,15 +75,22 @@ const toElement = async (node,{parent,connects,parentConfig}) => {
             node.toJSONLD(node)
            // console.log(node.toJSONLD(node))
         }
-        let config = parentConfig?.contentAllowed ? (parentConfig.contentAllowed==="*" ? tags[node.tag] : parentConfig.contentAllowed[node.tag]) : tags[node.tag];
+        let config = parentConfig.contentAllowed[node.tag];
+        if(typeof(config)==="function") {
+            config = await config.call(parentConfig.contentAllowed);
+        }
         if(node.beforeMount) {
-            node = node.beforeMount(node)
+            const transformed = node.beforeMount(node);
+            if(node.tag!==transformed.tag && !["span","div"].includes(transformed.tag)) {
+                config = parentConfig.contentAllowed[transformed.tag]
+                if(typeof(config)==="function") {
+                    config = await config.call(parentConfig.contentAllowed);
+                }
+            }
+            node = transformed;
         }
-        const {tag, id, classList, attributes} = node;
-        if(!["span","div"].includes(tag)) {
-            config = parentConfig?.contentAllowed ? (parentConfig.contentAllowed==="*" ? tags[node.tag] : parentConfig.contentAllowed[node.tag]||tags[node.tag]) : tags[node.tag]; // node may have been mapped to a new tag, which may be global and not just local content
-        }
-        const  attributesAllowed = config.attributesAllowed||{};
+        const {tag, id, classList, attributes} = node,
+            attributesAllowed = config.attributesAllowed||{};
 
         let el = node.toText ? document.createElement("span") : document.createElement(tag);
         if (id) el.id = id;
@@ -171,55 +180,34 @@ const toElement = async (node,{parent,connects,parentConfig}) => {
     }
 }
 
-const validateNode = async ({parser,node,path=[],contentAllowed= tags,errors=[]}) => {
+const validateNode = async ({parser,node,path=[],contentAllowed=bodyContent,errors=[],level=0}) => {
     if(!node || typeof(node)!=="object") {
         return;
     }
     node.getContentByTagName = getContentByTagName.bind(node,node);
-    if(contentAllowed==="*") {
-        contentAllowed = tags;
-    } else if(typeof(contentAllowed)==="function") {
-        contentAllowed = contentAllowed();
+    if(typeof(contentAllowed)==="function") {
+        contentAllowed = await contentAllowed();
     }
     node.attributes ||= {};
     node.classList ||= [];
     node.content ||= [];
     let tag = node.tag,
-        config = contentAllowed[tag] || tags[tag];
+        config = contentAllowed[tag];
     if(!config) {
         node.drop = true;
         errors.push(new parser.SyntaxError(`Dropping unknown tag ${tag}`,null,null,node.location));
         return {node,errors};
     }
-    if(path.length===0 && !config.allowAsRoot) {
-        node.drop = true;
-        errors.push(new parser.SyntaxError(`${tag} is not permitted as a root level element`,null,null,node.location));
-        return {node,errors};
+    if(typeof(config)==="function") {
+        config = await config.call(contentAllowed);
     }
     if(config.parentRequired && (path.length===0 || !config.parentRequired.includes(path[path.length-1].tag))) {
         node.drop = true;
         errors.push(new parser.SyntaxError(`${tag} required parent to be one of`,JSON.stringify(config.parentRequired),path[path.length-1].tag,node.location));
         return {node,errors};
     }
-    if(!config.initialized) {
-        config.initialized = true;
-        if(config.contentAllowed) {
-            config.contentAllowed = typeof(config.contentAllowed)==="function" ? config.contentAllowed() : config.contentAllowed;
-            if(typeof(config.contentAllowed)==="object") {
-                Object.entries(config.contentAllowed).forEach(([key,value]) => {
-                    if(typeof(value)==="function") {
-                        config.contentAllowed[key] = value();
-                    }
-                })
-            }
-        }
-    }
-    let ancestorIndex;
-    if(path.length>0 && !config.indirectChildAllowed && config.contentAllowed && typeof(config.contentAllowed)==="object" && !config.contentAllowed[tag] && (ancestorIndex = path.findIndex((ancestor) => ancestor.tag===tag)!==-1)) {
-        node.drop = true;
-        const ancestor = path[ancestorIndex+1];
-        ancestor.content.splice(ancestor.content.findIndex((node) => node.tag===tag),1,...node.content);
-        errors.push(new parser.SyntaxError(`${tag} is not permitted as a nested element of self. Elevating content.`,null,null,node.location));
+    if(typeof(config.contentAllowed)==="function") {
+        config.contentAllowed = await config.contentAllowed();
     }
 
     node.attributes ||= {};
@@ -231,13 +219,19 @@ const validateNode = async ({parser,node,path=[],contentAllowed= tags,errors=[]}
         }
     })
     let transformed;
-    if(config.transform) {
-        const transformed = await config.transform(node,path);
+    if(config.transform && !node.transformed) {
+        const transformed = await config.transform(node,{path,level});
         if(transformed===undefined) {
             debugger;
         }
-        node = transformed;
-        config = config.contentAllowed ? config.contentAllowed[node.tag] || contentAllowed[node.tag] : contentAllowed[node.tag];
+        node.transformed = true;
+        if(transformed.tag!==node.tag) {
+            config = contentAllowed[transformed.tag];
+            if(typeof(config)==="function") {
+                config = await config.call(contentAllowed);
+            }
+            return validateNode({parser,node:transformed,path,contentAllowed,errors,level})
+        }
     }
     if(node.content.length>0 && !config.contentAllowed) {
         while(node.content.length) { // try remove whitespace
@@ -267,7 +261,7 @@ const validateNode = async ({parser,node,path=[],contentAllowed= tags,errors=[]}
                     errors.push(new parser.SyntaxError(`${tag} does not allow child ${child.tag}.`,null,JSON.stringify(child),node.location));
                     child.tag = "error";
                 } else {
-                    const result = await validateNode({parser,node:child,path:[...path,node],contentAllowed:config.contentAllowed,errors});
+                    const result = await validateNode({parser,node:child,path:[...path,node],contentAllowed:config.contentAllowed,errors,level:level+1});
                     child = result.node;
                     if(!child.drop)  {
                         content.push(child);
@@ -388,9 +382,9 @@ const configureStyles = (tags,styleAllowed) => {
     };
 
 const transform = async (parser,text,{styleAllowed}={}) => {
-    if(styleAllowed) {
+    /*if(styleAllowed) {
         configureStyles(tags,styleAllowed);
-    }
+    }*/
     const transformed = parser.parse(text,{Tag,JSON5}); //patchTopLevel(parser.parse(text,{Tag,JSON5}));
     const parsed = JSON.parse(JSON.stringify(transformed));
     const errors = await transformed.reduce(async (errors,node) => {
@@ -407,8 +401,14 @@ const transform = async (parser,text,{styleAllowed}={}) => {
         span.autohelm-nav-up-down a {font-size: 80%; vertical-align:text-top} 
         span.autohelm-footnote {position:relative; font-size:small; top:-.5em}
         mark.secst-error { background: red }
+        section {
+            margin-left: 2ch
+        }
         details {
             display: inline
+        }
+        .katex {
+            font-size: unset;
         }
         kbd {
             background-color: whitesmoke;
@@ -431,9 +431,6 @@ const transform = async (parser,text,{styleAllowed}={}) => {
             border: 1px solid black;
             padding: 5px;
         }
-        .secst-pre-line {
-            white-space: pre-line;
-        }
         .secst-plaintext {
             background-color: unset;
             border: unset;
@@ -447,13 +444,12 @@ const transform = async (parser,text,{styleAllowed}={}) => {
             font-family: monospace;
             white-space: pre;
         }
-        textarea.secst-code {
-            unicode-bidi: embed;
-            font-family: monospace;
-            white-space: pre;
+        pre.secst {
             min-width: 100%;
             max-width: 100%;
-            resize: none;
+            max-height: 25em;
+            overflow: auto;
+            background-color: whitesmoke;
         }
         code {
             white-space: pre;
@@ -461,11 +457,11 @@ const transform = async (parser,text,{styleAllowed}={}) => {
         }
         </style>`;
     for(const node of transformed) {
-        await toElement(node,{parent:dom.body})
+        await toElement(node,{parent:dom.body,parentConfig:{contentAllowed:bodyContent}})
     }
     connect(dom,document);
     try {
-        initAutohelm({tocSelector:".toc",dom:dom.body,directChildren:true});
+        initAutohelm({tocSelector:".toc",dom:dom.body,useSections:true});
     } catch(e) {
 
     }

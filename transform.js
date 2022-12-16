@@ -31,7 +31,7 @@ const text = await fs.readFile("./index.sct",{ encoding: 'utf8' }),
 script.setAttribute("src","./secst.js?run");
 dom.head.appendChild(script);
 await resolve(dom.body);
-await fs.writeFile("./index.html",`<html><head>${dom.head.innerHTML}</head><body>${dom.body.innerHTML}</body></html>`,{ encoding: 'utf8' })
+await fs.writeFile("./index.html",`<!DOCTYPE html><html><head>${dom.head.innerHTML}</head><body>${dom.body.innerHTML}</body></html>`,{ encoding: 'utf8' })
 await fs.writeFile("./index.txt",text,{ encoding: 'utf8' })
 console.log(errors);
 
