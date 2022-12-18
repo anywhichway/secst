@@ -30,7 +30,7 @@
   },
   "homepage": "https://github.com/anywhichway/secst#readme",
   "dependencies": {
-    "@anywhichway/autohelm": "^0.0.30",
+    "@anywhichway/autohelm": "^0.0.34",
     "@anywhichway/quick-worker": "^0.0.3",
     "@types/node": "^18.11.9",
     "cross-fetch": "^3.1.5",

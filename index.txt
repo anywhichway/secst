@@ -12,7 +12,7 @@
         - Reactive :a(.#values-and-formulas)[formulas and data import] that are no more complex than Excel formulas, e.g. :code[:value[2 * 2]] = :value[2 * 2].
         - The use of JSON-LD :a(.#structured-data)[structured data] for both content generation/layout and SEO optimization.
         - :a(.#images)[Asset bundling] for images, video, and audio.
-        - Server and client side well structured HTML output resistant to XSS attacks.
+        - Server and client generated well structured HTML output resistant to XSS attacks.
     ]
     :dl[
         :dt[Semantic Tag]
@@ -36,7 +36,7 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
     - Reactive :a(.#values-and-formulas)[formulas and data import] that are no more complex than Excel formulas, e.g. :code[:value[2 * 2]] = :value[2 * 2].
     - The use of JSON-LD :a(.#structured-data)[structured data] for both content generation/layout and SEO optimization.
     - :a(.#images)[Asset bundling] for images, video, and audio.
-    - Server and client side well structured HTML output resistant to XSS attacks.
+    - Server and client generated well structured HTML output resistant to XSS attacks.
 ]
 
 :dl[
@@ -62,7 +62,7 @@ This site's navigation, footnotes, computations, special styles like :kbd[Key] f
         :h[HTML and Markdown Issues]
 
         :ul[
-           :li[HTML is verbose.]
+           :li[HTML is verbose as a result of the need for matching open and close named tags.]
            :li[Markdown's goal is simplicity, for which it sacrifices a lot of expressive power. This sacrifice is the result of a non-uniform, non-semantic syntax used to support its simplicity.]
            :li[Ensuring that HTML documents are meaningful for textual analysis or supportive of assistive software is hard.]
            :li[Markdown is not semantic, you must learn the different annotations to format your document and the resulting HTML is not necessarily meaningful to textual analysis or assistive software. When Markdown initially had a very limited number of ways to format documents, its syntax was a benefit, for some it is now becoming a burden.]
@@ -654,6 +654,8 @@ This site's navigation, footnotes, computations, special styles like :kbd[Key] f
 
         This is best covered by an example based on :a(https://developers.google.com/search/docs/appearance/structured-data/article)[Google's documentation for a news article].
 
+        :em[Note: Only those tags documented for :code[NewsArticle] are currently supported.]
+
         :section[
             :h[News Article]
 
@@ -705,11 +707,11 @@ This site's navigation, footnotes, computations, special styles like :kbd[Key] f
                 :datePublished[2022-12-20T08:00:00+08:00]
             ]
 
-            SECST knows which tags to collect into arrays for JSON-LD and how to map similar SECST or HTML semantics to JSON-LD.
+            SECST knows which tags to collect into arrays for JSON-LD and how to map similar SECST or HTML semantics to JSON-LD. It ignores tags that are not part of JSON-LD schema unless they have been mapped to JSON-LD schema internally.
 
             Some JSON-LD attributes mapped to tags can have attributes, e.g. :code[:heading({level:2})[]].
 
-            Also note below the use of Date formatting based on :a(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat)[Javascript date and time format functionality].
+            Also note the use of Date formatting below based on :a(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat)[Javascript date and time format functionality].
 
              :code[
                 :NewsArticle[
@@ -934,9 +936,100 @@ This site's navigation, footnotes, computations, special styles like :kbd[Key] f
 :h[Architecture]
     :section[
         :h[Semantic Architecture]
+        The Mozilla Development Network, a.k.a. :abbrev[MDN], documents several HTML tag content categories:
+
+        :ul[
+            - :a(https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#metadata_content)[Metadata content], e.g. :code[<link>], :code[<style].
+            - :a(https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#flow_content)[Flow content], most elements that can go inside :code[<body>].
+            - :a(https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#sectioning_content)[Sectioning Content], e.g. :code[<section>], :code[<artcile>].
+            - :a(https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#heading_content)[Heading Content], e.g, :code[<h1>], :code[<h2>].
+            - :a(https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#phrasing_content)[Phrasing Content], i.e. anything that can go in a paragraph, :code[<p>].
+            - :a(https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#embedded_content)[Embedded Content], e.g. :code[<img>], :code[audio], that cab be used in the same places as flow content.
+            - :a(https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#interactive_content)[Interactive Content], i.e. that specifically designed to support user interaction, e.g. :code[<a>], :code[<input>].
+            - :a(https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#form-associated_content)[Form Associated Content], i.e. elements that are usually seen inside a form, but might not support interaction, e.g. :code[<progress>].
+        ]
+
+        SECST uses these content types to determine what types of tags can exists inside other tags with a few enhancements or exceptions:
+
+        :ul[
+            - A content category Text Content, which is a sub-set of Phrasing Content that is typically displayed inline and does not allow a tag to be nested inside itself because it would be redundant, e.g. :code[<strong>].
+            - A content category Block Content, which includes all Flow Content that is not included in Text Content, e.g. :code[<table>].
+            - A content category Body Content, which specifically enumerated tags allowed in a :code[<body>], including :code[<style>] and :code[<link>] which are usually in a :code[<head>] section, but may exist in a :code[<body>].
+            - All Flow Content :strong[MUST] be inside of Sectioning Content.
+            - Common cases where browsers support elements in an alternate context that makes semantic sense, e.g. :code[:progress[]] can exist outside a :code[<form>].
+            - JSON-LD tags, which are treated as Sectioning Content.
+        ]
+
     ]
     :section[
         :h[Data Architecture]
+
+        The relationship between tags is represented as a cyclical JSON structure. The bulk of of the structure is static, but some of is dynamic and memoized to address its cyclical nature.
+
+        Tags are defined with the following parts:
+
+        :code[
+            {
+                attributesAllowed: { // optional
+                    <attributeName>: true || "<primitive-type>" : function, // the function can validate or transform the attribute
+                    ...
+                },
+                contentAllowed: boolean || function || {<tagName>: Tag,...}, // optional
+                transform(node) { // optional
+                    // a function body that can validate and manipulate the parsed tag
+                    // e.g. replace SECST attribute names with valid HTML attribute names or classes, map  :code[{language:"javascript"}] to the CSS class :code[.language-javascript] for use by HighlightJS.
+                    return node;
+                },
+                beforeMount(node) { // optional
+                    // a function body that can map SECST tag names to HTML tag names that are not valid in SECST
+                    // e.g. :code[transpiled] to :code[span] or :code[div]
+                    // node.tag = "div"
+                    return node;
+                },
+                toJSONLD(node) { // optional
+                    const jsonld = ...
+                     // a function body to override built-in JSONLD generation
+                    return jsonld;
+                }
+                toHTML(node) { // optional
+                    const html = ...
+                    // a function body to generate the :code[innerHTML] for a tag in place of SECST iterating over parsed content for the tag
+                    return html;
+                }
+                toText(node) { // optional
+                    const text = ...
+                    // a function body to generate the :code[innerText] for a tag in place of SECST iterating over parsed content for the tag
+                }
+                render(el,node) { // optional
+                    // a function body to manipulate the element based on the parsed node in some custom manner
+                }
+                mounted(el,node) { // optional
+                    // a function body that can make adjustments to the generated element before it is rendered, e.g. call HighlightJS with the :code[innerHTML] and replace it.
+                },
+                connected(el,node) { // optional
+                    // a function body that is called after all nodes have been rendered in the order they were added to the document, e.g. re-compute sizes that can't be done easily with CSS
+                }
+                listeners: { // optional, responds to events on all occurrences of the tag
+                    <event-name>(event) {
+                        // function body
+                    },
+                    ...
+                }
+            }
+        ]
+
+        Functions taking a :code[node] as an argument are free to modify the :code[node]. Where necessary, copying to support immutability is done prior to calling the function. Functions taking a :code[node] as the first argument :strong[MUST] return a :code[node].
+
+        Parsed instances of tags, a.k.a. :code[nodes], have a structure similar to that found in a virtual DOM:
+
+        :code[
+            {
+                tag:<tag-name>,
+                attributes:{<attribute-name>:<attribute-value>,...}
+                classNames: Array // will be changed to use a Set,
+                content: [string || <node>, ...]
+            }
+        ]
     ]
     :section[
         :h[Project Architecture]

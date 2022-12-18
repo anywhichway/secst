@@ -1,4 +1,5 @@
 import {HighlightJS} from "highlight.js";
+import Tag from "../tag.js";
 
 const transpiled = {
     async contentAllowed() {
@@ -9,9 +10,31 @@ const transpiled = {
             ...bodyContent
         }
     },
+    beforeConnect(node) {
+        node.tag = "div";
+        return node;
+    },
     mounted(el) {
-        el.innerHTML = `<pre><code class="language-html">${el.innerHTML.replace(/</g,"&lt;").replace(/>/g,"&gt;")}</code></pre>`;
-        HighlightJS.highlightElement(el);
+        let html = el.innerHTML;
+        const trimmed = html.trimLeft(),
+            space = html.length - trimmed.length;
+        if(space>0) { // remove left spaces to equal indent of first line
+            html = html.split("\n").map((line) => {
+                let count = 0;
+                while (count<space && ["\t", " "].includes(line[count])) {
+                    count++;
+                }
+                return line.substring(count);
+            }).join("\n").trim();
+        }
+        const pre = document.createElement("pre"),
+            code = document.createElement("code");
+        pre.classList.add("secst");
+        code.innerHTML =  HighlightJS.highlight(html,{language:"html"}).value;
+        code.classList.add("hljs");
+        code.classList.add("language-html");
+        pre.appendChild(code);
+        el.replaceWith(pre);
     },
     requires: [
         {
@@ -23,6 +46,5 @@ const transpiled = {
         }
     ]
 }
-
 
 export {transpiled,transpiled as default}

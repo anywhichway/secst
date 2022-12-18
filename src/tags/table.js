@@ -97,6 +97,12 @@ const table = {
         node.classList.push("secst");
         return node;
         // todo: normalize table so all rows have length of max length row
+    },
+    mounted(el) {
+        const div = document.createElement("div");
+        div.style.overflow = "auto";
+        el.replaceWith(div);
+        div.appendChild(el);
     }
 }
 

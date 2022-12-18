@@ -69,12 +69,14 @@ const author = {
 const NewsArticle = {
     async contentAllowed() {
         const {blockContent} = await import("../block-content.js");
-        return this.contentAllowed = {
+        this.contentAllowed = {
             author,
             ...blockContent,
             datePublished,
             headline
         }
+        delete this.contentAllowed.NewsArticle;
+        return this.contentAllowed;
     },
     toJSONLD(node) {
         node.classList.push("JSON-LD-NewsArticle");

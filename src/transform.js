@@ -149,6 +149,7 @@ const toElement = async (node,{parent,connects,parentConfig}) => {
                 await toElement(child,{parent:el,parentConfig:config});
             }
         }
+        parent.appendChild(el);
         if(node.mounted) {
             node.mounted(el,node);
         }
@@ -156,7 +157,7 @@ const toElement = async (node,{parent,connects,parentConfig}) => {
             el.connected = async () => await node.connected(el,node);
         }
         //domNodes.push(el);
-        parent.appendChild(el);
+
         const listeners = Object.entries(config?.listeners||[]);
         if(listeners.length>0) {
             const script = document.createElement("script");
@@ -444,6 +445,7 @@ const transform = async (parser,text,{styleAllowed}={}) => {
             white-space: pre;
         }
         pre.secst {
+            padding: 1ch;
             min-width: 100%;
             max-width: 100%;
             max-height: 25em;
@@ -454,7 +456,18 @@ const transform = async (parser,text,{styleAllowed}={}) => {
             white-space: pre;
             unicode-bidi: embed;
         }
+        img[align="left"] {
+           margin-right: 1ch;
+        }
+         img[align="right"] {
+           margin-left: 1ch;
+        }
         </style>`;
+    /*
+            section > *:not(:first-child):not(section) {
+            display: none
+        }
+     */
     for(const node of transformed) {
         await toElement(node,{parent:dom.body,parentConfig:{contentAllowed:bodyContent}})
     }

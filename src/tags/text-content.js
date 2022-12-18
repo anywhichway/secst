@@ -8,6 +8,7 @@ const textContent = {
     async em() { const {em} = await import("./em.js"); return this.em = em; },
     async ins() { const {ins} = await import("./ins.js"); return this.ins = ins; },
     async kbd() { const {kbd} = await import("./kbd.js"); return this.kbd = kbd; },
+    async meta() { const {meta} = await import("./meta.js"); return this.meta = meta; },
     async mark() { const {mark} = await import("./mark.js"); return this.mark = mark; },
     async pre() { const {pre} = await import("./pre.js"); return this.pre = pre; },
     async q() { const {q} = await import("./q.js"); return this.q = q; },

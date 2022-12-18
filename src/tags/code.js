@@ -38,7 +38,7 @@ const code = {
         }
         return node;
     },
-    connected(el,node) {
+    mounted(el,node) {
         if(!node.classList.includes("nohighlight")) {
             HighlightJS.highlightElement(el);
             if(!node.content[0].includes("\n")) {
