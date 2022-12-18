@@ -4806,6 +4806,17 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 /***/ }),
 
+/***/ "./src/tags/b.js":
+/*!***********************!*\
+  !*** ./src/tags/b.js ***!
+  \***********************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"b\": () => (/* binding */ b),\n/* harmony export */   \"default\": () => (/* binding */ b)\n/* harmony export */ });\n/* harmony import */ var _text_content_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./text-content.js */ \"./src/tags/text-content.js\");\n\r\n\r\nconst b = {\r\n    contentAllowed:{..._text_content_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"]}\r\n}\r\ndelete b.contentAllowed.b;\r\n\r\n\n\n//# sourceURL=webpack://secst/./src/tags/b.js?");
+
+/***/ }),
+
 /***/ "./src/tags/block-content.js":
 /*!***********************************!*\
   !*** ./src/tags/block-content.js ***!
@@ -4836,6 +4847,17 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 "use strict";
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"bodyContent\": () => (/* binding */ bodyContent),\n/* harmony export */   \"default\": () => (/* binding */ bodyContent)\n/* harmony export */ });\n/* harmony import */ var _link_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./link.js */ \"./src/tags/link.js\");\n/* harmony import */ var _listeners_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./listeners.js */ \"./src/tags/listeners.js\");\n/* harmony import */ var _meta_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./meta.js */ \"./src/tags/meta.js\");\n/* harmony import */ var _sectioning_content_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./sectioning-content.js */ \"./src/tags/sectioning-content.js\");\n/* harmony import */ var _style_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./style.js */ \"./src/tags/style.js\");\n/* harmony import */ var _title_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./title.js */ \"./src/tags/title.js\");\n/* harmony import */ var _toc_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./toc.js */ \"./src/tags/toc.js\");\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nconst bodyContent = {\r\n    link: _link_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"],\r\n    listeners: _listeners_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"],\r\n    meta: _meta_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"],\r\n    ..._sectioning_content_js__WEBPACK_IMPORTED_MODULE_3__[\"default\"],\r\n    style: _style_js__WEBPACK_IMPORTED_MODULE_4__[\"default\"],\r\n    title: _title_js__WEBPACK_IMPORTED_MODULE_5__[\"default\"]\r\n}\r\n\r\n\n\n//# sourceURL=webpack://secst/./src/tags/body-content.js?");
+
+/***/ }),
+
+/***/ "./src/tags/bold.js":
+/*!**************************!*\
+  !*** ./src/tags/bold.js ***!
+  \**************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"bold\": () => (/* binding */ bold),\n/* harmony export */   \"default\": () => (/* binding */ bold)\n/* harmony export */ });\n/* harmony import */ var _text_content_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./text-content.js */ \"./src/tags/text-content.js\");\n\r\n\r\nconst bold = {\r\n    contentAllowed:{..._text_content_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"]}\r\n}\r\ndelete bold.contentAllowed.bold;\r\n\r\n\n\n//# sourceURL=webpack://secst/./src/tags/bold.js?");
 
 /***/ }),
 
@@ -5004,6 +5026,17 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 /***/ }),
 
+/***/ "./src/tags/i.js":
+/*!***********************!*\
+  !*** ./src/tags/i.js ***!
+  \***********************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ i),\n/* harmony export */   \"i\": () => (/* binding */ i)\n/* harmony export */ });\n/* harmony import */ var _text_content_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./text-content.js */ \"./src/tags/text-content.js\");\n\r\n\r\nconst i = {\r\n    contentAllowed:{..._text_content_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"]}\r\n}\r\ndelete i.contentAllowed.i;\r\n\r\n\n\n//# sourceURL=webpack://secst/./src/tags/i.js?");
+
+/***/ }),
+
 /***/ "./src/tags/img.js":
 /*!*************************!*\
   !*** ./src/tags/img.js ***!
@@ -5034,6 +5067,17 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 "use strict";
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ ins),\n/* harmony export */   \"ins\": () => (/* binding */ ins)\n/* harmony export */ });\n/* harmony import */ var _text_content_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./text-content.js */ \"./src/tags/text-content.js\");\n\r\n\r\nconst ins = {\r\n    contentAllowed:{..._text_content_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"]}\r\n}\r\ndelete ins.contentAllowed.ins;\r\n\r\n\n\n//# sourceURL=webpack://secst/./src/tags/ins.js?");
+
+/***/ }),
+
+/***/ "./src/tags/italic.js":
+/*!****************************!*\
+  !*** ./src/tags/italic.js ***!
+  \****************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ italic),\n/* harmony export */   \"italic\": () => (/* binding */ italic)\n/* harmony export */ });\n/* harmony import */ var _text_content_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./text-content.js */ \"./src/tags/text-content.js\");\n\r\n\r\nconst italic = {\r\n    contentAllowed:{..._text_content_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"]}\r\n}\r\ndelete italic.contentAllowed.italic;\r\n\r\n\n\n//# sourceURL=webpack://secst/./src/tags/italic.js?");
 
 /***/ }),
 
@@ -5308,7 +5352,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ textContent),\n/* harmony export */   \"textContent\": () => (/* binding */ textContent)\n/* harmony export */ });\n/* harmony import */ var _value_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./value.js */ \"./src/tags/value.js\");\n\r\n\r\nconst textContent = {\r\n    async a() { const {a} = await Promise.resolve(/*! import() */).then(__webpack_require__.bind(__webpack_require__, /*! ./a.js */ \"./src/tags/a.js\")); return this.a = a; },\r\n    async abbr() { const {abbr} = await Promise.resolve(/*! import() */).then(__webpack_require__.bind(__webpack_require__, /*! ./abbr.js */ \"./src/tags/abbr.js\")); return this.abbr = abbr; },\r\n    async code() { const {code} = await Promise.resolve(/*! import() */).then(__webpack_require__.bind(__webpack_require__, /*! ./code.js */ \"./src/tags/code.js\")); return this.code = code; },\r\n    async del() { const {del} = await Promise.resolve(/*! import() */).then(__webpack_require__.bind(__webpack_require__, /*! ./del.js */ \"./src/tags/del.js\")); return this.del = del; },\r\n    async em() { const {em} = await Promise.resolve(/*! import() */).then(__webpack_require__.bind(__webpack_require__, /*! ./em.js */ \"./src/tags/em.js\")); return this.em = em; },\r\n    async ins() { const {ins} = await Promise.resolve(/*! import() */).then(__webpack_require__.bind(__webpack_require__, /*! ./ins.js */ \"./src/tags/ins.js\")); return this.ins = ins; },\r\n    async kbd() { const {kbd} = await Promise.resolve(/*! import() */).then(__webpack_require__.bind(__webpack_require__, /*! ./kbd.js */ \"./src/tags/kbd.js\")); return this.kbd = kbd; },\r\n    async meta() { const {meta} = await Promise.resolve(/*! import() */).then(__webpack_require__.bind(__webpack_require__, /*! ./meta.js */ \"./src/tags/meta.js\")); return this.meta = meta; },\r\n    async mark() { const {mark} = await Promise.resolve(/*! import() */).then(__webpack_require__.bind(__webpack_require__, /*! ./mark.js */ \"./src/tags/mark.js\")); return this.mark = mark; },\r\n    async pre() { const {pre} = await Promise.resolve(/*! import() */).then(__webpack_require__.bind(__webpack_require__, /*! ./pre.js */ \"./src/tags/pre.js\")); return this.pre = pre; },\r\n    async q() { const {q} = await Promise.resolve(/*! import() */).then(__webpack_require__.bind(__webpack_require__, /*! ./q.js */ \"./src/tags/q.js\")); return this.q = q; },\r\n    async samp() { const {samp} = await Promise.resolve(/*! import() */).then(__webpack_require__.bind(__webpack_require__, /*! ./samp.js */ \"./src/tags/samp.js\")); return this.samp = samp; },\r\n    async strike() { const {strike} = await Promise.resolve(/*! import() */).then(__webpack_require__.bind(__webpack_require__, /*! ./strike.js */ \"./src/tags/strike.js\")); return this.strike = strike; },\r\n    async strong() { const {strong} = await Promise.resolve(/*! import() */).then(__webpack_require__.bind(__webpack_require__, /*! ./strong.js */ \"./src/tags/strong.js\")); return this.strong = strong; },\r\n    async sub() { const {sub} = await Promise.resolve(/*! import() */).then(__webpack_require__.bind(__webpack_require__, /*! ./sub.js */ \"./src/tags/sub.js\")); return this.sub = sub; },\r\n    async sup() { const {sup} = await Promise.resolve(/*! import() */).then(__webpack_require__.bind(__webpack_require__, /*! ./sup.js */ \"./src/tags/sup.js\")); return this.sup = sup; },\r\n    async u() { const {u} = await Promise.resolve(/*! import() */).then(__webpack_require__.bind(__webpack_require__, /*! ./u.js */ \"./src/tags/u.js\")); return this.u = u; },\r\n    var: {\r\n        async contentAllowed() {\r\n            const textContent = await Promise.resolve(/*! import() */).then(__webpack_require__.bind(__webpack_require__, /*! ./text-content.js */ \"./src/tags/text-content.js\"));\r\n            delete textContent.var;\r\n            return textContent;\r\n        }\r\n    }\r\n}\r\n\r\n\n\n//# sourceURL=webpack://secst/./src/tags/text-content.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ textContent),\n/* harmony export */   \"textContent\": () => (/* binding */ textContent)\n/* harmony export */ });\n/* harmony import */ var _value_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./value.js */ \"./src/tags/value.js\");\n\r\n\r\nconst textContent = {\r\n    async a() { const {a} = await Promise.resolve(/*! import() */).then(__webpack_require__.bind(__webpack_require__, /*! ./a.js */ \"./src/tags/a.js\")); return this.a = a; },\r\n    async abbr() { const {abbr} = await Promise.resolve(/*! import() */).then(__webpack_require__.bind(__webpack_require__, /*! ./abbr.js */ \"./src/tags/abbr.js\")); return this.abbr = abbr; },\r\n    async b() { const {b} = await Promise.resolve(/*! import() */).then(__webpack_require__.bind(__webpack_require__, /*! ./b.js */ \"./src/tags/b.js\")); return this.b = b; },\r\n    async bold() { const {bold} = await Promise.resolve(/*! import() */).then(__webpack_require__.bind(__webpack_require__, /*! ./bold.js */ \"./src/tags/bold.js\")); return this.bold = bold; },\r\n    async code() { const {code} = await Promise.resolve(/*! import() */).then(__webpack_require__.bind(__webpack_require__, /*! ./code.js */ \"./src/tags/code.js\")); return this.code = code; },\r\n    async del() { const {del} = await Promise.resolve(/*! import() */).then(__webpack_require__.bind(__webpack_require__, /*! ./del.js */ \"./src/tags/del.js\")); return this.del = del; },\r\n    async em() { const {em} = await Promise.resolve(/*! import() */).then(__webpack_require__.bind(__webpack_require__, /*! ./em.js */ \"./src/tags/em.js\")); return this.em = em; },\r\n    async i() { const {i} = await Promise.resolve(/*! import() */).then(__webpack_require__.bind(__webpack_require__, /*! ./i.js */ \"./src/tags/i.js\")); return this.i = i; },\r\n    async ins() { const {ins} = await Promise.resolve(/*! import() */).then(__webpack_require__.bind(__webpack_require__, /*! ./ins.js */ \"./src/tags/ins.js\")); return this.ins = ins; },\r\n    async italic() { const {italic} = await Promise.resolve(/*! import() */).then(__webpack_require__.bind(__webpack_require__, /*! ./italic.js */ \"./src/tags/italic.js\")); return this.italic = italic; },\r\n    async kbd() { const {kbd} = await Promise.resolve(/*! import() */).then(__webpack_require__.bind(__webpack_require__, /*! ./kbd.js */ \"./src/tags/kbd.js\")); return this.kbd = kbd; },\r\n    async meta() { const {meta} = await Promise.resolve(/*! import() */).then(__webpack_require__.bind(__webpack_require__, /*! ./meta.js */ \"./src/tags/meta.js\")); return this.meta = meta; },\r\n    async mark() { const {mark} = await Promise.resolve(/*! import() */).then(__webpack_require__.bind(__webpack_require__, /*! ./mark.js */ \"./src/tags/mark.js\")); return this.mark = mark; },\r\n    async pre() { const {pre} = await Promise.resolve(/*! import() */).then(__webpack_require__.bind(__webpack_require__, /*! ./pre.js */ \"./src/tags/pre.js\")); return this.pre = pre; },\r\n    async q() { const {q} = await Promise.resolve(/*! import() */).then(__webpack_require__.bind(__webpack_require__, /*! ./q.js */ \"./src/tags/q.js\")); return this.q = q; },\r\n    async samp() { const {samp} = await Promise.resolve(/*! import() */).then(__webpack_require__.bind(__webpack_require__, /*! ./samp.js */ \"./src/tags/samp.js\")); return this.samp = samp; },\r\n    async strike() { const {strike} = await Promise.resolve(/*! import() */).then(__webpack_require__.bind(__webpack_require__, /*! ./strike.js */ \"./src/tags/strike.js\")); return this.strike = strike; },\r\n    async strong() { const {strong} = await Promise.resolve(/*! import() */).then(__webpack_require__.bind(__webpack_require__, /*! ./strong.js */ \"./src/tags/strong.js\")); return this.strong = strong; },\r\n    async sub() { const {sub} = await Promise.resolve(/*! import() */).then(__webpack_require__.bind(__webpack_require__, /*! ./sub.js */ \"./src/tags/sub.js\")); return this.sub = sub; },\r\n    async sup() { const {sup} = await Promise.resolve(/*! import() */).then(__webpack_require__.bind(__webpack_require__, /*! ./sup.js */ \"./src/tags/sup.js\")); return this.sup = sup; },\r\n    async u() { const {u} = await Promise.resolve(/*! import() */).then(__webpack_require__.bind(__webpack_require__, /*! ./u.js */ \"./src/tags/u.js\")); return this.u = u; },\r\n    var: {\r\n        async contentAllowed() {\r\n            const textContent = await Promise.resolve(/*! import() */).then(__webpack_require__.bind(__webpack_require__, /*! ./text-content.js */ \"./src/tags/text-content.js\"));\r\n            delete textContent.var;\r\n            return textContent;\r\n        }\r\n    }\r\n}\r\n\r\n\n\n//# sourceURL=webpack://secst/./src/tags/text-content.js?");
 
 /***/ }),
 

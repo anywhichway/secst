@@ -6,11 +6,16 @@ import { Window } from 'happy-dom';
 global.window = new Window(),
     global.document = window.document;
 global.URL = URL;
-global.fetch = (url,...args) => {
-    if(!url.includes("://")) {
-        url = "http://localhost:63342/secst/" + url;
+global.fetch = async (url,...args) => {
+    try {
+        const response = await window.fetch((new URL(url,"http://localhost:63342/secst/")).href,...args);
+        if(response.status===200) {
+            return response;
+        }
+    } catch(e) {
+
     }
-    return window.fetch(url,...args);
+    return window.fetch((new URL(url, "https://sects.org/")).href,...args);
 }
 global.Text = window.Text;
 global.MutationObserver = window.MutationObserver;

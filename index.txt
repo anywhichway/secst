@@ -294,7 +294,28 @@ This site's navigation, footnotes, computations, special styles like :kbd[Key] f
                         ]
                     ]
 
+                    :ol[
+                        2. LinkedIn
+                        - Facebook
+                        - Twitter
+                    ]
+
                     The standard HTML attributes for configuring ordered lists, :code[reversed], :code[start], :code[type] are :a(https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ol)[also supported].
+
+                     :code[
+                        :ol({type:"a"})[
+                            - LinkedIn
+                            - Facebook
+                            - Twitter
+                        ]
+                    ]
+
+                    :ol({type:"a"})[
+                        - LinkedIn
+                        - Facebook
+                        - Twitter
+                    ]
+
                 ]
                 :section[
                     :h[Definition Lists]
@@ -1063,4 +1084,10 @@ This site's navigation, footnotes, computations, special styles like :kbd[Key] f
          click() { alert("clicked") }
         ]
     ]
+]
+:section[
+    :h[Copyright and License]
+    Copyright 2022, AnyWhichWay LLC
+
+    License: :a(https://www.gnu.org/licenses/agpl-3.0.en.html)[AGPL-3.0]
 ]
