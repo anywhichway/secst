@@ -441,11 +441,13 @@ const transform = async (parser,text,{styleAllowed}={}) => {
             unicode-bidi: embed;
             font-family: monospace;
             white-space: pre;
+            max-width: calc(100% - 1ch);
+            min-width: calc(100% - 1ch);
+            overflow: auto;
         }
         pre.secst {
             padding: 1ch;
-            min-width: 100%;
-            max-width: 100%;
+            max-width:  calc(100% - 1ch);
             max-height: 25em;
             overflow: auto;
             background-color: whitesmoke;

@@ -17,7 +17,7 @@ const updateValueWidths = (els) => {
                         pad = el.hasAttribute("readonly") || el.hasAttribute("disabled") ? 0 : 1;
                     el.style.width = Math.max(1,value.length+pad)+"ch";
                 }
-                el.style.maxWidth = document.body.getBoundingClientRect().width + "px";
+                //el.style.maxWidth = document.body.getBoundingClientRect().width + "px";
             });
         })
     }
