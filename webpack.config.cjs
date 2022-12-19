@@ -1,10 +1,14 @@
 const path = require("path");
 
+
 module.exports = {
-    entry: './src/index.js',
+    entry: {
+        index:'./src/index.js',
+        runtime:'./src/runtime.js'
+    },
     //watch: true,
     output: {
-        filename: './secst.js',
+        filename: './[name].js',
         path: __dirname,
         chunkFormat: "module"
     },
@@ -14,5 +18,8 @@ module.exports = {
     },
     experiments: {
         topLevelAwait: true
+    },
+    optimization: {
+       minimize: true
     }
 };

@@ -1,10 +1,11 @@
 import JSON5 from "json5";
-
-import {transform} from "./transform.js";
+import {HighlightJS} from "highlight.js";
+import katex from "katex";
+import {init as initEmojiMart, SearchIndex } from "emoji-mart";
 import {listeners} from "./listeners.js";
 import {updateValueWidths} from "./update-value-widths.js";
 import {resolve} from "./resolve.js";
-import {engage} from "@anywhichway/autohelm";
+import {engage, init} from "@anywhichway/autohelm";
 
 if(document.currentScript?.getAttribute("src").endsWith("?run")) {
     if(typeof(window)==="object" && typeof(MutationObserver)=="function") {
@@ -38,8 +39,17 @@ if(document.currentScript?.getAttribute("src").endsWith("?run")) {
 }
 
 window.JSON5 = JSON5;
+window.katex = katex;
+window.autohelm = {
+    init,
+    engage
+}
+window.emojiMart = {
+    init: initEmojiMart,
+    SearchIndex
+}
+window.HighlightJS = HighlightJS;
 window.SECST = {
-    transform,
     resolve,
     listeners,
     updateValueWidths: updateValueWidths

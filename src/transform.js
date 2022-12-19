@@ -1,5 +1,3 @@
-import JSON5 from "json5";
-import {init as initAutohelm} from "@anywhichway/autohelm";
 import Tag from "./tag.js";
 import bodyContent from "./tags/body-content.js";
 import universalAttributes from "./universal-attributes.js";
@@ -473,7 +471,7 @@ const transform = async (parser,text,{styleAllowed}={}) => {
     }
     connect(dom,document);
     try {
-        initAutohelm({tocSelector:".toc",dom:dom.body,useSections:true});
+        autohelm.init({tocSelector:".toc",dom:dom.body,useSections:true});
     } catch(e) {
 
     }

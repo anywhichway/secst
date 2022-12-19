@@ -1,4 +1,3 @@
-import JSON5 from "json5";
 import {updateValueWidths} from "../update-value-widths.js";
 
 const value = {

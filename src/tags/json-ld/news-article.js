@@ -1,4 +1,3 @@
-import JSON5 from "json5";
 import Person from "./person.js";
 
 const headline = {

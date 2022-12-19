@@ -1,4 +1,3 @@
-import {HighlightJS} from "highlight.js";
 import Tag from "../tag.js";
 import {updateValueWidths} from "../update-value-widths.js";
 
@@ -6,7 +5,11 @@ const code = {
     attributesAllowed: {
         disabled: true,
         readonly: true,
-        language: true, // todo validate with list
+        language(value) {
+            return {
+                "data-language": value
+            }
+        }, // todo validate with list HighlightJs.listLanguages
     },
     contentAllowed: true,
     transform(node) {
@@ -40,7 +43,10 @@ const code = {
     },
     mounted(el,node) {
         if(!node.classList.includes("nohighlight")) {
-            HighlightJS.highlightElement(el);
+            const language = HighlightJS.getLanguage(node.attributes["data-language"]);
+            if(language) {
+                HighlightJS.highlightElement(el);
+            }
             if(!node.content[0].includes("\n")) {
                 el.style.backgroundColor = "unset";
             }

@@ -1,5 +1,3 @@
-import katex from "katex";
-
 const latex = {
     contentAllowed: true,
     requires: [

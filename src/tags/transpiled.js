@@ -1,4 +1,3 @@
-import {HighlightJS} from "highlight.js";
 import Tag from "../tag.js";
 
 const transpiled = {

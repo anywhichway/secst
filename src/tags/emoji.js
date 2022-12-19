@@ -1,11 +1,12 @@
 //import { init, SearchIndex } from "emoji-mart";
-import * as all from "emoji-mart";
+/*import * as all from "emoji-mart";
 let { init, SearchIndex } = all;
 if(init==null) {
     init = all.default.init;
     SearchIndex = all.default.SearchIndex;
-}
+}*/
 
+const {init,SearchIndex} = emojiMart;
 
 let emojiMartData;
 const emoji = {

@@ -6,19 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pegjs/0.9.0/peg.min.js"></script>
     <script src="./src/parser.js"></script>
-    <script src="./secst.js"></script>
+    <script src="./index.js"></script>
 </head>
 <body>
 
 <script type="module">
-    import {engage} from "./node_modules/@anywhichway/autohelm/index.js";
+    import {transform} from "./src/transform.js";
     document.addEventListener("DOMContentLoaded",async ()=> {
-        engage(".toc");
+        autohelm.engage(".toc");
         let markup;
         const render = async () => {
             const newmarkup = await fetch("./index.sct").then((response) => response.text());
             if(markup!==newmarkup) {
-                const {dom,errors} = await SECST.transform(await parser(),markup=newmarkup,{styleAllowed:"*"});
+                const {dom,errors} = await transform(await parser(),markup=newmarkup,{styleAllowed:"*"});
                 console.log(errors);
                 await SECST.resolve(dom.body);
                 document.body.innerHTML = "";
