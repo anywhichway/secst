@@ -1,5 +1,6 @@
 :section[
 :h[The Joy of SECST]
+
     :abbr[SECST] (:strong[S]emantic, :strong[E]xtensible, :strong[C]omputational, :strong[S]tyleable, :strong[T]agged) markup language. Use it to joyfully create compelling, interactive HTML SEO enabled documents.
 
     SECST is intended to be a more expressive, but just as easy to learn and use, alternative to Markdown. It provides these features:
@@ -609,6 +610,8 @@
 
                 Math formulas include anything that can use the normal operators, :code[,%,^,*,-,+,<,<=,==,>=,>] and any functions available via :a(https://mathjs.org/docs/reference/functions.html)[MathJS].
 
+                Formulas can include :a(https://mathjs.org/docs/datatypes/units.html#physical-constants)[physical constants], e.g :code[:value[pi * 3^2]] = :value[pi * 3^2].
+
                 This includes these items (most links goto MathJS documentation):
 
                 :ul[
@@ -629,7 +632,7 @@
                     - :a(https://mathjs.org/docs/reference/functions.html#trigonometry-functions)[Trigonometry functions]
                     - :a(https://mathjs.org/docs/reference/functions.html#unit-functions)[Unit functions]
                     - :a(https://mathjs.org/docs/reference/functions.html#utils-functions)[Utility functions]
-                    - Unit math :a(https://mathjs.org/docs/datatypes/units.html)[from MathJS] and durations from :a(https://timewave.dev/#duration)[Timewave], covered in :a(.#unit-math)[more detail] later.
+                    - Unit math :a(https://mathjs.org/docs/datatypes/units.html)[from MathJS] covered in :a(.#unit-math)[more detail] later.
                 ]
             ]
             :section[
@@ -697,7 +700,23 @@
             :section[
                 :h[Unit Math]
 
-                 :code[:value[D("1w 1d").to("d")]] = :value[D("1w 1d").to("d")]
+                :code[:value[2 inch to cm]] = :value[2 inch to cm]
+
+                :code[:value[90 km/h to mi/h]] = :value[90 km/h to mi/h]
+
+                :code[:value[90 km/h to m/h]] = :value[90 km/h to m/h] :code[m/h] is meters per hour
+
+                :code[:value[(1 week + 1 day) to days]] = value[(1 week + 1 day) to days]
+
+                :code[:value[cos(45 deg)]] = :value[cos(45 deg)]
+
+                :code[:value[8.314 m^3 Pa / mol / K]] = :value[8.314 m^3 Pa / mol / K]
+
+                There are many :a(https://mathjs.org/docs/datatypes/units.html#reference)[supported units].
+
+                Remember, if you have a value that looks like a formula, but is not, you can use the attribute :code[literal], e.g.  :code[:value(literal)[2 inch to cm]] = :value(literal)[2 inch to cm].
+
+                And, you can use :code[plaintext] to display values without any styling, e.g. :code(plaintext)[:value[90 km/h to mi/h]] = :value(plaintext)[90 km/h to mi/h].
 
             ]
         ]

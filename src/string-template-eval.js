@@ -36,11 +36,11 @@ const stringTemplateEval = async (stringTemplate,requestor) => {
                         AsyncFunction = (async ()=>{}).constructor;
                     //debugger;
                     try { // try as math expression
-                        const result = await (new AsyncFunction("functions", "math", "D","globalThis", "with(functions) { with(math) { return math.evaluate(\"" + stringTemplate + "\") }}")).call(null, functions, self.math,self.Timewave.D); //always 3  args so globalThis is undefined
-                        return result && typeof(result.isOperatorNode)!=="undefined" ? result.toString() : result;
+                        const result = await (new AsyncFunction("functions", "math", "globalThis", "with(functions) { with(math) { return math.evaluate(\"" + stringTemplate + "\") }}")).call(null, functions, self.math); //always 3  args so globalThis is undefined
+                        return result && (typeof(result.isOperatorNode)!=="undefined" || (result.units && result.toSI)) ? result.toString() : result;
                     } catch (e) {
                         try { // try as JavaScript expression
-                            const result = await (new AsyncFunction("functions", "math", "D","globalThis", "with(functions) { with(math) { return " + stringTemplate + "}}")).call(null, functions, self.math,self.Timewave.D);
+                            const result = await (new AsyncFunction("functions", "math", "globalThis", "with(functions) { with(math) { return " + stringTemplate + "}}")).call(null, functions, self.math);
                             return result && typeof(result.isOperatorNode)!=="undefined" ? result.toString() : result;
                         } catch(e) {
                             return {stringTemplateError: e + ""}
@@ -49,7 +49,7 @@ const stringTemplateEval = async (stringTemplate,requestor) => {
                 },
             },
             timeout:1000,
-            imports:['https://cdn.jsdelivr.net/npm/mathjs@11.3.2/lib/browser/math.min.js','https://cdn.jsdelivr.net/npm/json5@2.2.1/dist/index.min.js',"https://unpkg.com/timewave@0.1.7/browser/timewave.js"]})
+            imports:['https://cdn.jsdelivr.net/npm/mathjs@11.3.2/lib/browser/math.min.js','https://cdn.jsdelivr.net/npm/json5@2.2.1/dist/index.min.js']})
     }
     return (await stringTemplateEval.evaluator.evaluate)(stringTemplate);
 }

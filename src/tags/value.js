@@ -10,6 +10,7 @@ const value = {
         "data-mime-type": true,
         "data-editable": true,
         "data-literal": true,
+        "data-plaintext": true,
         fitcontent() {
             return {
                 "data-fitcontent": ""
@@ -57,7 +58,11 @@ const value = {
                 src: value
             }
         },
-        plaintext: true,
+        plaintext() {
+            return {
+                "data-plaintext": ""
+            }
+        },
         src(value) {
             new URL(value,document.baseURI)
         },
@@ -113,9 +118,11 @@ const value = {
     contentAllowed: "*",
     async transform(node) {
         let type = node.attributes.type;
-        node.attributes.fitcontent = "";
+        node.classList.push("secst");
+        if(node.attributes.plaintext==null) {
+            node.attributes.fitcontent = "";
+        }
         if(["application/json","text/plain","text/csv"].includes(type)) {
-            node.classList.push("secst");
             node.attributes["data-mime-type"] = type;
             node.skipContent;
             delete node.attributes.type;
@@ -188,15 +195,13 @@ const value = {
             delete node.attributes.hidden;
             node.attributes.style = "display: none;" + (node.attributes.style||"");
         }
-        if(node.attributes.plaintext!=null) {
-            node.classList.push("secst-plaintext");
-        }
         if(node.attributes["data-mime-type"]) {
             node.tag = "textarea";
         } else {
-            node.tag = "input";
-            if(node.attributes.plaintext==null) {
-                node.attributes.style = "font-family: monospace;" + (node.attributes.style||"");
+            if(node.attributes["data-plaintext"]!=null) {
+                node.tag = "span";
+            } else {
+                node.tag = "input";
             }
         }
         node.attributes.spellcheck = "false";

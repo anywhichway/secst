@@ -429,12 +429,8 @@ const transform = async (parser,text,{styleAllowed}={}) => {
             border: 1px solid black;
             padding: 5px;
         }
-        .secst-plaintext {
-            background-color: unset;
-            border: unset;
-            padding: unset;
-            color: unset;
-            font-family: unset;
+        input.secst {
+             font-family: monospace;
         }
         textarea.secst {
             display: block;
