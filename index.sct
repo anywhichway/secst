@@ -1,6 +1,5 @@
 :section[
 :h[The Joy of SECST]
-
     :abbr[SECST] (:strong[S]emantic, :strong[E]xtensible, :strong[C]omputational, :strong[S]tyleable, :strong[T]agged) markup language. Use it to joyfully create compelling, interactive HTML SEO enabled documents.
 
     SECST is intended to be a more expressive, but just as easy to learn and use, alternative to Markdown. It provides these features:
@@ -652,6 +651,8 @@
             ]
             :section[
                 :h[Unit Math]
+
+                 :code[:value[D("1w 1d").to("d")]] = :value[D("1w 1d").to("d")]
 
             ]
         ]
