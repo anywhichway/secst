@@ -85,7 +85,7 @@
             :li[Semantic tags, which make it easier to learn and remember than Markdown and encourages more meaningful documents than straight HTML. Many tags are named after their semantic HTML counterparts to make SECST easier to learn, maintain, and extend.]
             :li[Enforcement of required attributes and valid values for proper behavior or accessibility reasons.]
             :li[Extensive, built-in :a(.#tables-of-contents)[document navigation] for tables of contents and footnotes (more than Markdown).]
-            :li[Using SECST's built-in :a({href:"#basic-computation"})[computational capability] for math and text expressions is no harder than writing Excel formulas.]
+            :li[Using SECST's built-in :a({href:"#values-and-formulas"})[computational capability] for math and text expressions is no harder than writing Excel formulas.]
             :li[A predominantly declarative extension technique make SECTS easier to extend than HTML. Expertise in programming custom elements is not required.]
             :li[Asset bundling via the use of the attribute :code[static] on :code[audio], :code[img], :code[video] and :code[value] tags.]
             :li[SECST is easier to extend than Markdown. Expertise in parsers or regular expressions is not required.]
@@ -502,6 +502,31 @@
 
         ]
         :section[
+            :h[Questions]
+
+            Questions can be used to create a quiz like experience.
+
+            :code[
+                :question({type:"number",showanswer:true})[
+                    :text[What is the :code[sqrt(4)]?]
+                    :answer[sqrt(4)]
+                ]
+            ]
+
+            renders as:
+
+            :question({type:"number",showanswer:true})[
+                :text[What is the :code[sqrt(4)]?]
+                :answer[sqrt(4)]
+            ]
+
+            Clicking on the &check; or leaving the input field tests the answer. If incorrect, the question will be surrounded with a red box based on the style :code[secst-error].
+
+            Questions take most of the same type attribute values as :a(https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input)[input]. They can also take the attribute :code[showanswer:true] if the correct answer is supposed to be shown after a user provides the wrong response.
+
+            Questions have two required content tags, :code[:text[<question-body>]] and :code[:answer[<some-formula>]], that must be provided in order. The :code[<question-body>] can be just about any content that would normally go in a paragraph. Formulas are :a(.#values-and-formulas)[documented later]. The :code[:answer[]] tag can also take the attribute :code[literal], e.g. :code[:answer(literal)[2]].
+        ]
+        :section[
             :h[Transpiled SECST]
 
             The HTML of transpiled SECST can be displayed as plain text, e.g. :code[:transpiled[:strong[test]]] renders as :transpiled[:strong[test]].
@@ -554,130 +579,80 @@
     ]
 ]
 :section[
-    :h(#basic-computation)[Basic Computational Authoring]
+    :h[Values and Formulas]
+
+    SECST supports the tag :code[:value[]] for adding reactive variables and formulas to documents.
+    :ul[
+         - The value of a :code[:value[]] is the content, i.e the text between the :code[[]]. It should be either a literal value or a formula, e.g. :code[:value[2 * 2]] = :value[2 * 2].
+         - By default values are visible. Use the boolean attribute :code[hidden]  to hide them, e.g. :code[:value(hidden)[2 * 2]] = :value(hidden)[2 * 2].
+         - So that readers know the value may be computed, computed ones are rendered as disabled, readonly input. To render them as plaintext use the attribute :code[plaintext], e.g. :code[:value(plaintext)[2 * 2]] = :value(plaintext)[2 * 2].
+         - To make a value editable by readers, use the attribute :code[editable], e.g. code[:value(editable)[2 * 2]] = :value(editable)[2 * 2].
+         - Everything between the :code[[]] is treated as a formula for evaluation, if your readers may be entering formula like text and you do not want it evaluated, use the attribute :code[literal], e.g. :code[:value(literal)[2 *2]] = :value(literal)[2 * 2].
+         - If values are not given a :code[title] attribute, e.g. :code[:value({title:"Two times two"})[2 * 2]], then the content is used as the mouseover title unless the content is provided by a URL, in which case the URL is the title, e.g. :code[:value(./sample.json type="application/json")] has a mouseover title of :code[./sample.json].
+    ]
+
+    Formulas are actually just valid JavaScript expressions that also support standard and symbolic math. SECST attempts to process most values as math expressions first:footnote[A parser is used to match potential math expressions.] and if this fails, as JavaScript.
+
+    :ul[
+        - :code[2 * 3] = :value[2 * 2],
+        - :code[2^3] when used as part of a math expression:footnote[If the expression cannot be parsed as math, then 2^3 will be treated as XOR as it is in regular JavaScript.], is the same as :code[2**3], which is the same as :code[pow(2,3)], which is the same as :code[Math.pow(2,3)] = :value[2^3].
+    ]
+
+    To use a value in another formula, the value must be named with an id, e.g.
+
+    :code[:value(#v1)[2]] + :code[:value(#v2)[2]] = :code[:value(plaintext)[$(#v1) * $(#v2)]]
+
+    :value(#v1)[2] + :value(#v2)[2] = :value(plaintext)[$(#v1) + $(#v2)] (try changing one of the inputs)
+
+    The code :code[$(#<some-id>)] is used to substitute named values into formulas. See :a(.#advanced-formulas)[Advanced Formulas] for use of more general CSS selectors and arrays.
+
     :section[
-        :h[Values and Formulas]
+        :h[Typed Data]
 
-        :h3[Values]
+        The :code[:value[]] tag supports the type attribute, valid types include :a(https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input)[those supported by the HTML input element] except :code[button], :code[file], :code[hidden], :code[image], :code[search] and :code[submit].
 
-            SECST supports the tag :code[:value[]] for adding reactive variables and formulas to documents.
-            :ul[
-                 - The value of a :code[:value[]] is the content, i.e the text between the :code[[]]. It should be either a literal value or a formula, e.g. :code[:value[2 * 2]] = :value[2 * 2].
-                 - By default values are visible. Use the boolean attribute :code[hidden]  to hide them, e.g. :code[:value(hidden)[2 * 2]] = :value(hidden)[2 * 2].
-                 - So that readers know the value may be computed, computed ones are rendered as disabled, readonly input. To render them as plaintext use the attribute :code[plaintext], e.g. :code[:value(plaintext)[2 * 2]] = :value(plaintext)[2 * 2].
-                 - To make a value editable by readers, use the attribute :code[editable], e.g. code[:value(editable)[2 * 2]] = :value(editable)[2 * 2].
-                 - Everything between the :code[[]] is treated as a formula for evaluation, if your readers may be entering formula like text and you do not want it evaluated, use the attribute :code[literal], e.g. :code[:value(literal)[2 *2]] = :value(literal)[2 * 2].
-                 - If values are not given a :code[title] attribute, e.g. :code[:value({title:"Two times two"})[2 * 2]], then the content is used as the mouseover title unless the content is provided by a URL, in which case the URL is the title, e.g. :code[:value(./sample.json type="application/json")] has a mouseover title of :code[./sample.json].
-            ]
+        The type can also be one of the mime-types :code[text/plain], :code[text/csv], :code[application/json], e.g. :code[:value(editable {type:"application/json"})[{name:"Joe"}]] as shown below in :a(.#importing-data)[Importing Data]..
+
+        If you provide a type, e.g. :code[:value(editable {type:"number"})], then the type will be enforced when the value is edited: :value(editable {type:"number"}).
+
+        If the value is computed, a red border will surround type check failures.
+    ]
+    :section[
+        :h[String Manipulation]
+
+        Strings can be combined using the :code[+] sign, e.g. :code[:value["Hello" + " " + "world!"]] = :value["Hello" + " " + "world!"].
+
+        Strings can be manipulated using the :a(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)[standard JavaScript methods], e.g. :code[:value["Hello world!".substring(0,5)]] = :value["Hello world!".substring(0,5)].
+    ]
+    :section[
+        :h[Basic Math]
+
+        Math formulas include anything that can use the normal operators, :code[,%,^,*,-,+,<,<=,==,>=,>] and any functions available via :a(https://mathjs.org/docs/reference/functions.html)[MathJS].
+
+        Formulas can include :a(https://mathjs.org/docs/datatypes/units.html#physical-constants)[physical constants], e.g :code[:value[pi * 3^2]] = :value[pi * 3^2].
+
+        This includes these items (most links goto MathJS documentation):
+
+        :ul[
+            - :a(https://mathjs.org/docs/reference/functions.html#algebra-functions)[Algebraic functions], covered in :a(.#algebraic-functions)[more detail] later.
+            - :a(https://mathjs.org/docs/reference/functions.html#artihmetic-functions)[Arithmetic functions]
+            - :a(https://mathjs.org/docs/reference/functions.html#bitwise-functions)[Bitwise functions]
+            - :a(https://mathjs.org/docs/reference/functions.html#combinatorics-functions)[Combinatorics functions]
+            - :a(https://mathjs.org/docs/reference/functions.html#complex-functions)[Complex functions]
+            - :a(https://mathjs.org/docs/reference/functions.html#geometry-functions)[Geometry functions]
+            - :a(https://mathjs.org/docs/reference/functions.html#logical-functions)[Logical functions]
+            - :a(https://mathjs.org/docs/reference/functions.html#matrix-functions)[Matrix functions]
+            - :a(https://mathjs.org/docs/reference/functions.html#probability-functions)[Probability functions]
+            - :a(https://mathjs.org/docs/reference/functions.html#relational-functions)[Relational functions]
+            - :a(https://mathjs.org/docs/reference/functions.html#set-functions)[Set functions]
+            - :a(https://mathjs.org/docs/reference/functions.html#special-functions)[Special functions]
+            - :a(https://mathjs.org/docs/reference/functions.html#statistics-functions)[Statistics functions]
+            - :a(https://mathjs.org/docs/reference/functions.html#string-functions)[String functions]
+            - :a(https://mathjs.org/docs/reference/functions.html#trigonometry-functions)[Trigonometry functions]
+            - :a(https://mathjs.org/docs/reference/functions.html#unit-functions)[Unit functions]
+            - :a(https://mathjs.org/docs/reference/functions.html#utils-functions)[Utility functions]
+        ]
         :section[
-            :h[Formulas]
-
-            Formulas are actually just valid JavaScript expressions that also support standard and symbolic math. SECST attempts to process most values as math expressions first:footnote[A regular expression is used to match potential math expressions.] and if this fails as JavaScript.
-
-            :ul[
-                - :code[2 * 3] = :value[2 * 2],
-                - :code[2^3] when used as part of a math expression:footnote[If the expression cannot be parsed as math, then 2^3 will be treated as XOR as it is in regular JavaScript.], is the same as :code[2**3], which is the same as :code[pow(2,3)], which is the same as :code[Math.pow(2,3)] = :value[2^3].
-            ]
-
-            To use a value in another formula, the value must be named with an id, e.g.
-
-            :code[:value(#v1)[2]] + :code[:value(#v2)[2]] = :code[:value(plaintext)[$(#v1) * $(#v2)]]
-
-            :value(#v1)[2] + :value(#v2)[2] = :value(plaintext)[$(#v1) + $(#v2)] (try changing one of the inputs)
-
-            The code :code[$(#<some-id>)] is used to substitute named values into formulas. See :a(.#advanced-formulas)[Advanced Formulas] for use of more general CSS selectors and arrays.
-
-            :section[
-                :h[Typed Data]
-
-                The :code[:value[]] tag supports the type attribute, valid types include :a(https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input)[those supported by the HTML input element] except :code[button], :code[file], :code[hidden], :code[image], :code[search] and :code[submit].
-
-                The type can also be one of the mime-types :code[text/plain], :code[text/csv], :code[application/json], e.g. :code[:value(editable {type:"application/json"})[{name:"Joe"}]] as shown below in :a(.#importing-data)[Importing Data]..
-
-                If you provide a type, e.g. :code[:value(editable {type:"number"})], then the type will be enforced when the value is edited: :value(editable {type:"number"}).
-
-                If the value is computed, a red border will surround type check failures.
-            ]
-            :section[
-                :h[String Manipulation]
-
-                Strings can be combined using the :code[+] sign, e.g. :code[:value["Hello" + " " + "world!"]] = :value["Hello" + " " + "world!"].
-
-                Strings can be manipulated using the :a(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)[standard JavaScript methods], e.g. :code[:value["Hello world!".substring(0,5)]] = :value["Hello world!".substring(0,5)].
-            ]
-            :section[
-                :h[Basic Math]
-
-                Math formulas include anything that can use the normal operators, :code[,%,^,*,-,+,<,<=,==,>=,>] and any functions available via :a(https://mathjs.org/docs/reference/functions.html)[MathJS].
-
-                Formulas can include :a(https://mathjs.org/docs/datatypes/units.html#physical-constants)[physical constants], e.g :code[:value[pi * 3^2]] = :value[pi * 3^2].
-
-                This includes these items (most links goto MathJS documentation):
-
-                :ul[
-                    - :a(https://mathjs.org/docs/reference/functions.html#algebra-functions)[Algebraic functions], covered in :a(.#algebraic-functions)[more detail] later.
-                    - :a(https://mathjs.org/docs/reference/functions.html#artihmetic-functions)[Arithmetic functions]
-                    - :a(https://mathjs.org/docs/reference/functions.html#bitwise-functions)[Bitwise functions]
-                    - :a(https://mathjs.org/docs/reference/functions.html#combinatorics-functions)[Combinatorics functions]
-                    - :a(https://mathjs.org/docs/reference/functions.html#complex-functions)[Complex functions]
-                    - :a(https://mathjs.org/docs/reference/functions.html#geometry-functions)[Geometry functions]
-                    - :a(https://mathjs.org/docs/reference/functions.html#logical-functions)[Logical functions]
-                    - :a(https://mathjs.org/docs/reference/functions.html#matrix-functions)[Matrix functions]
-                    - :a(https://mathjs.org/docs/reference/functions.html#probability-functions)[Probability functions]
-                    - :a(https://mathjs.org/docs/reference/functions.html#relational-functions)[Relational functions]
-                    - :a(https://mathjs.org/docs/reference/functions.html#set-functions)[Set functions]
-                    - :a(https://mathjs.org/docs/reference/functions.html#special-functions)[Special functions]
-                    - :a(https://mathjs.org/docs/reference/functions.html#statistics-functions)[Statistics functions]
-                    - :a(https://mathjs.org/docs/reference/functions.html#string-functions)[String functions]
-                    - :a(https://mathjs.org/docs/reference/functions.html#trigonometry-functions)[Trigonometry functions]
-                    - :a(https://mathjs.org/docs/reference/functions.html#unit-functions)[Unit functions]
-                    - :a(https://mathjs.org/docs/reference/functions.html#utils-functions)[Utility functions]
-                    - Unit math :a(https://mathjs.org/docs/datatypes/units.html)[from MathJS] covered in :a(.#unit-math)[more detail] later.
-                ]
-            ]
-            :section[
-                :h[Importing Data]
-
-                Values can included imported data using the :code[src] attribute and a mime type provided in the :code[type] attribute. The trailing :code[[]] are optional. Static data is imported at transpile time. If importing fails, another attempt is made at runtime.
-
-                JSON is formatted for readability and :a(https://json5.org)[JSON5] is supported to make it easier to handle remote data.
-
-                :code[
-                    :value(https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson static {type:"application/json"})
-                ]
-
-                :value(https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson static {type:"application/json"})
-
-                Imported data is readonly because it is essentially a computation. To make it editable, use the attribute :code[editable].
-
-                :code[
-                    :value(https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson editable {type:"application/json"})
-                ]
-
-                :value(https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson editable {type:"application/json"})
-
-                If an id is added, the data can be used in a computation.
-
-                :code[
-                    :value(#earthquake-data https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson {type:"application/json"})
-
-                    :value[$(#earthquake-data).metadata]
-                ]
-
-               :value(#earthquake-data https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson {type:"application/json"})
-
-               :value({type:"application/json"})[$(#earthquake-data).metadata]
-            ]
-            :section[
-                :h[Advanced Formulas]
-
-                You can use almost any :a(https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors)[CSS selector] in place of :code[#id] in :code[$(#<id>)]. The value returned will be the contents of the value property on the element or (if not available) the value attribute or the :code[innerText].
-
-                You can use commas to select multiple identifier named elements, e.g. :code[:value[$(#id1, #id2, #id3)]] is an array of the values associated with the elements :code[:value(#id1)[3]], :code[:value(#id2)[2]], :code[:value(#id3)[1]] and will be :code[[3,2,1]].
-
-                A value reference :code[$(css-selector)] can end in :code[[]] to indicate multiple values should be returned as an array if the selector does not contain a comma. This allows tables to be treated somewhat like spreadsheets.
-            ]
-            :section[
                 :h[Algebraic Functions]
 
                 You can ...
@@ -697,29 +672,67 @@
                     :dd[The derivative of :value(#formula literal editable)[x^2 + x] for :value(#variable literal editable)[x] is :value(#derivative)[derivative($(#formula),$(#variable))]]
                 ]
             ]
-            :section[
-                :h[Unit Math]
+    ]
+    :section[
+        :h[Unit Math]
 
-                :code[:value[2 inch to cm]] = :value[2 inch to cm]
+        Unit math :a(https://mathjs.org/docs/datatypes/units.html)[from MathJS] allows fro conversions using the word :code[to], as well as units for numbers, e.g. :code[45 deg].
 
-                :code[:value[90 km/h to mi/h]] = :value[90 km/h to mi/h]
+        There are many :a(https://mathjs.org/docs/datatypes/units.html#reference)[supported units].
 
-                :code[:value[90 km/h to m/h]] = :value[90 km/h to m/h] :code[m/h] is meters per hour
+        Here are a few examples:
 
-                :code[:value[(1 week + 1 day) to days]] = value[(1 week + 1 day) to days]
+        :code[:value[2 inch to cm]] = :value[2 inch to cm]
 
-                :code[:value[cos(45 deg)]] = :value[cos(45 deg)]
+        :code[:value[90 km/h to mi/h]] = :value[90 km/h to mi/h]
 
-                :code[:value[8.314 m^3 Pa / mol / K]] = :value[8.314 m^3 Pa / mol / K]
+        :code[:value[90 km/h to m/h]] = :value[90 km/h to m/h] :code[m/h] is meters per hour
 
-                There are many :a(https://mathjs.org/docs/datatypes/units.html#reference)[supported units].
+        :code[:value[(1 week + 1 day) to days]] = value[(1 week + 1 day) to days]
 
-                Remember, if you have a value that looks like a formula, but is not, you can use the attribute :code[literal], e.g.  :code[:value(literal)[2 inch to cm]] = :value(literal)[2 inch to cm].
+        :code[:value[cos(45 deg)]] = :value[cos(45 deg)]
 
-                And, you can use :code[plaintext] to display values without any styling, e.g. :code(plaintext)[:value[90 km/h to mi/h]] = :value(plaintext)[90 km/h to mi/h].
+        :code[:value[8.314 m^3 Pa / mol / K]] = :value[8.314 m^3 Pa / mol / K]
 
-            ]
+        Remember, if you have a value that looks like a formula, but is not, you can use the attribute :code[literal], e.g.  :code[:value(literal)[2 inch to cm]] = :value(literal)[2 inch to cm].
+
+        And, you can use :code[plaintext] to display values without any styling, e.g. :code[:value(plaintext)[90 km/h to mi/h]] = :value(plaintext)[90 km/h to mi/h].
+
+    ]
+    :section[
+        :h[Importing Data]
+
+        Values can included imported data using the :code[src] attribute and a mime type provided in the :code[type] attribute. The trailing :code[[]] are optional.
+
+        Values with the boolean attribute :code[static] is import data at transpile time. If importing fails, another attempt is made at runtime.
+
+        JSON is formatted for readability and :a(https://json5.org)[JSON5] is supported to make it easier to handle remote data.
+
+        :code[
+            :value(https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson static {type:"application/json"})
         ]
+
+        :value(https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson static {type:"application/json"})
+
+        Imported data is readonly because it is essentially a computation. To make it editable, use the attribute :code[editable].
+
+        :code[
+            :value(https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson editable {type:"application/json"})
+        ]
+
+        :value(https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson editable {type:"application/json"})
+
+        If an id is added, the data can be used in a computation.
+
+        :code[
+            :value(#earthquake-data https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson {type:"application/json"})
+
+            :value[$(#earthquake-data).metadata]
+        ]
+
+       :value(#earthquake-data https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson {type:"application/json"})
+
+       :value({type:"application/json"})[$(#earthquake-data).metadata]
     ]
 ]
 :section[
@@ -932,11 +945,22 @@
     ]
 ]
 :section[
-    :h[Advanced Computational Authoring]
+    :h[Advanced Formulas]
 
-    As pointed out above, the SECST macro evaluator supports regular and advanced math. It also supports some utility functions.
+    :section[
+        :h[Formulas With CSS Selectors and Multiple Values]
+
+        You can use almost any :a(https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors)[CSS selector] in place of :code[#id] in :code[$(#<id>)]. The value returned will be the contents of the value property on the element or (if not available) the value attribute or the :code[innerText].
+
+        You can use commas to select multiple identifier named elements, e.g. :code[:value[$(#id1, #id2, #id3)]] is an array of the values associated with the elements :code[:value(#id1)[3]], :code[:value(#id2)[2]], :code[:value(#id3)[1]] and will be :code[[3,2,1]].
+
+        A value reference :code[$(css-selector)] can end in :code[[]] to indicate multiple values should be returned as an array if the selector does not contain a comma. This allows tables to be treated somewhat like spreadsheets.
+    ]
+
     :section[
         :h[Macro List Formatting]
+
+         The SECST formula evaluator supports supports some utility functions.
     ]
     :section[
         :h[JavaScript]
@@ -957,7 +981,7 @@
             Depending on your use case, the reference transpiler can be set to do one of the following when errors are encountered.
 
             :ul[
-                - cancel, stop processing and throw and errors when the first problem is detected
+                - cancel, stop processing and throw an error when the first problem is detected
                 - collect, collect all the errors and return them with line numbers (if you are writing an editor)
                 - leave the text version of the error generating mark-up in place (also collects the errors)
                 - try to correct the errors (collects the errors and also returns a parse tree with corrected markup)

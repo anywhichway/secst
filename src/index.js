@@ -5,6 +5,7 @@ import mhchem from "katex/dist/contrib/mhchem.mjs";
 import {init as initEmojiMart, SearchIndex } from "emoji-mart";
 import {listeners} from "./listeners.js";
 import {updateValueWidths} from "./update-value-widths.js";
+import {stringTemplateEval} from "./string-template-eval.js";
 import {resolve} from "./resolve.js";
 import {engage, init} from "@anywhichway/autohelm";
 
@@ -53,6 +54,7 @@ window.HighlightJS = HighlightJS;
 window.SECST = {
     resolve,
     listeners,
-    updateValueWidths: updateValueWidths
+    updateValueWidths: updateValueWidths,
+    stringTemplateEval
 }
 

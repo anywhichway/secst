@@ -418,6 +418,9 @@ const transform = async (parser,text,{styleAllowed}={}) => {
             padding-left: 2px;
             padding-right: 2px;
         }
+        .secst-error {
+            border: solid 1px red;
+        }
         table.secst {
             border: 1px solid black;
             border-collapse: collapse;

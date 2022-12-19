@@ -12,8 +12,6 @@ import textarea from "./textarea.js";
 import transpiled from "./transpiled.js";
 import value from "./value.js";
 
-
-
 // if tags have content phrasingContent, the must be loaded dynamically or a compile loop will occur
 
 const phrasingContent = {
@@ -33,6 +31,7 @@ const phrasingContent = {
     async latex() { const {latex} = await import("./latex.js"); return this.latex = latex; },
     ...mentions,
     async ol() { const {ol} = await import("./ol.js"); return this.ol = ol; },
+    async question() { const {question} = await import("./question.js"); return this.question = question; },
     table,
     textarea,
     transpiled,
