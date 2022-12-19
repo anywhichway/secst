@@ -1,6 +1,7 @@
 import JSON5 from "json5";
 import {HighlightJS} from "highlight.js";
 import katex from "katex";
+import mhchem from "katex/dist/contrib/mhchem.mjs";
 import {init as initEmojiMart, SearchIndex } from "emoji-mart";
 import {listeners} from "./listeners.js";
 import {updateValueWidths} from "./update-value-widths.js";

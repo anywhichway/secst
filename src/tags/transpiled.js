@@ -26,14 +26,18 @@ const transpiled = {
                 return line.substring(count);
             }).join("\n").trim();
         }
-        const pre = document.createElement("pre"),
-            code = document.createElement("code");
-        pre.classList.add("secst");
+        const code = document.createElement("code");
         code.innerHTML =  HighlightJS.highlight(html,{language:"html"}).value;
         code.classList.add("hljs");
         code.classList.add("language-html");
-        pre.appendChild(code);
-        el.replaceWith(pre);
+        if(html.includes("\n")) {
+            const pre = document.createElement("pre");
+            pre.classList.add("secst");
+            pre.appendChild(code);
+            el.replaceWith(pre);
+        } else {
+            el.replaceWith(code);
+        }
     },
     requires: [
         {

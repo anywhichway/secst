@@ -5,6 +5,7 @@ import {init as initAutohelm,engage} from "@anywhichway/autohelm";
 import {HighlightJS} from "highlight.js";
 import { Window } from 'happy-dom';
 import katex from "katex";
+import mhchem from "katex/dist/contrib/mhchem.js";
 import * as all from "emoji-mart";
 let { init, SearchIndex } = all;
 if(init==null) {

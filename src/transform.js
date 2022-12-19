@@ -149,10 +149,10 @@ const toElement = async (node,{parent,connects,parentConfig}) => {
         }
         parent.appendChild(el);
         if(node.mounted) {
-            node.mounted(el,node);
+            node.mounted(el,{...node});  // todo make the node copy a deepcopy?
         }
         if(node.connected) {
-            el.connected = async () => await node.connected(el,node);
+            el.connected = async () => await node.connected(el,{...node}); // todo make the node copy a deepcopy?
         }
         //domNodes.push(el);
 

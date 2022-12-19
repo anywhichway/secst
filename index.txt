@@ -1,6 +1,5 @@
 :section[
 :h[The Joy of SECST]
-
     :abbr[SECST] (:strong[S]emantic, :strong[E]xtensible, :strong[C]omputational, :strong[S]tyleable, :strong[T]agged) markup language. Use it to joyfully create compelling, interactive HTML SEO enabled documents.
 
     SECST is intended to be a more expressive, but just as easy to learn and use, alternative to Markdown. It provides these features:
@@ -212,7 +211,7 @@
     :section[
         :h[Markup Tags With HTML Names]
 
-        Almost every semantic tag supported by HTML5 is one of the :a({href:"#tags"})[tags supported by SECST]. Most non-semantic tags are excluded from SECST, e.g. :code[<div>] and :code[<span>]. Exceptions are :code[<hr>], :code[<table>], :code[<ol>], :code[<ul>] and :code[<style>].
+        Almost every semantic tag supported by HTML5 is one of the :a({href:"#tags"})[tags supported by SECST]. Most non-semantic tags are excluded from SECST, e.g. :code[<div>] and :code[<span>]. Exceptions are :code[<hr>], :code[<table>], :code[<ol>], :code[<ul>] and :code[<style>]; however, since they are so commonly used :code[:b[]] for :b[bold] and :code[:i[]] for :i[italic] are included, as are aliases :code[:bold[]] and :code[:italic[]].
 
         A few tags of note are documented below to illustrate the use of SECST or highlight special features.
 
@@ -221,16 +220,16 @@
             :section[
                 :h[Paragraph]
 
-                SECST will treat two newlines in sequence as a paragraph break. There is also a paragraph tag :code[:p[]]. Newlines inside a :code[p] tag will produce separate HTML :code[<br>] elements. A :code[p] tag is not strictly necessary for really simple content. A SECST parser/transpiler will do a reasonable job of figuring out where paragraph breaks are required; however behavior may vary from implementation to implementation.
+                SECST will treat two newlines in sequence as a paragraph break. There is also a paragraph tag :code[:p[]]. Newlines inside a :code[p] tag will produce separate HTML :code[<br>] elements. A :code[:p[]] tag is not strictly necessary for really simple content. A SECST parser/transpiler will do a reasonable job of figuring out where paragraph breaks are required; however behavior may vary from implementation to implementation.
 
-                If you get an unexpected document layout look try putting content inside a :code[:p[]] tag.
+                If you get an unexpected document layout, try putting content inside a :code[:p[]] tag.
             ]
             :section[
                 :h[Code]
 
-                Contents wrapped in :code[:code[]] will be inline unless the contents contain a newline, in which case the code will be displayed in paragraph format.
+                Contents wrapped in :code[:code[]] will be inline unless the contents contain a newline, in which case the code will be displayed in block format.
 
-                If you have a single line you wish to show as a paragraph, end it with a newline.
+                If you have a single line you wish to show as a block, end it with a newline.
             ]
             :section[
                 :h[Headings]
@@ -240,9 +239,9 @@
                 :em[Note: All tags can optionally take an id starting with :code[#]. If an id is present, it must be the first parameter.]
             ]
             :section[
-                :h[Links]
+                :h[Hyperlinks]
 
-                Sometimes, e.g. with links, you need to specify more than content. This is provided using an attribute block in parentheses, e.g.
+                Sometimes, e.g. with hyperlinks, you need to specify more than content. This is provided using an attribute block in parentheses, e.g.
 
                 :code[:a({href:"./index.txt",target:"_tab"})[SECST]] yields :a({href:"./index.txt",target:"_tab"})[SECST] , where you can access the source of this document.
 
@@ -252,9 +251,9 @@
 
                 You can also use document ids prefixed with a period as targets, e.g. :code[.#headings] for this section. The period prefix is necessary to distinguish from providing an id for the link itself.
 
-                You can also specify links with just a content value, e.g. :code[:a({target:"_tab"})[./index.txt]] renders as :a({target:"_tab"})[./index.txt].
+                You can also specify hyperlinks with just a content value, e.g. :code[:a({target:"_tab"})[./index.txt]] renders as :a({target:"_tab"})[./index.txt].
 
-                By default relative URLS and ids, i.e. those starting with a period, have a target that is the current window or tab. And, those starting with a protocol, e.g. :code[https://] have a target of a new tab.
+                By default, relative URLS and ids, i.e. those starting with a period, have a target that is the current window or tab. And, those starting with a protocol, e.g. :code[https://] have a target of a new tab.
 
                 All tags that take more than just content are fully documented in the :a({href:"#tags"})[complete list of tags]. Also see :a({href:"#advanced-authoring"})[Advanced Authoring].
 
@@ -318,7 +317,33 @@
 
                 ]
                 :section[
-                    :h[Definition Lists]
+                    :h[Description Lists]
+
+                    Definition lists follow the :a(https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dl)[MDN documentation] for their parallel HTML tags except non-semantic tags can't be used.
+
+                    :code[
+                        :dl[
+                            :dt[Beast of Bodmin]
+                            :dd[A large feline inhabiting Bodmin Moor.]
+
+                            :dt[Morgawr]
+                            :dd[A sea serpent.]
+
+                            :dt[Owlman]
+                            :dd[A giant owl-like creature.]
+                        ]
+                    ]
+
+                    :dl[
+                        :dt[Beast of Bodmin]
+                        :dd[A large feline inhabiting Bodmin Moor.]
+
+                        :dt[Morgawr]
+                        :dd[A sea serpent.]
+
+                        :dt[Owlman]
+                        :dd[A giant owl-like creature.]
+                    ]
                 ]
                 :section[
                     :h[Task Lists]
@@ -340,16 +365,16 @@
                     - :em[robots] with the comma separated values of :code[index] or :code[noindex] and :code[follow] or :code[nofollow].
                 ]
 
-                Also see the section :a(."#structured-data")[Structured Data] under :a(.#seo)[SEO].
+                Also see the section :a(.#structured-data)[Structured Data] under :a(.#seo)[SEO].
             ]
             :section[
                 :h[Multimedia]
                 :section[
                     :h[Images]
 
-                    Since SECST has a focus on semantics, images must be specified with alt text.
+                    Since SECST has a focus on semantics, images must be specified with alt text braces, even if they contain no content.
 
-                    :code[:img(static ./anywhichway_mobius_138.png)[]] will not transpile.
+                    :code[:img(static ./anywhichway_mobius_138.png)] will not transpile.
 
                     Images can be loaded statically at transpile time and delivered bundled into the output HTML.
                     :ul[
@@ -357,6 +382,8 @@
                         :li[renders as :img(static ./anywhichway_mobius_138.png)[Test]]
                         :li[instead of a reference there is a data url in :code[src] attribute of the :details[:summary[generated HTML.]  :transpiled[:img(static ./anywhichway_mobius_138.png)[Test]]]]
                     ]
+                    If static loading fails, the standard link will stay in place and dynamic loading may still render the image.
+
                     The callout for the generated HTML above is implemented using the :a({href:"#details"})[details tag].
                 ]
                 :section[
@@ -421,22 +448,32 @@
 
             There are over 1,800 emojis. If a match for the emoji name can't be found, it is displayed as plain text.
 
+            See :a(https://missiveapp.com/open/emoji-mart)[EmjoiMart] to find just the right emoji.
+
             :code[:emoji[smile]] renders as :smile:.
 
             :code[:emoji[smile frowning jumping]] renders as :emoji[smile frowning jumping].
 
-            Since most documents are black and white, emoji's are color filtered to grayscale by default. You can use colored emojis by providing the attribute :code[colored].
+            Most emoji's are colored. You can use grayscale emojis by providing the attribute :code[grayscale].
 
-            :code[:emoji(colored)[smile]] renders as :emoji(colored)[smile].
+            :code[:emoji(grayscale)[smile]] renders as :emoji(grayscale)[smile].
 
-            :code[:emoji(colored)[smile frowning jumping]] renders as :emoji(colored)[smile frowning jumping].
+            :code[:emoji(grayscale)[smile frowning jumping]] renders as :emoji(grayscale)[smile frowning jumping].
         ]
         :section[
             :h(#tables-of-contents)[Tables of Contents]
 
-            Tables of contents are placed at the location of the tag :code[toc[<title>]]. If you do not provide a title, "Table of Contents" is used. All content after the tag is analyzed for headings and used for the table. Navigation links are automatically created. Only the first occurrence of :code[toc] is used, others are ignored.
+            Tables of contents are placed at the location of the tag :code[toc[<title>]]. The :code[:toc[]] tag should occur at the same level, i.e. outside of, :code[:section[]].
 
-            After transpilation, each heading in the document will have an &[#9783] icon preceding it. When this icon is clicked, the table of contents will hover over the heading until something in the document is clicked. Each heading will have up and down arrows placed after it to facilitate jumping to the previous and next section.
+            If you do not provide a title, "Table of Contents" is used. All content after the tag is analyzed for sections with a heading as the first child tag. These are used for the table.
+
+            Levels are determined based on section nesting. You can use the heading tag :code[:h[]] that has no number and the headings will be automatically sized.
+
+            Only the first occurrence of :code[toc] is used, others are ignored.
+
+            After transpilation, each heading in the document will have an :&[#9783] icon preceding it. When this icon is clicked, the table of contents will hover over the heading until something in the document is clicked.
+
+            Each heading will have up and down arrows placed after it to facilitate jumping to the previous and next section.
 
             The tag can take the boolean attribute :code[toggle] to collapse the table of contents into an :a(https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details)[HTML details element].
         ]
@@ -445,9 +482,13 @@
 
             Footnotes are inserted with the :code[:footnote[<footnote-text>]] tag. The content between the braces is used as the footnote and placed at the end of the document. Auto-numbering is done so that authors do not have to keep updating footnotes as the document changes. :footnote(#markdown-footnote)[Markdown does not autonumber footnotes, which makes them hard to maintain. Although, it does create back-references.]
 
-            The source for the above footnote is: :code[:footnote(#markdown-footnote)[Markdown does not autonumber footnotes, which makes them hard to maintain. Although, it does create back-references.]].
+            The source for the above footnote is:
 
-            To re-use a footnote, give the first occurrence an id. Then, give the subsequent uses an :code[href] attribute using the id and leave the content section between the braces empty. This will override the anchors for numbered links generated by the SECST transpiler, but not break ordering. :footnote({href:"#markdown-footnote"})[] If you do provide content when reusing, it will be ignored.
+            :code[
+                :footnote(#markdown-footnote)[Markdown does not autonumber footnotes, which makes them hard to maintain. Although, it does create back-references.]
+            ].
+
+            To re-use a footnote, give the first occurrence an id. Then, give the subsequent uses an :code[href] attribute or shorthand relative URL reference using the id and leave the content section between the braces empty. This will override the anchors for numbered links generated by the SECST transpiler, but not break ordering. :footnote(.#markdown-footnote)[] If you do provide content when reusing, it will be ignored.
 
             The source for the second footnote is: :code[:footnote(.#markdown-footnote)].
 
@@ -456,17 +497,21 @@
         :section[
             :h[forEach]
 
+            The :code[:forEach[]] tag supports repeating content based on data values.
+
         ]
         :section[
             :h[Transpiled SECST]
 
             The HTML of transpiled SECST can be displayed as plain text, e.g. :code[:transpiled[:strong[test]]] renders as :transpiled[:strong[test]].
+
+            If you desire the transpiled code to be displayed as a block, end the content between the :code[[]] with a newline.
         ]
     ]
     :section[
         :h(#mentions)[Social Media And Other Mentions]
 
-        Several platforms provide :code[@mention] capability, but only for their users, e.g. GitHub and StackExchange.
+        Several platforms provide :code[@mention] capability, but only for their users, e.g. GitHub and StackExchange. SECST allows you to mention people on any platform, although they do not get notified.
 
         Mentions take the form :code[@<platform>[<space separated profile-names>]]. The target for mentions will always be another browser tab, unless a :code[target] attribute is provided.
 
@@ -485,7 +530,13 @@
     :section[
         :h[Latex]
 
+        Math and chemical formulas can be displayed using the :code[:latex[]] tag.
+
         :code({language:"latex"})[:latex[Lift = \frac{1}{2} \rho v^2 S C_L\]] renders as :latex[Lift = \frac{1}{2} \rho v^2 S C_L]
+
+        :code({language:"latex"})[:latex[\ce{CO2 + C -> 2 CO}]] renders as :latex[\ce{CO2 + C -> 2 CO}]
+
+        To display the generated formula as a block, end the content between the :code[[]] with a newline.
     ]
     :section[
         :h[Music (ABC Notation)]
@@ -512,7 +563,7 @@
             :ul[
                  - The value of a :code[:value[]] is the content, i.e the text between the :code[[]]. It should be either a literal value or a formula, e.g. :code[:value[2 * 2]] = :value[2 * 2].
                  - By default values are visible. Use the boolean attribute :code[hidden]  to hide them, e.g. :code[:value(hidden)[2 * 2]] = :value(hidden)[2 * 2].
-                 - So that readers know the value may be computed, values are rendered as disabled, readonly input. To render them as plaintext use the attribute :code[plaintext], e.g. :code[:value(plaintext)[2 * 2]] = :value(plaintext)[2 * 2].
+                 - So that readers know the value may be computed, computed ones are rendered as disabled, readonly input. To render them as plaintext use the attribute :code[plaintext], e.g. :code[:value(plaintext)[2 * 2]] = :value(plaintext)[2 * 2].
                  - To make a value editable by readers, use the attribute :code[editable], e.g. code[:value(editable)[2 * 2]] = :value(editable)[2 * 2].
                  - Everything between the :code[[]] is treated as a formula for evaluation, if your readers may be entering formula like text and you do not want it evaluated, use the attribute :code[literal], e.g. :code[:value(literal)[2 *2]] = :value(literal)[2 * 2].
                  - If values are not given a :code[title] attribute, e.g. :code[:value({title:"Two times two"})[2 * 2]], then the content is used as the mouseover title unless the content is provided by a URL, in which case the URL is the title, e.g. :code[:value(./sample.json type="application/json")] has a mouseover title of :code[./sample.json].
@@ -536,16 +587,15 @@
             The code :code[$(#<some-id>)] is used to substitute named values into formulas. See :a(.#advanced-formulas)[Advanced Formulas] for use of more general CSS selectors and arrays.
 
             :section[
-                :h[Typing Data]
+                :h[Typed Data]
 
                 The :code[:value[]] tag supports the type attribute, valid types include :a(https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input)[those supported by the HTML input element] except :code[button], :code[file], :code[hidden], :code[image], :code[search] and :code[submit].
+
+                The type can also be one of the mime-types :code[text/plain], :code[text/csv], :code[application/json], e.g. :code[:value(editable {type:"application/json"})[{name:"Joe"}]] as shown below in :a(.#importing-data)[Importing Data]..
 
                 If you provide a type, e.g. :code[:value(editable {type:"number"})], then the type will be enforced when the value is edited: :value(editable {type:"number"}).
 
                 If the value is computed, a red border will surround type check failures.
-
-                The type can also be one of the mime-types :code[text/plain], :code[text/csv], :code[application/json], e.g. :code[:value(editable {type:"application/json"})[{name:"Joe"}]] as shown below.
-
             ]
             :section[
                 :h[String Manipulation]
@@ -556,12 +606,6 @@
             ]
             :section[
                 :h[Basic Math]
-
-                :ul[
-                    :li[To use a value in a formula the value tag :strong[MUST] be identified by an id.]
-                    :li[Values computed from formulas are readonly unless the boolean attribute :code[editable] is provided, which automatically makes the value visible.]
-                    :li[Use the attribute :code[literal] if you want to prevent the evaluation of the content between the :code[[]], i.e. if it is not intended to be a formula itself but looks like a formula. See the last example below.]
-                ]
 
                 Math formulas include anything that can use the normal operators, :code[,%,^,*,-,+,<,<=,==,>=,>] and any functions available via :a(https://mathjs.org/docs/reference/functions.html)[MathJS].
 
@@ -591,7 +635,7 @@
             :section[
                 :h[Importing Data]
 
-                Values can included imported data using the :code[src] attribute and a mime type provided in the :code[type] attribute. The trailing :code[[]] are optional. Static data is imported at transpile time.
+                Values can included imported data using the :code[src] attribute and a mime type provided in the :code[type] attribute. The trailing :code[[]] are optional. Static data is imported at transpile time. If importing fails, another attempt is made at runtime.
 
                 JSON is formatted for readability and :a(https://json5.org)[JSON5] is supported to make it easier to handle remote data.
 
@@ -652,6 +696,8 @@
             ]
             :section[
                 :h[Unit Math]
+
+                 :code[:value[D("1w 1d").to("d")]] = :value[D("1w 1d").to("d")]
 
             ]
         ]
@@ -1035,11 +1081,14 @@
                         // function body
                     },
                     ...
-                }
+                },
+                ... // any other functions are added to the elements generated by the tag.
             }
         ]
 
         Functions taking a :code[node] as an argument are free to modify the :code[node]. Where necessary, copying to support immutability is done prior to calling the function. Functions taking a :code[node] as the first argument :strong[MUST] return a :code[node].
+
+        Functions taking a :code[node] as a second argument should not modify the node or return a value. If they do, it will be ignored.
 
         Parsed instances of tags, a.k.a. :code[nodes], have a structure similar to that found in a virtual DOM:
 
