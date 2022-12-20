@@ -3,6 +3,11 @@ import {listeners} from "./listeners.js";
 import {updateValueWidths} from "./update-value-widths.js";
 import {resolve} from "./resolve.js";
 import {engage} from "@anywhichway/autohelm";
+import {stringTemplateEval} from "./string-template-eval.js";
+
+window.SECST = {
+    stringTemplateEval
+}
 
 window.JSON5 = JSON5;
 if(document.currentScript?.getAttribute("src").endsWith("?run")) {

@@ -39,6 +39,9 @@
         input.secst {
              font-family: monospace;
         }
+        input.secst[type="number"] {
+             min-width: 4ch;
+        }
         textarea.secst {
             display: block;
             unicode-bidi: embed;
@@ -78,7 +81,7 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
   - :a(.#images)[Asset bundling] for images, video, and audio.
   - Server and client generated well structured HTML output resistant to XSS attacks.
 ]</code></pre></p><p>    This site's navigation, footnotes, computations, special styles like <kbd>Key</kbd> formatting and imported data are built entirely using SECST markup.</p><p>    The SECST language and reference HTML transpiler and runtime support implementations are currently in <strong>ALPHA</strong>. Most, but not all, documented features are implemented, testing is far from complete and resource sizes have not been optimized.<br></p></section>
-<section><h1 class="toc autohelm-heading" data-toggle="" id="table-of-contents">Table Of Contents<span class="autohelm-open-toc" style="display: inline; font-size: 15px;">&#9660;</span><span class="autohelm-close-toc" style="display: none; font-size: 15px;">&#9650;</span></h1><ol style="display: none;"><li class="autohelm-nav"><a href="#why-another-language">Why Another Language</a><ol><li class="autohelm-nav"><a href="#html-and-markdown-issues">HTML and Markdown Issues</a></li><li class="autohelm-nav"><a href="#secst-benefits">SECST Benefits</a></li></ol></li><li class="autohelm-nav"><a href="#when-to-use-secst">When To Use SECST</a><ol><li class="autohelm-nav"><a href="#basic-markdown">Basic Markdown</a></li><li class="autohelm-nav"><a href="#extended-markdown">Extended Markdown</a></li><li class="autohelm-nav"><a href="#markdown-gaps">Markdown Gaps</a></li></ol></li><li class="autohelm-nav"><a href="#authoring">Authoring</a><ol><li class="autohelm-nav"><a href="#markup-tags-with-html-names">Markup Tags With HTML Names</a><ol><li class="autohelm-nav"><a href="#tags-of-note">Tags of Note</a><ol><li class="autohelm-nav"><a href="#paragraph">Paragraph</a></li><li class="autohelm-nav"><a href="#code">Code</a></li><li class="autohelm-nav"><a href="#headings">Headings</a></li><li class="autohelm-nav"><a href="#hyperlinks">Hyperlinks</a></li><li class="autohelm-nav"><a href="#lists">Lists</a><ol><li class="autohelm-nav"><a href="#unordered-and-ordered-lists">Unordered And Ordered Lists</a></li><li class="autohelm-nav"><a href="#description-lists">Description Lists</a></li><li class="autohelm-nav"><a href="#task-lists">Task Lists</a></li></ol></li><li class="autohelm-nav"><a href="#meta-tags">Meta Tags</a></li><li class="autohelm-nav"><a href="#multimedia">Multimedia</a><ol><li class="autohelm-nav"><a href="#images">Images</a></li><li class="autohelm-nav"><a href="#audio">Audio</a></li><li class="autohelm-nav"><a href="#video">Video</a></li></ol></li></ol></li><li class="autohelm-nav"><a href="#html-entities-and-special-characters">HTML Entities and Special Characters</a></li><li class="autohelm-nav"><a href="#other-tags">Other Tags</a><ol><li class="autohelm-nav"><a href="#inserted-and-deleted">Inserted And Deleted</a></li><li class="autohelm-nav"><a href="#details">Details</a></li></ol></li></ol></li><li class="autohelm-nav"><a href="#markup-without-html-names">Markup Without HTML Names</a><ol><li class="autohelm-nav"><a href="#hashtags">Hashtags</a></li><li class="autohelm-nav"><a href="#emojis">Emojis</a></li><li class="autohelm-nav"><a href="#tables-of-contents">Tables of Contents</a></li><li class="autohelm-nav"><a href="#footnotes-endnotes">Footnotes/Endnotes</a></li><li class="autohelm-nav"><a href="#foreach">forEach</a></li><li class="autohelm-nav"><a href="#questions">Questions</a></li><li class="autohelm-nav"><a href="#transpiled-secst">Transpiled SECST</a></li></ol></li><li class="autohelm-nav"><a href="#mentions">Social Media And Other Mentions</a></li><li class="autohelm-nav"><a href="#latex">Latex</a></li><li class="autohelm-nav"><a href="#music--abc-notation-">Music (ABC Notation)</a></li><li class="autohelm-nav"><a href="#escaping-secst">Escaping SECST</a></li></ol></li><li class="autohelm-nav"><a href="#values-and-formulas">Values and Formulas</a><ol><li class="autohelm-nav"><a href="#typed-data">Typed Data</a></li><li class="autohelm-nav"><a href="#string-manipulation">String Manipulation</a></li><li class="autohelm-nav"><a href="#basic-math">Basic Math</a><ol><li class="autohelm-nav"><a href="#algebraic-functions">Algebraic Functions</a></li></ol></li><li class="autohelm-nav"><a href="#unit-math">Unit Math</a></li><li class="autohelm-nav"><a href="#importing-data">Importing Data</a></li></ol></li><li class="autohelm-nav"><a href="#seo">Search Engine Optimization</a><ol><li class="autohelm-nav"><a href="#structured-data">Structured Data</a><ol><li class="autohelm-nav"><a href="#news-article">News Article</a></li></ol></li><li class="autohelm-nav"><a href="#server-transpilation">Server Transpilation</a></li></ol></li><li class="autohelm-nav"><a href="#styling-content">Styling Content</a></li><li class="autohelm-nav"><a href="#advanced-formulas">Advanced Formulas</a><ol><li class="autohelm-nav"><a href="#formulas-with-css-selectors-and-multiple-values">Formulas With CSS Selectors and Multiple Values</a></li><li class="autohelm-nav"><a href="#macro-list-formatting">Macro List Formatting</a></li><li class="autohelm-nav"><a href="#javascript">JavaScript</a></li></ol></li><li class="autohelm-nav"><a href="#configuring--extending--and-programming">Configuring, Extending, And Programming</a><ol><li class="autohelm-nav"><a href="#basic-configuration">Basic Configuration</a><ol><li class="autohelm-nav"><a href="#semantic-options">Semantic Options</a></li><li class="autohelm-nav"><a href="#error-handling">Error Handling</a></li></ol></li><li class="autohelm-nav"><a href="#tag-configuration">Tag Configuration</a></li><li class="autohelm-nav"><a href="#custom-tags">Custom Tags</a></li><li class="autohelm-nav"><a href="#custom-methods">Custom Methods</a></li><li class="autohelm-nav"><a href="#event-listeners">Event Listeners</a></li></ol></li><li class="autohelm-nav"><a href="#tags">Complete List Of Tags</a></li><li class="autohelm-nav"><a href="#design-objectives">Design Objectives</a></li><li class="autohelm-nav"><a href="#grammar">Grammar</a></li><li class="autohelm-nav"><a href="#architecture">Architecture</a><ol><li class="autohelm-nav"><a href="#semantic-architecture">Semantic Architecture</a></li><li class="autohelm-nav"><a href="#data-architecture">Data Architecture</a></li><li class="autohelm-nav"><a href="#project-architecture">Project Architecture</a></li></ol></li><li class="autohelm-nav"><a href="#security">Security</a></li><li class="autohelm-nav"><a href="#copyright-and-license">Copyright and License</a></li></ol></section>
+<section><h1 class="toc autohelm-heading" data-toggle="" id="table-of-contents">Table Of Contents<span class="autohelm-open-toc" style="display: inline; font-size: 15px;">&#9660;</span><span class="autohelm-close-toc" style="display: none; font-size: 15px;">&#9650;</span></h1><ol style="display: none;"><li class="autohelm-nav"><a href="#why-another-language">Why Another Language</a><ol><li class="autohelm-nav"><a href="#html-and-markdown-issues">HTML and Markdown Issues</a></li><li class="autohelm-nav"><a href="#secst-benefits">SECST Benefits</a></li></ol></li><li class="autohelm-nav"><a href="#when-to-use-secst">When To Use SECST</a><ol><li class="autohelm-nav"><a href="#basic-markdown">Basic Markdown</a></li><li class="autohelm-nav"><a href="#extended-markdown">Extended Markdown</a></li><li class="autohelm-nav"><a href="#markdown-gaps">Markdown Gaps</a></li></ol></li><li class="autohelm-nav"><a href="#authoring">Authoring</a><ol><li class="autohelm-nav"><a href="#markup-tags-with-html-names">Markup Tags With HTML Names</a><ol><li class="autohelm-nav"><a href="#tags-of-note">Tags of Note</a><ol><li class="autohelm-nav"><a href="#paragraph">Paragraph</a></li><li class="autohelm-nav"><a href="#code">Code</a></li><li class="autohelm-nav"><a href="#headings">Headings</a></li><li class="autohelm-nav"><a href="#hyperlinks">Hyperlinks</a></li><li class="autohelm-nav"><a href="#lists">Lists</a><ol><li class="autohelm-nav"><a href="#unordered-and-ordered-lists">Unordered And Ordered Lists</a></li><li class="autohelm-nav"><a href="#description-lists">Description Lists</a></li><li class="autohelm-nav"><a href="#task-lists">Task Lists</a></li></ol></li><li class="autohelm-nav"><a href="#meta-tags">Meta Tags</a></li><li class="autohelm-nav"><a href="#multimedia">Multimedia</a><ol><li class="autohelm-nav"><a href="#images">Images</a></li><li class="autohelm-nav"><a href="#audio">Audio</a></li><li class="autohelm-nav"><a href="#video">Video</a></li></ol></li></ol></li><li class="autohelm-nav"><a href="#html-entities-and-special-characters">HTML Entities and Special Characters</a></li><li class="autohelm-nav"><a href="#other-tags">Other Tags</a><ol><li class="autohelm-nav"><a href="#inserted-and-deleted">Inserted And Deleted</a></li><li class="autohelm-nav"><a href="#details">Details</a></li></ol></li></ol></li><li class="autohelm-nav"><a href="#markup-without-html-names">Markup Without HTML Names</a><ol><li class="autohelm-nav"><a href="#hashtags">Hashtags</a></li><li class="autohelm-nav"><a href="#emojis">Emojis</a></li><li class="autohelm-nav"><a href="#tables-of-contents">Tables of Contents</a></li><li class="autohelm-nav"><a href="#footnotes-endnotes">Footnotes/Endnotes</a></li><li class="autohelm-nav"><a href="#foreach">forEach</a></li><li class="autohelm-nav"><a href="#questions">Questions</a></li><li class="autohelm-nav"><a href="#transpiled-secst">Transpiled SECST</a></li></ol></li><li class="autohelm-nav"><a href="#mentions">Social Media And Other Mentions</a></li><li class="autohelm-nav"><a href="#latex">Latex</a></li><li class="autohelm-nav"><a href="#mermaid-chart">Mermaid Chart</a></li><li class="autohelm-nav"><a href="#sheet-music--abc-notation-">Sheet Music (ABC Notation)</a></li><li class="autohelm-nav"><a href="#escaping-secst">Escaping SECST</a></li></ol></li><li class="autohelm-nav"><a href="#values-and-formulas">Values and Formulas</a><ol><li class="autohelm-nav"><a href="#typed-data">Typed Data</a></li><li class="autohelm-nav"><a href="#string-manipulation">String Manipulation</a></li><li class="autohelm-nav"><a href="#basic-math">Basic Math</a><ol><li class="autohelm-nav"><a href="#algebraic-functions">Algebraic Functions</a></li></ol></li><li class="autohelm-nav"><a href="#unit-math">Unit Math</a></li><li class="autohelm-nav"><a href="#importing-data">Importing Data</a></li></ol></li><li class="autohelm-nav"><a href="#seo">Search Engine Optimization</a><ol><li class="autohelm-nav"><a href="#structured-data">Structured Data</a><ol><li class="autohelm-nav"><a href="#news-article">News Article</a></li></ol></li><li class="autohelm-nav"><a href="#server-transpilation">Server Transpilation</a></li></ol></li><li class="autohelm-nav"><a href="#styling-content">Styling Content</a></li><li class="autohelm-nav"><a href="#advanced-formulas">Advanced Formulas</a><ol><li class="autohelm-nav"><a href="#formulas-with-css-selectors-and-multiple-values">Formulas With CSS Selectors and Multiple Values</a></li><li class="autohelm-nav"><a href="#macro-list-formatting">Macro List Formatting</a></li><li class="autohelm-nav"><a href="#javascript">JavaScript</a></li></ol></li><li class="autohelm-nav"><a href="#configuring--extending--and-programming">Configuring, Extending, And Programming</a><ol><li class="autohelm-nav"><a href="#basic-configuration">Basic Configuration</a><ol><li class="autohelm-nav"><a href="#semantic-options">Semantic Options</a></li><li class="autohelm-nav"><a href="#error-handling">Error Handling</a></li></ol></li><li class="autohelm-nav"><a href="#tag-configuration">Tag Configuration</a></li><li class="autohelm-nav"><a href="#custom-tags">Custom Tags</a></li><li class="autohelm-nav"><a href="#custom-methods">Custom Methods</a></li><li class="autohelm-nav"><a href="#event-listeners">Event Listeners</a></li></ol></li><li class="autohelm-nav"><a href="#tags">Complete List Of Tags</a></li><li class="autohelm-nav"><a href="#design-objectives">Design Objectives</a></li><li class="autohelm-nav"><a href="#grammar">Grammar</a></li><li class="autohelm-nav"><a href="#architecture">Architecture</a><ol><li class="autohelm-nav"><a href="#semantic-architecture">Semantic Architecture</a></li><li class="autohelm-nav"><a href="#data-architecture">Data Architecture</a></li><li class="autohelm-nav"><a href="#project-architecture">Project Architecture</a></li></ol></li><li class="autohelm-nav"><a href="#security">Security</a></li><li class="autohelm-nav"><a href="#copyright-and-license">Copyright and License</a></li></ol></section>
 <section><h1 id="why-another-language" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Why Another Language<span class="autohelm-nav autohelm-nav-up-down"> <a href="#html-and-markdown-issues">&darr;</a></span></h1><p>   <dl>
         <dt>Semantic Tag</dt>
         <dd>A tag that has meaning beyond that used to facilitate document layout and style.</dd>
@@ -147,7 +150,7 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
   :forEach({iterable:"#a, #b, #c"})[
       :li[${item} at ${index}]
   ]
-]</code></pre></p><p>            renders as <input id="a" class="secst" hidden="" data-default="" data-template="a" value="" title="a" data-literal="" data-fitcontent=""> <input id="b" class="secst" hidden="" data-default="" data-template="b" value="" title="b" data-literal="" data-fitcontent=""> <input id="c" class="secst" hidden="" data-default="" data-template="c" value="" title="c" data-literal="" data-fitcontent=""><br>            <ol><li>a at 0</li><li>b at 1</li><li>c at 2</li></ol></p></section><section><h3 id="questions" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Questions<span class="autohelm-nav autohelm-nav-up-down"> <a href="#foreach">&uarr;</a> <a href="#transpiled-secst">&darr;</a></span></h3><p>            Questions can be used to create a quiz like experience.</p><p>            <pre class="secst"><code class="nohighlight">:question({type:"number",showanswer:true})[
+]</code></pre></p><p>            renders as <input id="a" class="secst" hidden="" data-default="" data-template="a" value="a" title="a" data-literal="" data-fitcontent="" disabled="" style="width: 2ch;"> <input id="b" class="secst" hidden="" data-default="" data-template="b" value="b" title="b" data-literal="" data-fitcontent="" disabled="" style="width: 2ch;"> <input id="c" class="secst" hidden="" data-default="" data-template="c" value="c" title="c" data-literal="" data-fitcontent="" disabled="" style="width: 2ch;"><br>            <ol><li>a at 0</li><li>b at 1</li><li>c at 2</li></ol></p></section><section><h3 id="questions" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Questions<span class="autohelm-nav autohelm-nav-up-down"> <a href="#foreach">&uarr;</a> <a href="#transpiled-secst">&darr;</a></span></h3><p>            Questions can be used to create a quiz like experience.</p><p>            <pre class="secst"><code class="nohighlight">:question({type:"number",showanswer:true})[
   :text[What is the :code[sqrt(4)]?]
   :answer[sqrt(4)]
 ]</code></pre></p><p>            renders as:</p><p>            <div class="secst-question" data-showanswer="true"><label>What is the <code class="nohighlight">sqrt(4)</code>?</label> <input class="secst" type="number" data-default="" data-template="" value="" title="" data-editable="" data-fitcontent=""> &check;<input type="hidden" value="sqrt(4)"></div><script>document.currentScript.previousElementSibling.addEventListener("change",async function(event) {
@@ -174,8 +177,58 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
                 }
             }
         });
-</script></p><p>            Clicking on the <span>&check;</span> or leaving the input field tests the answer. If incorrect, the question will be surrounded with a red box based on the style <code class="nohighlight">secst-error</code>.</p><p>            Questions take most of the same type attribute values as <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input">input</a>. They can also take the attribute <code class="nohighlight">showanswer:true</code> if the correct answer is supposed to be shown after a user provides the wrong response.</p><p>            Questions have two required content tags, <code class="nohighlight">:text[&lt;question-body&gt;]</code> and <code class="nohighlight">:answer[&lt;some-formula&gt;]</code>, that must be provided in order. The <code class="nohighlight">&lt;question-body&gt;</code> can be just about any content that would normally go in a paragraph. Formulas are <a href="#values-and-formulas">documented later</a>. The <code class="nohighlight">:answer[]</code> tag can also take the attribute <code class="nohighlight">literal</code>, e.g. <code class="nohighlight">:answer(literal)[2]</code>.<br>        </p></section><section><h3 id="transpiled-secst" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Transpiled SECST<span class="autohelm-nav autohelm-nav-up-down"> <a href="#questions">&uarr;</a> <a href="#mentions">&darr;</a></span></h3><p>            The HTML of transpiled SECST can be displayed as plain text, e.g. <code class="nohighlight">:transpiled[:strong[test]]</code> renders as <code class="hljs language-html"><span class="hljs-tag">&lt;<span class="hljs-name">strong</span>&gt;</span>test<span class="hljs-tag">&lt;/<span class="hljs-name">strong</span>&gt;</span></code>.</p><p>            If you desire the transpiled code to be displayed as a block, end the content between the <code class="nohighlight">[]</code> with a newline.<br>        </p></section></section><section><h2 id="mentions" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Social Media And Other Mentions<span class="autohelm-nav autohelm-nav-up-down"> <a href="#markup-without-html-names">&uarr;</a> <a href="#latex">&darr;</a></span></h2><p>        Several platforms provide <code class="nohighlight">@mention</code> capability, but only for their users, e.g. GitHub and StackExchange. SECST allows you to mention people on any platform, although they do not get notified.</p><p>        Mentions take the form <code class="nohighlight">@&lt;platform&gt;[&lt;space separated profile-names&gt;]</code>. The target for mentions will always be another browser tab, unless a <code class="nohighlight">target</code> attribute is provided.</p><p>        The mark-up <code class="nohighlight">@github[anywhichway]</code> renders as <a target="_tab" href="https://github.com/anywhichway">anywhichway@github</a>.</p><p>        Alternatively you can name the user and provide your own content, e.g. <code class="nohighlight">@github({user:"anywhichway"})[AnyWhichWay]</code> renders as <a target="_tab" href="https://github.com/anywhichway">AnyWhichWay</a>.</p><p>        The supported platforms are:<br>        <ul><li> LinkedIn</li><li> Facebook</li><li> GitHub</li><li> Twitter</li></ul><br>    </p></section><section><h2 id="latex" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Latex<span class="autohelm-nav autohelm-nav-up-down"> <a href="#mentions">&uarr;</a> <a href="#music--abc-notation-">&darr;</a></span></h2><p>        Math and chemical formulas can be displayed using the <code class="nohighlight">:latex[]</code> tag.</p><p>        <code class="language-latex" style="background-color: unset;">:latex[Lift = \frac{1}{2} \rho v^2 S C_L]</code> renders as <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css" integrity="sha384-Juol1FqnotbkyZUT5Z7gUPjQ9gzlwCENvUZTpQBAPxtusdwFLRy382PSDx5UUJ4/" crossorigin="anonymous"><script src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js" integrity="sha384-PwRUT/YqbnEjkZO0zZxNqcxACrXe+j766U2amXcgMg5457rve2Y7I6ZJSm2A0mS4" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/mhchem.min.js" integrity="sha384-RTN08a0AXIioPBcVosEqPUfKK+rPp+h1x/izR7xMkdMyuwkcZCWdxO+RSwIFtJXN" crossorigin="anonymous"></script><span><script>(() => { const html = katex.renderToString("Lift = \\frac{1}{2} \\rho v^2 S C_L"); document.currentScript.parentElement.innerHTML = html; })()</script></span></p><p>        <code class="language-latex" style="background-color: unset;">:latex[\ce{CO2 + C -&gt; 2 CO}]</code> renders as <span><script>(() => { const html = katex.renderToString("\\ce{CO2 + C -> 2 CO}"); document.currentScript.parentElement.innerHTML = html; })()</script></span></p><p>        To display the generated formula as a block, end the content between the <code class="nohighlight">[]</code> with a newline.<br>    </p></section><section><h2 id="music--abc-notation-" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Music (ABC Notation)<span class="autohelm-nav autohelm-nav-up-down"> <a href="#latex">&uarr;</a> <a href="#escaping-secst">&darr;</a></span></h2></section><section><h2 id="escaping-secst" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Escaping SECST<span class="autohelm-nav autohelm-nav-up-down"> <a href="#music--abc-notation-">&uarr;</a> <a href="#values-and-formulas">&darr;</a></span></h2><p>        SECST tagging inside of <code class="nohighlight">:code[]</code> is automatically escaped. If you wish to escape it elsewhere use the tag <code class="nohighlight">:escape[]</code>.</p><p>        <code class="nohighlight">:code[:strong[text]]</code> renders as <code class="nohighlight">:strong[text]</code>.</p><p>        <code class="nohighlight">:escape[:strong[text]]</code> renders as <span>:strong[text]</span>.<br>    </p></section></section>
-<section><h1 id="values-and-formulas" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Values and Formulas<span class="autohelm-nav autohelm-nav-up-down"> <a href="#authoring">&uarr;</a> <a href="#typed-data">&darr;</a></span></h1><p>    SECST supports the tag <code class="nohighlight">:value[]</code> for adding reactive variables and formulas to documents.<br>    <ul><li> The value of a <code class="nohighlight">:value[]</code> is the content, i.e the text between the <code class="nohighlight">[]</code>. It should be either a literal value or a formula, e.g. <code class="nohighlight">:value[2 * 2]</code> = <input class="secst" data-default="" data-template="2 * 2" value="4" title="2 * 2" data-fitcontent="" disabled="" style="width: 2ch;">.</li><li> By default values are visible. Use the boolean attribute <code class="nohighlight">hidden</code>  to hide them, e.g. <code class="nohighlight">:value(hidden)[2 * 2]</code> = <input class="secst" hidden="" data-default="" data-template="2 * 2" value="4" title="2 * 2" data-fitcontent="" disabled="" style="width: 2ch;">.</li><li> So that readers know the value may be computed, computed ones are rendered as disabled, readonly input. To render them as plaintext use the attribute <code class="nohighlight">plaintext</code>, e.g. <code class="nohighlight">:value(plaintext)[2 * 2]</code> = <span class="secst" data-default="" data-template="2 * 2" value="" title="2 * 2" data-plaintext="">4</span>.</li><li> To make a value editable by readers, use the attribute <code class="nohighlight">editable</code>, e.g. code[:value(editable)[2 * 2]] = <input class="secst" data-default="" data-template="2 * 2" value="4" title="2 * 2" data-editable="" data-fitcontent="" style="width: 2ch;">.</li><li> Everything between the <code class="nohighlight">[]</code> is treated as a formula for evaluation, if your readers may be entering formula like text and you do not want it evaluated, use the attribute <code class="nohighlight">literal</code>, e.g. <code class="nohighlight">:value(literal)[2 *2]</code> = <input class="secst" data-default="" data-template="2 * 2" value="4" title="2 * 2" data-literal="" data-fitcontent="" disabled="" style="width: 2ch;">.</li><li> If values are not given a <code class="nohighlight">title</code> attribute, e.g. <code class="nohighlight">:value({title:"Two times two"})[2 * 2]</code>, then the content is used as the mouseover title unless the content is provided by a URL, in which case the URL is the title, e.g. <code class="nohighlight">:value(./sample.json type="application/json")</code> has a mouseover title of <code class="nohighlight">./sample.json</code>.</li></ul></p><p>    Formulas are actually just valid JavaScript expressions that also support standard and symbolic math. SECST attempts to process most values as math expressions first<span class="autohelm-footnote" id="autohelm-footnote-ref4"><a href="#autohelm-footnote4">4</a></span> and if this fails, as JavaScript.</p><p>    <ul><li> <code class="nohighlight">2 * 3</code> = <input class="secst" data-default="" data-template="2 * 2" value="4" title="2 * 2" data-fitcontent="" disabled="" style="width: 2ch;">,</li><li> <code class="nohighlight">2^3</code> when used as part of a math expression<span class="autohelm-footnote" id="autohelm-footnote-ref5"><a href="#autohelm-footnote5">5</a></span>, is the same as <code class="nohighlight">2**3</code>, which is the same as <code class="nohighlight">pow(2,3)</code>, which is the same as <code class="nohighlight">Math.pow(2,3)</code> = <input class="secst" data-default="" data-template="2^3" value="1" title="2^3" data-fitcontent="" disabled="" style="width: 2ch;">.</li></ul></p><p>    To use a value in another formula, the value must be named with an id, e.g.</p><p>    <code class="nohighlight">:value(#v1)[2]</code> + <code class="nohighlight">:value(#v2)[2]</code> = <code class="nohighlight">:value(plaintext)[$(#v1) + $(#v2)]</code></p><p>    <input id="v1" class="secst" data-default="" data-template="2" value="2" title="2" data-fitcontent="" style="width: 2ch;"> + <input id="v2" class="secst" data-default="" data-template="2" value="2" title="2" data-fitcontent="" style="width: 2ch;"> = <span class="secst" data-default="" data-template="$(#v1) + $(#v2)" value="" title="$(#v1) + $(#v2)" data-plaintext="">4</span> (try changing one of the inputs)</p><p>    The code <code class="nohighlight">$(#&lt;some-id&gt;)</code> is used to substitute named values into formulas. See <a href="#advanced-formulas">Advanced Formulas</a> for use of more general CSS selectors and arrays.</p><section><h2 id="typed-data" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Typed Data<span class="autohelm-nav autohelm-nav-up-down"> <a href="#values-and-formulas">&uarr;</a> <a href="#string-manipulation">&darr;</a></span></h2><p>        The <code class="nohighlight">:value[]</code> tag supports the type attribute, valid types include <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input">those supported by the HTML input element</a> except <code class="nohighlight">button</code>, <code class="nohighlight">file</code>, <code class="nohighlight">hidden</code>, <code class="nohighlight">image</code>, <code class="nohighlight">search</code> and <code class="nohighlight">submit</code>.</p><p>        The type can also be one of the mime-types <code class="nohighlight">text/plain</code>, <code class="nohighlight">text/csv</code>, <code class="nohighlight">application/json</code>, e.g. <code class="nohighlight">:value(editable {type:"application/json"})[{name:"Joe"}]</code> as shown below in <a href="#importing-data">Importing Data</a>..</p><p>        If you provide a type, e.g. <code class="nohighlight">:value(editable {type:"number"})</code>, then the type will be enforced when the value is edited: <input class="secst" type="number" data-default="" data-template="" value="" title="" data-editable="" data-fitcontent="">.</p><p>        If the value is computed, a red border will surround type check failures.<br>    </p></section><section><h2 id="string-manipulation" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>String Manipulation<span class="autohelm-nav autohelm-nav-up-down"> <a href="#typed-data">&uarr;</a> <a href="#basic-math">&darr;</a></span></h2><p>        Strings can be combined using the <code class="nohighlight">+</code> sign, e.g. <code class="nohighlight">:value["Hello" + " " + "world!"]</code> = <input class="secst" data-default="" data-template="&quot;Hello&quot; + &quot; &quot; + &quot;world!&quot;" value="Hello world!" title="&quot;Hello&quot; + &quot; &quot; + &quot;world!&quot;" data-fitcontent="" disabled="" style="width: 13ch;">.</p><p>        Strings can be manipulated using the <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">standard JavaScript methods</a>, e.g. <code class="nohighlight">:value["Hello world!".substring(0,5)]</code> = <input class="secst" data-default="" data-template="&quot;Hello world!&quot;.substring(0,5)" value="Hello" title="&quot;Hello world!&quot;.substring(0,5)" data-fitcontent="" disabled="" style="width: 6ch;">.<br>    </p></section><section><h2 id="basic-math" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Basic Math<span class="autohelm-nav autohelm-nav-up-down"> <a href="#string-manipulation">&uarr;</a> <a href="#algebraic-functions">&darr;</a></span></h2><p>        Math formulas include anything that can use the normal operators, <code class="nohighlight">,%,^,*,-,+,&lt;,&lt;=,==,&gt;=,&gt;</code> and any functions available via <a target="_tab" href="https://mathjs.org/docs/reference/functions.html">MathJS</a>.</p><p>        Formulas can include <a target="_tab" href="https://mathjs.org/docs/datatypes/units.html#physical-constants">physical constants</a>, e.g <code class="nohighlight">:value[pi * 3^2]</code> = <input class="secst" data-default="" data-template="pi * 3^2" value="" title="pi * 3^2" data-fitcontent="">.</p><p>        This includes these items (most links goto MathJS documentation):</p><p>        <ul><li> <a target="_tab" href="https://mathjs.org/docs/reference/functions.html#algebra-functions">Algebraic functions</a>, covered in <a href="#algebraic-functions">more detail</a> later.</li><li> <a target="_tab" href="https://mathjs.org/docs/reference/functions.html#artihmetic-functions">Arithmetic functions</a></li><li> <a target="_tab" href="https://mathjs.org/docs/reference/functions.html#bitwise-functions">Bitwise functions</a></li><li> <a target="_tab" href="https://mathjs.org/docs/reference/functions.html#combinatorics-functions">Combinatorics functions</a></li><li> <a target="_tab" href="https://mathjs.org/docs/reference/functions.html#complex-functions">Complex functions</a></li><li> <a target="_tab" href="https://mathjs.org/docs/reference/functions.html#geometry-functions">Geometry functions</a></li><li> <a target="_tab" href="https://mathjs.org/docs/reference/functions.html#logical-functions">Logical functions</a></li><li> <a target="_tab" href="https://mathjs.org/docs/reference/functions.html#matrix-functions">Matrix functions</a></li><li> <a target="_tab" href="https://mathjs.org/docs/reference/functions.html#probability-functions">Probability functions</a></li><li> <a target="_tab" href="https://mathjs.org/docs/reference/functions.html#relational-functions">Relational functions</a></li><li> <a target="_tab" href="https://mathjs.org/docs/reference/functions.html#set-functions">Set functions</a></li><li> <a target="_tab" href="https://mathjs.org/docs/reference/functions.html#special-functions">Special functions</a></li><li> <a target="_tab" href="https://mathjs.org/docs/reference/functions.html#statistics-functions">Statistics functions</a></li><li> <a target="_tab" href="https://mathjs.org/docs/reference/functions.html#string-functions">String functions</a></li><li> <a target="_tab" href="https://mathjs.org/docs/reference/functions.html#trigonometry-functions">Trigonometry functions</a></li><li> <a target="_tab" href="https://mathjs.org/docs/reference/functions.html#unit-functions">Unit functions</a></li><li> <a target="_tab" href="https://mathjs.org/docs/reference/functions.html#utils-functions">Utility functions</a></li></ul><br>        </p><section><h3 id="algebraic-functions" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Algebraic Functions<span class="autohelm-nav autohelm-nav-up-down"> <a href="#basic-math">&uarr;</a> <a href="#unit-math">&darr;</a></span></h3><p>                You can ...<br>                <dl>
+</script></p><p>            Clicking on the <span>&check;</span> or leaving the input field tests the answer. If incorrect, the question will be surrounded with a red box based on the style <code class="nohighlight">secst-error</code>.</p><p>            Questions take most of the same type attribute values as <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input">input</a>. They can also take the attribute <code class="nohighlight">showanswer:true</code> if the correct answer is supposed to be shown after a user provides the wrong response.</p><p>            Questions have two required content tags, <code class="nohighlight">:text[&lt;question-body&gt;]</code> and <code class="nohighlight">:answer[&lt;some-formula&gt;]</code>, that must be provided in order. The <code class="nohighlight">&lt;question-body&gt;</code> can be just about any content that would normally go in a paragraph. Formulas are <a href="#values-and-formulas">documented later</a>. The <code class="nohighlight">:answer[]</code> tag can also take the attribute <code class="nohighlight">literal</code>, e.g. <code class="nohighlight">:answer(literal)[2]</code>.<br>        </p></section><section><h3 id="transpiled-secst" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Transpiled SECST<span class="autohelm-nav autohelm-nav-up-down"> <a href="#questions">&uarr;</a> <a href="#mentions">&darr;</a></span></h3><p>            The HTML of transpiled SECST can be displayed as plain text, e.g. <code class="nohighlight">:transpiled[:strong[test]]</code> renders as <code class="hljs language-html"><span class="hljs-tag">&lt;<span class="hljs-name">strong</span>&gt;</span>test<span class="hljs-tag">&lt;/<span class="hljs-name">strong</span>&gt;</span></code>.</p><p>            If you desire the transpiled code to be displayed as a block, end the content between the <code class="nohighlight">[]</code> with a newline.<br>        </p></section></section><section><h2 id="mentions" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Social Media And Other Mentions<span class="autohelm-nav autohelm-nav-up-down"> <a href="#markup-without-html-names">&uarr;</a> <a href="#latex">&darr;</a></span></h2><p>        Several platforms provide <code class="nohighlight">@mention</code> capability, but only for their users, e.g. GitHub and StackExchange. SECST allows you to mention people on any platform, although they do not get notified.</p><p>        Mentions take the form <code class="nohighlight">@&lt;platform&gt;[&lt;space separated profile-names&gt;]</code>. The target for mentions will always be another browser tab, unless a <code class="nohighlight">target</code> attribute is provided.</p><p>        The mark-up <code class="nohighlight">@github[anywhichway]</code> renders as <a target="_tab" href="https://github.com/anywhichway">anywhichway@github</a>.</p><p>        Alternatively you can name the user and provide your own content, e.g. <code class="nohighlight">@github({user:"anywhichway"})[AnyWhichWay]</code> renders as <a target="_tab" href="https://github.com/anywhichway">AnyWhichWay</a>.</p><p>        The supported platforms are:<br>        <ul><li> LinkedIn</li><li> Facebook</li><li> GitHub</li><li> Twitter</li></ul><br>    </p></section><section><h2 id="latex" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Latex<span class="autohelm-nav autohelm-nav-up-down"> <a href="#mentions">&uarr;</a> <a href="#mermaid-chart">&darr;</a></span></h2><p>        Math and chemical formulas can be displayed using the <code class="nohighlight">:latex[]</code> tag.</p><p>        <code class="language-latex" style="background-color: unset;">:latex[Lift = \frac{1}{2} \rho v^2 S C_L]</code> renders as <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css" integrity="sha384-Juol1FqnotbkyZUT5Z7gUPjQ9gzlwCENvUZTpQBAPxtusdwFLRy382PSDx5UUJ4/" crossorigin="anonymous"><script src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js" integrity="sha384-PwRUT/YqbnEjkZO0zZxNqcxACrXe+j766U2amXcgMg5457rve2Y7I6ZJSm2A0mS4" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/mhchem.min.js" integrity="sha384-RTN08a0AXIioPBcVosEqPUfKK+rPp+h1x/izR7xMkdMyuwkcZCWdxO+RSwIFtJXN" crossorigin="anonymous"></script><span><script>(() => { const html = katex.renderToString("Lift = \\frac{1}{2} \\rho v^2 S C_L"); document.currentScript.parentElement.innerHTML = html; })()</script></span></p><p>        <code class="language-latex" style="background-color: unset;">:latex[\ce{CO2 + C -&gt; 2 CO}]</code> renders as <span><script>(() => { const html = katex.renderToString("\\ce{CO2 + C -> 2 CO}"); document.currentScript.parentElement.innerHTML = html; })()</script></span></p><p>        To display the generated formula as a block, end the content between the <code class="nohighlight">[]</code> with a newline.<br>    </p></section><section><h2 id="mermaid-chart" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Mermaid Chart<span class="autohelm-nav autohelm-nav-up-down"> <a href="#latex">&uarr;</a> <a href="#sheet-music--abc-notation-">&darr;</a></span></h2><p>        <code class="nohighlight">:mermaidChart[]</code> is a block level element, it belongs outside of paragraphs. Just provide <a target="_tab" href="https://mermaid.js.org/intro/">Mermaid notation</a> as the content.</p><p>        <pre class="secst"><code class="nohighlight">:mermaidChart[
+ graph LR
+ A --- B
+ B--&gt;C[fa:fa-ban forbidden]
+ B--&gt;D(fa:fa-spinner);
+]</code></pre></p><p>        renders as</p><script src="https://cdn.jsdelivr.net/npm/mermaid@9/dist/mermaid.min.js" onload="(() =&gt; { mermaid.initialize({ startOnLoad: true }) })()"></script><pre id="mermaidChart12044731324332969" class="mermaid">
+            graph LR
+            A --- B
+            B-->C[fa:fa-ban forbidden]
+            B-->D(fa:fa-spinner);
+        </pre><script type="module">
+            const el = document.getElementById("mermaidChart12044731324332969"),
+                sibling = el.nextSibling,
+                insertSvg = function (svgCode, bindFunctions) {
+                    el.innerHTML = svgCode;
+                    if(!el.isConnected) {
+                        sibling.parentElement.insertBefore(el,sibling);
+                    }
+                };
+            const graphDefinition = `
+            graph LR
+            A --- B
+            B-->C[fa:fa-ban forbidden]
+            B-->D(fa:fa-spinner);
+        `;
+            setTimeout(() => mermaid.mermaidAPI.render("mermaidChart12044731324332969", graphDefinition, insertSvg),1000);
+        </script><p>        There are lots of charts to choose from:</p><p>        <ul><li> <a target="_tab" href="https://mermaid.js.org/syntax/flowchart.html">Flowchart</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/sequenceDiagram.html">Sequence Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/classDiagram.html">Class Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/stateDiagram.html">State Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/entityRelationshipDiagram.html">Entity Relationship Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/userJourney.html">User Journey</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/gantt.html">Gannt</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/pie.html">Pie Chart</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/requirementDiagram.html">Requirement Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/gitgraph.html">Gitgraph Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/c4c.html">C4C Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/mindmap.html">Mindmaps</a></li></ul><br>    </p></section><section><h2 id="sheet-music--abc-notation-" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Sheet Music (ABC Notation)<span class="autohelm-nav autohelm-nav-up-down"> <a href="#mermaid-chart">&uarr;</a> <a href="#escaping-secst">&darr;</a></span></h2><p>        <code class="nohighlight">:sheetMusic[]</code> is a block level element, it belongs outside of paragraphs. Just provide <a target="_tab" href="https://abcnotation.com/examples">ABC notation</a> as the content.</p><p>        <pre class="secst"><code class="nohighlight">:sheetMusic[
+  X: 1
+  T: Nokia Tune
+  M: 3/4
+  L: 1/8
+  K: Amaj
+  |: e'd' f2 g2 | c'b d2 e2 | ba c2 e2 | a6 |
+]</code></pre></p><p>        renders as</p><script src="https://cdn.jsdelivr.net/npm/@anywhichway/quick-component@0.0.14/quick-component.min.js" component="https://cdn.jsdelivr.net/npm/@anywhichway/sheet-music@0.0.1"></script><sheet-music>
+            X: 1
+            T: Nokia Tune
+            M: 3/4
+            L: 1/8
+            K: Amaj
+            |: e'd' f2 g2 | c'b d2 e2 | ba c2 e2 | a6 |
+        </sheet-music><p>        If you drop the <code class="nohighlight">:</code> from the second position in the last line, the play button will disappear.</p><p>         <pre class="secst"><code class="nohighlight">:sheetMusic[
+  X:1
+  T: Paper
+  K:D
+  | DDAA | BBA2|
+]</code></pre></p><p>        renders as</p><sheet-music>
+           X:1
+           T: Paper
+           K:D
+           | DDAA | BBA2|
+        </sheet-music></section><section><h2 id="escaping-secst" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Escaping SECST<span class="autohelm-nav autohelm-nav-up-down"> <a href="#sheet-music--abc-notation-">&uarr;</a> <a href="#values-and-formulas">&darr;</a></span></h2><p>        SECST tagging inside of <code class="nohighlight">:code[]</code> is automatically escaped. If you wish to escape it elsewhere use the tag <code class="nohighlight">:escape[]</code>.</p><p>        <code class="nohighlight">:code[:strong[text]]</code> renders as <code class="nohighlight">:strong[text]</code>.</p><p>        <code class="nohighlight">:escape[:strong[text]]</code> renders as <span>:strong[text]</span>.<br>    </p></section></section>
+<section><h1 id="values-and-formulas" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Values and Formulas<span class="autohelm-nav autohelm-nav-up-down"> <a href="#authoring">&uarr;</a> <a href="#typed-data">&darr;</a></span></h1><p>    SECST supports the tag <code class="nohighlight">:value[]</code> for adding reactive variables and formulas to documents.<br>    <ul><li> The value of a <code class="nohighlight">:value[]</code> is the content, i.e the text between the <code class="nohighlight">[]</code>. It should be either a literal value or a formula, e.g. <code class="nohighlight">:value[2 * 2]</code> = <input class="secst" data-default="" data-template="2 * 2" value="4" title="2 * 2" data-fitcontent="" disabled="" style="width: 2ch;">.</li><li> By default values are visible. Use the boolean attribute <code class="nohighlight">hidden</code>  to hide them, e.g. <code class="nohighlight">:value(hidden)[2 * 2]</code> = <input class="secst" hidden="" data-default="" data-template="2 * 2" value="4" title="2 * 2" data-fitcontent="" disabled="" style="width: 2ch;">.</li><li> So that readers know the value may be computed, computed ones are rendered as disabled, readonly input. To render them as plaintext use the attribute <code class="nohighlight">plaintext</code>, e.g. <code class="nohighlight">:value(plaintext)[2 * 2]</code> = <span class="secst" data-default="" data-template="2 * 2" value="" title="2 * 2" data-plaintext="">4</span>.</li><li> To make a value editable by readers, use the attribute <code class="nohighlight">editable</code>, e.g. code[:value(editable)[2 * 2]] = <input class="secst" data-default="" data-template="2 * 2" value="4" title="2 * 2" data-editable="" data-fitcontent="" style="width: 2ch;">.</li><li> Everything between the <code class="nohighlight">[]</code> is treated as a formula for evaluation, if your readers may be entering formula like text and you do not want it evaluated, use the attribute <code class="nohighlight">literal</code>, e.g. <code class="nohighlight">:value(literal)[2 *2]</code> = <input class="secst" data-default="" data-template="2 * 2" value="2 * 2" title="2 * 2" data-literal="" data-fitcontent="" disabled="" style="width: 6ch;">.</li><li> If values are not given a <code class="nohighlight">title</code> attribute, e.g. <code class="nohighlight">:value({title:"Two times two"})[2 * 2]</code>, then the content is used as the mouseover title unless the content is provided by a URL, in which case the URL is the title, e.g. <code class="nohighlight">:value(./sample.json type="application/json")</code> has a mouseover title of <code class="nohighlight">./sample.json</code>.</li></ul></p><p>    Formulas are actually just valid JavaScript expressions that also support standard and symbolic math. SECST attempts to process most values as math expressions first<span class="autohelm-footnote" id="autohelm-footnote-ref4"><a href="#autohelm-footnote4">4</a></span> and if this fails, as JavaScript.</p><p>    <ul><li> <code class="nohighlight">2 * 3</code> = <input class="secst" data-default="" data-template="2 * 2" value="4" title="2 * 2" data-fitcontent="" disabled="" style="width: 2ch;">,</li><li> <code class="nohighlight">2^3</code> when used as part of a math expression<span class="autohelm-footnote" id="autohelm-footnote-ref5"><a href="#autohelm-footnote5">5</a></span>, is the same as <code class="nohighlight">2**3</code>, which is the same as <code class="nohighlight">pow(2,3)</code>, which is the same as <code class="nohighlight">Math.pow(2,3)</code> = <input class="secst" data-default="" data-template="2^3" value="1" title="2^3" data-fitcontent="" disabled="" style="width: 2ch;">.</li></ul></p><p>    To use a value in another formula, the value must be named with an id, e.g.</p><p>    <code class="nohighlight">:value(#v1)[2]</code> + <code class="nohighlight">:value(#v2)[2]</code> = <code class="nohighlight">:value(plaintext)[$(#v1) + $(#v2)]</code></p><p>    <input id="v1" class="secst" data-default="" data-template="2" value="2" title="2" data-fitcontent="" style="width: 2ch;"> + <input id="v2" class="secst" data-default="" data-template="2" value="2" title="2" data-fitcontent="" style="width: 2ch;"> = <span class="secst" data-default="" data-template="$(#v1) + $(#v2)" value="" title="$(#v1) + $(#v2)" data-plaintext="">4</span> (try changing one of the inputs)</p><p>    The code <code class="nohighlight">$(#&lt;some-id&gt;)</code> is used to substitute named values into formulas. See <a href="#advanced-formulas">Advanced Formulas</a> for use of more general CSS selectors and arrays.</p><section><h2 id="typed-data" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Typed Data<span class="autohelm-nav autohelm-nav-up-down"> <a href="#values-and-formulas">&uarr;</a> <a href="#string-manipulation">&darr;</a></span></h2><p>        The <code class="nohighlight">:value[]</code> tag supports the type attribute, valid types include <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input">those supported by the HTML input element</a> except <code class="nohighlight">button</code>, <code class="nohighlight">file</code>, <code class="nohighlight">hidden</code>, <code class="nohighlight">image</code>, <code class="nohighlight">search</code> and <code class="nohighlight">submit</code>.</p><p>        The type can also be one of the mime-types <code class="nohighlight">text/plain</code>, <code class="nohighlight">text/csv</code>, <code class="nohighlight">application/json</code>, e.g. <code class="nohighlight">:value(editable {type:"application/json"})[{name:"Joe"}]</code> as shown below in <a href="#importing-data">Importing Data</a>..</p><p>        If you provide a type, e.g. <code class="nohighlight">:value(editable {type:"number"})</code>, then the type will be enforced when the value is edited: <input class="secst" type="number" data-default="" data-template="" value="" title="" data-editable="" data-fitcontent="">.</p><p>        If the value is computed, a red border will surround type check failures.<br>    </p></section><section><h2 id="string-manipulation" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>String Manipulation<span class="autohelm-nav autohelm-nav-up-down"> <a href="#typed-data">&uarr;</a> <a href="#basic-math">&darr;</a></span></h2><p>        Strings can be combined using the <code class="nohighlight">+</code> sign, e.g. <code class="nohighlight">:value["Hello" + " " + "world!"]</code> = <input class="secst" data-default="" data-template="&quot;Hello&quot; + &quot; &quot; + &quot;world!&quot;" value="Hello world!" title="&quot;Hello&quot; + &quot; &quot; + &quot;world!&quot;" data-fitcontent="" disabled="" style="width: 13ch;">.</p><p>        Strings can be manipulated using the <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">standard JavaScript methods</a>, e.g. <code class="nohighlight">:value["Hello world!".substring(0,5)]</code> = <input class="secst" data-default="" data-template="&quot;Hello world!&quot;.substring(0,5)" value="Hello" title="&quot;Hello world!&quot;.substring(0,5)" data-fitcontent="" disabled="" style="width: 6ch;">.<br>    </p></section><section><h2 id="basic-math" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Basic Math<span class="autohelm-nav autohelm-nav-up-down"> <a href="#string-manipulation">&uarr;</a> <a href="#algebraic-functions">&darr;</a></span></h2><p>        Math formulas include anything that can use the normal operators, <code class="nohighlight">,%,^,*,-,+,&lt;,&lt;=,==,&gt;=,&gt;</code> and any functions available via <a target="_tab" href="https://mathjs.org/docs/reference/functions.html">MathJS</a>.</p><p>        Formulas can include <a target="_tab" href="https://mathjs.org/docs/datatypes/units.html#physical-constants">physical constants</a>, e.g <code class="nohighlight">:value[pi * 3^2]</code> = <input class="secst" data-default="" data-template="pi * 3^2" value="" title="pi * 3^2" data-fitcontent="">.</p><p>        This includes these items (most links goto MathJS documentation):</p><p>        <ul><li> <a target="_tab" href="https://mathjs.org/docs/reference/functions.html#algebra-functions">Algebraic functions</a>, covered in <a href="#algebraic-functions">more detail</a> later.</li><li> <a target="_tab" href="https://mathjs.org/docs/reference/functions.html#artihmetic-functions">Arithmetic functions</a></li><li> <a target="_tab" href="https://mathjs.org/docs/reference/functions.html#bitwise-functions">Bitwise functions</a></li><li> <a target="_tab" href="https://mathjs.org/docs/reference/functions.html#combinatorics-functions">Combinatorics functions</a></li><li> <a target="_tab" href="https://mathjs.org/docs/reference/functions.html#complex-functions">Complex functions</a></li><li> <a target="_tab" href="https://mathjs.org/docs/reference/functions.html#geometry-functions">Geometry functions</a></li><li> <a target="_tab" href="https://mathjs.org/docs/reference/functions.html#logical-functions">Logical functions</a></li><li> <a target="_tab" href="https://mathjs.org/docs/reference/functions.html#matrix-functions">Matrix functions</a></li><li> <a target="_tab" href="https://mathjs.org/docs/reference/functions.html#probability-functions">Probability functions</a></li><li> <a target="_tab" href="https://mathjs.org/docs/reference/functions.html#relational-functions">Relational functions</a></li><li> <a target="_tab" href="https://mathjs.org/docs/reference/functions.html#set-functions">Set functions</a></li><li> <a target="_tab" href="https://mathjs.org/docs/reference/functions.html#special-functions">Special functions</a></li><li> <a target="_tab" href="https://mathjs.org/docs/reference/functions.html#statistics-functions">Statistics functions</a></li><li> <a target="_tab" href="https://mathjs.org/docs/reference/functions.html#string-functions">String functions</a></li><li> <a target="_tab" href="https://mathjs.org/docs/reference/functions.html#trigonometry-functions">Trigonometry functions</a></li><li> <a target="_tab" href="https://mathjs.org/docs/reference/functions.html#unit-functions">Unit functions</a></li><li> <a target="_tab" href="https://mathjs.org/docs/reference/functions.html#utils-functions">Utility functions</a></li></ul><br>        </p><section><h3 id="algebraic-functions" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Algebraic Functions<span class="autohelm-nav autohelm-nav-up-down"> <a href="#basic-math">&uarr;</a> <a href="#unit-math">&darr;</a></span></h3><p>                You can ...<br>                <dl>
                     <dt>Compute derivatives:</dt>
                     <dd><code class="nohighlight">:value[derivative('x^2 + x', 'x')]</code></dd>
                     <dd><input class="secst" data-default="" data-template="derivative(&#x27;x^2 + x&#x27;, &#x27;x&#x27;)" value="" title="derivative(&#x27;x^2 + x&#x27;, &#x27;x&#x27;)" data-fitcontent=""></dd>
@@ -188,11 +241,11 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
                     <dt>Give your readers the opportunity to provide the values for which to solve:</dt>
                     <dd>Math.pow(r,2) where r = <code class="nohighlight">:value(#v1d)[0]</code> is <code class="nohighlight">:value(#v2d)[solve('Math.pow(r,2)',{r:$(#v1d)})]</code></dd>
                     <dd>Math.pow(r,2) where r = <input id="v1d" class="secst" data-default="" data-template="0" value="0" title="0" data-fitcontent="" style="width: 2ch;"> is <input id="v2d" class="secst" data-default="" data-template="solve(&#x27;Math.pow(r,2)&#x27;,{r:$(#v1d)})" value="" title="solve(&#x27;Math.pow(r,2)&#x27;,{r:$(#v1d)})" data-fitcontent=""></dd>
-                    <dd>The derivative of <input id="formula" class="secst" data-default="" data-template="x^2 + x" value="" title="x^2 + x" data-literal="" data-editable="" data-fitcontent=""> for <input id="variable" class="secst" data-default="" data-template="x" value="" title="x" data-literal="" data-editable="" data-fitcontent=""> is <input id="derivative" class="secst" data-default="" data-template="derivative($(#formula),$(#variable))" value="" title="derivative($(#formula),$(#variable))" data-fitcontent=""></dd>
-                </dl><br>            </p></section></section><section><h2 id="unit-math" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Unit Math<span class="autohelm-nav autohelm-nav-up-down"> <a href="#basic-math">&uarr;</a> <a href="#importing-data">&darr;</a></span></h2><p>        Unit math <a target="_tab" href="https://mathjs.org/docs/datatypes/units.html">from MathJS</a> allows fro conversions using the word <code class="nohighlight">to</code>, as well as units for numbers, e.g. <code class="nohighlight">45 deg</code>.</p><p>        There are many <a target="_tab" href="https://mathjs.org/docs/datatypes/units.html#reference">supported units</a>.</p><p>        Here are a few examples:</p><p>        <code class="nohighlight">:value[2 inch to cm]</code> = <input class="secst" data-default="" data-template="2 inch to cm" value="" title="2 inch to cm" data-fitcontent=""></p><p>        <code class="nohighlight">:value[90 km/h to mi/h]</code> = <input class="secst" data-default="" data-template="90 km/h to mi/h" value="" title="90 km/h to mi/h" data-fitcontent=""></p><p>        <code class="nohighlight">:value[90 km/h to m/h]</code> = <input class="secst" data-default="" data-template="90 km/h to m/h" value="" title="90 km/h to m/h" data-fitcontent=""> <code class="nohighlight">m/h</code> is meters per hour</p><p>        <code class="nohighlight">:value[(1 week + 1 day) to days]</code> = value[(1 week + 1 day) to days]</p><p>        <code class="nohighlight">:value[cos(45 deg)]</code> = <input class="secst" data-default="" data-template="cos(45 deg)" value="" title="cos(45 deg)" data-fitcontent=""></p><p>        <code class="nohighlight">:value[8.314 m^3 Pa / mol / K]</code> = <input class="secst" data-default="" data-template="8.314 m^3 Pa / mol / K" value="" title="8.314 m^3 Pa / mol / K" data-fitcontent=""></p><p>        Remember, if you have a value that looks like a formula, but is not, you can use the attribute <code class="nohighlight">literal</code>, e.g.  <code class="nohighlight">:value(literal)[2 inch to cm]</code> = <input class="secst" data-default="" data-template="2 inch to cm" value="" title="2 inch to cm" data-literal="" data-fitcontent="">.</p><p>        And, you can use <code class="nohighlight">plaintext</code> to display values without any styling, e.g. <code class="nohighlight">:value(plaintext)[90 km/h to mi/h]</code> = <span class="secst" data-default="" data-template="90 km/h to mi/h" value="" title="90 km/h to mi/h" data-plaintext="">90 km/h to mi/h</span>.</p></section><section><h2 id="importing-data" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Importing Data<span class="autohelm-nav autohelm-nav-up-down"> <a href="#unit-math">&uarr;</a> <a href="#seo">&darr;</a></span></h2><p>        Values can included imported data using the <code class="nohighlight">src</code> attribute and a mime type provided in the <code class="nohighlight">type</code> attribute. The trailing <code class="nohighlight">[]</code> are optional.</p><p>        Values with the boolean attribute <code class="nohighlight">static</code> is import data at transpile time. If importing fails, another attempt is made at runtime.</p><p>        JSON is formatted for readability and <a target="_tab" href="https://json5.org">JSON5</a> is supported to make it easier to handle remote data.</p><p>        <pre class="secst"><code class="nohighlight">:value(https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson static {type:"application/json"})</code></pre></p><p>        <textarea class="secst" data-mime-type="application/json" data-default="" title="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson" data-fitcontent="" disabled="">{
+                    <dd>The derivative of <input id="formula" class="secst" data-default="" data-template="x^2 + x" value="x^2 + x" title="x^2 + x" data-literal="" data-editable="" data-fitcontent="" style="width: 8ch;"> for <input id="variable" class="secst" data-default="" data-template="x" value="x" title="x" data-literal="" data-editable="" data-fitcontent="" style="width: 2ch;"> is <input id="derivative" class="secst" data-default="" data-template="derivative($(#formula),$(#variable))" value="" title="derivative($(#formula),$(#variable))" data-fitcontent=""></dd>
+                </dl><br>            </p></section></section><section><h2 id="unit-math" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Unit Math<span class="autohelm-nav autohelm-nav-up-down"> <a href="#basic-math">&uarr;</a> <a href="#importing-data">&darr;</a></span></h2><p>        Unit math <a target="_tab" href="https://mathjs.org/docs/datatypes/units.html">from MathJS</a> allows fro conversions using the word <code class="nohighlight">to</code>, as well as units for numbers, e.g. <code class="nohighlight">45 deg</code>.</p><p>        There are many <a target="_tab" href="https://mathjs.org/docs/datatypes/units.html#reference">supported units</a>.</p><p>        Here are a few examples:</p><p>        <code class="nohighlight">:value[2 inch to cm]</code> = <input class="secst" data-default="" data-template="2 inch to cm" value="" title="2 inch to cm" data-fitcontent=""></p><p>        <code class="nohighlight">:value[90 km/h to mi/h]</code> = <input class="secst" data-default="" data-template="90 km/h to mi/h" value="" title="90 km/h to mi/h" data-fitcontent=""></p><p>        <code class="nohighlight">:value[90 km/h to m/h]</code> = <input class="secst" data-default="" data-template="90 km/h to m/h" value="" title="90 km/h to m/h" data-fitcontent=""> <code class="nohighlight">m/h</code> is meters per hour</p><p>        <code class="nohighlight">:value[(1 week + 1 day) to days]</code> = value[(1 week + 1 day) to days]</p><p>        <code class="nohighlight">:value[cos(45 deg)]</code> = <input class="secst" data-default="" data-template="cos(45 deg)" value="" title="cos(45 deg)" data-fitcontent=""></p><p>        <code class="nohighlight">:value[8.314 m^3 Pa / mol / K]</code> = <input class="secst" data-default="" data-template="8.314 m^3 Pa / mol / K" value="" title="8.314 m^3 Pa / mol / K" data-fitcontent=""></p><p>        Remember, if you have a value that looks like a formula, but is not, you can use the attribute <code class="nohighlight">literal</code>, e.g.  <code class="nohighlight">:value(literal)[2 inch to cm]</code> = <input class="secst" data-default="" data-template="2 inch to cm" value="2 inch to cm" title="2 inch to cm" data-literal="" data-fitcontent="" disabled="" style="width: 13ch;">.</p><p>        And, you can use <code class="nohighlight">plaintext</code> to display values without any styling, e.g. <code class="nohighlight">:value(plaintext)[90 km/h to mi/h]</code> = <span class="secst" data-default="" data-template="90 km/h to mi/h" value="" title="90 km/h to mi/h" data-plaintext="">90 km/h to mi/h</span>.</p></section><section><h2 id="importing-data" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Importing Data<span class="autohelm-nav autohelm-nav-up-down"> <a href="#unit-math">&uarr;</a> <a href="#seo">&darr;</a></span></h2><p>        Values can included imported data using the <code class="nohighlight">src</code> attribute and a mime type provided in the <code class="nohighlight">type</code> attribute. The trailing <code class="nohighlight">[]</code> are optional.</p><p>        Values with the boolean attribute <code class="nohighlight">static</code> is import data at transpile time. If importing fails, another attempt is made at runtime.</p><p>        JSON is formatted for readability and <a target="_tab" href="https://json5.org">JSON5</a> is supported to make it easier to handle remote data.</p><p>        <pre class="secst"><code class="nohighlight">:value(https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson static {type:"application/json"})</code></pre></p><p>        <textarea class="secst" data-mime-type="application/json" data-default="" title="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson" data-fitcontent="" disabled="">{
   "type": "FeatureCollection",
   "metadata": {
-    "generated": 1671548326000,
+    "generated": 1671564540000,
     "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson",
     "title": "USGS All Earthquakes, Past Hour",
     "status": 200,
@@ -203,93 +256,173 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
     {
       "type": "Feature",
       "properties": {
-        "mag": 1.76,
-        "place": "13km ESE of Pine Hills, CA",
-        "time": 1671548088400,
-        "updated": 1671548184139,
+        "mag": 2.31999993,
+        "place": "0 km SSE of Pāhala, Hawaii",
+        "time": 1671563981540,
+        "updated": 1671564183600,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821616",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821616.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73277132",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73277132.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 48,
+        "sig": 83,
+        "net": "hv",
+        "code": "73277132",
+        "ids": ",hv73277132,",
+        "sources": ",hv,",
+        "types": ",origin,phase-data,",
+        "nst": 35,
+        "dmin": null,
+        "rms": 0.0900000036,
+        "gap": 103,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 2.3 - 0 km SSE of Pāhala, Hawaii"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -155.476165771484,
+          19.1958332061768,
+          33.5200004577637
+        ]
+      },
+      "id": "hv73277132"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 2.65,
+        "place": "39km W of Petrolia, CA",
+        "time": 1671563823700,
+        "updated": 1671564130486,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821921",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821921.geojson",
+        "felt": 1,
+        "cdi": 0,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 108,
         "net": "nc",
-        "code": "73821616",
-        "ids": ",nc73821616,",
+        "code": "73821921",
+        "ids": ",nc73821921,",
+        "sources": ",nc,",
+        "types": ",dyfi,nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 19,
+        "dmin": null,
+        "rms": 0.35,
+        "gap": 244,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 2.7 - 39km W of Petrolia, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -124.7388306,
+          40.3878326,
+          16.78
+        ]
+      },
+      "id": "nc73821921"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 0.7,
+        "place": "6km NNW of The Geysers, CA",
+        "time": 1671563548760,
+        "updated": 1671563644156,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821911",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821911.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 8,
+        "net": "nc",
+        "code": "73821911",
+        "ids": ",nc73821911,",
         "sources": ",nc,",
         "types": ",nearby-cities,origin,phase-data,",
-        "nst": 6,
-        "dmin": 0.08113,
-        "rms": 0.03,
-        "gap": 254,
+        "nst": 11,
+        "dmin": 0.009825,
+        "rms": 0.01,
+        "gap": 69,
         "magType": "md",
         "type": "earthquake",
-        "title": "M 1.8 - 13km ESE of Pine Hills, CA"
+        "title": "M 0.7 - 6km NNW of The Geysers, CA"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -124.0061646,
-          40.7008324,
-          19.18
+          -122.7978363,
+          38.8256683,
+          2.85
         ]
       },
-      "id": "nc73821616"
+      "id": "nc73821911"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 2.41,
-        "place": "7km W of Ferndale, CA",
-        "time": 1671547327600,
-        "updated": 1671548172300,
+        "mag": 1.86000001,
+        "place": "9 km SSW of Leilani Estates, Hawaii",
+        "time": 1671562947870,
+        "updated": 1671563138610,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821596",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821596.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73277122",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73277122.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 89,
-        "net": "nc",
-        "code": "73821596",
-        "ids": ",nc73821596,",
-        "sources": ",nc,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 11,
-        "dmin": 0.09509,
-        "rms": 0.38,
-        "gap": 256,
+        "sig": 53,
+        "net": "hv",
+        "code": "73277122",
+        "ids": ",hv73277122,",
+        "sources": ",hv,",
+        "types": ",origin,phase-data,",
+        "nst": 21,
+        "dmin": null,
+        "rms": 0.140000001,
+        "gap": 218,
         "magType": "md",
         "type": "earthquake",
-        "title": "M 2.4 - 7km W of Ferndale, CA"
+        "title": "M 1.9 - 9 km SSW of Leilani Estates, Hawaii"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -124.3430023,
-          40.5706673,
-          12.75
+          -154.945327758789,
+          19.3924999237061,
+          7.01000022888184
         ]
       },
-      "id": "nc73821596"
+      "id": "hv73277122"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 1.6,
-        "place": "47 km ENE of Pedro Bay, Alaska",
-        "time": 1671547163365,
-        "updated": 1671547272225,
+        "mag": 1.59,
+        "place": "7km NW of The Geysers, CA",
+        "time": 1671562624100,
+        "updated": 1671564131485,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022g9otc0g",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022g9otc0g.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821896",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821896.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
@@ -297,397 +430,317 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
         "status": "automatic",
         "tsunami": 0,
         "sig": 39,
-        "net": "ak",
-        "code": "022g9otc0g",
-        "ids": ",ak022g9otc0g,",
-        "sources": ",ak,",
-        "types": ",origin,phase-data,",
-        "nst": null,
+        "net": "nc",
+        "code": "73821896",
+        "ids": ",nc73821896,",
+        "sources": ",nc,",
+        "types": ",focal-mechanism,nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 32,
         "dmin": null,
-        "rms": 0.49,
-        "gap": null,
-        "magType": "ml",
-        "type": "earthquake",
-        "title": "M 1.6 - 47 km ENE of Pedro Bay, Alaska"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -153.2873,
-          59.8989,
-          108.5
-        ]
-      },
-      "id": "ak022g9otc0g"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 2.33,
-        "place": "11km W of Ferndale, CA",
-        "time": 1671546819720,
-        "updated": 1671548171751,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821591",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821591.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 84,
-        "net": "nc",
-        "code": "73821591",
-        "ids": ",nc73821591,",
-        "sources": ",nc,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 9,
-        "dmin": 0.1206,
-        "rms": 0.34,
-        "gap": 270,
+        "rms": 0.01,
+        "gap": 53,
         "magType": "md",
         "type": "earthquake",
-        "title": "M 2.3 - 11km W of Ferndale, CA"
+        "title": "M 1.6 - 7km NW of The Geysers, CA"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -124.3973312,
-          40.5873337,
-          19.91
+          -122.8044968,
+          38.8236656,
+          2.34
         ]
       },
-      "id": "nc73821591"
+      "id": "nc73821896"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 2.31,
-        "place": "15km E of Rio Dell, CA",
-        "time": 1671546548030,
-        "updated": 1671548171642,
+        "mag": 1.04,
+        "place": "7km NW of The Geysers, CA",
+        "time": 1671562150740,
+        "updated": 1671562246233,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821581",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821581.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821891",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821891.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 82,
+        "sig": 17,
         "net": "nc",
-        "code": "73821581",
-        "ids": ",nc73821581,",
+        "code": "73821891",
+        "ids": ",nc73821891,",
         "sources": ",nc,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 12,
-        "dmin": 0.1082,
-        "rms": 0.06,
-        "gap": 151,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 2.3 - 15km E of Rio Dell, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -123.9268341,
-          40.4981651,
-          19.53
-        ]
-      },
-      "id": "nc73821581"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.07,
-        "place": "9km SSE of Big Bear City, CA",
-        "time": 1671546393040,
-        "updated": 1671546602885,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40392672",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40392672.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 18,
-        "net": "ci",
-        "code": "40392672",
-        "ids": ",ci40392672,",
-        "sources": ",ci,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 19,
-        "dmin": 0.1172,
-        "rms": 0.23,
-        "gap": 47,
-        "magType": "ml",
-        "type": "earthquake",
-        "title": "M 1.1 - 9km SSE of Big Bear City, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -116.8106667,
-          34.1885,
-          1.18
-        ]
-      },
-      "id": "ci40392672"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 2.2,
-        "place": "Southern Alaska",
-        "time": 1671546113164,
-        "updated": 1671546765758,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022g9opjf8",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022g9opjf8.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 74,
-        "net": "ak",
-        "code": "022g9opjf8",
-        "ids": ",ak022g9opjf8,",
-        "sources": ",ak,",
-        "types": ",origin,phase-data,",
-        "nst": null,
-        "dmin": null,
-        "rms": 1.46,
-        "gap": null,
-        "magType": "ml",
-        "type": "earthquake",
-        "title": "M 2.2 - Southern Alaska"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -147.0609,
-          60.3305,
-          12.7
-        ]
-      },
-      "id": "ak022g9opjf8"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 2.33,
-        "place": "13km NNW of Ferndale, CA",
-        "time": 1671545919650,
-        "updated": 1671546981198,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821561",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821561.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 84,
-        "net": "nc",
-        "code": "73821561",
-        "ids": ",nc73821561,",
-        "sources": ",nc,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 8,
-        "dmin": 0.2026,
-        "rms": 0.08,
-        "gap": 268,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 2.3 - 13km NNW of Ferndale, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -124.3453369,
-          40.6783333,
-          28.65
-        ]
-      },
-      "id": "nc73821561"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 4.4,
-        "place": "38 km NNE of Lae, Papua New Guinea",
-        "time": 1671545871788,
-        "updated": 1671548132040,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000jakr",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/us6000jakr.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "reviewed",
-        "tsunami": 0,
-        "sig": 298,
-        "net": "us",
-        "code": "6000jakr",
-        "ids": ",us6000jakr,",
-        "sources": ",us,",
-        "types": ",origin,phase-data,",
-        "nst": 22,
-        "dmin": 13.031,
-        "rms": 1.03,
-        "gap": 64,
-        "magType": "mb",
-        "type": "earthquake",
-        "title": "M 4.4 - 38 km NNE of Lae, Papua New Guinea"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          147.1459,
-          -6.409,
-          35
-        ]
-      },
-      "id": "us6000jakr"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 4.7,
-        "place": "3 km WSW of Oxapampa, Peru",
-        "time": 1671545658734,
-        "updated": 1671547498040,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000jaks",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/us6000jaks.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "reviewed",
-        "tsunami": 0,
-        "sig": 340,
-        "net": "us",
-        "code": "6000jaks",
-        "ids": ",us6000jaks,",
-        "sources": ",us,",
-        "types": ",origin,phase-data,",
-        "nst": 45,
-        "dmin": 1.964,
-        "rms": 0.43,
-        "gap": 95,
-        "magType": "mb",
-        "type": "earthquake",
-        "title": "M 4.7 - 3 km WSW of Oxapampa, Peru"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -75.4313,
-          -10.5854,
-          11.297
-        ]
-      },
-      "id": "us6000jaks"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 2.84,
-        "place": "20km SE of Blue Lake, CA",
-        "time": 1671545459950,
-        "updated": 1671546981432,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821551",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821551.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 124,
-        "net": "nc",
-        "code": "73821551",
-        "ids": ",nc73821551,",
-        "sources": ",nc,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 16,
-        "dmin": 0.04531,
-        "rms": 0.1,
-        "gap": 94,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 2.8 - 20km SE of Blue Lake, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -123.8454971,
-          40.7314987,
-          19.79
-        ]
-      },
-      "id": "nc73821551"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 2.08,
-        "place": "7km S of Ferndale, CA",
-        "time": 1671545186990,
-        "updated": 1671546133119,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821531",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821531.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 67,
-        "net": "nc",
-        "code": "73821531",
-        "ids": ",nc73821531,",
-        "sources": ",nc,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 5,
-        "dmin": 0.05825,
+        "types": ",nearby-cities,origin,phase-data,",
+        "nst": 17,
+        "dmin": 0.003987,
         "rms": 0.02,
-        "gap": 256,
+        "gap": 62,
         "magType": "md",
         "type": "earthquake",
-        "title": "M 2.1 - 7km S of Ferndale, CA"
+        "title": "M 1.0 - 7km NW of The Geysers, CA"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -124.2766647,
-          40.5108337,
-          11.57
+          -122.8050003,
+          38.8238335,
+          2.36
         ]
       },
-      "id": "nc73821531"
+      "id": "nc73821891"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.12,
+        "place": "7km NW of The Geysers, CA",
+        "time": 1671561938200,
+        "updated": 1671563591441,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821886",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821886.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 19,
+        "net": "nc",
+        "code": "73821886",
+        "ids": ",nc73821886,",
+        "sources": ",nc,",
+        "types": ",focal-mechanism,nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 28,
+        "dmin": 0.005182,
+        "rms": 0.03,
+        "gap": 32,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 1.1 - 7km NW of The Geysers, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.8043365,
+          38.8260002,
+          2.25
+        ]
+      },
+      "id": "nc73821886"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 2.24,
+        "place": "1 km SE of Indios, Puerto Rico",
+        "time": 1671561725800,
+        "updated": 1671562685340,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/pr71388278",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/pr71388278.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 77,
+        "net": "pr",
+        "code": "71388278",
+        "ids": ",pr71388278,",
+        "sources": ",pr,",
+        "types": ",origin,phase-data,",
+        "nst": 17,
+        "dmin": 0.03915,
+        "rms": 0.09,
+        "gap": 190,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 2.2 - 1 km SE of Indios, Puerto Rico"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -66.8081666666667,
+          17.984,
+          15.55
+        ]
+      },
+      "id": "pr71388278"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.52,
+        "place": "7km NW of The Geysers, CA",
+        "time": 1671561455320,
+        "updated": 1671563172405,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821861",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821861.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 36,
+        "net": "nc",
+        "code": "73821861",
+        "ids": ",nc73821861,",
+        "sources": ",nc,",
+        "types": ",focal-mechanism,nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 32,
+        "dmin": null,
+        "rms": 0.02,
+        "gap": 54,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 1.5 - 7km NW of The Geysers, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.803833,
+          38.8240013,
+          2.48
+        ]
+      },
+      "id": "nc73821861"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.95,
+        "place": "9km W of Ferndale, CA",
+        "time": 1671561347880,
+        "updated": 1671562571354,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821856",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821856.geojson",
+        "felt": 1,
+        "cdi": 0,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 58,
+        "net": "nc",
+        "code": "73821856",
+        "ids": ",nc73821856,",
+        "sources": ",nc,",
+        "types": ",dyfi,nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 6,
+        "dmin": 0.09119,
+        "rms": 0.04,
+        "gap": 302,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 2.0 - 9km W of Ferndale, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -124.3688354,
+          40.5636673,
+          20.18
+        ]
+      },
+      "id": "nc73821856"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.9,
+        "place": "75 km NW of Aleneva, Alaska",
+        "time": 1671561329192,
+        "updated": 1671561486347,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022g9r680n",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022g9r680n.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 56,
+        "net": "ak",
+        "code": "022g9r680n",
+        "ids": ",ak022g9r680n,",
+        "sources": ",ak,",
+        "types": ",origin,phase-data,",
+        "nst": null,
+        "dmin": null,
+        "rms": 0.35,
+        "gap": null,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 1.9 - 75 km NW of Aleneva, Alaska"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -153.9462,
+          58.4603,
+          88.7
+        ]
+      },
+      "id": "ak022g9r680n"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 2.13,
+        "place": "9km NW of Ferndale, CA",
+        "time": 1671561172460,
+        "updated": 1671561972297,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821851",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821851.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 70,
+        "net": "nc",
+        "code": "73821851",
+        "ids": ",nc73821851,",
+        "sources": ",nc,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 10,
+        "dmin": 0.1593,
+        "rms": 0.23,
+        "gap": 259,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 2.1 - 9km NW of Ferndale, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -124.3348312,
+          40.6349983,
+          17.12
+        ]
+      },
+      "id": "nc73821851"
     }
   ],
   "bbox": [
-    -153.2873,
-    -10.5854,
-    1.18,
-    147.1459,
-    60.3305,
-    108.5
+    -155.47616577148,
+    17.984,
+    2.25,
+    -66.808166666667,
+    58.4603,
+    88.7
   ]
 }</textarea></p><p>        Imported data is readonly because it is essentially a computation. To make it editable, use the attribute <code class="nohighlight">editable</code>.</p><p>        <pre class="secst"><code class="nohighlight">:value(https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson editable {type:"application/json"})</code></pre></p><p>        <textarea class="secst" data-mime-type="application/json" data-default="" data-template="await (async () =&gt; {
                         try {
@@ -711,7 +764,7 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
                         })()" title="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson" data-editable="" data-fitcontent="" style="height: 30em; width: 80ch;">{
   "type": "FeatureCollection",
   "metadata": {
-    "generated": 1671548326000,
+    "generated": 1671564540000,
     "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson",
     "title": "USGS All Earthquakes, Past Hour",
     "status": 200,
@@ -722,93 +775,173 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
     {
       "type": "Feature",
       "properties": {
-        "mag": 1.76,
-        "place": "13km ESE of Pine Hills, CA",
-        "time": 1671548088400,
-        "updated": 1671548184139,
+        "mag": 2.31999993,
+        "place": "0 km SSE of Pāhala, Hawaii",
+        "time": 1671563981540,
+        "updated": 1671564183600,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821616",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821616.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73277132",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73277132.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 48,
+        "sig": 83,
+        "net": "hv",
+        "code": "73277132",
+        "ids": ",hv73277132,",
+        "sources": ",hv,",
+        "types": ",origin,phase-data,",
+        "nst": 35,
+        "dmin": null,
+        "rms": 0.0900000036,
+        "gap": 103,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 2.3 - 0 km SSE of Pāhala, Hawaii"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -155.476165771484,
+          19.1958332061768,
+          33.5200004577637
+        ]
+      },
+      "id": "hv73277132"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 2.65,
+        "place": "39km W of Petrolia, CA",
+        "time": 1671563823700,
+        "updated": 1671564130486,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821921",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821921.geojson",
+        "felt": 1,
+        "cdi": 0,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 108,
         "net": "nc",
-        "code": "73821616",
-        "ids": ",nc73821616,",
+        "code": "73821921",
+        "ids": ",nc73821921,",
+        "sources": ",nc,",
+        "types": ",dyfi,nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 19,
+        "dmin": null,
+        "rms": 0.35,
+        "gap": 244,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 2.7 - 39km W of Petrolia, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -124.7388306,
+          40.3878326,
+          16.78
+        ]
+      },
+      "id": "nc73821921"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 0.7,
+        "place": "6km NNW of The Geysers, CA",
+        "time": 1671563548760,
+        "updated": 1671563644156,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821911",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821911.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 8,
+        "net": "nc",
+        "code": "73821911",
+        "ids": ",nc73821911,",
         "sources": ",nc,",
         "types": ",nearby-cities,origin,phase-data,",
-        "nst": 6,
-        "dmin": 0.08113,
-        "rms": 0.03,
-        "gap": 254,
+        "nst": 11,
+        "dmin": 0.009825,
+        "rms": 0.01,
+        "gap": 69,
         "magType": "md",
         "type": "earthquake",
-        "title": "M 1.8 - 13km ESE of Pine Hills, CA"
+        "title": "M 0.7 - 6km NNW of The Geysers, CA"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -124.0061646,
-          40.7008324,
-          19.18
+          -122.7978363,
+          38.8256683,
+          2.85
         ]
       },
-      "id": "nc73821616"
+      "id": "nc73821911"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 2.41,
-        "place": "7km W of Ferndale, CA",
-        "time": 1671547327600,
-        "updated": 1671548172300,
+        "mag": 1.86000001,
+        "place": "9 km SSW of Leilani Estates, Hawaii",
+        "time": 1671562947870,
+        "updated": 1671563138610,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821596",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821596.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73277122",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73277122.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 89,
-        "net": "nc",
-        "code": "73821596",
-        "ids": ",nc73821596,",
-        "sources": ",nc,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 11,
-        "dmin": 0.09509,
-        "rms": 0.38,
-        "gap": 256,
+        "sig": 53,
+        "net": "hv",
+        "code": "73277122",
+        "ids": ",hv73277122,",
+        "sources": ",hv,",
+        "types": ",origin,phase-data,",
+        "nst": 21,
+        "dmin": null,
+        "rms": 0.140000001,
+        "gap": 218,
         "magType": "md",
         "type": "earthquake",
-        "title": "M 2.4 - 7km W of Ferndale, CA"
+        "title": "M 1.9 - 9 km SSW of Leilani Estates, Hawaii"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -124.3430023,
-          40.5706673,
-          12.75
+          -154.945327758789,
+          19.3924999237061,
+          7.01000022888184
         ]
       },
-      "id": "nc73821596"
+      "id": "hv73277122"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 1.6,
-        "place": "47 km ENE of Pedro Bay, Alaska",
-        "time": 1671547163365,
-        "updated": 1671547272225,
+        "mag": 1.59,
+        "place": "7km NW of The Geysers, CA",
+        "time": 1671562624100,
+        "updated": 1671564131485,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022g9otc0g",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022g9otc0g.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821896",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821896.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
@@ -816,397 +949,317 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
         "status": "automatic",
         "tsunami": 0,
         "sig": 39,
-        "net": "ak",
-        "code": "022g9otc0g",
-        "ids": ",ak022g9otc0g,",
-        "sources": ",ak,",
-        "types": ",origin,phase-data,",
-        "nst": null,
+        "net": "nc",
+        "code": "73821896",
+        "ids": ",nc73821896,",
+        "sources": ",nc,",
+        "types": ",focal-mechanism,nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 32,
         "dmin": null,
-        "rms": 0.49,
-        "gap": null,
-        "magType": "ml",
-        "type": "earthquake",
-        "title": "M 1.6 - 47 km ENE of Pedro Bay, Alaska"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -153.2873,
-          59.8989,
-          108.5
-        ]
-      },
-      "id": "ak022g9otc0g"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 2.33,
-        "place": "11km W of Ferndale, CA",
-        "time": 1671546819720,
-        "updated": 1671548171751,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821591",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821591.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 84,
-        "net": "nc",
-        "code": "73821591",
-        "ids": ",nc73821591,",
-        "sources": ",nc,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 9,
-        "dmin": 0.1206,
-        "rms": 0.34,
-        "gap": 270,
+        "rms": 0.01,
+        "gap": 53,
         "magType": "md",
         "type": "earthquake",
-        "title": "M 2.3 - 11km W of Ferndale, CA"
+        "title": "M 1.6 - 7km NW of The Geysers, CA"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -124.3973312,
-          40.5873337,
-          19.91
+          -122.8044968,
+          38.8236656,
+          2.34
         ]
       },
-      "id": "nc73821591"
+      "id": "nc73821896"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 2.31,
-        "place": "15km E of Rio Dell, CA",
-        "time": 1671546548030,
-        "updated": 1671548171642,
+        "mag": 1.04,
+        "place": "7km NW of The Geysers, CA",
+        "time": 1671562150740,
+        "updated": 1671562246233,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821581",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821581.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821891",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821891.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 82,
+        "sig": 17,
         "net": "nc",
-        "code": "73821581",
-        "ids": ",nc73821581,",
+        "code": "73821891",
+        "ids": ",nc73821891,",
         "sources": ",nc,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 12,
-        "dmin": 0.1082,
-        "rms": 0.06,
-        "gap": 151,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 2.3 - 15km E of Rio Dell, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -123.9268341,
-          40.4981651,
-          19.53
-        ]
-      },
-      "id": "nc73821581"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.07,
-        "place": "9km SSE of Big Bear City, CA",
-        "time": 1671546393040,
-        "updated": 1671546602885,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40392672",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40392672.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 18,
-        "net": "ci",
-        "code": "40392672",
-        "ids": ",ci40392672,",
-        "sources": ",ci,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 19,
-        "dmin": 0.1172,
-        "rms": 0.23,
-        "gap": 47,
-        "magType": "ml",
-        "type": "earthquake",
-        "title": "M 1.1 - 9km SSE of Big Bear City, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -116.8106667,
-          34.1885,
-          1.18
-        ]
-      },
-      "id": "ci40392672"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 2.2,
-        "place": "Southern Alaska",
-        "time": 1671546113164,
-        "updated": 1671546765758,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022g9opjf8",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022g9opjf8.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 74,
-        "net": "ak",
-        "code": "022g9opjf8",
-        "ids": ",ak022g9opjf8,",
-        "sources": ",ak,",
-        "types": ",origin,phase-data,",
-        "nst": null,
-        "dmin": null,
-        "rms": 1.46,
-        "gap": null,
-        "magType": "ml",
-        "type": "earthquake",
-        "title": "M 2.2 - Southern Alaska"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -147.0609,
-          60.3305,
-          12.7
-        ]
-      },
-      "id": "ak022g9opjf8"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 2.33,
-        "place": "13km NNW of Ferndale, CA",
-        "time": 1671545919650,
-        "updated": 1671546981198,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821561",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821561.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 84,
-        "net": "nc",
-        "code": "73821561",
-        "ids": ",nc73821561,",
-        "sources": ",nc,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 8,
-        "dmin": 0.2026,
-        "rms": 0.08,
-        "gap": 268,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 2.3 - 13km NNW of Ferndale, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -124.3453369,
-          40.6783333,
-          28.65
-        ]
-      },
-      "id": "nc73821561"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 4.4,
-        "place": "38 km NNE of Lae, Papua New Guinea",
-        "time": 1671545871788,
-        "updated": 1671548132040,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000jakr",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/us6000jakr.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "reviewed",
-        "tsunami": 0,
-        "sig": 298,
-        "net": "us",
-        "code": "6000jakr",
-        "ids": ",us6000jakr,",
-        "sources": ",us,",
-        "types": ",origin,phase-data,",
-        "nst": 22,
-        "dmin": 13.031,
-        "rms": 1.03,
-        "gap": 64,
-        "magType": "mb",
-        "type": "earthquake",
-        "title": "M 4.4 - 38 km NNE of Lae, Papua New Guinea"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          147.1459,
-          -6.409,
-          35
-        ]
-      },
-      "id": "us6000jakr"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 4.7,
-        "place": "3 km WSW of Oxapampa, Peru",
-        "time": 1671545658734,
-        "updated": 1671547498040,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000jaks",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/us6000jaks.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "reviewed",
-        "tsunami": 0,
-        "sig": 340,
-        "net": "us",
-        "code": "6000jaks",
-        "ids": ",us6000jaks,",
-        "sources": ",us,",
-        "types": ",origin,phase-data,",
-        "nst": 45,
-        "dmin": 1.964,
-        "rms": 0.43,
-        "gap": 95,
-        "magType": "mb",
-        "type": "earthquake",
-        "title": "M 4.7 - 3 km WSW of Oxapampa, Peru"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -75.4313,
-          -10.5854,
-          11.297
-        ]
-      },
-      "id": "us6000jaks"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 2.84,
-        "place": "20km SE of Blue Lake, CA",
-        "time": 1671545459950,
-        "updated": 1671546981432,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821551",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821551.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 124,
-        "net": "nc",
-        "code": "73821551",
-        "ids": ",nc73821551,",
-        "sources": ",nc,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 16,
-        "dmin": 0.04531,
-        "rms": 0.1,
-        "gap": 94,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 2.8 - 20km SE of Blue Lake, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -123.8454971,
-          40.7314987,
-          19.79
-        ]
-      },
-      "id": "nc73821551"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 2.08,
-        "place": "7km S of Ferndale, CA",
-        "time": 1671545186990,
-        "updated": 1671546133119,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821531",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821531.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 67,
-        "net": "nc",
-        "code": "73821531",
-        "ids": ",nc73821531,",
-        "sources": ",nc,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 5,
-        "dmin": 0.05825,
+        "types": ",nearby-cities,origin,phase-data,",
+        "nst": 17,
+        "dmin": 0.003987,
         "rms": 0.02,
-        "gap": 256,
+        "gap": 62,
         "magType": "md",
         "type": "earthquake",
-        "title": "M 2.1 - 7km S of Ferndale, CA"
+        "title": "M 1.0 - 7km NW of The Geysers, CA"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -124.2766647,
-          40.5108337,
-          11.57
+          -122.8050003,
+          38.8238335,
+          2.36
         ]
       },
-      "id": "nc73821531"
+      "id": "nc73821891"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.12,
+        "place": "7km NW of The Geysers, CA",
+        "time": 1671561938200,
+        "updated": 1671563591441,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821886",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821886.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 19,
+        "net": "nc",
+        "code": "73821886",
+        "ids": ",nc73821886,",
+        "sources": ",nc,",
+        "types": ",focal-mechanism,nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 28,
+        "dmin": 0.005182,
+        "rms": 0.03,
+        "gap": 32,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 1.1 - 7km NW of The Geysers, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.8043365,
+          38.8260002,
+          2.25
+        ]
+      },
+      "id": "nc73821886"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 2.24,
+        "place": "1 km SE of Indios, Puerto Rico",
+        "time": 1671561725800,
+        "updated": 1671562685340,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/pr71388278",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/pr71388278.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 77,
+        "net": "pr",
+        "code": "71388278",
+        "ids": ",pr71388278,",
+        "sources": ",pr,",
+        "types": ",origin,phase-data,",
+        "nst": 17,
+        "dmin": 0.03915,
+        "rms": 0.09,
+        "gap": 190,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 2.2 - 1 km SE of Indios, Puerto Rico"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -66.8081666666667,
+          17.984,
+          15.55
+        ]
+      },
+      "id": "pr71388278"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.52,
+        "place": "7km NW of The Geysers, CA",
+        "time": 1671561455320,
+        "updated": 1671563172405,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821861",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821861.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 36,
+        "net": "nc",
+        "code": "73821861",
+        "ids": ",nc73821861,",
+        "sources": ",nc,",
+        "types": ",focal-mechanism,nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 32,
+        "dmin": null,
+        "rms": 0.02,
+        "gap": 54,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 1.5 - 7km NW of The Geysers, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.803833,
+          38.8240013,
+          2.48
+        ]
+      },
+      "id": "nc73821861"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.95,
+        "place": "9km W of Ferndale, CA",
+        "time": 1671561347880,
+        "updated": 1671562571354,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821856",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821856.geojson",
+        "felt": 1,
+        "cdi": 0,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 58,
+        "net": "nc",
+        "code": "73821856",
+        "ids": ",nc73821856,",
+        "sources": ",nc,",
+        "types": ",dyfi,nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 6,
+        "dmin": 0.09119,
+        "rms": 0.04,
+        "gap": 302,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 2.0 - 9km W of Ferndale, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -124.3688354,
+          40.5636673,
+          20.18
+        ]
+      },
+      "id": "nc73821856"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.9,
+        "place": "75 km NW of Aleneva, Alaska",
+        "time": 1671561329192,
+        "updated": 1671561486347,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022g9r680n",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022g9r680n.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 56,
+        "net": "ak",
+        "code": "022g9r680n",
+        "ids": ",ak022g9r680n,",
+        "sources": ",ak,",
+        "types": ",origin,phase-data,",
+        "nst": null,
+        "dmin": null,
+        "rms": 0.35,
+        "gap": null,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 1.9 - 75 km NW of Aleneva, Alaska"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -153.9462,
+          58.4603,
+          88.7
+        ]
+      },
+      "id": "ak022g9r680n"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 2.13,
+        "place": "9km NW of Ferndale, CA",
+        "time": 1671561172460,
+        "updated": 1671561972297,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821851",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821851.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 70,
+        "net": "nc",
+        "code": "73821851",
+        "ids": ",nc73821851,",
+        "sources": ",nc,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 10,
+        "dmin": 0.1593,
+        "rms": 0.23,
+        "gap": 259,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 2.1 - 9km NW of Ferndale, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -124.3348312,
+          40.6349983,
+          17.12
+        ]
+      },
+      "id": "nc73821851"
     }
   ],
   "bbox": [
-    -153.2873,
-    -10.5854,
-    1.18,
-    147.1459,
-    60.3305,
-    108.5
+    -155.47616577148,
+    17.984,
+    2.25,
+    -66.808166666667,
+    58.4603,
+    88.7
   ]
 }</textarea></p><p>        If an id is added, the data can be used in a computation.</p><p>        <pre class="secst"><code class="nohighlight">:value(#earthquake-data https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson {type:"application/json"})
 
@@ -1232,7 +1285,7 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
                         })()" title="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson" data-fitcontent="" disabled="" style="height: 30em; width: 80ch;">{
   "type": "FeatureCollection",
   "metadata": {
-    "generated": 1671548326000,
+    "generated": 1671564540000,
     "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson",
     "title": "USGS All Earthquakes, Past Hour",
     "status": 200,
@@ -1243,93 +1296,173 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
     {
       "type": "Feature",
       "properties": {
-        "mag": 1.76,
-        "place": "13km ESE of Pine Hills, CA",
-        "time": 1671548088400,
-        "updated": 1671548184139,
+        "mag": 2.31999993,
+        "place": "0 km SSE of Pāhala, Hawaii",
+        "time": 1671563981540,
+        "updated": 1671564183600,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821616",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821616.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73277132",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73277132.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 48,
+        "sig": 83,
+        "net": "hv",
+        "code": "73277132",
+        "ids": ",hv73277132,",
+        "sources": ",hv,",
+        "types": ",origin,phase-data,",
+        "nst": 35,
+        "dmin": null,
+        "rms": 0.0900000036,
+        "gap": 103,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 2.3 - 0 km SSE of Pāhala, Hawaii"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -155.476165771484,
+          19.1958332061768,
+          33.5200004577637
+        ]
+      },
+      "id": "hv73277132"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 2.65,
+        "place": "39km W of Petrolia, CA",
+        "time": 1671563823700,
+        "updated": 1671564130486,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821921",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821921.geojson",
+        "felt": 1,
+        "cdi": 0,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 108,
         "net": "nc",
-        "code": "73821616",
-        "ids": ",nc73821616,",
+        "code": "73821921",
+        "ids": ",nc73821921,",
+        "sources": ",nc,",
+        "types": ",dyfi,nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 19,
+        "dmin": null,
+        "rms": 0.35,
+        "gap": 244,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 2.7 - 39km W of Petrolia, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -124.7388306,
+          40.3878326,
+          16.78
+        ]
+      },
+      "id": "nc73821921"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 0.7,
+        "place": "6km NNW of The Geysers, CA",
+        "time": 1671563548760,
+        "updated": 1671563644156,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821911",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821911.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 8,
+        "net": "nc",
+        "code": "73821911",
+        "ids": ",nc73821911,",
         "sources": ",nc,",
         "types": ",nearby-cities,origin,phase-data,",
-        "nst": 6,
-        "dmin": 0.08113,
-        "rms": 0.03,
-        "gap": 254,
+        "nst": 11,
+        "dmin": 0.009825,
+        "rms": 0.01,
+        "gap": 69,
         "magType": "md",
         "type": "earthquake",
-        "title": "M 1.8 - 13km ESE of Pine Hills, CA"
+        "title": "M 0.7 - 6km NNW of The Geysers, CA"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -124.0061646,
-          40.7008324,
-          19.18
+          -122.7978363,
+          38.8256683,
+          2.85
         ]
       },
-      "id": "nc73821616"
+      "id": "nc73821911"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 2.41,
-        "place": "7km W of Ferndale, CA",
-        "time": 1671547327600,
-        "updated": 1671548172300,
+        "mag": 1.86000001,
+        "place": "9 km SSW of Leilani Estates, Hawaii",
+        "time": 1671562947870,
+        "updated": 1671563138610,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821596",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821596.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73277122",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73277122.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 89,
-        "net": "nc",
-        "code": "73821596",
-        "ids": ",nc73821596,",
-        "sources": ",nc,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 11,
-        "dmin": 0.09509,
-        "rms": 0.38,
-        "gap": 256,
+        "sig": 53,
+        "net": "hv",
+        "code": "73277122",
+        "ids": ",hv73277122,",
+        "sources": ",hv,",
+        "types": ",origin,phase-data,",
+        "nst": 21,
+        "dmin": null,
+        "rms": 0.140000001,
+        "gap": 218,
         "magType": "md",
         "type": "earthquake",
-        "title": "M 2.4 - 7km W of Ferndale, CA"
+        "title": "M 1.9 - 9 km SSW of Leilani Estates, Hawaii"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -124.3430023,
-          40.5706673,
-          12.75
+          -154.945327758789,
+          19.3924999237061,
+          7.01000022888184
         ]
       },
-      "id": "nc73821596"
+      "id": "hv73277122"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 1.6,
-        "place": "47 km ENE of Pedro Bay, Alaska",
-        "time": 1671547163365,
-        "updated": 1671547272225,
+        "mag": 1.59,
+        "place": "7km NW of The Geysers, CA",
+        "time": 1671562624100,
+        "updated": 1671564131485,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022g9otc0g",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022g9otc0g.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821896",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821896.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
@@ -1337,397 +1470,317 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
         "status": "automatic",
         "tsunami": 0,
         "sig": 39,
-        "net": "ak",
-        "code": "022g9otc0g",
-        "ids": ",ak022g9otc0g,",
-        "sources": ",ak,",
-        "types": ",origin,phase-data,",
-        "nst": null,
+        "net": "nc",
+        "code": "73821896",
+        "ids": ",nc73821896,",
+        "sources": ",nc,",
+        "types": ",focal-mechanism,nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 32,
         "dmin": null,
-        "rms": 0.49,
-        "gap": null,
-        "magType": "ml",
-        "type": "earthquake",
-        "title": "M 1.6 - 47 km ENE of Pedro Bay, Alaska"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -153.2873,
-          59.8989,
-          108.5
-        ]
-      },
-      "id": "ak022g9otc0g"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 2.33,
-        "place": "11km W of Ferndale, CA",
-        "time": 1671546819720,
-        "updated": 1671548171751,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821591",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821591.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 84,
-        "net": "nc",
-        "code": "73821591",
-        "ids": ",nc73821591,",
-        "sources": ",nc,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 9,
-        "dmin": 0.1206,
-        "rms": 0.34,
-        "gap": 270,
+        "rms": 0.01,
+        "gap": 53,
         "magType": "md",
         "type": "earthquake",
-        "title": "M 2.3 - 11km W of Ferndale, CA"
+        "title": "M 1.6 - 7km NW of The Geysers, CA"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -124.3973312,
-          40.5873337,
-          19.91
+          -122.8044968,
+          38.8236656,
+          2.34
         ]
       },
-      "id": "nc73821591"
+      "id": "nc73821896"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 2.31,
-        "place": "15km E of Rio Dell, CA",
-        "time": 1671546548030,
-        "updated": 1671548171642,
+        "mag": 1.04,
+        "place": "7km NW of The Geysers, CA",
+        "time": 1671562150740,
+        "updated": 1671562246233,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821581",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821581.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821891",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821891.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 82,
+        "sig": 17,
         "net": "nc",
-        "code": "73821581",
-        "ids": ",nc73821581,",
+        "code": "73821891",
+        "ids": ",nc73821891,",
         "sources": ",nc,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 12,
-        "dmin": 0.1082,
-        "rms": 0.06,
-        "gap": 151,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 2.3 - 15km E of Rio Dell, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -123.9268341,
-          40.4981651,
-          19.53
-        ]
-      },
-      "id": "nc73821581"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.07,
-        "place": "9km SSE of Big Bear City, CA",
-        "time": 1671546393040,
-        "updated": 1671546602885,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40392672",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40392672.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 18,
-        "net": "ci",
-        "code": "40392672",
-        "ids": ",ci40392672,",
-        "sources": ",ci,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 19,
-        "dmin": 0.1172,
-        "rms": 0.23,
-        "gap": 47,
-        "magType": "ml",
-        "type": "earthquake",
-        "title": "M 1.1 - 9km SSE of Big Bear City, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -116.8106667,
-          34.1885,
-          1.18
-        ]
-      },
-      "id": "ci40392672"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 2.2,
-        "place": "Southern Alaska",
-        "time": 1671546113164,
-        "updated": 1671546765758,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022g9opjf8",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022g9opjf8.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 74,
-        "net": "ak",
-        "code": "022g9opjf8",
-        "ids": ",ak022g9opjf8,",
-        "sources": ",ak,",
-        "types": ",origin,phase-data,",
-        "nst": null,
-        "dmin": null,
-        "rms": 1.46,
-        "gap": null,
-        "magType": "ml",
-        "type": "earthquake",
-        "title": "M 2.2 - Southern Alaska"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -147.0609,
-          60.3305,
-          12.7
-        ]
-      },
-      "id": "ak022g9opjf8"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 2.33,
-        "place": "13km NNW of Ferndale, CA",
-        "time": 1671545919650,
-        "updated": 1671546981198,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821561",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821561.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 84,
-        "net": "nc",
-        "code": "73821561",
-        "ids": ",nc73821561,",
-        "sources": ",nc,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 8,
-        "dmin": 0.2026,
-        "rms": 0.08,
-        "gap": 268,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 2.3 - 13km NNW of Ferndale, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -124.3453369,
-          40.6783333,
-          28.65
-        ]
-      },
-      "id": "nc73821561"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 4.4,
-        "place": "38 km NNE of Lae, Papua New Guinea",
-        "time": 1671545871788,
-        "updated": 1671548132040,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000jakr",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/us6000jakr.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "reviewed",
-        "tsunami": 0,
-        "sig": 298,
-        "net": "us",
-        "code": "6000jakr",
-        "ids": ",us6000jakr,",
-        "sources": ",us,",
-        "types": ",origin,phase-data,",
-        "nst": 22,
-        "dmin": 13.031,
-        "rms": 1.03,
-        "gap": 64,
-        "magType": "mb",
-        "type": "earthquake",
-        "title": "M 4.4 - 38 km NNE of Lae, Papua New Guinea"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          147.1459,
-          -6.409,
-          35
-        ]
-      },
-      "id": "us6000jakr"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 4.7,
-        "place": "3 km WSW of Oxapampa, Peru",
-        "time": 1671545658734,
-        "updated": 1671547498040,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000jaks",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/us6000jaks.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "reviewed",
-        "tsunami": 0,
-        "sig": 340,
-        "net": "us",
-        "code": "6000jaks",
-        "ids": ",us6000jaks,",
-        "sources": ",us,",
-        "types": ",origin,phase-data,",
-        "nst": 45,
-        "dmin": 1.964,
-        "rms": 0.43,
-        "gap": 95,
-        "magType": "mb",
-        "type": "earthquake",
-        "title": "M 4.7 - 3 km WSW of Oxapampa, Peru"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -75.4313,
-          -10.5854,
-          11.297
-        ]
-      },
-      "id": "us6000jaks"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 2.84,
-        "place": "20km SE of Blue Lake, CA",
-        "time": 1671545459950,
-        "updated": 1671546981432,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821551",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821551.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 124,
-        "net": "nc",
-        "code": "73821551",
-        "ids": ",nc73821551,",
-        "sources": ",nc,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 16,
-        "dmin": 0.04531,
-        "rms": 0.1,
-        "gap": 94,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 2.8 - 20km SE of Blue Lake, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -123.8454971,
-          40.7314987,
-          19.79
-        ]
-      },
-      "id": "nc73821551"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 2.08,
-        "place": "7km S of Ferndale, CA",
-        "time": 1671545186990,
-        "updated": 1671546133119,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821531",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821531.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 67,
-        "net": "nc",
-        "code": "73821531",
-        "ids": ",nc73821531,",
-        "sources": ",nc,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 5,
-        "dmin": 0.05825,
+        "types": ",nearby-cities,origin,phase-data,",
+        "nst": 17,
+        "dmin": 0.003987,
         "rms": 0.02,
-        "gap": 256,
+        "gap": 62,
         "magType": "md",
         "type": "earthquake",
-        "title": "M 2.1 - 7km S of Ferndale, CA"
+        "title": "M 1.0 - 7km NW of The Geysers, CA"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -124.2766647,
-          40.5108337,
-          11.57
+          -122.8050003,
+          38.8238335,
+          2.36
         ]
       },
-      "id": "nc73821531"
+      "id": "nc73821891"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.12,
+        "place": "7km NW of The Geysers, CA",
+        "time": 1671561938200,
+        "updated": 1671563591441,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821886",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821886.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 19,
+        "net": "nc",
+        "code": "73821886",
+        "ids": ",nc73821886,",
+        "sources": ",nc,",
+        "types": ",focal-mechanism,nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 28,
+        "dmin": 0.005182,
+        "rms": 0.03,
+        "gap": 32,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 1.1 - 7km NW of The Geysers, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.8043365,
+          38.8260002,
+          2.25
+        ]
+      },
+      "id": "nc73821886"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 2.24,
+        "place": "1 km SE of Indios, Puerto Rico",
+        "time": 1671561725800,
+        "updated": 1671562685340,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/pr71388278",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/pr71388278.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 77,
+        "net": "pr",
+        "code": "71388278",
+        "ids": ",pr71388278,",
+        "sources": ",pr,",
+        "types": ",origin,phase-data,",
+        "nst": 17,
+        "dmin": 0.03915,
+        "rms": 0.09,
+        "gap": 190,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 2.2 - 1 km SE of Indios, Puerto Rico"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -66.8081666666667,
+          17.984,
+          15.55
+        ]
+      },
+      "id": "pr71388278"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.52,
+        "place": "7km NW of The Geysers, CA",
+        "time": 1671561455320,
+        "updated": 1671563172405,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821861",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821861.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 36,
+        "net": "nc",
+        "code": "73821861",
+        "ids": ",nc73821861,",
+        "sources": ",nc,",
+        "types": ",focal-mechanism,nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 32,
+        "dmin": null,
+        "rms": 0.02,
+        "gap": 54,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 1.5 - 7km NW of The Geysers, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.803833,
+          38.8240013,
+          2.48
+        ]
+      },
+      "id": "nc73821861"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.95,
+        "place": "9km W of Ferndale, CA",
+        "time": 1671561347880,
+        "updated": 1671562571354,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821856",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821856.geojson",
+        "felt": 1,
+        "cdi": 0,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 58,
+        "net": "nc",
+        "code": "73821856",
+        "ids": ",nc73821856,",
+        "sources": ",nc,",
+        "types": ",dyfi,nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 6,
+        "dmin": 0.09119,
+        "rms": 0.04,
+        "gap": 302,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 2.0 - 9km W of Ferndale, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -124.3688354,
+          40.5636673,
+          20.18
+        ]
+      },
+      "id": "nc73821856"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.9,
+        "place": "75 km NW of Aleneva, Alaska",
+        "time": 1671561329192,
+        "updated": 1671561486347,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022g9r680n",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022g9r680n.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 56,
+        "net": "ak",
+        "code": "022g9r680n",
+        "ids": ",ak022g9r680n,",
+        "sources": ",ak,",
+        "types": ",origin,phase-data,",
+        "nst": null,
+        "dmin": null,
+        "rms": 0.35,
+        "gap": null,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 1.9 - 75 km NW of Aleneva, Alaska"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -153.9462,
+          58.4603,
+          88.7
+        ]
+      },
+      "id": "ak022g9r680n"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 2.13,
+        "place": "9km NW of Ferndale, CA",
+        "time": 1671561172460,
+        "updated": 1671561972297,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821851",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821851.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 70,
+        "net": "nc",
+        "code": "73821851",
+        "ids": ",nc73821851,",
+        "sources": ",nc,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 10,
+        "dmin": 0.1593,
+        "rms": 0.23,
+        "gap": 259,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 2.1 - 9km NW of Ferndale, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -124.3348312,
+          40.6349983,
+          17.12
+        ]
+      },
+      "id": "nc73821851"
     }
   ],
   "bbox": [
-    -153.2873,
-    -10.5854,
-    1.18,
-    147.1459,
-    60.3305,
-    108.5
+    -155.47616577148,
+    17.984,
+    2.25,
+    -66.808166666667,
+    58.4603,
+    88.7
   ]
 }</textarea></p><p>       <textarea class="secst" data-mime-type="application/json" data-default="" data-template="$(#earthquake-data).metadata" title="$(#earthquake-data).metadata" data-fitcontent="" disabled="" style="height: 1.5em; width: 15ch;">[object Object]</textarea><br>    </p></section></section>
 <section><h1 id="seo" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Search Engine Optimization<span class="autohelm-nav autohelm-nav-up-down"> <a href="#values-and-formulas">&uarr;</a> <a href="#structured-data">&darr;</a></span></h1><p>    SECST provides several features to support <abbr>SEO</abbr> Search Engine Optimization.</p><p>    <ul title="SEO features"><li><a href="#hastags">hashtags</a></li><li><a href="#meta-tags">meta tags</a></li><li><a href="#structured-data">structured data</a></li><li><a href="#server-transpilation">server transpilation</a></li></ul><br>    </p><section><h2 id="structured-data" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Structured Data<span class="autohelm-nav autohelm-nav-up-down"> <a href="#seo">&uarr;</a> <a href="#news-article">&darr;</a></span></h2><p>        For select tags, SECST can generate JSON-LD directly from SECST markup. Content, layout, and SEO optimization will always be in sync.</p><p>        This is best covered by an example based on <a target="_tab" href="https://developers.google.com/search/docs/appearance/structured-data/article">Google's documentation for a news article</a>.</p><p>        <em>Note: Only those tags documented for <code class="nohighlight">NewsArticle</code> are currently supported.</em></p><section><h3 id="news-article" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>News Article<span class="autohelm-nav autohelm-nav-up-down"> <a href="#structured-data">&uarr;</a> <a href="#server-transpilation">&darr;</a></span></h3><p>            The SECST tag <code class="nohighlight">:NewsArticle[]</code> can contain regular SECST as well as tags that parallel established JSON-LD schema like <code class="nohighlight">:headline[]</code>, <code class="nohighlight">:author[]</code> and <code class="nohighlight">:Person[]</code>. Where there are identical or trivially equivalent tags and attribute names, e.g. <code class="nohighlight">image</code> and <code class="nohighlight">img</code>, the native SECST tag is used.</p><p>            <pre class="secst"><code class="nohighlight">:NewsArticle[

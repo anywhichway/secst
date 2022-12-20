@@ -82,7 +82,7 @@ const toElement = async (node,{parent,connects,parentConfig}) => {
         }
         if(node.beforeMount) {
             const transformed = node.beforeMount(node);
-            if(node.tag!==transformed.tag && !["span","div"].includes(transformed.tag)) {
+            if(node.tag!==transformed.tag && !["span","div"].includes(transformed.tag) && !transformed.tag.includes("-")) { // not span or div or custom element
                 config = parentConfig.contentAllowed[transformed.tag]
                 if(typeof(config)==="function") {
                     config = await config.call(parentConfig.contentAllowed);
@@ -436,6 +436,9 @@ const transform = async (parser,text,{styleAllowed}={}) => {
         }
         input.secst {
              font-family: monospace;
+        }
+        input.secst[type="number"] {
+             min-width: 4ch;
         }
         textarea.secst {
             display: block;

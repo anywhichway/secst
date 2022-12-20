@@ -117,7 +117,7 @@ const replaceReferences = async (root,string,requestor) => {
 
 const resolveDataTemplate = async (root,string,requestor) => {
     if(!string) return;
-    if(requestor.hasAttribute("data-literal")) return string;
+    if(requestor?.hasAttribute("data-literal")) return string;
     const text = await replaceReferences(root,string,requestor);
     if(typeof(Worker)==="function") {
         let result =  await stringTemplateEval(text), //"${" + text + "}"

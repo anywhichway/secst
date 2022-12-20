@@ -1,4 +1,5 @@
 :section[
+
 :h[The Joy of SECST]
 
     :abbr[SECST] (:strong[S]emantic, :strong[E]xtensible, :strong[C]omputational, :strong[S]tyleable, :strong[T]agged) markup language. Use it to joyfully create compelling, interactive HTML SEO enabled documents.
@@ -586,7 +587,91 @@
         To display the generated formula as a block, end the content between the :code[[]] with a newline.
     ]
     :section[
-        :h[Music (ABC Notation)]
+        :h[Mermaid Chart]
+
+        :code[:mermaidChart[]] is a block level element, it belongs outside of paragraphs. Just provide :a(https://mermaid.js.org/intro/)[Mermaid notation] as the content.
+
+        :code[
+             :mermaidChart[
+                graph LR
+                A --- B
+                B-->C[fa:fa-ban forbidden]
+                B-->D(fa:fa-spinner);
+            ]
+        ]
+
+        renders as
+
+        :mermaidChart[
+            graph LR
+            A --- B
+            B-->C[fa:fa-ban forbidden]
+            B-->D(fa:fa-spinner);
+        ]
+
+        There are lots of charts to choose from:
+
+        :ul[
+            - :a(https://mermaid.js.org/syntax/flowchart.html)[Flowchart]
+            - :a(https://mermaid.js.org/syntax/sequenceDiagram.html)[Sequence Diagram]
+            - :a(https://mermaid.js.org/syntax/classDiagram.html)[Class Diagram]
+            - :a(https://mermaid.js.org/syntax/stateDiagram.html)[State Diagram]
+            - :a(https://mermaid.js.org/syntax/entityRelationshipDiagram.html)[Entity Relationship Diagram]
+            - :a(https://mermaid.js.org/syntax/userJourney.html)[User Journey]
+            - :a(https://mermaid.js.org/syntax/gantt.html)[Gannt]
+            - :a(https://mermaid.js.org/syntax/pie.html)[Pie Chart]
+            - :a(https://mermaid.js.org/syntax/requirementDiagram.html)[Requirement Diagram]
+            - :a(https://mermaid.js.org/syntax/gitgraph.html)[Gitgraph Diagram]
+            - :a(https://mermaid.js.org/syntax/c4c.html)[C4C Diagram]
+            - :a(https://mermaid.js.org/syntax/mindmap.html)[Mindmaps]
+        ]
+    ]
+    :section[
+        :h[Sheet Music (ABC Notation)]
+
+        :code[:sheetMusic[]] is a block level element, it belongs outside of paragraphs. Just provide :a(https://abcnotation.com/examples)[ABC notation] as the content.
+
+        :code[
+            :sheetMusic[
+                X: 1
+                T: Nokia Tune
+                M: 3/4
+                L: 1/8
+                K: Amaj
+                |: e'd' f2 g2 | c'b d2 e2 | ba c2 e2 | a6 |
+            ]
+        ]
+
+        renders as
+
+        :sheetMusic[
+            X: 1
+            T: Nokia Tune
+            M: 3/4
+            L: 1/8
+            K: Amaj
+            |: e'd' f2 g2 | c'b d2 e2 | ba c2 e2 | a6 |
+        ]
+
+        If you drop the :code[:] from the second position in the last line, the play button will disappear.
+
+         :code[
+            :sheetMusic[
+                X:1
+                T: Paper
+                K:D
+                | DDAA | BBA2|
+            ]
+        ]
+
+        renders as
+
+        :sheetMusic[
+           X:1
+           T: Paper
+           K:D
+           | DDAA | BBA2|
+        ]
 
     ]
     :section[
