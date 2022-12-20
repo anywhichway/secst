@@ -600,7 +600,7 @@
 
     To use a value in another formula, the value must be named with an id, e.g.
 
-    :code[:value(#v1)[2]] + :code[:value(#v2)[2]] = :code[:value(plaintext)[$(#v1) * $(#v2)]]
+    :code[:value(#v1)[2]] + :code[:value(#v2)[2]] = :code[:value(plaintext)[$(#v1) + $(#v2)]]
 
     :value(#v1)[2] + :value(#v2)[2] = :value(plaintext)[$(#v1) + $(#v2)] (try changing one of the inputs)
 

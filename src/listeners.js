@@ -11,7 +11,7 @@ const update = async (target) => {
     } else {
         target.rawValue = extractValue(target);
         target.setAttribute("data-template", target.rawValue);
-        const value = formatValue(target);
+        const value = await formatValue(target);
         if(target.value!==value) {
             target.value = value;
             if(target.tagName==="TEXTAREA") {
@@ -26,7 +26,7 @@ const update = async (target) => {
     }
     for(const el of [...target.dependents||[]]) {
         el.rawValue = await resolveDataTemplate(document.body,el.getAttribute("data-template"));
-        const value = formatValue(el);
+        const value = await formatValue(el);
         if(el.value!==value) {
             el.value = value;
             if(el.tagName==="TEXTAREA") {
@@ -36,8 +36,10 @@ const update = async (target) => {
                     el.style.height = (Math.min(20, lines.length) * 1.5) + "em";
                     el.style.width = Math.min(80, lines.reduce((len, line) => Math.max(len, line.length), 0)) + "ch";
                 }
-            } else {
+            } else if(el.tagName==="INPUT") {
                 el.setAttribute("value",value); // both .value and attribute are needed, or Chrome breaks
+            } else {
+                el.innerText = value;
             }
         }
     }

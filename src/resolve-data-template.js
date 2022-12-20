@@ -42,7 +42,7 @@ const valueOf = async (root,selector,requestor) => {
                 const template = el.getAttribute("data-template");
                 el.rawValue = await resolveDataTemplate(root,template,el);
             }
-            const formatted = formatValue(el);
+            const formatted = await formatValue(el);
             el.value = formatted;
             if(el.tagName==="TEXTAREA") {
                 el.innerHTML = formatted;
@@ -56,10 +56,15 @@ const valueOf = async (root,selector,requestor) => {
                 }
             }
         } else {
-            try {
-                el.rawValue = JSON5.parse(el.innerText)
-            } catch(e) {
-                el.rawValue = el.innerText;
+            const template = el.getAttribute("data-template");
+            if(template) {
+                el.rawValue = await resolveDataTemplate(root,template,el);
+            } else {
+                try {
+                    el.rawValue = JSON5.parse(el.innerText)
+                } catch(e) {
+                    el.rawValue = el.innerText;
+                }
             }
         }
     }

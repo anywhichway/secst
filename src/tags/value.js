@@ -208,7 +208,7 @@ const value = {
         return node;
     },
     connected(el,node) {
-        let value =el.getAttribute("value");
+        let value = el.getAttribute("value");
         if(node.tag==="textarea") {
             value ||= el.hasAttribute("data-literal") ? el.getAttribute("data-template") : value;
             if(el.innerHTML!==value) {
