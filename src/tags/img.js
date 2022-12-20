@@ -26,7 +26,7 @@ const img = {
             node.attributes.alt ||= node.content[0];
             node.content.shift();
         }
-        if(node.attributes.static!==null && node.attributes.url) {
+        if(node.attributes.static!=null && node.attributes.url) {
             delete node.attributes.static;
             try {
                 const response = await fetch(node.attributes.url);

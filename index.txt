@@ -3,7 +3,7 @@
 
     :abbr[SECST] (:strong[S]emantic, :strong[E]xtensible, :strong[C]omputational, :strong[S]tyleable, :strong[T]agged) markup language. Use it to joyfully create compelling, interactive HTML SEO enabled documents.
 
-    SECST is intended to be a more expressive, but just as easy to learn and use, alternative to Markdown. It provides these features:
+    SECST is intended to be a more expressive, but just as easy to learn and use, alternative to Markdown. It provides these features and more:
 
     :ul[
         - Support for almost all HTML tags.
@@ -14,20 +14,13 @@
         - :a(.#images)[Asset bundling] for images, video, and audio.
         - Server and client generated well structured HTML output resistant to XSS attacks.
     ]
-    :dl[
-        :dt[Semantic Tag]
-        :dd[A tag that has meaning beyond that used to facilitate document layout and style.]
-        :dd[:code[<b>] for bold is not semantic, but :code[<strong>] for indicating importance and rendering as bold is semantic.]
-    ]
-
-    This site's navigation, footnotes, computations, special styles like :kbd[Key] formatting and imported data are built entirely using SECST markup.
 
     This is the source for the introduction above:
 
     :code({language:"secst"})[
         :abbr[SECST] is a :strong[S]emantic, :strong[E]xtensible, :strong[C]omputational, :strong[S]tyleable :strong[T]ag oriented markup language. You can use it to joyfully create compelling, interactive, SEO enabled documents backed by HTML.
 
-        SECST is intended to be a more expressive, but just as easy to learn and use, alternative to Markdown. It provides these features:
+        SECST is intended to be a more expressive, but just as easy to learn and use, alternative to Markdown. It provides these features and more:
 
         :ul[
             - Support for almost all HTML tags.
@@ -38,25 +31,23 @@
             - :a(.#images)[Asset bundling] for images, video, and audio.
             - Server and client generated well structured HTML output resistant to XSS attacks.
         ]
-
-        :dl[
-            :dt[Semantic Tag]
-            :dd[A tag that has meaning beyond that used to facilitate document layout and style.]
-            :dd[:code[<b>] for bold is not semantic, but :code[<strong>] for indicating importance and rendering as bold is semantic.]
-        ]
-
-        This site's navigation, footnotes, computations, special styles like :kbd[Key] formatting and imported data are built entirely using SECST markup.
     ]
 
-    The SECST language and reference HTML transpiler and runtime support implementations are currently in :strong[ALPHA]. Most, but not all, documented features are implemented, testing is far from complete and resource sizes have not been optimized.
+    This site's navigation, footnotes, computations, special styles like :kbd[Key] formatting and imported data are built entirely using SECST markup.
 
-    SECST is AGPL Licensed. Visit :a(https://github.com/anywhichway/secst)[SECST on GitHub] to participate in its further development.
+    The SECST language and reference HTML transpiler and runtime support implementations are currently in :strong[ALPHA]. Most, but not all, documented features are implemented, testing is far from complete and resource sizes have not been optimized.
 ]
 :section[
     :toc(toggle)[Table Of Contents]
 ]
 :section[
     :h[Why Another Language]
+
+   :dl[
+        :dt[Semantic Tag]
+        :dd[A tag that has meaning beyond that used to facilitate document layout and style.]
+        :dd[:code[<b>] for bold is not semantic, but :code[<strong>] for indicating importance and rendering as bold is semantic.]
+    ]
 
     :section[
         :h[HTML and Markdown Issues]
@@ -248,7 +239,7 @@
 
                 For convenience, any tag that can accept a url (either :code[src] or :code[href] in HTML) does not require the attribute, just provide the URL. And, single quotes can be used for attribute values, e.g.
 
-                :code[`:a(./index.txt {target:'_tab'})[SECST]`] yields :a(./index.txt {target:'_tab'})[SECST].
+                :code[:a(./index.txt {target:'_tab'})[SECST]] yields :a(./index.txt {target:'_tab'})[SECST].
 
                 You can also use document ids prefixed with a period as targets, e.g. :code[.#headings] for this section. The period prefix is necessary to distinguish from providing an id for the link itself.
 
@@ -256,7 +247,7 @@
 
                 By default, relative URLS and ids, i.e. those starting with a period, have a target that is the current window or tab. And, those starting with a protocol, e.g. :code[https://] have a target of a new tab.
 
-                All tags that take more than just content are fully documented in the :a({href:"#tags"})[complete list of tags]. Also see :a({href:"#advanced-authoring"})[Advanced Authoring].
+                All tags that take more than just content are fully documented in the :a({href:"#tags"})[complete list of tags].
 
             ]
             :section[
@@ -498,7 +489,37 @@
         :section[
             :h[forEach]
 
-            The :code[:forEach[]] tag supports repeating content based on data values.
+            The :code[:forEach[]] tag supports repeating content based on an iterable object, typically an array or the results of using a CSS selector to gather values from a document.
+
+            The variables :code[item], :code[index], :code[iterable] are available to string template literals in the content.
+
+            :code[
+                :ol[
+                    :forEach({iterable:["a","b","c"]})[
+                        :li[${item} at ${index}]
+                    ]
+                ]
+            ]
+
+            renders as
+
+            :ol[
+                :forEach({iterable:["a","b","c"]})[:li[${item} at ${index}]]
+            ]
+
+            :code[
+                :value(#a hidden literal)[a] :value(#b hidden literal)[b] :value(#c hidden litral)[c]
+                :ol[
+                    :forEach({iterable:"#a, #b, #c"})[
+                        :li[${item} at ${index}]
+                    ]
+                ]
+            ]
+
+            renders as :value(#a hidden literal)[a] :value(#b hidden literal)[b] :value(#c hidden literal)[c]
+            :ol[
+                :forEach({iterable:"#a, #b, #c"})[:li[${item} at ${index}]]
+            ]
 
         ]
         :section[
@@ -558,7 +579,7 @@
 
         Math and chemical formulas can be displayed using the :code[:latex[]] tag.
 
-        :code({language:"latex"})[:latex[Lift = \frac{1}{2} \rho v^2 S C_L\]] renders as :latex[Lift = \frac{1}{2} \rho v^2 S C_L]
+        :code({language:"latex"})[:latex[Lift = \frac{1}{2} \rho v^2 S C_L]] renders as :latex[Lift = \frac{1}{2} \rho v^2 S C_L]
 
         :code({language:"latex"})[:latex[\ce{CO2 + C -> 2 CO}]] renders as :latex[\ce{CO2 + C -> 2 CO}]
 
@@ -600,7 +621,7 @@
 
     To use a value in another formula, the value must be named with an id, e.g.
 
-    :code[:value(#v1)[2]] + :code[:value(#v2)[2]] = :code[:value(plaintext)[$(#v1) * $(#v2)]]
+    :code[:value(#v1)[2]] + :code[:value(#v2)[2]] = :code[:value(plaintext)[$(#v1) + $(#v2)]]
 
     :value(#v1)[2] + :value(#v2)[2] = :value(plaintext)[$(#v1) + $(#v2)] (try changing one of the inputs)
 
@@ -1182,4 +1203,6 @@
     Copyright 2022, AnyWhichWay LLC
 
     License: :a(https://www.gnu.org/licenses/agpl-3.0.en.html)[AGPL-3.0]
+
+    Visit :a(https://github.com/anywhichway/secst)[SECST on GitHub] to participate in SECST's further development.
 ]

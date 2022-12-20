@@ -46,7 +46,11 @@ const required = new Set(),
     domParser = typeof(DOMParser)==="function" ? new DOMParser() : null;
 //decoder = document.createElement("textarea");
 
+let allTags;
 const toElement = async (node,{parent,connects,parentConfig}) => {
+    if(!allTags) {
+        allTags = await import("./tags/all-tags.js")
+    }
     if(typeof(node)==="string") {
         if(parentConfig && parentConfig.breakOnNewline) {
             const lines = node.split("\n");
@@ -104,7 +108,6 @@ const toElement = async (node,{parent,connects,parentConfig}) => {
                     } else if (innerHTML) {
                         el.innerHTML = innerHTML;
                     }
-                    //domNodes.push(el);
                     parent.appendChild(el);
                 });
             }
@@ -207,7 +210,6 @@ const validateNode = async ({parser,node,path=[],contentAllowed=bodyContent,erro
     if(typeof(config.contentAllowed)==="function") {
         config.contentAllowed = await config.contentAllowed();
     }
-
     node.attributes ||= {};
     node.requires ||= [];
     if(config.requires) node.requires.push(config.requires);
@@ -223,7 +225,7 @@ const validateNode = async ({parser,node,path=[],contentAllowed=bodyContent,erro
             debugger;
         }
         node.transformed = true;
-        if(transformed.tag!==node.tag) {
+        if(transformed.tag!==node.tag && config.contentAllowed!=="*") {
             config = contentAllowed[transformed.tag];
             if(typeof(config)==="function") {
                 config = await config.call(contentAllowed);
@@ -244,7 +246,7 @@ const validateNode = async ({parser,node,path=[],contentAllowed=bodyContent,erro
             node.content = [];
         }
     }
-    if(!node.skipContent) {
+    if(!node.skipContent && config.contentAllowed!=="*") {
         const content = [];
         for(let child of node.content) {
             const type = typeof(child);

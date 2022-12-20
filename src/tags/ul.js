@@ -1,12 +1,14 @@
 import Tag from "../tag.js";
 import li from "./li.js"
+import forEach from "./for-each.js";
 
 const ul = {
     attributesAllowed: {
         title:"string"
     },
         contentAllowed: {
-            li: li
+            forEach,
+            li
         },
         transform(node) {
             let currentli;

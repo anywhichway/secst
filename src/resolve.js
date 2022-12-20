@@ -26,6 +26,9 @@ const resolve = async (node=document.body,ifNull) => {
     for(const el of valueEls) {
         const template = el.getAttribute("data-template"),
             tagName = el.tagName;
+        if(!template) {
+            continue;
+        }
         try {
             el.rawValue = resolveDataTemplate(node,template,el).then(async (value) => {
                 el.rawValue = value;

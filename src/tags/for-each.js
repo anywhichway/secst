@@ -1,33 +1,54 @@
-import JSON5 from "json5";
-
 const forEach = {
     attributesAllowed:{
         "data-iterable": true,
         iterable(value) {
-            try {
-                const iterable = JSON5.parse(value);
-                if(Array.isArray(iterable)) {
-                    return {
-                        "data-iterable": value
-                    }
+            if(typeof(value)==="string") {
+                return {
+                    "data-iterable": value
                 }
-                throw new TypeError(`${value} is not iterable`)
-            } catch(e) {
-                throw e;
+            }
+            return {
+                "data-iterable": JSON.stringify(value)
             }
         }
     },
-    contentAllowed: "*",
-    transform(node) {
-        node.contents = [node.contents.join("")]
+    async contentAllowed() {
+       const {allTags} = await import("./all-tags.js");
+       return this.contentAllowed = allTags;
     },
-    mounted(el,node) {
-        const parent = el.parentElement,
-            iterable = JSON5.parse(el.getAttribute("data-iterable")),
-            template = node.contents[0];
+    async connected(el,node) {
+        const parent = el.parentElement;
+        let iterable = el.getAttribute("data-iterable");
+        try {
+            iterable = JSON5.parse(iterable);
+        } catch(e) {
+            let root = el.parentElement;
+            while(root.parentElement) {
+                root = root.parentElement;
+            }
+            const els = [...root.querySelectorAll(iterable)],
+                requestor = el;
+            iterable = await els.reduce(async (items,el) => {
+                items = await items;
+                const template = el.getAttribute("data-template");
+                if(template) {
+                    const value =  await SECST.resolveDataTemplate(el,template,requestor)
+                    if(value!=null) {
+                        items.push(value)
+                    }
+                } else {
+                    try {
+                        items.push(JSON5.parse(el.innerText))
+                    } catch(e) {
+                        items.push(el.innerText)
+                    }
+                }
+                return items;
+            },[])
+        }
         iterable.forEach((item,index,iterable) => {
             // todo: move to web worker
-            const html = (new Function("item","index","iterable","with(item) { return `" + template + "` }"))(item,index,iterable);
+            const html = (new Function("item","index","iterable","with(item) { return `" + el.innerHTML + "` }"))(item,index,iterable);
             el.insertAdjacentHTML("beforebegin",html)
         });
         el.remove()

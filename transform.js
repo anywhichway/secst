@@ -4,13 +4,18 @@ import JSON5 from "json5";
 import {init as initAutohelm,engage} from "@anywhichway/autohelm";
 import {HighlightJS} from "highlight.js";
 import { Window } from 'happy-dom';
-import katex from "katex";
-import mhchem from "katex/dist/contrib/mhchem.js";
+//import katex from "katex";
+//import mhchem from "katex/dist/contrib/mhchem.js";
 import * as all from "emoji-mart";
 let { init, SearchIndex } = all;
 if(init==null) {
     init = all.default.init;
     SearchIndex = all.default.SearchIndex;
+}
+import {resolveDataTemplate} from "./src/resolve-data-template.js";
+
+global.SECST = {
+    resolveDataTemplate
 }
 
 global.window = new Window(),
@@ -39,7 +44,7 @@ global.autohelm = {
     engage
 }
 global.HighlightJS = HighlightJS;
-global.katex = katex;
+//global.katex = katex;
 global.emojiMart = {
     init,
     SearchIndex

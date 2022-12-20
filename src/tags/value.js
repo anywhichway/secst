@@ -191,10 +191,6 @@ const value = {
         return node;
     },
     beforeMount(node) {
-        if(node.attributes.hidden!=null) {
-            delete node.attributes.hidden;
-            node.attributes.style = "display: none;" + (node.attributes.style||"");
-        }
         if(node.attributes["data-mime-type"]) {
             node.tag = "textarea";
         } else {

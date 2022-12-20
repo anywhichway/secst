@@ -7,6 +7,7 @@ import {listeners} from "./listeners.js";
 import {updateValueWidths} from "./update-value-widths.js";
 import {stringTemplateEval} from "./string-template-eval.js";
 import {resolve} from "./resolve.js";
+import {resolveDataTemplate} from "./resolve-data-template.js";
 import {engage, init} from "@anywhichway/autohelm";
 
 if(document.currentScript?.getAttribute("src").endsWith("?run")) {
@@ -54,7 +55,8 @@ window.HighlightJS = HighlightJS;
 window.SECST = {
     resolve,
     listeners,
-    updateValueWidths: updateValueWidths,
-    stringTemplateEval
+    updateValueWidths,
+    stringTemplateEval,
+    resolveDataTemplate
 }
 

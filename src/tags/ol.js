@@ -1,5 +1,6 @@
 import Tag from "../tag.js";
 import li from "./li.js"
+import forEach from "./for-each.js";
 
 const ol = {
     indirectChildAllowed: true,
@@ -17,7 +18,8 @@ const ol = {
         }
     },
     contentAllowed: {
-        li: li
+        forEach,
+        li
     },
     transform(node) {
         node.content = node.content.reduce((content,item) => {
