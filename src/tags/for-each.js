@@ -32,7 +32,7 @@ const forEach = {
                 items = await items;
                 const template = el.getAttribute("data-template");
                 if(template) {
-                    const value =  await SECST.resolveDataTemplate(el,template,requestor)
+                    const value =  await SECST.resolveDataTemplate(root,template,el)
                     if(value!=null) {
                         items.push(value)
                     }
