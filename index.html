@@ -182,13 +182,13 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
  A --- B
  B--&gt;C[fa:fa-ban forbidden]
  B--&gt;D(fa:fa-spinner);
-]</code></pre></p><p>        renders as</p><script src="https://cdn.jsdelivr.net/npm/mermaid@9/dist/mermaid.min.js" onload="(() =&gt; { mermaid.initialize({ startOnLoad: true }) })()"></script><pre id="mermaidChart12044731324332969" class="mermaid">
+]</code></pre></p><p>        renders as</p><script src="https://cdn.jsdelivr.net/npm/mermaid@9/dist/mermaid.min.js" onload="(() =&gt; { mermaid.initialize({ startOnLoad: true }) })()"></script><pre id="mermaidChart37680520666203" class="mermaid">
             graph LR
             A --- B
             B-->C[fa:fa-ban forbidden]
             B-->D(fa:fa-spinner);
         </pre><script type="module">
-            const el = document.getElementById("mermaidChart12044731324332969"),
+            const el = document.getElementById("mermaidChart37680520666203"),
                 sibling = el.nextSibling,
                 insertSvg = function (svgCode, bindFunctions) {
                     el.innerHTML = svgCode;
@@ -202,7 +202,7 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
             B-->C[fa:fa-ban forbidden]
             B-->D(fa:fa-spinner);
         `;
-            setTimeout(() => mermaid.mermaidAPI.render("mermaidChart12044731324332969", graphDefinition, insertSvg),1000);
+            setTimeout(() => mermaid.mermaidAPI.render("mermaidChart37680520666203", graphDefinition, insertSvg),1000);
         </script><p>        There are lots of charts to choose from:</p><p>        <ul><li> <a target="_tab" href="https://mermaid.js.org/syntax/flowchart.html">Flowchart</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/sequenceDiagram.html">Sequence Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/classDiagram.html">Class Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/stateDiagram.html">State Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/entityRelationshipDiagram.html">Entity Relationship Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/userJourney.html">User Journey</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/gantt.html">Gannt</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/pie.html">Pie Chart</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/requirementDiagram.html">Requirement Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/gitgraph.html">Gitgraph Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/c4c.html">C4C Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/mindmap.html">Mindmaps</a></li></ul><br>    </p></section><section><h2 id="sheet-music--abc-notation-" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Sheet Music (ABC Notation)<span class="autohelm-nav autohelm-nav-up-down"> <a href="#mermaid-chart">&uarr;</a> <a href="#escaping-secst">&darr;</a></span></h2><p>        <code class="nohighlight">:sheetMusic[]</code> is a block level element, it belongs outside of paragraphs. Just provide <a target="_tab" href="https://abcnotation.com/examples">ABC notation</a> as the content.</p><p>        <pre class="secst"><code class="nohighlight">:sheetMusic[
   X: 1
   T: Nokia Tune
@@ -245,502 +245,182 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
                 </dl><br>            </p></section></section><section><h2 id="unit-math" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Unit Math<span class="autohelm-nav autohelm-nav-up-down"> <a href="#basic-math">&uarr;</a> <a href="#importing-data">&darr;</a></span></h2><p>        Unit math <a target="_tab" href="https://mathjs.org/docs/datatypes/units.html">from MathJS</a> allows fro conversions using the word <code class="nohighlight">to</code>, as well as units for numbers, e.g. <code class="nohighlight">45 deg</code>.</p><p>        There are many <a target="_tab" href="https://mathjs.org/docs/datatypes/units.html#reference">supported units</a>.</p><p>        Here are a few examples:</p><p>        <code class="nohighlight">:value[2 inch to cm]</code> = <input class="secst" data-default="" data-template="2 inch to cm" value="" title="2 inch to cm" data-fitcontent=""></p><p>        <code class="nohighlight">:value[90 km/h to mi/h]</code> = <input class="secst" data-default="" data-template="90 km/h to mi/h" value="" title="90 km/h to mi/h" data-fitcontent=""></p><p>        <code class="nohighlight">:value[90 km/h to m/h]</code> = <input class="secst" data-default="" data-template="90 km/h to m/h" value="" title="90 km/h to m/h" data-fitcontent=""> <code class="nohighlight">m/h</code> is meters per hour</p><p>        <code class="nohighlight">:value[(1 week + 1 day) to days]</code> = value[(1 week + 1 day) to days]</p><p>        <code class="nohighlight">:value[cos(45 deg)]</code> = <input class="secst" data-default="" data-template="cos(45 deg)" value="" title="cos(45 deg)" data-fitcontent=""></p><p>        <code class="nohighlight">:value[8.314 m^3 Pa / mol / K]</code> = <input class="secst" data-default="" data-template="8.314 m^3 Pa / mol / K" value="" title="8.314 m^3 Pa / mol / K" data-fitcontent=""></p><p>        Remember, if you have a value that looks like a formula, but is not, you can use the attribute <code class="nohighlight">literal</code>, e.g.  <code class="nohighlight">:value(literal)[2 inch to cm]</code> = <input class="secst" data-default="" data-template="2 inch to cm" value="2 inch to cm" title="2 inch to cm" data-literal="" data-fitcontent="" disabled="" style="width: 13ch;">.</p><p>        And, you can use <code class="nohighlight">plaintext</code> to display values without any styling, e.g. <code class="nohighlight">:value(plaintext)[90 km/h to mi/h]</code> = <span class="secst" data-default="" data-template="90 km/h to mi/h" value="" title="90 km/h to mi/h" data-plaintext="">90 km/h to mi/h</span>.</p></section><section><h2 id="importing-data" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Importing Data<span class="autohelm-nav autohelm-nav-up-down"> <a href="#unit-math">&uarr;</a> <a href="#seo">&darr;</a></span></h2><p>        Values can included imported data using the <code class="nohighlight">src</code> attribute and a mime type provided in the <code class="nohighlight">type</code> attribute. The trailing <code class="nohighlight">[]</code> are optional.</p><p>        Values with the boolean attribute <code class="nohighlight">static</code> is import data at transpile time. If importing fails, another attempt is made at runtime.</p><p>        JSON is formatted for readability and <a target="_tab" href="https://json5.org">JSON5</a> is supported to make it easier to handle remote data.</p><p>        <pre class="secst"><code class="nohighlight">:value(https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson static {type:"application/json"})</code></pre></p><p>        <textarea class="secst" data-mime-type="application/json" data-default="" title="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson" data-fitcontent="" disabled="">{
   "type": "FeatureCollection",
   "metadata": {
-    "generated": 1671564540000,
+    "generated": 1671653940000,
     "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson",
     "title": "USGS All Earthquakes, Past Hour",
     "status": 200,
     "api": "1.10.3",
-    "count": 12
+    "count": 4
   },
   "features": [
     {
       "type": "Feature",
       "properties": {
-        "mag": 2.31999993,
-        "place": "0 km SSE of Pāhala, Hawaii",
-        "time": 1671563981540,
-        "updated": 1671564183600,
+        "mag": 0.95,
+        "place": "2km NE of The Geysers, CA",
+        "time": 1671653821730,
+        "updated": 1671653918256,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73277132",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73277132.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73822686",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73822686.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 83,
-        "net": "hv",
-        "code": "73277132",
-        "ids": ",hv73277132,",
-        "sources": ",hv,",
-        "types": ",origin,phase-data,",
-        "nst": 35,
-        "dmin": null,
-        "rms": 0.0900000036,
-        "gap": 103,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 2.3 - 0 km SSE of Pāhala, Hawaii"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -155.476165771484,
-          19.1958332061768,
-          33.5200004577637
-        ]
-      },
-      "id": "hv73277132"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 2.65,
-        "place": "39km W of Petrolia, CA",
-        "time": 1671563823700,
-        "updated": 1671564130486,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821921",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821921.geojson",
-        "felt": 1,
-        "cdi": 0,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 108,
+        "sig": 14,
         "net": "nc",
-        "code": "73821921",
-        "ids": ",nc73821921,",
-        "sources": ",nc,",
-        "types": ",dyfi,nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 19,
-        "dmin": null,
-        "rms": 0.35,
-        "gap": 244,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 2.7 - 39km W of Petrolia, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -124.7388306,
-          40.3878326,
-          16.78
-        ]
-      },
-      "id": "nc73821921"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 0.7,
-        "place": "6km NNW of The Geysers, CA",
-        "time": 1671563548760,
-        "updated": 1671563644156,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821911",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821911.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 8,
-        "net": "nc",
-        "code": "73821911",
-        "ids": ",nc73821911,",
+        "code": "73822686",
+        "ids": ",nc73822686,",
         "sources": ",nc,",
         "types": ",nearby-cities,origin,phase-data,",
-        "nst": 11,
-        "dmin": 0.009825,
+        "nst": 9,
+        "dmin": 0.006685,
         "rms": 0.01,
-        "gap": 69,
+        "gap": 92,
         "magType": "md",
         "type": "earthquake",
-        "title": "M 0.7 - 6km NNW of The Geysers, CA"
+        "title": "M 1.0 - 2km NE of The Geysers, CA"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -122.7978363,
-          38.8256683,
-          2.85
+          -122.7343369,
+          38.7896652,
+          1.75
         ]
       },
-      "id": "nc73821911"
+      "id": "nc73822686"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 1.86000001,
-        "place": "9 km SSW of Leilani Estates, Hawaii",
-        "time": 1671562947870,
-        "updated": 1671563138610,
+        "mag": 1.17,
+        "place": "12km NW of Ocotillo Wells, CA",
+        "time": 1671653730550,
+        "updated": 1671653855905,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73277122",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73277122.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40148607",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40148607.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 53,
-        "net": "hv",
-        "code": "73277122",
-        "ids": ",hv73277122,",
-        "sources": ",hv,",
-        "types": ",origin,phase-data,",
-        "nst": 21,
-        "dmin": null,
-        "rms": 0.140000001,
-        "gap": 218,
-        "magType": "md",
+        "sig": 21,
+        "net": "ci",
+        "code": "40148607",
+        "ids": ",ci40148607,",
+        "sources": ",ci,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 20,
+        "dmin": 0.03811,
+        "rms": 0.21,
+        "gap": 102,
+        "magType": "ml",
         "type": "earthquake",
-        "title": "M 1.9 - 9 km SSW of Leilani Estates, Hawaii"
+        "title": "M 1.2 - 12km NW of Ocotillo Wells, CA"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -154.945327758789,
-          19.3924999237061,
-          7.01000022888184
+          -116.2208328,
+          33.2188339,
+          5.18
         ]
       },
-      "id": "hv73277122"
+      "id": "ci40148607"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 1.59,
-        "place": "7km NW of The Geysers, CA",
-        "time": 1671562624100,
-        "updated": 1671564131485,
+        "mag": 2.43,
+        "place": "5 km ESE of Punta Santiago, Puerto Rico",
+        "time": 1671652820660,
+        "updated": 1671653904910,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821896",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821896.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 39,
-        "net": "nc",
-        "code": "73821896",
-        "ids": ",nc73821896,",
-        "sources": ",nc,",
-        "types": ",focal-mechanism,nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 32,
-        "dmin": null,
-        "rms": 0.01,
-        "gap": 53,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 1.6 - 7km NW of The Geysers, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.8044968,
-          38.8236656,
-          2.34
-        ]
-      },
-      "id": "nc73821896"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.04,
-        "place": "7km NW of The Geysers, CA",
-        "time": 1671562150740,
-        "updated": 1671562246233,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821891",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821891.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 17,
-        "net": "nc",
-        "code": "73821891",
-        "ids": ",nc73821891,",
-        "sources": ",nc,",
-        "types": ",nearby-cities,origin,phase-data,",
-        "nst": 17,
-        "dmin": 0.003987,
-        "rms": 0.02,
-        "gap": 62,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 1.0 - 7km NW of The Geysers, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.8050003,
-          38.8238335,
-          2.36
-        ]
-      },
-      "id": "nc73821891"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.12,
-        "place": "7km NW of The Geysers, CA",
-        "time": 1671561938200,
-        "updated": 1671563591441,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821886",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821886.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 19,
-        "net": "nc",
-        "code": "73821886",
-        "ids": ",nc73821886,",
-        "sources": ",nc,",
-        "types": ",focal-mechanism,nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 28,
-        "dmin": 0.005182,
-        "rms": 0.03,
-        "gap": 32,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 1.1 - 7km NW of The Geysers, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.8043365,
-          38.8260002,
-          2.25
-        ]
-      },
-      "id": "nc73821886"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 2.24,
-        "place": "1 km SE of Indios, Puerto Rico",
-        "time": 1671561725800,
-        "updated": 1671562685340,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/pr71388278",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/pr71388278.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/pr71388408",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/pr71388408.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "reviewed",
         "tsunami": 0,
-        "sig": 77,
+        "sig": 91,
         "net": "pr",
-        "code": "71388278",
-        "ids": ",pr71388278,",
+        "code": "71388408",
+        "ids": ",pr71388408,",
         "sources": ",pr,",
         "types": ",origin,phase-data,",
-        "nst": 17,
-        "dmin": 0.03915,
-        "rms": 0.09,
-        "gap": 190,
+        "nst": 12,
+        "dmin": 0.07132,
+        "rms": 0.06,
+        "gap": 133,
         "magType": "md",
         "type": "earthquake",
-        "title": "M 2.2 - 1 km SE of Indios, Puerto Rico"
+        "title": "M 2.4 - 5 km ESE of Punta Santiago, Puerto Rico"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -66.8081666666667,
-          17.984,
-          15.55
+          -65.6971666666667,
+          18.1553333333333,
+          17.83
         ]
       },
-      "id": "pr71388278"
+      "id": "pr71388408"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 1.52,
-        "place": "7km NW of The Geysers, CA",
-        "time": 1671561455320,
-        "updated": 1671563172405,
+        "mag": 2.2,
+        "place": "65 km ESE of Pope-Vannoy Landing, Alaska",
+        "time": 1671650553849,
+        "updated": 1671650668884,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821861",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821861.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022gbf885f",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022gbf885f.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 36,
-        "net": "nc",
-        "code": "73821861",
-        "ids": ",nc73821861,",
-        "sources": ",nc,",
-        "types": ",focal-mechanism,nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 32,
-        "dmin": null,
-        "rms": 0.02,
-        "gap": 54,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 1.5 - 7km NW of The Geysers, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.803833,
-          38.8240013,
-          2.48
-        ]
-      },
-      "id": "nc73821861"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.95,
-        "place": "9km W of Ferndale, CA",
-        "time": 1671561347880,
-        "updated": 1671562571354,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821856",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821856.geojson",
-        "felt": 1,
-        "cdi": 0,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 58,
-        "net": "nc",
-        "code": "73821856",
-        "ids": ",nc73821856,",
-        "sources": ",nc,",
-        "types": ",dyfi,nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 6,
-        "dmin": 0.09119,
-        "rms": 0.04,
-        "gap": 302,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 2.0 - 9km W of Ferndale, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -124.3688354,
-          40.5636673,
-          20.18
-        ]
-      },
-      "id": "nc73821856"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.9,
-        "place": "75 km NW of Aleneva, Alaska",
-        "time": 1671561329192,
-        "updated": 1671561486347,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022g9r680n",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022g9r680n.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 56,
+        "sig": 74,
         "net": "ak",
-        "code": "022g9r680n",
-        "ids": ",ak022g9r680n,",
+        "code": "022gbf885f",
+        "ids": ",ak022gbf885f,",
         "sources": ",ak,",
         "types": ",origin,phase-data,",
         "nst": null,
         "dmin": null,
-        "rms": 0.35,
+        "rms": 0.41,
         "gap": null,
         "magType": "ml",
         "type": "earthquake",
-        "title": "M 1.9 - 75 km NW of Aleneva, Alaska"
+        "title": "M 2.2 - 65 km ESE of Pope-Vannoy Landing, Alaska"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -153.9462,
-          58.4603,
-          88.7
+          -153.4698,
+          59.291,
+          101.6
         ]
       },
-      "id": "ak022g9r680n"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 2.13,
-        "place": "9km NW of Ferndale, CA",
-        "time": 1671561172460,
-        "updated": 1671561972297,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821851",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821851.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 70,
-        "net": "nc",
-        "code": "73821851",
-        "ids": ",nc73821851,",
-        "sources": ",nc,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 10,
-        "dmin": 0.1593,
-        "rms": 0.23,
-        "gap": 259,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 2.1 - 9km NW of Ferndale, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -124.3348312,
-          40.6349983,
-          17.12
-        ]
-      },
-      "id": "nc73821851"
+      "id": "ak022gbf885f"
     }
   ],
   "bbox": [
-    -155.47616577148,
-    17.984,
-    2.25,
-    -66.808166666667,
-    58.4603,
-    88.7
+    -153.4698,
+    18.155333333333,
+    1.75,
+    -65.697166666667,
+    59.291,
+    101.6
   ]
 }</textarea></p><p>        Imported data is readonly because it is essentially a computation. To make it editable, use the attribute <code class="nohighlight">editable</code>.</p><p>        <pre class="secst"><code class="nohighlight">:value(https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson editable {type:"application/json"})</code></pre></p><p>        <textarea class="secst" data-mime-type="application/json" data-default="" data-template="await (async () =&gt; {
                         try {
@@ -764,502 +444,182 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
                         })()" title="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson" data-editable="" data-fitcontent="" style="height: 30em; width: 80ch;">{
   "type": "FeatureCollection",
   "metadata": {
-    "generated": 1671564540000,
+    "generated": 1671653940000,
     "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson",
     "title": "USGS All Earthquakes, Past Hour",
     "status": 200,
     "api": "1.10.3",
-    "count": 12
+    "count": 4
   },
   "features": [
     {
       "type": "Feature",
       "properties": {
-        "mag": 2.31999993,
-        "place": "0 km SSE of Pāhala, Hawaii",
-        "time": 1671563981540,
-        "updated": 1671564183600,
+        "mag": 0.95,
+        "place": "2km NE of The Geysers, CA",
+        "time": 1671653821730,
+        "updated": 1671653918256,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73277132",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73277132.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73822686",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73822686.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 83,
-        "net": "hv",
-        "code": "73277132",
-        "ids": ",hv73277132,",
-        "sources": ",hv,",
-        "types": ",origin,phase-data,",
-        "nst": 35,
-        "dmin": null,
-        "rms": 0.0900000036,
-        "gap": 103,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 2.3 - 0 km SSE of Pāhala, Hawaii"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -155.476165771484,
-          19.1958332061768,
-          33.5200004577637
-        ]
-      },
-      "id": "hv73277132"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 2.65,
-        "place": "39km W of Petrolia, CA",
-        "time": 1671563823700,
-        "updated": 1671564130486,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821921",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821921.geojson",
-        "felt": 1,
-        "cdi": 0,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 108,
+        "sig": 14,
         "net": "nc",
-        "code": "73821921",
-        "ids": ",nc73821921,",
-        "sources": ",nc,",
-        "types": ",dyfi,nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 19,
-        "dmin": null,
-        "rms": 0.35,
-        "gap": 244,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 2.7 - 39km W of Petrolia, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -124.7388306,
-          40.3878326,
-          16.78
-        ]
-      },
-      "id": "nc73821921"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 0.7,
-        "place": "6km NNW of The Geysers, CA",
-        "time": 1671563548760,
-        "updated": 1671563644156,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821911",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821911.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 8,
-        "net": "nc",
-        "code": "73821911",
-        "ids": ",nc73821911,",
+        "code": "73822686",
+        "ids": ",nc73822686,",
         "sources": ",nc,",
         "types": ",nearby-cities,origin,phase-data,",
-        "nst": 11,
-        "dmin": 0.009825,
+        "nst": 9,
+        "dmin": 0.006685,
         "rms": 0.01,
-        "gap": 69,
+        "gap": 92,
         "magType": "md",
         "type": "earthquake",
-        "title": "M 0.7 - 6km NNW of The Geysers, CA"
+        "title": "M 1.0 - 2km NE of The Geysers, CA"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -122.7978363,
-          38.8256683,
-          2.85
+          -122.7343369,
+          38.7896652,
+          1.75
         ]
       },
-      "id": "nc73821911"
+      "id": "nc73822686"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 1.86000001,
-        "place": "9 km SSW of Leilani Estates, Hawaii",
-        "time": 1671562947870,
-        "updated": 1671563138610,
+        "mag": 1.17,
+        "place": "12km NW of Ocotillo Wells, CA",
+        "time": 1671653730550,
+        "updated": 1671653855905,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73277122",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73277122.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40148607",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40148607.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 53,
-        "net": "hv",
-        "code": "73277122",
-        "ids": ",hv73277122,",
-        "sources": ",hv,",
-        "types": ",origin,phase-data,",
-        "nst": 21,
-        "dmin": null,
-        "rms": 0.140000001,
-        "gap": 218,
-        "magType": "md",
+        "sig": 21,
+        "net": "ci",
+        "code": "40148607",
+        "ids": ",ci40148607,",
+        "sources": ",ci,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 20,
+        "dmin": 0.03811,
+        "rms": 0.21,
+        "gap": 102,
+        "magType": "ml",
         "type": "earthquake",
-        "title": "M 1.9 - 9 km SSW of Leilani Estates, Hawaii"
+        "title": "M 1.2 - 12km NW of Ocotillo Wells, CA"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -154.945327758789,
-          19.3924999237061,
-          7.01000022888184
+          -116.2208328,
+          33.2188339,
+          5.18
         ]
       },
-      "id": "hv73277122"
+      "id": "ci40148607"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 1.59,
-        "place": "7km NW of The Geysers, CA",
-        "time": 1671562624100,
-        "updated": 1671564131485,
+        "mag": 2.43,
+        "place": "5 km ESE of Punta Santiago, Puerto Rico",
+        "time": 1671652820660,
+        "updated": 1671653904910,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821896",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821896.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 39,
-        "net": "nc",
-        "code": "73821896",
-        "ids": ",nc73821896,",
-        "sources": ",nc,",
-        "types": ",focal-mechanism,nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 32,
-        "dmin": null,
-        "rms": 0.01,
-        "gap": 53,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 1.6 - 7km NW of The Geysers, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.8044968,
-          38.8236656,
-          2.34
-        ]
-      },
-      "id": "nc73821896"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.04,
-        "place": "7km NW of The Geysers, CA",
-        "time": 1671562150740,
-        "updated": 1671562246233,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821891",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821891.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 17,
-        "net": "nc",
-        "code": "73821891",
-        "ids": ",nc73821891,",
-        "sources": ",nc,",
-        "types": ",nearby-cities,origin,phase-data,",
-        "nst": 17,
-        "dmin": 0.003987,
-        "rms": 0.02,
-        "gap": 62,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 1.0 - 7km NW of The Geysers, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.8050003,
-          38.8238335,
-          2.36
-        ]
-      },
-      "id": "nc73821891"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.12,
-        "place": "7km NW of The Geysers, CA",
-        "time": 1671561938200,
-        "updated": 1671563591441,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821886",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821886.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 19,
-        "net": "nc",
-        "code": "73821886",
-        "ids": ",nc73821886,",
-        "sources": ",nc,",
-        "types": ",focal-mechanism,nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 28,
-        "dmin": 0.005182,
-        "rms": 0.03,
-        "gap": 32,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 1.1 - 7km NW of The Geysers, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.8043365,
-          38.8260002,
-          2.25
-        ]
-      },
-      "id": "nc73821886"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 2.24,
-        "place": "1 km SE of Indios, Puerto Rico",
-        "time": 1671561725800,
-        "updated": 1671562685340,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/pr71388278",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/pr71388278.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/pr71388408",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/pr71388408.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "reviewed",
         "tsunami": 0,
-        "sig": 77,
+        "sig": 91,
         "net": "pr",
-        "code": "71388278",
-        "ids": ",pr71388278,",
+        "code": "71388408",
+        "ids": ",pr71388408,",
         "sources": ",pr,",
         "types": ",origin,phase-data,",
-        "nst": 17,
-        "dmin": 0.03915,
-        "rms": 0.09,
-        "gap": 190,
+        "nst": 12,
+        "dmin": 0.07132,
+        "rms": 0.06,
+        "gap": 133,
         "magType": "md",
         "type": "earthquake",
-        "title": "M 2.2 - 1 km SE of Indios, Puerto Rico"
+        "title": "M 2.4 - 5 km ESE of Punta Santiago, Puerto Rico"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -66.8081666666667,
-          17.984,
-          15.55
+          -65.6971666666667,
+          18.1553333333333,
+          17.83
         ]
       },
-      "id": "pr71388278"
+      "id": "pr71388408"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 1.52,
-        "place": "7km NW of The Geysers, CA",
-        "time": 1671561455320,
-        "updated": 1671563172405,
+        "mag": 2.2,
+        "place": "65 km ESE of Pope-Vannoy Landing, Alaska",
+        "time": 1671650553849,
+        "updated": 1671650668884,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821861",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821861.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022gbf885f",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022gbf885f.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 36,
-        "net": "nc",
-        "code": "73821861",
-        "ids": ",nc73821861,",
-        "sources": ",nc,",
-        "types": ",focal-mechanism,nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 32,
-        "dmin": null,
-        "rms": 0.02,
-        "gap": 54,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 1.5 - 7km NW of The Geysers, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.803833,
-          38.8240013,
-          2.48
-        ]
-      },
-      "id": "nc73821861"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.95,
-        "place": "9km W of Ferndale, CA",
-        "time": 1671561347880,
-        "updated": 1671562571354,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821856",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821856.geojson",
-        "felt": 1,
-        "cdi": 0,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 58,
-        "net": "nc",
-        "code": "73821856",
-        "ids": ",nc73821856,",
-        "sources": ",nc,",
-        "types": ",dyfi,nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 6,
-        "dmin": 0.09119,
-        "rms": 0.04,
-        "gap": 302,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 2.0 - 9km W of Ferndale, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -124.3688354,
-          40.5636673,
-          20.18
-        ]
-      },
-      "id": "nc73821856"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.9,
-        "place": "75 km NW of Aleneva, Alaska",
-        "time": 1671561329192,
-        "updated": 1671561486347,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022g9r680n",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022g9r680n.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 56,
+        "sig": 74,
         "net": "ak",
-        "code": "022g9r680n",
-        "ids": ",ak022g9r680n,",
+        "code": "022gbf885f",
+        "ids": ",ak022gbf885f,",
         "sources": ",ak,",
         "types": ",origin,phase-data,",
         "nst": null,
         "dmin": null,
-        "rms": 0.35,
+        "rms": 0.41,
         "gap": null,
         "magType": "ml",
         "type": "earthquake",
-        "title": "M 1.9 - 75 km NW of Aleneva, Alaska"
+        "title": "M 2.2 - 65 km ESE of Pope-Vannoy Landing, Alaska"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -153.9462,
-          58.4603,
-          88.7
+          -153.4698,
+          59.291,
+          101.6
         ]
       },
-      "id": "ak022g9r680n"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 2.13,
-        "place": "9km NW of Ferndale, CA",
-        "time": 1671561172460,
-        "updated": 1671561972297,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821851",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821851.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 70,
-        "net": "nc",
-        "code": "73821851",
-        "ids": ",nc73821851,",
-        "sources": ",nc,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 10,
-        "dmin": 0.1593,
-        "rms": 0.23,
-        "gap": 259,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 2.1 - 9km NW of Ferndale, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -124.3348312,
-          40.6349983,
-          17.12
-        ]
-      },
-      "id": "nc73821851"
+      "id": "ak022gbf885f"
     }
   ],
   "bbox": [
-    -155.47616577148,
-    17.984,
-    2.25,
-    -66.808166666667,
-    58.4603,
-    88.7
+    -153.4698,
+    18.155333333333,
+    1.75,
+    -65.697166666667,
+    59.291,
+    101.6
   ]
 }</textarea></p><p>        If an id is added, the data can be used in a computation.</p><p>        <pre class="secst"><code class="nohighlight">:value(#earthquake-data https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson {type:"application/json"})
 
@@ -1285,502 +645,182 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
                         })()" title="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson" data-fitcontent="" disabled="" style="height: 30em; width: 80ch;">{
   "type": "FeatureCollection",
   "metadata": {
-    "generated": 1671564540000,
+    "generated": 1671653940000,
     "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson",
     "title": "USGS All Earthquakes, Past Hour",
     "status": 200,
     "api": "1.10.3",
-    "count": 12
+    "count": 4
   },
   "features": [
     {
       "type": "Feature",
       "properties": {
-        "mag": 2.31999993,
-        "place": "0 km SSE of Pāhala, Hawaii",
-        "time": 1671563981540,
-        "updated": 1671564183600,
+        "mag": 0.95,
+        "place": "2km NE of The Geysers, CA",
+        "time": 1671653821730,
+        "updated": 1671653918256,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73277132",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73277132.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73822686",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73822686.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 83,
-        "net": "hv",
-        "code": "73277132",
-        "ids": ",hv73277132,",
-        "sources": ",hv,",
-        "types": ",origin,phase-data,",
-        "nst": 35,
-        "dmin": null,
-        "rms": 0.0900000036,
-        "gap": 103,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 2.3 - 0 km SSE of Pāhala, Hawaii"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -155.476165771484,
-          19.1958332061768,
-          33.5200004577637
-        ]
-      },
-      "id": "hv73277132"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 2.65,
-        "place": "39km W of Petrolia, CA",
-        "time": 1671563823700,
-        "updated": 1671564130486,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821921",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821921.geojson",
-        "felt": 1,
-        "cdi": 0,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 108,
+        "sig": 14,
         "net": "nc",
-        "code": "73821921",
-        "ids": ",nc73821921,",
-        "sources": ",nc,",
-        "types": ",dyfi,nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 19,
-        "dmin": null,
-        "rms": 0.35,
-        "gap": 244,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 2.7 - 39km W of Petrolia, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -124.7388306,
-          40.3878326,
-          16.78
-        ]
-      },
-      "id": "nc73821921"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 0.7,
-        "place": "6km NNW of The Geysers, CA",
-        "time": 1671563548760,
-        "updated": 1671563644156,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821911",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821911.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 8,
-        "net": "nc",
-        "code": "73821911",
-        "ids": ",nc73821911,",
+        "code": "73822686",
+        "ids": ",nc73822686,",
         "sources": ",nc,",
         "types": ",nearby-cities,origin,phase-data,",
-        "nst": 11,
-        "dmin": 0.009825,
+        "nst": 9,
+        "dmin": 0.006685,
         "rms": 0.01,
-        "gap": 69,
+        "gap": 92,
         "magType": "md",
         "type": "earthquake",
-        "title": "M 0.7 - 6km NNW of The Geysers, CA"
+        "title": "M 1.0 - 2km NE of The Geysers, CA"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -122.7978363,
-          38.8256683,
-          2.85
+          -122.7343369,
+          38.7896652,
+          1.75
         ]
       },
-      "id": "nc73821911"
+      "id": "nc73822686"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 1.86000001,
-        "place": "9 km SSW of Leilani Estates, Hawaii",
-        "time": 1671562947870,
-        "updated": 1671563138610,
+        "mag": 1.17,
+        "place": "12km NW of Ocotillo Wells, CA",
+        "time": 1671653730550,
+        "updated": 1671653855905,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73277122",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73277122.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40148607",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40148607.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 53,
-        "net": "hv",
-        "code": "73277122",
-        "ids": ",hv73277122,",
-        "sources": ",hv,",
-        "types": ",origin,phase-data,",
-        "nst": 21,
-        "dmin": null,
-        "rms": 0.140000001,
-        "gap": 218,
-        "magType": "md",
+        "sig": 21,
+        "net": "ci",
+        "code": "40148607",
+        "ids": ",ci40148607,",
+        "sources": ",ci,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 20,
+        "dmin": 0.03811,
+        "rms": 0.21,
+        "gap": 102,
+        "magType": "ml",
         "type": "earthquake",
-        "title": "M 1.9 - 9 km SSW of Leilani Estates, Hawaii"
+        "title": "M 1.2 - 12km NW of Ocotillo Wells, CA"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -154.945327758789,
-          19.3924999237061,
-          7.01000022888184
+          -116.2208328,
+          33.2188339,
+          5.18
         ]
       },
-      "id": "hv73277122"
+      "id": "ci40148607"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 1.59,
-        "place": "7km NW of The Geysers, CA",
-        "time": 1671562624100,
-        "updated": 1671564131485,
+        "mag": 2.43,
+        "place": "5 km ESE of Punta Santiago, Puerto Rico",
+        "time": 1671652820660,
+        "updated": 1671653904910,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821896",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821896.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 39,
-        "net": "nc",
-        "code": "73821896",
-        "ids": ",nc73821896,",
-        "sources": ",nc,",
-        "types": ",focal-mechanism,nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 32,
-        "dmin": null,
-        "rms": 0.01,
-        "gap": 53,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 1.6 - 7km NW of The Geysers, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.8044968,
-          38.8236656,
-          2.34
-        ]
-      },
-      "id": "nc73821896"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.04,
-        "place": "7km NW of The Geysers, CA",
-        "time": 1671562150740,
-        "updated": 1671562246233,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821891",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821891.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 17,
-        "net": "nc",
-        "code": "73821891",
-        "ids": ",nc73821891,",
-        "sources": ",nc,",
-        "types": ",nearby-cities,origin,phase-data,",
-        "nst": 17,
-        "dmin": 0.003987,
-        "rms": 0.02,
-        "gap": 62,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 1.0 - 7km NW of The Geysers, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.8050003,
-          38.8238335,
-          2.36
-        ]
-      },
-      "id": "nc73821891"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.12,
-        "place": "7km NW of The Geysers, CA",
-        "time": 1671561938200,
-        "updated": 1671563591441,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821886",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821886.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 19,
-        "net": "nc",
-        "code": "73821886",
-        "ids": ",nc73821886,",
-        "sources": ",nc,",
-        "types": ",focal-mechanism,nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 28,
-        "dmin": 0.005182,
-        "rms": 0.03,
-        "gap": 32,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 1.1 - 7km NW of The Geysers, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.8043365,
-          38.8260002,
-          2.25
-        ]
-      },
-      "id": "nc73821886"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 2.24,
-        "place": "1 km SE of Indios, Puerto Rico",
-        "time": 1671561725800,
-        "updated": 1671562685340,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/pr71388278",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/pr71388278.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/pr71388408",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/pr71388408.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "reviewed",
         "tsunami": 0,
-        "sig": 77,
+        "sig": 91,
         "net": "pr",
-        "code": "71388278",
-        "ids": ",pr71388278,",
+        "code": "71388408",
+        "ids": ",pr71388408,",
         "sources": ",pr,",
         "types": ",origin,phase-data,",
-        "nst": 17,
-        "dmin": 0.03915,
-        "rms": 0.09,
-        "gap": 190,
+        "nst": 12,
+        "dmin": 0.07132,
+        "rms": 0.06,
+        "gap": 133,
         "magType": "md",
         "type": "earthquake",
-        "title": "M 2.2 - 1 km SE of Indios, Puerto Rico"
+        "title": "M 2.4 - 5 km ESE of Punta Santiago, Puerto Rico"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -66.8081666666667,
-          17.984,
-          15.55
+          -65.6971666666667,
+          18.1553333333333,
+          17.83
         ]
       },
-      "id": "pr71388278"
+      "id": "pr71388408"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 1.52,
-        "place": "7km NW of The Geysers, CA",
-        "time": 1671561455320,
-        "updated": 1671563172405,
+        "mag": 2.2,
+        "place": "65 km ESE of Pope-Vannoy Landing, Alaska",
+        "time": 1671650553849,
+        "updated": 1671650668884,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821861",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821861.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022gbf885f",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022gbf885f.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 36,
-        "net": "nc",
-        "code": "73821861",
-        "ids": ",nc73821861,",
-        "sources": ",nc,",
-        "types": ",focal-mechanism,nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 32,
-        "dmin": null,
-        "rms": 0.02,
-        "gap": 54,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 1.5 - 7km NW of The Geysers, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.803833,
-          38.8240013,
-          2.48
-        ]
-      },
-      "id": "nc73821861"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.95,
-        "place": "9km W of Ferndale, CA",
-        "time": 1671561347880,
-        "updated": 1671562571354,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821856",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821856.geojson",
-        "felt": 1,
-        "cdi": 0,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 58,
-        "net": "nc",
-        "code": "73821856",
-        "ids": ",nc73821856,",
-        "sources": ",nc,",
-        "types": ",dyfi,nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 6,
-        "dmin": 0.09119,
-        "rms": 0.04,
-        "gap": 302,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 2.0 - 9km W of Ferndale, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -124.3688354,
-          40.5636673,
-          20.18
-        ]
-      },
-      "id": "nc73821856"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.9,
-        "place": "75 km NW of Aleneva, Alaska",
-        "time": 1671561329192,
-        "updated": 1671561486347,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022g9r680n",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022g9r680n.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 56,
+        "sig": 74,
         "net": "ak",
-        "code": "022g9r680n",
-        "ids": ",ak022g9r680n,",
+        "code": "022gbf885f",
+        "ids": ",ak022gbf885f,",
         "sources": ",ak,",
         "types": ",origin,phase-data,",
         "nst": null,
         "dmin": null,
-        "rms": 0.35,
+        "rms": 0.41,
         "gap": null,
         "magType": "ml",
         "type": "earthquake",
-        "title": "M 1.9 - 75 km NW of Aleneva, Alaska"
+        "title": "M 2.2 - 65 km ESE of Pope-Vannoy Landing, Alaska"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -153.9462,
-          58.4603,
-          88.7
+          -153.4698,
+          59.291,
+          101.6
         ]
       },
-      "id": "ak022g9r680n"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 2.13,
-        "place": "9km NW of Ferndale, CA",
-        "time": 1671561172460,
-        "updated": 1671561972297,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73821851",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73821851.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 70,
-        "net": "nc",
-        "code": "73821851",
-        "ids": ",nc73821851,",
-        "sources": ",nc,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 10,
-        "dmin": 0.1593,
-        "rms": 0.23,
-        "gap": 259,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 2.1 - 9km NW of Ferndale, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -124.3348312,
-          40.6349983,
-          17.12
-        ]
-      },
-      "id": "nc73821851"
+      "id": "ak022gbf885f"
     }
   ],
   "bbox": [
-    -155.47616577148,
-    17.984,
-    2.25,
-    -66.808166666667,
-    58.4603,
-    88.7
+    -153.4698,
+    18.155333333333,
+    1.75,
+    -65.697166666667,
+    59.291,
+    101.6
   ]
 }</textarea></p><p>       <textarea class="secst" data-mime-type="application/json" data-default="" data-template="$(#earthquake-data).metadata" title="$(#earthquake-data).metadata" data-fitcontent="" disabled="" style="height: 1.5em; width: 15ch;">[object Object]</textarea><br>    </p></section></section>
 <section><h1 id="seo" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Search Engine Optimization<span class="autohelm-nav autohelm-nav-up-down"> <a href="#values-and-formulas">&uarr;</a> <a href="#structured-data">&darr;</a></span></h1><p>    SECST provides several features to support <abbr>SEO</abbr> Search Engine Optimization.</p><p>    <ul title="SEO features"><li><a href="#hastags">hashtags</a></li><li><a href="#meta-tags">meta tags</a></li><li><a href="#structured-data">structured data</a></li><li><a href="#server-transpilation">server transpilation</a></li></ul><br>    </p><section><h2 id="structured-data" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Structured Data<span class="autohelm-nav autohelm-nav-up-down"> <a href="#seo">&uarr;</a> <a href="#news-article">&darr;</a></span></h2><p>        For select tags, SECST can generate JSON-LD directly from SECST markup. Content, layout, and SEO optimization will always be in sync.</p><p>        This is best covered by an example based on <a target="_tab" href="https://developers.google.com/search/docs/appearance/structured-data/article">Google's documentation for a news article</a>.</p><p>        <em>Note: Only those tags documented for <code class="nohighlight">NewsArticle</code> are currently supported.</em></p><section><h3 id="news-article" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>News Article<span class="autohelm-nav autohelm-nav-up-down"> <a href="#structured-data">&uarr;</a> <a href="#server-transpilation">&darr;</a></span></h3><p>            The SECST tag <code class="nohighlight">:NewsArticle[]</code> can contain regular SECST as well as tags that parallel established JSON-LD schema like <code class="nohighlight">:headline[]</code>, <code class="nohighlight">:author[]</code> and <code class="nohighlight">:Person[]</code>. Where there are identical or trivially equivalent tags and attribute names, e.g. <code class="nohighlight">image</code> and <code class="nohighlight">img</code>, the native SECST tag is used.</p><p>            <pre class="secst"><code class="nohighlight">:NewsArticle[
@@ -1887,7 +927,1761 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
 <section><h1 id="styling-content" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Styling Content<span class="autohelm-nav autohelm-nav-up-down"> <a href="#seo">&uarr;</a> <a href="#advanced-formulas">&darr;</a></span></h1><p>    The ability to use styling can be configured using API options and command line arguments. See <a id="document-programming" href="document programming" target="_tab">document programming</a> below. Hence, not all styling may be available in all environments that provide a SECST editor.</p><p>    Content can be styled using CSS classes loaded using the <code class="nohighlight">style[]</code> tag. This tag can be used in multiple ways. If a url is provided, i.e. <code class="nohighlight">style(./my-css-url.css)[]</code>, then an HTML link element of type style is created behind the scenes. If CSS is placed between the square braces, i.e. <code class="nohighlight">style[.my-class { background-color: red}]</code>, then a style element with CSS content is created behind the scenes. If both are provided, then two elements are generated, one of each. <code class="nohighlight">link(&lt;some url&gt; type='style')[]</code> tag.</p><p>    CSS classes are applied to content using <code class="nohighlight">.&lt;class-name&gt;</code> inside the parenthetical configuration part of a tag, e.g. <code class="nohighlight">:p(.my-class1 .my-class2)[My content]</code>.</p><p>    Style can also be applied using the <code class="nohighlight">style</code> attribute of a tag. The style attribute can be in string or JSON format. If in JSON format, should use camelCase versions of CSS property names. For example, <code class="nohighlight">:p(style='width:200px;text-align:right;float:right')[My right content]</code>  and <code class="nohighlight">:p({style:{width:"200px";textAlign:"right",float:"right"}}')[My right content]</code> produce the same output.</p><p>My right content</p><p>    Left Content<br>    More left content<br>    </p></section>
 <section><h1 id="advanced-formulas" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Advanced Formulas<span class="autohelm-nav autohelm-nav-up-down"> <a href="#styling-content">&uarr;</a> <a href="#formulas-with-css-selectors-and-multiple-values">&darr;</a></span></h1><section><h2 id="formulas-with-css-selectors-and-multiple-values" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Formulas With CSS Selectors and Multiple Values<span class="autohelm-nav autohelm-nav-up-down"> <a href="#advanced-formulas">&uarr;</a> <a href="#macro-list-formatting">&darr;</a></span></h2><p>        You can use almost any <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors">CSS selector</a> in place of <code class="nohighlight">#id</code> in <code class="nohighlight">$(#&lt;id&gt;)</code>. The value returned will be the contents of the value property on the element or (if not available) the value attribute or the <code class="nohighlight">innerText</code>.</p><p>        You can use commas to select multiple identifier named elements, e.g. <code class="nohighlight">:value[$(#id1, #id2, #id3)]</code> is an array of the values associated with the elements <code class="nohighlight">:value(#id1)[3]</code>, <code class="nohighlight">:value(#id2)[2]</code>, <code class="nohighlight">:value(#id3)[1]</code> and will be <code class="nohighlight">[3,2,1]</code>.</p><p>        A value reference <code class="nohighlight">$(css-selector)</code> can end in <code class="nohighlight">[]</code> to indicate multiple values should be returned as an array if the selector does not contain a comma. This allows tables to be treated somewhat like spreadsheets.<br>    </p></section><section><h2 id="macro-list-formatting" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Macro List Formatting<span class="autohelm-nav autohelm-nav-up-down"> <a href="#formulas-with-css-selectors-and-multiple-values">&uarr;</a> <a href="#javascript">&darr;</a></span></h2><p>         The SECST formula evaluator supports supports some utility functions.<br>    </p></section><section><h2 id="javascript" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>JavaScript<span class="autohelm-nav autohelm-nav-up-down"> <a href="#macro-list-formatting">&uarr;</a> <a href="#configuring--extending--and-programming">&darr;</a></span></h2><p>        You can use any JavaScript that is available in <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API">WebWorkers</a> inside a macro. A special read-only <code class="nohighlight">document</code> object is also made available. This object has title, baseURI, location, and navigator properties along with a property for each meta tag name and value.<br>    </p></section></section>
 <section><h1 id="configuring--extending--and-programming" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Configuring, Extending, And Programming<span class="autohelm-nav autohelm-nav-up-down"> <a href="#advanced-formulas">&uarr;</a> <a href="#basic-configuration">&darr;</a></span></h1><section><h2 id="basic-configuration" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Basic Configuration<span class="autohelm-nav autohelm-nav-up-down"> <a href="#configuring--extending--and-programming">&uarr;</a> <a href="#semantic-options">&darr;</a></span></h2><section><h3 id="semantic-options" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Semantic Options<span class="autohelm-nav autohelm-nav-up-down"> <a href="#basic-configuration">&uarr;</a> <a href="#error-handling">&darr;</a></span></h3></section><section><h3 id="error-handling" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Error Handling<span class="autohelm-nav autohelm-nav-up-down"> <a href="#semantic-options">&uarr;</a> <a href="#tag-configuration">&darr;</a></span></h3><p>            Depending on your use case, the reference transpiler can be set to do one of the following when errors are encountered.</p><p>            <ul><li> cancel, stop processing and throw an error when the first problem is detected</li><li> collect, collect all the errors and return them with line numbers (if you are writing an editor)</li><li> leave the text version of the error generating mark-up in place (also collects the errors)</li><li> try to correct the errors (collects the errors and also returns a parse tree with corrected markup)</li></ul><br>        </p></section></section><section><h2 id="tag-configuration" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Tag Configuration<span class="autohelm-nav autohelm-nav-up-down"> <a href="#basic-configuration">&uarr;</a> <a href="#custom-tags">&darr;</a></span></h2></section><section><h2 id="custom-tags" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Custom Tags<span class="autohelm-nav autohelm-nav-up-down"> <a href="#tag-configuration">&uarr;</a> <a href="#custom-methods">&darr;</a></span></h2></section><section><h2 id="custom-methods" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Custom Methods<span class="autohelm-nav autohelm-nav-up-down"> <a href="#custom-tags">&uarr;</a> <a href="#event-listeners">&darr;</a></span></h2></section><section><h2 id="event-listeners" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Event Listeners<span class="autohelm-nav autohelm-nav-up-down"> <a href="#custom-methods">&uarr;</a> <a href="#tags">&darr;</a></span></h2></section></section>
-<section><h1 id="tags" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Complete List Of Tags<span class="autohelm-nav autohelm-nav-up-down"> <a href="#configuring--extending--and-programming">&uarr;</a> <a href="#design-objectives">&darr;</a></span></h1></section>
+<section><h1 id="tags" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Complete List Of Tags<span class="autohelm-nav autohelm-nav-up-down"> <a href="#configuring--extending--and-programming">&uarr;</a> <a href="#design-objectives">&darr;</a></span></h1><p>    <textarea class="secst" data-default="" data-template="" title="" data-mime-type="application/json" data-literal="" data-global-this="SECST.tagSpecs" data-fitcontent="">{
+  "a": {
+    "attributesAllowed": {
+      "url": true,
+      "href": true,
+      "ping": true,
+      "referrerpolicy": true,
+      "target": true,
+      "type": true
+    },
+    "contentAllowed": {
+      "abbr": true,
+      "b": true,
+      "bold": true,
+      "code": true,
+      "del": true,
+      "em": true,
+      "i": true,
+      "ins": true,
+      "italic": true,
+      "kbd": true,
+      "meta": true,
+      "mark": true,
+      "pre": true,
+      "q": true,
+      "samp": true,
+      "strike": true,
+      "strong": true,
+      "sub": true,
+      "sup": true,
+      "u": true,
+      "var": true
+    },
+    "transform": true
+  },
+  "abbr": {
+    "contentAllowed": {
+      "a": true,
+      "b": true,
+      "bold": true,
+      "code": true,
+      "del": true,
+      "em": true,
+      "i": true,
+      "ins": true,
+      "italic": true,
+      "kbd": true,
+      "meta": true,
+      "mark": true,
+      "pre": true,
+      "q": true,
+      "samp": true,
+      "strike": true,
+      "strong": true,
+      "sub": true,
+      "sup": true,
+      "u": true,
+      "var": true
+    }
+  },
+  "b": {
+    "contentAllowed": {
+      "a": true,
+      "abbr": true,
+      "bold": true,
+      "code": true,
+      "del": true,
+      "em": true,
+      "i": true,
+      "ins": true,
+      "italic": true,
+      "kbd": true,
+      "meta": true,
+      "mark": true,
+      "pre": true,
+      "q": true,
+      "samp": true,
+      "strike": true,
+      "strong": true,
+      "sub": true,
+      "sup": true,
+      "u": true,
+      "var": true
+    }
+  },
+  "bold": {
+    "contentAllowed": {
+      "a": true,
+      "abbr": true,
+      "b": true,
+      "code": true,
+      "del": true,
+      "em": true,
+      "i": true,
+      "ins": true,
+      "italic": true,
+      "kbd": true,
+      "meta": true,
+      "mark": true,
+      "pre": true,
+      "q": true,
+      "samp": true,
+      "strike": true,
+      "strong": true,
+      "sub": true,
+      "sup": true,
+      "u": true,
+      "var": true
+    }
+  },
+  "code": {
+    "attributesAllowed": {
+      "disabled": true,
+      "readonly": true,
+      "language": true
+    },
+    "contentAllowed": true,
+    "transform": true,
+    "mounted": true,
+    "requires": [
+      {
+        "tag": "link",
+        "attributes": {
+          "rel": "stylesheet",
+          "href": "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/styles/default.min.css"
+        }
+      }
+    ]
+  },
+  "del": {
+    "contentAllowed": {
+      "a": true,
+      "abbr": true,
+      "b": true,
+      "bold": true,
+      "code": true,
+      "em": true,
+      "i": true,
+      "ins": true,
+      "italic": true,
+      "kbd": true,
+      "meta": true,
+      "mark": true,
+      "pre": true,
+      "q": true,
+      "samp": true,
+      "strike": true,
+      "strong": true,
+      "sub": true,
+      "sup": true,
+      "u": true,
+      "var": true
+    }
+  },
+  "em": {
+    "contentAllowed": {
+      "a": true,
+      "abbr": true,
+      "b": true,
+      "bold": true,
+      "code": true,
+      "del": true,
+      "i": true,
+      "ins": true,
+      "italic": true,
+      "kbd": true,
+      "meta": true,
+      "mark": true,
+      "pre": true,
+      "q": true,
+      "samp": true,
+      "strike": true,
+      "strong": true,
+      "sub": true,
+      "sup": true,
+      "u": true,
+      "var": true
+    }
+  },
+  "i": {
+    "contentAllowed": {
+      "a": true,
+      "abbr": true,
+      "b": true,
+      "bold": true,
+      "code": true,
+      "del": true,
+      "em": true,
+      "ins": true,
+      "italic": true,
+      "kbd": true,
+      "meta": true,
+      "mark": true,
+      "pre": true,
+      "q": true,
+      "samp": true,
+      "strike": true,
+      "strong": true,
+      "sub": true,
+      "sup": true,
+      "u": true,
+      "var": true
+    }
+  },
+  "ins": {
+    "contentAllowed": {
+      "a": true,
+      "abbr": true,
+      "b": true,
+      "bold": true,
+      "code": true,
+      "del": true,
+      "em": true,
+      "i": true,
+      "italic": true,
+      "kbd": true,
+      "meta": true,
+      "mark": true,
+      "pre": true,
+      "q": true,
+      "samp": true,
+      "strike": true,
+      "strong": true,
+      "sub": true,
+      "sup": true,
+      "u": true,
+      "var": true
+    }
+  },
+  "italic": {
+    "contentAllowed": {
+      "a": true,
+      "abbr": true,
+      "b": true,
+      "bold": true,
+      "code": true,
+      "del": true,
+      "em": true,
+      "i": true,
+      "ins": true,
+      "kbd": true,
+      "meta": true,
+      "mark": true,
+      "pre": true,
+      "q": true,
+      "samp": true,
+      "strike": true,
+      "strong": true,
+      "sub": true,
+      "sup": true,
+      "u": true,
+      "var": true
+    }
+  },
+  "kbd": {
+    "contentAllowed": {
+      "a": true,
+      "abbr": true,
+      "b": true,
+      "bold": true,
+      "code": true,
+      "del": true,
+      "em": true,
+      "i": true,
+      "ins": true,
+      "italic": true,
+      "meta": true,
+      "mark": true,
+      "pre": true,
+      "q": true,
+      "samp": true,
+      "strike": true,
+      "strong": true,
+      "sub": true,
+      "sup": true,
+      "u": true,
+      "var": true
+    }
+  },
+  "meta": {
+    "contentAllowed": true,
+    "attributesAllowed": {
+      "name": true,
+      "content": true
+    },
+    "transform": true,
+    "connected": true
+  },
+  "mark": {
+    "contentAllowed": {
+      "a": true,
+      "abbr": true,
+      "b": true,
+      "bold": true,
+      "code": true,
+      "del": true,
+      "em": true,
+      "i": true,
+      "ins": true,
+      "italic": true,
+      "kbd": true,
+      "meta": true,
+      "pre": true,
+      "q": true,
+      "samp": true,
+      "strike": true,
+      "strong": true,
+      "sub": true,
+      "sup": true,
+      "u": true,
+      "var": true
+    }
+  },
+  "pre": {
+    "contentAllowed": {
+      "a": true,
+      "abbr": true,
+      "b": true,
+      "bold": true,
+      "code": true,
+      "del": true,
+      "em": true,
+      "i": true,
+      "ins": true,
+      "italic": true,
+      "kbd": true,
+      "meta": true,
+      "mark": true,
+      "q": true,
+      "samp": true,
+      "strike": true,
+      "strong": true,
+      "sub": true,
+      "sup": true,
+      "u": true,
+      "var": true
+    }
+  },
+  "q": {
+    "contentAllowed": {
+      "a": true,
+      "abbr": true,
+      "b": true,
+      "bold": true,
+      "code": true,
+      "del": true,
+      "em": true,
+      "i": true,
+      "ins": true,
+      "italic": true,
+      "kbd": true,
+      "meta": true,
+      "mark": true,
+      "pre": true,
+      "samp": true,
+      "strike": true,
+      "strong": true,
+      "sub": true,
+      "sup": true,
+      "u": true,
+      "var": true
+    }
+  },
+  "samp": {
+    "contentAllowed": {
+      "a": true,
+      "abbr": true,
+      "b": true,
+      "bold": true,
+      "code": true,
+      "del": true,
+      "em": true,
+      "i": true,
+      "ins": true,
+      "italic": true,
+      "kbd": true,
+      "meta": true,
+      "mark": true,
+      "pre": true,
+      "q": true,
+      "strike": true,
+      "strong": true,
+      "sub": true,
+      "sup": true,
+      "u": true,
+      "var": true
+    }
+  },
+  "strike": {
+    "contentAllowed": {
+      "a": true,
+      "abbr": true,
+      "b": true,
+      "bold": true,
+      "code": true,
+      "del": true,
+      "em": true,
+      "i": true,
+      "ins": true,
+      "italic": true,
+      "kbd": true,
+      "meta": true,
+      "mark": true,
+      "pre": true,
+      "q": true,
+      "samp": true,
+      "strong": true,
+      "sub": true,
+      "sup": true,
+      "u": true,
+      "var": true
+    }
+  },
+  "strong": {
+    "contentAllowed": {
+      "a": true,
+      "abbr": true,
+      "b": true,
+      "bold": true,
+      "code": true,
+      "del": true,
+      "em": true,
+      "i": true,
+      "ins": true,
+      "italic": true,
+      "kbd": true,
+      "meta": true,
+      "mark": true,
+      "pre": true,
+      "q": true,
+      "samp": true,
+      "strike": true,
+      "sub": true,
+      "sup": true,
+      "u": true,
+      "var": true
+    }
+  },
+  "sub": {
+    "contentAllowed": {
+      "a": true,
+      "abbr": true,
+      "b": true,
+      "bold": true,
+      "code": true,
+      "del": true,
+      "em": true,
+      "i": true,
+      "ins": true,
+      "italic": true,
+      "kbd": true,
+      "meta": true,
+      "mark": true,
+      "pre": true,
+      "q": true,
+      "samp": true,
+      "strike": true,
+      "strong": true,
+      "sup": true,
+      "u": true,
+      "var": true
+    }
+  },
+  "sup": {
+    "contentAllowed": {
+      "a": true,
+      "abbr": true,
+      "b": true,
+      "bold": true,
+      "code": true,
+      "del": true,
+      "em": true,
+      "i": true,
+      "ins": true,
+      "italic": true,
+      "kbd": true,
+      "meta": true,
+      "mark": true,
+      "pre": true,
+      "q": true,
+      "samp": true,
+      "strike": true,
+      "strong": true,
+      "sub": true,
+      "u": true,
+      "var": true
+    }
+  },
+  "u": {
+    "contentAllowed": {
+      "a": true,
+      "abbr": true,
+      "b": true,
+      "bold": true,
+      "code": true,
+      "del": true,
+      "em": true,
+      "i": true,
+      "ins": true,
+      "italic": true,
+      "kbd": true,
+      "meta": true,
+      "mark": true,
+      "pre": true,
+      "q": true,
+      "samp": true,
+      "strike": true,
+      "strong": true,
+      "sub": true,
+      "sup": true,
+      "var": true
+    }
+  },
+  "var": {
+    "contentAllowed": {
+      "default": true,
+      "textContent": true
+    }
+  },
+  "default": {
+    "a": true,
+    "abbr": true,
+    "b": true,
+    "bold": true,
+    "code": true,
+    "del": true,
+    "em": true,
+    "i": true,
+    "ins": true,
+    "italic": true,
+    "kbd": true,
+    "meta": true,
+    "mark": true,
+    "pre": true,
+    "q": true,
+    "samp": true,
+    "strike": true,
+    "strong": true,
+    "sub": true,
+    "sup": true,
+    "u": true,
+    "var": {}
+  },
+  "textContent": {
+    "a": true,
+    "abbr": true,
+    "b": true,
+    "bold": true,
+    "code": true,
+    "del": true,
+    "em": true,
+    "i": true,
+    "ins": true,
+    "italic": true,
+    "kbd": true,
+    "meta": true,
+    "mark": true,
+    "pre": true,
+    "q": true,
+    "samp": true,
+    "strike": true,
+    "strong": true,
+    "sub": true,
+    "sup": true,
+    "u": true,
+    "var": {}
+  },
+  "&": {
+    "contentAllowed": true,
+    "transform": true,
+    "beforeMount": true
+  },
+  "br": {},
+  "details": {
+    "contentAllowed": {
+      "summary": true,
+      "a": true,
+      "abbr": true,
+      "b": true,
+      "bold": true,
+      "code": true,
+      "del": true,
+      "em": true,
+      "i": true,
+      "ins": true,
+      "italic": true,
+      "kbd": true,
+      "meta": true,
+      "mark": true,
+      "pre": true,
+      "q": true,
+      "samp": true,
+      "strike": true,
+      "strong": true,
+      "sub": true,
+      "sup": true,
+      "u": true,
+      "var": true,
+      "&": true,
+      "br": true,
+      "details": true,
+      "dl": true,
+      "emoji": true,
+      "escape": true,
+      "footnote": true,
+      "hashtag": true,
+      "hr": true,
+      "input": true,
+      "img": true,
+      "latex": true,
+      "@facebook": true,
+      "@github": true,
+      "@linkedin": true,
+      "@twitter": true,
+      "ol": true,
+      "question": true,
+      "table": true,
+      "textarea": true,
+      "transpiled": true,
+      "ul": true,
+      "value": true
+    },
+    "transform": true
+  },
+  "summary": {
+    "contentAllowed": {
+      "a": true,
+      "abbr": true,
+      "b": true,
+      "bold": true,
+      "code": true,
+      "del": true,
+      "em": true,
+      "i": true,
+      "ins": true,
+      "italic": true,
+      "kbd": true,
+      "meta": true,
+      "mark": true,
+      "pre": true,
+      "q": true,
+      "samp": true,
+      "strike": true,
+      "strong": true,
+      "sub": true,
+      "sup": true,
+      "u": true,
+      "var": true
+    }
+  },
+  "dl": {
+    "contentAllowed": {
+      "dt": true,
+      "dd": true
+    }
+  },
+  "dt": {
+    "contentAllowed": {
+      "a": true,
+      "abbr": true,
+      "b": true,
+      "bold": true,
+      "code": true,
+      "del": true,
+      "em": true,
+      "i": true,
+      "ins": true,
+      "italic": true,
+      "kbd": true,
+      "meta": true,
+      "mark": true,
+      "pre": true,
+      "q": true,
+      "samp": true,
+      "strike": true,
+      "strong": true,
+      "sub": true,
+      "sup": true,
+      "u": true,
+      "var": true,
+      "&": true,
+      "br": true,
+      "details": true,
+      "emoji": true,
+      "escape": true,
+      "footnote": true,
+      "hashtag": true,
+      "hr": true,
+      "input": true,
+      "img": true,
+      "latex": true,
+      "@facebook": true,
+      "@github": true,
+      "@linkedin": true,
+      "@twitter": true,
+      "ol": true,
+      "question": true,
+      "table": true,
+      "textarea": true,
+      "transpiled": true,
+      "ul": true,
+      "value": true
+    }
+  },
+  "emoji": {
+    "attributesAllowed": {
+      "greyscale": true,
+      "grayscale": true,
+      "filter": true
+    },
+    "contentAllowed": true,
+    "toElement": true
+  },
+  "escape": {
+    "contentAllowed": true,
+    "beforeMount": true
+  },
+  "footnote": {
+    "contentAllowed": {
+      "a": true,
+      "abbr": true,
+      "b": true,
+      "bold": true,
+      "code": true,
+      "del": true,
+      "em": true,
+      "i": true,
+      "ins": true,
+      "italic": true,
+      "kbd": true,
+      "meta": true,
+      "mark": true,
+      "pre": true,
+      "q": true,
+      "samp": true,
+      "strike": true,
+      "strong": true,
+      "sub": true,
+      "sup": true,
+      "u": true,
+      "var": true,
+      "&": true,
+      "br": true,
+      "details": true,
+      "dl": true,
+      "emoji": true,
+      "escape": true,
+      "hashtag": true,
+      "hr": true,
+      "input": true,
+      "img": true,
+      "latex": true,
+      "@facebook": true,
+      "@github": true,
+      "@linkedin": true,
+      "@twitter": true,
+      "ol": true,
+      "question": true,
+      "table": true,
+      "textarea": true,
+      "transpiled": true,
+      "ul": true,
+      "value": true
+    },
+    "attributesAllowed": {
+      "url": true,
+      "href": true
+    },
+    "transform": true,
+    "beforeMount": true
+  },
+  "hashtag": {
+    "contentAllowed": true,
+    "transform": true,
+    "toText": true,
+    "connected": true
+  },
+  "hr": {},
+  "input": {
+    "attributesAllowed": {
+      "title": true,
+      "type": true,
+      "value": true
+    }
+  },
+  "img": {
+    "attributesAllowed": {
+      "alt": true,
+      "static": true,
+      "height": true,
+      "width": true,
+      "align": true,
+      "decoding": true,
+      "ismap": true,
+      "type": true,
+      "loading": true,
+      "src": true,
+      "title": true,
+      "url": true
+    },
+    "transform": true,
+    "beforeMount": true,
+    "toJSONLD": true
+  },
+  "latex": {
+    "contentAllowed": true,
+    "requires": [
+      {
+        "tag": "link",
+        "attributes": {
+          "rel": "stylesheet",
+          "href": "https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css",
+          "integrity": "sha384-Juol1FqnotbkyZUT5Z7gUPjQ9gzlwCENvUZTpQBAPxtusdwFLRy382PSDx5UUJ4/",
+          "crossOrigin": "anonymous"
+        }
+      },
+      {
+        "tag": "script",
+        "attributes": {
+          "src": "https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js",
+          "integrity": "sha384-PwRUT/YqbnEjkZO0zZxNqcxACrXe+j766U2amXcgMg5457rve2Y7I6ZJSm2A0mS4",
+          "crossOrigin": "anonymous"
+        }
+      },
+      {
+        "tag": "script",
+        "attributes": {
+          "src": "https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/mhchem.min.js",
+          "integrity": "sha384-RTN08a0AXIioPBcVosEqPUfKK+rPp+h1x/izR7xMkdMyuwkcZCWdxO+RSwIFtJXN",
+          "crossOrigin": "anonymous"
+        }
+      }
+    ],
+    "transform": true,
+    "beforeMount": true,
+    "toHTML": true
+  },
+  "@facebook": {
+    "attributesAllowed": {
+      "href": true,
+      "target": true
+    },
+    "contentAllowed": true,
+    "transform": true
+  },
+  "@github": {
+    "attributesAllowed": {
+      "href": true,
+      "target": true
+    },
+    "contentAllowed": true,
+    "transform": true
+  },
+  "@linkedin": {
+    "attributesAllowed": {
+      "href": true,
+      "target": true
+    },
+    "contentAllowed": true,
+    "transform": true
+  },
+  "@twitter": {
+    "attributesAllowed": {
+      "href": true,
+      "target": true
+    },
+    "contentAllowed": true,
+    "transform": true
+  },
+  "ol": {
+    "indirectChildAllowed": true,
+    "attributesAllowed": {
+      "reversed": true,
+      "start": true,
+      "type": true
+    },
+    "contentAllowed": {
+      "forEach": true,
+      "li": true
+    },
+    "transform": true
+  },
+  "forEach": {
+    "attributesAllowed": {
+      "iterable": true
+    },
+    "contentAllowed": {
+      "a": true,
+      "abbr": true,
+      "b": true,
+      "bold": true,
+      "code": true,
+      "del": true,
+      "em": true,
+      "i": true,
+      "ins": true,
+      "italic": true,
+      "kbd": true,
+      "meta": true,
+      "mark": true,
+      "pre": true,
+      "q": true,
+      "samp": true,
+      "strike": true,
+      "strong": true,
+      "sub": true,
+      "sup": true,
+      "u": true,
+      "var": true,
+      "&": true,
+      "br": true,
+      "details": true,
+      "summary": true,
+      "dl": true,
+      "dt": true,
+      "emoji": true,
+      "escape": true,
+      "footnote": true,
+      "hashtag": true,
+      "hr": true,
+      "input": true,
+      "img": true,
+      "latex": true,
+      "@facebook": true,
+      "@github": true,
+      "@linkedin": true,
+      "@twitter": true,
+      "ol": true,
+      "forEach": true,
+      "li": true,
+      "question": true,
+      "text": true,
+      "table": true,
+      "tbody": true,
+      "tr": true,
+      "td": true,
+      "th": true,
+      "tfoot": true,
+      "thead": true,
+      "caption": true,
+      "textarea": true,
+      "transpiled": true,
+      "ul": true,
+      "value": true,
+      "answer": true,
+      "dd": true
+    },
+    "connected": true
+  },
+  "li": {
+    "breakOnNewline": true,
+    "attributesAllowed": {
+      "value": true,
+      "type": true
+    },
+    "contentAllowed": {
+      "a": true,
+      "abbr": true,
+      "b": true,
+      "bold": true,
+      "code": true,
+      "del": true,
+      "em": true,
+      "i": true,
+      "ins": true,
+      "italic": true,
+      "kbd": true,
+      "meta": true,
+      "mark": true,
+      "pre": true,
+      "q": true,
+      "samp": true,
+      "strike": true,
+      "strong": true,
+      "sub": true,
+      "sup": true,
+      "u": true,
+      "var": true,
+      "&": true,
+      "br": true,
+      "details": true,
+      "dl": true,
+      "emoji": true,
+      "escape": true,
+      "footnote": true,
+      "hashtag": true,
+      "hr": true,
+      "input": true,
+      "img": true,
+      "latex": true,
+      "@facebook": true,
+      "@github": true,
+      "@linkedin": true,
+      "@twitter": true,
+      "ol": true,
+      "question": true,
+      "table": true,
+      "textarea": true,
+      "transpiled": true,
+      "ul": true,
+      "value": true
+    }
+  },
+  "question": {
+    "attributesAllowed": {
+      "type": true,
+      "showanswer": true
+    },
+    "contentAllowed": {
+      "text": true,
+      "answer": true,
+      "value": true
+    },
+    "transform": true,
+    "beforeMount": true,
+    "listeners": {}
+  },
+  "text": {
+    "contentAllowed": {
+      "a": true,
+      "abbr": true,
+      "b": true,
+      "bold": true,
+      "code": true,
+      "del": true,
+      "em": true,
+      "i": true,
+      "ins": true,
+      "italic": true,
+      "kbd": true,
+      "meta": true,
+      "mark": true,
+      "pre": true,
+      "q": true,
+      "samp": true,
+      "strike": true,
+      "strong": true,
+      "sub": true,
+      "sup": true,
+      "u": true,
+      "var": true,
+      "&": true,
+      "br": true,
+      "details": true,
+      "dl": true,
+      "emoji": true,
+      "escape": true,
+      "footnote": true,
+      "hashtag": true,
+      "hr": true,
+      "input": true,
+      "img": true,
+      "latex": true,
+      "@facebook": true,
+      "@github": true,
+      "@linkedin": true,
+      "@twitter": true,
+      "ol": true,
+      "question": true,
+      "table": true,
+      "textarea": true,
+      "transpiled": true,
+      "ul": true,
+      "value": true
+    },
+    "beforeMount": true
+  },
+  "table": {
+    "contentAllowed": {
+      "tbody": true,
+      "tfoot": true,
+      "thead": true,
+      "caption": true,
+      "tr": true
+    },
+    "transform": true,
+    "mounted": true
+  },
+  "tbody": {
+    "contentAllowed": {
+      "tr": true
+    }
+  },
+  "tr": {
+    "attributesAllowed": {
+      "rowspan": true
+    },
+    "contentAllowed": {
+      "td": true,
+      "th": true
+    },
+    "transform": true
+  },
+  "td": {
+    "attributesAllowed": {
+      "colspan": true
+    },
+    "contentAllowed": {
+      "a": true,
+      "abbr": true,
+      "b": true,
+      "bold": true,
+      "code": true,
+      "del": true,
+      "em": true,
+      "i": true,
+      "ins": true,
+      "italic": true,
+      "kbd": true,
+      "meta": true,
+      "mark": true,
+      "pre": true,
+      "q": true,
+      "samp": true,
+      "strike": true,
+      "strong": true,
+      "sub": true,
+      "sup": true,
+      "u": true,
+      "var": true,
+      "&": true,
+      "br": true,
+      "details": true,
+      "dl": true,
+      "emoji": true,
+      "escape": true,
+      "footnote": true,
+      "hashtag": true,
+      "hr": true,
+      "input": true,
+      "img": true,
+      "latex": true,
+      "@facebook": true,
+      "@github": true,
+      "@linkedin": true,
+      "@twitter": true,
+      "ol": true,
+      "question": true,
+      "table": true,
+      "textarea": true,
+      "transpiled": true,
+      "ul": true,
+      "value": true
+    }
+  },
+  "textarea": {
+    "contentAllowed": true,
+    "attributesAllowed": {
+      "disabled": true,
+      "value": true,
+      "readonly": true
+    },
+    "render": true,
+    "transform": true
+  },
+  "transpiled": {
+    "contentAllowed": {
+      "blockquote": true,
+      "h": true,
+      "h1": true,
+      "h2": true,
+      "h3": true,
+      "h4": true,
+      "h5": true,
+      "h6": true,
+      "h7": true,
+      "h8": true,
+      "mermaidChart": true,
+      "p": true,
+      "a": true,
+      "abbr": true,
+      "b": true,
+      "bold": true,
+      "code": true,
+      "del": true,
+      "em": true,
+      "i": true,
+      "ins": true,
+      "italic": true,
+      "kbd": true,
+      "meta": true,
+      "mark": true,
+      "pre": true,
+      "q": true,
+      "samp": true,
+      "strike": true,
+      "strong": true,
+      "sub": true,
+      "sup": true,
+      "u": true,
+      "var": true,
+      "&": true,
+      "br": true,
+      "details": true,
+      "dl": true,
+      "emoji": true,
+      "escape": true,
+      "footnote": true,
+      "hashtag": true,
+      "hr": true,
+      "input": true,
+      "img": true,
+      "latex": true,
+      "@facebook": true,
+      "@github": true,
+      "@linkedin": true,
+      "@twitter": true,
+      "ol": true,
+      "question": true,
+      "table": true,
+      "textarea": true,
+      "transpiled": true,
+      "ul": true,
+      "value": true,
+      "article": true,
+      "NewsArticle": true,
+      "section": true,
+      "toc": true,
+      "sheetMusic": true,
+      "link": true,
+      "listeners": true,
+      "style": true,
+      "title": true
+    },
+    "beforeConnect": true,
+    "mounted": true,
+    "requires": [
+      {
+        "tag": "link",
+        "attributes": {
+          "rel": "stylesheet",
+          "href": "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/styles/default.min.css"
+        }
+      }
+    ]
+  },
+  "blockquote": {},
+  "h": {
+    "contentAllowed": {
+      "a": true,
+      "abbr": true,
+      "b": true,
+      "bold": true,
+      "code": true,
+      "del": true,
+      "em": true,
+      "i": true,
+      "ins": true,
+      "italic": true,
+      "kbd": true,
+      "meta": true,
+      "mark": true,
+      "pre": true,
+      "q": true,
+      "samp": true,
+      "strike": true,
+      "strong": true,
+      "sub": true,
+      "sup": true,
+      "u": true,
+      "var": true
+    },
+    "transform": true
+  },
+  "h1": {
+    "contentAllowed": {
+      "a": true,
+      "abbr": true,
+      "b": true,
+      "bold": true,
+      "code": true,
+      "del": true,
+      "em": true,
+      "i": true,
+      "ins": true,
+      "italic": true,
+      "kbd": true,
+      "meta": true,
+      "mark": true,
+      "pre": true,
+      "q": true,
+      "samp": true,
+      "strike": true,
+      "strong": true,
+      "sub": true,
+      "sup": true,
+      "u": true,
+      "var": true
+    }
+  },
+  "h2": {
+    "contentAllowed": {
+      "a": true,
+      "abbr": true,
+      "b": true,
+      "bold": true,
+      "code": true,
+      "del": true,
+      "em": true,
+      "i": true,
+      "ins": true,
+      "italic": true,
+      "kbd": true,
+      "meta": true,
+      "mark": true,
+      "pre": true,
+      "q": true,
+      "samp": true,
+      "strike": true,
+      "strong": true,
+      "sub": true,
+      "sup": true,
+      "u": true,
+      "var": true
+    }
+  },
+  "h3": {
+    "contentAllowed": {
+      "a": true,
+      "abbr": true,
+      "b": true,
+      "bold": true,
+      "code": true,
+      "del": true,
+      "em": true,
+      "i": true,
+      "ins": true,
+      "italic": true,
+      "kbd": true,
+      "meta": true,
+      "mark": true,
+      "pre": true,
+      "q": true,
+      "samp": true,
+      "strike": true,
+      "strong": true,
+      "sub": true,
+      "sup": true,
+      "u": true,
+      "var": true
+    }
+  },
+  "h4": {
+    "contentAllowed": {
+      "a": true,
+      "abbr": true,
+      "b": true,
+      "bold": true,
+      "code": true,
+      "del": true,
+      "em": true,
+      "i": true,
+      "ins": true,
+      "italic": true,
+      "kbd": true,
+      "meta": true,
+      "mark": true,
+      "pre": true,
+      "q": true,
+      "samp": true,
+      "strike": true,
+      "strong": true,
+      "sub": true,
+      "sup": true,
+      "u": true,
+      "var": true
+    }
+  },
+  "h5": {
+    "contentAllowed": {
+      "a": true,
+      "abbr": true,
+      "b": true,
+      "bold": true,
+      "code": true,
+      "del": true,
+      "em": true,
+      "i": true,
+      "ins": true,
+      "italic": true,
+      "kbd": true,
+      "meta": true,
+      "mark": true,
+      "pre": true,
+      "q": true,
+      "samp": true,
+      "strike": true,
+      "strong": true,
+      "sub": true,
+      "sup": true,
+      "u": true,
+      "var": true
+    }
+  },
+  "h6": {
+    "contentAllowed": {
+      "a": true,
+      "abbr": true,
+      "b": true,
+      "bold": true,
+      "code": true,
+      "del": true,
+      "em": true,
+      "i": true,
+      "ins": true,
+      "italic": true,
+      "kbd": true,
+      "meta": true,
+      "mark": true,
+      "pre": true,
+      "q": true,
+      "samp": true,
+      "strike": true,
+      "strong": true,
+      "sub": true,
+      "sup": true,
+      "u": true,
+      "var": true
+    }
+  },
+  "h7": {
+    "contentAllowed": {
+      "a": true,
+      "abbr": true,
+      "b": true,
+      "bold": true,
+      "code": true,
+      "del": true,
+      "em": true,
+      "i": true,
+      "ins": true,
+      "italic": true,
+      "kbd": true,
+      "meta": true,
+      "mark": true,
+      "pre": true,
+      "q": true,
+      "samp": true,
+      "strike": true,
+      "strong": true,
+      "sub": true,
+      "sup": true,
+      "u": true,
+      "var": true
+    }
+  },
+  "h8": {
+    "contentAllowed": {
+      "a": true,
+      "abbr": true,
+      "b": true,
+      "bold": true,
+      "code": true,
+      "del": true,
+      "em": true,
+      "i": true,
+      "ins": true,
+      "italic": true,
+      "kbd": true,
+      "meta": true,
+      "mark": true,
+      "pre": true,
+      "q": true,
+      "samp": true,
+      "strike": true,
+      "strong": true,
+      "sub": true,
+      "sup": true,
+      "u": true,
+      "var": true
+    }
+  },
+  "mermaidChart": {
+    "contentAllowed": true,
+    "requires": [
+      {
+        "tag": "script",
+        "attributes": {
+          "src": "https://cdn.jsdelivr.net/npm/mermaid@9/dist/mermaid.min.js",
+          "onload": "(() => { mermaid.initialize({ startOnLoad: true }) })()"
+        }
+      }
+    ],
+    "transform": true,
+    "beforeMount": true,
+    "toHTML": true,
+    "connected": true
+  },
+  "p": {
+    "stringsAllowed": true,
+    "contentAllowed": {
+      "a": true,
+      "abbr": true,
+      "b": true,
+      "bold": true,
+      "code": true,
+      "del": true,
+      "em": true,
+      "i": true,
+      "ins": true,
+      "italic": true,
+      "kbd": true,
+      "meta": true,
+      "mark": true,
+      "pre": true,
+      "q": true,
+      "samp": true,
+      "strike": true,
+      "strong": true,
+      "sub": true,
+      "sup": true,
+      "u": true,
+      "var": true,
+      "&": true,
+      "br": true,
+      "details": true,
+      "dl": true,
+      "emoji": true,
+      "escape": true,
+      "footnote": true,
+      "hashtag": true,
+      "hr": true,
+      "input": true,
+      "img": true,
+      "latex": true,
+      "@facebook": true,
+      "@github": true,
+      "@linkedin": true,
+      "@twitter": true,
+      "ol": true,
+      "question": true,
+      "table": true,
+      "textarea": true,
+      "transpiled": true,
+      "ul": true,
+      "value": true
+    },
+    "transform": true
+  },
+  "ul": {},
+  "value": {
+    "attributesAllowed": {
+      "fitcontent": true,
+      "default": true,
+      "disabled": true,
+      "extract": true,
+      "editable": true,
+      "literal": true,
+      "format": true,
+      "hidden": true,
+      "globalThis": true,
+      "readonly": true,
+      "url": true,
+      "plaintext": true,
+      "src": true,
+      "static": true,
+      "template": true,
+      "title": true,
+      "type": true,
+      "value": true
+    },
+    "contentAllowed": "*",
+    "transform": true,
+    "beforeMount": true,
+    "connected": true
+  },
+  "article": {},
+  "NewsArticle": {},
+  "section": {},
+  "toc": {
+    "contentAllowed": true,
+    "attributesAllowed": {
+      "toggle": true
+    },
+    "transform": true
+  },
+  "sheetMusic": {
+    "contentAllowed": true,
+    "requires": [
+      {
+        "tag": "script",
+        "attributes": {
+          "src": "https://cdn.jsdelivr.net/npm/@anywhichway/quick-component@0.0.14/quick-component.min.js",
+          "component": "https://cdn.jsdelivr.net/npm/@anywhichway/sheet-music@0.0.1"
+        }
+      }
+    ],
+    "beforeMount": true,
+    "toHTML": true
+  },
+  "link": {
+    "attributesAllowed": {
+      "url": true,
+      "href": true,
+      "type": true
+    }
+  },
+  "listeners": {
+    "listeners": {
+      "contentAllowed": true
+    }
+  },
+  "style": {
+    "contentAllowed": true,
+    "transform": true
+  },
+  "title": {
+    "contentAllowed": true,
+    "connected": true
+  },
+  "th": {
+    "attributesAllowed": {
+      "colspan": true
+    },
+    "contentAllowed": {
+      "a": true,
+      "abbr": true,
+      "b": true,
+      "bold": true,
+      "code": true,
+      "del": true,
+      "em": true,
+      "i": true,
+      "ins": true,
+      "italic": true,
+      "kbd": true,
+      "meta": true,
+      "mark": true,
+      "pre": true,
+      "q": true,
+      "samp": true,
+      "strike": true,
+      "strong": true,
+      "sub": true,
+      "sup": true,
+      "u": true,
+      "var": true,
+      "&": true,
+      "br": true,
+      "details": true,
+      "dl": true,
+      "emoji": true,
+      "escape": true,
+      "footnote": true,
+      "hashtag": true,
+      "hr": true,
+      "input": true,
+      "img": true,
+      "latex": true,
+      "@facebook": true,
+      "@github": true,
+      "@linkedin": true,
+      "@twitter": true,
+      "ol": true,
+      "question": true,
+      "table": true,
+      "textarea": true,
+      "transpiled": true,
+      "ul": true,
+      "value": true
+    }
+  },
+  "tfoot": {
+    "contentAllowed": "*"
+  },
+  "thead": {
+    "contentAllowed": {
+      "tr": true
+    },
+    "transform": true
+  },
+  "caption": {
+    "contentAllowed": {
+      "a": true,
+      "abbr": true,
+      "b": true,
+      "bold": true,
+      "code": true,
+      "del": true,
+      "em": true,
+      "i": true,
+      "ins": true,
+      "italic": true,
+      "kbd": true,
+      "meta": true,
+      "mark": true,
+      "pre": true,
+      "q": true,
+      "samp": true,
+      "strike": true,
+      "strong": true,
+      "sub": true,
+      "sup": true,
+      "u": true,
+      "var": true
+    }
+  },
+  "answer": {
+    "attributesAllowed": {
+      "type": true,
+      "value": true,
+      "literal": true
+    },
+    "contentAllowed": true,
+    "beforeMount": true
+  },
+  "dd": {
+    "contentAllowed": {
+      "a": true,
+      "abbr": true,
+      "b": true,
+      "bold": true,
+      "code": true,
+      "del": true,
+      "em": true,
+      "i": true,
+      "ins": true,
+      "italic": true,
+      "kbd": true,
+      "meta": true,
+      "mark": true,
+      "pre": true,
+      "q": true,
+      "samp": true,
+      "strike": true,
+      "strong": true,
+      "sub": true,
+      "sup": true,
+      "u": true,
+      "var": true,
+      "&": true,
+      "br": true,
+      "details": true,
+      "emoji": true,
+      "escape": true,
+      "footnote": true,
+      "hashtag": true,
+      "hr": true,
+      "input": true,
+      "img": true,
+      "latex": true,
+      "@facebook": true,
+      "@github": true,
+      "@linkedin": true,
+      "@twitter": true,
+      "ol": true,
+      "question": true,
+      "table": true,
+      "textarea": true,
+      "transpiled": true,
+      "ul": true,
+      "value": true
+    }
+  }
+}</textarea>;<br></p></section>
 <section><h1 id="design-objectives" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Design Objectives<span class="autohelm-nav autohelm-nav-up-down"> <a href="#tags">&uarr;</a> <a href="#grammar">&darr;</a></span></h1><p>    <em>Note, not all design objectives are fully implemented</em>.</p><p>    <ul><li> Easy to understand, simple syntax, semantic</li><li> Easy to learn, limited syntax, semantic</li><li> Forgiving, auto corrects nesting, table column count, etc.</li><li> Easy to extend, uniform syntax, declarative language elements        li[Secure, transpiler ensures security, also see  :a({"href":"#security"})[Security]]</li><li> Performant, simple syntax reduces parser work, although iterating over tag object definitions can take time</li><li> Small, simple syntax reduces parser size, although tag object definitions can take up memory</li><li> Configurable, declarative language elements</li><li> Comprehensive, all of semantic HTML and more (extensible)</li><li> Computational, reactivity built-in, advanced math built in, simple user input mechanisms</li><li> Programmable, simple event handling plus API</li><li> Styled, code highlighting built-in, optional CSS capability</li><li> Portable, HTML output with asset bundling options        li[SEO Friendly, browser or server rendering, meta tags driven by hashtags and an explicit  :code[:keywords[]]  tag]</li></ul><br></p></section>
 <section><h1 id="grammar" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Grammar<span class="autohelm-nav autohelm-nav-up-down"> <a href="#design-objectives">&uarr;</a> <a href="#architecture">&darr;</a></span></h1><p>    All SECST markup takes one of two forms:</p><p>    <ul><li><code class="nohighlight">:&lt;tag&gt;[&lt;content&gt;...]</code> where code:[&lt;content&gt;] is SECST markup ans text.</li><li><code class="nohighlight">:&lt;tag&gt;(#&lt;id&gt; .&lt;class&gt;... &lt;unaryattribute&gt;... &lt;attributes&gt;...)[&lt;content&gt;...]</code> where  <code class="nohighlight">&lt;id&gt;</code>,  <code class="nohighlight">&lt;class&gt;</code> space separated list,  <code class="nohighlight">&lt;unaryattribute&gt;</code> space separated list, <code class="nohighlight">&lt;attributes&gt;</code> JSON5 object are all optional, but must be provided in that order if present.</li></ul></p><p>    In some cases, e.g. for <code class="nohighlight">:hr</code>, <code class="nohighlight">:br</code>, and <code class="nohighlight">:value</code> the trailing <code class="nohighlight">[]</code> are optional.</p><p>    The reference implementation uses a <a target="_tab" href="https://pegjs.org/">PEG parser</a> and this grammar:</p><p>    <textarea class="secst" data-mime-type="text/plain" data-default="" title="./src/grammar.txt" data-fitcontent="" disabled=""> {
         function* flattenContent(content) {
@@ -2119,7 +2913,7 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
 
     _ "whitespace"
         = whitespace:[ \t\n\r]* { return whitespace.join("") }</value.length></textarea><br></p></section>
-<section><h1 id="architecture" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Architecture<span class="autohelm-nav autohelm-nav-up-down"> <a href="#grammar">&uarr;</a> <a href="#semantic-architecture">&darr;</a></span></h1><section><h2 id="semantic-architecture" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Semantic Architecture<span class="autohelm-nav autohelm-nav-up-down"> <a href="#architecture">&uarr;</a> <a href="#data-architecture">&darr;</a></span></h2><p>        The Mozilla Development Network, a.k.a. , documents several HTML tag content categories:</p><p>        <ul><li> <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#metadata_content">Metadata content</a>, e.g. <code class="nohighlight">&lt;link&gt;</code>, <code class="nohighlight">&lt;style</code>.</li><li> <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#flow_content">Flow content</a>, most elements that can go inside <code class="nohighlight">&lt;body&gt;</code>.</li><li> <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#sectioning_content">Sectioning Content</a>, e.g. <code class="nohighlight">&lt;section&gt;</code>, <code class="nohighlight">&lt;artcile&gt;</code>.</li><li> <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#heading_content">Heading Content</a>, e.g, <code class="nohighlight">&lt;h1&gt;</code>, <code class="nohighlight">&lt;h2&gt;</code>.</li><li> <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#phrasing_content">Phrasing Content</a>, i.e. anything that can go in a paragraph, <code class="nohighlight">&lt;p&gt;</code>.</li><li> <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#embedded_content">Embedded Content</a>, e.g. <code class="nohighlight">&lt;img&gt;</code>, <code class="nohighlight">audio</code>, that cab be used in the same places as flow content.</li><li> <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#interactive_content">Interactive Content</a>, i.e. that specifically designed to support user interaction, e.g. <code class="nohighlight">&lt;a&gt;</code>, <code class="nohighlight">&lt;input&gt;</code>.</li><li> <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#form-associated_content">Form Associated Content</a>, i.e. elements that are usually seen inside a form, but might not support interaction, e.g. <code class="nohighlight">&lt;progress&gt;</code>.</li></ul></p><p>        SECST uses these content types to determine what types of tags can exists inside other tags with a few enhancements or exceptions:</p><p>        <ul><li> A content category Text Content, which is a sub-set of Phrasing Content that is typically displayed inline and does not allow a tag to be nested inside itself because it would be redundant, e.g. <code class="nohighlight">&lt;strong&gt;</code>.</li><li> A content category Block Content, which includes all Flow Content that is not included in Text Content, e.g. <code class="nohighlight">&lt;table&gt;</code>.</li><li> A content category Body Content, which specifically enumerated tags allowed in a <code class="nohighlight">&lt;body&gt;</code>, including <code class="nohighlight">&lt;style&gt;</code> and <code class="nohighlight">&lt;link&gt;</code> which are usually in a <code class="nohighlight">&lt;head&gt;</code> section, but may exist in a <code class="nohighlight">&lt;body&gt;</code>.</li><li> All Flow Content <strong>MUST</strong> be inside of Sectioning Content.</li><li> Common cases where browsers support elements in an alternate context that makes semantic sense, e.g. <code class="nohighlight">:progress[]</code> can exist outside a <code class="nohighlight">&lt;form&gt;</code>.</li><li> JSON-LD tags, which are treated as Sectioning Content.</li></ul></p></section><section><h2 id="data-architecture" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Data Architecture<span class="autohelm-nav autohelm-nav-up-down"> <a href="#semantic-architecture">&uarr;</a> <a href="#project-architecture">&darr;</a></span></h2><p>        The relationship between tags is represented as a cyclical JSON structure. The bulk of of the structure is static, but some of is dynamic and memoized to address its cyclical nature.</p><p>        Tags are defined with the following parts:</p><p>        <pre class="secst"><code class="nohighlight">{
+<section><h1 id="architecture" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Architecture<span class="autohelm-nav autohelm-nav-up-down"> <a href="#grammar">&uarr;</a> <a href="#semantic-architecture">&darr;</a></span></h1><section><h2 id="semantic-architecture" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Semantic Architecture<span class="autohelm-nav autohelm-nav-up-down"> <a href="#architecture">&uarr;</a> <a href="#data-architecture">&darr;</a></span></h2><p>        The Mozilla Development Network, a.k.a. , documents several HTML tag content categories:</p><p>        <ul><li> <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#metadata_content">Metadata content</a>, e.g. <code class="nohighlight">&lt;link&gt;</code>, <code class="nohighlight">&lt;style</code>.</li><li> <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#flow_content">Flow content</a>, most elements that can go inside <code class="nohighlight">&lt;body&gt;</code>.</li><li> <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#sectioning_content">Sectioning Content</a>, e.g. <code class="nohighlight">&lt;section&gt;</code>, <code class="nohighlight">&lt;article&gt;</code>.</li><li> <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#heading_content">Heading Content</a>, e.g, <code class="nohighlight">&lt;h1&gt;</code>, <code class="nohighlight">&lt;h2&gt;</code>.</li><li> <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#phrasing_content">Phrasing Content</a>, i.e. anything that can go in a paragraph, <code class="nohighlight">&lt;p&gt;</code>.</li><li> <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#embedded_content">Embedded Content</a>, e.g. <code class="nohighlight">&lt;img&gt;</code>, <code class="nohighlight">audio</code>, that cab be used in the same places as flow content.</li><li> <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#interactive_content">Interactive Content</a>, i.e. that specifically designed to support user interaction, e.g. <code class="nohighlight">&lt;a&gt;</code>, <code class="nohighlight">&lt;input&gt;</code>.</li><li> <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#form-associated_content">Form Associated Content</a>, i.e. elements that are usually seen inside a form, but might not support interaction, e.g. <code class="nohighlight">&lt;progress&gt;</code>.</li></ul></p><p>        SECST uses these content types to determine what types of tags can exists inside other tags with a few enhancements or exceptions:</p><p>        <ul><li>A content category <em>Text Content</em>, a sub-set of <em>Phrasing Content</em> that is typically displayed inline and does not allow a tag to be nested inside itself because it would be redundant, e.g. <code class="nohighlight">&lt;strong&gt;</code>.</li><li> A content category <em>Block Content</em>, includes all <em>Flow Content</em> that is not included in Text Content, e.g. <code class="nohighlight">&lt;table&gt;</code>.</li><li> A content category <em>Body Content</em>, with specifically enumerated tags allowed in a <code class="nohighlight">&lt;body&gt;</code>, including <code class="nohighlight">&lt;style&gt;</code> and <code class="nohighlight">&lt;link&gt;</code> which are usually in a <code class="nohighlight">&lt;head&gt;</code> section, but may exist in a <code class="nohighlight">&lt;body&gt;</code>.</li><li> All Flow Content <strong>MUST</strong> be inside of Sectioning Content.</li><li> Common cases where browsers support elements in an alternate context that makes semantic sense, e.g. <code class="nohighlight">:progress[]</code> can exist outside a <code class="nohighlight">&lt;form&gt;</code>.</li><li> JSON-LD tags, which are treated as <em>Sectioning Content</em>.</li></ul></p></section><section><h2 id="data-architecture" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Data Architecture<span class="autohelm-nav autohelm-nav-up-down"> <a href="#semantic-architecture">&uarr;</a> <a href="#project-architecture">&darr;</a></span></h2><p>        The relationship between tags is represented as a cyclical JSON structure. The bulk of of the structure is static, but some of is dynamic and memoized to address its cyclical nature.</p><p>        Tags are defined with the following parts:</p><p>        <pre class="secst"><code class="nohighlight">{
   attributesAllowed: { // optional
       &lt;attributeName&gt;: true || "&lt;primitive-type&gt;" : function, // the function can validate or transform the attribute
       ...
@@ -2143,12 +2937,12 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
   }
   toHTML(node) { // optional
       const html = ...
-      // a function body to generate the :code[innerHTML] for a tag in place of SECST iterating over parsed content for the tag
+      // a function body to generate the :code[innerHTML] for a tag in place of SECST iterating over parsed content for the tag.
       return html;
   }
   toText(node) { // optional
       const text = ...
-      // a function body to generate the :code[innerText] for a tag in place of SECST iterating over parsed content for the tag
+      // a function body to generate text inside a :code[&lt;span&gt;] as a replacement for the tag in place of SECST iterating over parsed content for the tag.
   }
   render(el,node) { // optional
       // a function body to manipulate the element based on the parsed node in some custom manner
@@ -2165,7 +2959,7 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
       },
       ...
   },
-  ... // any other functions are added to the elements generated by the tag.
+  ... // any other functions are added to the element generated by the tag.
 }</code></pre></p><p>        Functions taking a <code class="nohighlight">node</code> as an argument are free to modify the <code class="nohighlight">node</code>. Where necessary, copying to support immutability is done prior to calling the function. Functions taking a <code class="nohighlight">node</code> as the first argument <strong>MUST</strong> return a <code class="nohighlight">node</code>.</p><p>        Functions taking a <code class="nohighlight">node</code> as a second argument should not modify the node or return a value. If they do, it will be ignored.</p><p>        Parsed instances of tags, a.k.a. <code class="nohighlight">nodes</code>, have a structure similar to that found in a virtual DOM:</p><p>        <pre class="secst"><code class="nohighlight">{
   tag:&lt;tag-name&gt;,
   attributes:{&lt;attribute-name&gt;:&lt;attribute-value&gt;,...}

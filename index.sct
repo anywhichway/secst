@@ -1109,6 +1109,8 @@
 ]
 :section[
     :h(#tags)[Complete List Of Tags]
+
+    :value({globalThis:"SECST.tagSpecs"})[];
 ]
 :section[
 :h[Design Objectives]
@@ -1168,8 +1170,8 @@
         SECST uses these content types to determine what types of tags can exists inside other tags with a few enhancements or exceptions:
 
         :ul[
-            - A content category :em[Text Content], which is a sub-set of :em[Phrasing Content] that is typically displayed inline and does not allow a tag to be nested inside itself because it would be redundant, e.g. :code[<strong>].
-            - A content category :em[Block Content], which includes all :em[Flow Content] that is not included in Text Content, e.g. :code[<table>].
+            :li[A content category :em[Text Content], a sub-set of :em[Phrasing Content] that is typically displayed inline and does not allow a tag to be nested inside itself because it would be redundant, e.g. :code[<strong>].]
+            - A content category :em[Block Content], includes all :em[Flow Content] that is not included in Text Content, e.g. :code[<table>].
             - A content category :em[Body Content], with specifically enumerated tags allowed in a :code[<body>], including :code[<style>] and :code[<link>] which are usually in a :code[<head>] section, but may exist in a :code[<body>].
             - All Flow Content :strong[MUST] be inside of Sectioning Content.
             - Common cases where browsers support elements in an alternate context that makes semantic sense, e.g. :code[:progress[]] can exist outside a :code[<form>].

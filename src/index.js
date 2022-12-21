@@ -1,7 +1,5 @@
 import JSON5 from "json5";
 import {HighlightJS} from "highlight.js";
-import katex from "katex";
-import mhchem from "katex/dist/contrib/mhchem.mjs";
 import {init as initEmojiMart, SearchIndex } from "emoji-mart";
 import {listeners} from "./listeners.js";
 import {updateValueWidths} from "./update-value-widths.js";
@@ -9,6 +7,7 @@ import {stringTemplateEval} from "./string-template-eval.js";
 import {resolve} from "./resolve.js";
 import {resolveDataTemplate} from "./resolve-data-template.js";
 import {engage, init} from "@anywhichway/autohelm";
+import {toTagSpecs} from "./to-tag-specs.js";
 
 if(document.currentScript?.getAttribute("src").endsWith("?run")) {
     if(typeof(window)==="object" && typeof(MutationObserver)=="function") {
@@ -42,7 +41,6 @@ if(document.currentScript?.getAttribute("src").endsWith("?run")) {
 }
 
 window.JSON5 = JSON5;
-window.katex = katex;
 window.autohelm = {
     init,
     engage
@@ -57,6 +55,10 @@ window.SECST = {
     listeners,
     updateValueWidths,
     stringTemplateEval,
-    resolveDataTemplate
+    resolveDataTemplate,
+    tagSpecs: await (async () => {
+        const {allTags} = await import("./tags/all-tags.js");
+        return await toTagSpecs(allTags);
+    })()
 }
 

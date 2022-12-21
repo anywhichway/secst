@@ -11,6 +11,7 @@ const value = {
         "data-editable": true,
         "data-literal": true,
         "data-plaintext": true,
+        "data-global-this": true,
         fitcontent() {
             return {
                 "data-fitcontent": ""
@@ -47,6 +48,19 @@ const value = {
             }
         },
         hidden: true,
+        globalThis(value,node) {
+            const parts = value.split(".");
+            let globalValue = globalThis;
+            while(parts.length>0 && globalValue!=null) {
+                globalValue = globalValue[parts.shift()]
+            }
+            node.attributes.value = JSON.stringify(globalValue,null,2);
+            node.attributes["data-mime-type"] = "application/json";
+            node.attributes["data-literal"] = "";
+            return {
+                "data-global-this": value
+            }
+        },
         readonly() {
             return {
                 readonly: ""
@@ -64,7 +78,7 @@ const value = {
             }
         },
         src(value) {
-            new URL(value,document.baseURI)
+            new URL(value,document.baseURI);
         },
         static:true,
         template(value) {

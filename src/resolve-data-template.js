@@ -140,4 +140,4 @@ const resolveDataTemplate = async (root,string,requestor) => {
     }
 }
 
-export {resolveDataTemplate}
+export {resolveDataTemplate, resolveDataTemplate as default}

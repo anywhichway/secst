@@ -4,19 +4,15 @@ import JSON5 from "json5";
 import {init as initAutohelm,engage} from "@anywhichway/autohelm";
 import {HighlightJS} from "highlight.js";
 import { Window } from 'happy-dom';
-//import katex from "katex";
-//import mhchem from "katex/dist/contrib/mhchem.js";
 import * as all from "emoji-mart";
 let { init, SearchIndex } = all;
 if(init==null) {
     init = all.default.init;
     SearchIndex = all.default.SearchIndex;
 }
-import {resolveDataTemplate} from "./src/resolve-data-template.js";
+import toTagSpecs from "./src/to-tag-specs.js";
+import resolveDataTemplate from "./src/resolve-data-template.js";
 
-global.SECST = {
-    resolveDataTemplate
-}
 
 global.window = new Window(),
     global.document = window.document;
@@ -48,6 +44,17 @@ global.HighlightJS = HighlightJS;
 global.emojiMart = {
     init,
     SearchIndex
+}
+
+
+global.SECST = {
+    resolveDataTemplate,
+    tagSpecs: await (async () => {
+        const {allTags} = await import("./src/tags/all-tags.js");
+        const specs = await toTagSpecs(allTags);
+        //console.log(JSON.stringify(specs))
+        return await toTagSpecs(allTags);
+    })()
 }
 
 import peg from "pegjs";
