@@ -1,5 +1,3 @@
-import value from "./value.js";
-
 const textContent = {
     async a() { const {a} = await import("./a.js"); return this.a = a; },
     async abbr() { const {abbr} = await import("./abbr.js"); return this.abbr = abbr; },
@@ -24,7 +22,7 @@ const textContent = {
     async u() { const {u} = await import("./u.js"); return this.u = u; },
     var: {
         async contentAllowed() {
-            const textContent = await import("./text-content.js");
+            const {textContent} = await import("./text-content.js");
             delete textContent.var;
             return textContent;
         }

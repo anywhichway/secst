@@ -1,3 +1,4 @@
+import flowContent from "./flow-content.js";
 import phrasingContent from "./phrasing-content.js";
 
 const allTags = {};
@@ -17,6 +18,6 @@ const mapTags = async (tags) => {
     }
 }
 
-await mapTags(phrasingContent);
+await mapTags({...phrasingContent,...flowContent});
 
 export {allTags, allTags as default}

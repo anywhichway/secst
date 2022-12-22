@@ -182,13 +182,13 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
  A --- B
  B--&gt;C[fa:fa-ban forbidden]
  B--&gt;D(fa:fa-spinner);
-]</code></pre></p><p>        renders as</p><script src="https://cdn.jsdelivr.net/npm/mermaid@9/dist/mermaid.min.js" onload="(() =&gt; { mermaid.initialize({ startOnLoad: true }) })()"></script><pre id="mermaidChart37680520666203" class="mermaid">
+]</code></pre></p><p>        renders as</p><script src="https://cdn.jsdelivr.net/npm/mermaid@9/dist/mermaid.min.js" onload="(() =&gt; { mermaid.initialize({ startOnLoad: true }) })()"></script><pre id="mermaidChart1783948982669472" class="mermaid">
             graph LR
             A --- B
             B-->C[fa:fa-ban forbidden]
             B-->D(fa:fa-spinner);
         </pre><script type="module">
-            const el = document.getElementById("mermaidChart37680520666203"),
+            const el = document.getElementById("mermaidChart1783948982669472"),
                 sibling = el.nextSibling,
                 insertSvg = function (svgCode, bindFunctions) {
                     el.innerHTML = svgCode;
@@ -202,7 +202,7 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
             B-->C[fa:fa-ban forbidden]
             B-->D(fa:fa-spinner);
         `;
-            setTimeout(() => mermaid.mermaidAPI.render("mermaidChart37680520666203", graphDefinition, insertSvg),1000);
+            setTimeout(() => mermaid.mermaidAPI.render("mermaidChart1783948982669472", graphDefinition, insertSvg),1000);
         </script><p>        There are lots of charts to choose from:</p><p>        <ul><li> <a target="_tab" href="https://mermaid.js.org/syntax/flowchart.html">Flowchart</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/sequenceDiagram.html">Sequence Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/classDiagram.html">Class Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/stateDiagram.html">State Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/entityRelationshipDiagram.html">Entity Relationship Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/userJourney.html">User Journey</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/gantt.html">Gannt</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/pie.html">Pie Chart</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/requirementDiagram.html">Requirement Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/gitgraph.html">Gitgraph Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/c4c.html">C4C Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/mindmap.html">Mindmaps</a></li></ul><br>    </p></section><section><h2 id="sheet-music--abc-notation-" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Sheet Music (ABC Notation)<span class="autohelm-nav autohelm-nav-up-down"> <a href="#mermaid-chart">&uarr;</a> <a href="#escaping-secst">&darr;</a></span></h2><p>        <code class="nohighlight">:sheetMusic[]</code> is a block level element, it belongs outside of paragraphs. Just provide <a target="_tab" href="https://abcnotation.com/examples">ABC notation</a> as the content.</p><p>        <pre class="secst"><code class="nohighlight">:sheetMusic[
   X: 1
   T: Nokia Tune
@@ -245,64 +245,144 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
                 </dl><br>            </p></section></section><section><h2 id="unit-math" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Unit Math<span class="autohelm-nav autohelm-nav-up-down"> <a href="#basic-math">&uarr;</a> <a href="#importing-data">&darr;</a></span></h2><p>        Unit math <a target="_tab" href="https://mathjs.org/docs/datatypes/units.html">from MathJS</a> allows fro conversions using the word <code class="nohighlight">to</code>, as well as units for numbers, e.g. <code class="nohighlight">45 deg</code>.</p><p>        There are many <a target="_tab" href="https://mathjs.org/docs/datatypes/units.html#reference">supported units</a>.</p><p>        Here are a few examples:</p><p>        <code class="nohighlight">:value[2 inch to cm]</code> = <input class="secst" data-default="" data-template="2 inch to cm" value="" title="2 inch to cm" data-fitcontent=""></p><p>        <code class="nohighlight">:value[90 km/h to mi/h]</code> = <input class="secst" data-default="" data-template="90 km/h to mi/h" value="" title="90 km/h to mi/h" data-fitcontent=""></p><p>        <code class="nohighlight">:value[90 km/h to m/h]</code> = <input class="secst" data-default="" data-template="90 km/h to m/h" value="" title="90 km/h to m/h" data-fitcontent=""> <code class="nohighlight">m/h</code> is meters per hour</p><p>        <code class="nohighlight">:value[(1 week + 1 day) to days]</code> = value[(1 week + 1 day) to days]</p><p>        <code class="nohighlight">:value[cos(45 deg)]</code> = <input class="secst" data-default="" data-template="cos(45 deg)" value="" title="cos(45 deg)" data-fitcontent=""></p><p>        <code class="nohighlight">:value[8.314 m^3 Pa / mol / K]</code> = <input class="secst" data-default="" data-template="8.314 m^3 Pa / mol / K" value="" title="8.314 m^3 Pa / mol / K" data-fitcontent=""></p><p>        Remember, if you have a value that looks like a formula, but is not, you can use the attribute <code class="nohighlight">literal</code>, e.g.  <code class="nohighlight">:value(literal)[2 inch to cm]</code> = <input class="secst" data-default="" data-template="2 inch to cm" value="2 inch to cm" title="2 inch to cm" data-literal="" data-fitcontent="" disabled="" style="width: 13ch;">.</p><p>        And, you can use <code class="nohighlight">plaintext</code> to display values without any styling, e.g. <code class="nohighlight">:value(plaintext)[90 km/h to mi/h]</code> = <span class="secst" data-default="" data-template="90 km/h to mi/h" value="" title="90 km/h to mi/h" data-plaintext="">90 km/h to mi/h</span>.</p></section><section><h2 id="importing-data" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Importing Data<span class="autohelm-nav autohelm-nav-up-down"> <a href="#unit-math">&uarr;</a> <a href="#seo">&darr;</a></span></h2><p>        Values can included imported data using the <code class="nohighlight">src</code> attribute and a mime type provided in the <code class="nohighlight">type</code> attribute. The trailing <code class="nohighlight">[]</code> are optional.</p><p>        Values with the boolean attribute <code class="nohighlight">static</code> is import data at transpile time. If importing fails, another attempt is made at runtime.</p><p>        JSON is formatted for readability and <a target="_tab" href="https://json5.org">JSON5</a> is supported to make it easier to handle remote data.</p><p>        <pre class="secst"><code class="nohighlight">:value(https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson static {type:"application/json"})</code></pre></p><p>        <textarea class="secst" data-mime-type="application/json" data-default="" title="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson" data-fitcontent="" disabled="">{
   "type": "FeatureCollection",
   "metadata": {
-    "generated": 1671653940000,
+    "generated": 1671670020000,
     "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson",
     "title": "USGS All Earthquakes, Past Hour",
     "status": 200,
     "api": "1.10.3",
-    "count": 4
+    "count": 6
   },
   "features": [
     {
       "type": "Feature",
       "properties": {
-        "mag": 0.95,
-        "place": "2km NE of The Geysers, CA",
-        "time": 1671653821730,
-        "updated": 1671653918256,
+        "mag": 1.96,
+        "place": "14km W of Ferndale, CA",
+        "time": 1671669366780,
+        "updated": 1671669849950,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73822686",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73822686.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73822816",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73822816.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 14,
+        "sig": 59,
         "net": "nc",
-        "code": "73822686",
-        "ids": ",nc73822686,",
+        "code": "73822816",
+        "ids": ",nc73822816,",
         "sources": ",nc,",
-        "types": ",nearby-cities,origin,phase-data,",
-        "nst": 9,
-        "dmin": 0.006685,
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 5,
+        "dmin": 0.2681,
         "rms": 0.01,
-        "gap": 92,
+        "gap": 334,
         "magType": "md",
         "type": "earthquake",
-        "title": "M 1.0 - 2km NE of The Geysers, CA"
+        "title": "M 2.0 - 14km W of Ferndale, CA"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -122.7343369,
-          38.7896652,
-          1.75
+          -124.4215012,
+          40.5561676,
+          15.82
         ]
       },
-      "id": "nc73822686"
+      "id": "nc73822816"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 1.17,
-        "place": "12km NW of Ocotillo Wells, CA",
-        "time": 1671653730550,
-        "updated": 1671653855905,
+        "mag": -0.2,
+        "place": "46 km ESE of Beatty, Nevada",
+        "time": 1671668287371,
+        "updated": 1671668409789,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40148607",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40148607.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nn00853940",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nn00853940.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 0,
+        "net": "nn",
+        "code": "00853940",
+        "ids": ",nn00853940,",
+        "sources": ",nn,",
+        "types": ",origin,phase-data,",
+        "nst": 8,
+        "dmin": 0.028,
+        "rms": 0.0666,
+        "gap": 118.6,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M -0.2 - 46 km ESE of Beatty, Nevada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -116.3034,
+          36.7046,
+          8.2
+        ]
+      },
+      "id": "nn00853940"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.4,
+        "place": "23 km NNW of Eureka Roadhouse, Alaska",
+        "time": 1671667899981,
+        "updated": 1671668001909,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022gcrdzri",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022gcrdzri.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 30,
+        "net": "ak",
+        "code": "022gcrdzri",
+        "ids": ",ak022gcrdzri,",
+        "sources": ",ak,",
+        "types": ",origin,phase-data,",
+        "nst": null,
+        "dmin": null,
+        "rms": 0.63,
+        "gap": null,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 1.4 - 23 km NNW of Eureka Roadhouse, Alaska"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -147.388,
+          62.1273,
+          39.7
+        ]
+      },
+      "id": "ak022gcrdzri"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.18,
+        "place": "10km N of Banning, CA",
+        "time": 1671667440560,
+        "updated": 1671668095710,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40148671",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40148671.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
@@ -311,116 +391,116 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
         "tsunami": 0,
         "sig": 21,
         "net": "ci",
-        "code": "40148607",
-        "ids": ",ci40148607,",
+        "code": "40148671",
+        "ids": ",ci40148671,",
         "sources": ",ci,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 20,
-        "dmin": 0.03811,
-        "rms": 0.21,
-        "gap": 102,
+        "types": ",focal-mechanism,nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 41,
+        "dmin": 0.05136,
+        "rms": 0.2,
+        "gap": 40,
         "magType": "ml",
         "type": "earthquake",
-        "title": "M 1.2 - 12km NW of Ocotillo Wells, CA"
+        "title": "M 1.2 - 10km N of Banning, CA"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -116.2208328,
-          33.2188339,
-          5.18
+          -116.8625,
+          34.0111667,
+          16.02
         ]
       },
-      "id": "ci40148607"
+      "id": "ci40148671"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 2.43,
-        "place": "5 km ESE of Punta Santiago, Puerto Rico",
-        "time": 1671652820660,
-        "updated": 1671653904910,
+        "mag": 0.77,
+        "place": "10km WNW of The Geysers, CA",
+        "time": 1671667389640,
+        "updated": 1671668652824,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/pr71388408",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/pr71388408.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "reviewed",
-        "tsunami": 0,
-        "sig": 91,
-        "net": "pr",
-        "code": "71388408",
-        "ids": ",pr71388408,",
-        "sources": ",pr,",
-        "types": ",origin,phase-data,",
-        "nst": 12,
-        "dmin": 0.07132,
-        "rms": 0.06,
-        "gap": 133,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 2.4 - 5 km ESE of Punta Santiago, Puerto Rico"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -65.6971666666667,
-          18.1553333333333,
-          17.83
-        ]
-      },
-      "id": "pr71388408"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 2.2,
-        "place": "65 km ESE of Pope-Vannoy Landing, Alaska",
-        "time": 1671650553849,
-        "updated": 1671650668884,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022gbf885f",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022gbf885f.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73822806",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73822806.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 74,
-        "net": "ak",
-        "code": "022gbf885f",
-        "ids": ",ak022gbf885f,",
-        "sources": ",ak,",
-        "types": ",origin,phase-data,",
-        "nst": null,
-        "dmin": null,
-        "rms": 0.41,
-        "gap": null,
-        "magType": "ml",
+        "sig": 9,
+        "net": "nc",
+        "code": "73822806",
+        "ids": ",nc73822806,",
+        "sources": ",nc,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 8,
+        "dmin": 0.01404,
+        "rms": 0.01,
+        "gap": 194,
+        "magType": "md",
         "type": "earthquake",
-        "title": "M 2.2 - 65 km ESE of Pope-Vannoy Landing, Alaska"
+        "title": "M 0.8 - 10km WNW of The Geysers, CA"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -153.4698,
-          59.291,
-          101.6
+          -122.8529968,
+          38.8226662,
+          2.75
         ]
       },
-      "id": "ak022gbf885f"
+      "id": "nc73822806"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.85,
+        "place": "4km SW of Fortuna, CA",
+        "time": 1671666715240,
+        "updated": 1671668112778,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73822801",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73822801.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 53,
+        "net": "nc",
+        "code": "73822801",
+        "ids": ",nc73822801,",
+        "sources": ",nc,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 7,
+        "dmin": 0.144,
+        "rms": 0.08,
+        "gap": 176,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 1.9 - 4km SW of Fortuna, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -124.1901703,
+          40.565834,
+          4.62
+        ]
+      },
+      "id": "nc73822801"
     }
   ],
   "bbox": [
-    -153.4698,
-    18.155333333333,
-    1.75,
-    -65.697166666667,
-    59.291,
-    101.6
+    -147.388,
+    34.0111667,
+    2.75,
+    -116.3034,
+    62.1273,
+    39.7
   ]
 }</textarea></p><p>        Imported data is readonly because it is essentially a computation. To make it editable, use the attribute <code class="nohighlight">editable</code>.</p><p>        <pre class="secst"><code class="nohighlight">:value(https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson editable {type:"application/json"})</code></pre></p><p>        <textarea class="secst" data-mime-type="application/json" data-default="" data-template="await (async () =&gt; {
                         try {
@@ -444,64 +524,144 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
                         })()" title="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson" data-editable="" data-fitcontent="" style="height: 30em; width: 80ch;">{
   "type": "FeatureCollection",
   "metadata": {
-    "generated": 1671653940000,
+    "generated": 1671670020000,
     "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson",
     "title": "USGS All Earthquakes, Past Hour",
     "status": 200,
     "api": "1.10.3",
-    "count": 4
+    "count": 6
   },
   "features": [
     {
       "type": "Feature",
       "properties": {
-        "mag": 0.95,
-        "place": "2km NE of The Geysers, CA",
-        "time": 1671653821730,
-        "updated": 1671653918256,
+        "mag": 1.96,
+        "place": "14km W of Ferndale, CA",
+        "time": 1671669366780,
+        "updated": 1671669849950,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73822686",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73822686.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73822816",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73822816.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 14,
+        "sig": 59,
         "net": "nc",
-        "code": "73822686",
-        "ids": ",nc73822686,",
+        "code": "73822816",
+        "ids": ",nc73822816,",
         "sources": ",nc,",
-        "types": ",nearby-cities,origin,phase-data,",
-        "nst": 9,
-        "dmin": 0.006685,
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 5,
+        "dmin": 0.2681,
         "rms": 0.01,
-        "gap": 92,
+        "gap": 334,
         "magType": "md",
         "type": "earthquake",
-        "title": "M 1.0 - 2km NE of The Geysers, CA"
+        "title": "M 2.0 - 14km W of Ferndale, CA"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -122.7343369,
-          38.7896652,
-          1.75
+          -124.4215012,
+          40.5561676,
+          15.82
         ]
       },
-      "id": "nc73822686"
+      "id": "nc73822816"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 1.17,
-        "place": "12km NW of Ocotillo Wells, CA",
-        "time": 1671653730550,
-        "updated": 1671653855905,
+        "mag": -0.2,
+        "place": "46 km ESE of Beatty, Nevada",
+        "time": 1671668287371,
+        "updated": 1671668409789,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40148607",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40148607.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nn00853940",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nn00853940.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 0,
+        "net": "nn",
+        "code": "00853940",
+        "ids": ",nn00853940,",
+        "sources": ",nn,",
+        "types": ",origin,phase-data,",
+        "nst": 8,
+        "dmin": 0.028,
+        "rms": 0.0666,
+        "gap": 118.6,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M -0.2 - 46 km ESE of Beatty, Nevada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -116.3034,
+          36.7046,
+          8.2
+        ]
+      },
+      "id": "nn00853940"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.4,
+        "place": "23 km NNW of Eureka Roadhouse, Alaska",
+        "time": 1671667899981,
+        "updated": 1671668001909,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022gcrdzri",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022gcrdzri.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 30,
+        "net": "ak",
+        "code": "022gcrdzri",
+        "ids": ",ak022gcrdzri,",
+        "sources": ",ak,",
+        "types": ",origin,phase-data,",
+        "nst": null,
+        "dmin": null,
+        "rms": 0.63,
+        "gap": null,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 1.4 - 23 km NNW of Eureka Roadhouse, Alaska"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -147.388,
+          62.1273,
+          39.7
+        ]
+      },
+      "id": "ak022gcrdzri"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.18,
+        "place": "10km N of Banning, CA",
+        "time": 1671667440560,
+        "updated": 1671668095710,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40148671",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40148671.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
@@ -510,116 +670,116 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
         "tsunami": 0,
         "sig": 21,
         "net": "ci",
-        "code": "40148607",
-        "ids": ",ci40148607,",
+        "code": "40148671",
+        "ids": ",ci40148671,",
         "sources": ",ci,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 20,
-        "dmin": 0.03811,
-        "rms": 0.21,
-        "gap": 102,
+        "types": ",focal-mechanism,nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 41,
+        "dmin": 0.05136,
+        "rms": 0.2,
+        "gap": 40,
         "magType": "ml",
         "type": "earthquake",
-        "title": "M 1.2 - 12km NW of Ocotillo Wells, CA"
+        "title": "M 1.2 - 10km N of Banning, CA"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -116.2208328,
-          33.2188339,
-          5.18
+          -116.8625,
+          34.0111667,
+          16.02
         ]
       },
-      "id": "ci40148607"
+      "id": "ci40148671"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 2.43,
-        "place": "5 km ESE of Punta Santiago, Puerto Rico",
-        "time": 1671652820660,
-        "updated": 1671653904910,
+        "mag": 0.77,
+        "place": "10km WNW of The Geysers, CA",
+        "time": 1671667389640,
+        "updated": 1671668652824,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/pr71388408",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/pr71388408.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "reviewed",
-        "tsunami": 0,
-        "sig": 91,
-        "net": "pr",
-        "code": "71388408",
-        "ids": ",pr71388408,",
-        "sources": ",pr,",
-        "types": ",origin,phase-data,",
-        "nst": 12,
-        "dmin": 0.07132,
-        "rms": 0.06,
-        "gap": 133,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 2.4 - 5 km ESE of Punta Santiago, Puerto Rico"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -65.6971666666667,
-          18.1553333333333,
-          17.83
-        ]
-      },
-      "id": "pr71388408"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 2.2,
-        "place": "65 km ESE of Pope-Vannoy Landing, Alaska",
-        "time": 1671650553849,
-        "updated": 1671650668884,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022gbf885f",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022gbf885f.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73822806",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73822806.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 74,
-        "net": "ak",
-        "code": "022gbf885f",
-        "ids": ",ak022gbf885f,",
-        "sources": ",ak,",
-        "types": ",origin,phase-data,",
-        "nst": null,
-        "dmin": null,
-        "rms": 0.41,
-        "gap": null,
-        "magType": "ml",
+        "sig": 9,
+        "net": "nc",
+        "code": "73822806",
+        "ids": ",nc73822806,",
+        "sources": ",nc,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 8,
+        "dmin": 0.01404,
+        "rms": 0.01,
+        "gap": 194,
+        "magType": "md",
         "type": "earthquake",
-        "title": "M 2.2 - 65 km ESE of Pope-Vannoy Landing, Alaska"
+        "title": "M 0.8 - 10km WNW of The Geysers, CA"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -153.4698,
-          59.291,
-          101.6
+          -122.8529968,
+          38.8226662,
+          2.75
         ]
       },
-      "id": "ak022gbf885f"
+      "id": "nc73822806"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.85,
+        "place": "4km SW of Fortuna, CA",
+        "time": 1671666715240,
+        "updated": 1671668112778,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73822801",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73822801.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 53,
+        "net": "nc",
+        "code": "73822801",
+        "ids": ",nc73822801,",
+        "sources": ",nc,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 7,
+        "dmin": 0.144,
+        "rms": 0.08,
+        "gap": 176,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 1.9 - 4km SW of Fortuna, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -124.1901703,
+          40.565834,
+          4.62
+        ]
+      },
+      "id": "nc73822801"
     }
   ],
   "bbox": [
-    -153.4698,
-    18.155333333333,
-    1.75,
-    -65.697166666667,
-    59.291,
-    101.6
+    -147.388,
+    34.0111667,
+    2.75,
+    -116.3034,
+    62.1273,
+    39.7
   ]
 }</textarea></p><p>        If an id is added, the data can be used in a computation.</p><p>        <pre class="secst"><code class="nohighlight">:value(#earthquake-data https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson {type:"application/json"})
 
@@ -645,64 +805,144 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
                         })()" title="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson" data-fitcontent="" disabled="" style="height: 30em; width: 80ch;">{
   "type": "FeatureCollection",
   "metadata": {
-    "generated": 1671653940000,
+    "generated": 1671670020000,
     "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson",
     "title": "USGS All Earthquakes, Past Hour",
     "status": 200,
     "api": "1.10.3",
-    "count": 4
+    "count": 6
   },
   "features": [
     {
       "type": "Feature",
       "properties": {
-        "mag": 0.95,
-        "place": "2km NE of The Geysers, CA",
-        "time": 1671653821730,
-        "updated": 1671653918256,
+        "mag": 1.96,
+        "place": "14km W of Ferndale, CA",
+        "time": 1671669366780,
+        "updated": 1671669849950,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73822686",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73822686.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73822816",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73822816.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 14,
+        "sig": 59,
         "net": "nc",
-        "code": "73822686",
-        "ids": ",nc73822686,",
+        "code": "73822816",
+        "ids": ",nc73822816,",
         "sources": ",nc,",
-        "types": ",nearby-cities,origin,phase-data,",
-        "nst": 9,
-        "dmin": 0.006685,
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 5,
+        "dmin": 0.2681,
         "rms": 0.01,
-        "gap": 92,
+        "gap": 334,
         "magType": "md",
         "type": "earthquake",
-        "title": "M 1.0 - 2km NE of The Geysers, CA"
+        "title": "M 2.0 - 14km W of Ferndale, CA"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -122.7343369,
-          38.7896652,
-          1.75
+          -124.4215012,
+          40.5561676,
+          15.82
         ]
       },
-      "id": "nc73822686"
+      "id": "nc73822816"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 1.17,
-        "place": "12km NW of Ocotillo Wells, CA",
-        "time": 1671653730550,
-        "updated": 1671653855905,
+        "mag": -0.2,
+        "place": "46 km ESE of Beatty, Nevada",
+        "time": 1671668287371,
+        "updated": 1671668409789,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40148607",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40148607.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nn00853940",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nn00853940.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 0,
+        "net": "nn",
+        "code": "00853940",
+        "ids": ",nn00853940,",
+        "sources": ",nn,",
+        "types": ",origin,phase-data,",
+        "nst": 8,
+        "dmin": 0.028,
+        "rms": 0.0666,
+        "gap": 118.6,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M -0.2 - 46 km ESE of Beatty, Nevada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -116.3034,
+          36.7046,
+          8.2
+        ]
+      },
+      "id": "nn00853940"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.4,
+        "place": "23 km NNW of Eureka Roadhouse, Alaska",
+        "time": 1671667899981,
+        "updated": 1671668001909,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022gcrdzri",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022gcrdzri.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 30,
+        "net": "ak",
+        "code": "022gcrdzri",
+        "ids": ",ak022gcrdzri,",
+        "sources": ",ak,",
+        "types": ",origin,phase-data,",
+        "nst": null,
+        "dmin": null,
+        "rms": 0.63,
+        "gap": null,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 1.4 - 23 km NNW of Eureka Roadhouse, Alaska"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -147.388,
+          62.1273,
+          39.7
+        ]
+      },
+      "id": "ak022gcrdzri"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.18,
+        "place": "10km N of Banning, CA",
+        "time": 1671667440560,
+        "updated": 1671668095710,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40148671",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40148671.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
@@ -711,116 +951,116 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
         "tsunami": 0,
         "sig": 21,
         "net": "ci",
-        "code": "40148607",
-        "ids": ",ci40148607,",
+        "code": "40148671",
+        "ids": ",ci40148671,",
         "sources": ",ci,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 20,
-        "dmin": 0.03811,
-        "rms": 0.21,
-        "gap": 102,
+        "types": ",focal-mechanism,nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 41,
+        "dmin": 0.05136,
+        "rms": 0.2,
+        "gap": 40,
         "magType": "ml",
         "type": "earthquake",
-        "title": "M 1.2 - 12km NW of Ocotillo Wells, CA"
+        "title": "M 1.2 - 10km N of Banning, CA"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -116.2208328,
-          33.2188339,
-          5.18
+          -116.8625,
+          34.0111667,
+          16.02
         ]
       },
-      "id": "ci40148607"
+      "id": "ci40148671"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 2.43,
-        "place": "5 km ESE of Punta Santiago, Puerto Rico",
-        "time": 1671652820660,
-        "updated": 1671653904910,
+        "mag": 0.77,
+        "place": "10km WNW of The Geysers, CA",
+        "time": 1671667389640,
+        "updated": 1671668652824,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/pr71388408",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/pr71388408.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "reviewed",
-        "tsunami": 0,
-        "sig": 91,
-        "net": "pr",
-        "code": "71388408",
-        "ids": ",pr71388408,",
-        "sources": ",pr,",
-        "types": ",origin,phase-data,",
-        "nst": 12,
-        "dmin": 0.07132,
-        "rms": 0.06,
-        "gap": 133,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 2.4 - 5 km ESE of Punta Santiago, Puerto Rico"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -65.6971666666667,
-          18.1553333333333,
-          17.83
-        ]
-      },
-      "id": "pr71388408"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 2.2,
-        "place": "65 km ESE of Pope-Vannoy Landing, Alaska",
-        "time": 1671650553849,
-        "updated": 1671650668884,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022gbf885f",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022gbf885f.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73822806",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73822806.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 74,
-        "net": "ak",
-        "code": "022gbf885f",
-        "ids": ",ak022gbf885f,",
-        "sources": ",ak,",
-        "types": ",origin,phase-data,",
-        "nst": null,
-        "dmin": null,
-        "rms": 0.41,
-        "gap": null,
-        "magType": "ml",
+        "sig": 9,
+        "net": "nc",
+        "code": "73822806",
+        "ids": ",nc73822806,",
+        "sources": ",nc,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 8,
+        "dmin": 0.01404,
+        "rms": 0.01,
+        "gap": 194,
+        "magType": "md",
         "type": "earthquake",
-        "title": "M 2.2 - 65 km ESE of Pope-Vannoy Landing, Alaska"
+        "title": "M 0.8 - 10km WNW of The Geysers, CA"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -153.4698,
-          59.291,
-          101.6
+          -122.8529968,
+          38.8226662,
+          2.75
         ]
       },
-      "id": "ak022gbf885f"
+      "id": "nc73822806"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.85,
+        "place": "4km SW of Fortuna, CA",
+        "time": 1671666715240,
+        "updated": 1671668112778,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73822801",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73822801.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 53,
+        "net": "nc",
+        "code": "73822801",
+        "ids": ",nc73822801,",
+        "sources": ",nc,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 7,
+        "dmin": 0.144,
+        "rms": 0.08,
+        "gap": 176,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 1.9 - 4km SW of Fortuna, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -124.1901703,
+          40.565834,
+          4.62
+        ]
+      },
+      "id": "nc73822801"
     }
   ],
   "bbox": [
-    -153.4698,
-    18.155333333333,
-    1.75,
-    -65.697166666667,
-    59.291,
-    101.6
+    -147.388,
+    34.0111667,
+    2.75,
+    -116.3034,
+    62.1273,
+    39.7
   ]
 }</textarea></p><p>       <textarea class="secst" data-mime-type="application/json" data-default="" data-template="$(#earthquake-data).metadata" title="$(#earthquake-data).metadata" data-fitcontent="" disabled="" style="height: 1.5em; width: 15ch;">[object Object]</textarea><br>    </p></section></section>
 <section><h1 id="seo" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Search Engine Optimization<span class="autohelm-nav autohelm-nav-up-down"> <a href="#values-and-formulas">&uarr;</a> <a href="#structured-data">&darr;</a></span></h1><p>    SECST provides several features to support <abbr>SEO</abbr> Search Engine Optimization.</p><p>    <ul title="SEO features"><li><a href="#hastags">hashtags</a></li><li><a href="#meta-tags">meta tags</a></li><li><a href="#structured-data">structured data</a></li><li><a href="#server-transpilation">server transpilation</a></li></ul><br>    </p><section><h2 id="structured-data" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Structured Data<span class="autohelm-nav autohelm-nav-up-down"> <a href="#seo">&uarr;</a> <a href="#news-article">&darr;</a></span></h2><p>        For select tags, SECST can generate JSON-LD directly from SECST markup. Content, layout, and SEO optimization will always be in sync.</p><p>        This is best covered by an example based on <a target="_tab" href="https://developers.google.com/search/docs/appearance/structured-data/article">Google's documentation for a news article</a>.</p><p>        <em>Note: Only those tags documented for <code class="nohighlight">NewsArticle</code> are currently supported.</em></p><section><h3 id="news-article" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>News Article<span class="autohelm-nav autohelm-nav-up-down"> <a href="#structured-data">&uarr;</a> <a href="#server-transpilation">&darr;</a></span></h3><p>            The SECST tag <code class="nohighlight">:NewsArticle[]</code> can contain regular SECST as well as tags that parallel established JSON-LD schema like <code class="nohighlight">:headline[]</code>, <code class="nohighlight">:author[]</code> and <code class="nohighlight">:Person[]</code>. Where there are identical or trivially equivalent tags and attribute names, e.g. <code class="nohighlight">image</code> and <code class="nohighlight">img</code>, the native SECST tag is used.</p><p>            <pre class="secst"><code class="nohighlight">:NewsArticle[
@@ -927,15 +1167,15 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
 <section><h1 id="styling-content" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Styling Content<span class="autohelm-nav autohelm-nav-up-down"> <a href="#seo">&uarr;</a> <a href="#advanced-formulas">&darr;</a></span></h1><p>    The ability to use styling can be configured using API options and command line arguments. See <a id="document-programming" href="document programming" target="_tab">document programming</a> below. Hence, not all styling may be available in all environments that provide a SECST editor.</p><p>    Content can be styled using CSS classes loaded using the <code class="nohighlight">style[]</code> tag. This tag can be used in multiple ways. If a url is provided, i.e. <code class="nohighlight">style(./my-css-url.css)[]</code>, then an HTML link element of type style is created behind the scenes. If CSS is placed between the square braces, i.e. <code class="nohighlight">style[.my-class { background-color: red}]</code>, then a style element with CSS content is created behind the scenes. If both are provided, then two elements are generated, one of each. <code class="nohighlight">link(&lt;some url&gt; type='style')[]</code> tag.</p><p>    CSS classes are applied to content using <code class="nohighlight">.&lt;class-name&gt;</code> inside the parenthetical configuration part of a tag, e.g. <code class="nohighlight">:p(.my-class1 .my-class2)[My content]</code>.</p><p>    Style can also be applied using the <code class="nohighlight">style</code> attribute of a tag. The style attribute can be in string or JSON format. If in JSON format, should use camelCase versions of CSS property names. For example, <code class="nohighlight">:p(style='width:200px;text-align:right;float:right')[My right content]</code>  and <code class="nohighlight">:p({style:{width:"200px";textAlign:"right",float:"right"}}')[My right content]</code> produce the same output.</p><p>My right content</p><p>    Left Content<br>    More left content<br>    </p></section>
 <section><h1 id="advanced-formulas" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Advanced Formulas<span class="autohelm-nav autohelm-nav-up-down"> <a href="#styling-content">&uarr;</a> <a href="#formulas-with-css-selectors-and-multiple-values">&darr;</a></span></h1><section><h2 id="formulas-with-css-selectors-and-multiple-values" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Formulas With CSS Selectors and Multiple Values<span class="autohelm-nav autohelm-nav-up-down"> <a href="#advanced-formulas">&uarr;</a> <a href="#macro-list-formatting">&darr;</a></span></h2><p>        You can use almost any <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors">CSS selector</a> in place of <code class="nohighlight">#id</code> in <code class="nohighlight">$(#&lt;id&gt;)</code>. The value returned will be the contents of the value property on the element or (if not available) the value attribute or the <code class="nohighlight">innerText</code>.</p><p>        You can use commas to select multiple identifier named elements, e.g. <code class="nohighlight">:value[$(#id1, #id2, #id3)]</code> is an array of the values associated with the elements <code class="nohighlight">:value(#id1)[3]</code>, <code class="nohighlight">:value(#id2)[2]</code>, <code class="nohighlight">:value(#id3)[1]</code> and will be <code class="nohighlight">[3,2,1]</code>.</p><p>        A value reference <code class="nohighlight">$(css-selector)</code> can end in <code class="nohighlight">[]</code> to indicate multiple values should be returned as an array if the selector does not contain a comma. This allows tables to be treated somewhat like spreadsheets.<br>    </p></section><section><h2 id="macro-list-formatting" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Macro List Formatting<span class="autohelm-nav autohelm-nav-up-down"> <a href="#formulas-with-css-selectors-and-multiple-values">&uarr;</a> <a href="#javascript">&darr;</a></span></h2><p>         The SECST formula evaluator supports supports some utility functions.<br>    </p></section><section><h2 id="javascript" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>JavaScript<span class="autohelm-nav autohelm-nav-up-down"> <a href="#macro-list-formatting">&uarr;</a> <a href="#configuring--extending--and-programming">&darr;</a></span></h2><p>        You can use any JavaScript that is available in <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API">WebWorkers</a> inside a macro. A special read-only <code class="nohighlight">document</code> object is also made available. This object has title, baseURI, location, and navigator properties along with a property for each meta tag name and value.<br>    </p></section></section>
 <section><h1 id="configuring--extending--and-programming" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Configuring, Extending, And Programming<span class="autohelm-nav autohelm-nav-up-down"> <a href="#advanced-formulas">&uarr;</a> <a href="#basic-configuration">&darr;</a></span></h1><section><h2 id="basic-configuration" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Basic Configuration<span class="autohelm-nav autohelm-nav-up-down"> <a href="#configuring--extending--and-programming">&uarr;</a> <a href="#semantic-options">&darr;</a></span></h2><section><h3 id="semantic-options" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Semantic Options<span class="autohelm-nav autohelm-nav-up-down"> <a href="#basic-configuration">&uarr;</a> <a href="#error-handling">&darr;</a></span></h3></section><section><h3 id="error-handling" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Error Handling<span class="autohelm-nav autohelm-nav-up-down"> <a href="#semantic-options">&uarr;</a> <a href="#tag-configuration">&darr;</a></span></h3><p>            Depending on your use case, the reference transpiler can be set to do one of the following when errors are encountered.</p><p>            <ul><li> cancel, stop processing and throw an error when the first problem is detected</li><li> collect, collect all the errors and return them with line numbers (if you are writing an editor)</li><li> leave the text version of the error generating mark-up in place (also collects the errors)</li><li> try to correct the errors (collects the errors and also returns a parse tree with corrected markup)</li></ul><br>        </p></section></section><section><h2 id="tag-configuration" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Tag Configuration<span class="autohelm-nav autohelm-nav-up-down"> <a href="#basic-configuration">&uarr;</a> <a href="#custom-tags">&darr;</a></span></h2></section><section><h2 id="custom-tags" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Custom Tags<span class="autohelm-nav autohelm-nav-up-down"> <a href="#tag-configuration">&uarr;</a> <a href="#custom-methods">&darr;</a></span></h2></section><section><h2 id="custom-methods" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Custom Methods<span class="autohelm-nav autohelm-nav-up-down"> <a href="#custom-tags">&uarr;</a> <a href="#event-listeners">&darr;</a></span></h2></section><section><h2 id="event-listeners" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Event Listeners<span class="autohelm-nav autohelm-nav-up-down"> <a href="#custom-methods">&uarr;</a> <a href="#tags">&darr;</a></span></h2></section></section>
-<section><h1 id="tags" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Complete List Of Tags<span class="autohelm-nav autohelm-nav-up-down"> <a href="#configuring--extending--and-programming">&uarr;</a> <a href="#design-objectives">&darr;</a></span></h1><p>    <textarea class="secst" data-default="" data-template="" title="" data-mime-type="application/json" data-literal="" data-global-this="SECST.tagSpecs" data-fitcontent="">{
+<section><h1 id="tags" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Complete List Of Tags<span class="autohelm-nav autohelm-nav-up-down"> <a href="#configuring--extending--and-programming">&uarr;</a> <a href="#design-objectives">&darr;</a></span></h1><p>    Below scroll area should be hidden.</p><p>    <textarea id="tagSpecs" class="secst" hidden="" data-default="" data-template="" title="" data-mime-type="application/json" data-literal="" data-global-this="SECST.tagSpecs" data-fitcontent="">{
   "a": {
     "attributesAllowed": {
-      "url": true,
       "href": true,
       "ping": true,
       "referrerpolicy": true,
       "target": true,
-      "type": true
+      "type": true,
+      "url": true
     },
     "contentAllowed": {
       "abbr": true,
@@ -948,8 +1188,8 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
       "ins": true,
       "italic": true,
       "kbd": true,
-      "meta": true,
       "mark": true,
+      "meta": true,
       "pre": true,
       "q": true,
       "samp": true,
@@ -974,8 +1214,8 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
       "ins": true,
       "italic": true,
       "kbd": true,
-      "meta": true,
       "mark": true,
+      "meta": true,
       "pre": true,
       "q": true,
       "samp": true,
@@ -999,8 +1239,8 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
       "ins": true,
       "italic": true,
       "kbd": true,
-      "meta": true,
       "mark": true,
+      "meta": true,
       "pre": true,
       "q": true,
       "samp": true,
@@ -1024,8 +1264,8 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
       "ins": true,
       "italic": true,
       "kbd": true,
-      "meta": true,
       "mark": true,
+      "meta": true,
       "pre": true,
       "q": true,
       "samp": true,
@@ -1040,8 +1280,8 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
   "code": {
     "attributesAllowed": {
       "disabled": true,
-      "readonly": true,
-      "language": true
+      "language": true,
+      "readonly": true
     },
     "contentAllowed": true,
     "transform": true,
@@ -1068,8 +1308,8 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
       "ins": true,
       "italic": true,
       "kbd": true,
-      "meta": true,
       "mark": true,
+      "meta": true,
       "pre": true,
       "q": true,
       "samp": true,
@@ -1093,8 +1333,8 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
       "ins": true,
       "italic": true,
       "kbd": true,
-      "meta": true,
       "mark": true,
+      "meta": true,
       "pre": true,
       "q": true,
       "samp": true,
@@ -1118,8 +1358,8 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
       "ins": true,
       "italic": true,
       "kbd": true,
-      "meta": true,
       "mark": true,
+      "meta": true,
       "pre": true,
       "q": true,
       "samp": true,
@@ -1143,8 +1383,8 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
       "i": true,
       "italic": true,
       "kbd": true,
-      "meta": true,
       "mark": true,
+      "meta": true,
       "pre": true,
       "q": true,
       "samp": true,
@@ -1168,8 +1408,8 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
       "i": true,
       "ins": true,
       "kbd": true,
-      "meta": true,
       "mark": true,
+      "meta": true,
       "pre": true,
       "q": true,
       "samp": true,
@@ -1193,8 +1433,8 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
       "i": true,
       "ins": true,
       "italic": true,
-      "meta": true,
       "mark": true,
+      "meta": true,
       "pre": true,
       "q": true,
       "samp": true,
@@ -1209,8 +1449,8 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
   "meta": {
     "contentAllowed": true,
     "attributesAllowed": {
-      "name": true,
-      "content": true
+      "content": true,
+      "name": true
     },
     "transform": true,
     "connected": true
@@ -1253,8 +1493,8 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
       "ins": true,
       "italic": true,
       "kbd": true,
-      "meta": true,
       "mark": true,
+      "meta": true,
       "q": true,
       "samp": true,
       "strike": true,
@@ -1278,8 +1518,8 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
       "ins": true,
       "italic": true,
       "kbd": true,
-      "meta": true,
       "mark": true,
+      "meta": true,
       "pre": true,
       "samp": true,
       "strike": true,
@@ -1303,8 +1543,8 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
       "ins": true,
       "italic": true,
       "kbd": true,
-      "meta": true,
       "mark": true,
+      "meta": true,
       "pre": true,
       "q": true,
       "strike": true,
@@ -1328,8 +1568,8 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
       "ins": true,
       "italic": true,
       "kbd": true,
-      "meta": true,
       "mark": true,
+      "meta": true,
       "pre": true,
       "q": true,
       "samp": true,
@@ -1353,8 +1593,8 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
       "ins": true,
       "italic": true,
       "kbd": true,
-      "meta": true,
       "mark": true,
+      "meta": true,
       "pre": true,
       "q": true,
       "samp": true,
@@ -1378,8 +1618,8 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
       "ins": true,
       "italic": true,
       "kbd": true,
-      "meta": true,
       "mark": true,
+      "meta": true,
       "pre": true,
       "q": true,
       "samp": true,
@@ -1403,8 +1643,8 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
       "ins": true,
       "italic": true,
       "kbd": true,
-      "meta": true,
       "mark": true,
+      "meta": true,
       "pre": true,
       "q": true,
       "samp": true,
@@ -1428,8 +1668,8 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
       "ins": true,
       "italic": true,
       "kbd": true,
-      "meta": true,
       "mark": true,
+      "meta": true,
       "pre": true,
       "q": true,
       "samp": true,
@@ -1442,67 +1682,6 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
   },
   "var": {
     "contentAllowed": {
-      "default": true,
-      "textContent": true
-    }
-  },
-  "default": {
-    "a": true,
-    "abbr": true,
-    "b": true,
-    "bold": true,
-    "code": true,
-    "del": true,
-    "em": true,
-    "i": true,
-    "ins": true,
-    "italic": true,
-    "kbd": true,
-    "meta": true,
-    "mark": true,
-    "pre": true,
-    "q": true,
-    "samp": true,
-    "strike": true,
-    "strong": true,
-    "sub": true,
-    "sup": true,
-    "u": true,
-    "var": {}
-  },
-  "textContent": {
-    "a": true,
-    "abbr": true,
-    "b": true,
-    "bold": true,
-    "code": true,
-    "del": true,
-    "em": true,
-    "i": true,
-    "ins": true,
-    "italic": true,
-    "kbd": true,
-    "meta": true,
-    "mark": true,
-    "pre": true,
-    "q": true,
-    "samp": true,
-    "strike": true,
-    "strong": true,
-    "sub": true,
-    "sup": true,
-    "u": true,
-    "var": {}
-  },
-  "&": {
-    "contentAllowed": true,
-    "transform": true,
-    "beforeMount": true
-  },
-  "br": {},
-  "details": {
-    "contentAllowed": {
-      "summary": true,
       "a": true,
       "abbr": true,
       "b": true,
@@ -1514,8 +1693,8 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
       "ins": true,
       "italic": true,
       "kbd": true,
-      "meta": true,
       "mark": true,
+      "meta": true,
       "pre": true,
       "q": true,
       "samp": true,
@@ -1523,31 +1702,63 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
       "strong": true,
       "sub": true,
       "sup": true,
-      "u": true,
-      "var": true,
+      "u": true
+    }
+  },
+  "&": {
+    "contentAllowed": true,
+    "transform": true,
+    "beforeMount": true
+  },
+  "br": {},
+  "details": {
+    "contentAllowed": {
       "&": true,
+      "@facebook": true,
+      "@github": true,
+      "@linkedin": true,
+      "@twitter": true,
+      "a": true,
+      "abbr": true,
+      "b": true,
+      "bold": true,
       "br": true,
+      "code": true,
+      "del": true,
       "details": true,
       "dl": true,
+      "em": true,
       "emoji": true,
       "escape": true,
       "footnote": true,
       "hashtag": true,
       "hr": true,
-      "input": true,
+      "i": true,
       "img": true,
+      "input": true,
+      "ins": true,
+      "italic": true,
+      "kbd": true,
       "latex": true,
-      "@facebook": true,
-      "@github": true,
-      "@linkedin": true,
-      "@twitter": true,
+      "mark": true,
+      "meta": true,
       "ol": true,
+      "pre": true,
+      "q": true,
       "question": true,
+      "samp": true,
+      "strike": true,
+      "strong": true,
+      "sub": true,
+      "summary": true,
+      "sup": true,
       "table": true,
       "textarea": true,
       "transpiled": true,
+      "u": true,
       "ul": true,
-      "value": true
+      "value": true,
+      "var": true
     },
     "transform": true
   },
@@ -1564,8 +1775,8 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
       "ins": true,
       "italic": true,
       "kbd": true,
-      "meta": true,
       "mark": true,
+      "meta": true,
       "pre": true,
       "q": true,
       "samp": true,
@@ -1579,63 +1790,235 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
   },
   "dl": {
     "contentAllowed": {
+      "dd": true,
       "dt": true,
-      "dd": true
+      "forEach": true,
+      "forEntries": true
     }
+  },
+  "forEach": {
+    "attributesAllowed": {
+      "iterable": true
+    },
+    "contentAllowed": {
+      "&": true,
+      "@facebook": true,
+      "@github": true,
+      "@linkedin": true,
+      "@twitter": true,
+      "NewsArticle": true,
+      "a": true,
+      "abbr": true,
+      "answer": true,
+      "article": true,
+      "b": true,
+      "blockquote": true,
+      "bold": true,
+      "br": true,
+      "caption": true,
+      "code": true,
+      "dd": true,
+      "del": true,
+      "details": true,
+      "dl": true,
+      "dt": true,
+      "em": true,
+      "emoji": true,
+      "escape": true,
+      "footnote": true,
+      "forEach": true,
+      "forEntries": true,
+      "h": true,
+      "h1": true,
+      "h2": true,
+      "h3": true,
+      "h4": true,
+      "h5": true,
+      "h6": true,
+      "h7": true,
+      "h8": true,
+      "hashtag": true,
+      "hr": true,
+      "i": true,
+      "img": true,
+      "input": true,
+      "ins": true,
+      "italic": true,
+      "kbd": true,
+      "latex": true,
+      "li": true,
+      "mark": true,
+      "mermaidChart": true,
+      "meta": true,
+      "ol": true,
+      "p": true,
+      "pre": true,
+      "q": true,
+      "question": true,
+      "samp": true,
+      "section": true,
+      "sheetMusic": true,
+      "strike": true,
+      "strong": true,
+      "sub": true,
+      "summary": true,
+      "sup": true,
+      "table": true,
+      "tbody": true,
+      "td": true,
+      "text": true,
+      "textarea": true,
+      "tfoot": true,
+      "th": true,
+      "thead": true,
+      "toc": true,
+      "tr": true,
+      "transpiled": true,
+      "u": true,
+      "ul": true,
+      "value": true,
+      "var": true
+    },
+    "connected": true
+  },
+  "forEntries": {
+    "attributesAllowed": {
+      "object": true
+    },
+    "contentAllowed": {
+      "&": true,
+      "@facebook": true,
+      "@github": true,
+      "@linkedin": true,
+      "@twitter": true,
+      "NewsArticle": true,
+      "a": true,
+      "abbr": true,
+      "answer": true,
+      "article": true,
+      "b": true,
+      "blockquote": true,
+      "bold": true,
+      "br": true,
+      "caption": true,
+      "code": true,
+      "dd": true,
+      "del": true,
+      "details": true,
+      "dl": true,
+      "dt": true,
+      "em": true,
+      "emoji": true,
+      "escape": true,
+      "footnote": true,
+      "forEach": true,
+      "forEntries": true,
+      "h": true,
+      "h1": true,
+      "h2": true,
+      "h3": true,
+      "h4": true,
+      "h5": true,
+      "h6": true,
+      "h7": true,
+      "h8": true,
+      "hashtag": true,
+      "hr": true,
+      "i": true,
+      "img": true,
+      "input": true,
+      "ins": true,
+      "italic": true,
+      "kbd": true,
+      "latex": true,
+      "li": true,
+      "mark": true,
+      "mermaidChart": true,
+      "meta": true,
+      "ol": true,
+      "p": true,
+      "pre": true,
+      "q": true,
+      "question": true,
+      "samp": true,
+      "section": true,
+      "sheetMusic": true,
+      "strike": true,
+      "strong": true,
+      "sub": true,
+      "summary": true,
+      "sup": true,
+      "table": true,
+      "tbody": true,
+      "td": true,
+      "text": true,
+      "textarea": true,
+      "tfoot": true,
+      "th": true,
+      "thead": true,
+      "toc": true,
+      "tr": true,
+      "transpiled": true,
+      "u": true,
+      "ul": true,
+      "value": true,
+      "var": true
+    },
+    "connected": true
   },
   "dt": {
     "contentAllowed": {
+      "&": true,
+      "@facebook": true,
+      "@github": true,
+      "@linkedin": true,
+      "@twitter": true,
       "a": true,
       "abbr": true,
       "b": true,
       "bold": true,
+      "br": true,
       "code": true,
       "del": true,
-      "em": true,
-      "i": true,
-      "ins": true,
-      "italic": true,
-      "kbd": true,
-      "meta": true,
-      "mark": true,
-      "pre": true,
-      "q": true,
-      "samp": true,
-      "strike": true,
-      "strong": true,
-      "sub": true,
-      "sup": true,
-      "u": true,
-      "var": true,
-      "&": true,
-      "br": true,
       "details": true,
+      "em": true,
       "emoji": true,
       "escape": true,
       "footnote": true,
       "hashtag": true,
       "hr": true,
-      "input": true,
+      "i": true,
       "img": true,
+      "input": true,
+      "ins": true,
+      "italic": true,
+      "kbd": true,
       "latex": true,
-      "@facebook": true,
-      "@github": true,
-      "@linkedin": true,
-      "@twitter": true,
+      "mark": true,
+      "meta": true,
       "ol": true,
+      "pre": true,
+      "q": true,
       "question": true,
+      "samp": true,
+      "strike": true,
+      "strong": true,
+      "sub": true,
+      "sup": true,
       "table": true,
       "textarea": true,
       "transpiled": true,
+      "u": true,
       "ul": true,
-      "value": true
+      "value": true,
+      "var": true
     }
   },
   "emoji": {
     "attributesAllowed": {
-      "greyscale": true,
+      "filter": true,
       "grayscale": true,
-      "filter": true
+      "greyscale": true
     },
     "contentAllowed": true,
     "toElement": true
@@ -1646,54 +2029,54 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
   },
   "footnote": {
     "contentAllowed": {
+      "&": true,
+      "@facebook": true,
+      "@github": true,
+      "@linkedin": true,
+      "@twitter": true,
       "a": true,
       "abbr": true,
       "b": true,
       "bold": true,
+      "br": true,
       "code": true,
       "del": true,
+      "details": true,
+      "dl": true,
       "em": true,
+      "emoji": true,
+      "escape": true,
+      "hashtag": true,
+      "hr": true,
       "i": true,
+      "img": true,
+      "input": true,
       "ins": true,
       "italic": true,
       "kbd": true,
-      "meta": true,
+      "latex": true,
       "mark": true,
+      "meta": true,
+      "ol": true,
       "pre": true,
       "q": true,
+      "question": true,
       "samp": true,
       "strike": true,
       "strong": true,
       "sub": true,
       "sup": true,
-      "u": true,
-      "var": true,
-      "&": true,
-      "br": true,
-      "details": true,
-      "dl": true,
-      "emoji": true,
-      "escape": true,
-      "hashtag": true,
-      "hr": true,
-      "input": true,
-      "img": true,
-      "latex": true,
-      "@facebook": true,
-      "@github": true,
-      "@linkedin": true,
-      "@twitter": true,
-      "ol": true,
-      "question": true,
       "table": true,
       "textarea": true,
       "transpiled": true,
+      "u": true,
       "ul": true,
-      "value": true
+      "value": true,
+      "var": true
     },
     "attributesAllowed": {
-      "url": true,
-      "href": true
+      "href": true,
+      "url": true
     },
     "transform": true,
     "beforeMount": true
@@ -1714,18 +2097,18 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
   },
   "img": {
     "attributesAllowed": {
-      "alt": true,
-      "static": true,
-      "height": true,
-      "width": true,
       "align": true,
+      "alt": true,
       "decoding": true,
+      "height": true,
       "ismap": true,
-      "type": true,
       "loading": true,
       "src": true,
+      "static": true,
       "title": true,
-      "url": true
+      "type": true,
+      "url": true,
+      "width": true
     },
     "transform": true,
     "beforeMount": true,
@@ -1805,139 +2188,73 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
     },
     "contentAllowed": {
       "forEach": true,
+      "forEntries": true,
       "li": true
     },
     "transform": true
   },
-  "forEach": {
-    "attributesAllowed": {
-      "iterable": true
-    },
-    "contentAllowed": {
-      "a": true,
-      "abbr": true,
-      "b": true,
-      "bold": true,
-      "code": true,
-      "del": true,
-      "em": true,
-      "i": true,
-      "ins": true,
-      "italic": true,
-      "kbd": true,
-      "meta": true,
-      "mark": true,
-      "pre": true,
-      "q": true,
-      "samp": true,
-      "strike": true,
-      "strong": true,
-      "sub": true,
-      "sup": true,
-      "u": true,
-      "var": true,
-      "&": true,
-      "br": true,
-      "details": true,
-      "summary": true,
-      "dl": true,
-      "dt": true,
-      "emoji": true,
-      "escape": true,
-      "footnote": true,
-      "hashtag": true,
-      "hr": true,
-      "input": true,
-      "img": true,
-      "latex": true,
-      "@facebook": true,
-      "@github": true,
-      "@linkedin": true,
-      "@twitter": true,
-      "ol": true,
-      "forEach": true,
-      "li": true,
-      "question": true,
-      "text": true,
-      "table": true,
-      "tbody": true,
-      "tr": true,
-      "td": true,
-      "th": true,
-      "tfoot": true,
-      "thead": true,
-      "caption": true,
-      "textarea": true,
-      "transpiled": true,
-      "ul": true,
-      "value": true,
-      "answer": true,
-      "dd": true
-    },
-    "connected": true
-  },
   "li": {
     "breakOnNewline": true,
     "attributesAllowed": {
-      "value": true,
-      "type": true
+      "type": true,
+      "value": true
     },
     "contentAllowed": {
+      "&": true,
+      "@facebook": true,
+      "@github": true,
+      "@linkedin": true,
+      "@twitter": true,
       "a": true,
       "abbr": true,
       "b": true,
       "bold": true,
+      "br": true,
       "code": true,
       "del": true,
-      "em": true,
-      "i": true,
-      "ins": true,
-      "italic": true,
-      "kbd": true,
-      "meta": true,
-      "mark": true,
-      "pre": true,
-      "q": true,
-      "samp": true,
-      "strike": true,
-      "strong": true,
-      "sub": true,
-      "sup": true,
-      "u": true,
-      "var": true,
-      "&": true,
-      "br": true,
       "details": true,
       "dl": true,
+      "em": true,
       "emoji": true,
       "escape": true,
       "footnote": true,
       "hashtag": true,
       "hr": true,
-      "input": true,
+      "i": true,
       "img": true,
+      "input": true,
+      "ins": true,
+      "italic": true,
+      "kbd": true,
       "latex": true,
-      "@facebook": true,
-      "@github": true,
-      "@linkedin": true,
-      "@twitter": true,
+      "mark": true,
+      "meta": true,
       "ol": true,
+      "pre": true,
+      "q": true,
       "question": true,
+      "samp": true,
+      "strike": true,
+      "strong": true,
+      "sub": true,
+      "sup": true,
       "table": true,
       "textarea": true,
       "transpiled": true,
+      "u": true,
       "ul": true,
-      "value": true
+      "value": true,
+      "var": true
     }
   },
   "question": {
     "attributesAllowed": {
-      "type": true,
-      "showanswer": true
+      "showanswer": true,
+      "type": true
     },
     "contentAllowed": {
-      "text": true,
       "answer": true,
+      "text": true,
       "value": true
     },
     "transform": true,
@@ -1946,60 +2263,60 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
   },
   "text": {
     "contentAllowed": {
+      "&": true,
+      "@facebook": true,
+      "@github": true,
+      "@linkedin": true,
+      "@twitter": true,
       "a": true,
       "abbr": true,
       "b": true,
       "bold": true,
+      "br": true,
       "code": true,
       "del": true,
-      "em": true,
-      "i": true,
-      "ins": true,
-      "italic": true,
-      "kbd": true,
-      "meta": true,
-      "mark": true,
-      "pre": true,
-      "q": true,
-      "samp": true,
-      "strike": true,
-      "strong": true,
-      "sub": true,
-      "sup": true,
-      "u": true,
-      "var": true,
-      "&": true,
-      "br": true,
       "details": true,
       "dl": true,
+      "em": true,
       "emoji": true,
       "escape": true,
       "footnote": true,
       "hashtag": true,
       "hr": true,
-      "input": true,
+      "i": true,
       "img": true,
+      "input": true,
+      "ins": true,
+      "italic": true,
+      "kbd": true,
       "latex": true,
-      "@facebook": true,
-      "@github": true,
-      "@linkedin": true,
-      "@twitter": true,
+      "mark": true,
+      "meta": true,
       "ol": true,
+      "pre": true,
+      "q": true,
       "question": true,
+      "samp": true,
+      "strike": true,
+      "strong": true,
+      "sub": true,
+      "sup": true,
       "table": true,
       "textarea": true,
       "transpiled": true,
+      "u": true,
       "ul": true,
-      "value": true
+      "value": true,
+      "var": true
     },
     "beforeMount": true
   },
   "table": {
     "contentAllowed": {
+      "caption": true,
       "tbody": true,
       "tfoot": true,
       "thead": true,
-      "caption": true,
       "tr": true
     },
     "transform": true,
@@ -2025,66 +2342,88 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
       "colspan": true
     },
     "contentAllowed": {
+      "&": true,
+      "@facebook": true,
+      "@github": true,
+      "@linkedin": true,
+      "@twitter": true,
       "a": true,
       "abbr": true,
       "b": true,
       "bold": true,
+      "br": true,
       "code": true,
       "del": true,
-      "em": true,
-      "i": true,
-      "ins": true,
-      "italic": true,
-      "kbd": true,
-      "meta": true,
-      "mark": true,
-      "pre": true,
-      "q": true,
-      "samp": true,
-      "strike": true,
-      "strong": true,
-      "sub": true,
-      "sup": true,
-      "u": true,
-      "var": true,
-      "&": true,
-      "br": true,
       "details": true,
       "dl": true,
+      "em": true,
       "emoji": true,
       "escape": true,
       "footnote": true,
       "hashtag": true,
       "hr": true,
-      "input": true,
+      "i": true,
       "img": true,
+      "input": true,
+      "ins": true,
+      "italic": true,
+      "kbd": true,
       "latex": true,
-      "@facebook": true,
-      "@github": true,
-      "@linkedin": true,
-      "@twitter": true,
+      "mark": true,
+      "meta": true,
       "ol": true,
+      "pre": true,
+      "q": true,
       "question": true,
+      "samp": true,
+      "strike": true,
+      "strong": true,
+      "sub": true,
+      "sup": true,
       "table": true,
       "textarea": true,
       "transpiled": true,
+      "u": true,
       "ul": true,
-      "value": true
+      "value": true,
+      "var": true
     }
   },
   "textarea": {
     "contentAllowed": true,
     "attributesAllowed": {
       "disabled": true,
-      "value": true,
-      "readonly": true
+      "readonly": true,
+      "value": true
     },
     "render": true,
     "transform": true
   },
   "transpiled": {
     "contentAllowed": {
+      "&": true,
+      "@facebook": true,
+      "@github": true,
+      "@linkedin": true,
+      "@twitter": true,
+      "NewsArticle": true,
+      "a": true,
+      "abbr": true,
+      "article": true,
+      "b": true,
       "blockquote": true,
+      "bold": true,
+      "br": true,
+      "code": true,
+      "del": true,
+      "details": true,
+      "dl": true,
+      "em": true,
+      "emoji": true,
+      "escape": true,
+      "footnote": true,
+      "forEach": true,
+      "forEntries": true,
       "h": true,
       "h1": true,
       "h2": true,
@@ -2094,62 +2433,42 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
       "h6": true,
       "h7": true,
       "h8": true,
-      "mermaidChart": true,
-      "p": true,
-      "a": true,
-      "abbr": true,
-      "b": true,
-      "bold": true,
-      "code": true,
-      "del": true,
-      "em": true,
+      "hashtag": true,
+      "hr": true,
       "i": true,
+      "img": true,
+      "input": true,
       "ins": true,
       "italic": true,
       "kbd": true,
-      "meta": true,
-      "mark": true,
-      "pre": true,
-      "q": true,
-      "samp": true,
-      "strike": true,
-      "strong": true,
-      "sub": true,
-      "sup": true,
-      "u": true,
-      "var": true,
-      "&": true,
-      "br": true,
-      "details": true,
-      "dl": true,
-      "emoji": true,
-      "escape": true,
-      "footnote": true,
-      "hashtag": true,
-      "hr": true,
-      "input": true,
-      "img": true,
       "latex": true,
-      "@facebook": true,
-      "@github": true,
-      "@linkedin": true,
-      "@twitter": true,
-      "ol": true,
-      "question": true,
-      "table": true,
-      "textarea": true,
-      "transpiled": true,
-      "ul": true,
-      "value": true,
-      "article": true,
-      "NewsArticle": true,
-      "section": true,
-      "toc": true,
-      "sheetMusic": true,
       "link": true,
       "listeners": true,
+      "mark": true,
+      "mermaidChart": true,
+      "meta": true,
+      "ol": true,
+      "p": true,
+      "pre": true,
+      "q": true,
+      "question": true,
+      "samp": true,
+      "section": true,
+      "sheetMusic": true,
+      "strike": true,
+      "strong": true,
       "style": true,
-      "title": true
+      "sub": true,
+      "sup": true,
+      "table": true,
+      "textarea": true,
+      "title": true,
+      "toc": true,
+      "transpiled": true,
+      "u": true,
+      "ul": true,
+      "value": true,
+      "var": true
     },
     "beforeConnect": true,
     "mounted": true,
@@ -2177,8 +2496,8 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
       "ins": true,
       "italic": true,
       "kbd": true,
-      "meta": true,
       "mark": true,
+      "meta": true,
       "pre": true,
       "q": true,
       "samp": true,
@@ -2204,8 +2523,8 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
       "ins": true,
       "italic": true,
       "kbd": true,
-      "meta": true,
       "mark": true,
+      "meta": true,
       "pre": true,
       "q": true,
       "samp": true,
@@ -2230,8 +2549,8 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
       "ins": true,
       "italic": true,
       "kbd": true,
-      "meta": true,
       "mark": true,
+      "meta": true,
       "pre": true,
       "q": true,
       "samp": true,
@@ -2256,8 +2575,8 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
       "ins": true,
       "italic": true,
       "kbd": true,
-      "meta": true,
       "mark": true,
+      "meta": true,
       "pre": true,
       "q": true,
       "samp": true,
@@ -2282,8 +2601,8 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
       "ins": true,
       "italic": true,
       "kbd": true,
-      "meta": true,
       "mark": true,
+      "meta": true,
       "pre": true,
       "q": true,
       "samp": true,
@@ -2308,8 +2627,8 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
       "ins": true,
       "italic": true,
       "kbd": true,
-      "meta": true,
       "mark": true,
+      "meta": true,
       "pre": true,
       "q": true,
       "samp": true,
@@ -2334,8 +2653,8 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
       "ins": true,
       "italic": true,
       "kbd": true,
-      "meta": true,
       "mark": true,
+      "meta": true,
       "pre": true,
       "q": true,
       "samp": true,
@@ -2360,8 +2679,8 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
       "ins": true,
       "italic": true,
       "kbd": true,
-      "meta": true,
       "mark": true,
+      "meta": true,
       "pre": true,
       "q": true,
       "samp": true,
@@ -2386,8 +2705,8 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
       "ins": true,
       "italic": true,
       "kbd": true,
-      "meta": true,
       "mark": true,
+      "meta": true,
       "pre": true,
       "q": true,
       "samp": true,
@@ -2418,74 +2737,74 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
   "p": {
     "stringsAllowed": true,
     "contentAllowed": {
+      "&": true,
+      "@facebook": true,
+      "@github": true,
+      "@linkedin": true,
+      "@twitter": true,
       "a": true,
       "abbr": true,
       "b": true,
       "bold": true,
+      "br": true,
       "code": true,
       "del": true,
-      "em": true,
-      "i": true,
-      "ins": true,
-      "italic": true,
-      "kbd": true,
-      "meta": true,
-      "mark": true,
-      "pre": true,
-      "q": true,
-      "samp": true,
-      "strike": true,
-      "strong": true,
-      "sub": true,
-      "sup": true,
-      "u": true,
-      "var": true,
-      "&": true,
-      "br": true,
       "details": true,
       "dl": true,
+      "em": true,
       "emoji": true,
       "escape": true,
       "footnote": true,
       "hashtag": true,
       "hr": true,
-      "input": true,
+      "i": true,
       "img": true,
+      "input": true,
+      "ins": true,
+      "italic": true,
+      "kbd": true,
       "latex": true,
-      "@facebook": true,
-      "@github": true,
-      "@linkedin": true,
-      "@twitter": true,
+      "mark": true,
+      "meta": true,
       "ol": true,
+      "pre": true,
+      "q": true,
       "question": true,
+      "samp": true,
+      "strike": true,
+      "strong": true,
+      "sub": true,
+      "sup": true,
       "table": true,
       "textarea": true,
       "transpiled": true,
+      "u": true,
       "ul": true,
-      "value": true
+      "value": true,
+      "var": true
     },
     "transform": true
   },
   "ul": {},
   "value": {
     "attributesAllowed": {
-      "fitcontent": true,
       "default": true,
       "disabled": true,
-      "extract": true,
       "editable": true,
-      "literal": true,
+      "extract": true,
+      "fitcontent": true,
       "format": true,
-      "hidden": true,
       "globalThis": true,
-      "readonly": true,
-      "url": true,
+      "hidden": true,
+      "literal": true,
       "plaintext": true,
+      "readonly": true,
       "src": true,
       "static": true,
       "template": true,
       "title": true,
       "type": true,
+      "url": true,
       "value": true
     },
     "contentAllowed": "*",
@@ -2519,9 +2838,9 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
   },
   "link": {
     "attributesAllowed": {
-      "url": true,
       "href": true,
-      "type": true
+      "type": true,
+      "url": true
     }
   },
   "listeners": {
@@ -2542,51 +2861,51 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
       "colspan": true
     },
     "contentAllowed": {
+      "&": true,
+      "@facebook": true,
+      "@github": true,
+      "@linkedin": true,
+      "@twitter": true,
       "a": true,
       "abbr": true,
       "b": true,
       "bold": true,
+      "br": true,
       "code": true,
       "del": true,
-      "em": true,
-      "i": true,
-      "ins": true,
-      "italic": true,
-      "kbd": true,
-      "meta": true,
-      "mark": true,
-      "pre": true,
-      "q": true,
-      "samp": true,
-      "strike": true,
-      "strong": true,
-      "sub": true,
-      "sup": true,
-      "u": true,
-      "var": true,
-      "&": true,
-      "br": true,
       "details": true,
       "dl": true,
+      "em": true,
       "emoji": true,
       "escape": true,
       "footnote": true,
       "hashtag": true,
       "hr": true,
-      "input": true,
+      "i": true,
       "img": true,
+      "input": true,
+      "ins": true,
+      "italic": true,
+      "kbd": true,
       "latex": true,
-      "@facebook": true,
-      "@github": true,
-      "@linkedin": true,
-      "@twitter": true,
+      "mark": true,
+      "meta": true,
       "ol": true,
+      "pre": true,
+      "q": true,
       "question": true,
+      "samp": true,
+      "strike": true,
+      "strong": true,
+      "sub": true,
+      "sup": true,
       "table": true,
       "textarea": true,
       "transpiled": true,
+      "u": true,
       "ul": true,
-      "value": true
+      "value": true,
+      "var": true
     }
   },
   "tfoot": {
@@ -2611,8 +2930,8 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
       "ins": true,
       "italic": true,
       "kbd": true,
-      "meta": true,
       "mark": true,
+      "meta": true,
       "pre": true,
       "q": true,
       "samp": true,
@@ -2626,62 +2945,388 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
   },
   "answer": {
     "attributesAllowed": {
+      "literal": true,
       "type": true,
-      "value": true,
-      "literal": true
+      "value": true
     },
     "contentAllowed": true,
     "beforeMount": true
   },
   "dd": {
     "contentAllowed": {
+      "&": true,
+      "@facebook": true,
+      "@github": true,
+      "@linkedin": true,
+      "@twitter": true,
       "a": true,
       "abbr": true,
       "b": true,
       "bold": true,
+      "br": true,
       "code": true,
       "del": true,
-      "em": true,
-      "i": true,
-      "ins": true,
-      "italic": true,
-      "kbd": true,
-      "meta": true,
-      "mark": true,
-      "pre": true,
-      "q": true,
-      "samp": true,
-      "strike": true,
-      "strong": true,
-      "sub": true,
-      "sup": true,
-      "u": true,
-      "var": true,
-      "&": true,
-      "br": true,
       "details": true,
+      "em": true,
       "emoji": true,
       "escape": true,
       "footnote": true,
       "hashtag": true,
       "hr": true,
-      "input": true,
+      "i": true,
       "img": true,
+      "input": true,
+      "ins": true,
+      "italic": true,
+      "kbd": true,
       "latex": true,
-      "@facebook": true,
-      "@github": true,
-      "@linkedin": true,
-      "@twitter": true,
+      "mark": true,
+      "meta": true,
       "ol": true,
+      "pre": true,
+      "q": true,
       "question": true,
+      "samp": true,
+      "strike": true,
+      "strong": true,
+      "sub": true,
+      "sup": true,
       "table": true,
       "textarea": true,
       "transpiled": true,
+      "u": true,
       "ul": true,
-      "value": true
+      "value": true,
+      "var": true
     }
   }
-}</textarea>;<br></p></section>
+}</textarea></p><p>    <dl>
+        
+            <dt>a</dt>
+            <dd>Attributes Allowed: href, ping, referrerpolicy, target, type, url</dd>
+            <dd>Content Allowed: abbr, b, bold, code, del, em, i, ins, italic, kbd, mark, meta, pre, q, samp, strike, strong, sub, sup, u, var</dd>
+        
+            <dt>abbr</dt>
+            <dd>Attributes Allowed: N/A</dd>
+            <dd>Content Allowed: a, b, bold, code, del, em, i, ins, italic, kbd, mark, meta, pre, q, samp, strike, strong, sub, sup, u, var</dd>
+        
+            <dt>b</dt>
+            <dd>Attributes Allowed: N/A</dd>
+            <dd>Content Allowed: a, abbr, bold, code, del, em, i, ins, italic, kbd, mark, meta, pre, q, samp, strike, strong, sub, sup, u, var</dd>
+        
+            <dt>bold</dt>
+            <dd>Attributes Allowed: N/A</dd>
+            <dd>Content Allowed: a, abbr, b, code, del, em, i, ins, italic, kbd, mark, meta, pre, q, samp, strike, strong, sub, sup, u, var</dd>
+        
+            <dt>code</dt>
+            <dd>Attributes Allowed: disabled, language, readonly</dd>
+            <dd>Content Allowed: </dd>
+        
+            <dt>del</dt>
+            <dd>Attributes Allowed: N/A</dd>
+            <dd>Content Allowed: a, abbr, b, bold, code, em, i, ins, italic, kbd, mark, meta, pre, q, samp, strike, strong, sub, sup, u, var</dd>
+        
+            <dt>em</dt>
+            <dd>Attributes Allowed: N/A</dd>
+            <dd>Content Allowed: a, abbr, b, bold, code, del, i, ins, italic, kbd, mark, meta, pre, q, samp, strike, strong, sub, sup, u, var</dd>
+        
+            <dt>i</dt>
+            <dd>Attributes Allowed: N/A</dd>
+            <dd>Content Allowed: a, abbr, b, bold, code, del, em, ins, italic, kbd, mark, meta, pre, q, samp, strike, strong, sub, sup, u, var</dd>
+        
+            <dt>ins</dt>
+            <dd>Attributes Allowed: N/A</dd>
+            <dd>Content Allowed: a, abbr, b, bold, code, del, em, i, italic, kbd, mark, meta, pre, q, samp, strike, strong, sub, sup, u, var</dd>
+        
+            <dt>italic</dt>
+            <dd>Attributes Allowed: N/A</dd>
+            <dd>Content Allowed: a, abbr, b, bold, code, del, em, i, ins, kbd, mark, meta, pre, q, samp, strike, strong, sub, sup, u, var</dd>
+        
+            <dt>kbd</dt>
+            <dd>Attributes Allowed: N/A</dd>
+            <dd>Content Allowed: a, abbr, b, bold, code, del, em, i, ins, italic, mark, meta, pre, q, samp, strike, strong, sub, sup, u, var</dd>
+        
+            <dt>meta</dt>
+            <dd>Attributes Allowed: content, name</dd>
+            <dd>Content Allowed: </dd>
+        
+            <dt>mark</dt>
+            <dd>Attributes Allowed: N/A</dd>
+            <dd>Content Allowed: a, abbr, b, bold, code, del, em, i, ins, italic, kbd, meta, pre, q, samp, strike, strong, sub, sup, u, var</dd>
+        
+            <dt>pre</dt>
+            <dd>Attributes Allowed: N/A</dd>
+            <dd>Content Allowed: a, abbr, b, bold, code, del, em, i, ins, italic, kbd, mark, meta, q, samp, strike, strong, sub, sup, u, var</dd>
+        
+            <dt>q</dt>
+            <dd>Attributes Allowed: N/A</dd>
+            <dd>Content Allowed: a, abbr, b, bold, code, del, em, i, ins, italic, kbd, mark, meta, pre, samp, strike, strong, sub, sup, u, var</dd>
+        
+            <dt>samp</dt>
+            <dd>Attributes Allowed: N/A</dd>
+            <dd>Content Allowed: a, abbr, b, bold, code, del, em, i, ins, italic, kbd, mark, meta, pre, q, strike, strong, sub, sup, u, var</dd>
+        
+            <dt>strike</dt>
+            <dd>Attributes Allowed: N/A</dd>
+            <dd>Content Allowed: a, abbr, b, bold, code, del, em, i, ins, italic, kbd, mark, meta, pre, q, samp, strong, sub, sup, u, var</dd>
+        
+            <dt>strong</dt>
+            <dd>Attributes Allowed: N/A</dd>
+            <dd>Content Allowed: a, abbr, b, bold, code, del, em, i, ins, italic, kbd, mark, meta, pre, q, samp, strike, sub, sup, u, var</dd>
+        
+            <dt>sub</dt>
+            <dd>Attributes Allowed: N/A</dd>
+            <dd>Content Allowed: a, abbr, b, bold, code, del, em, i, ins, italic, kbd, mark, meta, pre, q, samp, strike, strong, sup, u, var</dd>
+        
+            <dt>sup</dt>
+            <dd>Attributes Allowed: N/A</dd>
+            <dd>Content Allowed: a, abbr, b, bold, code, del, em, i, ins, italic, kbd, mark, meta, pre, q, samp, strike, strong, sub, u, var</dd>
+        
+            <dt>u</dt>
+            <dd>Attributes Allowed: N/A</dd>
+            <dd>Content Allowed: a, abbr, b, bold, code, del, em, i, ins, italic, kbd, mark, meta, pre, q, samp, strike, strong, sub, sup, var</dd>
+        
+            <dt>var</dt>
+            <dd>Attributes Allowed: N/A</dd>
+            <dd>Content Allowed: a, abbr, b, bold, code, del, em, i, ins, italic, kbd, mark, meta, pre, q, samp, strike, strong, sub, sup, u</dd>
+        
+            <dt>&</dt>
+            <dd>Attributes Allowed: N/A</dd>
+            <dd>Content Allowed: </dd>
+        
+            <dt>br</dt>
+            <dd>Attributes Allowed: N/A</dd>
+            <dd>Content Allowed: N/A</dd>
+        
+            <dt>details</dt>
+            <dd>Attributes Allowed: N/A</dd>
+            <dd>Content Allowed: &, @facebook, @github, @linkedin, @twitter, a, abbr, b, bold, br, code, del, details, dl, em, emoji, escape, footnote, hashtag, hr, i, img, input, ins, italic, kbd, latex, mark, meta, ol, pre, q, question, samp, strike, strong, sub, summary, sup, table, textarea, transpiled, u, ul, value, var</dd>
+        
+            <dt>summary</dt>
+            <dd>Attributes Allowed: N/A</dd>
+            <dd>Content Allowed: a, abbr, b, bold, code, del, em, i, ins, italic, kbd, mark, meta, pre, q, samp, strike, strong, sub, sup, u, var</dd>
+        
+            <dt>dl</dt>
+            <dd>Attributes Allowed: N/A</dd>
+            <dd>Content Allowed: dd, dt, forEach, forEntries</dd>
+        
+            <dt>forEach</dt>
+            <dd>Attributes Allowed: iterable</dd>
+            <dd>Content Allowed: &, @facebook, @github, @linkedin, @twitter, NewsArticle, a, abbr, answer, article, b, blockquote, bold, br, caption, code, dd, del, details, dl, dt, em, emoji, escape, footnote, forEach, forEntries, h, h1, h2, h3, h4, h5, h6, h7, h8, hashtag, hr, i, img, input, ins, italic, kbd, latex, li, mark, mermaidChart, meta, ol, p, pre, q, question, samp, section, sheetMusic, strike, strong, sub, summary, sup, table, tbody, td, text, textarea, tfoot, th, thead, toc, tr, transpiled, u, ul, value, var</dd>
+        
+            <dt>forEntries</dt>
+            <dd>Attributes Allowed: object</dd>
+            <dd>Content Allowed: &, @facebook, @github, @linkedin, @twitter, NewsArticle, a, abbr, answer, article, b, blockquote, bold, br, caption, code, dd, del, details, dl, dt, em, emoji, escape, footnote, forEach, forEntries, h, h1, h2, h3, h4, h5, h6, h7, h8, hashtag, hr, i, img, input, ins, italic, kbd, latex, li, mark, mermaidChart, meta, ol, p, pre, q, question, samp, section, sheetMusic, strike, strong, sub, summary, sup, table, tbody, td, text, textarea, tfoot, th, thead, toc, tr, transpiled, u, ul, value, var</dd>
+        
+            <dt>dt</dt>
+            <dd>Attributes Allowed: N/A</dd>
+            <dd>Content Allowed: &, @facebook, @github, @linkedin, @twitter, a, abbr, b, bold, br, code, del, details, em, emoji, escape, footnote, hashtag, hr, i, img, input, ins, italic, kbd, latex, mark, meta, ol, pre, q, question, samp, strike, strong, sub, sup, table, textarea, transpiled, u, ul, value, var</dd>
+        
+            <dt>emoji</dt>
+            <dd>Attributes Allowed: filter, grayscale, greyscale</dd>
+            <dd>Content Allowed: </dd>
+        
+            <dt>escape</dt>
+            <dd>Attributes Allowed: N/A</dd>
+            <dd>Content Allowed: </dd>
+        
+            <dt>footnote</dt>
+            <dd>Attributes Allowed: href, url</dd>
+            <dd>Content Allowed: &, @facebook, @github, @linkedin, @twitter, a, abbr, b, bold, br, code, del, details, dl, em, emoji, escape, hashtag, hr, i, img, input, ins, italic, kbd, latex, mark, meta, ol, pre, q, question, samp, strike, strong, sub, sup, table, textarea, transpiled, u, ul, value, var</dd>
+        
+            <dt>hashtag</dt>
+            <dd>Attributes Allowed: N/A</dd>
+            <dd>Content Allowed: </dd>
+        
+            <dt>hr</dt>
+            <dd>Attributes Allowed: N/A</dd>
+            <dd>Content Allowed: N/A</dd>
+        
+            <dt>input</dt>
+            <dd>Attributes Allowed: title, type, value</dd>
+            <dd>Content Allowed: N/A</dd>
+        
+            <dt>img</dt>
+            <dd>Attributes Allowed: align, alt, decoding, height, ismap, loading, src, static, title, type, url, width</dd>
+            <dd>Content Allowed: N/A</dd>
+        
+            <dt>latex</dt>
+            <dd>Attributes Allowed: N/A</dd>
+            <dd>Content Allowed: </dd>
+        
+            <dt>@facebook</dt>
+            <dd>Attributes Allowed: href, target</dd>
+            <dd>Content Allowed: </dd>
+        
+            <dt>@github</dt>
+            <dd>Attributes Allowed: href, target</dd>
+            <dd>Content Allowed: </dd>
+        
+            <dt>@linkedin</dt>
+            <dd>Attributes Allowed: href, target</dd>
+            <dd>Content Allowed: </dd>
+        
+            <dt>@twitter</dt>
+            <dd>Attributes Allowed: href, target</dd>
+            <dd>Content Allowed: </dd>
+        
+            <dt>ol</dt>
+            <dd>Attributes Allowed: reversed, start, type</dd>
+            <dd>Content Allowed: forEach, forEntries, li</dd>
+        
+            <dt>li</dt>
+            <dd>Attributes Allowed: type, value</dd>
+            <dd>Content Allowed: &, @facebook, @github, @linkedin, @twitter, a, abbr, b, bold, br, code, del, details, dl, em, emoji, escape, footnote, hashtag, hr, i, img, input, ins, italic, kbd, latex, mark, meta, ol, pre, q, question, samp, strike, strong, sub, sup, table, textarea, transpiled, u, ul, value, var</dd>
+        
+            <dt>question</dt>
+            <dd>Attributes Allowed: showanswer, type</dd>
+            <dd>Content Allowed: answer, text, value</dd>
+        
+            <dt>text</dt>
+            <dd>Attributes Allowed: N/A</dd>
+            <dd>Content Allowed: &, @facebook, @github, @linkedin, @twitter, a, abbr, b, bold, br, code, del, details, dl, em, emoji, escape, footnote, hashtag, hr, i, img, input, ins, italic, kbd, latex, mark, meta, ol, pre, q, question, samp, strike, strong, sub, sup, table, textarea, transpiled, u, ul, value, var</dd>
+        
+            <dt>table</dt>
+            <dd>Attributes Allowed: N/A</dd>
+            <dd>Content Allowed: caption, tbody, tfoot, thead, tr</dd>
+        
+            <dt>tbody</dt>
+            <dd>Attributes Allowed: N/A</dd>
+            <dd>Content Allowed: tr</dd>
+        
+            <dt>tr</dt>
+            <dd>Attributes Allowed: rowspan</dd>
+            <dd>Content Allowed: td, th</dd>
+        
+            <dt>td</dt>
+            <dd>Attributes Allowed: colspan</dd>
+            <dd>Content Allowed: &, @facebook, @github, @linkedin, @twitter, a, abbr, b, bold, br, code, del, details, dl, em, emoji, escape, footnote, hashtag, hr, i, img, input, ins, italic, kbd, latex, mark, meta, ol, pre, q, question, samp, strike, strong, sub, sup, table, textarea, transpiled, u, ul, value, var</dd>
+        
+            <dt>textarea</dt>
+            <dd>Attributes Allowed: disabled, readonly, value</dd>
+            <dd>Content Allowed: </dd>
+        
+            <dt>transpiled</dt>
+            <dd>Attributes Allowed: N/A</dd>
+            <dd>Content Allowed: &, @facebook, @github, @linkedin, @twitter, NewsArticle, a, abbr, article, b, blockquote, bold, br, code, del, details, dl, em, emoji, escape, footnote, forEach, forEntries, h, h1, h2, h3, h4, h5, h6, h7, h8, hashtag, hr, i, img, input, ins, italic, kbd, latex, link, listeners, mark, mermaidChart, meta, ol, p, pre, q, question, samp, section, sheetMusic, strike, strong, style, sub, sup, table, textarea, title, toc, transpiled, u, ul, value, var</dd>
+        
+            <dt>blockquote</dt>
+            <dd>Attributes Allowed: N/A</dd>
+            <dd>Content Allowed: N/A</dd>
+        
+            <dt>h</dt>
+            <dd>Attributes Allowed: N/A</dd>
+            <dd>Content Allowed: a, abbr, b, bold, code, del, em, i, ins, italic, kbd, mark, meta, pre, q, samp, strike, strong, sub, sup, u, var</dd>
+        
+            <dt>h1</dt>
+            <dd>Attributes Allowed: N/A</dd>
+            <dd>Content Allowed: a, abbr, b, bold, code, del, em, i, ins, italic, kbd, mark, meta, pre, q, samp, strike, strong, sub, sup, u, var</dd>
+        
+            <dt>h2</dt>
+            <dd>Attributes Allowed: N/A</dd>
+            <dd>Content Allowed: a, abbr, b, bold, code, del, em, i, ins, italic, kbd, mark, meta, pre, q, samp, strike, strong, sub, sup, u, var</dd>
+        
+            <dt>h3</dt>
+            <dd>Attributes Allowed: N/A</dd>
+            <dd>Content Allowed: a, abbr, b, bold, code, del, em, i, ins, italic, kbd, mark, meta, pre, q, samp, strike, strong, sub, sup, u, var</dd>
+        
+            <dt>h4</dt>
+            <dd>Attributes Allowed: N/A</dd>
+            <dd>Content Allowed: a, abbr, b, bold, code, del, em, i, ins, italic, kbd, mark, meta, pre, q, samp, strike, strong, sub, sup, u, var</dd>
+        
+            <dt>h5</dt>
+            <dd>Attributes Allowed: N/A</dd>
+            <dd>Content Allowed: a, abbr, b, bold, code, del, em, i, ins, italic, kbd, mark, meta, pre, q, samp, strike, strong, sub, sup, u, var</dd>
+        
+            <dt>h6</dt>
+            <dd>Attributes Allowed: N/A</dd>
+            <dd>Content Allowed: a, abbr, b, bold, code, del, em, i, ins, italic, kbd, mark, meta, pre, q, samp, strike, strong, sub, sup, u, var</dd>
+        
+            <dt>h7</dt>
+            <dd>Attributes Allowed: N/A</dd>
+            <dd>Content Allowed: a, abbr, b, bold, code, del, em, i, ins, italic, kbd, mark, meta, pre, q, samp, strike, strong, sub, sup, u, var</dd>
+        
+            <dt>h8</dt>
+            <dd>Attributes Allowed: N/A</dd>
+            <dd>Content Allowed: a, abbr, b, bold, code, del, em, i, ins, italic, kbd, mark, meta, pre, q, samp, strike, strong, sub, sup, u, var</dd>
+        
+            <dt>mermaidChart</dt>
+            <dd>Attributes Allowed: N/A</dd>
+            <dd>Content Allowed: </dd>
+        
+            <dt>p</dt>
+            <dd>Attributes Allowed: N/A</dd>
+            <dd>Content Allowed: &, @facebook, @github, @linkedin, @twitter, a, abbr, b, bold, br, code, del, details, dl, em, emoji, escape, footnote, hashtag, hr, i, img, input, ins, italic, kbd, latex, mark, meta, ol, pre, q, question, samp, strike, strong, sub, sup, table, textarea, transpiled, u, ul, value, var</dd>
+        
+            <dt>ul</dt>
+            <dd>Attributes Allowed: N/A</dd>
+            <dd>Content Allowed: N/A</dd>
+        
+            <dt>value</dt>
+            <dd>Attributes Allowed: default, disabled, editable, extract, fitcontent, format, globalThis, hidden, literal, plaintext, readonly, src, static, template, title, type, url, value</dd>
+            <dd>Content Allowed: 0</dd>
+        
+            <dt>article</dt>
+            <dd>Attributes Allowed: N/A</dd>
+            <dd>Content Allowed: N/A</dd>
+        
+            <dt>NewsArticle</dt>
+            <dd>Attributes Allowed: N/A</dd>
+            <dd>Content Allowed: N/A</dd>
+        
+            <dt>section</dt>
+            <dd>Attributes Allowed: N/A</dd>
+            <dd>Content Allowed: N/A</dd>
+        
+            <dt>toc</dt>
+            <dd>Attributes Allowed: toggle</dd>
+            <dd>Content Allowed: </dd>
+        
+            <dt>sheetMusic</dt>
+            <dd>Attributes Allowed: N/A</dd>
+            <dd>Content Allowed: </dd>
+        
+            <dt>link</dt>
+            <dd>Attributes Allowed: href, type, url</dd>
+            <dd>Content Allowed: N/A</dd>
+        
+            <dt>listeners</dt>
+            <dd>Attributes Allowed: N/A</dd>
+            <dd>Content Allowed: N/A</dd>
+        
+            <dt>style</dt>
+            <dd>Attributes Allowed: N/A</dd>
+            <dd>Content Allowed: </dd>
+        
+            <dt>title</dt>
+            <dd>Attributes Allowed: N/A</dd>
+            <dd>Content Allowed: </dd>
+        
+            <dt>th</dt>
+            <dd>Attributes Allowed: colspan</dd>
+            <dd>Content Allowed: &, @facebook, @github, @linkedin, @twitter, a, abbr, b, bold, br, code, del, details, dl, em, emoji, escape, footnote, hashtag, hr, i, img, input, ins, italic, kbd, latex, mark, meta, ol, pre, q, question, samp, strike, strong, sub, sup, table, textarea, transpiled, u, ul, value, var</dd>
+        
+            <dt>tfoot</dt>
+            <dd>Attributes Allowed: N/A</dd>
+            <dd>Content Allowed: 0</dd>
+        
+            <dt>thead</dt>
+            <dd>Attributes Allowed: N/A</dd>
+            <dd>Content Allowed: tr</dd>
+        
+            <dt>caption</dt>
+            <dd>Attributes Allowed: N/A</dd>
+            <dd>Content Allowed: a, abbr, b, bold, code, del, em, i, ins, italic, kbd, mark, meta, pre, q, samp, strike, strong, sub, sup, u, var</dd>
+        
+            <dt>answer</dt>
+            <dd>Attributes Allowed: literal, type, value</dd>
+            <dd>Content Allowed: </dd>
+        
+            <dt>dd</dt>
+            <dd>Attributes Allowed: N/A</dd>
+            <dd>Content Allowed: &, @facebook, @github, @linkedin, @twitter, a, abbr, b, bold, br, code, del, details, em, emoji, escape, footnote, hashtag, hr, i, img, input, ins, italic, kbd, latex, mark, meta, ol, pre, q, question, samp, strike, strong, sub, sup, table, textarea, transpiled, u, ul, value, var</dd>
+        
+    </dl><br></p></section>
 <section><h1 id="design-objectives" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Design Objectives<span class="autohelm-nav autohelm-nav-up-down"> <a href="#tags">&uarr;</a> <a href="#grammar">&darr;</a></span></h1><p>    <em>Note, not all design objectives are fully implemented</em>.</p><p>    <ul><li> Easy to understand, simple syntax, semantic</li><li> Easy to learn, limited syntax, semantic</li><li> Forgiving, auto corrects nesting, table column count, etc.</li><li> Easy to extend, uniform syntax, declarative language elements        li[Secure, transpiler ensures security, also see  :a({"href":"#security"})[Security]]</li><li> Performant, simple syntax reduces parser work, although iterating over tag object definitions can take time</li><li> Small, simple syntax reduces parser size, although tag object definitions can take up memory</li><li> Configurable, declarative language elements</li><li> Comprehensive, all of semantic HTML and more (extensible)</li><li> Computational, reactivity built-in, advanced math built in, simple user input mechanisms</li><li> Programmable, simple event handling plus API</li><li> Styled, code highlighting built-in, optional CSS capability</li><li> Portable, HTML output with asset bundling options        li[SEO Friendly, browser or server rendering, meta tags driven by hashtags and an explicit  :code[:keywords[]]  tag]</li></ul><br></p></section>
 <section><h1 id="grammar" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Grammar<span class="autohelm-nav autohelm-nav-up-down"> <a href="#design-objectives">&uarr;</a> <a href="#architecture">&darr;</a></span></h1><p>    All SECST markup takes one of two forms:</p><p>    <ul><li><code class="nohighlight">:&lt;tag&gt;[&lt;content&gt;...]</code> where code:[&lt;content&gt;] is SECST markup ans text.</li><li><code class="nohighlight">:&lt;tag&gt;(#&lt;id&gt; .&lt;class&gt;... &lt;unaryattribute&gt;... &lt;attributes&gt;...)[&lt;content&gt;...]</code> where  <code class="nohighlight">&lt;id&gt;</code>,  <code class="nohighlight">&lt;class&gt;</code> space separated list,  <code class="nohighlight">&lt;unaryattribute&gt;</code> space separated list, <code class="nohighlight">&lt;attributes&gt;</code> JSON5 object are all optional, but must be provided in that order if present.</li></ul></p><p>    In some cases, e.g. for <code class="nohighlight">:hr</code>, <code class="nohighlight">:br</code>, and <code class="nohighlight">:value</code> the trailing <code class="nohighlight">[]</code> are optional.</p><p>    The reference implementation uses a <a target="_tab" href="https://pegjs.org/">PEG parser</a> and this grammar:</p><p>    <textarea class="secst" data-mime-type="text/plain" data-default="" title="./src/grammar.txt" data-fitcontent="" disabled=""> {
         function* flattenContent(content) {

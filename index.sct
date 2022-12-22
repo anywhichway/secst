@@ -1110,7 +1110,17 @@
 :section[
     :h(#tags)[Complete List Of Tags]
 
-    :value({globalThis:"SECST.tagSpecs"})[];
+    Below scroll area should be hidden.
+
+    :value(#tagSpecs hidden {globalThis:"SECST.tagSpecs"})[]
+
+    :dl[
+        :forEntries({object:"#tagSpecs"})[
+            :dt[${key}]
+            :dd[Attributes Allowed: ${value.attributesAllowed && typeof(value.attributesAllowed) ? Object.keys(value.attributesAllowed).join(", ") : "N/A"}]
+            :dd[Content Allowed: ${value.contentAllowed && typeof(value.contentAllowed) ? Object.keys(value.contentAllowed).join(", ") : "N/A"}]
+        ]
+    ]
 ]
 :section[
 :h[Design Objectives]

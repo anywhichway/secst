@@ -1,6 +1,7 @@
 import Tag from "../tag.js";
 import li from "./li.js"
 import forEach from "./for-each.js";
+import forEntries from "./for-entries.js";
 
 const ul = {
     attributesAllowed: {
@@ -8,6 +9,7 @@ const ul = {
     },
         contentAllowed: {
             forEach,
+            forEntries,
             li
         },
         transform(node) {

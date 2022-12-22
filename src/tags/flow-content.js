@@ -1,3 +1,5 @@
+import forEach from "./for-each.js";
+import forEntries from "./for-entries.js";
 import headings from "./headings.js";
 import p from "./p.js";
 import phrasingContent from "./phrasing-content.js";
@@ -9,6 +11,8 @@ import sheetMusic from "./sheet-music.js";
 
 const flowContent = {
     async blockquote() {const {blockquote} = await import("./blockquote.js"); return this.blockquote = blockquote; },
+    forEach,
+    forEntries,
     ...headings,
     mermaidChart,
     p,
