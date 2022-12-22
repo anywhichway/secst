@@ -19,5 +19,6 @@ const dl = {
         }
     }
 }
+dl.contentAllowed.dl = dl;
 
 export {dl,dl as default}

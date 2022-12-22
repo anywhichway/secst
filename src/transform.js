@@ -1,23 +1,8 @@
 import Tag from "./tag.js";
 import bodyContent from "./tags/body-content.js";
 import universalAttributes from "./universal-attributes.js";
+import getTagsByName from "./get-tags-by-name.js";
 
-const getContentByTagName = function(node,tagName,results=[]) {
-    if(node.content) {
-        node.content.reduce((results,item) => {
-            if(item.tag===tagName) {
-                results.push(item)
-            }
-            if(item.content) {
-                item.content.forEach((node) => {
-                    getContentByTagName(node,tagName,results);
-                })
-            }
-            return results;
-        },results)
-    }
-    return results;
-};
 
 const patchTopLevel = (tree) => {
     let previous;
@@ -181,11 +166,16 @@ const toElement = async (node,{parent,connects,parentConfig}) => {
     }
 }
 
+import {macro as MACRO} from "./tags/macro.js";
 const validateNode = async ({parser,node,path=[],contentAllowed=bodyContent,errors=[],level=0}) => {
     if(!node || typeof(node)!=="object") {
         return;
     }
-    node.getContentByTagName = getContentByTagName.bind(node,node);
+    const macro = MACRO.macros.get(node.tag);
+    if(macro) {
+        node = MACRO.resolve(macro,node);
+    }
+    node.getTagsByName = getTagsByName.bind(node,node);
     if(typeof(contentAllowed)==="function") {
         contentAllowed = await contentAllowed();
     }
@@ -257,6 +247,10 @@ const validateNode = async ({parser,node,path=[],contentAllowed=bodyContent,erro
                     errors.push(new parser.SyntaxError(`${tag} does not allow string child. Dropping child.`,null,child,node.location))
                 }
             } else if(child && type==="object") {
+                const macro = MACRO.macros.get(child.tag);
+                if(macro) {
+                    child = MACRO.resolve(macro,child);
+                }
                 if(!config.contentAllowed || (config.contentAllowed!=="*" && !config.contentAllowed[child.tag])) {
                     errors.push(new parser.SyntaxError(`${tag} does not allow child ${child.tag}.`,null,JSON.stringify(child),node.location));
                     child.tag = "error";
@@ -396,82 +390,20 @@ const transform = async (parser,text,{styleAllowed}={}) => {
     dom.appendChild(dom.head = document.createElement("head"));
     dom.head.innerHTML = `<meta name="viewport" content="width=device-width, initial-scale=1" />`;
     dom.appendChild(dom.body = document.createElement("body"));
-    dom.body.innerHTML = `<style>
-        span.autohelm-nav a {all: unset} 
-        span.autohelm-nav-up-down a {font-size: 80%; vertical-align:text-top} 
-        span.autohelm-footnote {position:relative; font-size:small; top:-.5em}
-        mark.secst-error { background: red }
-        section {
-            margin-left: 2ch
-        }
-        details {
-            display: inline
-        }
-        .katex {
-            font-size: unset;
-        }
-        kbd {
-            background-color: whitesmoke;
-            border: 1px solid darkgray;
-            border-radius: 2px;
-            unicode-bidi: embed;
-            font-family: monospace;
-            white-space: pre;
-            padding-left: 2px;
-            padding-right: 2px;
-        }
-        .secst-error {
-            border: solid 1px red;
-        }
-        table.secst {
-            border: 1px solid black;
-            border-collapse: collapse;
-        }
-        .secst th {
-            background-color: whitesmoke;
-        }
-        .secst th, td {
-            border: 1px solid black;
-            padding: 5px;
-        }
-        input.secst {
-             font-family: monospace;
-        }
-        input.secst[type="number"] {
-             min-width: 4ch;
-        }
-        textarea.secst {
-            display: block;
-            unicode-bidi: embed;
-            font-family: monospace;
-            white-space: pre;
-            max-width: calc(100% - 1ch);
-            min-width: calc(100% - 1ch);
-            overflow: auto;
-        }
-        pre.secst {
-            padding: 1ch;
-            max-width:  calc(100% - 1ch);
-            max-height: 25em;
-            overflow: auto;
-            background-color: whitesmoke;
-        }
-        code {
-            white-space: pre;
-            unicode-bidi: embed;
-        }
-        img[align="left"] {
-           margin-right: 1ch;
-        }
-         img[align="right"] {
-           margin-left: 1ch;
-        }
-        </style>`;
     /*
             section > *:not(:first-child):not(section) {
             display: none
         }
      */
+    if(!transformed.some((node) => {
+        (node.tag==="theme" && !node.content.some((node) => node.tag==="link" && node.attributes.rel==="stylesheet")) ||
+        !getTagsByName(node,"theme").some((node) => node.tag==="link" && node.attributes.rel==="stylesheet")
+    })) {
+        const link = document.createElement("link");
+        link.setAttribute("rel","stylesheet");
+        link.setAttribute("href","./assets/themes/secst.css");
+        dom.body.appendChild(link);
+    }
     for(const node of transformed) {
         await toElement(node,{parent:dom.body,parentConfig:{contentAllowed:bodyContent}})
     }

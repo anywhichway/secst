@@ -1,8 +1,13 @@
+import getTagById from "./get-tag-by-id.js";
+import getTagsByName from "./get-tags-by-name.js";
+
 class Tag {
     constructor({tag,options,content=[],location}) {
         const {attributes={}, classList=[], id } = options||{};
         Object.assign(this,{tag,id,classList,attributes,content});
         Object.defineProperty(this,"location",{value:location});
+        this.getTagById = getTagById.bind(this,this);
+        this.getTagsByName = getTagsByName.bind(this,this);
     }
     toString() {
         let string = ":" + this.tag;

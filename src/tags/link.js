@@ -9,7 +9,7 @@ const link = {
         href(value) {
             new URL(value,document?.baseURI);
         },
-        type: ["rel"]
+        rel: ["stylesheet"]
     }
 }
 

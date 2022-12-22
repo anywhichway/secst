@@ -12,7 +12,7 @@ const Person = {
     },
     toJSONLD(node) {
         node.classList.push("JSON-LD-Person");
-        const name = node.getContentByTagName("name")[0];
+        const name = node.getTagsByName("name")[0];
         return {
             "@type": "Person",
             name: name.toJSONLD(name).name

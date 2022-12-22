@@ -86,12 +86,12 @@ const question = {
                 type = typeof(result);
             if(value!=="" && result!=value) {
                 currentTarget.classList.add("secst-error");
-                if(currentTarget.getAttribute("data-showanswer")==="true") {
+                if(currentTarget.lastChild.nodeType!==Node.TEXT_NODE && currentTarget.getAttribute("data-showanswer")==="true") {
                     currentTarget.appendChild(new Text(" Correct Answer: " + (type==="string" ? result : JSON.stringify(result))));
                 }
             } else {
                 currentTarget.classList.remove("secst-error");
-                if(currentTarget.lastChild.nodeType===Node.TEXT_NODE) {
+                while(currentTarget.lastChild.nodeType===Node.TEXT_NODE) {
                     currentTarget.lastChild.remove()
                 }
             }

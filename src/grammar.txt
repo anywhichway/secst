@@ -199,7 +199,7 @@
         = "." cls:classname { return cls }
 
     classname
-        = hyphen:"-"? start:[_a-z]i rest:[\w]i* { return (hyphen || "") + start + rest.join("") }
+        = start:[_a-z\-]i rest:[_a-z0-9\-]i* { return start + rest.join("") }
 
     binaryattribute
         = attr:(_ hidden _ / _ checked _ / _ grayscale _ / _ greyscale _ / _ disabled _ / _ editable _ / _ fitcontent _ / _ literal _ / _ open _ / _ plaintext _ / _ readonly _ / _ reversed _ / _ run _ / _ selected _ / _ static _ / _ toggle _ / _ url _ / _ visible _) { return attr[1] }

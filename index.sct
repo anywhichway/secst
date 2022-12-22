@@ -7,12 +7,13 @@
     SECST is intended to be a more expressive, but just as easy to learn and use, alternative to Markdown. It provides these features and more:
 
     :ul[
-        - Support for almost all HTML tags.
+        - Support for almost all HTML tags :a(.#tags)[and then some...].
         - :a(.#tables-of-contents)[Table of contents] and :a(.#footnotes)[footnote management].
         - :a(.#hashtags)[Hashtag] and social media :a(.#mentions)[support].
+        - :a(.#theme)[Theme and style support].
         - Reactive :a(.#values-and-formulas)[formulas and data import] that are no more complex than Excel formulas, e.g. :code[:value[2 * 2]] = :value[2 * 2].
         - The use of JSON-LD :a(.#structured-data)[structured data] for both content generation/layout and SEO optimization.
-        - :a(.#images)[Asset bundling] for images, video, and audio.
+        - :a(.#images)[Asset bundling] for images, video, audio.
         - Server and client generated well structured HTML output resistant to XSS attacks.
     ]
 
@@ -24,9 +25,10 @@
         SECST is intended to be a more expressive, but just as easy to learn and use, alternative to Markdown. It provides these features and more:
 
         :ul[
-            - Support for almost all HTML tags.
+            - Support for almost all HTML tags :a(.#tags)[and then some...].
             - :a(.#tables-of-contents)[Table of contents] and :a(.#footnotes)[footnote management].
             - :a(.#hashtags)[Hashtag] and social media :a(.#mentions)[support].
+            - :a(.#theme)[Theme and style support].
             - Reactive :a(.#values-and-formulas)[formulas and data import] that are no more complex than Excel formulas, e.g. :code[:value[2 * 2]] = :value[2 * 2].
             - The use of JSON-LD :a(.#structured-data)[structured data] for both content generation/layout and SEO optimization.
             - :a(.#images)[Asset bundling] for images, video, and audio.
@@ -58,7 +60,6 @@
            :li[Markdown's goal is simplicity, for which it sacrifices a lot of expressive power. This sacrifice is the result of a non-uniform, non-semantic syntax used to support its simplicity.]
            :li[Ensuring that HTML documents are meaningful for textual analysis or supportive of assistive software is hard.]
            :li[Markdown is not semantic, you must learn the different annotations to format your document and the resulting HTML is not necessarily meaningful to textual analysis or assistive software. When Markdown initially had a very limited number of ways to format documents, its syntax was a benefit, for some it is now becoming a burden.]
-           :li[Neither Markdown or HTML enforce what are effectively required attributes for some markup to work or for accessibility purposes.]
            :li[Some Markdown syntax is invisible, e.g. spaces for line breaks]
            :li[The built-in self creating document navigation capabilities of HTML and Markdown are limited.]
            :li[Using HTML's computational capabilities, i.e. JavaScript, requires programming skills.]
@@ -523,6 +524,33 @@
             ]
 
         ]
+        :macro({name:"profile",tag:"p",contentAllowed:true})[
+            :em[${name}]
+            :em[${age}]
+         ]
+        :section[
+            :h[Macros]
+
+            New tags can be defined in the content of any document through the use of macros.
+
+            A macro takes a :code[name] attribute, which will be the new tag name and a :code[tag] attribute which will be the top level tag to use for replacing the macro tag.
+
+            The content of the macro is used as a substitute for the macro. The content can contain variables that are populated based on the attributes provided to the new tag when it is used.
+
+            An optional attribute :code[contentAllowed] specifies if instances of the macro tag can provide content to append at the end.
+
+            :code[
+                :macro({name:"profile",tag:"p",contentAllowed:true})[
+                    :em[${name}]
+                    :em[${age}]
+                ]
+                :profile({name:"joe",age:26})[Hi there ${name}!]
+            ]
+
+            renders as
+
+            :profile({name:"joe",age:26})[Hi there ${name}!]
+        ]
         :section[
             :h[Questions]
 
@@ -547,6 +575,46 @@
             Questions take most of the same type attribute values as :a(https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input)[input]. They can also take the attribute :code[showanswer:true] if the correct answer is supposed to be shown after a user provides the wrong response.
 
             Questions have two required content tags, :code[:text[<question-body>]] and :code[:answer[<some-formula>]], that must be provided in order. The :code[<question-body>] can be just about any content that would normally go in a paragraph. Formulas are :a(.#values-and-formulas)[documented later]. The :code[:answer[]] tag can also take the attribute :code[literal], e.g. :code[:answer(literal)[2]].
+        ]
+        :section[
+            :h[Theme]
+
+            If a :code[:theme[]] tag with a URL or :code[:link]] content exists in document, then the default theme of :a(./assets/themes/secst.css {target:"_tab"})[sects.css] is not applied.
+
+            The theme :code[:theme(./assets/themes/html.css)[]] provides only those styles dependent on the :code[.secst] class. Default browser HTML styling is used elsewhere. It is kind of ugly!
+
+            The content of a theme can be any tag, except most have a special interpretation. The tag content is the CSS to apply to the tag, e.g. :code[:theme[:p[border:solid black 1px;]]] will put a black border around all paragraphs.
+
+            The theme content tags permitted but not treated in a special way are :code[:link[]], :code[:style[]], and :code[:class[]] (which is unique to :code[:theme[]]).
+
+            The tag :code[:class[]] takes a name attribute (without a prefixed period) and the content is the CSS, e.g. :code[:theme[:class({name:"italic-paragraph"})[font-style:italic;]]] creates a class :code[.italic-paragraph].
+
+            Theme tags can exist as :a(.#body-content)[Body Content] or :a(.#block-content)[Block Content]. They should be placed as close to the top of the document as possible.
+
+            Themes can be scoped using the scope attribute, the value of which is a CSS selector string, e.g. :code[:theme({scope:#special-section})[:p[border:solid black 1px;]]] will only put borders around a paragraphs that are inside a :code[:section(#special-section)[]].
+
+
+            :code[
+                :theme[:class({name:"italic-paragraph"})[font-style:italic;]]
+                :theme({scope:"#special-section"})[:p[border:solid black 1px;]]
+                :section[
+                   :p(.italic-paragraph)[Italic paragraph with no border.]
+                ]
+                :section(#special-section)[
+                   :p[Paragraph with border.]
+                ]
+            ]
+
+            renders as
+
+            :theme[:class({name:"italic-paragraph"})[font-style:italic;]]
+            :theme({scope:"#special-section"})[:p[border:solid black 1px;]]
+            :section[
+               :p(.italic-paragraph)[Italic paragraph with no border]
+            ]
+            :section(#special-section)[
+               :p[Paragraph with border]
+            ]
         ]
         :section[
             :h[Transpiled SECST]
@@ -1118,9 +1186,10 @@
 
     :dl[
         :forEntries({object:"#tagSpecs"})[
-            :dt[${key}]
-            :dd[Attributes Allowed: ${value.attributesAllowed && typeof(value.attributesAllowed) ? Object.keys(value.attributesAllowed).join(", ") : "N/A"}]
-            :dd[Content Allowed: ${value.contentAllowed && typeof(value.contentAllowed) ? Object.keys(value.contentAllowed).join(", ") : "N/A"}]
+            :dt[:strong[${key}]]
+            :dd[:em[Attributes Allowed]: :code[${value.attributesAllowed && typeof(value.attributesAllowed)==="object" ? Object.keys(value.attributesAllowed).join(", ") : "N/A"}]]
+            :dd[:em[Content Allowed]: :code[${value.contentAllowed ? (typeof(value.contentAllowed)==="object" ? Object.keys(value.contentAllowed).join(", ") : "plain text") : "N/A"}]]
+            :dd[:em[Transformation Impacts]: ${value.transform && value.attributesAllowed ? "Attributes may differ from the above since the tag is transformed and transient attributes may be deleted. See the detailed documentation for the tag." : "N/A"}]
         ]
     ]
 ]
@@ -1169,32 +1238,32 @@
         The Mozilla Development Network, a.k.a. :abbrev[MDN], documents several HTML tag content categories:
 
         :ul[
-            - :a(https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#metadata_content)[Metadata content], e.g. :code[<link>], :code[<style].
-            - :a(https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#flow_content)[Flow content], most elements that can go inside :code[<body>].
-            - :a(https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#sectioning_content)[Sectioning Content], e.g. :code[<section>], :code[<article>].
-            - :a(https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#heading_content)[Heading Content], e.g, :code[<h1>], :code[<h2>].
-            - :a(https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#phrasing_content)[Phrasing Content], i.e. anything that can go in a paragraph, :code[<p>].
-            - :a(https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#embedded_content)[Embedded Content], e.g. :code[<img>], :code[audio], that cab be used in the same places as flow content.
-            - :a(https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#interactive_content)[Interactive Content], i.e. that specifically designed to support user interaction, e.g. :code[<a>], :code[<input>].
-            - :a(https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#form-associated_content)[Form Associated Content], i.e. elements that are usually seen inside a form, but might not support interaction, e.g. :code[<progress>].
+            - :a(https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#metadata_content)[:em(#metadata-content)[Metadata content]], e.g. :code[<link>], :code[<style].
+            - :a(https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#flow_content)[:em(#flow-content)[Flow content]], most elements that can go inside :code[<body>].
+            - :a(https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#sectioning_content)[:em(#sectioning-content)[Sectioning Content]], e.g. :code[<section>], :code[<article>].
+            - :a(https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#heading_content)[:em(#heading-content)[Heading Content]], e.g, :code[<h1>], :code[<h2>].
+            - :a(https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#phrasing_content)[:em(#phrasing-content)[Phrasing Content]], i.e. anything that can go in a paragraph, :code[<p>].
+            - :a(https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#embedded_content)[:em(#embedded-content)[Embedded Content]], e.g. :code[<img>], :code[audio], that cab be used in the same places as flow content.
+            - :a(https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#interactive_content)[:em(#interactive-content)[Interactive Content]], i.e. that specifically designed to support user interaction, e.g. :code[<a>], :code[<input>].
+            - :a(https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#form-associated_content)[:em(#form-associated-content)[Form Associated Content]], i.e. elements that are usually seen inside a form, but might not support interaction, e.g. :code[<progress>].
         ]
 
         SECST uses these content types to determine what types of tags can exists inside other tags with a few enhancements or exceptions:
 
         :ul[
-            :li[A content category :em[Text Content], a sub-set of :em[Phrasing Content] that is typically displayed inline and does not allow a tag to be nested inside itself because it would be redundant, e.g. :code[<strong>].]
-            - A content category :em[Block Content], includes all :em[Flow Content] that is not included in Text Content, e.g. :code[<table>].
-            - A content category :em[Body Content], with specifically enumerated tags allowed in a :code[<body>], including :code[<style>] and :code[<link>] which are usually in a :code[<head>] section, but may exist in a :code[<body>].
-            - All Flow Content :strong[MUST] be inside of Sectioning Content.
+            :li[A content category :em(#text-content)[Text Content], a sub-set of :a(.#phrasing-content)[:em[Phrasing Content]] that is typically displayed inline and does not allow a tag to be nested inside itself because it would be redundant, e.g. :code[<strong>].]
+            - A content category :em(#block-content)[Block Content], includes all :a(.#flow-content)[:em[Flow Content]] that is not included in :em[Text Content], e.g. :code[<table>].
+            - A content category :em(#body-content)[Body Content], enumerates tags allowed in a :code[<body>], including :code[<style>] and :code[<link>] which are usually in a :code[<head>] section, but may exist in a :code[<body>].
+            - All :a(.#flow-content)[:em[Flow Content]] &nbsp; :strong[MUST] be inside of :a(.#sectioning-content)[:em[Sectioning Content]]. The tags :code[:article[]] and :code[:section[]] are both :a(.#sectioning-content)[:em[Sectioning Content]] and  :a(.#flow-content)[:em[Flow Content]], so they can be nested.
             - Common cases where browsers support elements in an alternate context that makes semantic sense, e.g. :code[:progress[]] can exist outside a :code[<form>].
-            - JSON-LD tags, which are treated as :em[Sectioning Content].
+            - JSON-LD tags, which are treated as :a(.#sectioning-content)[:em[Sectioning Content]].
         ]
 
     ]
     :section[
         :h[Data Architecture]
 
-        The relationship between tags is represented as a cyclical JSON structure. The bulk of of the structure is static, but some of is dynamic and memoized to address its cyclical nature.
+        The relationship between tags is represented as a cyclical JSON structure. The bulk of of the structure is static, but some of it is dynamic and memoized to address its cyclical nature.
 
         Tags are defined with the following parts:
 
@@ -1234,14 +1303,15 @@
                     // a function body to manipulate the element based on the parsed node in some custom manner
                 }
                 mounted(el,node) { // optional
+                    // called when the element is added to a DOM tree that is not yet connected to a document
                     // a function body that can make adjustments to the generated element before it is rendered, e.g. call HighlightJS with the :code[innerHTML] and replace it.
                 },
                 connected(el,node) { // optional
-                    // a function body that is called after all nodes have been rendered in the order they were added to the document, e.g. re-compute sizes that can't be done easily with CSS
+                    // a function body that is called after all nodes have been added to a document in the order they were added to the document, e.g. re-compute sizes that can't be done easily with CSS
                 }
                 listeners: { // optional, responds to events on all occurrences of the tag
                     <event-name>(event) {
-                        // function body
+                        // function body, event.target will be the occurrence of the HTML element generated by the Tag
                     },
                     ...
                 },

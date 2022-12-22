@@ -1,0 +1,75 @@
+span.autohelm-nav a {text-decoration: unset; color:unset}
+span.autohelm-nav-up-down a {font-size: 80%; vertical-align:text-top}
+span.autohelm-footnote {position:relative; font-size:small; top:-.5em}
+section {
+    margin-left: 2ch
+}
+details {
+    display: inline
+}
+.katex {
+    font-size: unset;
+}
+kbd {
+    background-color: whitesmoke;
+    border: 1px solid darkgray;
+    border-radius: 2px;
+    unicode-bidi: embed;
+    font-family: monospace;
+    white-space: pre;
+    padding-left: 2px;
+    padding-right: 2px;
+}
+.sect[hidden] {
+    display: none
+}
+.secst-error {
+    border: solid 1px red;
+}
+mark.secst-error { background: red }
+table.secst {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+.secst th {
+    background-color: whitesmoke;
+}
+.secst th, td {
+    border: 1px solid black;
+    padding: 5px;
+}
+input.secst {
+    font-family: monospace;
+}
+input.secst[type="number"] {
+    min-width: 4ch;
+}
+textarea.secst:not([hidden]) {
+    display: block;
+    unicode-bidi: embed;
+    font-family: monospace;
+    white-space: pre;
+    max-width: calc(100% - 1ch);
+    min-width: calc(100% - 1ch);
+    overflow: auto;
+}
+pre.secst {
+    padding: 1ch;
+    max-width:  calc(100% - 1ch);
+    max-height: 25em;
+    overflow: auto;
+    background-color: whitesmoke;
+}
+code {
+    white-space: pre-line;
+    unicode-bidi: embed;
+}
+pre > code {
+    white-space: pre;
+}
+img[align="left"] {
+    margin-right: 1ch;
+}
+img[align="right"] {
+    margin-left: 1ch;
+}

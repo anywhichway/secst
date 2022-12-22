@@ -1,36 +1,41 @@
-import Tag from "../tag.js";
 import blockContent from "./block-content.js";
+import {macro as MACRO} from "./macro.js";
+import Tag from "../tag.js";
 
 const section = {
     stringAllowed: true,
     contentAllowed: {
         ...blockContent,
+        macro: MACRO
     },
     transform(node,{level}) {
         const pconfig = section.contentAllowed.p;
         let p;
          node.content = [...node.content.reduce((content,item,i) => {
-             if(typeof(item)==="string") {
+             if (typeof (item) === "string") {
                  const paragraphs = item.split("\r\n\r\n");
-                 if(paragraphs.length>1) {
-                     paragraphs.forEach((paragraph,i) => {
-                         if(i===0 && p) {
+                 if (paragraphs.length > 1) {
+                     paragraphs.forEach((paragraph, i) => {
+                         if (i === 0 && p) {
                              p.content.push(paragraph);
                          } else {
                              content.add(p = new Tag({tag: "p", content: [paragraph]}))
                          }
                      })
                  } else {
-                     p ||= new Tag({tag:"p",level});
+                     p ||= new Tag({tag: "p", level});
                      p.content.push(item);
                  }
-             } else if(pconfig.contentAllowed[item.tag]) {
-                 p ||= new Tag({tag:"p",level});
+             } else if (pconfig.contentAllowed[item.tag]) {
+                 p ||= new Tag({tag: "p", level});
                  p.content.push(item);
-             } else if(section.contentAllowed[item.tag]) {
+             } else if (section.contentAllowed[item.tag]) {
                  content.add(item);
-                 p = new Tag({tag:"p",level});
-            } else {
+                 p = new Tag({tag: "p", level});
+             } else if(MACRO.macros.has(item.tag)) {
+                const macro = MACRO.macros.get(item.tag);
+                content.add(MACRO.resolve(macro,item));
+             } else {
                  console.log("err")
              }
             if(p) {

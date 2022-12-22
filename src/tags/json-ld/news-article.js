@@ -60,7 +60,7 @@ const author = {
     },
     minCount: 1,
     toJSONLD(node) {
-        const author = node.getContentByTagName("name")[0] || node.getContentByTagName("Person")[0];
+        const author = node.getTagsByName("name")[0] || node.getTagsByName("Person")[0];
         if(author) return author.toJSONLD(author);
     }
 }
@@ -79,9 +79,9 @@ const NewsArticle = {
     },
     toJSONLD(node) {
         node.classList.push("JSON-LD-NewsArticle");
-        const headlines = node.getContentByTagName("headline"),
-            images = node.getContentByTagName("img"),
-            authors = node.getContentByTagName("author"),
+        const headlines = node.getTagsByName("headline"),
+            images = node.getTagsByName("img"),
+            authors = node.getTagsByName("author"),
             headline = headlines.length===1 ? headlines[0] : null;
         const jsonld = {
             headline: headline.content[0],
