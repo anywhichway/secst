@@ -1114,6 +1114,8 @@
 
     :value(#tagSpecs hidden {globalThis:"SECST.tagSpecs"})[]
 
+    The documentation below is generated directly from SECST source code.
+
     :dl[
         :forEntries({object:"#tagSpecs"})[
             :dt[${key}]
