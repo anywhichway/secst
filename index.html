@@ -1,17 +1,13 @@
-<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width, initial-scale=1"><script src="./runtime.js?run"></script></head><body><link rel="stylesheet" href="./assets/themes/secst.css"><section><h1 id="the-joy-of-secst" class="autohelm-heading">The Joy of SECST</h1><p>    <abbr>SECST</abbr> (<strong>S</strong>emantic, <strong>E</strong>xtensible, <strong>C</strong>omputational, <strong>S</strong>tyleable, <strong>T</strong>agged) markup language. Use it to joyfully create compelling, interactive HTML SEO enabled documents.</p><p>    SECST is intended to be a more expressive, but just as easy to learn and use, alternative to Markdown. It provides these features and more:</p><p>    <ul><li> Support for almost all HTML tags <a href="#tags">and then some...</a>.</li><li> <a href="#tables-of-contents">Table of contents</a> and <a href="#footnotes">footnote management</a>.</li><li> <a href="#hashtags">Hashtag</a> and social media <a href="#mentions">support</a>.</li><li> <a href="#theme">Theme and style support</a>.</li><li> Reactive <a href="#values-and-formulas">formulas and data import</a> that are no more complex than Excel formulas, e.g. <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/styles/default.min.css"><code class="nohighlight">:value[2 * 2]</code> = <input class="secst" data-default="" data-template="2 * 2" value="4" title="2 * 2" data-fitcontent="" disabled="" style="width: 2ch;">.</li><li> The use of JSON-LD <a href="#structured-data">structured data</a> for both content generation/layout and SEO optimization.</li><li> <a href="#images">Asset bundling</a> for images, video, audio.</li><li> Server and client generated well structured HTML output resistant to XSS attacks.</li></ul></p><p>    This is the source for the introduction above:</p><p>    <pre class="secst"><code class="language-secst">:abbr[SECST] is a :strong[S]emantic, :strong[E]xtensible, :strong[C]omputational, :strong[S]tyleable :strong[T]ag oriented markup language. You can use it to joyfully create compelling, interactive, SEO enabled documents backed by HTML.
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width, initial-scale=1"><script src="./runtime.js?run"></script></head><body><link rel="stylesheet" href="./assets/themes/secst.css"><section><h1 id="the-joy-of-secst" class="autohelm-heading">The Joy of SECST</h1><p>    <abbr>SECST</abbr> (<strong>S</strong>emantic, <strong>E</strong>xtensible, <strong>C</strong>omputational, <strong>S</strong>tyleable, <strong>T</strong>agged) markup language. Use it to joyfully create compelling, interactive HTML documents.</p><p>    SECST is a more expressive, but as easy to learn and use, alternative to Markdown. It provides these features and more:</p><p>    <ul><li> Support for almost all HTML tags <a href="#tags">and then some...</a>, with <a href="#theme">themes and styles</a>.</li><li> <a href="#tables-of-contents">Table of contents</a>, <a href="#footnotes">footnote</a>, <a href="#hashtags">hashtag</a> and <a href="#mentions">social media</a> support.</li><li> Reactive <a href="#values-and-formulas">formulas and data import</a> that are as simple as Excel formulas, e.g. <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/styles/default.min.css"><code class="nohighlight">:value[2 * 2]</code> = <input class="secst" data-default="" data-template="2 * 2" value="4" title="2 * 2" data-fitcontent="" disabled="" style="width: 2ch;">.</li><li> SEO optimization via server rendering with JSON-LD <a href="#structured-data">structured data</a> for both content generation/layout.</li></ul></p><p>    This is the source for the introduction above:</p><p>    <pre class="secst"><code class="language-secst">:abbr[SECST] is a :strong[S]emantic, :strong[E]xtensible, :strong[C]omputational, :strong[S]tyleable :strong[T]ag oriented markup language. You can use it to joyfully create compelling, interactive, HTML documents.
 
-SECST is intended to be a more expressive, but just as easy to learn and use, alternative to Markdown. It provides these features and more:
+SECST is a more expressive, but as easy to learn and use, alternative to Markdown. It provides these features and more:
 
 :ul[
-  - Support for almost all HTML tags :a(.#tags)[and then some...].
-  - :a(.#tables-of-contents)[Table of contents] and :a(.#footnotes)[footnote management].
-  - :a(.#hashtags)[Hashtag] and social media :a(.#mentions)[support].
-  - :a(.#theme)[Theme and style support].
-  - Reactive :a(.#values-and-formulas)[formulas and data import] that are no more complex than Excel formulas, e.g. :code[:value[2 * 2]] = :value[2 * 2].
-  - The use of JSON-LD :a(.#structured-data)[structured data] for both content generation/layout and SEO optimization.
-  - :a(.#images)[Asset bundling] for images, video, and audio.
-  - Server and client generated well structured HTML output resistant to XSS attacks.
-]</code></pre></p><p>    This site's navigation, footnotes, computations, special styles like <kbd>Key</kbd> formatting and imported data are built entirely using SECST markup.</p><p>    The SECST language and reference HTML transpiler and runtime support implementations are currently in <strong>ALPHA</strong>. Most, but not all, documented features are implemented, testing is far from complete and resource sizes have not been optimized.<br></p></section>
+  - Support for almost all HTML tags :a(.#tags)[and then some...], with :a(.#theme)[themes and styles].
+  - :a(.#tables-of-contents)[Table of contents], :a(.#footnotes)[footnote], :a(.#hashtags)[hashtag] and :a(.#mentions)[social media] support.
+  - Reactive :a(.#values-and-formulas)[formulas and data import] that are as simple as Excel formulas, e.g. :code[:value[2 * 2]] = :value[2 * 2].
+  - SEO optimization via server rendering with JSON-LD :a(.#structured-data)[structured data] for both content generation/layout.
+]</code></pre></p><p>    For a gentle overview see the Medium and Hackernoon articles:</p><p>    <ul><li><a target="_tab" href="https://medium.com/@anywhichway/the-joy-of-secst-markup-333d16263225?sk=2f2c7ea14e3086e093b00ca7bec5252d">The Joy of SECST Markup</a></li></ul></p><p>    This site's navigation, footnotes, computations, special styles like <kbd>Key</kbd> formatting and imported data are built entirely using SECST markup.</p><p>    The SECST language and reference HTML transpiler and runtime support implementations are currently in <strong>ALPHA</strong>. Most, but not all, documented features are implemented, testing is far from complete and resource sizes have not been fully optimized.<br></p></section>
 <section><h1 class="toc autohelm-heading" data-toggle="" id="table-of-contents">Table Of Contents<span class="autohelm-open-toc" style="display: inline; font-size: 15px;">&#9660;</span><span class="autohelm-close-toc" style="display: none; font-size: 15px;">&#9650;</span></h1><ol style="display: none;"><li class="autohelm-nav"><a href="#why-another-language">Why Another Language</a><ol><li class="autohelm-nav"><a href="#html-and-markdown-issues">HTML and Markdown Issues</a></li><li class="autohelm-nav"><a href="#secst-benefits">SECST Benefits</a></li></ol></li><li class="autohelm-nav"><a href="#when-to-use-secst">When To Use SECST</a><ol><li class="autohelm-nav"><a href="#basic-markdown">Basic Markdown</a></li><li class="autohelm-nav"><a href="#extended-markdown">Extended Markdown</a></li><li class="autohelm-nav"><a href="#markdown-gaps">Markdown Gaps</a></li></ol></li><li class="autohelm-nav"><a href="#authoring">Authoring</a><ol><li class="autohelm-nav"><a href="#markup-tags-with-html-names">Markup Tags With HTML Names</a><ol><li class="autohelm-nav"><a href="#tags-of-note">Tags of Note</a><ol><li class="autohelm-nav"><a href="#paragraph">Paragraph</a></li><li class="autohelm-nav"><a href="#code">Code</a></li><li class="autohelm-nav"><a href="#headings">Headings</a></li><li class="autohelm-nav"><a href="#hyperlinks">Hyperlinks</a></li><li class="autohelm-nav"><a href="#lists">Lists</a><ol><li class="autohelm-nav"><a href="#unordered-and-ordered-lists">Unordered And Ordered Lists</a></li><li class="autohelm-nav"><a href="#description-lists">Description Lists</a></li><li class="autohelm-nav"><a href="#task-lists">Task Lists</a></li></ol></li><li class="autohelm-nav"><a href="#meta-tags">Meta Tags</a></li><li class="autohelm-nav"><a href="#multimedia">Multimedia</a><ol><li class="autohelm-nav"><a href="#images">Images</a></li><li class="autohelm-nav"><a href="#audio">Audio</a></li><li class="autohelm-nav"><a href="#video">Video</a></li></ol></li></ol></li><li class="autohelm-nav"><a href="#html-entities-and-special-characters">HTML Entities and Special Characters</a></li><li class="autohelm-nav"><a href="#other-tags">Other Tags</a><ol><li class="autohelm-nav"><a href="#inserted-and-deleted">Inserted And Deleted</a></li><li class="autohelm-nav"><a href="#details">Details</a></li></ol></li></ol></li><li class="autohelm-nav"><a href="#markup-without-html-names">Markup Without HTML Names</a><ol><li class="autohelm-nav"><a href="#hashtags">Hashtags</a></li><li class="autohelm-nav"><a href="#emojis">Emojis</a></li><li class="autohelm-nav"><a href="#tables-of-contents">Tables of Contents</a></li><li class="autohelm-nav"><a href="#footnotes-endnotes">Footnotes/Endnotes</a></li><li class="autohelm-nav"><a href="#foreach">forEach</a></li><li class="autohelm-nav"><a href="#macros">Macros</a></li><li class="autohelm-nav"><a href="#questions">Questions</a></li><li class="autohelm-nav"><a href="#theme">Theme</a></li></ol></li><li class="autohelm-nav"><a href="#transpiled-secst">Transpiled SECST</a></li></ol></li><li class="autohelm-nav"><a href="#mentions">Social Media And Other Mentions</a></li><li class="autohelm-nav"><a href="#latex">Latex</a></li><li class="autohelm-nav"><a href="#mermaid-chart">Mermaid Chart</a></li><li class="autohelm-nav"><a href="#sheet-music--abc-notation-">Sheet Music (ABC Notation)</a></li><li class="autohelm-nav"><a href="#escaping-secst">Escaping SECST</a></li><li class="autohelm-nav"><a href="#values-and-formulas">Values and Formulas</a><ol><li class="autohelm-nav"><a href="#typed-data">Typed Data</a></li><li class="autohelm-nav"><a href="#string-manipulation">String Manipulation</a></li><li class="autohelm-nav"><a href="#basic-math">Basic Math</a><ol><li class="autohelm-nav"><a href="#algebraic-functions">Algebraic Functions</a></li></ol></li><li class="autohelm-nav"><a href="#unit-math">Unit Math</a></li><li class="autohelm-nav"><a href="#importing-data">Importing Data</a></li></ol></li><li class="autohelm-nav"><a href="#seo">Search Engine Optimization</a><ol><li class="autohelm-nav"><a href="#structured-data">Structured Data</a><ol><li class="autohelm-nav"><a href="#news-article">News Article</a></li></ol></li><li class="autohelm-nav"><a href="#server-transpilation">Server Transpilation</a></li></ol></li><li class="autohelm-nav"><a href="#styling-content">Styling Content</a></li><li class="autohelm-nav"><a href="#advanced-formulas">Advanced Formulas</a><ol><li class="autohelm-nav"><a href="#formulas-with-css-selectors-and-multiple-values">Formulas With CSS Selectors and Multiple Values</a></li><li class="autohelm-nav"><a href="#macro-list-formatting">Macro List Formatting</a></li><li class="autohelm-nav"><a href="#javascript">JavaScript</a></li></ol></li><li class="autohelm-nav"><a href="#configuring--extending--and-programming">Configuring, Extending, And Programming</a><ol><li class="autohelm-nav"><a href="#basic-configuration">Basic Configuration</a><ol><li class="autohelm-nav"><a href="#semantic-options">Semantic Options</a></li><li class="autohelm-nav"><a href="#error-handling">Error Handling</a></li></ol></li><li class="autohelm-nav"><a href="#tag-configuration">Tag Configuration</a></li><li class="autohelm-nav"><a href="#custom-tags">Custom Tags</a></li><li class="autohelm-nav"><a href="#custom-methods">Custom Methods</a></li><li class="autohelm-nav"><a href="#event-listeners">Event Listeners</a></li></ol></li><li class="autohelm-nav"><a href="#tags">Complete List Of Tags</a></li><li class="autohelm-nav"><a href="#design-objectives">Design Objectives</a></li><li class="autohelm-nav"><a href="#grammar">Grammar</a></li><li class="autohelm-nav"><a href="#architecture">Architecture</a><ol><li class="autohelm-nav"><a href="#semantic-architecture">Semantic Architecture</a></li><li class="autohelm-nav"><a href="#data-architecture">Data Architecture</a></li><li class="autohelm-nav"><a href="#project-architecture">Project Architecture</a></li></ol></li><li class="autohelm-nav"><a href="#security">Security</a></li><li class="autohelm-nav"><a href="#copyright-and-license">Copyright and License</a></li></ol></section>
 <section><h1 id="why-another-language" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Why Another Language<span class="autohelm-nav autohelm-nav-up-down"> <a href="#html-and-markdown-issues">&darr;</a></span></h1><p>   <dl>
         <dt>Semantic Tag</dt>
@@ -127,13 +123,13 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
  A --- B
  B--&gt;C[fa:fa-ban forbidden]
  B--&gt;D(fa:fa-spinner);
-]</code></pre></p><p>        renders as</p><script src="https://cdn.jsdelivr.net/npm/mermaid@9/dist/mermaid.min.js" onload="(() =&gt; { mermaid.initialize({ startOnLoad: true }) })()"></script><pre id="mermaidChart7223005838559164" class="mermaid">
+]</code></pre></p><p>        renders as</p><script src="https://cdn.jsdelivr.net/npm/mermaid@9/dist/mermaid.min.js" onload="(() =&gt; { mermaid.initialize({ startOnLoad: true }) })()"></script><pre id="mermaidChart4126629518211875" class="mermaid">
             graph LR
             A --- B
             B-->C[fa:fa-ban forbidden]
             B-->D(fa:fa-spinner);
         </pre><script type="module">
-            const el = document.getElementById("mermaidChart7223005838559164"),
+            const el = document.getElementById("mermaidChart4126629518211875"),
                 sibling = el.nextSibling,
                 insertSvg = function (svgCode, bindFunctions) {
                     el.innerHTML = svgCode;
@@ -147,7 +143,7 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
             B-->C[fa:fa-ban forbidden]
             B-->D(fa:fa-spinner);
         `;
-            setTimeout(() => mermaid.mermaidAPI.render("mermaidChart7223005838559164", graphDefinition, insertSvg),1000);
+            setTimeout(() => mermaid.mermaidAPI.render("mermaidChart4126629518211875", graphDefinition, insertSvg),1000);
         </script><p>        There are lots of charts to choose from:</p><p>        <ul><li> <a target="_tab" href="https://mermaid.js.org/syntax/flowchart.html">Flowchart</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/sequenceDiagram.html">Sequence Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/classDiagram.html">Class Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/stateDiagram.html">State Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/entityRelationshipDiagram.html">Entity Relationship Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/userJourney.html">User Journey</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/gantt.html">Gannt</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/pie.html">Pie Chart</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/requirementDiagram.html">Requirement Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/gitgraph.html">Gitgraph Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/c4c.html">C4C Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/mindmap.html">Mindmaps</a></li></ul><br>    </p></section>
     <section><h1 id="sheet-music--abc-notation-" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Sheet Music (ABC Notation)<span class="autohelm-nav autohelm-nav-up-down"> <a href="#mermaid-chart">&uarr;</a> <a href="#escaping-secst">&darr;</a></span></h1><p>        <code class="nohighlight">:sheetMusic[]</code> is a block level element, it belongs outside of paragraphs. Just provide <a target="_tab" href="https://abcnotation.com/examples">ABC notation</a> as the content.</p><p>        <pre class="secst"><code class="nohighlight">:sheetMusic[
   X: 1
@@ -193,104 +189,264 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
                 </dl><br>            </p></section></section><section><h2 id="unit-math" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Unit Math<span class="autohelm-nav autohelm-nav-up-down"> <a href="#basic-math">&uarr;</a> <a href="#importing-data">&darr;</a></span></h2><p>        Unit math <a target="_tab" href="https://mathjs.org/docs/datatypes/units.html">from MathJS</a> allows fro conversions using the word <code class="nohighlight">to</code>, as well as units for numbers, e.g. <code class="nohighlight">45 deg</code>.</p><p>        There are many <a target="_tab" href="https://mathjs.org/docs/datatypes/units.html#reference">supported units</a>.</p><p>        Here are a few examples:</p><p>        <code class="nohighlight">:value[2 inch to cm]</code> = <input class="secst" data-default="" data-template="2 inch to cm" value="" title="2 inch to cm" data-fitcontent=""></p><p>        <code class="nohighlight">:value[90 km/h to mi/h]</code> = <input class="secst" data-default="" data-template="90 km/h to mi/h" value="" title="90 km/h to mi/h" data-fitcontent=""></p><p>        <code class="nohighlight">:value[90 km/h to m/h]</code> = <input class="secst" data-default="" data-template="90 km/h to m/h" value="" title="90 km/h to m/h" data-fitcontent=""> <code class="nohighlight">m/h</code> is meters per hour</p><p>        <code class="nohighlight">:value[(1 week + 1 day) to days]</code> = value[(1 week + 1 day) to days]</p><p>        <code class="nohighlight">:value[cos(45 deg)]</code> = <input class="secst" data-default="" data-template="cos(45 deg)" value="" title="cos(45 deg)" data-fitcontent=""></p><p>        <code class="nohighlight">:value[8.314 m^3 Pa / mol / K]</code> = <input class="secst" data-default="" data-template="8.314 m^3 Pa / mol / K" value="" title="8.314 m^3 Pa / mol / K" data-fitcontent=""></p><p>        Remember, if you have a value that looks like a formula, but is not, you can use the attribute <code class="nohighlight">literal</code>, e.g.  <code class="nohighlight">:value(literal)[2 inch to cm]</code> = <input class="secst" data-default="" data-template="2 inch to cm" value="2 inch to cm" title="2 inch to cm" data-literal="" data-fitcontent="" disabled="" style="width: 13ch;">.</p><p>        And, you can use <code class="nohighlight">plaintext</code> to display values without any styling, e.g. <code class="nohighlight">:value(plaintext)[90 km/h to mi/h]</code> = <span class="secst" data-default="" data-template="90 km/h to mi/h" value="" title="90 km/h to mi/h" data-plaintext="">90 km/h to mi/h</span>.</p></section><section><h2 id="importing-data" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Importing Data<span class="autohelm-nav autohelm-nav-up-down"> <a href="#unit-math">&uarr;</a> <a href="#seo">&darr;</a></span></h2><p>        Values can included imported data using the <code class="nohighlight">src</code> attribute and a mime type provided in the <code class="nohighlight">type</code> attribute. The trailing <code class="nohighlight">[]</code> are optional.</p><p>        Values with the boolean attribute <code class="nohighlight">static</code> is import data at transpile time. If importing fails, another attempt is made at runtime.</p><p>        JSON is formatted for readability and <a target="_tab" href="https://json5.org">JSON5</a> is supported to make it easier to handle remote data.</p><p>        <pre class="secst"><code class="nohighlight">:value(https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson static {type:"application/json"})</code></pre></p><p>        <textarea class="secst" data-mime-type="application/json" data-default="" title="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson" data-fitcontent="" disabled="">{
   "type": "FeatureCollection",
   "metadata": {
-    "generated": 1671739680000,
+    "generated": 1671751260000,
     "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson",
     "title": "USGS All Earthquakes, Past Hour",
     "status": 200,
     "api": "1.10.3",
-    "count": 5
+    "count": 9
   },
   "features": [
     {
       "type": "Feature",
       "properties": {
-        "mag": 2.1,
-        "place": "61 km W of Ninilchik, Alaska",
-        "time": 1671738687560,
-        "updated": 1671738779598,
+        "mag": 1.1,
+        "place": "60 km N of Tonopah, Nevada",
+        "time": 1671750276133,
+        "updated": 1671750469294,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022gd2xrxw",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022gd2xrxw.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nn00854012",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nn00854012.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 68,
-        "net": "ak",
-        "code": "022gd2xrxw",
-        "ids": ",ak022gd2xrxw,",
-        "sources": ",ak,",
+        "sig": 19,
+        "net": "nn",
+        "code": "00854012",
+        "ids": ",nn00854012,",
+        "sources": ",nn,",
         "types": ",origin,phase-data,",
-        "nst": null,
-        "dmin": null,
-        "rms": 0.31,
-        "gap": null,
+        "nst": 9,
+        "dmin": 0.679,
+        "rms": 0.3622,
+        "gap": 206.48,
         "magType": "ml",
         "type": "earthquake",
-        "title": "M 2.1 - 61 km W of Ninilchik, Alaska"
+        "title": "M 1.1 - 60 km N of Tonopah, Nevada"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -152.7491,
-          60.1597,
-          109.4
+          -117.178,
+          38.6139,
+          13.7
         ]
       },
-      "id": "ak022gd2xrxw"
+      "id": "nn00854012"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 2,
-        "place": "34 km NE of Chase, Alaska",
-        "time": 1671737677116,
-        "updated": 1671737773005,
+        "mag": 1,
+        "place": "49 km NE of Beatty, Nevada",
+        "time": 1671749789931,
+        "updated": 1671749910355,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022gd2u5i7",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022gd2u5i7.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nn00854008",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nn00854008.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
+        "tsunami": 0,
+        "sig": 15,
+        "net": "nn",
+        "code": "00854008",
+        "ids": ",nn00854008,",
+        "sources": ",nn,",
+        "types": ",origin,phase-data,",
+        "nst": 12,
+        "dmin": 0.045,
+        "rms": 0.2898,
+        "gap": 138.82,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 1.0 - 49 km NE of Beatty, Nevada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -116.3035,
+          37.1718,
+          14.1
+        ]
+      },
+      "id": "nn00854008"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.05,
+        "place": "2km N of The Geysers, CA",
+        "time": 1671749783280,
+        "updated": 1671750735251,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73823341",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73823341.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 17,
+        "net": "nc",
+        "code": "73823341",
+        "ids": ",nc73823341,",
+        "sources": ",nc,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 16,
+        "dmin": 0.004935,
+        "rms": 0.03,
+        "gap": 93,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 1.1 - 2km N of The Geysers, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.7545013,
+          38.7978325,
+          3.84
+        ]
+      },
+      "id": "nc73823341"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 2.01,
+        "place": "Mona Passage",
+        "time": 1671749621170,
+        "updated": 1671751130320,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/pr71388603",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/pr71388603.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
         "tsunami": 0,
         "sig": 62,
-        "net": "ak",
-        "code": "022gd2u5i7",
-        "ids": ",ak022gd2u5i7,",
-        "sources": ",ak,",
+        "net": "pr",
+        "code": "71388603",
+        "ids": ",pr71388603,",
+        "sources": ",pr,",
         "types": ",origin,phase-data,",
-        "nst": null,
-        "dmin": null,
-        "rms": 0.5,
-        "gap": null,
-        "magType": "ml",
+        "nst": 5,
+        "dmin": 0.06846,
+        "rms": 0.1,
+        "gap": 286,
+        "magType": "md",
         "type": "earthquake",
-        "title": "M 2.0 - 34 km NE of Chase, Alaska"
+        "title": "M 2.0 - Mona Passage"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.5893,
-          62.6542,
-          57.3
+          -67.1265,
+          18.0745,
+          18.64
         ]
       },
-      "id": "ak022gd2u5i7"
+      "id": "pr71388603"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 0.2,
-        "place": "39 km N of Rachel, Nevada",
-        "time": 1671737580759,
-        "updated": 1671737736667,
+        "mag": 2.20000005,
+        "place": "4 km SSW of Pāhala, Hawaii",
+        "time": 1671749389590,
+        "updated": 1671749584660,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nn00853981",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nn00853981.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73278652",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73278652.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 74,
+        "net": "hv",
+        "code": "73278652",
+        "ids": ",hv73278652,",
+        "sources": ",hv,",
+        "types": ",origin,phase-data,",
+        "nst": 34,
+        "dmin": null,
+        "rms": 0.150000006,
+        "gap": 121,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 2.2 - 4 km SSW of Pāhala, Hawaii"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -155.496673583984,
+          19.1618328094482,
+          34.0499992370605
+        ]
+      },
+      "id": "hv73278652"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1,
+        "place": "Central Alaska",
+        "time": 1671749247587,
+        "updated": 1671749356239,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022gd4p7w6",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022gd4p7w6.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 15,
+        "net": "ak",
+        "code": "022gd4p7w6",
+        "ids": ",ak022gd4p7w6,",
+        "sources": ",ak,",
+        "types": ",origin,phase-data,",
+        "nst": null,
+        "dmin": null,
+        "rms": 0.61,
+        "gap": null,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 1.0 - Central Alaska"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -147.8791,
+          64.7627,
+          22.2
+        ]
+      },
+      "id": "ak022gd4p7w6"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 0.29,
+        "place": "13km ENE of Cloverdale, CA",
+        "time": 1671748820290,
+        "updated": 1671750074187,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73823331",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73823331.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
@@ -298,117 +454,117 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
         "status": "automatic",
         "tsunami": 0,
         "sig": 1,
-        "net": "nn",
-        "code": "00853981",
-        "ids": ",nn00853981,",
-        "sources": ",nn,",
-        "types": ",origin,phase-data,",
-        "nst": 8,
-        "dmin": 0.935,
-        "rms": 0.4499,
-        "gap": 328,
-        "magType": "ml",
+        "net": "nc",
+        "code": "73823331",
+        "ids": ",nc73823331,",
+        "sources": ",nc,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 14,
+        "dmin": 0.005851,
+        "rms": 0.02,
+        "gap": 96,
+        "magType": "md",
         "type": "earthquake",
-        "title": "M 0.2 - 39 km N of Rachel, Nevada"
+        "title": "M 0.3 - 13km ENE of Cloverdale, CA"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -115.7884,
-          37.9996,
-          2.2
+          -122.87883,
+          38.8428345,
+          2.25
         ]
       },
-      "id": "nn00853981"
+      "id": "nc73823331"
     },
     {
       "type": "Feature",
       "properties": {
         "mag": 1.03,
-        "place": "16km E of Julian, CA",
-        "time": 1671737306880,
-        "updated": 1671739095480,
+        "place": "7km W of Pinon Hills, CA",
+        "time": 1671748698290,
+        "updated": 1671748914803,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40148959",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40148959.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "reviewed",
-        "tsunami": 0,
-        "sig": 16,
-        "net": "ci",
-        "code": "40148959",
-        "ids": ",ci40148959,",
-        "sources": ",ci,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 25,
-        "dmin": 0.01898,
-        "rms": 0.2,
-        "gap": 84,
-        "magType": "ml",
-        "type": "earthquake",
-        "title": "M 1.0 - 16km E of Julian, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -116.4363333,
-          33.0583333,
-          7.94
-        ]
-      },
-      "id": "ci40148959"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 2.32,
-        "place": "12km WSW of Ferndale, CA",
-        "time": 1671736210960,
-        "updated": 1671737593951,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73823231",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73823231.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40148983",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40148983.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 83,
-        "net": "nc",
-        "code": "73823231",
-        "ids": ",nc73823231,",
-        "sources": ",nc,",
+        "sig": 16,
+        "net": "ci",
+        "code": "40148983",
+        "ids": ",ci40148983,",
+        "sources": ",ci,",
         "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 10,
-        "dmin": 0.0712,
-        "rms": 0.07,
-        "gap": 306,
-        "magType": "md",
+        "nst": 21,
+        "dmin": 0.05728,
+        "rms": 0.23,
+        "gap": 86,
+        "magType": "ml",
         "type": "earthquake",
-        "title": "M 2.3 - 12km WSW of Ferndale, CA"
+        "title": "M 1.0 - 7km W of Pinon Hills, CA"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -124.3974991,
-          40.5301666,
-          17.39
+          -117.72,
+          34.4278333,
+          4.28
         ]
       },
-      "id": "nc73823231"
+      "id": "ci40148983"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 2.1099999,
+        "place": "9 km E of Pāhala, Hawaii",
+        "time": 1671747660720,
+        "updated": 1671749543040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73278627",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73278627.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 68,
+        "net": "hv",
+        "code": "73278627",
+        "ids": ",us6000jb6j,hv73278627,",
+        "sources": ",us,hv,",
+        "types": ",origin,phase-data,",
+        "nst": 38,
+        "dmin": null,
+        "rms": 0.119999997,
+        "gap": 159,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 2.1 - 9 km E of Pāhala, Hawaii"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -155.388671875,
+          19.2116661071777,
+          29.8999996185303
+        ]
+      },
+      "id": "hv73278627"
     }
   ],
   "bbox": [
-    -152.7491,
-    33.0583333,
-    2.2,
-    -115.7884,
-    62.6542,
-    109.4
+    -155.49667358398,
+    18.0745,
+    2.25,
+    -67.1265,
+    64.7627,
+    34.04999923706
   ]
 }</textarea></p><p>        Imported data is readonly because it is essentially a computation. To make it editable, use the attribute <code class="nohighlight">editable</code>.</p><p>        <pre class="secst"><code class="nohighlight">:value(https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson editable {type:"application/json"})</code></pre></p><p>        <textarea class="secst" data-mime-type="application/json" data-default="" data-template="await (async () =&gt; {
                         try {
@@ -432,104 +588,264 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
                         })()" title="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson" data-editable="" data-fitcontent="" style="height: 30em; width: 80ch;">{
   "type": "FeatureCollection",
   "metadata": {
-    "generated": 1671739740000,
+    "generated": 1671751260000,
     "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson",
     "title": "USGS All Earthquakes, Past Hour",
     "status": 200,
     "api": "1.10.3",
-    "count": 5
+    "count": 9
   },
   "features": [
     {
       "type": "Feature",
       "properties": {
-        "mag": 2.1,
-        "place": "61 km W of Ninilchik, Alaska",
-        "time": 1671738687560,
-        "updated": 1671738779598,
+        "mag": 1.1,
+        "place": "60 km N of Tonopah, Nevada",
+        "time": 1671750276133,
+        "updated": 1671750469294,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022gd2xrxw",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022gd2xrxw.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nn00854012",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nn00854012.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 68,
-        "net": "ak",
-        "code": "022gd2xrxw",
-        "ids": ",ak022gd2xrxw,",
-        "sources": ",ak,",
+        "sig": 19,
+        "net": "nn",
+        "code": "00854012",
+        "ids": ",nn00854012,",
+        "sources": ",nn,",
         "types": ",origin,phase-data,",
-        "nst": null,
-        "dmin": null,
-        "rms": 0.31,
-        "gap": null,
+        "nst": 9,
+        "dmin": 0.679,
+        "rms": 0.3622,
+        "gap": 206.48,
         "magType": "ml",
         "type": "earthquake",
-        "title": "M 2.1 - 61 km W of Ninilchik, Alaska"
+        "title": "M 1.1 - 60 km N of Tonopah, Nevada"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -152.7491,
-          60.1597,
-          109.4
+          -117.178,
+          38.6139,
+          13.7
         ]
       },
-      "id": "ak022gd2xrxw"
+      "id": "nn00854012"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 2,
-        "place": "34 km NE of Chase, Alaska",
-        "time": 1671737677116,
-        "updated": 1671737773005,
+        "mag": 1,
+        "place": "49 km NE of Beatty, Nevada",
+        "time": 1671749789931,
+        "updated": 1671749910355,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022gd2u5i7",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022gd2u5i7.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nn00854008",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nn00854008.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
+        "tsunami": 0,
+        "sig": 15,
+        "net": "nn",
+        "code": "00854008",
+        "ids": ",nn00854008,",
+        "sources": ",nn,",
+        "types": ",origin,phase-data,",
+        "nst": 12,
+        "dmin": 0.045,
+        "rms": 0.2898,
+        "gap": 138.82,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 1.0 - 49 km NE of Beatty, Nevada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -116.3035,
+          37.1718,
+          14.1
+        ]
+      },
+      "id": "nn00854008"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.05,
+        "place": "2km N of The Geysers, CA",
+        "time": 1671749783280,
+        "updated": 1671750735251,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73823341",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73823341.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 17,
+        "net": "nc",
+        "code": "73823341",
+        "ids": ",nc73823341,",
+        "sources": ",nc,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 16,
+        "dmin": 0.004935,
+        "rms": 0.03,
+        "gap": 93,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 1.1 - 2km N of The Geysers, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.7545013,
+          38.7978325,
+          3.84
+        ]
+      },
+      "id": "nc73823341"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 2.01,
+        "place": "Mona Passage",
+        "time": 1671749621170,
+        "updated": 1671751130320,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/pr71388603",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/pr71388603.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
         "tsunami": 0,
         "sig": 62,
-        "net": "ak",
-        "code": "022gd2u5i7",
-        "ids": ",ak022gd2u5i7,",
-        "sources": ",ak,",
+        "net": "pr",
+        "code": "71388603",
+        "ids": ",pr71388603,",
+        "sources": ",pr,",
         "types": ",origin,phase-data,",
-        "nst": null,
-        "dmin": null,
-        "rms": 0.5,
-        "gap": null,
-        "magType": "ml",
+        "nst": 5,
+        "dmin": 0.06846,
+        "rms": 0.1,
+        "gap": 286,
+        "magType": "md",
         "type": "earthquake",
-        "title": "M 2.0 - 34 km NE of Chase, Alaska"
+        "title": "M 2.0 - Mona Passage"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.5893,
-          62.6542,
-          57.3
+          -67.1265,
+          18.0745,
+          18.64
         ]
       },
-      "id": "ak022gd2u5i7"
+      "id": "pr71388603"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 0.2,
-        "place": "39 km N of Rachel, Nevada",
-        "time": 1671737580759,
-        "updated": 1671737736667,
+        "mag": 2.20000005,
+        "place": "4 km SSW of Pāhala, Hawaii",
+        "time": 1671749389590,
+        "updated": 1671749584660,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nn00853981",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nn00853981.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73278652",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73278652.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 74,
+        "net": "hv",
+        "code": "73278652",
+        "ids": ",hv73278652,",
+        "sources": ",hv,",
+        "types": ",origin,phase-data,",
+        "nst": 34,
+        "dmin": null,
+        "rms": 0.150000006,
+        "gap": 121,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 2.2 - 4 km SSW of Pāhala, Hawaii"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -155.496673583984,
+          19.1618328094482,
+          34.0499992370605
+        ]
+      },
+      "id": "hv73278652"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1,
+        "place": "Central Alaska",
+        "time": 1671749247587,
+        "updated": 1671749356239,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022gd4p7w6",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022gd4p7w6.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 15,
+        "net": "ak",
+        "code": "022gd4p7w6",
+        "ids": ",ak022gd4p7w6,",
+        "sources": ",ak,",
+        "types": ",origin,phase-data,",
+        "nst": null,
+        "dmin": null,
+        "rms": 0.61,
+        "gap": null,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 1.0 - Central Alaska"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -147.8791,
+          64.7627,
+          22.2
+        ]
+      },
+      "id": "ak022gd4p7w6"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 0.29,
+        "place": "13km ENE of Cloverdale, CA",
+        "time": 1671748820290,
+        "updated": 1671750074187,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73823331",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73823331.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
@@ -537,117 +853,117 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
         "status": "automatic",
         "tsunami": 0,
         "sig": 1,
-        "net": "nn",
-        "code": "00853981",
-        "ids": ",nn00853981,",
-        "sources": ",nn,",
-        "types": ",origin,phase-data,",
-        "nst": 8,
-        "dmin": 0.935,
-        "rms": 0.4499,
-        "gap": 328,
-        "magType": "ml",
+        "net": "nc",
+        "code": "73823331",
+        "ids": ",nc73823331,",
+        "sources": ",nc,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 14,
+        "dmin": 0.005851,
+        "rms": 0.02,
+        "gap": 96,
+        "magType": "md",
         "type": "earthquake",
-        "title": "M 0.2 - 39 km N of Rachel, Nevada"
+        "title": "M 0.3 - 13km ENE of Cloverdale, CA"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -115.7884,
-          37.9996,
-          2.2
+          -122.87883,
+          38.8428345,
+          2.25
         ]
       },
-      "id": "nn00853981"
+      "id": "nc73823331"
     },
     {
       "type": "Feature",
       "properties": {
         "mag": 1.03,
-        "place": "16km E of Julian, CA",
-        "time": 1671737306880,
-        "updated": 1671739095480,
+        "place": "7km W of Pinon Hills, CA",
+        "time": 1671748698290,
+        "updated": 1671748914803,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40148959",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40148959.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "reviewed",
-        "tsunami": 0,
-        "sig": 16,
-        "net": "ci",
-        "code": "40148959",
-        "ids": ",ci40148959,",
-        "sources": ",ci,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 25,
-        "dmin": 0.01898,
-        "rms": 0.2,
-        "gap": 84,
-        "magType": "ml",
-        "type": "earthquake",
-        "title": "M 1.0 - 16km E of Julian, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -116.4363333,
-          33.0583333,
-          7.94
-        ]
-      },
-      "id": "ci40148959"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 2.32,
-        "place": "12km WSW of Ferndale, CA",
-        "time": 1671736210960,
-        "updated": 1671737593951,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73823231",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73823231.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40148983",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40148983.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 83,
-        "net": "nc",
-        "code": "73823231",
-        "ids": ",nc73823231,",
-        "sources": ",nc,",
+        "sig": 16,
+        "net": "ci",
+        "code": "40148983",
+        "ids": ",ci40148983,",
+        "sources": ",ci,",
         "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 10,
-        "dmin": 0.0712,
-        "rms": 0.07,
-        "gap": 306,
-        "magType": "md",
+        "nst": 21,
+        "dmin": 0.05728,
+        "rms": 0.23,
+        "gap": 86,
+        "magType": "ml",
         "type": "earthquake",
-        "title": "M 2.3 - 12km WSW of Ferndale, CA"
+        "title": "M 1.0 - 7km W of Pinon Hills, CA"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -124.3974991,
-          40.5301666,
-          17.39
+          -117.72,
+          34.4278333,
+          4.28
         ]
       },
-      "id": "nc73823231"
+      "id": "ci40148983"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 2.1099999,
+        "place": "9 km E of Pāhala, Hawaii",
+        "time": 1671747660720,
+        "updated": 1671749543040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73278627",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73278627.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 68,
+        "net": "hv",
+        "code": "73278627",
+        "ids": ",us6000jb6j,hv73278627,",
+        "sources": ",us,hv,",
+        "types": ",origin,phase-data,",
+        "nst": 38,
+        "dmin": null,
+        "rms": 0.119999997,
+        "gap": 159,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 2.1 - 9 km E of Pāhala, Hawaii"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -155.388671875,
+          19.2116661071777,
+          29.8999996185303
+        ]
+      },
+      "id": "hv73278627"
     }
   ],
   "bbox": [
-    -152.7491,
-    33.0583333,
-    2.2,
-    -115.7884,
-    62.6542,
-    109.4
+    -155.49667358398,
+    18.0745,
+    2.25,
+    -67.1265,
+    64.7627,
+    34.04999923706
   ]
 }</textarea></p><p>        If an id is added, the data can be used in a computation.</p><p>        <pre class="secst"><code class="nohighlight">:value(#earthquake-data https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson {type:"application/json"})
 
@@ -673,104 +989,264 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
                         })()" title="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson" data-fitcontent="" disabled="" style="height: 30em; width: 80ch;">{
   "type": "FeatureCollection",
   "metadata": {
-    "generated": 1671739740000,
+    "generated": 1671751260000,
     "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson",
     "title": "USGS All Earthquakes, Past Hour",
     "status": 200,
     "api": "1.10.3",
-    "count": 5
+    "count": 9
   },
   "features": [
     {
       "type": "Feature",
       "properties": {
-        "mag": 2.1,
-        "place": "61 km W of Ninilchik, Alaska",
-        "time": 1671738687560,
-        "updated": 1671738779598,
+        "mag": 1.1,
+        "place": "60 km N of Tonopah, Nevada",
+        "time": 1671750276133,
+        "updated": 1671750469294,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022gd2xrxw",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022gd2xrxw.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nn00854012",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nn00854012.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 68,
-        "net": "ak",
-        "code": "022gd2xrxw",
-        "ids": ",ak022gd2xrxw,",
-        "sources": ",ak,",
+        "sig": 19,
+        "net": "nn",
+        "code": "00854012",
+        "ids": ",nn00854012,",
+        "sources": ",nn,",
         "types": ",origin,phase-data,",
-        "nst": null,
-        "dmin": null,
-        "rms": 0.31,
-        "gap": null,
+        "nst": 9,
+        "dmin": 0.679,
+        "rms": 0.3622,
+        "gap": 206.48,
         "magType": "ml",
         "type": "earthquake",
-        "title": "M 2.1 - 61 km W of Ninilchik, Alaska"
+        "title": "M 1.1 - 60 km N of Tonopah, Nevada"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -152.7491,
-          60.1597,
-          109.4
+          -117.178,
+          38.6139,
+          13.7
         ]
       },
-      "id": "ak022gd2xrxw"
+      "id": "nn00854012"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 2,
-        "place": "34 km NE of Chase, Alaska",
-        "time": 1671737677116,
-        "updated": 1671737773005,
+        "mag": 1,
+        "place": "49 km NE of Beatty, Nevada",
+        "time": 1671749789931,
+        "updated": 1671749910355,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022gd2u5i7",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022gd2u5i7.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nn00854008",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nn00854008.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
+        "tsunami": 0,
+        "sig": 15,
+        "net": "nn",
+        "code": "00854008",
+        "ids": ",nn00854008,",
+        "sources": ",nn,",
+        "types": ",origin,phase-data,",
+        "nst": 12,
+        "dmin": 0.045,
+        "rms": 0.2898,
+        "gap": 138.82,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 1.0 - 49 km NE of Beatty, Nevada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -116.3035,
+          37.1718,
+          14.1
+        ]
+      },
+      "id": "nn00854008"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.05,
+        "place": "2km N of The Geysers, CA",
+        "time": 1671749783280,
+        "updated": 1671750735251,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73823341",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73823341.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 17,
+        "net": "nc",
+        "code": "73823341",
+        "ids": ",nc73823341,",
+        "sources": ",nc,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 16,
+        "dmin": 0.004935,
+        "rms": 0.03,
+        "gap": 93,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 1.1 - 2km N of The Geysers, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.7545013,
+          38.7978325,
+          3.84
+        ]
+      },
+      "id": "nc73823341"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 2.01,
+        "place": "Mona Passage",
+        "time": 1671749621170,
+        "updated": 1671751130320,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/pr71388603",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/pr71388603.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
         "tsunami": 0,
         "sig": 62,
-        "net": "ak",
-        "code": "022gd2u5i7",
-        "ids": ",ak022gd2u5i7,",
-        "sources": ",ak,",
+        "net": "pr",
+        "code": "71388603",
+        "ids": ",pr71388603,",
+        "sources": ",pr,",
         "types": ",origin,phase-data,",
-        "nst": null,
-        "dmin": null,
-        "rms": 0.5,
-        "gap": null,
-        "magType": "ml",
+        "nst": 5,
+        "dmin": 0.06846,
+        "rms": 0.1,
+        "gap": 286,
+        "magType": "md",
         "type": "earthquake",
-        "title": "M 2.0 - 34 km NE of Chase, Alaska"
+        "title": "M 2.0 - Mona Passage"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.5893,
-          62.6542,
-          57.3
+          -67.1265,
+          18.0745,
+          18.64
         ]
       },
-      "id": "ak022gd2u5i7"
+      "id": "pr71388603"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 0.2,
-        "place": "39 km N of Rachel, Nevada",
-        "time": 1671737580759,
-        "updated": 1671737736667,
+        "mag": 2.20000005,
+        "place": "4 km SSW of Pāhala, Hawaii",
+        "time": 1671749389590,
+        "updated": 1671749584660,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nn00853981",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nn00853981.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73278652",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73278652.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 74,
+        "net": "hv",
+        "code": "73278652",
+        "ids": ",hv73278652,",
+        "sources": ",hv,",
+        "types": ",origin,phase-data,",
+        "nst": 34,
+        "dmin": null,
+        "rms": 0.150000006,
+        "gap": 121,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 2.2 - 4 km SSW of Pāhala, Hawaii"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -155.496673583984,
+          19.1618328094482,
+          34.0499992370605
+        ]
+      },
+      "id": "hv73278652"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1,
+        "place": "Central Alaska",
+        "time": 1671749247587,
+        "updated": 1671749356239,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022gd4p7w6",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022gd4p7w6.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 15,
+        "net": "ak",
+        "code": "022gd4p7w6",
+        "ids": ",ak022gd4p7w6,",
+        "sources": ",ak,",
+        "types": ",origin,phase-data,",
+        "nst": null,
+        "dmin": null,
+        "rms": 0.61,
+        "gap": null,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 1.0 - Central Alaska"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -147.8791,
+          64.7627,
+          22.2
+        ]
+      },
+      "id": "ak022gd4p7w6"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 0.29,
+        "place": "13km ENE of Cloverdale, CA",
+        "time": 1671748820290,
+        "updated": 1671750074187,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73823331",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73823331.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
@@ -778,117 +1254,117 @@ SECST is intended to be a more expressive, but just as easy to learn and use, al
         "status": "automatic",
         "tsunami": 0,
         "sig": 1,
-        "net": "nn",
-        "code": "00853981",
-        "ids": ",nn00853981,",
-        "sources": ",nn,",
-        "types": ",origin,phase-data,",
-        "nst": 8,
-        "dmin": 0.935,
-        "rms": 0.4499,
-        "gap": 328,
-        "magType": "ml",
+        "net": "nc",
+        "code": "73823331",
+        "ids": ",nc73823331,",
+        "sources": ",nc,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 14,
+        "dmin": 0.005851,
+        "rms": 0.02,
+        "gap": 96,
+        "magType": "md",
         "type": "earthquake",
-        "title": "M 0.2 - 39 km N of Rachel, Nevada"
+        "title": "M 0.3 - 13km ENE of Cloverdale, CA"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -115.7884,
-          37.9996,
-          2.2
+          -122.87883,
+          38.8428345,
+          2.25
         ]
       },
-      "id": "nn00853981"
+      "id": "nc73823331"
     },
     {
       "type": "Feature",
       "properties": {
         "mag": 1.03,
-        "place": "16km E of Julian, CA",
-        "time": 1671737306880,
-        "updated": 1671739095480,
+        "place": "7km W of Pinon Hills, CA",
+        "time": 1671748698290,
+        "updated": 1671748914803,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40148959",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40148959.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "reviewed",
-        "tsunami": 0,
-        "sig": 16,
-        "net": "ci",
-        "code": "40148959",
-        "ids": ",ci40148959,",
-        "sources": ",ci,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 25,
-        "dmin": 0.01898,
-        "rms": 0.2,
-        "gap": 84,
-        "magType": "ml",
-        "type": "earthquake",
-        "title": "M 1.0 - 16km E of Julian, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -116.4363333,
-          33.0583333,
-          7.94
-        ]
-      },
-      "id": "ci40148959"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 2.32,
-        "place": "12km WSW of Ferndale, CA",
-        "time": 1671736210960,
-        "updated": 1671737593951,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73823231",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73823231.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40148983",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40148983.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 83,
-        "net": "nc",
-        "code": "73823231",
-        "ids": ",nc73823231,",
-        "sources": ",nc,",
+        "sig": 16,
+        "net": "ci",
+        "code": "40148983",
+        "ids": ",ci40148983,",
+        "sources": ",ci,",
         "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 10,
-        "dmin": 0.0712,
-        "rms": 0.07,
-        "gap": 306,
-        "magType": "md",
+        "nst": 21,
+        "dmin": 0.05728,
+        "rms": 0.23,
+        "gap": 86,
+        "magType": "ml",
         "type": "earthquake",
-        "title": "M 2.3 - 12km WSW of Ferndale, CA"
+        "title": "M 1.0 - 7km W of Pinon Hills, CA"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -124.3974991,
-          40.5301666,
-          17.39
+          -117.72,
+          34.4278333,
+          4.28
         ]
       },
-      "id": "nc73823231"
+      "id": "ci40148983"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 2.1099999,
+        "place": "9 km E of Pāhala, Hawaii",
+        "time": 1671747660720,
+        "updated": 1671749543040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73278627",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73278627.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 68,
+        "net": "hv",
+        "code": "73278627",
+        "ids": ",us6000jb6j,hv73278627,",
+        "sources": ",us,hv,",
+        "types": ",origin,phase-data,",
+        "nst": 38,
+        "dmin": null,
+        "rms": 0.119999997,
+        "gap": 159,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 2.1 - 9 km E of Pāhala, Hawaii"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -155.388671875,
+          19.2116661071777,
+          29.8999996185303
+        ]
+      },
+      "id": "hv73278627"
     }
   ],
   "bbox": [
-    -152.7491,
-    33.0583333,
-    2.2,
-    -115.7884,
-    62.6542,
-    109.4
+    -155.49667358398,
+    18.0745,
+    2.25,
+    -67.1265,
+    64.7627,
+    34.04999923706
   ]
 }</textarea></p><p>       <textarea class="secst" data-mime-type="application/json" data-default="" data-template="$(#earthquake-data).metadata" title="$(#earthquake-data).metadata" data-fitcontent="" disabled="" style="height: 1.5em; width: 15ch;">[object Object]</textarea><br>    </p></section></section>
 <section><h1 id="seo" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Search Engine Optimization<span class="autohelm-nav autohelm-nav-up-down"> <a href="#values-and-formulas">&uarr;</a> <a href="#structured-data">&darr;</a></span></h1><p>    SECST provides several features to support <abbr>SEO</abbr> Search Engine Optimization.</p><p>    <ul title="SEO features"><li><a href="#hastags">hashtags</a></li><li><a href="#meta-tags">meta tags</a></li><li><a href="#structured-data">structured data</a></li><li><a href="#server-transpilation">server transpilation</a></li></ul><br>    </p><section><h2 id="structured-data" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Structured Data<span class="autohelm-nav autohelm-nav-up-down"> <a href="#seo">&uarr;</a> <a href="#news-article">&darr;</a></span></h2><p>        For select tags, SECST can generate JSON-LD directly from SECST markup. Content, layout, and SEO optimization will always be in sync.</p><p>        This is best covered by an example based on <a target="_tab" href="https://developers.google.com/search/docs/appearance/structured-data/article">Google's documentation for a news article</a>.</p><p>        <em>Note: Only those tags documented for <code class="nohighlight">NewsArticle</code> are currently supported.</em></p><section><h3 id="news-article" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>News Article<span class="autohelm-nav autohelm-nav-up-down"> <a href="#structured-data">&uarr;</a> <a href="#server-transpilation">&darr;</a></span></h3><p>            The SECST tag <code class="nohighlight">:NewsArticle[]</code> can contain regular SECST as well as tags that parallel established JSON-LD schema like <code class="nohighlight">:headline[]</code>, <code class="nohighlight">:author[]</code> and <code class="nohighlight">:Person[]</code>. Where there are identical or trivially equivalent tags and attribute names, e.g. <code class="nohighlight">image</code> and <code class="nohighlight">img</code>, the native SECST tag is used.</p><p>            <pre class="secst"><code class="nohighlight">:NewsArticle[
