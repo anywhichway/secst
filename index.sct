@@ -1,9 +1,9 @@
-:header[:p({align:"left"})[:abbr[:a(.#the-joy-of-secst)[SECST]] (:strong[S]emantic, :strong[E]xtensible, :strong[C]omputational, :strong[S]tyleable, :strong[T]agged) Markup] :p({align:"right"})[:a(https://github.com/anywhichway/secst)[GitHub]]]
+:header[:p({align:"left"})[:abbr[:a(.#the-joy-of-secst)[SECST]] Markup Language] :p({align:"right"})[:a(https://github.com/anywhichway/secst)[GitHub]]]
 :footer[:p({align:"left"})[Copyright 2022, AnyWhichWay LLC]]
 :section[
 
 :h[The Joy of SECST]
-    SECST is a more expressive, but easy to learn and use, alternative to Markdown. It provides these features and more:
+    :abbrev[SECST] (:strong[S]emantic, :strong[E]xtensible, :strong[C]omputational, :strong[S]tyleable, :strong[T]agged) is a more expressive, but easy to learn and use, alternative to Markdown. It provides these features and more:
 
     :ul[
         - Support for almost all HTML tags :a(.#tags)[and then some...], with :a(.#theme)[themes and styles].
@@ -17,7 +17,7 @@
     This is the source for the introduction above:
 
     :code({language:"secst"})[
-        SECST is a more expressive, but easy to learn and use, alternative to Markdown. It provides these features and more:
+        :abbrev[SECST] (:strong[S]emantic, :strong[E]xtensible, :strong[C]omputational, :strong[S]tyleable, :strong[T]agged) is a more expressive, but easy to learn and use, alternative to Markdown. It provides these features and more:
 
         :ul[
             - Support for almost all HTML tags :a(.#tags)[and then some...], with :a(.#theme)[themes and styles].
