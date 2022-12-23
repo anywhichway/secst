@@ -39,13 +39,26 @@
 
       This site's navigation, footnotes, computations, special styles like :kbd[Key] formatting and imported data are built entirely using SECST markup.
 
-      This guide is comprehensive, which may make it a little overwhelming. However, SECST has been designed so that you can start using it just a few tags at a time.
+      You can tap on the icon next to a heading to access a table of contents at any time. You can goto the top of the guide by tapping of SECST in the top left corner.
+
+      This guide is comprehensive, which may make it a little overwhelming. However, SECST has been designed so that you can start using it just a few tags and capabilities at a time.
+
+      The following order of learning is suggested:
+
+      :ol[
+        :li[Use tags that support markup similar to :a(.#basic-markdown)[Markdown].]
+        :li[Start leveraging attributes like :code[align] on :a(.#images)[img].]
+        :li[Try :a(.#theme)[themes or styles].]
+        :li[If you are into music, math, or chemistry try :a(.#sheet-music)[:code[sheetMusic]] or :a(.#latex)[:code[Latex]].]
+        :li[Add some simple :a(.#values-and-formulas)[values and formulas].]
+        - Anything else that gives you joy!
+      ]
 
       For gentle overviews see the Medium and Hackernoon articles:
 
       :ul[
-          :a(https://medium.com/@anywhichway/the-joy-of-secst-markup-333d16263225?sk=2f2c7ea14e3086e093b00ca7bec5252d)[Medium:The Joy of SECST Markup]
-          :a(https://hackernoon.com/the-joy-of-using-secst-markup)[Hackernoon:The Joy of Using SECST Markup]
+          :li[:a(https://medium.com/@anywhichway/the-joy-of-secst-markup-333d16263225?sk=2f2c7ea14e3086e093b00ca7bec5252d)[Medium:The Joy of SECST Markup]]
+          :li[:a(https://hackernoon.com/the-joy-of-using-secst-markup)[Hackernoon:The Joy of Using SECST Markup]]
       ]
 
 ]
@@ -701,7 +714,7 @@
         ]
     ]
     :section[
-        :h[Sheet Music (ABC Notation)]
+        :h(#sheet-music)[Sheet Music (ABC Notation)]
 
         :code[:sheetMusic[]] is a block level element, it belongs outside of paragraphs. Just provide :a(https://abcnotation.com/examples)[ABC notation] as the content.
 
