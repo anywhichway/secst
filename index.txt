@@ -3,7 +3,7 @@
 :section[
 
 :h[The Joy of SECST]
-    :abbrev[SECST] (:strong[S]emantic, :strong[E]xtensible, :strong[C]omputational, :strong[S]tyleable, :strong[T]agged) is a more expressive, but easy to learn and use, alternative to Markdown. It provides these features and more:
+    :abbr[SECST] (:strong[S]emantic, :strong[E]xtensible, :strong[C]omputational, :strong[S]tyleable, :strong[T]agged) is a more expressive, but easy to learn and use, alternative to Markdown. It provides these features and more:
 
     :ul[
         - Support for almost all HTML tags :a(.#tags)[and then some...], with :a(.#theme)[themes and styles].
@@ -17,7 +17,7 @@
     This is the source for the introduction above:
 
     :code({language:"secst"})[
-        :abbrev[SECST] (:strong[S]emantic, :strong[E]xtensible, :strong[C]omputational, :strong[S]tyleable, :strong[T]agged) is a more expressive, but easy to learn and use, alternative to Markdown. It provides these features and more:
+        :abbr[SECST] (:strong[S]emantic, :strong[E]xtensible, :strong[C]omputational, :strong[S]tyleable, :strong[T]agged) is a more expressive, but easy to learn and use, alternative to Markdown. It provides these features and more:
 
         :ul[
             - Support for almost all HTML tags :a(.#tags)[and then some...], with :a(.#theme)[themes and styles].
