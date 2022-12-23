@@ -38,6 +38,10 @@ if(document.currentScript?.getAttribute("src").endsWith("?run")) {
         engage(".toc");
         resolve();
         updateValueWidths();
+        window.addEventListener("hashchange",() => {
+            const header = document.getElementById("secst-header");
+            header.scrollIntoView()
+        })
     })
 }
 
