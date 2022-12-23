@@ -1,4 +1,4 @@
-<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width, initial-scale=1"><script src="./runtime.js?run"></script></head><body><header id="secst-header"><p style="float: left;"><abbr><a href="#the-joy-of-secst">SECST</a></abbr> (<strong>S</strong>emantic, <strong>E</strong>xtensible, <strong>C</strong>omputational, <strong>S</strong>tyleable, <strong>T</strong>agged) Markup Language</p> <p style="float: right;"><a target="_tab" href="https://github.com/anywhichway/secst">GitHub</a></p></header><div id="secst-content">
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width, initial-scale=1"><script src="./runtime.js?run"></script></head><body><header id="secst-header"><p style="float: left;"><abbr><a href="#the-joy-of-secst">SECST</a></abbr> (<strong>S</strong>emantic, <strong>E</strong>xtensible, <strong>C</strong>omputational, <strong>S</strong>tyleable, <strong>T</strong>agged) Markup</p> <p style="float: right;"><a target="_tab" href="https://github.com/anywhichway/secst">GitHub</a></p></header><div id="secst-content">
 
 <section><h1 id="the-joy-of-secst" class="autohelm-heading">The Joy of SECST</h1><p>    SECST is a more expressive, but easy to learn and use, alternative to Markdown. It provides these features and more:</p><p>    <ul><li> Support for almost all HTML tags <a href="#tags">and then some...</a>, with <a href="#theme">themes and styles</a>.</li><li> <a href="#tables-of-contents">Table of contents</a>, <a href="#footnotes">footnote</a>, <a href="#hashtags">hashtag</a> and <a href="#mentions">social media</a> support.</li><li> Reactive <a href="#values-and-formulas">formulas and data import</a> that are as simple as Excel formulas, e.g. <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/styles/default.min.css"><code class="nohighlight">:value[2 * 2]</code> = <input class="secst" data-default="" data-template="2 * 2" value="4" title="2 * 2" data-fitcontent="" disabled="" style="width: 2ch;">.</li><li> SEO optimization via server rendering with JSON-LD <a href="#structured-data">structured data</a> for both content generation and layout.</li></ul></p><p>    Use SECST to joyfully create compelling, interactive HTML documents.</p><p>    This is the source for the introduction above:</p><p>    <pre class="secst"><code class="language-secst">SECST is a more expressive, but easy to learn and use, alternative to Markdown. It provides these features and more:
 
@@ -158,13 +158,13 @@ Use SECST to joyfully create compelling, interactive HTML documents.</code></pre
  A --- B
  B--&gt;C[fa:fa-ban forbidden]
  B--&gt;D(fa:fa-spinner);
-]</code></pre></p><p>        renders as</p><script src="https://cdn.jsdelivr.net/npm/mermaid@9/dist/mermaid.min.js" onload="(() =&gt; { mermaid.initialize({ startOnLoad: true }) })()"></script><pre id="mermaidChart027507448509328736" class="mermaid">
+]</code></pre></p><p>        renders as</p><script src="https://cdn.jsdelivr.net/npm/mermaid@9/dist/mermaid.min.js" onload="(() =&gt; { mermaid.initialize({ startOnLoad: true }) })()"></script><pre id="mermaidChart05234066077996702" class="mermaid">
             graph LR
             A --- B
             B-->C[fa:fa-ban forbidden]
             B-->D(fa:fa-spinner);
         </pre><script type="module">
-            const el = document.getElementById("mermaidChart027507448509328736"),
+            const el = document.getElementById("mermaidChart05234066077996702"),
                 sibling = el.nextSibling,
                 insertSvg = function (svgCode, bindFunctions) {
                     el.innerHTML = svgCode;
@@ -178,7 +178,7 @@ Use SECST to joyfully create compelling, interactive HTML documents.</code></pre
             B-->C[fa:fa-ban forbidden]
             B-->D(fa:fa-spinner);
         `;
-            setTimeout(() => mermaid.mermaidAPI.render("mermaidChart027507448509328736", graphDefinition, insertSvg),1000);
+            setTimeout(() => mermaid.mermaidAPI.render("mermaidChart05234066077996702", graphDefinition, insertSvg),1000);
         </script><p>        There are lots of charts to choose from:</p><p>        <ul><li> <a target="_tab" href="https://mermaid.js.org/syntax/flowchart.html">Flowchart</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/sequenceDiagram.html">Sequence Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/classDiagram.html">Class Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/stateDiagram.html">State Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/entityRelationshipDiagram.html">Entity Relationship Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/userJourney.html">User Journey</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/gantt.html">Gannt</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/pie.html">Pie Chart</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/requirementDiagram.html">Requirement Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/gitgraph.html">Gitgraph Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/c4c.html">C4C Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/mindmap.html">Mindmaps</a></li></ul><br>    </p></section>
     <section><h1 id="sheet-music" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Sheet Music (ABC Notation)<span class="autohelm-nav autohelm-nav-up-down"> <a href="#mermaid-chart">&uarr;</a> <a href="#escaping-secst">&darr;</a></span></h1><p>        <code class="nohighlight">:sheetMusic[]</code> is a block level element, it belongs outside of paragraphs. Just provide <a target="_tab" href="https://abcnotation.com/examples">ABC notation</a> as the content.</p><p>        <pre class="secst"><code class="nohighlight">:sheetMusic[
   X: 1
@@ -237,182 +237,462 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
     <section><h1 id="importing-data" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Importing Data<span class="autohelm-nav autohelm-nav-up-down"> <a href="#unit-math">&uarr;</a> <a href="#seo">&darr;</a></span></h1><p>        Values can included imported data using the <code class="nohighlight">src</code> attribute and a mime type provided in the <code class="nohighlight">type</code> attribute. The trailing <code class="nohighlight">[]</code> are optional.</p><p>        Values with the boolean attribute <code class="nohighlight">static</code> is import data at transpile time. If importing fails, another attempt is made at runtime.</p><p>        JSON is formatted for readability and <a target="_tab" href="https://json5.org">JSON5</a> is supported to make it easier to handle remote data.</p><p>        <pre class="secst"><code class="nohighlight">:value(https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson static {type:"application/json"})</code></pre></p><p>        <textarea class="secst" data-mime-type="application/json" data-default="" title="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson" data-fitcontent="" disabled="">{
   "type": "FeatureCollection",
   "metadata": {
-    "generated": 1671830280000,
+    "generated": 1671835560000,
     "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson",
     "title": "USGS All Earthquakes, Past Hour",
     "status": 200,
     "api": "1.10.3",
-    "count": 4
+    "count": 11
   },
   "features": [
     {
       "type": "Feature",
       "properties": {
-        "mag": 1.02,
-        "place": "5km WNW of Cobb, CA",
-        "time": 1671828294110,
-        "updated": 1671829876308,
+        "mag": 1.13,
+        "place": "2km ENE of The Geysers, CA",
+        "time": 1671835337590,
+        "updated": 1671835435692,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73823796",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73823796.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73823861",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73823861.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 16,
+        "sig": 20,
         "net": "nc",
-        "code": "73823796",
-        "ids": ",nc73823796,",
+        "code": "73823861",
+        "ids": ",nc73823861,",
         "sources": ",nc,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 14,
-        "dmin": 0.006646,
+        "types": ",nearby-cities,origin,phase-data,",
+        "nst": 9,
+        "dmin": 0.005715,
         "rms": 0.02,
-        "gap": 70,
+        "gap": 90,
         "magType": "md",
         "type": "earthquake",
-        "title": "M 1.0 - 5km WNW of Cobb, CA"
+        "title": "M 1.1 - 2km ENE of The Geysers, CA"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -122.783165,
-          38.8348351,
+          -122.732666,
+          38.7879982,
+          2.1
+        ]
+      },
+      "id": "nc73823861"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 2.11,
+        "place": "2km NE of The Geysers, CA",
+        "time": 1671835295790,
+        "updated": 1671835464950,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73823856",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73823856.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 68,
+        "net": "nc",
+        "code": "73823856",
+        "ids": ",nc73823856,",
+        "sources": ",nc,",
+        "types": ",focal-mechanism,nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 35,
+        "dmin": null,
+        "rms": 0.05,
+        "gap": 50,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 2.1 - 2km NE of The Geysers, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.7334976,
+          38.7898331,
+          1.26
+        ]
+      },
+      "id": "nc73823856"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 2.24000001,
+        "place": "8 km ENE of Pāhala, Hawaii",
+        "time": 1671835021920,
+        "updated": 1671835217050,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73279832",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73279832.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 77,
+        "net": "hv",
+        "code": "73279832",
+        "ids": ",hv73279832,",
+        "sources": ",hv,",
+        "types": ",origin,phase-data,",
+        "nst": 26,
+        "dmin": null,
+        "rms": 0.129999995,
+        "gap": 136,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 2.2 - 8 km ENE of Pāhala, Hawaii"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -155.40283203125,
+          19.2373332977295,
+          29.7600002288818
+        ]
+      },
+      "id": "hv73279832"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.87,
+        "place": "10 km ENE of Pāhala, Hawaii",
+        "time": 1671834854110,
+        "updated": 1671835058690,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73279827",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73279827.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 54,
+        "net": "hv",
+        "code": "73279827",
+        "ids": ",hv73279827,",
+        "sources": ",hv,",
+        "types": ",origin,phase-data,",
+        "nst": 32,
+        "dmin": null,
+        "rms": 0.150000006,
+        "gap": 157,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 1.9 - 10 km ENE of Pāhala, Hawaii"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -155.383499145508,
+          19.2269992828369,
+          32.5900001525879
+        ]
+      },
+      "id": "hv73279827"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.8,
+        "place": "2 km ESE of Las Vegas, Nevada",
+        "time": 1671834045677,
+        "updated": 1671835030437,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nn00854080",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nn00854080.geojson",
+        "felt": 3,
+        "cdi": 2,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 50,
+        "net": "nn",
+        "code": "00854080",
+        "ids": ",nn00854080,",
+        "sources": ",nn,",
+        "types": ",dyfi,origin,phase-data,",
+        "nst": 22,
+        "dmin": 0.337,
+        "rms": 0.2243,
+        "gap": 269.07,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 1.8 - 2 km ESE of Las Vegas, Nevada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -115.1075,
+          36.1699,
           1.8
         ]
       },
-      "id": "nc73823796"
+      "id": "nn00854080"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 2.77999997,
-        "place": "8 km ENE of Pāhala, Hawaii",
-        "time": 1671828128850,
-        "updated": 1671828324250,
+        "mag": 2.7,
+        "place": "4 km WNW of Amalga, Utah",
+        "time": 1671833362300,
+        "updated": 1671835364416,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73279737",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73279737.geojson",
-        "felt": null,
-        "cdi": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/uu60528612",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/uu60528612.geojson",
+        "felt": 12,
+        "cdi": 2.9,
         "mmi": null,
         "alert": null,
-        "status": "automatic",
+        "status": "reviewed",
         "tsunami": 0,
-        "sig": 119,
-        "net": "hv",
-        "code": "73279737",
-        "ids": ",hv73279737,",
-        "sources": ",hv,",
-        "types": ",origin,phase-data,",
-        "nst": 19,
-        "dmin": null,
-        "rms": 0.140000001,
-        "gap": 154,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 2.8 - 8 km ENE of Pāhala, Hawaii"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -155.400161743164,
-          19.2201671600342,
-          34.560001373291
-        ]
-      },
-      "id": "hv73279737"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 0.54,
-        "place": "14km NE of Ridgecrest, CA",
-        "time": 1671827859660,
-        "updated": 1671828067927,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40149215",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40149215.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 4,
-        "net": "ci",
-        "code": "40149215",
-        "ids": ",ci40149215,",
-        "sources": ",ci,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 11,
-        "dmin": 0.1205,
-        "rms": 0.18,
-        "gap": 149,
+        "sig": 116,
+        "net": "uu",
+        "code": "60528612",
+        "ids": ",uu60528612,us6000jbcg,",
+        "sources": ",uu,us,",
+        "types": ",dyfi,origin,phase-data,",
+        "nst": 46,
+        "dmin": 0.1507,
+        "rms": 0.45,
+        "gap": 61,
         "magType": "ml",
         "type": "earthquake",
-        "title": "M 0.5 - 14km NE of Ridgecrest, CA"
+        "title": "M 2.7 - 4 km WNW of Amalga, Utah"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -117.5493333,
-          35.7015,
-          6.62
+          -111.9421692,
+          41.8763351,
+          -3.06
         ]
       },
-      "id": "ci40149215"
+      "id": "uu60528612"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 1.4,
-        "place": "Central Alaska",
-        "time": 1671827784150,
-        "updated": 1671827925743,
+        "mag": 2.5,
+        "place": "29 km ENE of Chignik, Alaska",
+        "time": 1671833038633,
+        "updated": 1671833190374,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022geqzc2j",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022geqzc2j.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022gerz79z",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022gerz79z.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 30,
+        "sig": 96,
         "net": "ak",
-        "code": "022geqzc2j",
-        "ids": ",ak022geqzc2j,",
+        "code": "022gerz79z",
+        "ids": ",ak022gerz79z,",
         "sources": ",ak,",
         "types": ",origin,phase-data,",
         "nst": null,
         "dmin": null,
-        "rms": 1.18,
+        "rms": 0.23,
         "gap": null,
         "magType": "ml",
         "type": "earthquake",
-        "title": "M 1.4 - Central Alaska"
+        "title": "M 2.5 - 29 km ENE of Chignik, Alaska"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.2014,
-          64.7526,
-          12.3
+          -157.9523,
+          56.3731,
+          65.7
         ]
       },
-      "id": "ak022geqzc2j"
+      "id": "ak022gerz79z"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.25,
+        "place": "3km WSW of Cobb, CA",
+        "time": 1671832693890,
+        "updated": 1671834672732,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73823851",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73823851.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 24,
+        "net": "nc",
+        "code": "73823851",
+        "ids": ",nc73823851,",
+        "sources": ",nc,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 11,
+        "dmin": 0.01297,
+        "rms": 0.04,
+        "gap": 169,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 1.3 - 3km WSW of Cobb, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.7546692,
+          38.8129997,
+          0.96
+        ]
+      },
+      "id": "nc73823851"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 0.8,
+        "place": "86 km NW of Karluk, Alaska",
+        "time": 1671832670454,
+        "updated": 1671833498960,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022gerpbph",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022gerpbph.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 10,
+        "net": "ak",
+        "code": "022gerpbph",
+        "ids": ",av91737166,ak022gerpbph,",
+        "sources": ",av,ak,",
+        "types": ",origin,phase-data,",
+        "nst": null,
+        "dmin": null,
+        "rms": 0.07,
+        "gap": null,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 0.8 - 86 km NW of Karluk, Alaska"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -155.3919,
+          58.1642,
+          1.1
+        ]
+      },
+      "id": "ak022gerpbph"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 0.32,
+        "place": "85 km NNW of Karluk, Alaska",
+        "time": 1671832483370,
+        "updated": 1671833349100,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/av91737161",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/av91737161.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 2,
+        "net": "av",
+        "code": "91737161",
+        "ids": ",av91737161,",
+        "sources": ",av,",
+        "types": ",origin,phase-data,",
+        "nst": 7,
+        "dmin": null,
+        "rms": 0.08,
+        "gap": 93,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 0.3 - 85 km NNW of Karluk, Alaska"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -155.134833333333,
+          58.2475,
+          2.26
+        ]
+      },
+      "id": "av91737161"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 3.11,
+        "place": "2 km S of Guánica, Puerto Rico",
+        "time": 1671832000700,
+        "updated": 1671833268180,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/pr71388668",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/pr71388668.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 149,
+        "net": "pr",
+        "code": "71388668",
+        "ids": ",us6000jbce,pr71388668,",
+        "sources": ",us,pr,",
+        "types": ",origin,phase-data,",
+        "nst": 32,
+        "dmin": 0.02011,
+        "rms": 0.18,
+        "gap": 201,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 3.1 - 2 km S of Guánica, Puerto Rico"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -66.9058333333333,
+          17.9521666666667,
+          11.36
+        ]
+      },
+      "id": "pr71388668"
     }
   ],
   "bbox": [
-    -155.40016174316,
-    19.220167160034,
-    1.8,
-    -117.5493333,
-    64.7526,
-    34.560001373291
+    -157.9523,
+    17.952166666667,
+    -3.06,
+    -66.905833333333,
+    58.2475,
+    65.7
   ]
 }</textarea></p><p>        Imported data is readonly because it is essentially a computation. To make it editable, use the attribute <code class="nohighlight">editable</code>.</p><p>        <pre class="secst"><code class="nohighlight">:value(https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson editable {type:"application/json"})</code></pre></p><p>        <textarea class="secst" data-mime-type="application/json" data-default="" data-template="await (async () =&gt; {
                         try {
@@ -436,182 +716,462 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
                         })()" title="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson" data-editable="" data-fitcontent="" style="height: 30em; width: 80ch;">{
   "type": "FeatureCollection",
   "metadata": {
-    "generated": 1671830280000,
+    "generated": 1671835560000,
     "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson",
     "title": "USGS All Earthquakes, Past Hour",
     "status": 200,
     "api": "1.10.3",
-    "count": 4
+    "count": 11
   },
   "features": [
     {
       "type": "Feature",
       "properties": {
-        "mag": 1.02,
-        "place": "5km WNW of Cobb, CA",
-        "time": 1671828294110,
-        "updated": 1671829876308,
+        "mag": 1.13,
+        "place": "2km ENE of The Geysers, CA",
+        "time": 1671835337590,
+        "updated": 1671835435692,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73823796",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73823796.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73823861",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73823861.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 16,
+        "sig": 20,
         "net": "nc",
-        "code": "73823796",
-        "ids": ",nc73823796,",
+        "code": "73823861",
+        "ids": ",nc73823861,",
         "sources": ",nc,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 14,
-        "dmin": 0.006646,
+        "types": ",nearby-cities,origin,phase-data,",
+        "nst": 9,
+        "dmin": 0.005715,
         "rms": 0.02,
-        "gap": 70,
+        "gap": 90,
         "magType": "md",
         "type": "earthquake",
-        "title": "M 1.0 - 5km WNW of Cobb, CA"
+        "title": "M 1.1 - 2km ENE of The Geysers, CA"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -122.783165,
-          38.8348351,
+          -122.732666,
+          38.7879982,
+          2.1
+        ]
+      },
+      "id": "nc73823861"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 2.11,
+        "place": "2km NE of The Geysers, CA",
+        "time": 1671835295790,
+        "updated": 1671835464950,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73823856",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73823856.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 68,
+        "net": "nc",
+        "code": "73823856",
+        "ids": ",nc73823856,",
+        "sources": ",nc,",
+        "types": ",focal-mechanism,nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 35,
+        "dmin": null,
+        "rms": 0.05,
+        "gap": 50,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 2.1 - 2km NE of The Geysers, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.7334976,
+          38.7898331,
+          1.26
+        ]
+      },
+      "id": "nc73823856"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 2.24000001,
+        "place": "8 km ENE of Pāhala, Hawaii",
+        "time": 1671835021920,
+        "updated": 1671835217050,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73279832",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73279832.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 77,
+        "net": "hv",
+        "code": "73279832",
+        "ids": ",hv73279832,",
+        "sources": ",hv,",
+        "types": ",origin,phase-data,",
+        "nst": 26,
+        "dmin": null,
+        "rms": 0.129999995,
+        "gap": 136,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 2.2 - 8 km ENE of Pāhala, Hawaii"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -155.40283203125,
+          19.2373332977295,
+          29.7600002288818
+        ]
+      },
+      "id": "hv73279832"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.87,
+        "place": "10 km ENE of Pāhala, Hawaii",
+        "time": 1671834854110,
+        "updated": 1671835058690,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73279827",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73279827.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 54,
+        "net": "hv",
+        "code": "73279827",
+        "ids": ",hv73279827,",
+        "sources": ",hv,",
+        "types": ",origin,phase-data,",
+        "nst": 32,
+        "dmin": null,
+        "rms": 0.150000006,
+        "gap": 157,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 1.9 - 10 km ENE of Pāhala, Hawaii"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -155.383499145508,
+          19.2269992828369,
+          32.5900001525879
+        ]
+      },
+      "id": "hv73279827"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.8,
+        "place": "2 km ESE of Las Vegas, Nevada",
+        "time": 1671834045677,
+        "updated": 1671835030437,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nn00854080",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nn00854080.geojson",
+        "felt": 3,
+        "cdi": 2,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 50,
+        "net": "nn",
+        "code": "00854080",
+        "ids": ",nn00854080,",
+        "sources": ",nn,",
+        "types": ",dyfi,origin,phase-data,",
+        "nst": 22,
+        "dmin": 0.337,
+        "rms": 0.2243,
+        "gap": 269.07,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 1.8 - 2 km ESE of Las Vegas, Nevada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -115.1075,
+          36.1699,
           1.8
         ]
       },
-      "id": "nc73823796"
+      "id": "nn00854080"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 2.77999997,
-        "place": "8 km ENE of Pāhala, Hawaii",
-        "time": 1671828128850,
-        "updated": 1671828324250,
+        "mag": 2.7,
+        "place": "4 km WNW of Amalga, Utah",
+        "time": 1671833362300,
+        "updated": 1671835364416,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73279737",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73279737.geojson",
-        "felt": null,
-        "cdi": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/uu60528612",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/uu60528612.geojson",
+        "felt": 12,
+        "cdi": 2.9,
         "mmi": null,
         "alert": null,
-        "status": "automatic",
+        "status": "reviewed",
         "tsunami": 0,
-        "sig": 119,
-        "net": "hv",
-        "code": "73279737",
-        "ids": ",hv73279737,",
-        "sources": ",hv,",
-        "types": ",origin,phase-data,",
-        "nst": 19,
-        "dmin": null,
-        "rms": 0.140000001,
-        "gap": 154,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 2.8 - 8 km ENE of Pāhala, Hawaii"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -155.400161743164,
-          19.2201671600342,
-          34.560001373291
-        ]
-      },
-      "id": "hv73279737"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 0.54,
-        "place": "14km NE of Ridgecrest, CA",
-        "time": 1671827859660,
-        "updated": 1671828067927,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40149215",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40149215.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 4,
-        "net": "ci",
-        "code": "40149215",
-        "ids": ",ci40149215,",
-        "sources": ",ci,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 11,
-        "dmin": 0.1205,
-        "rms": 0.18,
-        "gap": 149,
+        "sig": 116,
+        "net": "uu",
+        "code": "60528612",
+        "ids": ",uu60528612,us6000jbcg,",
+        "sources": ",uu,us,",
+        "types": ",dyfi,origin,phase-data,",
+        "nst": 46,
+        "dmin": 0.1507,
+        "rms": 0.45,
+        "gap": 61,
         "magType": "ml",
         "type": "earthquake",
-        "title": "M 0.5 - 14km NE of Ridgecrest, CA"
+        "title": "M 2.7 - 4 km WNW of Amalga, Utah"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -117.5493333,
-          35.7015,
-          6.62
+          -111.9421692,
+          41.8763351,
+          -3.06
         ]
       },
-      "id": "ci40149215"
+      "id": "uu60528612"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 1.4,
-        "place": "Central Alaska",
-        "time": 1671827784150,
-        "updated": 1671827925743,
+        "mag": 2.5,
+        "place": "29 km ENE of Chignik, Alaska",
+        "time": 1671833038633,
+        "updated": 1671833190374,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022geqzc2j",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022geqzc2j.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022gerz79z",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022gerz79z.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 30,
+        "sig": 96,
         "net": "ak",
-        "code": "022geqzc2j",
-        "ids": ",ak022geqzc2j,",
+        "code": "022gerz79z",
+        "ids": ",ak022gerz79z,",
         "sources": ",ak,",
         "types": ",origin,phase-data,",
         "nst": null,
         "dmin": null,
-        "rms": 1.18,
+        "rms": 0.23,
         "gap": null,
         "magType": "ml",
         "type": "earthquake",
-        "title": "M 1.4 - Central Alaska"
+        "title": "M 2.5 - 29 km ENE of Chignik, Alaska"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.2014,
-          64.7526,
-          12.3
+          -157.9523,
+          56.3731,
+          65.7
         ]
       },
-      "id": "ak022geqzc2j"
+      "id": "ak022gerz79z"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.25,
+        "place": "3km WSW of Cobb, CA",
+        "time": 1671832693890,
+        "updated": 1671834672732,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73823851",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73823851.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 24,
+        "net": "nc",
+        "code": "73823851",
+        "ids": ",nc73823851,",
+        "sources": ",nc,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 11,
+        "dmin": 0.01297,
+        "rms": 0.04,
+        "gap": 169,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 1.3 - 3km WSW of Cobb, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.7546692,
+          38.8129997,
+          0.96
+        ]
+      },
+      "id": "nc73823851"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 0.8,
+        "place": "86 km NW of Karluk, Alaska",
+        "time": 1671832670454,
+        "updated": 1671833498960,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022gerpbph",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022gerpbph.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 10,
+        "net": "ak",
+        "code": "022gerpbph",
+        "ids": ",av91737166,ak022gerpbph,",
+        "sources": ",av,ak,",
+        "types": ",origin,phase-data,",
+        "nst": null,
+        "dmin": null,
+        "rms": 0.07,
+        "gap": null,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 0.8 - 86 km NW of Karluk, Alaska"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -155.3919,
+          58.1642,
+          1.1
+        ]
+      },
+      "id": "ak022gerpbph"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 0.32,
+        "place": "85 km NNW of Karluk, Alaska",
+        "time": 1671832483370,
+        "updated": 1671833349100,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/av91737161",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/av91737161.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 2,
+        "net": "av",
+        "code": "91737161",
+        "ids": ",av91737161,",
+        "sources": ",av,",
+        "types": ",origin,phase-data,",
+        "nst": 7,
+        "dmin": null,
+        "rms": 0.08,
+        "gap": 93,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 0.3 - 85 km NNW of Karluk, Alaska"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -155.134833333333,
+          58.2475,
+          2.26
+        ]
+      },
+      "id": "av91737161"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 3.11,
+        "place": "2 km S of Guánica, Puerto Rico",
+        "time": 1671832000700,
+        "updated": 1671833268180,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/pr71388668",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/pr71388668.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 149,
+        "net": "pr",
+        "code": "71388668",
+        "ids": ",us6000jbce,pr71388668,",
+        "sources": ",us,pr,",
+        "types": ",origin,phase-data,",
+        "nst": 32,
+        "dmin": 0.02011,
+        "rms": 0.18,
+        "gap": 201,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 3.1 - 2 km S of Guánica, Puerto Rico"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -66.9058333333333,
+          17.9521666666667,
+          11.36
+        ]
+      },
+      "id": "pr71388668"
     }
   ],
   "bbox": [
-    -155.40016174316,
-    19.220167160034,
-    1.8,
-    -117.5493333,
-    64.7526,
-    34.560001373291
+    -157.9523,
+    17.952166666667,
+    -3.06,
+    -66.905833333333,
+    58.2475,
+    65.7
   ]
 }</textarea></p><p>        If an id is added, the data can be used in a computation.</p><p>        <pre class="secst"><code class="nohighlight">:value(#earthquake-data https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson {type:"application/json"})
 
@@ -637,182 +1197,462 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
                         })()" title="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson" data-fitcontent="" disabled="" style="height: 30em; width: 80ch;">{
   "type": "FeatureCollection",
   "metadata": {
-    "generated": 1671830280000,
+    "generated": 1671835560000,
     "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson",
     "title": "USGS All Earthquakes, Past Hour",
     "status": 200,
     "api": "1.10.3",
-    "count": 4
+    "count": 11
   },
   "features": [
     {
       "type": "Feature",
       "properties": {
-        "mag": 1.02,
-        "place": "5km WNW of Cobb, CA",
-        "time": 1671828294110,
-        "updated": 1671829876308,
+        "mag": 1.13,
+        "place": "2km ENE of The Geysers, CA",
+        "time": 1671835337590,
+        "updated": 1671835435692,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73823796",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73823796.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73823861",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73823861.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 16,
+        "sig": 20,
         "net": "nc",
-        "code": "73823796",
-        "ids": ",nc73823796,",
+        "code": "73823861",
+        "ids": ",nc73823861,",
         "sources": ",nc,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 14,
-        "dmin": 0.006646,
+        "types": ",nearby-cities,origin,phase-data,",
+        "nst": 9,
+        "dmin": 0.005715,
         "rms": 0.02,
-        "gap": 70,
+        "gap": 90,
         "magType": "md",
         "type": "earthquake",
-        "title": "M 1.0 - 5km WNW of Cobb, CA"
+        "title": "M 1.1 - 2km ENE of The Geysers, CA"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -122.783165,
-          38.8348351,
+          -122.732666,
+          38.7879982,
+          2.1
+        ]
+      },
+      "id": "nc73823861"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 2.11,
+        "place": "2km NE of The Geysers, CA",
+        "time": 1671835295790,
+        "updated": 1671835464950,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73823856",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73823856.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 68,
+        "net": "nc",
+        "code": "73823856",
+        "ids": ",nc73823856,",
+        "sources": ",nc,",
+        "types": ",focal-mechanism,nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 35,
+        "dmin": null,
+        "rms": 0.05,
+        "gap": 50,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 2.1 - 2km NE of The Geysers, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.7334976,
+          38.7898331,
+          1.26
+        ]
+      },
+      "id": "nc73823856"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 2.24000001,
+        "place": "8 km ENE of Pāhala, Hawaii",
+        "time": 1671835021920,
+        "updated": 1671835217050,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73279832",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73279832.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 77,
+        "net": "hv",
+        "code": "73279832",
+        "ids": ",hv73279832,",
+        "sources": ",hv,",
+        "types": ",origin,phase-data,",
+        "nst": 26,
+        "dmin": null,
+        "rms": 0.129999995,
+        "gap": 136,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 2.2 - 8 km ENE of Pāhala, Hawaii"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -155.40283203125,
+          19.2373332977295,
+          29.7600002288818
+        ]
+      },
+      "id": "hv73279832"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.87,
+        "place": "10 km ENE of Pāhala, Hawaii",
+        "time": 1671834854110,
+        "updated": 1671835058690,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73279827",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73279827.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 54,
+        "net": "hv",
+        "code": "73279827",
+        "ids": ",hv73279827,",
+        "sources": ",hv,",
+        "types": ",origin,phase-data,",
+        "nst": 32,
+        "dmin": null,
+        "rms": 0.150000006,
+        "gap": 157,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 1.9 - 10 km ENE of Pāhala, Hawaii"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -155.383499145508,
+          19.2269992828369,
+          32.5900001525879
+        ]
+      },
+      "id": "hv73279827"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.8,
+        "place": "2 km ESE of Las Vegas, Nevada",
+        "time": 1671834045677,
+        "updated": 1671835030437,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nn00854080",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nn00854080.geojson",
+        "felt": 3,
+        "cdi": 2,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 50,
+        "net": "nn",
+        "code": "00854080",
+        "ids": ",nn00854080,",
+        "sources": ",nn,",
+        "types": ",dyfi,origin,phase-data,",
+        "nst": 22,
+        "dmin": 0.337,
+        "rms": 0.2243,
+        "gap": 269.07,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 1.8 - 2 km ESE of Las Vegas, Nevada"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -115.1075,
+          36.1699,
           1.8
         ]
       },
-      "id": "nc73823796"
+      "id": "nn00854080"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 2.77999997,
-        "place": "8 km ENE of Pāhala, Hawaii",
-        "time": 1671828128850,
-        "updated": 1671828324250,
+        "mag": 2.7,
+        "place": "4 km WNW of Amalga, Utah",
+        "time": 1671833362300,
+        "updated": 1671835364416,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73279737",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73279737.geojson",
-        "felt": null,
-        "cdi": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/uu60528612",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/uu60528612.geojson",
+        "felt": 12,
+        "cdi": 2.9,
         "mmi": null,
         "alert": null,
-        "status": "automatic",
+        "status": "reviewed",
         "tsunami": 0,
-        "sig": 119,
-        "net": "hv",
-        "code": "73279737",
-        "ids": ",hv73279737,",
-        "sources": ",hv,",
-        "types": ",origin,phase-data,",
-        "nst": 19,
-        "dmin": null,
-        "rms": 0.140000001,
-        "gap": 154,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 2.8 - 8 km ENE of Pāhala, Hawaii"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -155.400161743164,
-          19.2201671600342,
-          34.560001373291
-        ]
-      },
-      "id": "hv73279737"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 0.54,
-        "place": "14km NE of Ridgecrest, CA",
-        "time": 1671827859660,
-        "updated": 1671828067927,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40149215",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40149215.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 4,
-        "net": "ci",
-        "code": "40149215",
-        "ids": ",ci40149215,",
-        "sources": ",ci,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 11,
-        "dmin": 0.1205,
-        "rms": 0.18,
-        "gap": 149,
+        "sig": 116,
+        "net": "uu",
+        "code": "60528612",
+        "ids": ",uu60528612,us6000jbcg,",
+        "sources": ",uu,us,",
+        "types": ",dyfi,origin,phase-data,",
+        "nst": 46,
+        "dmin": 0.1507,
+        "rms": 0.45,
+        "gap": 61,
         "magType": "ml",
         "type": "earthquake",
-        "title": "M 0.5 - 14km NE of Ridgecrest, CA"
+        "title": "M 2.7 - 4 km WNW of Amalga, Utah"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -117.5493333,
-          35.7015,
-          6.62
+          -111.9421692,
+          41.8763351,
+          -3.06
         ]
       },
-      "id": "ci40149215"
+      "id": "uu60528612"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 1.4,
-        "place": "Central Alaska",
-        "time": 1671827784150,
-        "updated": 1671827925743,
+        "mag": 2.5,
+        "place": "29 km ENE of Chignik, Alaska",
+        "time": 1671833038633,
+        "updated": 1671833190374,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022geqzc2j",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022geqzc2j.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022gerz79z",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022gerz79z.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 30,
+        "sig": 96,
         "net": "ak",
-        "code": "022geqzc2j",
-        "ids": ",ak022geqzc2j,",
+        "code": "022gerz79z",
+        "ids": ",ak022gerz79z,",
         "sources": ",ak,",
         "types": ",origin,phase-data,",
         "nst": null,
         "dmin": null,
-        "rms": 1.18,
+        "rms": 0.23,
         "gap": null,
         "magType": "ml",
         "type": "earthquake",
-        "title": "M 1.4 - Central Alaska"
+        "title": "M 2.5 - 29 km ENE of Chignik, Alaska"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -149.2014,
-          64.7526,
-          12.3
+          -157.9523,
+          56.3731,
+          65.7
         ]
       },
-      "id": "ak022geqzc2j"
+      "id": "ak022gerz79z"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.25,
+        "place": "3km WSW of Cobb, CA",
+        "time": 1671832693890,
+        "updated": 1671834672732,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73823851",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73823851.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 24,
+        "net": "nc",
+        "code": "73823851",
+        "ids": ",nc73823851,",
+        "sources": ",nc,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 11,
+        "dmin": 0.01297,
+        "rms": 0.04,
+        "gap": 169,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 1.3 - 3km WSW of Cobb, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.7546692,
+          38.8129997,
+          0.96
+        ]
+      },
+      "id": "nc73823851"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 0.8,
+        "place": "86 km NW of Karluk, Alaska",
+        "time": 1671832670454,
+        "updated": 1671833498960,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022gerpbph",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022gerpbph.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 10,
+        "net": "ak",
+        "code": "022gerpbph",
+        "ids": ",av91737166,ak022gerpbph,",
+        "sources": ",av,ak,",
+        "types": ",origin,phase-data,",
+        "nst": null,
+        "dmin": null,
+        "rms": 0.07,
+        "gap": null,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 0.8 - 86 km NW of Karluk, Alaska"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -155.3919,
+          58.1642,
+          1.1
+        ]
+      },
+      "id": "ak022gerpbph"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 0.32,
+        "place": "85 km NNW of Karluk, Alaska",
+        "time": 1671832483370,
+        "updated": 1671833349100,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/av91737161",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/av91737161.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 2,
+        "net": "av",
+        "code": "91737161",
+        "ids": ",av91737161,",
+        "sources": ",av,",
+        "types": ",origin,phase-data,",
+        "nst": 7,
+        "dmin": null,
+        "rms": 0.08,
+        "gap": 93,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 0.3 - 85 km NNW of Karluk, Alaska"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -155.134833333333,
+          58.2475,
+          2.26
+        ]
+      },
+      "id": "av91737161"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 3.11,
+        "place": "2 km S of Guánica, Puerto Rico",
+        "time": 1671832000700,
+        "updated": 1671833268180,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/pr71388668",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/pr71388668.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 149,
+        "net": "pr",
+        "code": "71388668",
+        "ids": ",us6000jbce,pr71388668,",
+        "sources": ",us,pr,",
+        "types": ",origin,phase-data,",
+        "nst": 32,
+        "dmin": 0.02011,
+        "rms": 0.18,
+        "gap": 201,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 3.1 - 2 km S of Guánica, Puerto Rico"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -66.9058333333333,
+          17.9521666666667,
+          11.36
+        ]
+      },
+      "id": "pr71388668"
     }
   ],
   "bbox": [
-    -155.40016174316,
-    19.220167160034,
-    1.8,
-    -117.5493333,
-    64.7526,
-    34.560001373291
+    -157.9523,
+    17.952166666667,
+    -3.06,
+    -66.905833333333,
+    58.2475,
+    65.7
   ]
 }</textarea></p><p>       <textarea class="secst" data-mime-type="application/json" data-default="" data-template="$(#earthquake-data).metadata" title="$(#earthquake-data).metadata" data-fitcontent="" disabled="" style="height: 1.5em; width: 15ch;">[object Object]</textarea><br>    </p></section>
 ]
