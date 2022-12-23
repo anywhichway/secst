@@ -39,6 +39,10 @@ if(document.currentScript?.getAttribute("src").endsWith("?run")) {
         resolve();
         updateValueWidths();
         patchAutohelm();
+        window.addEventListener("hashchange",() => {
+            const header = document.getElementById("secst-header");
+            header.scrollIntoView()
+        })
     })
 }
 

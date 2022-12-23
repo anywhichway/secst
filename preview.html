@@ -35,6 +35,11 @@
         });
 
         patchAutohelm();
+
+        window.addEventListener("hashchange",() => {
+            const header = document.getElementById("secst-header");
+            header.scrollIntoView()
+        })
     })
 </script>
 </body>

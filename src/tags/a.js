@@ -49,18 +49,6 @@ const a = {
             }
         }
         return node;
-    },
-    listeners: {
-        click(event) {
-            const {currentTarget} = event,
-                href = currentTarget.getAttribute("href");
-            if(href[0]==="#") {
-                setTimeout(() => {
-                    const header = document.getElementById("secst-header");
-                    header.scrollIntoView()
-                })
-            }
-        }
     }
 }
 delete a.contentAllowed.a;
