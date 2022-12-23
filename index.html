@@ -1,4 +1,4 @@
-<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width, initial-scale=1"><script src="./runtime.js?run"></script></head><body><header id="secst-header"><p style="float: left;"><abbr><a href="#the-joy-of-secst">SECST</a></abbr> Markup Language</p> <p style="float: right;"><a target="_tab" href="https://github.com/anywhichway/secst">GitHub</a></p></header><div id="secst-content">
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width, initial-scale=1"><script src="./runtime.js?run"></script></head><body><header id="secst-header"><p style="float: left;"><a href="#the-joy-of-secst">SECST</a> Markup Language</p> <p style="float: right;"><a target="_tab" href="https://github.com/anywhichway/secst">GitHub</a></p></header><div id="secst-content">
 
 <section><h1 id="the-joy-of-secst" class="autohelm-heading">The Joy of SECST</h1><p>     (<strong>S</strong>emantic, <strong>E</strong>xtensible, <strong>C</strong>omputational, <strong>S</strong>tyleable, <strong>T</strong>agged) is a more expressive, but easy to learn and use, alternative to Markdown. It provides these features and more:</p><p>    <ul><li> Support for almost all HTML tags <a href="#tags">and then some...</a>, with <a href="#theme">themes and styles</a>.</li><li> <a href="#tables-of-contents">Table of contents</a>, <a href="#footnotes">footnote</a>, <a href="#hashtags">hashtag</a> and <a href="#mentions">social media</a> support.</li><li> Reactive <a href="#values-and-formulas">formulas and data import</a> that are as simple as Excel formulas, e.g. <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/styles/default.min.css"><code class="nohighlight">:value[2 * 2]</code> = <input class="secst" data-default="" data-template="2 * 2" value="4" title="2 * 2" data-fitcontent="" disabled="" style="width: 2ch;">.</li><li> SEO optimization via server rendering with JSON-LD <a href="#structured-data">structured data</a> for both content generation and layout.</li></ul></p><p>    Use SECST to joyfully create compelling, interactive HTML documents.</p><p>    This is the source for the introduction above:</p><p>    <pre class="secst"><code class="language-secst">:abbrev[SECST] (:strong[S]emantic, :strong[E]xtensible, :strong[C]omputational, :strong[S]tyleable, :strong[T]agged) is a more expressive, but easy to learn and use, alternative to Markdown. It provides these features and more:
 
@@ -158,13 +158,13 @@ Use SECST to joyfully create compelling, interactive HTML documents.</code></pre
  A --- B
  B--&gt;C[fa:fa-ban forbidden]
  B--&gt;D(fa:fa-spinner);
-]</code></pre></p><p>        renders as</p><script src="https://cdn.jsdelivr.net/npm/mermaid@9/dist/mermaid.min.js" onload="(() =&gt; { mermaid.initialize({ startOnLoad: true }) })()"></script><pre id="mermaidChart7033276849193109" class="mermaid">
+]</code></pre></p><p>        renders as</p><script src="https://cdn.jsdelivr.net/npm/mermaid@9/dist/mermaid.min.js" onload="(() =&gt; { mermaid.initialize({ startOnLoad: true }) })()"></script><pre id="mermaidChart44079964188577025" class="mermaid">
             graph LR
             A --- B
             B-->C[fa:fa-ban forbidden]
             B-->D(fa:fa-spinner);
         </pre><script type="module">
-            const el = document.getElementById("mermaidChart7033276849193109"),
+            const el = document.getElementById("mermaidChart44079964188577025"),
                 sibling = el.nextSibling,
                 insertSvg = function (svgCode, bindFunctions) {
                     el.innerHTML = svgCode;
@@ -178,7 +178,7 @@ Use SECST to joyfully create compelling, interactive HTML documents.</code></pre
             B-->C[fa:fa-ban forbidden]
             B-->D(fa:fa-spinner);
         `;
-            setTimeout(() => mermaid.mermaidAPI.render("mermaidChart7033276849193109", graphDefinition, insertSvg),1000);
+            setTimeout(() => mermaid.mermaidAPI.render("mermaidChart44079964188577025", graphDefinition, insertSvg),1000);
         </script><p>        There are lots of charts to choose from:</p><p>        <ul><li> <a target="_tab" href="https://mermaid.js.org/syntax/flowchart.html">Flowchart</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/sequenceDiagram.html">Sequence Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/classDiagram.html">Class Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/stateDiagram.html">State Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/entityRelationshipDiagram.html">Entity Relationship Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/userJourney.html">User Journey</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/gantt.html">Gannt</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/pie.html">Pie Chart</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/requirementDiagram.html">Requirement Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/gitgraph.html">Gitgraph Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/c4c.html">C4C Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/mindmap.html">Mindmaps</a></li></ul><br>    </p></section>
     <section><h1 id="sheet-music" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Sheet Music (ABC Notation)<span class="autohelm-nav autohelm-nav-up-down"> <a href="#mermaid-chart">&uarr;</a> <a href="#escaping-secst">&darr;</a></span></h1><p>        <code class="nohighlight">:sheetMusic[]</code> is a block level element, it belongs outside of paragraphs. Just provide <a target="_tab" href="https://abcnotation.com/examples">ABC notation</a> as the content.</p><p>        <pre class="secst"><code class="nohighlight">:sheetMusic[
   X: 1
@@ -237,14 +237,94 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
     <section><h1 id="importing-data" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Importing Data<span class="autohelm-nav autohelm-nav-up-down"> <a href="#unit-math">&uarr;</a> <a href="#seo">&darr;</a></span></h1><p>        Values can included imported data using the <code class="nohighlight">src</code> attribute and a mime type provided in the <code class="nohighlight">type</code> attribute. The trailing <code class="nohighlight">[]</code> are optional.</p><p>        Values with the boolean attribute <code class="nohighlight">static</code> is import data at transpile time. If importing fails, another attempt is made at runtime.</p><p>        JSON is formatted for readability and <a target="_tab" href="https://json5.org">JSON5</a> is supported to make it easier to handle remote data.</p><p>        <pre class="secst"><code class="nohighlight">:value(https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson static {type:"application/json"})</code></pre></p><p>        <textarea class="secst" data-mime-type="application/json" data-default="" title="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson" data-fitcontent="" disabled="">{
   "type": "FeatureCollection",
   "metadata": {
-    "generated": 1671835800000,
+    "generated": 1671835860000,
     "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson",
     "title": "USGS All Earthquakes, Past Hour",
     "status": 200,
     "api": "1.10.3",
-    "count": 10
+    "count": 12
   },
   "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.08,
+        "place": "2km ENE of The Geysers, CA",
+        "time": 1671835750050,
+        "updated": 1671835845672,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73823866",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73823866.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 18,
+        "net": "nc",
+        "code": "73823866",
+        "ids": ",nc73823866,",
+        "sources": ",nc,",
+        "types": ",nearby-cities,origin,phase-data,",
+        "nst": 14,
+        "dmin": 0.02369,
+        "rms": 0.03,
+        "gap": 89,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 1.1 - 2km ENE of The Geysers, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.7331696,
+          38.7891655,
+          1.4
+        ]
+      },
+      "id": "nc73823866"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.01,
+        "place": "21km NNW of Borrego Springs, CA",
+        "time": 1671835713810,
+        "updated": 1671835841999,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40149231",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40149231.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 16,
+        "net": "ci",
+        "code": "40149231",
+        "ids": ",ci40149231,",
+        "sources": ",ci,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 35,
+        "dmin": 0.08424,
+        "rms": 0.16,
+        "gap": 71,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 1.0 - 21km NNW of Borrego Springs, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -116.4428329,
+          33.4401665,
+          9.22
+        ]
+      },
+      "id": "ci40149231"
+    },
     {
       "type": "Feature",
       "properties": {
@@ -329,7 +409,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
       "type": "Feature",
       "properties": {
         "mag": 2.24000001,
-        "place": "8 km ENE of Pāhala, Hawaii",
+        "place": "Island of Hawaii, Hawaii",
         "time": 1671835021920,
         "updated": 1671835217050,
         "tz": null,
@@ -353,7 +433,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
         "gap": 136,
         "magType": "md",
         "type": "earthquake",
-        "title": "M 2.2 - 8 km ENE of Pāhala, Hawaii"
+        "title": "M 2.2 - Island of Hawaii, Hawaii"
       },
       "geometry": {
         "type": "Point",
@@ -409,7 +489,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
       "type": "Feature",
       "properties": {
         "mag": 1.8,
-        "place": "2 km ESE of Las Vegas, Nevada",
+        "place": "Nevada",
         "time": 1671834045677,
         "updated": 1671835030437,
         "tz": null,
@@ -433,7 +513,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
         "gap": 269.07,
         "magType": "ml",
         "type": "earthquake",
-        "title": "M 1.8 - 2 km ESE of Las Vegas, Nevada"
+        "title": "M 1.8 - Nevada"
       },
       "geometry": {
         "type": "Point",
@@ -569,7 +649,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
       "type": "Feature",
       "properties": {
         "mag": 0.8,
-        "place": "86 km NW of Karluk, Alaska",
+        "place": "Alaska Peninsula",
         "time": 1671832670454,
         "updated": 1671833498960,
         "tz": null,
@@ -593,7 +673,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
         "gap": null,
         "magType": "ml",
         "type": "earthquake",
-        "title": "M 0.8 - 86 km NW of Karluk, Alaska"
+        "title": "M 0.8 - Alaska Peninsula"
       },
       "geometry": {
         "type": "Point",
@@ -676,14 +756,94 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
                         })()" title="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson" data-editable="" data-fitcontent="" style="height: 30em; width: 80ch;">{
   "type": "FeatureCollection",
   "metadata": {
-    "generated": 1671835800000,
+    "generated": 1671835860000,
     "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson",
     "title": "USGS All Earthquakes, Past Hour",
     "status": 200,
     "api": "1.10.3",
-    "count": 10
+    "count": 12
   },
   "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.08,
+        "place": "2km ENE of The Geysers, CA",
+        "time": 1671835750050,
+        "updated": 1671835845672,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73823866",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73823866.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 18,
+        "net": "nc",
+        "code": "73823866",
+        "ids": ",nc73823866,",
+        "sources": ",nc,",
+        "types": ",nearby-cities,origin,phase-data,",
+        "nst": 14,
+        "dmin": 0.02369,
+        "rms": 0.03,
+        "gap": 89,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 1.1 - 2km ENE of The Geysers, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.7331696,
+          38.7891655,
+          1.4
+        ]
+      },
+      "id": "nc73823866"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.01,
+        "place": "21km NNW of Borrego Springs, CA",
+        "time": 1671835713810,
+        "updated": 1671835841999,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40149231",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40149231.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 16,
+        "net": "ci",
+        "code": "40149231",
+        "ids": ",ci40149231,",
+        "sources": ",ci,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 35,
+        "dmin": 0.08424,
+        "rms": 0.16,
+        "gap": 71,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 1.0 - 21km NNW of Borrego Springs, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -116.4428329,
+          33.4401665,
+          9.22
+        ]
+      },
+      "id": "ci40149231"
+    },
     {
       "type": "Feature",
       "properties": {
@@ -768,7 +928,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
       "type": "Feature",
       "properties": {
         "mag": 2.24000001,
-        "place": "8 km ENE of Pāhala, Hawaii",
+        "place": "Island of Hawaii, Hawaii",
         "time": 1671835021920,
         "updated": 1671835217050,
         "tz": null,
@@ -792,7 +952,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
         "gap": 136,
         "magType": "md",
         "type": "earthquake",
-        "title": "M 2.2 - 8 km ENE of Pāhala, Hawaii"
+        "title": "M 2.2 - Island of Hawaii, Hawaii"
       },
       "geometry": {
         "type": "Point",
@@ -848,7 +1008,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
       "type": "Feature",
       "properties": {
         "mag": 1.8,
-        "place": "2 km ESE of Las Vegas, Nevada",
+        "place": "Nevada",
         "time": 1671834045677,
         "updated": 1671835030437,
         "tz": null,
@@ -872,7 +1032,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
         "gap": 269.07,
         "magType": "ml",
         "type": "earthquake",
-        "title": "M 1.8 - 2 km ESE of Las Vegas, Nevada"
+        "title": "M 1.8 - Nevada"
       },
       "geometry": {
         "type": "Point",
@@ -1008,7 +1168,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
       "type": "Feature",
       "properties": {
         "mag": 0.8,
-        "place": "86 km NW of Karluk, Alaska",
+        "place": "Alaska Peninsula",
         "time": 1671832670454,
         "updated": 1671833498960,
         "tz": null,
@@ -1032,7 +1192,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
         "gap": null,
         "magType": "ml",
         "type": "earthquake",
-        "title": "M 0.8 - 86 km NW of Karluk, Alaska"
+        "title": "M 0.8 - Alaska Peninsula"
       },
       "geometry": {
         "type": "Point",
@@ -1117,14 +1277,94 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
                         })()" title="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson" data-fitcontent="" disabled="" style="height: 30em; width: 80ch;">{
   "type": "FeatureCollection",
   "metadata": {
-    "generated": 1671835800000,
+    "generated": 1671835860000,
     "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson",
     "title": "USGS All Earthquakes, Past Hour",
     "status": 200,
     "api": "1.10.3",
-    "count": 10
+    "count": 12
   },
   "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.08,
+        "place": "2km ENE of The Geysers, CA",
+        "time": 1671835750050,
+        "updated": 1671835845672,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73823866",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73823866.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 18,
+        "net": "nc",
+        "code": "73823866",
+        "ids": ",nc73823866,",
+        "sources": ",nc,",
+        "types": ",nearby-cities,origin,phase-data,",
+        "nst": 14,
+        "dmin": 0.02369,
+        "rms": 0.03,
+        "gap": 89,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 1.1 - 2km ENE of The Geysers, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.7331696,
+          38.7891655,
+          1.4
+        ]
+      },
+      "id": "nc73823866"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.01,
+        "place": "21km NNW of Borrego Springs, CA",
+        "time": 1671835713810,
+        "updated": 1671835841999,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40149231",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40149231.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 16,
+        "net": "ci",
+        "code": "40149231",
+        "ids": ",ci40149231,",
+        "sources": ",ci,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 35,
+        "dmin": 0.08424,
+        "rms": 0.16,
+        "gap": 71,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 1.0 - 21km NNW of Borrego Springs, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -116.4428329,
+          33.4401665,
+          9.22
+        ]
+      },
+      "id": "ci40149231"
+    },
     {
       "type": "Feature",
       "properties": {
@@ -1209,7 +1449,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
       "type": "Feature",
       "properties": {
         "mag": 2.24000001,
-        "place": "8 km ENE of Pāhala, Hawaii",
+        "place": "Island of Hawaii, Hawaii",
         "time": 1671835021920,
         "updated": 1671835217050,
         "tz": null,
@@ -1233,7 +1473,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
         "gap": 136,
         "magType": "md",
         "type": "earthquake",
-        "title": "M 2.2 - 8 km ENE of Pāhala, Hawaii"
+        "title": "M 2.2 - Island of Hawaii, Hawaii"
       },
       "geometry": {
         "type": "Point",
@@ -1289,7 +1529,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
       "type": "Feature",
       "properties": {
         "mag": 1.8,
-        "place": "2 km ESE of Las Vegas, Nevada",
+        "place": "Nevada",
         "time": 1671834045677,
         "updated": 1671835030437,
         "tz": null,
@@ -1313,7 +1553,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
         "gap": 269.07,
         "magType": "ml",
         "type": "earthquake",
-        "title": "M 1.8 - 2 km ESE of Las Vegas, Nevada"
+        "title": "M 1.8 - Nevada"
       },
       "geometry": {
         "type": "Point",
@@ -1449,7 +1689,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
       "type": "Feature",
       "properties": {
         "mag": 0.8,
-        "place": "86 km NW of Karluk, Alaska",
+        "place": "Alaska Peninsula",
         "time": 1671832670454,
         "updated": 1671833498960,
         "tz": null,
@@ -1473,7 +1713,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
         "gap": null,
         "magType": "ml",
         "type": "earthquake",
-        "title": "M 0.8 - 86 km NW of Karluk, Alaska"
+        "title": "M 0.8 - Alaska Peninsula"
       },
       "geometry": {
         "type": "Point",

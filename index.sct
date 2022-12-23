@@ -1,4 +1,4 @@
-:header[:p({align:"left"})[:abbr[:a(.#the-joy-of-secst)[SECST]] Markup Language] :p({align:"right"})[:a(https://github.com/anywhichway/secst)[GitHub]]]
+:header[:p({align:"left"})[:a(.#the-joy-of-secst)[SECST] Markup Language] :p({align:"right"})[:a(https://github.com/anywhichway/secst)[GitHub]]]
 :footer[:p({align:"left"})[Copyright 2022, AnyWhichWay LLC]]
 :section[
 
