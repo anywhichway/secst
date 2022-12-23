@@ -1,4 +1,5 @@
 const mermaidChart = {
+    htmlDocLink: "",
     contentAllowed: true,
     requires: [
         {
@@ -18,7 +19,7 @@ const mermaidChart = {
         node.classList.push("mermaid")
         return node;
     },
-    toHTML(node) {
+    toInnerHTML(node) {
        return  node.content.join("");
     },
     connected(el,node) {

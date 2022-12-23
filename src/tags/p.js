@@ -2,6 +2,10 @@ import Tag from "../tag.js";
 import phrasingContent from "./phrasing-content.js";
 
 const p = {
+    attributesAllowed: {
+        align:["left","right"],
+        textAlign:["left","center","right","justify"]
+    },
     stringsAllowed: true,
     contentAllowed: {
         ...phrasingContent
@@ -30,6 +34,17 @@ const p = {
             return content;
         },[])
         return node;
+    },
+    mounted(el,node) {
+        if(node.attributes.align!=null) {
+            el.style.float = node.attributes.align;
+            el.removeAttribute("align")
+        }
+        if(node.attributes.textAlign!=null) {
+            el.style.textAlign = node.attributes.textAlign;
+            delete node.attributes.textAlign;
+            el.removeAttribute("textalign")
+        }
     }
 }
 

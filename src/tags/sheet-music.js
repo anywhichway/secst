@@ -1,4 +1,5 @@
 const sheetMusic = {
+    htmlDocLink: "",
     contentAllowed: true,
     requires: [
         {
@@ -13,7 +14,7 @@ const sheetMusic = {
         node.tag = "sheet-music";
         return node;
     },
-    toHTML(node) {
+    toInnerHTML(node) {
         return  node.content.join("");
     }
 }

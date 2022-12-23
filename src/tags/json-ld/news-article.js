@@ -1,6 +1,7 @@
 import Person from "./person.js";
 
 const headline = {
+    htmlDocLink: "",
     attributesAllowed: {
         level: true
     },
@@ -19,6 +20,7 @@ const headline = {
 }
 
 const datePublished = {
+    htmlDocLink: "",
     attributesAllowed:{
         "data-format": true,
         lang: true,
@@ -40,6 +42,7 @@ const datePublished = {
 }
 
 const author = {
+    htmlDocLink: "",
     contentAllowed: {
         name: {
             contentAllowed: true,
@@ -66,6 +69,7 @@ const author = {
 }
 
 const NewsArticle = {
+    htmlDocLink: "",
     async contentAllowed() {
         const {blockContent} = await import("../block-content.js");
         this.contentAllowed = {

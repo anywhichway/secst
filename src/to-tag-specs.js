@@ -14,6 +14,10 @@ const toTagSpecs = async (data,seen= {}) => {
         if(seen[key]) {
             continue;
         }
+        if(tag.htmlDocLink==null) {
+            tag.htmlDocLink =  `<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/${key}" target="_tab">html</a>`;
+        }
+
         seen[key] = tag;
         for(const property in tag) {
             const value = tag[property],
@@ -34,10 +38,17 @@ const toTagSpecs = async (data,seen= {}) => {
                 tag.attributesAllowed = {...value};
                 if(type==="object") {
                     for(const key in value) {
+                        const type = typeof(value[key]);
                         if(key.includes("-")) {
                             delete tag.attributesAllowed[key]
+                        } else if(type==="function") {
+                            tag.attributesAllowed[key] = (key==value[key].name ? "transform " : "") + `${value[key].name}(value)`;
+                        }  else if(type==="object" && !Array.isArray(value[key])) {
+                            tag.attributesAllowed[key] = "custom validation object";
+                        } else if(Array.isArray(value[key])) {
+                            tag.attributesAllowed[key] = `one of [${value[key].join(", ")}]`;
                         } else {
-                            tag.attributesAllowed[key] = true;
+                            tag.attributesAllowed[key] = value[key];
                         }
                     }
                     tag.attributesAllowed = keySort(tag.attributesAllowed);
@@ -47,7 +58,7 @@ const toTagSpecs = async (data,seen= {}) => {
             }
         }
     }
-    return seen;
+    return keySort(seen);
 }
 
 export {toTagSpecs, toTagSpecs as default}

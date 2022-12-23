@@ -1,6 +1,7 @@
 import phrasingContent from "./phrasing-content.js";
 
 const characterEntity = {
+    htmlDocLink: "",
     contentAllowed: true,
     transform(node) {
         const values = node.content[0].split(" ");

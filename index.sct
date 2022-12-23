@@ -1,5 +1,5 @@
-:header[:abbr[:a(.#the-joy-of-secst)[SECST]] (:strong[S]emantic, :strong[E]xtensible, :strong[C]omputational, :strong[S]tyleable, :strong[T]agged) Markup Language]
-:footer[Copyright 2022, AnyWhichWay LLC, On GitHub: :a[https://github.com/anywhichway/secst]]
+:header[:p({align:"left"})[:abbr[:a(.#the-joy-of-secst)[SECST]] (:strong[S]emantic, :strong[E]xtensible, :strong[C]omputational, :strong[S]tyleable, :strong[T]agged) Markup Language] :p({align:"right"})[:a(https://github.com/anywhichway/secst)[GitHub]]]
+:footer[:p({align:"left"})[Copyright 2022, AnyWhichWay LLC]]
 :section[
 
 :h[The Joy of SECST]
@@ -9,7 +9,7 @@
         - Support for almost all HTML tags :a(.#tags)[and then some...], with :a(.#theme)[themes and styles].
         - :a(.#tables-of-contents)[Table of contents], :a(.#footnotes)[footnote], :a(.#hashtags)[hashtag] and :a(.#mentions)[social media] support.
         - Reactive :a(.#values-and-formulas)[formulas and data import] that are as simple as Excel formulas, e.g. :code[:value[2 * 2]] = :value[2 * 2].
-        - SEO optimization via server rendering with JSON-LD :a(.#structured-data)[structured data] for both content generation/layout.
+        - SEO optimization via server rendering with JSON-LD :a(.#structured-data)[structured data] for both content generation and layout.
     ]
 
     Use SECST to joyfully create compelling, interactive HTML documents.
@@ -23,24 +23,31 @@
             - Support for almost all HTML tags :a(.#tags)[and then some...], with :a(.#theme)[themes and styles].
             - :a(.#tables-of-contents)[Table of contents], :a(.#footnotes)[footnote], :a(.#hashtags)[hashtag] and :a(.#mentions)[social media] support.
             - Reactive :a(.#values-and-formulas)[formulas and data import] that are as simple as Excel formulas, e.g. :code[:value[2 * 2]] = :value[2 * 2].
-            - SEO optimization via server rendering with JSON-LD :a(.#structured-data)[structured data] for both content generation/layout.
+            - SEO optimization via server rendering with JSON-LD :a(.#structured-data)[structured data] for both content generation and layout.
         ]
 
         Use SECST to joyfully create compelling, interactive HTML documents.
     ]
-
-    For a gentle overview see the Medium and Hackernoon articles:
-
-    :ul[
-        :a(https://medium.com/@anywhichway/the-joy-of-secst-markup-333d16263225?sk=2f2c7ea14e3086e093b00ca7bec5252d)[The Joy of SECST Markup]
-    ]
-
-    This site's navigation, footnotes, computations, special styles like :kbd[Key] formatting and imported data are built entirely using SECST markup.
-
-    The SECST language, reference HTML transpiler and runtime support implementations are currently in :strong[ALPHA]. Most, but not all, documented features are implemented, testing is far from complete and resource sizes have not been fully optimized.
 ]
 :section[
     :toc(toggle)[Table Of Contents]
+]
+:section[
+    :h[About This Guide]
+
+      The SECST language, reference HTML transpiler and runtime support implementations are currently in :strong[ALPHA]. Most, but not all, documented features are implemented, testing is far from complete and resource sizes have not been fully optimized.
+
+      This site's navigation, footnotes, computations, special styles like :kbd[Key] formatting and imported data are built entirely using SECST markup.
+
+      This guide is comprehensive, which may make it a little overwhelming. However, SECST has been designed so that you can start using it just a few tags at a time.
+
+      For gentle overviews see the Medium and Hackernoon articles:
+
+      :ul[
+          :a(https://medium.com/@anywhichway/the-joy-of-secst-markup-333d16263225?sk=2f2c7ea14e3086e093b00ca7bec5252d)[Medium:The Joy of SECST Markup]
+          :a(https://hackernoon.com/the-joy-of-using-secst-markup)[Hackernoon:The Joy of Using SECST Markup]
+      ]
+
 ]
 :section[
     :h[Why Another Language]
@@ -590,7 +597,7 @@
 
             Theme tags can exist as :a(.#body-content)[Body Content] or :a(.#block-content)[Block Content]. They should be placed as close to the top of the document as possible.
 
-            Themes can be scoped using the scope attribute, the value of which is a CSS selector string, e.g. :code[:theme({scope:#special-section})[:p[border:solid black 1px;]]] will only put borders around a paragraphs that are inside a :code[:section(#special-section)[]].
+            Themes can be scoped using the scope attribute, the value of which is a CSS selector string, e.g. :code[:theme({scope:#special-section})[:p[border:solid black 1px;]]] will only put borders around paragraphs that are inside a :code[:section(#special-section)[]].
 
 
             :code[
@@ -1193,18 +1200,23 @@
 :section[
     :h(#tags)[Complete List Of Tags]
 
-    Below scroll area should be hidden.
-
-    :value(#tagSpecs hidden {globalThis:"SECST.tagSpecs"})[]
-
-    The documentation below is generated directly from SECST source code.
+    :p[
+        :value(#tagSpecs hidden {globalThis:"SECST.tagSpecs"})[]
+        The documentation below is generated directly from SECST source code.
+    ]
 
     :dl[
         :forEntries({object:"#tagSpecs"})[
-            :dt[:strong[${key}]]
-            :dd[:em[Attributes Allowed]: :code[${value.attributesAllowed && typeof(value.attributesAllowed)==="object" ? Object.keys(value.attributesAllowed).join(", ") : "N/A"}]]
-            :dd[:em[Content Allowed]: :code[${value.contentAllowed ? (typeof(value.contentAllowed)==="object" ? Object.keys(value.contentAllowed).join(", ") : "plain text") : "N/A"}]]
-            :dd[:em[Transformation Impacts]: ${value.transform && value.attributesAllowed ? "Attributes may differ from the above since the tag is transformed and transient attributes may be deleted. See the detailed documentation for the tag." : "N/A"}]
+            :dt[:strong[${key}] ${value.htmlDocLink}]
+            :dd[:em[Transformation Impacts]:
+                ${value.transform && value.attributesAllowed ? "Attributes may differ from the below since the tag is transformed and transient attributes may be deleted. See the detailed documentation for the tag." : "N/A"} :br :br
+            ]
+            :dd[:em[Attributes Allowed]: :code[
+                ${value.attributesAllowed && typeof(value.attributesAllowed)==="object" ? JSON.stringify(value.attributesAllowed,null,2).replaceAll(/["\{\}]/g,"").replaceAll(/,\n/g,"\n").substring(1) : "N/A"}]
+            ]
+            :dd[:em[Content Allowed]: :code({wrap:true})[
+                ${value.contentAllowed ? (typeof(value.contentAllowed)==="object" ? Object.keys(value.contentAllowed).join(", ") : "plain text") : "N/A"}]
+            ]
         ]
     ]
 ]
@@ -1305,14 +1317,14 @@
                      // a function body to override built-in JSONLD generation
                     return jsonld;
                 }
-                toHTML(node) { // optional
+                toInnerHTML(node) { // optional
                     const html = ...
                     // a function body to generate the :code[innerHTML] for a tag in place of SECST iterating over parsed content for the tag.
                     return html;
                 }
                 toText(node) { // optional
                     const text = ...
-                    // a function body to generate text inside a :code[<span>] as a replacement for the tag in place of SECST iterating over parsed content for the tag.
+                    // a function body to generate text inside a :code[<span>] as a :strong[replacement] for the tag in place of SECST iterating over parsed content for the tag.
                 }
                 render(el,node) { // optional
                     // a function body to manipulate the element based on the parsed node in some custom manner

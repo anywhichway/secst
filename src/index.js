@@ -8,6 +8,7 @@ import {resolve} from "./resolve.js";
 import {resolveDataTemplate} from "./resolve-data-template.js";
 import {engage, init} from "@anywhichway/autohelm";
 import {toTagSpecs} from "./to-tag-specs.js";
+import {patchAutohelm} from "./patch-autohelm.js";
 
 if(document.currentScript?.getAttribute("src").endsWith("?run")) {
     if(typeof(window)==="object" && typeof(MutationObserver)=="function") {
@@ -37,6 +38,7 @@ if(document.currentScript?.getAttribute("src").endsWith("?run")) {
         engage(".toc");
         resolve();
         updateValueWidths();
+        patchAutohelm();
     })
 }
 
@@ -45,6 +47,7 @@ window.autohelm = {
     init,
     engage
 }
+window.patchAutohelm = patchAutohelm;
 window.emojiMart = {
     init: initEmojiMart,
     SearchIndex

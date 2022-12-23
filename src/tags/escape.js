@@ -1,6 +1,7 @@
 import phrasingContent from "./phrasing-content.js";
 
 const escape = {
+    htmlDocLink: "",
     contentAllowed: true,
     beforeMount(node) {
         if(node.content[0]?.includes("\n")) {

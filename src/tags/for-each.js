@@ -1,4 +1,5 @@
 const forEach = {
+    htmlDocLink: "",
     attributesAllowed:{
         "data-iterable": true,
         iterable(value) {
@@ -16,7 +17,7 @@ const forEach = {
        const {allTags} = await import("./all-tags.js");
        return this.contentAllowed = allTags;
     },
-    async mounted(el,node) {
+    async connected(el,node) {
         const parent = el.parentElement;
         let iterable = el.getAttribute("data-iterable");
         try {

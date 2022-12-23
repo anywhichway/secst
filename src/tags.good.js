@@ -299,7 +299,7 @@ const tags = {
             }
             return node;
         },
-        toHTML(node) {
+        toInnerHTML(node) {
             return katex.renderToString(node.content[0],{
                 throwOnError: false
             })
@@ -959,7 +959,7 @@ const tags = {
         },
         allowAsRoot: true,
         contentAllowed: true,
-        toHTML(node) {
+        toInnerHTML(node) {
             return node.content[0]
         },
         async transform(node) {

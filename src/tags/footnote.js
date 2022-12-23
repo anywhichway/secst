@@ -1,6 +1,7 @@
 import phrasingContent from "./phrasing-content.js";
 
 const footnote = {
+    htmlDocLink: "",
     contentAllowed:{
         ...phrasingContent
     },

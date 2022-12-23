@@ -1,6 +1,7 @@
 import textContent from "./text-content.js";
 
 const toc = {
+    htmlDocLink: "",
     contentAllowed: true,
     attributesAllowed: {
         "data-toggle": true,

@@ -21,6 +21,7 @@ const updateValueWidths = (els) => {
             });
         })
     }
+
 }
 
 export {updateValueWidths}

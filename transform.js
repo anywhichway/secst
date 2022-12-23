@@ -1,19 +1,19 @@
 import fs from "fs/promises";
 import url from "node:url";
+
 import JSON5 from "json5";
+global.JSON5 = JSON5;
+
 import {init as initAutohelm,engage} from "@anywhichway/autohelm";
-import {HighlightJS} from "highlight.js";
-import { Window } from 'happy-dom';
-import * as all from "emoji-mart";
-let { init, SearchIndex } = all;
-if(init==null) {
-    init = all.default.init;
-    SearchIndex = all.default.SearchIndex;
+global.autohelm = {
+    init: initAutohelm,
+    engage
 }
-import toTagSpecs from "./src/to-tag-specs.js";
-import resolveDataTemplate from "./src/resolve-data-template.js";
 
+import {HighlightJS} from "highlight.js";
+global.HighlightJS = HighlightJS;
 
+import { Window } from 'happy-dom';
 global.window = new Window(),
     global.document = window.document;
 global.URL = URL;
@@ -28,23 +28,27 @@ global.fetch = async (url,...args) => {
     }
     return window.fetch((new URL(url, "https://sects.org/")).href,...args);
 }
-global.JSON5 = JSON5;
+
 global.Text = window.Text;
 global.MutationObserver = window.MutationObserver;
 global.DOMParser = window.DOMParser;
 global.FileReader = window.FileReader;
 global.Node = window.Node;
 Object.defineProperty(global.document,"baseURI",{configurable:true,writable:true,value:"http://localhost:63342/secst/"});
-global.autohelm = {
-    init: initAutohelm,
-    engage
+
+import * as all from "emoji-mart";
+let { init, SearchIndex } = all;
+if(init==null) {
+    init = all.default.init;
+    SearchIndex = all.default.SearchIndex;
 }
-global.HighlightJS = HighlightJS;
-//global.katex = katex;
 global.emojiMart = {
     init,
     SearchIndex
 }
+
+import toTagSpecs from "./src/to-tag-specs.js";
+import resolveDataTemplate from "./src/resolve-data-template.js";
 
 
 global.SECST = {
@@ -58,10 +62,10 @@ global.SECST = {
 }
 
 import peg from "pegjs";
-import {transform} from "./src/transform.js";
 import {resolve} from "./src/resolve.js";
 
-const text = await fs.readFile("./index.sct",{ encoding: 'utf8' }),
+const {transform} = await import("./src/transform.js"),
+    text = await fs.readFile("./index.sct",{ encoding: 'utf8' }),
     grammar = await fs.readFile("./src/grammar.txt",{ encoding: 'utf8' }),
     parser = peg.generate(grammar),
     {dom,errors,parsed,transformed} = await transform(parser,text,{styleAllowed:"*"}),

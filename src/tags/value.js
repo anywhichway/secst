@@ -1,6 +1,7 @@
 import {updateValueWidths} from "../update-value-widths.js";
 
 const value = {
+    htmlDocLink: "",
     attributesAllowed: {
         "data-fitcontent": true,
         "data-default": true,

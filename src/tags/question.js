@@ -3,6 +3,7 @@ import phrasingContent from "./phrasing-content.js";
 import value from "./value.js";
 
 const question = {
+    htmlDocLink: "",
     attributesAllowed: {
         "show-answer": true,
         type: ["checkbox","color","date","datetime-local","email","file",

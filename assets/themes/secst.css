@@ -7,6 +7,9 @@ span.autohelm-open-toc:hover {
 span.autohelm-close-toc:hover {
     cursor: pointer;
 }
+div.autohelm-toc-popup {
+    border: solid 1px lightgray;
+}
 body {
     display: flex;
     flex-direction: column;
@@ -14,22 +17,21 @@ body {
     overflow: hidden;
     margin: 0px;
 }
-header, footer, #secst-content {
+#secst-content {
+    border-top: 1px solid black;
     width:100%;
-}
-header {
-    padding-top: .5em;
-    padding-left: 2ch;
-    padding-right: 2ch;
-    padding-bottom: .5em;
     border-bottom: 1px solid black;
 }
-footer {
-    padding-top: .5em;
+header, footer {
+    width:97%;
+}
+header {
     padding-left: 2ch;
     padding-right: 2ch;
-    border-top: 1px solid black;
-    margin-bottom: 1em;
+}
+footer {
+    padding-left: 2ch;
+    padding-right: 2ch;
 }
 #secst-content {
     flex: 1;

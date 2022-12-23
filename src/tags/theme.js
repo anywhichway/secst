@@ -3,6 +3,7 @@ import link from "./link.js";
 import style from "./style.js";
 
 const theme = {
+    htmlDocLink: "",
     contentAllowed:{
         style,
         link,

@@ -26,6 +26,7 @@ const resolve = (variables,node,instanceContent) => {
 }
 
 const macro = {
+    htmlDocLink: "",
     transform(node) {
         macro.macros.set(node.attributes.name,{...node});
         node.attributes = {};

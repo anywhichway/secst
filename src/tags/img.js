@@ -1,17 +1,19 @@
+function isURL(value) { new URL(value,document.baseURI) }
+
 const img = {
     attributesAllowed: {
-        alt:true,
-        static:true,
+        alt:"string",
+        static:"boolean",
         height:"number",
         width:"number",
         align:["top","middle","bottom","left","right"],
-        decoding:true,
-        ismap:true,
-        type:true,
+        decoding:["sync","async","auto"],
+        fetchpriority:["high","low","auto"],
+        ismap:"boolean",
+        //type:true,
         loading:["eager","lazy"],
-        src(value) {
-            new URL(value,document.baseURI);
-        },
+        referrerpolicy:["no-referrer","no-referrer-when-downgrade","origin","origin-when-corss-origin","same-origin","strict-origin","strict-origin-when-cross-origin"],
+        src: isURL,
         title: "string",
         url(value) {
             this.src(value);

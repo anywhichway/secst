@@ -1,4 +1,5 @@
 const hashtag = {
+    htmlDocLink: "",
     contentAllowed: true,
     transform(node) {
         // push to meta tags here

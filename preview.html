@@ -33,6 +33,8 @@
         Object.entries(SECST.listeners).forEach(([key,value]) => {
             window.addEventListener(key,value);
         });
+
+        patchAutohelm();
     })
 </script>
 </body>

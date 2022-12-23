@@ -1,7 +1,8 @@
+import p from "./p.js";
 import textContent from "./text-content.js";
 
 const header = {
-    contentAllowed:{...textContent},
+    contentAllowed:{...textContent,p},
     mounted(el) {
         let root = el.parentNode;
         while(root.parentNode) {

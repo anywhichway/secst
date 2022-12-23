@@ -10,6 +10,7 @@ const {init,SearchIndex} = emojiMart;
 
 let emojiMartData;
 const emoji = {
+    htmlDocLink: "",
     attributesAllowed: {
         greyscale() {
             return {

@@ -3,13 +3,14 @@ import {updateValueWidths} from "../update-value-widths.js";
 
 const code = {
     attributesAllowed: {
-        disabled: true,
-        readonly: true,
+        disabled: "boolean",
+        readonly: "boolean",
         language(value) {
             return {
                 "data-language": value
             }
         }, // todo validate with list HighlightJs.listLanguages
+        wrap: "boolean"
     },
     contentAllowed: true,
     transform(node) {
@@ -42,13 +43,14 @@ const code = {
         return node;
     },
     mounted(el,node) {
+        if(node.attributes.wrap===true || node.attributes.wrap==="") {
+            el.style.whiteSpace = "pre-wrap";
+            delete node.attributes.wrap;
+        }
         if(!node.classList.includes("nohighlight")) {
             const language = HighlightJS.getLanguage(node.attributes["data-language"]);
             if(language) {
                 HighlightJS.highlightElement(el);
-            }
-            if(!node.content[0].includes("\n")) {
-                el.style.backgroundColor = "unset";
             }
         }
     },

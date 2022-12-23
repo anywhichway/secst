@@ -124,8 +124,8 @@ const toElement = async (node,{parent,connects,parentConfig}) => {
         }
         if(node?.toElement) {
             el = await node.toElement(node,{parentConfig:config});
-        } else if(node?.toHTML) {
-            el.innerHTML = await node.toHTML(node,el);
+        } else if(node?.toInnerHTML) {
+            el.innerHTML = await node.toInnerHTML(node,el);
         } else if (node?.toText) {
             el.innerText = await node.toText(node,el);
         } else if(node.render) {
@@ -279,7 +279,7 @@ const validateNode = async ({parser,node,path=[],contentAllowed=bodyContent,erro
                     Object.assign(node.attributes,result);
                 }
             } else if(type==="string") {
-                if(typeof(value)!==attributeAllowed) {
+                if(typeof(value)!==attributeAllowed && !(attributeAllowed==="boolean" && value==="")) {
                     errors.push(new parser.SyntaxError(`${tag} the value ${key}:${value} type`,attributeAllowed,typeof(value),node.location));
                 }
             } else if(Array.isArray(attributeAllowed)) {

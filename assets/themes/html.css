@@ -11,22 +11,21 @@ body {
     overflow: hidden;
     margin: 0px;
 }
-header, footer, #secst-content {
+#secst-content {
+    border-top: 1px solid black;
     width:100%;
-}
-header {
-    padding-top: .5em;
-    padding-left: 2ch;
-    padding-right: 2ch;
-    padding-bottom: .5em;
     border-bottom: 1px solid black;
 }
-footer {
-    padding-top: .5em;
+header, footer {
+    width:97%;
+}
+header {
     padding-left: 2ch;
     padding-right: 2ch;
-    border-top: 1px solid black;
-    margin-bottom: 1em;
+}
+footer {
+    padding-left: 2ch;
+    padding-right: 2ch;
 }
 .sect[hidden] {
     display: none

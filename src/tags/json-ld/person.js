@@ -1,4 +1,5 @@
 const Person = {
+    htmlDocLink: "",
     contentAllowed: {
         name: {
             contentAllowed: true,

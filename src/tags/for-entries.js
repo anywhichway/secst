@@ -1,4 +1,5 @@
 const forEntries = {
+    htmlDocLink: "",
     attributesAllowed:{
         "data-object": true,
         object(value) {
@@ -16,7 +17,7 @@ const forEntries = {
        const {allTags} = await import("./all-tags.js");
        return this.contentAllowed = allTags;
     },
-    async mounted(el,node) {
+    async connected(el,node) {
         const parent = el.parentElement;
         let object = el.getAttribute("data-object");
         try {

@@ -1,5 +1,6 @@
 const mentions = {
     "@facebook": {
+        htmlDocLink: "",
         attributesAllowed: {
             href: true,
             target: true
@@ -18,6 +19,7 @@ const mentions = {
         }
     },
     "@github": {
+        htmlDocLink: "",
         attributesAllowed: {
             href: true,
             target: true
@@ -36,6 +38,7 @@ const mentions = {
         }
     },
     "@linkedin": {
+        htmlDocLink: "",
         attributesAllowed: {
             href: true,
             target: true
@@ -54,6 +57,7 @@ const mentions = {
         }
     },
     "@twitter": {
+        htmlDocLink: "",
         attributesAllowed: {
             href: true,
             target: true

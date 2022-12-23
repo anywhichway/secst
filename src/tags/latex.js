@@ -1,4 +1,5 @@
 const latex = {
+    htmlDocLink: "",
     contentAllowed: true,
     requires: [
         {
@@ -23,7 +24,8 @@ const latex = {
             attributes: {
                 src: "https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/mhchem.min.js",
                 integrity: "sha384-RTN08a0AXIioPBcVosEqPUfKK+rPp+h1x/izR7xMkdMyuwkcZCWdxO+RSwIFtJXN",
-                crossOrigin: "anonymous"
+                crossOrigin: "anonymous",
+                async: ""
             }
         }
     ],
@@ -40,24 +42,46 @@ const latex = {
         }
         return node;
     },
-    toHTML(node) {
+    toInnerHTML(node) {
         if(typeof(katex)!=="undefined") {
             return katex.renderToString(node.content[0],{
                 throwOnError: true
             })
         }
-        // server renderding of Latex with chem does not work well, also need to fihgure out an onload to latex to avoid using a random timeout
+        // server renderding of Latex with chem does not work well, also need to figure out an onload to latex to avoid using a random timeout
         const text = node.content[0].replaceAll(/\\/g,"\\\\");
-        return '<script>setTimeout((currentScript) => { const html = katex.renderToString("' + text + '"); currentScript.parentElement.innerHTML = html; },2000,document.currentScript)</script>';
+        return `<script>
+                (() => {
+                     const render = (currentScript) => {
+                        if(typeof(katex)!=="undefined") {
+                            try {
+                                 const html = katex.renderToString("' + text + '",{throwOnError: true}); 
+                                currentScript.parentElement.innerHTML = html;
+                            } catch(e) {
+                                console.log(e)
+                            }
+                            return;
+                        }
+                        setTimeout(render,1000,currentScript);
+                    }
+                   render(document.currentScript);
+                })();
+                </script>`;
     },
     connected(el,node) {
-        setTimeout(() => {
+        const render = () => {
             if(typeof(katex)!=="undefined") {
-                el.innerHTML = katex.renderToString(node.content[0],{
-                    throwOnError: true
-                })
+                try {
+                    const html = katex.renderToString(node.content[0],{throwOnError: true});
+                    el.innerHTML = html;
+                } catch(e) {
+                    console.log(e)
+                }
+                return;
             }
-        },1000)
+            setTimeout(render,1000);
+        }
+        render();
     }
 }
 
