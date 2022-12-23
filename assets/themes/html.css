@@ -1,3 +1,33 @@
+span.autohelm-open-toc:hover {
+    cursor: pointer;
+}
+span.autohelm-close-toc:hover {
+    cursor: pointer;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+    margin: 0px;
+}
+header, footer, #secst-content {
+    width:100%;
+}
+header {
+    padding-top: .5em;
+    padding-left: 2ch;
+    padding-right: 2ch;
+    padding-bottom: .5em;
+    border-bottom: 1px solid black;
+}
+footer {
+    padding-top: .5em;
+    padding-left: 2ch;
+    padding-right: 2ch;
+    border-top: 1px solid black;
+    margin-bottom: 1em;
+}
 .sect[hidden] {
     display: none
 }
@@ -37,4 +67,5 @@ pre.secst {
     max-height: 25em;
     overflow: auto;
     background-color: whitesmoke;
+    margin-right: 1ch;
 }

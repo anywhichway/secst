@@ -100,7 +100,8 @@ const table = {
     },
     mounted(el) {
         const div = document.createElement("div");
-        div.style.overflow = "auto";
+        div.style.overflow = "auto"; // todo move to style sheet
+        div.style.marginRight = "1ch";
         el.replaceWith(div);
         div.appendChild(el);
     }

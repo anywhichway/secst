@@ -1,11 +1,48 @@
 span.autohelm-nav a {text-decoration: unset; color:unset}
 span.autohelm-nav-up-down a {font-size: 80%; vertical-align:text-top}
 span.autohelm-footnote {position:relative; font-size:small; top:-.5em}
+span.autohelm-open-toc:hover {
+    cursor: pointer;
+}
+span.autohelm-close-toc:hover {
+    cursor: pointer;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+    margin: 0px;
+}
+header, footer, #secst-content {
+    width:100%;
+}
+header {
+    padding-top: .5em;
+    padding-left: 2ch;
+    padding-right: 2ch;
+    padding-bottom: .5em;
+    border-bottom: 1px solid black;
+}
+footer {
+    padding-top: .5em;
+    padding-left: 2ch;
+    padding-right: 2ch;
+    border-top: 1px solid black;
+    margin-bottom: 1em;
+}
+#secst-content {
+    flex: 1;
+    overflow: auto;
+}
 section {
     margin-left: 2ch
 }
 details {
     display: inline
+}
+dl {
+    margin-right: 1ch
 }
 .katex {
     font-size: unset;
@@ -59,6 +96,7 @@ pre.secst {
     max-height: 25em;
     overflow: auto;
     background-color: whitesmoke;
+    margin-right: 1ch;
 }
 code {
     white-space: pre-line;

@@ -390,6 +390,13 @@ const transform = async (parser,text,{styleAllowed}={}) => {
     dom.appendChild(dom.head = document.createElement("head"));
     dom.head.innerHTML = `<meta name="viewport" content="width=device-width, initial-scale=1" />`;
     dom.appendChild(dom.body = document.createElement("body"));
+    const header = document.createElement("header"),
+        content = document.createElement("div"),
+        footer = document.createElement("footer");
+    header.id = "secst-header";
+    content.id = "secst-content";
+    footer.id = "secst-footer";
+    [header,content,footer].forEach((el) => dom.body.appendChild(el));
     /*
             section > *:not(:first-child):not(section) {
             display: none
@@ -405,11 +412,11 @@ const transform = async (parser,text,{styleAllowed}={}) => {
         dom.body.appendChild(link);
     }
     for(const node of transformed) {
-        await toElement(node,{parent:dom.body,parentConfig:{contentAllowed:bodyContent}})
+        await toElement(node,{parent:content,parentConfig:{contentAllowed:bodyContent}})
     }
     connect(dom,document);
     try {
-        autohelm.init({tocSelector:".toc",dom:dom.body,useSections:true});
+        autohelm.init({tocSelector:".toc",dom:content,useSections:true});
     } catch(e) {
 
     }

@@ -46,9 +46,18 @@ const latex = {
                 throwOnError: true
             })
         }
-        // server renderding of Latex with chem does not work well
+        // server renderding of Latex with chem does not work well, also need to fihgure out an onload to latex to avoid using a random timeout
         const text = node.content[0].replaceAll(/\\/g,"\\\\");
-        return '<script>(() => { const html = katex.renderToString("' + text + '"); document.currentScript.parentElement.innerHTML = html; })()</script>';
+        return '<script>setTimeout((currentScript) => { const html = katex.renderToString("' + text + '"); currentScript.parentElement.innerHTML = html; },2000,document.currentScript)</script>';
+    },
+    connected(el,node) {
+        setTimeout(() => {
+            if(typeof(katex)!=="undefined") {
+                el.innerHTML = katex.renderToString(node.content[0],{
+                    throwOnError: true
+                })
+            }
+        },1000)
     }
 }
 

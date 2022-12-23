@@ -1,9 +1,8 @@
+:header[:abbr[:a(.#the-joy-of-secst)[SECST]] (:strong[S]emantic, :strong[E]xtensible, :strong[C]omputational, :strong[S]tyleable, :strong[T]agged) Markup Language]
+:footer[Copyright 2022, AnyWhichWay LLC, On GitHub: :a[https://github.com/anywhichway/secst]]
 :section[
 
 :h[The Joy of SECST]
-
-    :abbr[SECST] (:strong[S]emantic, :strong[E]xtensible, :strong[C]omputational, :strong[S]tyleable, :strong[T]agged) markup language. Use it to joyfully create compelling, interactive HTML documents.
-
     SECST is a more expressive, but as easy to learn and use, alternative to Markdown. It provides these features and more:
 
     :ul[
@@ -13,11 +12,11 @@
         - SEO optimization via server rendering with JSON-LD :a(.#structured-data)[structured data] for both content generation/layout.
     ]
 
+    Use SECST to joyfully create compelling, interactive HTML documents.
+
     This is the source for the introduction above:
 
     :code({language:"secst"})[
-        :abbr[SECST] is a :strong[S]emantic, :strong[E]xtensible, :strong[C]omputational, :strong[S]tyleable :strong[T]ag oriented markup language. You can use it to joyfully create compelling, interactive, HTML documents.
-
         SECST is a more expressive, but as easy to learn and use, alternative to Markdown. It provides these features and more:
 
         :ul[
@@ -26,6 +25,8 @@
             - Reactive :a(.#values-and-formulas)[formulas and data import] that are as simple as Excel formulas, e.g. :code[:value[2 * 2]] = :value[2 * 2].
             - SEO optimization via server rendering with JSON-LD :a(.#structured-data)[structured data] for both content generation/layout.
         ]
+
+        Use SECST to joyfully create compelling, interactive HTML documents.
     ]
 
     For a gentle overview see the Medium and Hackernoon articles:
@@ -36,7 +37,7 @@
 
     This site's navigation, footnotes, computations, special styles like :kbd[Key] formatting and imported data are built entirely using SECST markup.
 
-    The SECST language and reference HTML transpiler and runtime support implementations are currently in :strong[ALPHA]. Most, but not all, documented features are implemented, testing is far from complete and resource sizes have not been fully optimized.
+    The SECST language, reference HTML transpiler and runtime support implementations are currently in :strong[ALPHA]. Most, but not all, documented features are implemented, testing is far from complete and resource sizes have not been fully optimized.
 ]
 :section[
     :toc(toggle)[Table Of Contents]
@@ -839,9 +840,25 @@
                     :dd[:code[:value[solve('Math.pow(r,2)',{r:3})}]]]
                     :dd[:value[solve('Math.pow(r,2)',{r:3})]]
                     :dt[Give your readers the opportunity to provide the values for which to solve:]
-                    :dd[Math.pow(r,2) where r = :code[:value(#v1d)[0]] is :code[:value(#v2d)[solve('Math.pow(r,2)',{r:$(#v1d)})]]]
-                    :dd[Math.pow(r,2) where r = :value(#v1d)[0] is :value(#v2d)[solve('Math.pow(r,2)',{r:$(#v1d)})]]
-                    :dd[The derivative of :value(#formula literal editable)[x^2 + x] for :value(#variable literal editable)[x] is :value(#derivative)[derivative($(#formula),$(#variable))]]
+                    :dd[
+                        :code[
+                            Math.pow(r,2)
+                            where r = :value(#v1d)[0]
+                            is :value[solve('Math.pow(r,2)',{r:$(#v1d)})]
+                        ]
+                        renders as
+                        :br :br
+                        Math.pow(r,2) where r = :value(#v1d)[0] is :value[solve('Math.pow(r,2)',{r:$(#v1d)})]
+                        :br
+                        :code[
+                            The derivative of :value(#formula literal editable)[x^2 + x]
+                            for :value(#variable literal editable)[x]
+                            is :value[derivative($(#formula),$(#variable))]
+                        ]
+                        renders as
+                        :br :br
+                        The derivative of :value(#formula literal editable)[x^2 + x] for :value(#variable literal editable)[x] is :value[derivative($(#formula),$(#variable))]
+                    ]]
                 ]
             ]
     ]

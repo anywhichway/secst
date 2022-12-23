@@ -16,7 +16,7 @@ const forEach = {
        const {allTags} = await import("./all-tags.js");
        return this.contentAllowed = allTags;
     },
-    async connected(el,node) {
+    async mounted(el,node) {
         const parent = el.parentElement;
         let iterable = el.getAttribute("data-iterable");
         try {
