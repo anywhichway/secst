@@ -3,7 +3,7 @@ import textContent from "./text-content.js";
 
 const header = {
     contentAllowed:{...textContent,p},
-    mounted(el) {
+    connected(el) {
         let root = el.parentNode;
         while(root.parentNode) {
             root = root.parentNode;

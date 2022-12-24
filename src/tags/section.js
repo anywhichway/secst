@@ -3,6 +3,9 @@ import {macro as MACRO} from "./macro.js";
 import Tag from "../tag.js";
 
 const section = {
+    attributesAllowed:{
+        level:"number"
+    },
     stringAllowed: true,
     contentAllowed: {
         ...blockContent,
@@ -10,6 +13,9 @@ const section = {
     },
     transform(node,{level}) {
         const pconfig = section.contentAllowed.p;
+        if(node.attributes.level>0) {
+            level = node.attributes.level;
+        }
         let p;
          node.content = [...node.content.reduce((content,item,i) => {
              if (typeof (item) === "string") {

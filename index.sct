@@ -39,7 +39,7 @@
 
       This site's navigation, footnotes, computations, special styles like :kbd[Key] formatting and imported data are built entirely using SECST markup.
 
-      You can tap on the icon next to a heading to access a table of contents at any time. You can goto the top of the guide by tapping of SECST in the top left corner.
+      You can tap on the icon next to a heading to access a table of contents at any time. You can goto the top of the guide by tapping on SECST in the top left corner.
 
       This guide is comprehensive, which may make it a little overwhelming. However, SECST has been designed so that you can start using it just a few tags and capabilities at a time.
 
@@ -101,7 +101,7 @@
             :li[A predominantly declarative extension technique make SECTS easier to extend than HTML. Expertise in programming custom elements is not required.]
             :li[Asset bundling via the use of the attribute :code[static] on :code[audio], :code[img], :code[video] and :code[value] tags.]
             :li[SECST is easier to extend than Markdown. Expertise in parsers or regular expressions is not required.]
-            :li[SECST is translated to safe HTML constructs to limit the chance of XSS and other attacks.]
+            :li[SECST is transpiled to safe HTML constructs to limit the chance of XSS and other attacks.]
         ]
     ]
 ]
@@ -552,9 +552,9 @@
 
             New tags can be defined in the content of any document through the use of macros.
 
-            A macro takes a :code[name] attribute, which will be the new tag name and a :code[tag] attribute which will be the top level tag to use for replacing the macro tag.
+            A macro takes a :code[name] attribute, which will be the new SECST tag name and a :code[tag] attribute which will be the top level HTML tag to use for replacing the macro tag.
 
-            The content of the macro is used as a substitute for the macro. The content can contain variables that are populated based on the attributes provided to the new tag when it is used.
+            The content of the macro is used as a substitute for the macro. The content can contain variables that are populated based on attributes provided to the new tag when it is used.
 
             An optional attribute :code[contentAllowed] specifies if instances of the macro tag can provide content to append at the end.
 
@@ -563,12 +563,16 @@
                     :em[${name}]
                     :em[${age}]
                 ]
-                :profile({name:"joe",age:26})[Hi there ${name}!]
+                :profile({name:"joe",age:26})[Hi there ${name}!] // Hi there joe! gets appended since contentAllowed is true
             ]
 
             renders as
 
             :profile({name:"joe",age:26})[Hi there ${name}!]
+
+            with the HTML
+
+            :transpiled[ :profile({name:"joe",age:26})[Hi there ${name}!]]
         ]
         :section[
             :h[Questions]
@@ -1178,6 +1182,21 @@
     ]
 ]
 :section[
+    :h[Transpiling and Server Processing]
+
+    The command line :code[node secst.js] will convert any files in the root directory with the extension :code[.sct] into :code[HTML] files.
+
+    If a wild card Glob pattern is used, then all matching files with a :code[.sct] extension will be transpiled.
+
+    The command can be run as part of your build process to generate a static website.
+
+    There is not yet an Express route or Service Worker, but the code in :code[sects.js] could be used as a starting point.
+
+    An SPD (Single Page Document) capability that takes multiple :code[.sct] files in a directory tree that parallels the desired section structure and creates a single HTML file is under development.
+
+    A multi-page processor that will split a single :code[.sct] files into multiple files based on its section structure and patch links accordingly is also under consideration.
+]
+:section[
 :h[Configuring, Extending, And Programming]
     :section[
         :h[Basic Configuration]
@@ -1269,7 +1288,7 @@
 
     The reference implementation uses a :a(https://pegjs.org/)[PEG parser] and this grammar:
 
-    :value(./src/grammar.txt static {type:"text/plain"})
+    :value(./src/secst.peg static {type:"text/plain"})
 ]
 :section[
 :h[Architecture]
@@ -1386,7 +1405,7 @@
     :ul[
     :li[Prevents DOM clobbering by ensuring ids do not conflict with key DOM components, e.g. :code[head], :code[body].]
     - Does not allow the use of variables for attribute values.
-    - Executes all macros in WebWorkers that will timeout if they take too long.
+    - Executes all value functions in WebWorkers that will timeout if they take too long.
     - Does not support "on" event handlers and limits the use of styling directly on HTML elements.
     :li[Sanitizes CSS content used in the :code[:style[]] tag.]
     - Only passes attributes to HTML that are valid for the associated tag

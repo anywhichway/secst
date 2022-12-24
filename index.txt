@@ -1269,7 +1269,7 @@
 
     The reference implementation uses a :a(https://pegjs.org/)[PEG parser] and this grammar:
 
-    :value(./src/grammar.txt static {type:"text/plain"})
+    :value(./src/secst.peg static {type:"text/plain"})
 ]
 :section[
 :h[Architecture]
