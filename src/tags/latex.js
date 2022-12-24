@@ -55,7 +55,7 @@ const latex = {
                      const render = (currentScript) => {
                         if(typeof(katex)!=="undefined") {
                             try {
-                                 const html = katex.renderToString("' + text + '",{throwOnError: true}); 
+                                 const html = katex.renderToString("` + text + `",{throwOnError: true}); 
                                 currentScript.parentElement.innerHTML = html;
                             } catch(e) {
                                 console.log(e)
