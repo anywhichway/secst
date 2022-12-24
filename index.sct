@@ -131,7 +131,7 @@
                 bold | :td[:code[**text**]] :td[:code[:strong[text]] and :code[**text**]] :td[**text**]
             ]
             :tr[
-                italics | :td[:code[*text*]] :td[:code[:em[text]]] :td[*text*]
+                italics | :td[:code[*text*]] :td[:code[:em[text]] and :code[*text*]] :td[*text*]
             ]
             :tr[
                 blockquote | :td[:code[> quote text]] :td[:code[:blockquote[quote text]]] :td[]

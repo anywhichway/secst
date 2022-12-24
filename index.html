@@ -21,7 +21,7 @@ Use SECST to joyfully create compelling, interactive HTML documents.</code></pre
             <thead><tr><th>Document Item</th><th>Markdown</th><th>SECST</th><th>Example</th></tr></thead>
             <tr><td>headings</td><td><code class="nohighlight">h# heading text</code></td><td><code class="nohighlight">h#[heading text]</code></td><td></td></tr>
             <tr><td>bold</td><td><code class="nohighlight">**text**</code></td><td><code class="nohighlight">:strong[text]</code> and <code class="nohighlight">**text**</code></td><td><b>text</b></td></tr>
-            <tr><td>italics</td><td><code class="nohighlight">*text*</code></td><td><code class="nohighlight">:em[text]</code></td><td><i>text</i></td></tr>
+            <tr><td>italics</td><td><code class="nohighlight">*text*</code></td><td><code class="nohighlight">:em[text]</code> and <code class="nohighlight">*text*</code></td><td><i>text</i></td></tr>
             <tr><td>blockquote</td><td><code class="nohighlight">&gt; quote text</code></td><td><code class="nohighlight">:blockquote[quote text]</code></td><td></td></tr>
             <tr><td>nested blockquote</td><td><code class="nohighlight">&gt; quote text</code> <kbd>Enter</kbd> <code class="nohighlight">&gt;&gt; nested quote text</code></td><td><code class="nohighlight">:blockquote[quote text :blockquote[nested quote text]]</code></td><td></td></tr>
             <tr><td>code</td><td><code class="nohighlight">'the code'</code></td><td><code class="nohighlight">:code[the code]</code> and <code class="nohighlight">'the code'</code></td><td><code class="nohighlight">the code</code></td></tr>
@@ -156,13 +156,13 @@ Use SECST to joyfully create compelling, interactive HTML documents.</code></pre
  A --- B
  B--&gt;C[fa:fa-ban forbidden]
  B--&gt;D(fa:fa-spinner);
-]</code></pre></p><p>            renders as</p><script src="https://cdn.jsdelivr.net/npm/mermaid@9/dist/mermaid.min.js" onload="(() =&gt; { mermaid.initialize({ startOnLoad: true }) })()"></script><pre id="mermaidChart6496955230074717" class="mermaid">
+]</code></pre></p><p>            renders as</p><script src="https://cdn.jsdelivr.net/npm/mermaid@9/dist/mermaid.min.js" onload="(() =&gt; { mermaid.initialize({ startOnLoad: true }) })()"></script><pre id="mermaidChart4310033108118705" class="mermaid">
                 graph LR
                 A --- B
                 B-->C[fa:fa-ban forbidden]
                 B-->D(fa:fa-spinner);
             </pre><script type="module">
-            const el = document.getElementById("mermaidChart6496955230074717"),
+            const el = document.getElementById("mermaidChart4310033108118705"),
                 sibling = el.nextSibling,
                 insertSvg = function (svgCode, bindFunctions) {
                     el.innerHTML = svgCode;
@@ -176,7 +176,7 @@ Use SECST to joyfully create compelling, interactive HTML documents.</code></pre
                 B-->C[fa:fa-ban forbidden]
                 B-->D(fa:fa-spinner);
             `;
-            setTimeout(() => mermaid.mermaidAPI.render("mermaidChart6496955230074717", graphDefinition, insertSvg),1000);
+            setTimeout(() => mermaid.mermaidAPI.render("mermaidChart4310033108118705", graphDefinition, insertSvg),1000);
         </script><p>            There are lots of charts to choose from:</p><p>            <ul><li> <a target="_tab" href="https://mermaid.js.org/syntax/flowchart.html">Flowchart</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/sequenceDiagram.html">Sequence Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/classDiagram.html">Class Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/stateDiagram.html">State Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/entityRelationshipDiagram.html">Entity Relationship Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/userJourney.html">User Journey</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/gantt.html">Gannt</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/pie.html">Pie Chart</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/requirementDiagram.html">Requirement Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/gitgraph.html">Gitgraph Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/c4c.html">C4C Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/mindmap.html">Mindmaps</a></li></ul><br>        </p></section><section><h3 id="sheet-music" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Sheet Music (ABC Notation)<span class="autohelm-nav autohelm-nav-up-down"> <a href="#mermaid-chart">&uarr;</a> <a href="#escaping-secst">&darr;</a></span></h3><p>            <code class="nohighlight">:sheetMusic[]</code> is a block level element, it belongs outside of paragraphs. Just provide <a target="_tab" href="https://abcnotation.com/examples">ABC notation</a> as the content.</p><p>            <pre class="secst"><code class="nohighlight">:sheetMusic[
   X: 1
   T: Nokia Tune
@@ -230,7 +230,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
                     </dl><br>                </p></section></section><section><h4 id="unit-math" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Unit Math<span class="autohelm-nav autohelm-nav-up-down"> <a href="#basic-math">&uarr;</a> <a href="#importing-data">&darr;</a></span></h4><p>                Unit math <a target="_tab" href="https://mathjs.org/docs/datatypes/units.html">from MathJS</a> allows fro conversions using the word <code class="nohighlight">to</code>, as well as units for numbers, e.g. <code class="nohighlight">45 deg</code>.</p><p>                There are many <a target="_tab" href="https://mathjs.org/docs/datatypes/units.html#reference">supported units</a>.</p><p>                Here are a few examples:</p><p>                <code class="nohighlight">:value[2 inch to cm]</code> = <input class="secst" data-default="" data-template="2 inch to cm" value="" title="2 inch to cm" data-fitcontent=""></p><p>                <code class="nohighlight">:value[90 km/h to mi/h]</code> = <input class="secst" data-default="" data-template="90 km/h to mi/h" value="" title="90 km/h to mi/h" data-fitcontent=""></p><p>                <code class="nohighlight">:value[90 km/h to m/h]</code> = <input class="secst" data-default="" data-template="90 km/h to m/h" value="" title="90 km/h to m/h" data-fitcontent=""> <code class="nohighlight">m/h</code> is meters per hour</p><p>                <code class="nohighlight">:value[(1 week + 1 day) to days]</code> = value[(1 week + 1 day) to days]</p><p>                <code class="nohighlight">:value[cos(45 deg)]</code> = <input class="secst" data-default="" data-template="cos(45 deg)" value="" title="cos(45 deg)" data-fitcontent=""></p><p>                <code class="nohighlight">:value[8.314 m^3 Pa / mol / K]</code> = <input class="secst" data-default="" data-template="8.314 m^3 Pa / mol / K" value="" title="8.314 m^3 Pa / mol / K" data-fitcontent=""></p><p>                Remember, if you have a value that looks like a formula, but is not, you can use the attribute <code class="nohighlight">literal</code>, e.g.  <code class="nohighlight">:value(literal)[2 inch to cm]</code> = <input class="secst" data-default="" data-template="2 inch to cm" value="2 inch to cm" title="2 inch to cm" data-literal="" data-fitcontent="" disabled="" style="width: 13ch;">.</p><p>                And, you can use <code class="nohighlight">plaintext</code> to display values without any styling, e.g. <code class="nohighlight">:value(plaintext)[90 km/h to mi/h]</code> = <span class="secst" data-default="" data-template="90 km/h to mi/h" value="" title="90 km/h to mi/h" data-plaintext="">90 km/h to mi/h</span>.</p></section><section><h4 id="importing-data" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Importing Data<span class="autohelm-nav autohelm-nav-up-down"> <a href="#unit-math">&uarr;</a> <a href="#advanced-formulas">&darr;</a></span></h4><p>                Values can included imported data using the <code class="nohighlight">src</code> attribute and a mime type provided in the <code class="nohighlight">type</code> attribute. The trailing <code class="nohighlight">[]</code> are optional.</p><p>                Values with the boolean attribute <code class="nohighlight">static</code> is import data at transpile time. If importing fails, another attempt is made at runtime.</p><p>                JSON is formatted for readability and <a target="_tab" href="https://json5.org">JSON5</a> is supported to make it easier to handle remote data.</p><p>                <pre class="secst"><code class="nohighlight">:value(https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson static {type:"application/json"})</code></pre></p><p>                <textarea class="secst" data-mime-type="application/json" data-default="" title="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson" data-fitcontent="" disabled="">{
   "type": "FeatureCollection",
   "metadata": {
-    "generated": 1671910406000,
+    "generated": 1671910768000,
     "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson",
     "title": "USGS All Earthquakes, Past Hour",
     "status": 200,
@@ -238,6 +238,46 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
     "count": 9
   },
   "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.13,
+        "place": "8km E of Hydesville, CA",
+        "time": 1671910424220,
+        "updated": 1671910745010,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73824236",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73824236.geojson",
+        "felt": 4,
+        "cdi": 3.2,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 264,
+        "net": "nc",
+        "code": "73824236",
+        "ids": ",ew1671910430,nc73824236,",
+        "sources": ",ew,nc,",
+        "types": ",dyfi,focal-mechanism,nearby-cities,origin,phase-data,scitech-link,shake-alert,",
+        "nst": 25,
+        "dmin": null,
+        "rms": 0.1,
+        "gap": 141,
+        "magType": "mw",
+        "type": "earthquake",
+        "title": "M 4.1 - 8km E of Hydesville, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -124.004837,
+          40.552166,
+          20.43
+        ]
+      },
+      "id": "nc73824236"
+    },
     {
       "type": "Feature",
       "properties": {
@@ -482,7 +522,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
       "type": "Feature",
       "properties": {
         "mag": 0.1,
-        "place": "28 km W of Indian Springs, Nevada",
+        "place": "Nevada",
         "time": 1671907829581,
         "updated": 1671907978619,
         "tz": null,
@@ -506,7 +546,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
         "gap": 300.86,
         "magType": "ml",
         "type": "earthquake",
-        "title": "M 0.1 - 28 km W of Indian Springs, Nevada"
+        "title": "M 0.1 - Nevada"
       },
       "geometry": {
         "type": "Point",
@@ -522,7 +562,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
       "type": "Feature",
       "properties": {
         "mag": 1.7,
-        "place": "87 km NW of Karluk, Alaska",
+        "place": "Alaska Peninsula",
         "time": 1671907353230,
         "updated": 1671907467674,
         "tz": null,
@@ -546,7 +586,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
         "gap": null,
         "magType": "ml",
         "type": "earthquake",
-        "title": "M 1.7 - 87 km NW of Karluk, Alaska"
+        "title": "M 1.7 - Alaska Peninsula"
       },
       "geometry": {
         "type": "Point",
@@ -557,46 +597,6 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
         ]
       },
       "id": "ak022ggdd4bf"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.89,
-        "place": "3 km WSW of Volcano, Hawaii",
-        "time": 1671907067280,
-        "updated": 1671907397820,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73281182",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73281182.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 55,
-        "net": "hv",
-        "code": "73281182",
-        "ids": ",hv73281182,",
-        "sources": ",hv,",
-        "types": ",origin,phase-data,",
-        "nst": 17,
-        "dmin": null,
-        "rms": 0.119999997,
-        "gap": 138,
-        "magType": "ml",
-        "type": "earthquake",
-        "title": "M 1.9 - 3 km WSW of Volcano, Hawaii"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -155.263671875,
-          19.429500579834,
-          0.230000004172325
-        ]
-      },
-      "id": "hv73281182"
     }
   ],
   "bbox": [
@@ -629,7 +629,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
                         })()" title="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson" data-editable="" data-fitcontent="" style="height: 30em; width: 80ch;">{
   "type": "FeatureCollection",
   "metadata": {
-    "generated": 1671910406000,
+    "generated": 1671910768000,
     "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson",
     "title": "USGS All Earthquakes, Past Hour",
     "status": 200,
@@ -637,6 +637,46 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
     "count": 9
   },
   "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.13,
+        "place": "8km E of Hydesville, CA",
+        "time": 1671910424220,
+        "updated": 1671910745010,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73824236",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73824236.geojson",
+        "felt": 4,
+        "cdi": 3.2,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 264,
+        "net": "nc",
+        "code": "73824236",
+        "ids": ",ew1671910430,nc73824236,",
+        "sources": ",ew,nc,",
+        "types": ",dyfi,focal-mechanism,nearby-cities,origin,phase-data,scitech-link,shake-alert,",
+        "nst": 25,
+        "dmin": null,
+        "rms": 0.1,
+        "gap": 141,
+        "magType": "mw",
+        "type": "earthquake",
+        "title": "M 4.1 - 8km E of Hydesville, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -124.004837,
+          40.552166,
+          20.43
+        ]
+      },
+      "id": "nc73824236"
+    },
     {
       "type": "Feature",
       "properties": {
@@ -881,7 +921,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
       "type": "Feature",
       "properties": {
         "mag": 0.1,
-        "place": "28 km W of Indian Springs, Nevada",
+        "place": "Nevada",
         "time": 1671907829581,
         "updated": 1671907978619,
         "tz": null,
@@ -905,7 +945,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
         "gap": 300.86,
         "magType": "ml",
         "type": "earthquake",
-        "title": "M 0.1 - 28 km W of Indian Springs, Nevada"
+        "title": "M 0.1 - Nevada"
       },
       "geometry": {
         "type": "Point",
@@ -921,7 +961,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
       "type": "Feature",
       "properties": {
         "mag": 1.7,
-        "place": "87 km NW of Karluk, Alaska",
+        "place": "Alaska Peninsula",
         "time": 1671907353230,
         "updated": 1671907467674,
         "tz": null,
@@ -945,7 +985,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
         "gap": null,
         "magType": "ml",
         "type": "earthquake",
-        "title": "M 1.7 - 87 km NW of Karluk, Alaska"
+        "title": "M 1.7 - Alaska Peninsula"
       },
       "geometry": {
         "type": "Point",
@@ -956,46 +996,6 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
         ]
       },
       "id": "ak022ggdd4bf"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.89,
-        "place": "3 km WSW of Volcano, Hawaii",
-        "time": 1671907067280,
-        "updated": 1671907397820,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73281182",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73281182.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 55,
-        "net": "hv",
-        "code": "73281182",
-        "ids": ",hv73281182,",
-        "sources": ",hv,",
-        "types": ",origin,phase-data,",
-        "nst": 17,
-        "dmin": null,
-        "rms": 0.119999997,
-        "gap": 138,
-        "magType": "ml",
-        "type": "earthquake",
-        "title": "M 1.9 - 3 km WSW of Volcano, Hawaii"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -155.263671875,
-          19.429500579834,
-          0.230000004172325
-        ]
-      },
-      "id": "hv73281182"
     }
   ],
   "bbox": [
@@ -1030,7 +1030,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
                         })()" title="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson" data-fitcontent="" disabled="" style="height: 30em; width: 80ch;">{
   "type": "FeatureCollection",
   "metadata": {
-    "generated": 1671910406000,
+    "generated": 1671910768000,
     "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson",
     "title": "USGS All Earthquakes, Past Hour",
     "status": 200,
@@ -1038,6 +1038,46 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
     "count": 9
   },
   "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.13,
+        "place": "8km E of Hydesville, CA",
+        "time": 1671910424220,
+        "updated": 1671910745010,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73824236",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73824236.geojson",
+        "felt": 4,
+        "cdi": 3.2,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 264,
+        "net": "nc",
+        "code": "73824236",
+        "ids": ",ew1671910430,nc73824236,",
+        "sources": ",ew,nc,",
+        "types": ",dyfi,focal-mechanism,nearby-cities,origin,phase-data,scitech-link,shake-alert,",
+        "nst": 25,
+        "dmin": null,
+        "rms": 0.1,
+        "gap": 141,
+        "magType": "mw",
+        "type": "earthquake",
+        "title": "M 4.1 - 8km E of Hydesville, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -124.004837,
+          40.552166,
+          20.43
+        ]
+      },
+      "id": "nc73824236"
+    },
     {
       "type": "Feature",
       "properties": {
@@ -1282,7 +1322,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
       "type": "Feature",
       "properties": {
         "mag": 0.1,
-        "place": "28 km W of Indian Springs, Nevada",
+        "place": "Nevada",
         "time": 1671907829581,
         "updated": 1671907978619,
         "tz": null,
@@ -1306,7 +1346,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
         "gap": 300.86,
         "magType": "ml",
         "type": "earthquake",
-        "title": "M 0.1 - 28 km W of Indian Springs, Nevada"
+        "title": "M 0.1 - Nevada"
       },
       "geometry": {
         "type": "Point",
@@ -1322,7 +1362,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
       "type": "Feature",
       "properties": {
         "mag": 1.7,
-        "place": "87 km NW of Karluk, Alaska",
+        "place": "Alaska Peninsula",
         "time": 1671907353230,
         "updated": 1671907467674,
         "tz": null,
@@ -1346,7 +1386,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
         "gap": null,
         "magType": "ml",
         "type": "earthquake",
-        "title": "M 1.7 - 87 km NW of Karluk, Alaska"
+        "title": "M 1.7 - Alaska Peninsula"
       },
       "geometry": {
         "type": "Point",
@@ -1357,46 +1397,6 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
         ]
       },
       "id": "ak022ggdd4bf"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.89,
-        "place": "3 km WSW of Volcano, Hawaii",
-        "time": 1671907067280,
-        "updated": 1671907397820,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73281182",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73281182.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 55,
-        "net": "hv",
-        "code": "73281182",
-        "ids": ",hv73281182,",
-        "sources": ",hv,",
-        "types": ",origin,phase-data,",
-        "nst": 17,
-        "dmin": null,
-        "rms": 0.119999997,
-        "gap": 138,
-        "magType": "ml",
-        "type": "earthquake",
-        "title": "M 1.9 - 3 km WSW of Volcano, Hawaii"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -155.263671875,
-          19.429500579834,
-          0.230000004172325
-        ]
-      },
-      "id": "hv73281182"
     }
   ],
   "bbox": [
