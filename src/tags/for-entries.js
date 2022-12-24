@@ -40,16 +40,21 @@ const forEntries = {
                 }
             } else {
                 try {
-                   object = JSON5.parse(target.innerText)
+                   object = JSON5.parse(target.innerHTML.replace(/"\\&quot;/g,'\\"').replace(/\\&quot;"/g,'\\"'))
                 } catch(e) {
-                   object = {}
+                   try {
+                       object = JSON5.parse(target.innerText); // is this really necessary
+                   } catch(e) {
+                       object = {}
+                   }
                 }
             }
         }
+        const unescapeHTML = (text) => text.replace(/&lt;/g,"<").replace(/&gt;/g,">");
         Object.entries(object).forEach(([key,value],index,iterable) => {
             // todo: move to web worker
             const template = el.innerHTML.replaceAll(/&amp;/g,"&"); // should do a regexp replace inside string templates
-            const html = (new Function("key","value","index","iterable","return `" + template + "`"))(key,value,index,iterable);
+            const html = (new Function("unescapeHTML","key","value","index","iterable","return `" + template + "`"))(unescapeHTML,key,value,index,iterable);
             el.insertAdjacentHTML("beforebegin",html)
         });
         el.remove()

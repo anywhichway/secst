@@ -11,7 +11,7 @@
 
 Use SECST to joyfully create compelling, interactive HTML documents.</code></pre><br></p></section>
 <section><h1 class="toc autohelm-heading" data-toggle="" id="table-of-contents">Table Of Contents<span class="autohelm-open-toc" style="display: inline; font-size: 15px;">&#9660;</span><span class="autohelm-close-toc" style="display: none; font-size: 15px;">&#9650;</span></h1><ol style="display: none;"><li class="autohelm-nav"><a href="#about-this-guide">About This Guide</a></li><li class="autohelm-nav"><a href="#why-another-language">Why Another Language</a><ol><li class="autohelm-nav"><a href="#html-and-markdown-issues">HTML and Markdown Issues</a></li><li class="autohelm-nav"><a href="#secst-benefits">SECST Benefits</a></li></ol></li><li class="autohelm-nav"><a href="#when-to-use-secst">When To Use SECST</a><ol><li class="autohelm-nav"><a href="#basic-markdown">Basic Markdown</a></li><li class="autohelm-nav"><a href="#extended-markdown">Extended Markdown</a></li><li class="autohelm-nav"><a href="#markdown-gaps">Markdown Gaps</a></li></ol></li><li class="autohelm-nav"><a href="#authoring">Authoring</a><ol><li class="autohelm-nav"><a href="#markup-tags-with-html-names">Markup Tags With HTML Names</a><ol><li class="autohelm-nav"><a href="#tags-of-note">Tags of Note</a><ol><li class="autohelm-nav"><a href="#paragraph">Paragraph</a></li><li class="autohelm-nav"><a href="#code">Code</a></li><li class="autohelm-nav"><a href="#headings">Headings</a></li><li class="autohelm-nav"><a href="#hyperlinks">Hyperlinks</a></li><li class="autohelm-nav"><a href="#lists">Lists</a><ol><li class="autohelm-nav"><a href="#unordered-and-ordered-lists">Unordered And Ordered Lists</a></li><li class="autohelm-nav"><a href="#description-lists">Description Lists</a></li><li class="autohelm-nav"><a href="#task-lists">Task Lists</a></li></ol></li><li class="autohelm-nav"><a href="#meta-tags">Meta Tags</a></li><li class="autohelm-nav"><a href="#multimedia">Multimedia</a><ol><li class="autohelm-nav"><a href="#images">Images</a></li><li class="autohelm-nav"><a href="#audio">Audio</a></li><li class="autohelm-nav"><a href="#video">Video</a></li></ol></li></ol></li><li class="autohelm-nav"><a href="#html-entities-and-special-characters">HTML Entities and Special Characters</a></li><li class="autohelm-nav"><a href="#other-tags">Other Tags</a><ol><li class="autohelm-nav"><a href="#inserted-and-deleted">Inserted And Deleted</a></li><li class="autohelm-nav"><a href="#details">Details</a></li></ol></li></ol></li><li class="autohelm-nav"><a href="#markup-without-html-names">Markup Without HTML Names</a><ol><li class="autohelm-nav"><a href="#hashtags">Hashtags</a></li><li class="autohelm-nav"><a href="#emojis">Emojis</a></li><li class="autohelm-nav"><a href="#tables-of-contents">Tables of Contents</a></li><li class="autohelm-nav"><a href="#footnotes-endnotes">Footnotes/Endnotes</a></li><li class="autohelm-nav"><a href="#foreach">forEach</a></li><li class="autohelm-nav"><a href="#macros">Macros</a></li><li class="autohelm-nav"><a href="#questions">Questions</a></li><li class="autohelm-nav"><a href="#theme">Theme</a></li></ol></li><li class="autohelm-nav"><a href="#transpiled-secst">Transpiled SECST</a></li></ol></li><li class="autohelm-nav"><a href="#mentions">Social Media And Other Mentions</a></li><li class="autohelm-nav"><a href="#latex">Latex</a></li><li class="autohelm-nav"><a href="#mermaid-chart">Mermaid Chart</a></li><li class="autohelm-nav"><a href="#sheet-music">Sheet Music (ABC Notation)</a></li><li class="autohelm-nav"><a href="#escaping-secst">Escaping SECST</a></li><li class="autohelm-nav"><a href="#values-and-formulas">Values and Formulas</a><ol><li class="autohelm-nav"><a href="#typed-data">Typed Data</a></li><li class="autohelm-nav"><a href="#string-manipulation">String Manipulation</a></li><li class="autohelm-nav"><a href="#basic-math">Basic Math</a><ol><li class="autohelm-nav"><a href="#algebraic-functions">Algebraic Functions</a></li></ol></li></ol></li><li class="autohelm-nav"><a href="#unit-math">Unit Math</a></li><li class="autohelm-nav"><a href="#importing-data">Importing Data</a></li><li class="autohelm-nav"><a href="#seo">Search Engine Optimization</a><ol><li class="autohelm-nav"><a href="#structured-data">Structured Data</a><ol><li class="autohelm-nav"><a href="#news-article">News Article</a></li></ol></li><li class="autohelm-nav"><a href="#server-transpilation">Server Transpilation</a></li></ol></li><li class="autohelm-nav"><a href="#styling-content">Styling Content</a></li><li class="autohelm-nav"><a href="#advanced-formulas">Advanced Formulas</a><ol><li class="autohelm-nav"><a href="#formulas-with-css-selectors-and-multiple-values">Formulas With CSS Selectors and Multiple Values</a></li><li class="autohelm-nav"><a href="#macro-list-formatting">Macro List Formatting</a></li><li class="autohelm-nav"><a href="#javascript">JavaScript</a></li></ol></li><li class="autohelm-nav"><a href="#transpiling-and-server-processing">Transpiling and Server Processing</a></li><li class="autohelm-nav"><a href="#configuring--extending--and-programming">Configuring, Extending, And Programming</a><ol><li class="autohelm-nav"><a href="#basic-configuration">Basic Configuration</a><ol><li class="autohelm-nav"><a href="#semantic-options">Semantic Options</a></li><li class="autohelm-nav"><a href="#error-handling">Error Handling</a></li></ol></li><li class="autohelm-nav"><a href="#tag-configuration">Tag Configuration</a></li><li class="autohelm-nav"><a href="#custom-tags">Custom Tags</a></li><li class="autohelm-nav"><a href="#custom-methods">Custom Methods</a></li><li class="autohelm-nav"><a href="#event-listeners">Event Listeners</a></li></ol></li><li class="autohelm-nav"><a href="#tags">Complete List Of Tags</a></li><li class="autohelm-nav"><a href="#design-objectives">Design Objectives</a></li><li class="autohelm-nav"><a href="#grammar">Grammar</a></li><li class="autohelm-nav"><a href="#architecture">Architecture</a><ol><li class="autohelm-nav"><a href="#semantic-architecture">Semantic Architecture</a></li><li class="autohelm-nav"><a href="#data-architecture">Data Architecture</a></li><li class="autohelm-nav"><a href="#project-architecture">Project Architecture</a></li></ol></li><li class="autohelm-nav"><a href="#security">Security</a></li><li class="autohelm-nav"><a href="#copyright-and-license">Copyright and License</a></li></ol></section>
-<section><h1 id="about-this-guide" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>About This Guide<span class="autohelm-nav autohelm-nav-up-down"> <a href="#why-another-language">&darr;</a></span></h1><p>      The SECST language, reference HTML transpiler and runtime support implementations are currently in <strong>ALPHA</strong>. Most, but not all, documented features are implemented, testing is far from complete and resource sizes have not been fully optimized.</p><p>      This site's navigation, footnotes, computations, special styles like <kbd>Key</kbd> formatting and imported data are built entirely using SECST markup.</p><p>      You can tap on the icon next to a heading to access a table of contents at any time. You can goto the top of the guide by tapping of SECST in the top left corner.</p><p>      This guide is comprehensive, which may make it a little overwhelming. However, SECST has been designed so that you can start using it just a few tags and capabilities at a time.</p><p>      The following order of learning is suggested:</p><p>      <ol><li>Use tags that support markup similar to <a href="#basic-markdown">Markdown</a>.</li><li>Start leveraging attributes like <code class="nohighlight">align</code> on <a href="#images">img</a>.</li><li>Try <a href="#theme">themes or styles</a>.</li><li>If you are into music, math, or chemistry try <a href="#sheet-music"><code class="nohighlight">sheetMusic</code></a> or <a href="#latex"><code class="nohighlight">Latex</code></a>.</li><li>Add some simple <a href="#values-and-formulas">values and formulas</a>.</li><li>Anything else that gives you joy!</li></ol></p><p>      For gentle overviews see the Medium and Hackernoon articles:</p><p>      <ul><li><a target="_tab" href="https://medium.com/@anywhichway/the-joy-of-secst-markup-333d16263225?sk=2f2c7ea14e3086e093b00ca7bec5252d">Medium:The Joy of SECST Markup</a></li><li><a target="_tab" href="https://hackernoon.com/the-joy-of-using-secst-markup">Hackernoon:The Joy of Using SECST Markup</a></li></ul></p></section>
+<section><h1 id="about-this-guide" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>About This Guide<span class="autohelm-nav autohelm-nav-up-down"> <a href="#why-another-language">&darr;</a></span></h1><p>      The SECST language, reference HTML transpiler and runtime support implementations are currently in <strong>ALPHA</strong>. Most, but not all, documented features are implemented, testing is far from complete and resource sizes have not been fully optimized.</p><p>      This site's navigation, footnotes, computations, special styles like <kbd>Key</kbd> formatting and imported data are built entirely using SECST markup.</p><p>      You can tap on the icon next to a heading to access a table of contents at any time. You can goto the top of the guide by tapping on SECST in the top left corner.</p><p>      This guide is comprehensive, which may make it a little overwhelming. However, SECST has been designed so that you can start using it just a few tags and capabilities at a time.</p><p>      The following order of learning is suggested:</p><p>      <ol><li>Use tags that support markup similar to <a href="#basic-markdown">Markdown</a>.</li><li>Start leveraging attributes like <code class="nohighlight">align</code> on <a href="#images">img</a>.</li><li>Try <a href="#theme">themes or styles</a>.</li><li>If you are into music, math, or chemistry try <a href="#sheet-music"><code class="nohighlight">sheetMusic</code></a> or <a href="#latex"><code class="nohighlight">Latex</code></a>.</li><li>Add some simple <a href="#values-and-formulas">values and formulas</a>.</li><li>Anything else that gives you joy!</li></ol></p><p>      For gentle overviews see the Medium and Hackernoon articles:</p><p>      <ul><li><a target="_tab" href="https://medium.com/@anywhichway/the-joy-of-secst-markup-333d16263225?sk=2f2c7ea14e3086e093b00ca7bec5252d">Medium:The Joy of SECST Markup</a></li><li><a target="_tab" href="https://hackernoon.com/the-joy-of-using-secst-markup">Hackernoon:The Joy of Using SECST Markup</a></li></ul></p></section>
 <section><h1 id="why-another-language" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Why Another Language<span class="autohelm-nav autohelm-nav-up-down"> <a href="#about-this-guide">&uarr;</a> <a href="#html-and-markdown-issues">&darr;</a></span></h1><p>   <dl>
         <dt>Semantic Tag</dt>
         <dd>A tag that has meaning beyond that used to facilitate document layout and style.</dd>
@@ -158,13 +158,13 @@ Use SECST to joyfully create compelling, interactive HTML documents.</code></pre
  A --- B
  B--&gt;C[fa:fa-ban forbidden]
  B--&gt;D(fa:fa-spinner);
-]</code></pre></p><p>        renders as</p><script src="https://cdn.jsdelivr.net/npm/mermaid@9/dist/mermaid.min.js" onload="(() =&gt; { mermaid.initialize({ startOnLoad: true }) })()"></script><pre id="mermaidChart9822985852220534" class="mermaid">
+]</code></pre></p><p>        renders as</p><script src="https://cdn.jsdelivr.net/npm/mermaid@9/dist/mermaid.min.js" onload="(() =&gt; { mermaid.initialize({ startOnLoad: true }) })()"></script><pre id="mermaidChart5370389970808505" class="mermaid">
             graph LR
             A --- B
             B-->C[fa:fa-ban forbidden]
             B-->D(fa:fa-spinner);
         </pre><script type="module">
-            const el = document.getElementById("mermaidChart9822985852220534"),
+            const el = document.getElementById("mermaidChart5370389970808505"),
                 sibling = el.nextSibling,
                 insertSvg = function (svgCode, bindFunctions) {
                     el.innerHTML = svgCode;
@@ -178,7 +178,7 @@ Use SECST to joyfully create compelling, interactive HTML documents.</code></pre
             B-->C[fa:fa-ban forbidden]
             B-->D(fa:fa-spinner);
         `;
-            setTimeout(() => mermaid.mermaidAPI.render("mermaidChart9822985852220534", graphDefinition, insertSvg),1000);
+            setTimeout(() => mermaid.mermaidAPI.render("mermaidChart5370389970808505", graphDefinition, insertSvg),1000);
         </script><p>        There are lots of charts to choose from:</p><p>        <ul><li> <a target="_tab" href="https://mermaid.js.org/syntax/flowchart.html">Flowchart</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/sequenceDiagram.html">Sequence Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/classDiagram.html">Class Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/stateDiagram.html">State Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/entityRelationshipDiagram.html">Entity Relationship Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/userJourney.html">User Journey</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/gantt.html">Gannt</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/pie.html">Pie Chart</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/requirementDiagram.html">Requirement Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/gitgraph.html">Gitgraph Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/c4c.html">C4C Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/mindmap.html">Mindmaps</a></li></ul><br>    </p></section>
     <section><h1 id="sheet-music" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Sheet Music (ABC Notation)<span class="autohelm-nav autohelm-nav-up-down"> <a href="#mermaid-chart">&uarr;</a> <a href="#escaping-secst">&darr;</a></span></h1><p>        <code class="nohighlight">:sheetMusic[]</code> is a block level element, it belongs outside of paragraphs. Just provide <a target="_tab" href="https://abcnotation.com/examples">ABC notation</a> as the content.</p><p>        <pre class="secst"><code class="nohighlight">:sheetMusic[
   X: 1
@@ -237,14 +237,214 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
     <section><h1 id="importing-data" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Importing Data<span class="autohelm-nav autohelm-nav-up-down"> <a href="#unit-math">&uarr;</a> <a href="#seo">&darr;</a></span></h1><p>        Values can included imported data using the <code class="nohighlight">src</code> attribute and a mime type provided in the <code class="nohighlight">type</code> attribute. The trailing <code class="nohighlight">[]</code> are optional.</p><p>        Values with the boolean attribute <code class="nohighlight">static</code> is import data at transpile time. If importing fails, another attempt is made at runtime.</p><p>        JSON is formatted for readability and <a target="_tab" href="https://json5.org">JSON5</a> is supported to make it easier to handle remote data.</p><p>        <pre class="secst"><code class="nohighlight">:value(https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson static {type:"application/json"})</code></pre></p><p>        <textarea class="secst" data-mime-type="application/json" data-default="" title="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson" data-fitcontent="" disabled="">{
   "type": "FeatureCollection",
   "metadata": {
-    "generated": 1671893362000,
+    "generated": 1671896422000,
     "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson",
     "title": "USGS All Earthquakes, Past Hour",
     "status": 200,
     "api": "1.10.3",
-    "count": 5
+    "count": 6
   },
   "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 2.4,
+        "place": "3 km SSW of Pāhala, Hawaii",
+        "time": 1671895909330,
+        "updated": 1671896240010,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73280987",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73280987.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 89,
+        "net": "hv",
+        "code": "73280987",
+        "ids": ",hv73280987,",
+        "sources": ",hv,",
+        "types": ",origin,phase-data,",
+        "nst": 42,
+        "dmin": null,
+        "rms": 0.129999995,
+        "gap": 156,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 2.4 - 3 km SSW of Pāhala, Hawaii"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -155.489501953125,
+          19.1706657409668,
+          30.2299995422363
+        ]
+      },
+      "id": "hv73280987"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.65,
+        "place": "2km NE of Hayward, CA",
+        "time": 1671894410310,
+        "updated": 1671895935461,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73824171",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73824171.geojson",
+        "felt": 9,
+        "cdi": 2.2,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 44,
+        "net": "nc",
+        "code": "73824171",
+        "ids": ",nc73824171,",
+        "sources": ",nc,",
+        "types": ",dyfi,nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 16,
+        "dmin": 0.07941,
+        "rms": 0.12,
+        "gap": 100,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 1.7 - 2km NE of Hayward, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.0653305,
+          37.6571655,
+          4.52
+        ]
+      },
+      "id": "nc73824171"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 2.43,
+        "place": "10km WSW of Ferndale, CA",
+        "time": 1671893880570,
+        "updated": 1671895690719,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73824161",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73824161.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 91,
+        "net": "nc",
+        "code": "73824161",
+        "ids": ",nc73824161,",
+        "sources": ",nc,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 10,
+        "dmin": 0.06788,
+        "rms": 0.06,
+        "gap": 301,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 2.4 - 10km WSW of Ferndale, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -124.3688354,
+          40.5391655,
+          17.59
+        ]
+      },
+      "id": "nc73824161"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 2.12,
+        "place": "2km NNE of Hayward, CA",
+        "time": 1671893499950,
+        "updated": 1671895646595,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73824156",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73824156.geojson",
+        "felt": 40,
+        "cdi": 3.8,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 84,
+        "net": "nc",
+        "code": "73824156",
+        "ids": ",nc73824156,",
+        "sources": ",nc,",
+        "types": ",dyfi,focal-mechanism,nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 45,
+        "dmin": 0.07757,
+        "rms": 0.12,
+        "gap": 48,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 2.1 - 2km NNE of Hayward, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.0680008,
+          37.6580009,
+          4.12
+        ]
+      },
+      "id": "nc73824156"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.09,
+        "place": "17km SSW of Ocotillo Wells, CA",
+        "time": 1671893246070,
+        "updated": 1671893469832,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40149399",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40149399.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 18,
+        "net": "ci",
+        "code": "40149399",
+        "ids": ",ci40149399,",
+        "sources": ",ci,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 21,
+        "dmin": 0.1644,
+        "rms": 0.24,
+        "gap": 66,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 1.1 - 17km SSW of Ocotillo Wells, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -116.1693333,
+          32.9908333,
+          0.94
+        ]
+      },
+      "id": "ci40149399"
+    },
     {
       "type": "Feature",
       "properties": {
@@ -284,174 +484,14 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
         ]
       },
       "id": "ak022ggazjos"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.9,
-        "place": "19 km S of Denali National Park, Alaska",
-        "time": 1671892609050,
-        "updated": 1671892825131,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022ggay4tl",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022ggay4tl.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 56,
-        "net": "ak",
-        "code": "022ggay4tl",
-        "ids": ",ak022ggay4tl,",
-        "sources": ",ak,",
-        "types": ",origin,phase-data,",
-        "nst": null,
-        "dmin": null,
-        "rms": 0.67,
-        "gap": null,
-        "magType": "ml",
-        "type": "earthquake",
-        "title": "M 1.9 - 19 km S of Denali National Park, Alaska"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -151.7682,
-          63.3698,
-          8.6
-        ]
-      },
-      "id": "ak022ggay4tl"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.82000005,
-        "place": "Island of Hawaii, Hawaii",
-        "time": 1671890625400,
-        "updated": 1671890840630,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73280892",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73280892.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 51,
-        "net": "hv",
-        "code": "73280892",
-        "ids": ",hv73280892,",
-        "sources": ",hv,",
-        "types": ",origin,phase-data,",
-        "nst": 34,
-        "dmin": null,
-        "rms": 0.119999997,
-        "gap": 183,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 1.8 - Island of Hawaii, Hawaii"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -155.380340576172,
-          19.2013339996338,
-          31.6700000762939
-        ]
-      },
-      "id": "hv73280892"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.6,
-        "place": "58 km N of Tonopah, Nevada",
-        "time": 1671890584306,
-        "updated": 1671890815408,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nn00854114",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nn00854114.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 39,
-        "net": "nn",
-        "code": "00854114",
-        "ids": ",nn00854114,",
-        "sources": ",nn,",
-        "types": ",origin,phase-data,",
-        "nst": 11,
-        "dmin": 0.676,
-        "rms": 0.2093,
-        "gap": 178.62,
-        "magType": "ml",
-        "type": "earthquake",
-        "title": "M 1.6 - 58 km N of Tonopah, Nevada"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -117.1537,
-          38.5944,
-          0.1
-        ]
-      },
-      "id": "nn00854114"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.9,
-        "place": "9 km NNE of Anchor Point, Alaska",
-        "time": 1671890282202,
-        "updated": 1671890407917,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022ggahbfk",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022ggahbfk.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 56,
-        "net": "ak",
-        "code": "022ggahbfk",
-        "ids": ",ak022ggahbfk,",
-        "sources": ",ak,",
-        "types": ",origin,phase-data,",
-        "nst": null,
-        "dmin": null,
-        "rms": 0.25,
-        "gap": null,
-        "magType": "ml",
-        "type": "earthquake",
-        "title": "M 1.9 - 9 km NNE of Anchor Point, Alaska"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -151.7719,
-          59.8602,
-          60
-        ]
-      },
-      "id": "ak022ggahbfk"
     }
   ],
   "bbox": [
-    -155.38034057617,
-    19.201333999634,
-    0.1,
-    -117.1537,
-    63.3698,
+    -155.48950195312,
+    19.170665740967,
+    0.94,
+    -116.1693333,
+    61.7422,
     88.3
   ]
 }</textarea></p><p>        Imported data is readonly because it is essentially a computation. To make it editable, use the attribute <code class="nohighlight">editable</code>.</p><p>        <pre class="secst"><code class="nohighlight">:value(https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson editable {type:"application/json"})</code></pre></p><p>        <textarea class="secst" data-mime-type="application/json" data-default="" data-template="await (async () =&gt; {
@@ -476,14 +516,214 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
                         })()" title="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson" data-editable="" data-fitcontent="" style="height: 30em; width: 80ch;">{
   "type": "FeatureCollection",
   "metadata": {
-    "generated": 1671893362000,
+    "generated": 1671896422000,
     "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson",
     "title": "USGS All Earthquakes, Past Hour",
     "status": 200,
     "api": "1.10.3",
-    "count": 5
+    "count": 6
   },
   "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 2.4,
+        "place": "3 km SSW of Pāhala, Hawaii",
+        "time": 1671895909330,
+        "updated": 1671896240010,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73280987",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73280987.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 89,
+        "net": "hv",
+        "code": "73280987",
+        "ids": ",hv73280987,",
+        "sources": ",hv,",
+        "types": ",origin,phase-data,",
+        "nst": 42,
+        "dmin": null,
+        "rms": 0.129999995,
+        "gap": 156,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 2.4 - 3 km SSW of Pāhala, Hawaii"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -155.489501953125,
+          19.1706657409668,
+          30.2299995422363
+        ]
+      },
+      "id": "hv73280987"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.65,
+        "place": "2km NE of Hayward, CA",
+        "time": 1671894410310,
+        "updated": 1671895935461,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73824171",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73824171.geojson",
+        "felt": 9,
+        "cdi": 2.2,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 44,
+        "net": "nc",
+        "code": "73824171",
+        "ids": ",nc73824171,",
+        "sources": ",nc,",
+        "types": ",dyfi,nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 16,
+        "dmin": 0.07941,
+        "rms": 0.12,
+        "gap": 100,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 1.7 - 2km NE of Hayward, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.0653305,
+          37.6571655,
+          4.52
+        ]
+      },
+      "id": "nc73824171"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 2.43,
+        "place": "10km WSW of Ferndale, CA",
+        "time": 1671893880570,
+        "updated": 1671895690719,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73824161",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73824161.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 91,
+        "net": "nc",
+        "code": "73824161",
+        "ids": ",nc73824161,",
+        "sources": ",nc,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 10,
+        "dmin": 0.06788,
+        "rms": 0.06,
+        "gap": 301,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 2.4 - 10km WSW of Ferndale, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -124.3688354,
+          40.5391655,
+          17.59
+        ]
+      },
+      "id": "nc73824161"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 2.12,
+        "place": "2km NNE of Hayward, CA",
+        "time": 1671893499950,
+        "updated": 1671895646595,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73824156",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73824156.geojson",
+        "felt": 40,
+        "cdi": 3.8,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 84,
+        "net": "nc",
+        "code": "73824156",
+        "ids": ",nc73824156,",
+        "sources": ",nc,",
+        "types": ",dyfi,focal-mechanism,nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 45,
+        "dmin": 0.07757,
+        "rms": 0.12,
+        "gap": 48,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 2.1 - 2km NNE of Hayward, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.0680008,
+          37.6580009,
+          4.12
+        ]
+      },
+      "id": "nc73824156"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.09,
+        "place": "17km SSW of Ocotillo Wells, CA",
+        "time": 1671893246070,
+        "updated": 1671893469832,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40149399",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40149399.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 18,
+        "net": "ci",
+        "code": "40149399",
+        "ids": ",ci40149399,",
+        "sources": ",ci,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 21,
+        "dmin": 0.1644,
+        "rms": 0.24,
+        "gap": 66,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 1.1 - 17km SSW of Ocotillo Wells, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -116.1693333,
+          32.9908333,
+          0.94
+        ]
+      },
+      "id": "ci40149399"
+    },
     {
       "type": "Feature",
       "properties": {
@@ -523,174 +763,14 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
         ]
       },
       "id": "ak022ggazjos"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.9,
-        "place": "19 km S of Denali National Park, Alaska",
-        "time": 1671892609050,
-        "updated": 1671892825131,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022ggay4tl",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022ggay4tl.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 56,
-        "net": "ak",
-        "code": "022ggay4tl",
-        "ids": ",ak022ggay4tl,",
-        "sources": ",ak,",
-        "types": ",origin,phase-data,",
-        "nst": null,
-        "dmin": null,
-        "rms": 0.67,
-        "gap": null,
-        "magType": "ml",
-        "type": "earthquake",
-        "title": "M 1.9 - 19 km S of Denali National Park, Alaska"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -151.7682,
-          63.3698,
-          8.6
-        ]
-      },
-      "id": "ak022ggay4tl"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.82000005,
-        "place": "Island of Hawaii, Hawaii",
-        "time": 1671890625400,
-        "updated": 1671890840630,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73280892",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73280892.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 51,
-        "net": "hv",
-        "code": "73280892",
-        "ids": ",hv73280892,",
-        "sources": ",hv,",
-        "types": ",origin,phase-data,",
-        "nst": 34,
-        "dmin": null,
-        "rms": 0.119999997,
-        "gap": 183,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 1.8 - Island of Hawaii, Hawaii"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -155.380340576172,
-          19.2013339996338,
-          31.6700000762939
-        ]
-      },
-      "id": "hv73280892"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.6,
-        "place": "58 km N of Tonopah, Nevada",
-        "time": 1671890584306,
-        "updated": 1671890815408,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nn00854114",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nn00854114.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 39,
-        "net": "nn",
-        "code": "00854114",
-        "ids": ",nn00854114,",
-        "sources": ",nn,",
-        "types": ",origin,phase-data,",
-        "nst": 11,
-        "dmin": 0.676,
-        "rms": 0.2093,
-        "gap": 178.62,
-        "magType": "ml",
-        "type": "earthquake",
-        "title": "M 1.6 - 58 km N of Tonopah, Nevada"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -117.1537,
-          38.5944,
-          0.1
-        ]
-      },
-      "id": "nn00854114"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.9,
-        "place": "9 km NNE of Anchor Point, Alaska",
-        "time": 1671890282202,
-        "updated": 1671890407917,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022ggahbfk",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022ggahbfk.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 56,
-        "net": "ak",
-        "code": "022ggahbfk",
-        "ids": ",ak022ggahbfk,",
-        "sources": ",ak,",
-        "types": ",origin,phase-data,",
-        "nst": null,
-        "dmin": null,
-        "rms": 0.25,
-        "gap": null,
-        "magType": "ml",
-        "type": "earthquake",
-        "title": "M 1.9 - 9 km NNE of Anchor Point, Alaska"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -151.7719,
-          59.8602,
-          60
-        ]
-      },
-      "id": "ak022ggahbfk"
     }
   ],
   "bbox": [
-    -155.38034057617,
-    19.201333999634,
-    0.1,
-    -117.1537,
-    63.3698,
+    -155.48950195312,
+    19.170665740967,
+    0.94,
+    -116.1693333,
+    61.7422,
     88.3
   ]
 }</textarea></p><p>        If an id is added, the data can be used in a computation.</p><p>        <pre class="secst"><code class="nohighlight">:value(#earthquake-data https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson {type:"application/json"})
@@ -717,14 +797,214 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
                         })()" title="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson" data-fitcontent="" disabled="" style="height: 30em; width: 80ch;">{
   "type": "FeatureCollection",
   "metadata": {
-    "generated": 1671893362000,
+    "generated": 1671896422000,
     "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson",
     "title": "USGS All Earthquakes, Past Hour",
     "status": 200,
     "api": "1.10.3",
-    "count": 5
+    "count": 6
   },
   "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 2.4,
+        "place": "3 km SSW of Pāhala, Hawaii",
+        "time": 1671895909330,
+        "updated": 1671896240010,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73280987",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73280987.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 89,
+        "net": "hv",
+        "code": "73280987",
+        "ids": ",hv73280987,",
+        "sources": ",hv,",
+        "types": ",origin,phase-data,",
+        "nst": 42,
+        "dmin": null,
+        "rms": 0.129999995,
+        "gap": 156,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 2.4 - 3 km SSW of Pāhala, Hawaii"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -155.489501953125,
+          19.1706657409668,
+          30.2299995422363
+        ]
+      },
+      "id": "hv73280987"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.65,
+        "place": "2km NE of Hayward, CA",
+        "time": 1671894410310,
+        "updated": 1671895935461,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73824171",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73824171.geojson",
+        "felt": 9,
+        "cdi": 2.2,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 44,
+        "net": "nc",
+        "code": "73824171",
+        "ids": ",nc73824171,",
+        "sources": ",nc,",
+        "types": ",dyfi,nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 16,
+        "dmin": 0.07941,
+        "rms": 0.12,
+        "gap": 100,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 1.7 - 2km NE of Hayward, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.0653305,
+          37.6571655,
+          4.52
+        ]
+      },
+      "id": "nc73824171"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 2.43,
+        "place": "10km WSW of Ferndale, CA",
+        "time": 1671893880570,
+        "updated": 1671895690719,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73824161",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73824161.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 91,
+        "net": "nc",
+        "code": "73824161",
+        "ids": ",nc73824161,",
+        "sources": ",nc,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 10,
+        "dmin": 0.06788,
+        "rms": 0.06,
+        "gap": 301,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 2.4 - 10km WSW of Ferndale, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -124.3688354,
+          40.5391655,
+          17.59
+        ]
+      },
+      "id": "nc73824161"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 2.12,
+        "place": "2km NNE of Hayward, CA",
+        "time": 1671893499950,
+        "updated": 1671895646595,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73824156",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73824156.geojson",
+        "felt": 40,
+        "cdi": 3.8,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 84,
+        "net": "nc",
+        "code": "73824156",
+        "ids": ",nc73824156,",
+        "sources": ",nc,",
+        "types": ",dyfi,focal-mechanism,nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 45,
+        "dmin": 0.07757,
+        "rms": 0.12,
+        "gap": 48,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 2.1 - 2km NNE of Hayward, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.0680008,
+          37.6580009,
+          4.12
+        ]
+      },
+      "id": "nc73824156"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.09,
+        "place": "17km SSW of Ocotillo Wells, CA",
+        "time": 1671893246070,
+        "updated": 1671893469832,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40149399",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40149399.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 18,
+        "net": "ci",
+        "code": "40149399",
+        "ids": ",ci40149399,",
+        "sources": ",ci,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 21,
+        "dmin": 0.1644,
+        "rms": 0.24,
+        "gap": 66,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 1.1 - 17km SSW of Ocotillo Wells, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -116.1693333,
+          32.9908333,
+          0.94
+        ]
+      },
+      "id": "ci40149399"
+    },
     {
       "type": "Feature",
       "properties": {
@@ -764,174 +1044,14 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
         ]
       },
       "id": "ak022ggazjos"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.9,
-        "place": "19 km S of Denali National Park, Alaska",
-        "time": 1671892609050,
-        "updated": 1671892825131,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022ggay4tl",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022ggay4tl.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 56,
-        "net": "ak",
-        "code": "022ggay4tl",
-        "ids": ",ak022ggay4tl,",
-        "sources": ",ak,",
-        "types": ",origin,phase-data,",
-        "nst": null,
-        "dmin": null,
-        "rms": 0.67,
-        "gap": null,
-        "magType": "ml",
-        "type": "earthquake",
-        "title": "M 1.9 - 19 km S of Denali National Park, Alaska"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -151.7682,
-          63.3698,
-          8.6
-        ]
-      },
-      "id": "ak022ggay4tl"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.82000005,
-        "place": "Island of Hawaii, Hawaii",
-        "time": 1671890625400,
-        "updated": 1671890840630,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73280892",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73280892.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 51,
-        "net": "hv",
-        "code": "73280892",
-        "ids": ",hv73280892,",
-        "sources": ",hv,",
-        "types": ",origin,phase-data,",
-        "nst": 34,
-        "dmin": null,
-        "rms": 0.119999997,
-        "gap": 183,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 1.8 - Island of Hawaii, Hawaii"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -155.380340576172,
-          19.2013339996338,
-          31.6700000762939
-        ]
-      },
-      "id": "hv73280892"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.6,
-        "place": "58 km N of Tonopah, Nevada",
-        "time": 1671890584306,
-        "updated": 1671890815408,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nn00854114",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nn00854114.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 39,
-        "net": "nn",
-        "code": "00854114",
-        "ids": ",nn00854114,",
-        "sources": ",nn,",
-        "types": ",origin,phase-data,",
-        "nst": 11,
-        "dmin": 0.676,
-        "rms": 0.2093,
-        "gap": 178.62,
-        "magType": "ml",
-        "type": "earthquake",
-        "title": "M 1.6 - 58 km N of Tonopah, Nevada"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -117.1537,
-          38.5944,
-          0.1
-        ]
-      },
-      "id": "nn00854114"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.9,
-        "place": "9 km NNE of Anchor Point, Alaska",
-        "time": 1671890282202,
-        "updated": 1671890407917,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022ggahbfk",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022ggahbfk.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 56,
-        "net": "ak",
-        "code": "022ggahbfk",
-        "ids": ",ak022ggahbfk,",
-        "sources": ",ak,",
-        "types": ",origin,phase-data,",
-        "nst": null,
-        "dmin": null,
-        "rms": 0.25,
-        "gap": null,
-        "magType": "ml",
-        "type": "earthquake",
-        "title": "M 1.9 - 9 km NNE of Anchor Point, Alaska"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -151.7719,
-          59.8602,
-          60
-        ]
-      },
-      "id": "ak022ggahbfk"
     }
   ],
   "bbox": [
-    -155.38034057617,
-    19.201333999634,
-    0.1,
-    -117.1537,
-    63.3698,
+    -155.48950195312,
+    19.170665740967,
+    0.94,
+    -116.1693333,
+    61.7422,
     88.3
   ]
 }</textarea></p><p>       <textarea class="secst" data-mime-type="application/json" data-default="" data-template="$(#earthquake-data).metadata" title="$(#earthquake-data).metadata" data-fitcontent="" disabled="" style="height: 1.5em; width: 15ch;">[object Object]</textarea><br>    </p></section>
@@ -3127,7 +3247,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">plain text</code></pre>
             </dd>
         
-            <dt><strong>NewsArticle</strong> html</dt>
+            <dt><strong>NewsArticle</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/NewsArticle" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>
@@ -3136,7 +3256,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">N/A</code></pre>
             </dd>
         
-            <dt><strong>a</strong> html</dt>
+            <dt><strong>a</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 Attributes may differ from the below since the tag is transformed and transient attributes may be deleted. See the detailed documentation for the tag. <br> <br>
             </dd>
@@ -3151,7 +3271,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">abbr, b, bold, code, del, em, i, ins, italic, kbd, mark, meta, pre, q, samp, strike, strong, sub, sup, u, var</code></pre>
             </dd>
         
-            <dt><strong>abbr</strong> html</dt>
+            <dt><strong>abbr</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/abbr" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>
@@ -3160,7 +3280,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">a, b, bold, code, del, em, i, ins, italic, kbd, mark, meta, pre, q, samp, strike, strong, sub, sup, u, var</code></pre>
             </dd>
         
-            <dt><strong>answer</strong> html</dt>
+            <dt><strong>answer</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/answer" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>
@@ -3172,7 +3292,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">plain text</code></pre>
             </dd>
         
-            <dt><strong>article</strong> html</dt>
+            <dt><strong>article</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/article" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>
@@ -3181,7 +3301,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">N/A</code></pre>
             </dd>
         
-            <dt><strong>b</strong> html</dt>
+            <dt><strong>b</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/b" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>
@@ -3190,7 +3310,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">a, abbr, bold, code, del, em, i, ins, italic, kbd, mark, meta, pre, q, samp, strike, strong, sub, sup, u, var</code></pre>
             </dd>
         
-            <dt><strong>blockquote</strong> html</dt>
+            <dt><strong>blockquote</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/blockquote" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>
@@ -3199,7 +3319,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">N/A</code></pre>
             </dd>
         
-            <dt><strong>bold</strong> html</dt>
+            <dt><strong>bold</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/bold" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>
@@ -3208,7 +3328,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">a, abbr, b, code, del, em, i, ins, italic, kbd, mark, meta, pre, q, samp, strike, strong, sub, sup, u, var</code></pre>
             </dd>
         
-            <dt><strong>br</strong> html</dt>
+            <dt><strong>br</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/br" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>
@@ -3217,7 +3337,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">N/A</code></pre>
             </dd>
         
-            <dt><strong>caption</strong> html</dt>
+            <dt><strong>caption</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/caption" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>
@@ -3226,7 +3346,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">a, abbr, b, bold, code, del, em, i, ins, italic, kbd, mark, meta, pre, q, samp, strike, strong, sub, sup, u, var</code></pre>
             </dd>
         
-            <dt><strong>class</strong> html</dt>
+            <dt><strong>class</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/class" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>
@@ -3236,7 +3356,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">plain text</code></pre>
             </dd>
         
-            <dt><strong>code</strong> html</dt>
+            <dt><strong>code</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/code" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 Attributes may differ from the below since the tag is transformed and transient attributes may be deleted. See the detailed documentation for the tag. <br> <br>
             </dd>
@@ -3249,7 +3369,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">plain text</code></pre>
             </dd>
         
-            <dt><strong>dd</strong> html</dt>
+            <dt><strong>dd</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dd" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>
@@ -3258,7 +3378,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">&, @facebook, @github, @linkedin, @twitter, a, abbr, b, bold, br, code, del, details, em, emoji, escape, footnote, hashtag, hr, i, img, input, ins, italic, kbd, latex, mark, meta, ol, pre, q, question, samp, strike, strong, sub, sup, table, textarea, transpiled, u, ul, value, var</code></pre>
             </dd>
         
-            <dt><strong>del</strong> html</dt>
+            <dt><strong>del</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/del" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>
@@ -3267,7 +3387,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">a, abbr, b, bold, code, em, i, ins, italic, kbd, mark, meta, pre, q, samp, strike, strong, sub, sup, u, var</code></pre>
             </dd>
         
-            <dt><strong>details</strong> html</dt>
+            <dt><strong>details</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>
@@ -3276,7 +3396,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">&, @facebook, @github, @linkedin, @twitter, a, abbr, b, bold, br, code, del, details, dl, em, emoji, escape, footnote, hashtag, hr, i, img, input, ins, italic, kbd, latex, mark, meta, ol, pre, q, question, samp, strike, strong, sub, summary, sup, table, textarea, transpiled, u, ul, value, var</code></pre>
             </dd>
         
-            <dt><strong>dl</strong> html</dt>
+            <dt><strong>dl</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dl" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>
@@ -3285,7 +3405,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">dd, dl, dt, forEach, forEntries</code></pre>
             </dd>
         
-            <dt><strong>dt</strong> html</dt>
+            <dt><strong>dt</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dt" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>
@@ -3294,7 +3414,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">&, @facebook, @github, @linkedin, @twitter, a, abbr, b, bold, br, code, del, details, em, emoji, escape, footnote, hashtag, hr, i, img, input, ins, italic, kbd, latex, mark, meta, ol, pre, q, question, samp, strike, strong, sub, sup, table, textarea, transpiled, u, ul, value, var</code></pre>
             </dd>
         
-            <dt><strong>em</strong> html</dt>
+            <dt><strong>em</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/em" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>
@@ -3324,7 +3444,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">plain text</code></pre>
             </dd>
         
-            <dt><strong>footer</strong> html</dt>
+            <dt><strong>footer</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/footer" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>
@@ -3364,7 +3484,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">&, @facebook, @github, @linkedin, @twitter, NewsArticle, a, abbr, answer, article, b, blockquote, bold, br, caption, class, code, dd, del, details, dl, dt, em, emoji, escape, footer, footnote, forEach, forEntries, h, h1, h2, h3, h4, h5, h6, h7, h8, hashtag, header, hr, i, img, input, ins, italic, kbd, latex, li, link, macro, mark, mermaidChart, meta, ol, p, pre, q, question, samp, section, sheetMusic, strike, strong, style, sub, summary, sup, table, tbody, td, text, textarea, tfoot, th, thead, theme, toc, tr, transpiled, u, ul, value, var</code></pre>
             </dd>
         
-            <dt><strong>h</strong> html</dt>
+            <dt><strong>h</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/h" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>
@@ -3373,7 +3493,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">a, abbr, b, bold, code, del, em, i, ins, italic, kbd, mark, meta, pre, q, samp, strike, strong, sub, sup, u, var</code></pre>
             </dd>
         
-            <dt><strong>h1</strong> html</dt>
+            <dt><strong>h1</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/h1" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>
@@ -3382,7 +3502,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">a, abbr, b, bold, code, del, em, i, ins, italic, kbd, mark, meta, pre, q, samp, strike, strong, sub, sup, u, var</code></pre>
             </dd>
         
-            <dt><strong>h2</strong> html</dt>
+            <dt><strong>h2</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/h2" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>
@@ -3391,7 +3511,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">a, abbr, b, bold, code, del, em, i, ins, italic, kbd, mark, meta, pre, q, samp, strike, strong, sub, sup, u, var</code></pre>
             </dd>
         
-            <dt><strong>h3</strong> html</dt>
+            <dt><strong>h3</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/h3" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>
@@ -3400,7 +3520,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">a, abbr, b, bold, code, del, em, i, ins, italic, kbd, mark, meta, pre, q, samp, strike, strong, sub, sup, u, var</code></pre>
             </dd>
         
-            <dt><strong>h4</strong> html</dt>
+            <dt><strong>h4</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/h4" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>
@@ -3409,7 +3529,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">a, abbr, b, bold, code, del, em, i, ins, italic, kbd, mark, meta, pre, q, samp, strike, strong, sub, sup, u, var</code></pre>
             </dd>
         
-            <dt><strong>h5</strong> html</dt>
+            <dt><strong>h5</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/h5" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>
@@ -3418,7 +3538,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">a, abbr, b, bold, code, del, em, i, ins, italic, kbd, mark, meta, pre, q, samp, strike, strong, sub, sup, u, var</code></pre>
             </dd>
         
-            <dt><strong>h6</strong> html</dt>
+            <dt><strong>h6</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/h6" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>
@@ -3427,7 +3547,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">a, abbr, b, bold, code, del, em, i, ins, italic, kbd, mark, meta, pre, q, samp, strike, strong, sub, sup, u, var</code></pre>
             </dd>
         
-            <dt><strong>h7</strong> html</dt>
+            <dt><strong>h7</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/h7" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>
@@ -3436,7 +3556,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">a, abbr, b, bold, code, del, em, i, ins, italic, kbd, mark, meta, pre, q, samp, strike, strong, sub, sup, u, var</code></pre>
             </dd>
         
-            <dt><strong>h8</strong> html</dt>
+            <dt><strong>h8</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/h8" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>
@@ -3454,7 +3574,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">plain text</code></pre>
             </dd>
         
-            <dt><strong>header</strong> html</dt>
+            <dt><strong>header</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/header" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>
@@ -3463,7 +3583,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">a, abbr, b, bold, code, del, em, i, ins, italic, kbd, mark, meta, p, pre, q, samp, strike, strong, sub, sup, u, var</code></pre>
             </dd>
         
-            <dt><strong>hr</strong> html</dt>
+            <dt><strong>hr</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/hr" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>
@@ -3472,7 +3592,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">N/A</code></pre>
             </dd>
         
-            <dt><strong>i</strong> html</dt>
+            <dt><strong>i</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/i" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>
@@ -3481,7 +3601,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">a, abbr, b, bold, code, del, em, ins, italic, kbd, mark, meta, pre, q, samp, strike, strong, sub, sup, u, var</code></pre>
             </dd>
         
-            <dt><strong>img</strong> html</dt>
+            <dt><strong>img</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 Attributes may differ from the below since the tag is transformed and transient attributes may be deleted. See the detailed documentation for the tag. <br> <br>
             </dd>
@@ -3503,7 +3623,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">N/A</code></pre>
             </dd>
         
-            <dt><strong>input</strong> html</dt>
+            <dt><strong>input</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>
@@ -3515,7 +3635,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">N/A</code></pre>
             </dd>
         
-            <dt><strong>ins</strong> html</dt>
+            <dt><strong>ins</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ins" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>
@@ -3524,7 +3644,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">a, abbr, b, bold, code, del, em, i, italic, kbd, mark, meta, pre, q, samp, strike, strong, sub, sup, u, var</code></pre>
             </dd>
         
-            <dt><strong>italic</strong> html</dt>
+            <dt><strong>italic</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/italic" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>
@@ -3533,7 +3653,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">a, abbr, b, bold, code, del, em, i, ins, kbd, mark, meta, pre, q, samp, strike, strong, sub, sup, u, var</code></pre>
             </dd>
         
-            <dt><strong>kbd</strong> html</dt>
+            <dt><strong>kbd</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/kbd" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>
@@ -3551,7 +3671,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">plain text</code></pre>
             </dd>
         
-            <dt><strong>li</strong> html</dt>
+            <dt><strong>li</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/li" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>
@@ -3562,7 +3682,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">&, @facebook, @github, @linkedin, @twitter, a, abbr, b, bold, br, code, del, details, dl, em, emoji, escape, footnote, hashtag, hr, i, img, input, ins, italic, kbd, latex, mark, meta, ol, pre, q, question, samp, strike, strong, sub, sup, table, textarea, transpiled, u, ul, value, var</code></pre>
             </dd>
         
-            <dt><strong>link</strong> html</dt>
+            <dt><strong>link</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>
@@ -3574,7 +3694,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">N/A</code></pre>
             </dd>
         
-            <dt><strong>listeners</strong> html</dt>
+            <dt><strong>listeners</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/listeners" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>
@@ -3592,7 +3712,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">N/A</code></pre>
             </dd>
         
-            <dt><strong>mark</strong> html</dt>
+            <dt><strong>mark</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/mark" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>
@@ -3610,7 +3730,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">plain text</code></pre>
             </dd>
         
-            <dt><strong>meta</strong> html</dt>
+            <dt><strong>meta</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 Attributes may differ from the below since the tag is transformed and transient attributes may be deleted. See the detailed documentation for the tag. <br> <br>
             </dd>
@@ -3621,7 +3741,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">plain text</code></pre>
             </dd>
         
-            <dt><strong>ol</strong> html</dt>
+            <dt><strong>ol</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ol" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 Attributes may differ from the below since the tag is transformed and transient attributes may be deleted. See the detailed documentation for the tag. <br> <br>
             </dd>
@@ -3633,7 +3753,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">forEach, forEntries, li</code></pre>
             </dd>
         
-            <dt><strong>p</strong> html</dt>
+            <dt><strong>p</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/p" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 Attributes may differ from the below since the tag is transformed and transient attributes may be deleted. See the detailed documentation for the tag. <br> <br>
             </dd>
@@ -3644,7 +3764,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">&, @facebook, @github, @linkedin, @twitter, a, abbr, b, bold, br, code, del, details, dl, em, emoji, escape, footnote, hashtag, hr, i, img, input, ins, italic, kbd, latex, mark, meta, ol, pre, q, question, samp, strike, strong, sub, sup, table, textarea, transpiled, u, ul, value, var</code></pre>
             </dd>
         
-            <dt><strong>pre</strong> html</dt>
+            <dt><strong>pre</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/pre" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>
@@ -3653,7 +3773,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">a, abbr, b, bold, code, del, em, i, ins, italic, kbd, mark, meta, q, samp, strike, strong, sub, sup, u, var</code></pre>
             </dd>
         
-            <dt><strong>q</strong> html</dt>
+            <dt><strong>q</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/q" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>
@@ -3673,7 +3793,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">answer, text, value</code></pre>
             </dd>
         
-            <dt><strong>samp</strong> html</dt>
+            <dt><strong>samp</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/samp" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>
@@ -3682,7 +3802,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">a, abbr, b, bold, code, del, em, i, ins, italic, kbd, mark, meta, pre, q, strike, strong, sub, sup, u, var</code></pre>
             </dd>
         
-            <dt><strong>section</strong> html</dt>
+            <dt><strong>section</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/section" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>
@@ -3700,7 +3820,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">plain text</code></pre>
             </dd>
         
-            <dt><strong>strike</strong> html</dt>
+            <dt><strong>strike</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/strike" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>
@@ -3709,7 +3829,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">a, abbr, b, bold, code, del, em, i, ins, italic, kbd, mark, meta, pre, q, samp, strong, sub, sup, u, var</code></pre>
             </dd>
         
-            <dt><strong>strong</strong> html</dt>
+            <dt><strong>strong</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/strong" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>
@@ -3718,7 +3838,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">a, abbr, b, bold, code, del, em, i, ins, italic, kbd, mark, meta, pre, q, samp, strike, sub, sup, u, var</code></pre>
             </dd>
         
-            <dt><strong>style</strong> html</dt>
+            <dt><strong>style</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/style" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>
@@ -3727,7 +3847,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">plain text</code></pre>
             </dd>
         
-            <dt><strong>sub</strong> html</dt>
+            <dt><strong>sub</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/sub" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>
@@ -3736,7 +3856,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">a, abbr, b, bold, code, del, em, i, ins, italic, kbd, mark, meta, pre, q, samp, strike, strong, sup, u, var</code></pre>
             </dd>
         
-            <dt><strong>summary</strong> html</dt>
+            <dt><strong>summary</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/summary" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>
@@ -3745,7 +3865,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">a, abbr, b, bold, code, del, em, i, ins, italic, kbd, mark, meta, pre, q, samp, strike, strong, sub, sup, u, var</code></pre>
             </dd>
         
-            <dt><strong>sup</strong> html</dt>
+            <dt><strong>sup</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/sup" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>
@@ -3754,7 +3874,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">a, abbr, b, bold, code, del, em, i, ins, italic, kbd, mark, meta, pre, q, samp, strike, strong, sub, u, var</code></pre>
             </dd>
         
-            <dt><strong>table</strong> html</dt>
+            <dt><strong>table</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>
@@ -3763,7 +3883,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">caption, tbody, tfoot, thead, tr</code></pre>
             </dd>
         
-            <dt><strong>tbody</strong> html</dt>
+            <dt><strong>tbody</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/tbody" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>
@@ -3772,7 +3892,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">tr</code></pre>
             </dd>
         
-            <dt><strong>td</strong> html</dt>
+            <dt><strong>td</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/td" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>
@@ -3782,7 +3902,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">&, @facebook, @github, @linkedin, @twitter, a, abbr, b, bold, br, code, del, details, dl, em, emoji, escape, footnote, hashtag, hr, i, img, input, ins, italic, kbd, latex, mark, meta, ol, pre, q, question, samp, strike, strong, sub, sup, table, textarea, transpiled, u, ul, value, var</code></pre>
             </dd>
         
-            <dt><strong>text</strong> html</dt>
+            <dt><strong>text</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/text" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>
@@ -3791,7 +3911,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">&, @facebook, @github, @linkedin, @twitter, a, abbr, b, bold, br, code, del, details, dl, em, emoji, escape, footnote, hashtag, hr, i, img, input, ins, italic, kbd, latex, mark, meta, ol, pre, q, question, samp, strike, strong, sub, sup, table, textarea, transpiled, u, ul, value, var</code></pre>
             </dd>
         
-            <dt><strong>textarea</strong> html</dt>
+            <dt><strong>textarea</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 Attributes may differ from the below since the tag is transformed and transient attributes may be deleted. See the detailed documentation for the tag. <br> <br>
             </dd>
@@ -3803,7 +3923,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">plain text</code></pre>
             </dd>
         
-            <dt><strong>tfoot</strong> html</dt>
+            <dt><strong>tfoot</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/tfoot" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>
@@ -3812,7 +3932,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">plain text</code></pre>
             </dd>
         
-            <dt><strong>th</strong> html</dt>
+            <dt><strong>th</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/th" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>
@@ -3822,7 +3942,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">&, @facebook, @github, @linkedin, @twitter, a, abbr, b, bold, br, code, del, details, dl, em, emoji, escape, footnote, hashtag, hr, i, img, input, ins, italic, kbd, latex, mark, meta, ol, pre, q, question, samp, strike, strong, sub, sup, table, textarea, transpiled, u, ul, value, var</code></pre>
             </dd>
         
-            <dt><strong>thead</strong> html</dt>
+            <dt><strong>thead</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/thead" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>
@@ -3840,7 +3960,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">class, link, style</code></pre>
             </dd>
         
-            <dt><strong>title</strong> html</dt>
+            <dt><strong>title</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/title" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>
@@ -3859,7 +3979,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">plain text</code></pre>
             </dd>
         
-            <dt><strong>tr</strong> html</dt>
+            <dt><strong>tr</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/tr" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 Attributes may differ from the below since the tag is transformed and transient attributes may be deleted. See the detailed documentation for the tag. <br> <br>
             </dd>
@@ -3869,7 +3989,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">td, th</code></pre>
             </dd>
         
-            <dt><strong>transpiled</strong> html</dt>
+            <dt><strong>transpiled</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/transpiled" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>
@@ -3878,7 +3998,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">&, @facebook, @github, @linkedin, @twitter, NewsArticle, a, abbr, article, b, blockquote, bold, br, code, del, details, dl, em, emoji, escape, footer, footnote, forEach, forEntries, h, h1, h2, h3, h4, h5, h6, h7, h8, hashtag, header, hr, i, img, input, ins, italic, kbd, latex, link, listeners, macro, mark, mermaidChart, meta, ol, p, pre, q, question, samp, section, sheetMusic, strike, strong, style, sub, sup, table, textarea, theme, title, toc, transpiled, u, ul, value, var</code></pre>
             </dd>
         
-            <dt><strong>u</strong> html</dt>
+            <dt><strong>u</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/u" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>
@@ -3887,7 +4007,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">a, abbr, b, bold, code, del, em, i, ins, italic, kbd, mark, meta, pre, q, samp, strike, strong, sub, sup, var</code></pre>
             </dd>
         
-            <dt><strong>ul</strong> html</dt>
+            <dt><strong>ul</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>
@@ -3923,7 +4043,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">plain text</code></pre>
             </dd>
         
-            <dt><strong>var</strong> html</dt>
+            <dt><strong>var</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/var" target="_tab">html</a></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>

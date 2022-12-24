@@ -1239,7 +1239,7 @@
 
     :dl[
         :forEntries({object:"#tagSpecs"})[
-            :dt[:strong[${key}] ${value.htmlDocLink}]
+            :dt[:strong[${key}] ${unescapeHTML(value.htmlDocLink)}]
             :dd[:em[Transformation Impacts]:
                 ${value.transform && value.attributesAllowed ? "Attributes may differ from the below since the tag is transformed and transient attributes may be deleted. See the detailed documentation for the tag." : "N/A"} :br :br
             ]
