@@ -32,7 +32,7 @@
             }
 
     content
-        = backtickquoted / escape / script / code /  value / hr / br / emoji / (&colon expression _?) / [ a-z0-9_\-~!@#$%^&*()_+=\[\{\]\}|\\;:"'<,>.?/\n\r\t]i
+        = mhr / italic / bold / backtickquoted / escape / script / code /  value / hr / br / emoji / (&colon expression _?) / [ a-z0-9_\-~!@#$%^&*()_+=\[\{\]\}|\\;:"'<,>.?/\n\r\t]i
 
     colon
         = ":"
@@ -107,7 +107,7 @@
         = "@"
 
     bracketed_SECST
-        = BRACKETOPEN value:(backtickquoted/symbol/hashtag/mention/escape/script/code/value/hr/br/emoji/expression/not_bracketed/bracketed_SECST)* BRACKETCLOSE {
+        = BRACKETOPEN value:(mhr/italic/bold/backtickquoted/symbol/hashtag/mention/escape/script/code/value/hr/br/emoji/expression/not_bracketed/bracketed_SECST)* BRACKETCLOSE {
             if(Array.isArray(value) && value.every((item) => typeof(item)==="string")) {
                 return [value.join("")];
             }
@@ -163,8 +163,55 @@
 
     BRACECLOSE = '}'
 
+     bold
+            = start:BOLDOPEN value:(not_bold/bold)* end:BOLDCLOSE {
+                return new Tag({tag:"b",content:[start+value.join("")+end]})
+            }
+
+        not_bold
+            = not:(!BOLDCLOSE !BOLDOPEN.) {
+                    return not.join("");
+            }
+
+        BOLDOPEN
+            = '**' char:[^*] {
+                return char
+            }
+
+        BOLDCLOSE
+            = char:[^*] '**' {
+                return char
+            }
+
+    italic
+        = start:ITALICOPEN value:(not_italic/italic)* end:ITALICCLOSE {
+            return new Tag({tag:"i",content:[start+value.join("")+end]})
+        }
+
+    not_italic
+        = not:(!ITALICCLOSE !ITALICOPEN.) {
+                return not.join("");
+        }
+
+    ITALICOPEN
+        = '*' char:[^*] {
+            return char
+        }
+
+    ITALICCLOSE
+        = char:[^*] '*' {
+            return char
+        }
+
+    mhr
+        = [\r\n] [ \t]* '***' [ \t]* [\r\n] {
+            return new Tag({tag:"hr",content:[]})
+        }
+
     backtickquoted
-            = BACKTICKOPEN text:(not_backtickquoted/backtickquoted)*  BACKTICKCLOSE { return text.join("") }
+            = BACKTICKOPEN text:(not_backtickquoted/backtickquoted)*  BACKTICKCLOSE {
+                 return new Tag({tag:"code",content:[text.join("")]})
+            }
 
         not_backtickquoted
             = not:(!BACKTICKOPEN !BACKTICKOPEN.) { return not.join("");}

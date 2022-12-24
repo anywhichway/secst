@@ -93,7 +93,8 @@
         :h[SECST Benefits]
 
         :ul[
-            :li[A consistent, uniform compact representation. Where SECST can become verbose, it has shorthand notation similar to Markdown.]
+            :li[A consistent, uniform compact representation.]
+            :li[Compatibility with most :a(.#basic-markdown)[Basic Markdown] and some :a(.#extened-markdown)[Extended Markdown].]
             :li[Semantic tags, which make it easier to learn and remember than Markdown and encourages more meaningful documents than straight HTML. Many tags are named after their semantic HTML counterparts to make SECST easier to learn, maintain, and extend.]
             :li[Enforcement of required attributes and valid values for proper behavior or accessibility reasons.]
             :li[Extensive, built-in :a(.#tables-of-contents)[document navigation] for tables of contents and footnotes (more than Markdown).]
@@ -127,10 +128,10 @@
                 headings | :td[:code[h# heading text]] :td[:code[h#[heading text]]] :td[]
             ]
             :tr[
-                bold | :td[:code[**text**]] :td[:code[:strong[text]]] :td[:strong[text]]
+                bold | :td[:code[**text**]] :td[:code[:strong[text]] and :code[**text**]] :td[**text**]
             ]
             :tr[
-                italics | :td[:code[*text*]] :td[:code[:em[text]]] :td[:em[text]]
+                italics | :td[:code[*text*]] :td[:code[:em[text]]] :td[*text*]
             ]
             :tr[
                 blockquote | :td[:code[> quote text]] :td[:code[:blockquote[quote text]]] :td[]
@@ -139,10 +140,10 @@
                 nested blockquote | :td[:code[> quote text] :kbd[Enter] :code[>> nested quote text]] :td[:code[:blockquote[quote text :blockquote[nested quote text]]]] :td[]
             ]
             :tr[
-                code | :td[:code['the code']]  :td[:code[:code[the code]]] :td[:code[the code]]
+                code | :td[:code['the code']]  :td[:code[:code[the code]] and :code['the code']] :td[`the code`]
             ]
             :tr[
-                horizontal rule | :td[:code[***]] :td[:code[:hr]] :td[]
+                horizontal rule | :td[:code[***]] :td[:code[:hr] and :code[***]] :td[]
             ]
             :tr[
                 newline | a new line | :td[a new line or :code[:br]] :td[]
@@ -152,7 +153,7 @@
             ]
         ]
 
-       Where SECST can become un-necessarily verbose, e.g. lists items and table cells, it has shorthand notation similar to Markdown.
+        ***
 
         Also see :a({href:"#lists"})[Lists], :a({href:"#code"})[Code], :a({href:"#links"})[Links], :a({href:"#images"})[Images].
     ]
@@ -229,183 +230,34 @@
         A few tags of note are documented below to illustrate the use of SECST or highlight special features.
 
         :section[
-            :h[Tags of Note]
-            :section[
-                :h[Paragraph]
+            :h[Paragraph]
 
-                SECST will treat two newlines in sequence as a paragraph break. There is also a paragraph tag :code[:p[]]. Newlines inside a :code[p] tag will produce separate HTML :code[<br>] elements. A :code[:p[]] tag is not strictly necessary for really simple content. A SECST parser/transpiler will do a reasonable job of figuring out where paragraph breaks are required; however behavior may vary from implementation to implementation.
+            SECST will treat two newlines in sequence as a paragraph break. There is also a paragraph tag :code[:p[]]. Newlines inside a :code[p] tag will produce separate HTML :code[<br>] elements. A :code[:p[]] tag is not strictly necessary for really simple content. A SECST parser/transpiler will do a reasonable job of figuring out where paragraph breaks are required; however behavior may vary from implementation to implementation.
 
-                If you get an unexpected document layout, try putting content inside a :code[:p[]] tag.
-            ]
-            :section[
-                :h[Code]
+            If you get an unexpected document layout, try putting content inside a :code[:p[]] tag.
+        ]
+        :section[
+            :h[Code]
 
-                Contents wrapped in :code[:code[]] will be inline unless the contents contain a newline, in which case the code will be displayed in block format.
+            Contents wrapped in :code[:code[]] will be inline unless the contents contain a newline, in which case the code will be displayed in block format.
 
-                If you have a single line you wish to show as a block, end it with a newline.
-            ]
-            :section[
-                :h[Headings]
+            If you have a single line you wish to show as a block, end it with a newline.
+        ]
+        :section[
+            :h[Details]
 
-                Headings automatically get ids you can use for the destination of links. The id is the same as the text content in lower case with spaces and special characters replaced by dashes. To make it more convenient, you can also provide your own ids, e.g. :code[:h1(#myheading)[My Heading]] with link :code[:a({href:"#myheading"})[Go To My Heading]].
+            The :code[:details[]] tag supports the conditional display of content. It has one required sub-tag :code[:summary[<short text>]] and the rest of the content is conditionally displayed. If a :code[summary] tag is missing, then the first word is used as the summary.
 
-                :em[Note: All tags can optionally take an id starting with :code[#]. If an id is present, it must be the first parameter.]
-            ]
-            :section[
-                :h[Hyperlinks]
+            :code[:details[:summary[See the content...] Hello there!]] renders as :details[:summary[See the content...] Hello there!]
 
-                Sometimes, e.g. with hyperlinks, you need to specify more than content. This is provided using an attribute block in parentheses, e.g.
+            :code[:details[... Hello there!]] renders as :details[... Hello there!]
+        ]
+        :section[
+            :h[Headings]
 
-                :code[:a({href:"./index.txt",target:"_tab"})[SECST]] yields :a({href:"./index.txt",target:"_tab"})[SECST] , where you can access the source of this document.
+            Headings automatically get ids you can use for the destination of links. The id is the same as the text content in lower case with spaces and special characters replaced by dashes. To make it more convenient, you can also provide your own ids, e.g. :code[:h1(#myheading)[My Heading]] with link :code[:a({href:"#myheading"})[Go To My Heading]].
 
-                For convenience, any tag that can accept a url (either :code[src] or :code[href] in HTML) does not require the attribute, just provide the URL. And, single quotes can be used for attribute values, e.g.
-
-                :code[:a(./index.txt {target:'_tab'})[SECST]] yields :a(./index.txt {target:'_tab'})[SECST].
-
-                You can also use document ids prefixed with a period as targets, e.g. :code[.#headings] for this section. The period prefix is necessary to distinguish from providing an id for the link itself.
-
-                You can also specify hyperlinks with just a content value, e.g. :code[:a({target:"_tab"})[./index.txt]] renders as :a({target:"_tab"})[./index.txt].
-
-                By default, relative URLS and ids, i.e. those starting with a period, have a target that is the current window or tab. And, those starting with a protocol, e.g. :code[https://] have a target of a new tab.
-
-                All tags that take more than just content are fully documented in the :a({href:"#tags"})[complete list of tags].
-
-            ]
-            :section[
-                :h[Lists]
-                :section[
-                    :h[Unordered And Ordered Lists]
-
-                    Both ordered and unordered lists are supported using :code[ol] and :code[ul] tags with :code[li] tags.
-
-                    :code[:ul[:li[LinkedIn] :li[Facebook] :li[Twitter]]]
-
-                    :ul[
-                        :li[LinkedIn]
-                        :li[Facebook]
-                        :li[Twitter]
-                        ]
-
-                    There is also a shorthand:
-
-                    :code[
-                        :ul[
-                            - LinkedIn
-                            - Facebook
-                            - Twitter
-                        ]
-                    ]
-
-                    The same shorthand also works for :code[ol]. Since SECST already knows the list is ordered, numbers are inserted. The main utility of using numbers, is to reset numbering:
-
-                    :code[
-                        :ol[
-                            2. LinkedIn
-                            - Facebook
-                            - Twitter
-                        ]
-                    ]
-
-                    :ol[
-                        2. LinkedIn
-                        - Facebook
-                        - Twitter
-                    ]
-
-                    The standard HTML attributes for configuring ordered lists, :code[reversed], :code[start], :code[type] are :a(https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ol)[also supported].
-
-                     :code[
-                        :ol({type:"a"})[
-                            - LinkedIn
-                            - Facebook
-                            - Twitter
-                        ]
-                    ]
-
-                    :ol({type:"a"})[
-                        - LinkedIn
-                        - Facebook
-                        - Twitter
-                    ]
-
-                ]
-                :section[
-                    :h[Description Lists]
-
-                    Definition lists follow the :a(https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dl)[MDN documentation] for their parallel HTML tags except non-semantic tags can't be used.
-
-                    :code[
-                        :dl[
-                            :dt[Beast of Bodmin]
-                            :dd[A large feline inhabiting Bodmin Moor.]
-
-                            :dt[Morgawr]
-                            :dd[A sea serpent.]
-
-                            :dt[Owlman]
-                            :dd[A giant owl-like creature.]
-                        ]
-                    ]
-
-                    :dl[
-                        :dt[Beast of Bodmin]
-                        :dd[A large feline inhabiting Bodmin Moor.]
-
-                        :dt[Morgawr]
-                        :dd[A sea serpent.]
-
-                        :dt[Owlman]
-                        :dd[A giant owl-like creature.]
-                    ]
-                ]
-                :section[
-                    :h[Task Lists]
-                ]
-            ]
-            :section[
-                :h[Meta Tags]
-
-                The :code[:meta[]] tag inserts values into the head of a document. It takes the form :code[:meta({name:"my-name"})[my value]], e.g. :code[:meta({name:"author"})[John Jones]] injects the HTML :transpiled[:meta({name:"author"})[John Jones]].
-
-                Suggested meta tag names include:
-
-                :ul({title:"suggested meta tag names"})[
-                    - :em[keywords], comma separated key words, but consider using :a({href:"#hashtags"})[Hashtags]
-                    - :em[description] for a description of the document
-                    - :em[publisher] for the publisher of the document
-                    - :em[author] for the author of the document
-                    - :em[copyright] for a copyright notice of the document
-                    - :em[robots] with the comma separated values of :code[index] or :code[noindex] and :code[follow] or :code[nofollow].
-                ]
-
-                Also see the section :a(.#structured-data)[Structured Data] under :a(.#seo)[SEO].
-            ]
-            :section[
-                :h[Multimedia]
-                :section[
-                    :h[Images]
-
-                    Since SECST has a focus on semantics, images must be specified with alt text braces, even if they contain no content.
-
-                    :code[:img(static ./anywhichway_mobius_138.png)] will not transpile.
-
-                    Images can be loaded statically at transpile time and delivered bundled into the output HTML.
-                    :ul[
-                        :li[The tag :code[:img(static ./anywhichway_mobius_138.png)[Test]]]
-                        :li[renders as :img(static ./anywhichway_mobius_138.png)[Test]]
-                        :li[instead of a reference there is a data url in :code[src] attribute of the :details[:summary[generated HTML.]  :transpiled[:img(static ./anywhichway_mobius_138.png)[Test]]]]
-                    ]
-                    If static loading fails, the standard link will stay in place and dynamic loading may still render the image.
-
-                    The callout for the generated HTML above is implemented using the :a({href:"#details"})[details tag].
-                ]
-                :section[
-                    :h[Audio]
-                ]
-                :section[
-                    :h[Video]
-                ]
-            ]
+            :em[Note: All tags can optionally take an id starting with :code[#]. If an id is present, it must be the first parameter.]
         ]
         :section[
             :h[HTML Entities and Special Characters]
@@ -419,23 +271,165 @@
             The code :code[:&[female male #9893]] renders as :&[female male #9893].
         ]
         :section[
-            :h[Other Tags]
+            :h[Hyperlinks]
 
+            Sometimes, e.g. with hyperlinks, you need to specify more than content. This is provided using an attribute block in parentheses, e.g.
+
+            :code[:a({href:"./index.txt",target:"_tab"})[SECST]] yields :a({href:"./index.txt",target:"_tab"})[SECST] , where you can access the source of this document.
+
+            For convenience, any tag that can accept a url (either :code[src] or :code[href] in HTML) does not require the attribute, just provide the URL. And, single quotes can be used for attribute values, e.g.
+
+            :code[:a(./index.txt {target:'_tab'})[SECST]] yields :a(./index.txt {target:'_tab'})[SECST].
+
+            You can also use document ids prefixed with a period as targets, e.g. :code[.#headings] for this section. The period prefix is necessary to distinguish from providing an id for the link itself.
+
+            You can also specify hyperlinks with just a content value, e.g. :code[:a({target:"_tab"})[./index.txt]] renders as :a({target:"_tab"})[./index.txt].
+
+            By default, relative URLS and ids, i.e. those starting with a period, have a target that is the current window or tab. And, those starting with a protocol, e.g. :code[https://] have a target of a new tab.
+
+            All tags that take more than just content are fully documented in the :a({href:"#tags"})[complete list of tags].
+
+        ]
+        :section[
+            :h[Inserted And Deleted]
+
+            :code[:ins[inserted]] renders as :ins[inserted]
+
+            :code[:del[deleted]] renders as :del[deleted]
+        ]
+        :section[
+            :h[Lists]
             :section[
-                :h[Inserted And Deleted]
+                :h[Unordered And Ordered Lists]
 
-                :code[:ins[inserted]] renders as :ins[inserted]
+                Both ordered and unordered lists are supported using :code[ol] and :code[ul] tags with :code[li] tags.
 
-                :code[:del[deleted]] renders as :del[deleted]
+                :code[:ul[:li[LinkedIn] :li[Facebook] :li[Twitter]]]
+
+                :ul[
+                    :li[LinkedIn]
+                    :li[Facebook]
+                    :li[Twitter]
+                    ]
+
+                There is also a shorthand:
+
+                :code[
+                    :ul[
+                        - LinkedIn
+                        - Facebook
+                        - Twitter
+                    ]
+                ]
+
+                The same shorthand also works for :code[ol]. Since SECST already knows the list is ordered, numbers are inserted. The main utility of using numbers, is to reset numbering:
+
+                :code[
+                    :ol[
+                        2. LinkedIn
+                        - Facebook
+                        - Twitter
+                    ]
+                ]
+
+                :ol[
+                    2. LinkedIn
+                    - Facebook
+                    - Twitter
+                ]
+
+                The standard HTML attributes for configuring ordered lists, :code[reversed], :code[start], :code[type] are :a(https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ol)[also supported].
+
+                 :code[
+                    :ol({type:"a"})[
+                        - LinkedIn
+                        - Facebook
+                        - Twitter
+                    ]
+                ]
+
+                :ol({type:"a"})[
+                    - LinkedIn
+                    - Facebook
+                    - Twitter
+                ]
+
             ]
             :section[
-                :h[Details]
+                :h[Description Lists]
 
-                The :code[:details[]] tag supports the conditional display of content. It has one required sub-tag :code[:summary[<short text>]] and the rest of the content is conditionally displayed. If a :code[summary] tag is missing, then the first word is used as the summary.
+                Definition lists follow the :a(https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dl)[MDN documentation] for their parallel HTML tags except non-semantic tags can't be used.
 
-                :code[:details[:summary[See the content...] Hello there!]] renders as :details[:summary[See the content...] Hello there!]
+                :code[
+                    :dl[
+                        :dt[Beast of Bodmin]
+                        :dd[A large feline inhabiting Bodmin Moor.]
 
-                :code[:details[... Hello there!]] renders as :details[... Hello there!]
+                        :dt[Morgawr]
+                        :dd[A sea serpent.]
+
+                        :dt[Owlman]
+                        :dd[A giant owl-like creature.]
+                    ]
+                ]
+
+                :dl[
+                    :dt[Beast of Bodmin]
+                    :dd[A large feline inhabiting Bodmin Moor.]
+
+                    :dt[Morgawr]
+                    :dd[A sea serpent.]
+
+                    :dt[Owlman]
+                    :dd[A giant owl-like creature.]
+                ]
+            ]
+            :section[
+                :h[Task Lists]
+            ]
+        ]
+        :section[
+            :h[Meta Tags]
+
+            The :code[:meta[]] tag inserts values into the head of a document. It takes the form :code[:meta({name:"my-name"})[my value]], e.g. :code[:meta({name:"author"})[John Jones]] injects the HTML :transpiled[:meta({name:"author"})[John Jones]].
+
+            Suggested meta tag names include:
+
+            :ul({title:"suggested meta tag names"})[
+                - :em[keywords], comma separated key words, but consider using :a({href:"#hashtags"})[Hashtags]
+                - :em[description] for a description of the document
+                - :em[publisher] for the publisher of the document
+                - :em[author] for the author of the document
+                - :em[copyright] for a copyright notice of the document
+                - :em[robots] with the comma separated values of :code[index] or :code[noindex] and :code[follow] or :code[nofollow].
+            ]
+
+            Also see the section :a(.#structured-data)[Structured Data] under :a(.#seo)[SEO].
+        ]
+        :section[
+            :h[Multimedia]
+            :section[
+                :h[Images]
+
+                Since SECST has a focus on semantics, images must be specified with alt text braces, even if they contain no content.
+
+                :code[:img(static ./anywhichway_mobius_138.png)] will not transpile.
+
+                Images can be loaded statically at transpile time and delivered bundled into the output HTML.
+                :ul[
+                    :li[The tag :code[:img(static ./anywhichway_mobius_138.png)[Test]]]
+                    :li[renders as :img(static ./anywhichway_mobius_138.png)[Test]]
+                    :li[instead of a reference there is a data url in :code[src] attribute of the :details[:summary[generated HTML.]  :transpiled[:img(static ./anywhichway_mobius_138.png)[Test]]]]
+                ]
+                If static loading fails, the standard link will stay in place and dynamic loading may still render the image.
+
+                The callout for the generated HTML above is implemented using the :a({href:"#details"})[details tag].
+            ]
+            :section[
+                :h[Audio]
+            ]
+            :section[
+                :h[Video]
             ]
         ]
     ]
@@ -602,7 +596,7 @@
         :section[
             :h[Theme]
 
-            If a :code[:theme[]] tag with a URL or :code[:link]] content exists in document, then the default theme of :a(./assets/themes/secst.css {target:"_tab"})[sects.css] is not applied.
+            If a :code[:theme[]] tag with a URL or :code[:link] content exists in document, then the default theme of :a(./assets/themes/secst.css {target:"_tab"})[sects.css] is not applied.
 
             The theme :code[:theme(./assets/themes/html.css)[]] provides only those styles dependent on the :code[.secst] class. Default browser HTML styling is used elsewhere. It is kind of ugly!
 
@@ -646,83 +640,94 @@
 
             If you desire the transpiled code to be displayed as a block, end the content between the :code[[]] with a newline.
         ]
-    ]
-    :section[
-        :h(#mentions)[Social Media And Other Mentions]
+        :section[
+            :h(#mentions)[Social Media And Other Mentions]
 
-        Several platforms provide :code[@mention] capability, but only for their users, e.g. GitHub and StackExchange. SECST allows you to mention people on any platform, although they do not get notified.
+            Several platforms provide :code[@mention] capability, but only for their users, e.g. GitHub and StackExchange. SECST allows you to mention people on any platform, although they do not get notified.
 
-        Mentions take the form :code[@<platform>[<space separated profile-names>]]. The target for mentions will always be another browser tab, unless a :code[target] attribute is provided.
+            Mentions take the form :code[@<platform>[<space separated profile-names>]]. The target for mentions will always be another browser tab, unless a :code[target] attribute is provided.
 
-        The mark-up :code[@github[anywhichway]] renders as @github[anywhichway].
+            The mark-up :code[@github[anywhichway]] renders as @github[anywhichway].
 
-        Alternatively you can name the user and provide your own content, e.g. :code[@github({user:"anywhichway"})[AnyWhichWay]] renders as @github({user:"anywhichway"})[AnyWhichWay].
+            Alternatively you can name the user and provide your own content, e.g. :code[@github({user:"anywhichway"})[AnyWhichWay]] renders as @github({user:"anywhichway"})[AnyWhichWay].
 
-        The supported platforms are:
-        :ul[
-            - LinkedIn
-            - Facebook
-            - GitHub
-            - Twitter
+            The supported platforms are:
+            :ul[
+                - LinkedIn
+                - Facebook
+                - GitHub
+                - Twitter
+            ]
         ]
-    ]
-    :section[
-        :h[Latex]
+        :section[
+            :h[Latex]
 
-        Math and chemical formulas can be displayed using the :code[:latex[]] tag.
+            Math and chemical formulas can be displayed using the :code[:latex[]] tag.
 
-        :code({language:"latex"})[:latex[Lift = \frac{1}{2} \rho v^2 S C_L]] renders as :latex[Lift = \frac{1}{2} \rho v^2 S C_L]
+            :code({language:"latex"})[:latex[Lift = \frac{1}{2} \rho v^2 S C_L]] renders as :latex[Lift = \frac{1}{2} \rho v^2 S C_L]
 
-        :code({language:"latex"})[:latex[\ce{CO2 + C -> 2 CO}]] renders as :latex[\ce{CO2 + C -> 2 CO}]
+            :code({language:"latex"})[:latex[\ce{CO2 + C -> 2 CO}]] renders as :latex[\ce{CO2 + C -> 2 CO}]
 
-        To display the generated formula as a block, end the content between the :code[[]] with a newline.
-    ]
-    :section[
-        :h[Mermaid Chart]
+            To display the generated formula as a block, end the content between the :code[[]] with a newline.
+        ]
+        :section[
+            :h[Mermaid Chart]
 
-        :code[:mermaidChart[]] is a block level element, it belongs outside of paragraphs. Just provide :a(https://mermaid.js.org/intro/)[Mermaid notation] as the content.
+            :code[:mermaidChart[]] is a block level element, it belongs outside of paragraphs. Just provide :a(https://mermaid.js.org/intro/)[Mermaid notation] as the content.
 
-        :code[
-             :mermaidChart[
+            :code[
+                 :mermaidChart[
+                    graph LR
+                    A --- B
+                    B-->C[fa:fa-ban forbidden]
+                    B-->D(fa:fa-spinner);
+                ]
+            ]
+
+            renders as
+
+            :mermaidChart[
                 graph LR
                 A --- B
                 B-->C[fa:fa-ban forbidden]
                 B-->D(fa:fa-spinner);
             ]
+
+            There are lots of charts to choose from:
+
+            :ul[
+                - :a(https://mermaid.js.org/syntax/flowchart.html)[Flowchart]
+                - :a(https://mermaid.js.org/syntax/sequenceDiagram.html)[Sequence Diagram]
+                - :a(https://mermaid.js.org/syntax/classDiagram.html)[Class Diagram]
+                - :a(https://mermaid.js.org/syntax/stateDiagram.html)[State Diagram]
+                - :a(https://mermaid.js.org/syntax/entityRelationshipDiagram.html)[Entity Relationship Diagram]
+                - :a(https://mermaid.js.org/syntax/userJourney.html)[User Journey]
+                - :a(https://mermaid.js.org/syntax/gantt.html)[Gannt]
+                - :a(https://mermaid.js.org/syntax/pie.html)[Pie Chart]
+                - :a(https://mermaid.js.org/syntax/requirementDiagram.html)[Requirement Diagram]
+                - :a(https://mermaid.js.org/syntax/gitgraph.html)[Gitgraph Diagram]
+                - :a(https://mermaid.js.org/syntax/c4c.html)[C4C Diagram]
+                - :a(https://mermaid.js.org/syntax/mindmap.html)[Mindmaps]
+            ]
         ]
+        :section[
+            :h(#sheet-music)[Sheet Music (ABC Notation)]
 
-        renders as
+            :code[:sheetMusic[]] is a block level element, it belongs outside of paragraphs. Just provide :a(https://abcnotation.com/examples)[ABC notation] as the content.
 
-        :mermaidChart[
-            graph LR
-            A --- B
-            B-->C[fa:fa-ban forbidden]
-            B-->D(fa:fa-spinner);
-        ]
+            :code[
+                :sheetMusic[
+                    X: 1
+                    T: Nokia Tune
+                    M: 3/4
+                    L: 1/8
+                    K: Amaj
+                    |: e'd' f2 g2 | c'b d2 e2 | ba c2 e2 | a6 |
+                ]
+            ]
 
-        There are lots of charts to choose from:
+            renders as
 
-        :ul[
-            - :a(https://mermaid.js.org/syntax/flowchart.html)[Flowchart]
-            - :a(https://mermaid.js.org/syntax/sequenceDiagram.html)[Sequence Diagram]
-            - :a(https://mermaid.js.org/syntax/classDiagram.html)[Class Diagram]
-            - :a(https://mermaid.js.org/syntax/stateDiagram.html)[State Diagram]
-            - :a(https://mermaid.js.org/syntax/entityRelationshipDiagram.html)[Entity Relationship Diagram]
-            - :a(https://mermaid.js.org/syntax/userJourney.html)[User Journey]
-            - :a(https://mermaid.js.org/syntax/gantt.html)[Gannt]
-            - :a(https://mermaid.js.org/syntax/pie.html)[Pie Chart]
-            - :a(https://mermaid.js.org/syntax/requirementDiagram.html)[Requirement Diagram]
-            - :a(https://mermaid.js.org/syntax/gitgraph.html)[Gitgraph Diagram]
-            - :a(https://mermaid.js.org/syntax/c4c.html)[C4C Diagram]
-            - :a(https://mermaid.js.org/syntax/mindmap.html)[Mindmaps]
-        ]
-    ]
-    :section[
-        :h(#sheet-music)[Sheet Music (ABC Notation)]
-
-        :code[:sheetMusic[]] is a block level element, it belongs outside of paragraphs. Just provide :a(https://abcnotation.com/examples)[ABC notation] as the content.
-
-        :code[
             :sheetMusic[
                 X: 1
                 T: Nokia Tune
@@ -731,470 +736,462 @@
                 K: Amaj
                 |: e'd' f2 g2 | c'b d2 e2 | ba c2 e2 | a6 |
             ]
-        ]
 
-        renders as
-
-        :sheetMusic[
-            X: 1
-            T: Nokia Tune
-            M: 3/4
-            L: 1/8
-            K: Amaj
-            |: e'd' f2 g2 | c'b d2 e2 | ba c2 e2 | a6 |
-        ]
-
-        If you drop the :code[:] from the second position in the last line, the play button will disappear.
-
-         :code[
-            :sheetMusic[
-                X:1
-                T: Paper
-                K:D
-                | DDAA | BBA2|
-            ]
-        ]
-
-        renders as
-
-        :sheetMusic[
-           X:1
-           T: Paper
-           K:D
-           | DDAA | BBA2|
-        ]
-
-    ]
-    :section[
-        :h[Escaping SECST]
-
-        SECST tagging inside of :code[:code[]] is automatically escaped. If you wish to escape it elsewhere use the tag :code[:escape[]].
-
-        :code[:code[:strong[text]]] renders as :code[:strong[text]].
-
-        :code[:escape[:strong[text]]] renders as :escape[:strong[text]].
-    ]
-]
-:section[
-    :h[Values and Formulas]
-
-    SECST supports the tag :code[:value[]] for adding reactive variables and formulas to documents.
-    :ul[
-         - The value of a :code[:value[]] is the content, i.e the text between the :code[[]]. It should be either a literal value or a formula, e.g. :code[:value[2 * 2]] = :value[2 * 2].
-         - By default values are visible. Use the boolean attribute :code[hidden]  to hide them, e.g. :code[:value(hidden)[2 * 2]] = :value(hidden)[2 * 2].
-         - So that readers know the value may be computed, computed ones are rendered as disabled, readonly input. To render them as plaintext use the attribute :code[plaintext], e.g. :code[:value(plaintext)[2 * 2]] = :value(plaintext)[2 * 2].
-         - To make a value editable by readers, use the attribute :code[editable], e.g. code[:value(editable)[2 * 2]] = :value(editable)[2 * 2].
-         - Everything between the :code[[]] is treated as a formula for evaluation, if your readers may be entering formula like text and you do not want it evaluated, use the attribute :code[literal], e.g. :code[:value(literal)[2 *2]] = :value(literal)[2 * 2].
-         - If values are not given a :code[title] attribute, e.g. :code[:value({title:"Two times two"})[2 * 2]], then the content is used as the mouseover title unless the content is provided by a URL, in which case the URL is the title, e.g. :code[:value(./sample.json type="application/json")] has a mouseover title of :code[./sample.json].
-    ]
-
-    Formulas are actually just valid JavaScript expressions that also support standard and symbolic math. SECST attempts to process most values as math expressions first:footnote[A parser is used to match potential math expressions.] and if this fails, as JavaScript.
-
-    :ul[
-        - :code[2 * 3] = :value[2 * 2],
-        - :code[2^3] when used as part of a math expression:footnote[If the expression cannot be parsed as math, then 2^3 will be treated as XOR as it is in regular JavaScript.], is the same as :code[2**3], which is the same as :code[pow(2,3)], which is the same as :code[Math.pow(2,3)] = :value[2^3].
-    ]
-
-    To use a value in another formula, the value must be named with an id, e.g.
-
-    :code[:value(#v1)[2]] + :code[:value(#v2)[2]] = :code[:value(plaintext)[$(#v1) + $(#v2)]]
-
-    :value(#v1)[2] + :value(#v2)[2] = :value(plaintext)[$(#v1) + $(#v2)] (try changing one of the inputs)
-
-    The code :code[$(#<some-id>)] is used to substitute named values into formulas. See :a(.#advanced-formulas)[Advanced Formulas] for use of more general CSS selectors and arrays.
-
-    :section[
-        :h[Typed Data]
-
-        The :code[:value[]] tag supports the type attribute, valid types include :a(https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input)[those supported by the HTML input element] except :code[button], :code[file], :code[hidden], :code[image], :code[search] and :code[submit].
-
-        The type can also be one of the mime-types :code[text/plain], :code[text/csv], :code[application/json], e.g. :code[:value(editable {type:"application/json"})[{name:"Joe"}]] as shown below in :a(.#importing-data)[Importing Data]..
-
-        If you provide a type, e.g. :code[:value(editable {type:"number"})], then the type will be enforced when the value is edited: :value(editable {type:"number"}).
-
-        If the value is computed, a red border will surround type check failures.
-    ]
-    :section[
-        :h[String Manipulation]
-
-        Strings can be combined using the :code[+] sign, e.g. :code[:value["Hello" + " " + "world!"]] = :value["Hello" + " " + "world!"].
-
-        Strings can be manipulated using the :a(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)[standard JavaScript methods], e.g. :code[:value["Hello world!".substring(0,5)]] = :value["Hello world!".substring(0,5)].
-    ]
-    :section[
-        :h[Basic Math]
-
-        Math formulas include anything that can use the normal operators, :code[,%,^,*,-,+,<,<=,==,>=,>] and any functions available via :a(https://mathjs.org/docs/reference/functions.html)[MathJS].
-
-        Formulas can include :a(https://mathjs.org/docs/datatypes/units.html#physical-constants)[physical constants], e.g :code[:value[pi * 3^2]] = :value[pi * 3^2].
-
-        This includes these items (most links goto MathJS documentation):
-
-        :ul[
-            - :a(https://mathjs.org/docs/reference/functions.html#algebra-functions)[Algebraic functions], covered in :a(.#algebraic-functions)[more detail] later.
-            - :a(https://mathjs.org/docs/reference/functions.html#artihmetic-functions)[Arithmetic functions]
-            - :a(https://mathjs.org/docs/reference/functions.html#bitwise-functions)[Bitwise functions]
-            - :a(https://mathjs.org/docs/reference/functions.html#combinatorics-functions)[Combinatorics functions]
-            - :a(https://mathjs.org/docs/reference/functions.html#complex-functions)[Complex functions]
-            - :a(https://mathjs.org/docs/reference/functions.html#geometry-functions)[Geometry functions]
-            - :a(https://mathjs.org/docs/reference/functions.html#logical-functions)[Logical functions]
-            - :a(https://mathjs.org/docs/reference/functions.html#matrix-functions)[Matrix functions]
-            - :a(https://mathjs.org/docs/reference/functions.html#probability-functions)[Probability functions]
-            - :a(https://mathjs.org/docs/reference/functions.html#relational-functions)[Relational functions]
-            - :a(https://mathjs.org/docs/reference/functions.html#set-functions)[Set functions]
-            - :a(https://mathjs.org/docs/reference/functions.html#special-functions)[Special functions]
-            - :a(https://mathjs.org/docs/reference/functions.html#statistics-functions)[Statistics functions]
-            - :a(https://mathjs.org/docs/reference/functions.html#string-functions)[String functions]
-            - :a(https://mathjs.org/docs/reference/functions.html#trigonometry-functions)[Trigonometry functions]
-            - :a(https://mathjs.org/docs/reference/functions.html#unit-functions)[Unit functions]
-            - :a(https://mathjs.org/docs/reference/functions.html#utils-functions)[Utility functions]
-        ]
-        :section[
-                :h[Algebraic Functions]
-
-                You can ...
-                :dl[
-                    :dt[Compute derivatives:]
-                    :dd[:code[:value[derivative('x^2 + x', 'x')]]]
-                    :dd[:value[derivative('x^2 + x', 'x')]]
-                    :dt[Simplify equations:]
-                    :dd[:code[:value[simplify('x^2 + x + 3 + x^2')]]]
-                    :dd[:value[simplify('x^2 + x + 3 + x^2')]]
-                    :dt[Solve equations:]
-                    :dd[:code[:value[solve('Math.pow(r,2)',{r:3})}]]]
-                    :dd[:value[solve('Math.pow(r,2)',{r:3})]]
-                    :dt[Give your readers the opportunity to provide the values for which to solve:]
-                    :dd[
-                        :code[
-                            Math.pow(r,2)
-                            where r = :value(#v1d)[0]
-                            is :value[solve('Math.pow(r,2)',{r:$(#v1d)})]
-                        ]
-                        renders as
-                        :br :br
-                        Math.pow(r,2) where r = :value(#v1d)[0] is :value[solve('Math.pow(r,2)',{r:$(#v1d)})]
-                        :br
-                        :code[
-                            The derivative of :value(#formula literal editable)[x^2 + x]
-                            for :value(#variable literal editable)[x]
-                            is :value[derivative($(#formula),$(#variable))]
-                        ]
-                        renders as
-                        :br :br
-                        The derivative of :value(#formula literal editable)[x^2 + x] for :value(#variable literal editable)[x] is :value[derivative($(#formula),$(#variable))]
-                    ]]
-                ]
-            ]
-    ]
-    :section[
-        :h[Unit Math]
-
-        Unit math :a(https://mathjs.org/docs/datatypes/units.html)[from MathJS] allows fro conversions using the word :code[to], as well as units for numbers, e.g. :code[45 deg].
-
-        There are many :a(https://mathjs.org/docs/datatypes/units.html#reference)[supported units].
-
-        Here are a few examples:
-
-        :code[:value[2 inch to cm]] = :value[2 inch to cm]
-
-        :code[:value[90 km/h to mi/h]] = :value[90 km/h to mi/h]
-
-        :code[:value[90 km/h to m/h]] = :value[90 km/h to m/h] :code[m/h] is meters per hour
-
-        :code[:value[(1 week + 1 day) to days]] = value[(1 week + 1 day) to days]
-
-        :code[:value[cos(45 deg)]] = :value[cos(45 deg)]
-
-        :code[:value[8.314 m^3 Pa / mol / K]] = :value[8.314 m^3 Pa / mol / K]
-
-        Remember, if you have a value that looks like a formula, but is not, you can use the attribute :code[literal], e.g.  :code[:value(literal)[2 inch to cm]] = :value(literal)[2 inch to cm].
-
-        And, you can use :code[plaintext] to display values without any styling, e.g. :code[:value(plaintext)[90 km/h to mi/h]] = :value(plaintext)[90 km/h to mi/h].
-
-    ]
-    :section[
-        :h[Importing Data]
-
-        Values can included imported data using the :code[src] attribute and a mime type provided in the :code[type] attribute. The trailing :code[[]] are optional.
-
-        Values with the boolean attribute :code[static] is import data at transpile time. If importing fails, another attempt is made at runtime.
-
-        JSON is formatted for readability and :a(https://json5.org)[JSON5] is supported to make it easier to handle remote data.
-
-        :code[
-            :value(https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson static {type:"application/json"})
-        ]
-
-        :value(https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson static {type:"application/json"})
-
-        Imported data is readonly because it is essentially a computation. To make it editable, use the attribute :code[editable].
-
-        :code[
-            :value(https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson editable {type:"application/json"})
-        ]
-
-        :value(https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson editable {type:"application/json"})
-
-        If an id is added, the data can be used in a computation.
-
-        :code[
-            :value(#earthquake-data https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson {type:"application/json"})
-
-            :value[$(#earthquake-data).metadata]
-        ]
-
-       :value(#earthquake-data https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson {type:"application/json"})
-
-       :value({type:"application/json"})[$(#earthquake-data).metadata]
-    ]
-]
-:section[
-    :h(#seo)[Search Engine Optimization]
-
-    SECST provides several features to support :abbr[SEO] Search Engine Optimization.
-
-    :ul({title:"SEO features"})[
-        :li[:a({href:"#hastags"})[hashtags]]
-        :li[:a({href:"#meta-tags"})[meta tags]]
-        :li[:a({href:"#structured-data"})[structured data]]
-        :li[:a({href:"#server-transpilation"})[server transpilation]]
-    ]
-    :section[
-        :h[Structured Data]
-
-        For select tags, SECST can generate JSON-LD directly from SECST markup. Content, layout, and SEO optimization will always be in sync.
-
-        This is best covered by an example based on :a(https://developers.google.com/search/docs/appearance/structured-data/article)[Google's documentation for a news article].
-
-        :em[Note: Only those tags documented for :code[NewsArticle] are currently supported.]
-
-        :section[
-            :h[News Article]
-
-            The SECST tag :code[:NewsArticle[]] can contain regular SECST as well as tags that parallel established JSON-LD schema like :code[:headline[]], :code[:author[]] and :code[:Person[]]. Where there are identical or trivially equivalent tags and attribute names, e.g. :code[image] and :code[img], the native SECST tag is used.
-
-            :code[
-                :NewsArticle[
-                    :headline[Pinky Conquers The World]
-                    :img(./assets/images/The_Blue_Marble.jpg {height:50})[Earth]
-                    :p[
-                        Today Pinky finally conquered the world! Next up will be Mars. Watch out billionaires!
-                    ]
-                    :author[The Brain]
-                    :datePublished({format:""})[2022-12-20T08:00:00+08:00]
-                ]
-            ]
-
-            Where JSON-LD names elements accept sub-types, e.g. :code[:Person[]], those can also be used:
-
-            :code[
-                :NewsArticle[
-                    :headline[Pinky Conquers The World]
-                    :img(./assets/images/The_Blue_Marble.jpg {height:50,align:"left"})[Earth]
-                    :p[
-                       Today Pinky finally conquered the world! Next up will be Mars. Watch out billionaires!
-                    ]
-                    :author[
-                        :Person[
-                            :name[The Brain]
-                        ]
-                    ]
-                    :datePublished({format:""})[2022-12-20T08:00:00+08:00]
+            If you drop the :code[:] from the second position in the last line, the play button will disappear.
+
+             :code[
+                :sheetMusic[
+                    X:1
+                    T: Paper
+                    K:D
+                    | DDAA | BBA2|
                 ]
             ]
 
             renders as
 
-            :NewsArticle[
-                :headline[Pinky Conquers The World]
-                :img(./assets/images/The_Blue_Marble.jpg {height:50,align:"left"})[Earth]
-               :p[
-                   Today Pinky finally conquered the world! Next up will be Mars. Watch out billionaires!
-               ]
-                :author[
-                    :Person[
-                        :name[The Brain]
-                    ]
-                ]
-                :datePublished[2022-12-20T08:00:00+08:00]
+            :sheetMusic[
+               X:1
+               T: Paper
+               K:D
+               | DDAA | BBA2|
             ]
 
-            SECST knows which tags to collect into arrays for JSON-LD and how to map similar SECST or HTML semantics to JSON-LD. It ignores tags that are not part of JSON-LD schema unless they have been mapped to JSON-LD schema internally.
+        ]
+        :section[
+            :h[Escaping SECST]
 
-            Some JSON-LD attributes mapped to tags can have attributes, e.g. :code[:heading({level:2})[]].
+            SECST tagging inside of :code[:code[]] is automatically escaped. If you wish to escape it elsewhere use the tag :code[:escape[]].
 
-            Also note the use of Date formatting below based on :a(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat)[Javascript date and time format functionality].
+            :code[:code[:strong[text]]] renders as :code[:strong[text]].
 
-             :code[
+            :code[:escape[:strong[text]]] renders as :escape[:strong[text]].
+        ]
+        :section[
+            :h[Values and Formulas]
+
+            SECST supports the tag :code[:value[]] for adding reactive variables and formulas to documents.
+            :ul[
+                 - The value of a :code[:value[]] is the content, i.e the text between the :code[[]]. It should be either a literal value or a formula, e.g. :code[:value[2 * 2]] = :value[2 * 2].
+                 - By default values are visible. Use the boolean attribute :code[hidden]  to hide them, e.g. :code[:value(hidden)[2 * 2]] = :value(hidden)[2 * 2].
+                 - So that readers know the value may be computed, computed ones are rendered as disabled, readonly input. To render them as plaintext use the attribute :code[plaintext], e.g. :code[:value(plaintext)[2 * 2]] = :value(plaintext)[2 * 2].
+                 - To make a value editable by readers, use the attribute :code[editable], e.g. code[:value(editable)[2 * 2]] = :value(editable)[2 * 2].
+                 - Everything between the :code[[]] is treated as a formula for evaluation, if your readers may be entering formula like text and you do not want it evaluated, use the attribute :code[literal], e.g. :code[:value(literal)[2 *2]] = :value(literal)[2 * 2].
+                 - If values are not given a :code[title] attribute, e.g. :code[:value({title:"Two times two"})[2 * 2]], then the content is used as the mouseover title unless the content is provided by a URL, in which case the URL is the title, e.g. :code[:value(./sample.json type="application/json")] has a mouseover title of :code[./sample.json].
+            ]
+
+            Formulas are actually just valid JavaScript expressions that also support standard and symbolic math. SECST attempts to process most values as math expressions first:footnote[A parser is used to match potential math expressions.] and if this fails, as JavaScript.
+
+            :ul[
+                - :code[2 * 3] = :value[2 * 2],
+                - :code[2^3] when used as part of a math expression:footnote[If the expression cannot be parsed as math, then 2^3 will be treated as XOR as it is in regular JavaScript.], is the same as :code[2**3], which is the same as :code[pow(2,3)], which is the same as :code[Math.pow(2,3)] = :value[2^3].
+            ]
+
+            To use a value in another formula, the value must be named with an id, e.g.
+
+            :code[:value(#v1)[2]] + :code[:value(#v2)[2]] = :code[:value(plaintext)[$(#v1) + $(#v2)]]
+
+            :value(#v1)[2] + :value(#v2)[2] = :value(plaintext)[$(#v1) + $(#v2)] (try changing one of the inputs)
+
+            The code :code[$(#<some-id>)] is used to substitute named values into formulas. See :a(.#advanced-formulas)[Advanced Formulas] for use of more general CSS selectors and arrays.
+
+            :section[
+                :h[Typed Data]
+
+                The :code[:value[]] tag supports the type attribute, valid types include :a(https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input)[those supported by the HTML input element] except :code[button], :code[file], :code[hidden], :code[image], :code[search] and :code[submit].
+
+                The type can also be one of the mime-types :code[text/plain], :code[text/csv], :code[application/json], e.g. :code[:value(editable {type:"application/json"})[{name:"Joe"}]] as shown below in :a(.#importing-data)[Importing Data]..
+
+                If you provide a type, e.g. :code[:value(editable {type:"number"})], then the type will be enforced when the value is edited: :value(editable {type:"number"}).
+
+                If the value is computed, a red border will surround type check failures.
+            ]
+            :section[
+                :h[String Manipulation]
+
+                Strings can be combined using the :code[+] sign, e.g. :code[:value["Hello" + " " + "world!"]] = :value["Hello" + " " + "world!"].
+
+                Strings can be manipulated using the :a(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)[standard JavaScript methods], e.g. :code[:value["Hello world!".substring(0,5)]] = :value["Hello world!".substring(0,5)].
+            ]
+            :section[
+                :h[Basic Math]
+
+                Math formulas include anything that can use the normal operators, :code[,%,^,*,-,+,<,<=,==,>=,>] and any functions available via :a(https://mathjs.org/docs/reference/functions.html)[MathJS].
+
+                Formulas can include :a(https://mathjs.org/docs/datatypes/units.html#physical-constants)[physical constants], e.g :code[:value[pi * 3^2]] = :value[pi * 3^2].
+
+                This includes these items (most links goto MathJS documentation):
+
+                :ul[
+                    - :a(https://mathjs.org/docs/reference/functions.html#algebra-functions)[Algebraic functions], covered in :a(.#algebraic-functions)[more detail] later.
+                    - :a(https://mathjs.org/docs/reference/functions.html#artihmetic-functions)[Arithmetic functions]
+                    - :a(https://mathjs.org/docs/reference/functions.html#bitwise-functions)[Bitwise functions]
+                    - :a(https://mathjs.org/docs/reference/functions.html#combinatorics-functions)[Combinatorics functions]
+                    - :a(https://mathjs.org/docs/reference/functions.html#complex-functions)[Complex functions]
+                    - :a(https://mathjs.org/docs/reference/functions.html#geometry-functions)[Geometry functions]
+                    - :a(https://mathjs.org/docs/reference/functions.html#logical-functions)[Logical functions]
+                    - :a(https://mathjs.org/docs/reference/functions.html#matrix-functions)[Matrix functions]
+                    - :a(https://mathjs.org/docs/reference/functions.html#probability-functions)[Probability functions]
+                    - :a(https://mathjs.org/docs/reference/functions.html#relational-functions)[Relational functions]
+                    - :a(https://mathjs.org/docs/reference/functions.html#set-functions)[Set functions]
+                    - :a(https://mathjs.org/docs/reference/functions.html#special-functions)[Special functions]
+                    - :a(https://mathjs.org/docs/reference/functions.html#statistics-functions)[Statistics functions]
+                    - :a(https://mathjs.org/docs/reference/functions.html#string-functions)[String functions]
+                    - :a(https://mathjs.org/docs/reference/functions.html#trigonometry-functions)[Trigonometry functions]
+                    - :a(https://mathjs.org/docs/reference/functions.html#unit-functions)[Unit functions]
+                    - :a(https://mathjs.org/docs/reference/functions.html#utils-functions)[Utility functions]
+                ]
+                :section[
+                    :h[Algebraic Functions]
+
+                    You can ...
+                    :dl[
+                        :dt[Compute derivatives:]
+                        :dd[:code[:value[derivative('x^2 + x', 'x')]]]
+                        :dd[:value[derivative('x^2 + x', 'x')]]
+                        :dt[Simplify equations:]
+                        :dd[:code[:value[simplify('x^2 + x + 3 + x^2')]]]
+                        :dd[:value[simplify('x^2 + x + 3 + x^2')]]
+                        :dt[Solve equations:]
+                        :dd[:code[:value[solve('Math.pow(r,2)',{r:3})}]]]
+                        :dd[:value[solve('Math.pow(r,2)',{r:3})]]
+                        :dt[Give your readers the opportunity to provide the values for which to solve:]
+                        :dd[
+                            :code[
+                                Math.pow(r,2)
+                                where r = :value(#v1d)[0]
+                                is :value[solve('Math.pow(r,2)',{r:$(#v1d)})]
+                            ]
+                            renders as
+                            :br :br
+                            Math.pow(r,2) where r = :value(#v1d)[0] is :value[solve('Math.pow(r,2)',{r:$(#v1d)})]
+                            :br
+                            :code[
+                                The derivative of :value(#formula literal editable)[x^2 + x]
+                                for :value(#variable literal editable)[x]
+                                is :value[derivative($(#formula),$(#variable))]
+                            ]
+                            renders as
+                            :br :br
+                            The derivative of :value(#formula literal editable)[x^2 + x] for :value(#variable literal editable)[x] is :value[derivative($(#formula),$(#variable))]
+                        ]
+                    ]
+                ]
+            ]
+             :section[
+                :h[Unit Math]
+
+                Unit math :a(https://mathjs.org/docs/datatypes/units.html)[from MathJS] allows fro conversions using the word :code[to], as well as units for numbers, e.g. :code[45 deg].
+
+                There are many :a(https://mathjs.org/docs/datatypes/units.html#reference)[supported units].
+
+                Here are a few examples:
+
+                :code[:value[2 inch to cm]] = :value[2 inch to cm]
+
+                :code[:value[90 km/h to mi/h]] = :value[90 km/h to mi/h]
+
+                :code[:value[90 km/h to m/h]] = :value[90 km/h to m/h] :code[m/h] is meters per hour
+
+                :code[:value[(1 week + 1 day) to days]] = value[(1 week + 1 day) to days]
+
+                :code[:value[cos(45 deg)]] = :value[cos(45 deg)]
+
+                :code[:value[8.314 m^3 Pa / mol / K]] = :value[8.314 m^3 Pa / mol / K]
+
+                Remember, if you have a value that looks like a formula, but is not, you can use the attribute :code[literal], e.g.  :code[:value(literal)[2 inch to cm]] = :value(literal)[2 inch to cm].
+
+                And, you can use :code[plaintext] to display values without any styling, e.g. :code[:value(plaintext)[90 km/h to mi/h]] = :value(plaintext)[90 km/h to mi/h].
+
+            ]
+            :section[
+                :h[Importing Data]
+
+                Values can included imported data using the :code[src] attribute and a mime type provided in the :code[type] attribute. The trailing :code[[]] are optional.
+
+                Values with the boolean attribute :code[static] is import data at transpile time. If importing fails, another attempt is made at runtime.
+
+                JSON is formatted for readability and :a(https://json5.org)[JSON5] is supported to make it easier to handle remote data.
+
+                :code[
+                    :value(https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson static {type:"application/json"})
+                ]
+
+                :value(https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson static {type:"application/json"})
+
+                Imported data is readonly because it is essentially a computation. To make it editable, use the attribute :code[editable].
+
+                :code[
+                    :value(https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson editable {type:"application/json"})
+                ]
+
+                :value(https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson editable {type:"application/json"})
+
+                If an id is added, the data can be used in a computation.
+
+                :code[
+                    :value(#earthquake-data https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson {type:"application/json"})
+
+                    :value[$(#earthquake-data).metadata]
+                ]
+
+               :value(#earthquake-data https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson {type:"application/json"})
+
+               :value({type:"application/json"})[$(#earthquake-data).metadata]
+            ]
+            :section[
+                :h[Advanced Formulas]
+
+                :section[
+                    :h[Formulas With CSS Selectors and Multiple Values]
+
+                    You can use almost any :a(https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors)[CSS selector] in place of :code[#id] in :code[$(#<id>)]. The value returned will be the contents of the value property on the element or (if not available) the value attribute or the :code[innerText].
+
+                    You can use commas to select multiple identifier named elements, e.g. :code[:value[$(#id1, #id2, #id3)]] is an array of the values associated with the elements :code[:value(#id1)[3]], :code[:value(#id2)[2]], :code[:value(#id3)[1]] and will be :code[[3,2,1]].
+
+                    A value reference :code[$(css-selector)] can end in :code[[]] to indicate multiple values should be returned as an array if the selector does not contain a comma. This allows tables to be treated somewhat like spreadsheets.
+                ]
+
+                :section[
+                    :h[Macro List Formatting]
+
+                     The SECST formula evaluator supports supports some utility functions.
+                ]
+                :section[
+                    :h[JavaScript]
+
+                    You can use any JavaScript that is available in :a(https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API)[WebWorkers] inside a macro. A special read-only :code[document] object is also made available. This object has title, baseURI, location, and navigator properties along with a property for each meta tag name and value.
+                ]
+            ]
+        ]
+    ]
+    :section[
+        :h(#seo)[Search Engine Optimization]
+
+        SECST provides several features to support :abbr[SEO] Search Engine Optimization.
+
+        :ul({title:"SEO features"})[
+            :li[:a({href:"#hastags"})[hashtags]]
+            :li[:a({href:"#meta-tags"})[meta tags]]
+            :li[:a({href:"#structured-data"})[structured data]]
+            :li[:a({href:"#server-transpilation"})[server transpilation]]
+        ]
+        :section[
+            :h[Structured Data]
+
+            For select tags, SECST can generate JSON-LD directly from SECST markup. Content, layout, and SEO optimization will always be in sync.
+
+            This is best covered by an example based on :a(https://developers.google.com/search/docs/appearance/structured-data/article)[Google's documentation for a news article].
+
+            :em[Note: Only those tags documented for :code[NewsArticle] are currently supported.]
+
+            :section[
+                :h[News Article]
+
+                The SECST tag :code[:NewsArticle[]] can contain regular SECST as well as tags that parallel established JSON-LD schema like :code[:headline[]], :code[:author[]] and :code[:Person[]]. Where there are identical or trivially equivalent tags and attribute names, e.g. :code[image] and :code[img], the native SECST tag is used.
+
+                :code[
+                    :NewsArticle[
+                        :headline[Pinky Conquers The World]
+                        :img(./assets/images/The_Blue_Marble.jpg {height:50})[Earth]
+                        :p[
+                            Today Pinky finally conquered the world! Next up will be Mars. Watch out billionaires!
+                        ]
+                        :author[The Brain]
+                        :datePublished({format:""})[2022-12-20T08:00:00+08:00]
+                    ]
+                ]
+
+                Where JSON-LD names elements accept sub-types, e.g. :code[:Person[]], those can also be used:
+
+                :code[
+                    :NewsArticle[
+                        :headline[Pinky Conquers The World]
+                        :img(./assets/images/The_Blue_Marble.jpg {height:50,align:"left"})[Earth]
+                        :p[
+                           Today Pinky finally conquered the world! Next up will be Mars. Watch out billionaires!
+                        ]
+                        :author[
+                            :Person[
+                                :name[The Brain]
+                            ]
+                        ]
+                        :datePublished({format:""})[2022-12-20T08:00:00+08:00]
+                    ]
+                ]
+
+                renders as
+
+                :NewsArticle[
+                    :headline[Pinky Conquers The World]
+                    :img(./assets/images/The_Blue_Marble.jpg {height:50,align:"left"})[Earth]
+                   :p[
+                       Today Pinky finally conquered the world! Next up will be Mars. Watch out billionaires!
+                   ]
+                    :author[
+                        :Person[
+                            :name[The Brain]
+                        ]
+                    ]
+                    :datePublished[2022-12-20T08:00:00+08:00]
+                ]
+
+                SECST knows which tags to collect into arrays for JSON-LD and how to map similar SECST or HTML semantics to JSON-LD. It ignores tags that are not part of JSON-LD schema unless they have been mapped to JSON-LD schema internally.
+
+                Some JSON-LD attributes mapped to tags can have attributes, e.g. :code[:heading({level:2})[]].
+
+                Also note the use of Date formatting below based on :a(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat)[Javascript date and time format functionality].
+
+                 :code[
+                    :NewsArticle[
+                        :headline({level:2})[Pinky and The Brain Plan For Mars]
+                        :img(./assets/images/mars.jpg {height:50,align:"left"})[Mars]
+                        :p[
+                            We, Pinky and The Brain, will soon announce plans to partner with one of the world's billionaires to take over Mars.
+                        ]
+                        :Author[
+                            :Person[
+                                :name[Pinky]
+                            ],
+                            :Person[
+                                :name[The Brain]
+                            ]
+                        ]
+                        :datePublished({format:"{dateStyle:'full',timeStyle:'long'}"})[2022-12-20T08:00:00+08:00]
+                    ]
+                ]
+
+                will generate this JSON-LD and insert it into the head of the document:
+
+                :code[
+                    <script type="application/ld+json">
+                    {
+                      "@context": "https://schema.org",
+                      "@type": "NewsArticle",
+                      "headline": "Pinky and The Brain Plan For Mars",
+                      "image": [
+                        "./assets/images/mars.jpg"
+                       ],
+                      "datePublished": "2022-12-20T08:00:00+08:00",
+                      "author": [{
+                          "@type": "Person",
+                          "name": "Pinky",
+                        },{
+                          "@type": "Person",
+                          "name": "The Brain"
+                      }]
+                    }
+                    </script>
+                ]
+
+                while rendering this content
+
                 :NewsArticle[
                     :headline({level:2})[Pinky and The Brain Plan For Mars]
                     :img(./assets/images/mars.jpg {height:50,align:"left"})[Mars]
                     :p[
                         We, Pinky and The Brain, will soon announce plans to partner with one of the world's billionaires to take over Mars.
                     ]
-                    :Author[
-                        :Person[
-                            :name[Pinky]
-                        ],
-                        :Person[
-                            :name[The Brain]
-                        ]
+                    :author[
+                        :Person[:name[Pinky]],
+                        :Person[:name[The Brain]]
                     ]
                     :datePublished({format:"{dateStyle:'full',timeStyle:'long'}"})[2022-12-20T08:00:00+08:00]
                 ]
-            ]
 
-            will generate this JSON-LD and insert it into the head of the document:
+                The ordering of the tags inside :code[:NewsArticle[]] is only relevant to the display layout. This generates equivalent JSON-LD:
 
-            :code[
-                <script type="application/ld+json">
-                {
-                  "@context": "https://schema.org",
-                  "@type": "NewsArticle",
-                  "headline": "Pinky and The Brain Plan For Mars",
-                  "image": [
-                    "./assets/images/mars.jpg"
-                   ],
-                  "datePublished": "2022-12-20T08:00:00+08:00",
-                  "author": [{
-                      "@type": "Person",
-                      "name": "Pinky",
-                    },{
-                      "@type": "Person",
-                      "name": "The Brain"
-                  }]
-                }
-                </script>
-            ]
-
-            while rendering this content
-
-            :NewsArticle[
-                :headline({level:2})[Pinky and The Brain Plan For Mars]
-                :img(./assets/images/mars.jpg {height:50,align:"left"})[Mars]
-                :p[
-                    We, Pinky and The Brain, will soon announce plans to partner with one of the world's billionaires to take over Mars.
+                :code[
+                    :NewsArticle[
+                        :headline({level:4})[Pinky and The Brain Plan For Mars]
+                        :author[
+                            :Person[:name[Pinky]],
+                            :Person[:name[The Brain]]
+                        ]
+                        :datePublished({format:"{dateStyle:'full',timeStyle:'long'}"})[2022-12-20T08:00:00+08:00]
+                        :img(./assets/images/mars.jpg {height:50,align:"left"})[Mars]
+                        :p[
+                            We, Pinky and The Brain, will soon announce plans to partner with one of the world's billionaires to take over Mars.
+                        ]
+                    ]
                 ]
-                :author[
-                    :Person[:name[Pinky]],
-                    :Person[:name[The Brain]]
-                ]
-                :datePublished({format:"{dateStyle:'full',timeStyle:'long'}"})[2022-12-20T08:00:00+08:00]
-            ]
 
-            The ordering of the tags inside :code[:NewsArticle[]] is only relevant to the display layout. This generates equivalent JSON-LD:
+                but renders with a smaller heading and the attribution at the start:
 
-            :code[
-                :NewsArticle[
+                 :NewsArticle[
                     :headline({level:4})[Pinky and The Brain Plan For Mars]
                     :author[
                         :Person[:name[Pinky]],
                         :Person[:name[The Brain]]
                     ]
                     :datePublished({format:"{dateStyle:'full',timeStyle:'long'}"})[2022-12-20T08:00:00+08:00]
+                    :p[]
                     :img(./assets/images/mars.jpg {height:50,align:"left"})[Mars]
                     :p[
                         We, Pinky and The Brain, will soon announce plans to partner with one of the world's billionaires to take over Mars.
                     ]
                 ]
-            ]
+                The generated HTML also contains styles, so a style sheet can be used to modify the displayed content.
 
-            but renders with a smaller heading and the attribution at the start:
-
-             :NewsArticle[
-                :headline({level:4})[Pinky and The Brain Plan For Mars]
-                :author[
-                    :Person[:name[Pinky]],
-                    :Person[:name[The Brain]]
-                ]
-                :datePublished({format:"{dateStyle:'full',timeStyle:'long'}"})[2022-12-20T08:00:00+08:00]
-                :p[]
-                :img(./assets/images/mars.jpg {height:50,align:"left"})[Mars]
-                :p[
-                    We, Pinky and The Brain, will soon announce plans to partner with one of the world's billionaires to take over Mars.
-                ]
-            ]
-            The generated HTML also contains styles, so a style sheet can be used to modify the displayed content.
-
-            :transpiled[
-                :NewsArticle[
-                    :headline[Pinky and The Brain Plan For Mars]
-                    :author[
-                        :Person[:name[Pinky]],
-                        :Person[:name[The Brain]]
-                    ]
-                    :datePublished({format:"{dateStyle:'full',timeStyle:'long'}"})[2022-12-20T08:00:00+08:00]
-                    :p[
-                        :img(./assets/images/mars.jpg {height:50,align:"left"})[Mars]
-                        We, Pinky and The Brain, will soon announce plans to partner with one of the world's billionaires to take over Mars.
+                :transpiled[
+                    :NewsArticle[
+                        :headline[Pinky and The Brain Plan For Mars]
+                        :author[
+                            :Person[:name[Pinky]],
+                            :Person[:name[The Brain]]
+                        ]
+                        :datePublished({format:"{dateStyle:'full',timeStyle:'long'}"})[2022-12-20T08:00:00+08:00]
+                        :p[
+                            :img(./assets/images/mars.jpg {height:50,align:"left"})[Mars]
+                            We, Pinky and The Brain, will soon announce plans to partner with one of the world's billionaires to take over Mars.
+                        ]
                     ]
                 ]
             ]
         ]
     ]
     :section[
-        :h[Server Transpilation]
+        :h[Styling Content]
 
-        The reference implementation of SECST provides both client and server rendering capability.
+        The ability to use styling can be configured using API options and command line arguments. See :a(#document-programming)[document programming] below. Hence, not all styling may be available in all environments that provide a SECST editor.
 
-        Content delivered from server rendering is identical to that rendered on the client except forumlas will not be resolved and output element sizes will not be adjusted for the target device. Upon loading, a SECST runtime library makes a pass through the document to compute formulas and adjust layout.
+        Content can be styled using CSS classes loaded using the :code[style[]] tag. This tag can be used in multiple ways. If a url is provided, i.e. :code[style(./my-css-url.css)[]], then an HTML link element of type style is created behind the scenes. If CSS is placed between the square braces, i.e. :code[style[.my-class { background-color: red}]], then a style element with CSS content is created behind the scenes. If both are provided, then two elements are generated, one of each. :code[link(<some url> type='style')[]] tag.
+
+        CSS classes are applied to content using :code[.<class-name>] inside the parenthetical configuration part of a tag, e.g. :code[:p(.my-class1 .my-class2)[My content]].
+
+        Style can also be applied using the :code[style] attribute of a tag. The style attribute can be in string or JSON format. If in JSON format, should use camelCase versions of CSS property names. For example, :code[:p(style='width:200px;text-align:right;float:right')[My right content]]  and :code[:p({style:{width:"200px";textAlign:"right",float:"right"}}')[My right content]] produce the same output.
+
+        :p({style:"text-align:left;float:right"})[My right content]
+        :p[
+        Left Content
+        More left content
+        ]
     ]
 ]
+
 :section[
-    :h[Styling Content]
-
-    The ability to use styling can be configured using API options and command line arguments. See :a(#document-programming)[document programming] below. Hence, not all styling may be available in all environments that provide a SECST editor.
-
-    Content can be styled using CSS classes loaded using the :code[style[]] tag. This tag can be used in multiple ways. If a url is provided, i.e. :code[style(./my-css-url.css)[]], then an HTML link element of type style is created behind the scenes. If CSS is placed between the square braces, i.e. :code[style[.my-class { background-color: red}]], then a style element with CSS content is created behind the scenes. If both are provided, then two elements are generated, one of each. :code[link(<some url> type='style')[]] tag.
-
-    CSS classes are applied to content using :code[.<class-name>] inside the parenthetical configuration part of a tag, e.g. :code[:p(.my-class1 .my-class2)[My content]].
-
-    Style can also be applied using the :code[style] attribute of a tag. The style attribute can be in string or JSON format. If in JSON format, should use camelCase versions of CSS property names. For example, :code[:p(style='width:200px;text-align:right;float:right')[My right content]]  and :code[:p({style:{width:"200px";textAlign:"right",float:"right"}}')[My right content]] produce the same output.
-
-    :p({style:"text-align:left;float:right"})[My right content]
-    :p[
-    Left Content
-    More left content
-    ]
-]
-:section[
-    :h[Advanced Formulas]
+    :h[Transpiling]
 
     :section[
-        :h[Formulas With CSS Selectors and Multiple Values]
+        :h[Client Processing]
 
-        You can use almost any :a(https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors)[CSS selector] in place of :code[#id] in :code[$(#<id>)]. The value returned will be the contents of the value property on the element or (if not available) the value attribute or the :code[innerText].
-
-        You can use commas to select multiple identifier named elements, e.g. :code[:value[$(#id1, #id2, #id3)]] is an array of the values associated with the elements :code[:value(#id1)[3]], :code[:value(#id2)[2]], :code[:value(#id3)[1]] and will be :code[[3,2,1]].
-
-        A value reference :code[$(css-selector)] can end in :code[[]] to indicate multiple values should be returned as an array if the selector does not contain a comma. This allows tables to be treated somewhat like spreadsheets.
+        See the file :code[./preview.html] in the root of the project directory.
     ]
 
     :section[
-        :h[Macro List Formatting]
+        :h[Server Processing]
+        The command line :code[node secst.js] will convert any files in the root directory with the extension :code[.sct] into :code[HTML] files.
 
-         The SECST formula evaluator supports supports some utility functions.
+        If a wild card Glob pattern is used, then all matching files with a :code[.sct] extension will be transpiled.
+
+        The command can be run as part of your build process to generate a static website.
+
+        There is not yet an Express route or Service Worker, but the code in :code[sects.js] could be used as a starting point.
+
+        An SPD (Single Page Document) capability that takes multiple :code[.sct] files in a directory tree that parallels the desired section structure and creates a single HTML file is under development.
+
+        A multi-page processor that will split a single :code[.sct] files into multiple files based on its section structure and patch links accordingly is also under consideration.
     ]
-    :section[
-        :h[JavaScript]
-
-        You can use any JavaScript that is available in :a(https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API)[WebWorkers] inside a macro. A special read-only :code[document] object is also made available. This object has title, baseURI, location, and navigator properties along with a property for each meta tag name and value.
-    ]
-]
-:section[
-    :h[Transpiling and Server Processing]
-
-    The command line :code[node secst.js] will convert any files in the root directory with the extension :code[.sct] into :code[HTML] files.
-
-    If a wild card Glob pattern is used, then all matching files with a :code[.sct] extension will be transpiled.
-
-    The command can be run as part of your build process to generate a static website.
-
-    There is not yet an Express route or Service Worker, but the code in :code[sects.js] could be used as a starting point.
-
-    An SPD (Single Page Document) capability that takes multiple :code[.sct] files in a directory tree that parallels the desired section structure and creates a single HTML file is under development.
-
-    A multi-page processor that will split a single :code[.sct] files into multiple files based on its section structure and patch links accordingly is also under consideration.
 ]
 :section[
 :h[Configuring, Extending, And Programming]
