@@ -176,7 +176,7 @@
                  definition lists | :td[see :a({href:"#definition-lists"})[definition lists]] :td[] :td[]
              ]
              :tr[
-                 strikethrough | :td[:code[~~struck out~~]] :td[:code[:strike[struck out]]] :td[:strike[struck out]]
+                 strikethrough | :td[:code[~~struck out~~]] :td[:code[:strike[struck out]] and :code[~~struck out~~]] :td[~~struck out~~]
              ]
              :tr[
                  task lists | :td[see :a({href:"#task-lists"})[task lists]] :td[] :td[]
@@ -185,7 +185,7 @@
                  emojis | :td[:code[:]:code[emoji-name:]] :td[:code[:emoji[emoji-name]]] :td[:emoji[smile]]
              ]
              :tr[
-                  highlight | :td[:code[==marked words==]] :td[:code[:mark[marked words]]] :td[:mark[marked words]]
+                  highlight | :td[:code[==marked words==]] :td[:code[:mark[marked words]] and :code[==marked words==]] :td[==marked words==]
               ]
               :tr[
                   subscript | :td[:code[H~2~O]] :td[:code[H:sub[2]0]] :td[H:sub[2]0]

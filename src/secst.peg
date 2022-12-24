@@ -32,7 +32,7 @@
             }
 
     content
-        = mhr / italic / bold / backtickquoted / escape / script / code /  value / hr / br / emoji / (&colon expression _?) / [ a-z0-9_\-~!@#$%^&*()_+=\[\{\]\}|\\;:"'<,>.?/\n\r\t]i
+        = mhr / italic / bold / struck / mark / backtickquoted / escape / script / code /  value / hr / br / emoji / (&colon expression _?) / [ a-z0-9_\-~!@#$%^&*()_+=\[\{\]\}|\\;:"'<,>.?/\n\r\t]i
 
     colon
         = ":"
@@ -107,7 +107,7 @@
         = "@"
 
     bracketed_SECST
-        = BRACKETOPEN value:(mhr/italic/bold/backtickquoted/symbol/hashtag/mention/escape/script/code/value/hr/br/emoji/expression/not_bracketed/bracketed_SECST)* BRACKETCLOSE {
+        = BRACKETOPEN value:(mhr/italic/bold/struck/mark/backtickquoted/symbol/hashtag/mention/escape/script/code/value/hr/br/emoji/expression/not_bracketed/bracketed_SECST)* BRACKETCLOSE {
             if(Array.isArray(value) && value.every((item) => typeof(item)==="string")) {
                 return [value.join("")];
             }
@@ -168,20 +168,20 @@
                 return new Tag({tag:"b",content:[start+value.join("")+end]})
             }
 
-        not_bold
-            = not:(!BOLDCLOSE !BOLDOPEN.) {
-                    return not.join("");
-            }
+    not_bold
+        = not:(!BOLDCLOSE !BOLDOPEN.) {
+                return not.join("");
+        }
 
-        BOLDOPEN
-            = '**' char:[^*] {
-                return char
-            }
+    BOLDOPEN
+        = '**' char:[^* \t\r\n] {
+            return char
+        }
 
-        BOLDCLOSE
-            = char:[^*] '**' {
-                return char
-            }
+    BOLDCLOSE
+        = char:[^* \t\r\n] '**' {
+            return char
+        }
 
     italic
         = start:ITALICOPEN value:(not_italic/italic)* end:ITALICCLOSE {
@@ -194,14 +194,54 @@
         }
 
     ITALICOPEN
-        = '*' char:[^*] {
+        = '*' char:[^* \t\r\n] {
             return char
         }
 
     ITALICCLOSE
-        = char:[^*] '*' {
+        = char:[^* \t\r\n] '*' {
             return char
         }
+
+    struck
+        = start:STRUCKOPEN value:(not_struck/struck)* end:STRUCKCLOSE {
+            return new Tag({tag:"strike",content:[start+value.join("")+end]})
+        }
+
+    not_struck
+        = not:(!STRUCKCLOSE !STRUCKOPEN.) {
+                return not.join("");
+        }
+
+    STRUCKOPEN
+        = '~~' char:[^~ \t\r\n] {
+            return char
+        }
+
+   STRUCKCLOSE
+        = char:[^~ \t\r\n] '~~' {
+            return char
+        }
+
+   mark
+       = start:MARKOPEN value:(not_mark/mark)* end:MARKCLOSE {
+           return new Tag({tag:"mark",content:[start+value.join("")+end]})
+       }
+
+   not_mark
+       = not:(!MARKCLOSE !MARKOPEN.) {
+               return not.join("");
+       }
+
+   MARKOPEN
+       = '==' char:[^= \t\r\n] {
+           return char
+       }
+
+   MARKCLOSE
+       = char:[^= \t\r\n] '==' {
+           return char
+       }
 
     mhr
         = [\r\n] [ \t]* '***' [ \t]* [\r\n] {
