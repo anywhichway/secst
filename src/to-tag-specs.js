@@ -5,19 +5,22 @@ const keySort = (object) => {
     return result;
 }
 
-const toTagSpecs = async (data,seen= {}) => {
-    for(const key in data) {
+const toTagSpecs = async (data,seen) => {
+    let isRoot;
+    if(!seen) {
+        seen = {};
+    }
+    for(const key of Object.keys(data).sort()) {
+        if(seen[key]) {
+            continue;
+        }
         let tag = {...data[key]};
         if(typeof(tag)==="function") {
             tag = {...await tag()};
         }
-        if(seen[key]) {
-            continue;
-        }
         if(tag.htmlDocLink==null) {
             tag.htmlDocLink =  `<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/${key}" target="_tab">html</a>`;
         }
-
         seen[key] = tag;
         for(const property in tag) {
             const value = tag[property],
@@ -58,7 +61,7 @@ const toTagSpecs = async (data,seen= {}) => {
             }
         }
     }
-    return keySort(seen);
+    return isRoot ? keySort(seen) : seen;
 }
 
 export {toTagSpecs, toTagSpecs as default}

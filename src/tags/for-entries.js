@@ -50,10 +50,10 @@ const forEntries = {
                 }
             }
         }
-        const unescapeHTML = (text) => text.replace(/&lt;/g,"<").replace(/&gt;/g,">");
+        const unescapeHTML = (text) => typeof(text)=="string" ? text.replace(/&lt;/g,"<").replace(/&gt;/g,">").replace(/&amp;/g,"&") : (text!=null ? text : "");
         Object.entries(object).forEach(([key,value],index,iterable) => {
             // todo: move to web worker
-            const template = el.innerHTML.replaceAll(/&amp;/g,"&"); // should do a regexp replace inside string templates
+            const template = unescapeHTML(el.innerHTML); // should do a regexp replace inside string templates
             const html = (new Function("unescapeHTML","key","value","index","iterable","return `" + template + "`"))(unescapeHTML,key,value,index,iterable);
             el.insertAdjacentHTML("beforebegin",html)
         });

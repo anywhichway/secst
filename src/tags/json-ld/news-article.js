@@ -2,6 +2,7 @@ import Person from "./person.js";
 
 const headline = {
     htmlDocLink: "",
+    additionalDocLinks: ['<a target="_tab" href="https://schema.org/headline">JSON schema</a>'],
     attributesAllowed: {
         level: true
     },
@@ -21,6 +22,7 @@ const headline = {
 
 const datePublished = {
     htmlDocLink: "",
+    additionalDocLinks: ['<a target="_tab" href="https://schema.org/datePublished">JSON schema</a>'],
     attributesAllowed:{
         "data-format": true,
         lang: true,
@@ -43,6 +45,7 @@ const datePublished = {
 
 const author = {
     htmlDocLink: "",
+    additionalDocLinks: ['<a target="_tab" href="https://schema.org/author">JSON schema</a>'],
     contentAllowed: {
         name: {
             contentAllowed: true,
@@ -70,6 +73,7 @@ const author = {
 
 const NewsArticle = {
     htmlDocLink: "",
+    additionalDocLinks: ['<a target="_tab" href="https://schema.org/NewsArticle">JSON schema</a>','<a target="_tab" href="https://developers.google.com/search/docs/appearance/structured-data/article">Google SEO info</a>'],
     async contentAllowed() {
         const {blockContent} = await import("../block-content.js");
         this.contentAllowed = {

@@ -32,7 +32,7 @@
             }
 
     content
-        = mhr / italic / bold / struck / mark / backtickquoted / escape / script / code /  value / hr / br / emoji / (&colon expression _?) / [ a-z0-9_\-~!@#$%^&*()_+=\[\{\]\}|\\;:"'<,>.?/\n\r\t]i
+        = mhr / murl /italic / bold / struck / mark / backtickquoted / escape / script / code /  value / hr / br / emoji / (&colon expression _?) / [ a-z0-9_\-~!@#$%^&*()_+=\[\{\]\}|\\;:"'<,>.?/\n\r\t]i
 
     colon
         = ":"
@@ -107,7 +107,7 @@
         = "@"
 
     bracketed_SECST
-        = BRACKETOPEN value:(mhr/italic/bold/struck/mark/backtickquoted/symbol/hashtag/mention/escape/script/code/value/hr/br/emoji/expression/not_bracketed/bracketed_SECST)* BRACKETCLOSE {
+        = BRACKETOPEN value:(mhr/murl/italic/bold/struck/mark/backtickquoted/symbol/hashtag/mention/escape/script/code/value/hr/br/emoji/expression/not_bracketed/bracketed_SECST)* BRACKETCLOSE {
             if(Array.isArray(value) && value.every((item) => typeof(item)==="string")) {
                 return [value.join("")];
             }
@@ -248,6 +248,11 @@
             return new Tag({tag:"hr",content:[]})
         }
 
+    murl
+        = _ url:url _ {
+            return new Tag({tag:"a",content:[url[1]]})
+        }
+
     backtickquoted
             = BACKTICKOPEN text:(not_backtickquoted/backtickquoted)*  BACKTICKCLOSE {
                  return new Tag({tag:"code",content:[text.join("")]})
@@ -340,7 +345,7 @@
         = "toggle" { return ["toggle",""] }
 
     url
-        = prefix:urlprefix path:[a-z0-9_\-~`!@#$%^&*_+=\{\}\[\]|\\:;'<,>.?/]i* {
+        = prefix:urlprefix path:[a-z0-9_\-~`!@#$%^&*_+=|\\:;'<,>.?/]i* {
             if(prefix.startsWith(".#")) {
                 return ["url","#"+path.join("")]
             }

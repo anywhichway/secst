@@ -11,6 +11,7 @@ const {init,SearchIndex} = emojiMart;
 let emojiMartData;
 const emoji = {
     htmlDocLink: "",
+    additionalDocLinks: ['<a target="_tab" href="https://missiveapp.com/open/emoji-mart">emoji catalog</a>', '<a target="_tab" href="https://github.com/missive/emoji-mart#readme">additional info</a>'],
     attributesAllowed: {
         greyscale() {
             return {

@@ -1,5 +1,6 @@
 const Person = {
     htmlDocLink: "",
+    additionalDocLinks: ['<a target="_tab" href="https://schema.org/Person">JSON schema</a>'],
     contentAllowed: {
         name: {
             contentAllowed: true,
