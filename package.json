@@ -20,7 +20,9 @@
     "markup",
     "semantic",
     "computational",
-    "styleable"
+    "styleable",
+    "Lia",
+    "LiaScript"
   ],
   "author": "Simon Y. Blackwell",
   "license": "AGPL-3.0",

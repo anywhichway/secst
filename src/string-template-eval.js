@@ -37,18 +37,18 @@ const stringTemplateEval = async (stringTemplate,requestor) => {
                     //debugger;
                     try { // try as math expression
                         const result = await (new AsyncFunction("functions", "math", "globalThis", "with(functions) { with(math) { return math.evaluate(\"" + stringTemplate + "\") }}")).call(null, functions, self.math); //always 3  args so globalThis is undefined
-                        return result && (typeof(result.isOperatorNode)!=="undefined" || (result.units && result.toSI)) ? result.toString() : result;
+                        return result ? (result._data ? result._data : ((typeof(result.isOperatorNode)!=="undefined" || (result.units && result.toSI)) ? result.toString() : result)) : result;
                     } catch (e) {
                         try { // try as JavaScript expression
                             const result = await (new AsyncFunction("functions", "math", "globalThis", "with(functions) { with(math) { return " + stringTemplate + "}}")).call(null, functions, self.math);
-                            return result && typeof(result.isOperatorNode)!=="undefined" ? result.toString() : result;
+                            return result ? (result._data ? result._data : ((typeof(result.isOperatorNode)!=="undefined" || (result.units && result.toSI)) ? result.toString() : result)) : result;
                         } catch(e) {
                             return {stringTemplateError: e + ""}
                         }
                     }
                 },
             },
-            timeout:1000,
+            timeout:100000,
             imports:['https://cdn.jsdelivr.net/npm/mathjs@11.3.2/lib/browser/math.min.js','https://cdn.jsdelivr.net/npm/json5@2.2.1/dist/index.min.js']})
     }
     return (await stringTemplateEval.evaluator.evaluate)(stringTemplate);
