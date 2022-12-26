@@ -4,6 +4,7 @@ import headings from "./headings.js";
 import mermaidChart from "./mermaid-chart.js";
 import p from "./p.js";
 import phrasingContent from "./phrasing-content.js";
+import repl from "./repl.js";
 import sectioningContent from "./sectioning-content.js";
 import sheetMusic from "./sheet-music.js";
 import theme from "./theme.js";
@@ -18,6 +19,7 @@ const flowContent = {
     mermaidChart,
     p,
     ...phrasingContent,
+    repl,
     ...sectioningContent,
     sheetMusic,
     theme

@@ -388,7 +388,7 @@ const transform = async (parser,text,{styleAllowed}={}) => {
     },[]);
     const dom = document.createDocumentFragment();
     dom.appendChild(dom.head = document.createElement("head"));
-    dom.head.innerHTML = `<meta name="viewport" content="width=device-width, initial-scale=1" />`;
+    dom.head.innerHTML = `<meta name="viewport" content="width=device-width, initial-scale=1" /><script src="https://cdn.jsdelivr.net/npm/@anywhichway/quick-component@0.0.14"></script>`;
     dom.appendChild(dom.body = document.createElement("body"));
     const header = document.createElement("header"),
         content = document.createElement("div"),

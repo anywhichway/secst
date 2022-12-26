@@ -5,7 +5,7 @@ const sheetMusic = {
         {
             tag: "script",
             attributes: {
-                src: "https://cdn.jsdelivr.net/npm/@anywhichway/quick-component@0.0.14/quick-component.min.js",
+                src: "https://cdn.jsdelivr.net/npm/@anywhichway/quick-component@0.0.15",
                 component: "https://cdn.jsdelivr.net/npm/@anywhichway/sheet-music@0.0.1"
             }
         }

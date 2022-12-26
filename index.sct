@@ -639,7 +639,69 @@
         :section[
             :h[REPL]
 
-            The :code[:repl[]] tag (coming soon!) supports the insertion of a fully functional REPL into a document. See the :a(https://medium.com/@anywhichway/how-to-host-a-repl-342bc0e15f5d)[Medium article] for a preview.
+            The :code[:repl[]] tag supports the insertion of a REPL into a document.
+
+            Below is what a REPL looks with all sections turned on plus line numbers.
+
+            :code[:repl({head:true,css:true,body:true,javascript:true,linenumbers:true})[]]
+
+            :repl({head:true,css:true,body:true,javascript:true,linenumbers:true})[]
+
+            If you drop sections, they will disappear:
+
+            :code[:repl({css:true,body:true,linenumbers:true})[]]
+
+            :repl({css:true,body:true,linenumbers:true})[]
+
+            Sections can be pre-populated:
+
+            :code[
+                :repl({css:true,body:true,linenumbers:true})[
+                    :slot({name:"css"})[h1 { font-size:small}]
+                    :slot({name:"body"})[<h1>Heading One</h1>]
+                ]
+            ]
+
+            :repl({css:true,body:true,linenumbers:true})[
+                  :slot({name:"css"})[h1 { font-size:small}]
+                  :slot({name:"body"})[<h1>Heading One</h1>]
+            ]
+
+            Sections can be made readonly:
+
+            :code[
+                :repl({css:true,body:true,linenumbers:true})[
+                    :slot({name:"css",readonly:true})[h1 { font-size:small}]
+                    :slot({name:"body"})[<h1>Heading One</h1>]
+                ]
+            ]
+
+            :repl({css:true,body:true,linenumbers:true})[
+                  :slot({name:"css",readonly:true})[h1 { font-size:small}]
+                  :slot({name:"body"})[<h1>Heading One</h1>]
+            ]
+
+            Sections can be hidden:
+
+            :code[
+                :repl({css:true,body:true,linenumbers:true})[
+                    :slot({name:"css",hidden:true})[h1 { font-size:small}]
+                    :slot({name:"body"})[<h1>Heading One</h1>]
+                ]
+            ]
+
+            :repl({css:true,body:true,linenumbers:true})[
+                  :slot({name:"css",hidden:true})[h1 { font-size:small}]
+                  :slot({name:"body"})[<h1>Heading One</h1>]
+            ]
+
+            See the following for more info:
+
+            :ul[
+                :li[:a(https://github.com/anywhichway/repl-host)[GitHub]]
+                :li[:a(https://www.npmjs.com/package/@anywhichway/repl-host)[NPMJS]]
+                :li[:a(https://medium.com/@anywhichway/how-to-host-a-repl-342bc0e15f5d)[Medium: How to Host a REPL]]
+            ]
         ]
         :section[
             :h(#sheet-music)[Sheet Music (ABC Notation)]

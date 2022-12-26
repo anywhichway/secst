@@ -1,4 +1,4 @@
-<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width, initial-scale=1"><script src="./runtime.js?run"></script></head><body><header id="secst-header"><p style="float: left;"><a href="#the-joy-of-secst">SECST</a> Markup Language</p> <p style="float: right;"><a target="_tab" href="https://github.com/anywhichway/secst">GitHub</a></p></header><div id="secst-content">
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width, initial-scale=1"><script src="https://cdn.jsdelivr.net/npm/@anywhichway/quick-component@0.0.14"></script><script src="./runtime.js?run"></script></head><body><header id="secst-header"><p style="float: left;"><a href="#the-joy-of-secst">SECST</a> Markup Language</p> <p style="float: right;"><a target="_tab" href="https://github.com/anywhichway/secst">GitHub</a></p></header><div id="secst-content">
 
 <section><h1 id="the-joy-of-secst" class="autohelm-heading">The Joy of SECST</h1><p>    <abbr>SECST</abbr> (<strong>S</strong>emantic, <strong>E</strong>xtensible, <strong>C</strong>omputational, <strong>S</strong>tyleable, <strong>T</strong>agged) markup is a more expressive, but easy to learn and use, partial superset and alternative to regular Markdown. It provides these features and more:</p><p>    <ul><li> Support for almost all HTML tags <a href="#tags">and then some...</a>, with <a href="#theme">themes and styles</a>.</li><li> <a href="#tables-of-contents">Table of contents</a>, <a href="#footnotes">footnote</a>, <a href="#hashtags">hashtag</a> and <a href="#mentions">social media</a> support.</li><li> Reactive <a href="#values-and-formulas">formulas and data import</a> that are as simple as Excel formulas, e.g. <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/styles/default.min.css"><code class="nohighlight">:value[2 * 2]</code> = <input class="secst" data-default="" data-template="2 * 2" value="4" title="2 * 2" data-fitcontent="" disabled="" style="width: 2ch;">.</li><li> SEO optimization via server rendering with JSON-LD <a href="#structured-data">structured data</a> for both content generation and layout.</li></ul></p><p>    Use SECST to joyfully create compelling, interactive HTML documents.</p><p>    This is the source for the introduction above:</p><p>    <pre class="secst"><code class="language-secst">:abbr[SECST] (:strong[S]emantic, :strong[E]xtensible, :strong[C]omputational, :strong[S]tyleable, :strong[T]agged) markup is a more expressive, but easy to learn and use, partial superset and alternative to regular Markdown. It provides these features and more:
 
@@ -122,13 +122,13 @@ Use SECST to joyfully create compelling, interactive HTML documents.</code></pre
  A --- B
  B--&gt;C[fa:fa-ban forbidden]
  B--&gt;D(fa:fa-spinner);
-]</code></pre></p><p>            renders as</p><script src="https://cdn.jsdelivr.net/npm/mermaid@9/dist/mermaid.min.js" onload="(() =&gt; { mermaid.initialize({ startOnLoad: true }) })()"></script><pre id="mermaidChart5929909003824907" class="mermaid">
+]</code></pre></p><p>            renders as</p><script src="https://cdn.jsdelivr.net/npm/mermaid@9/dist/mermaid.min.js" onload="(() =&gt; { mermaid.initialize({ startOnLoad: true }) })()"></script><pre id="mermaidChart7782632059833348" class="mermaid">
                 graph LR
                 A --- B
                 B-->C[fa:fa-ban forbidden]
                 B-->D(fa:fa-spinner);
             </pre><script type="module">
-            const el = document.getElementById("mermaidChart5929909003824907"),
+            const el = document.getElementById("mermaidChart7782632059833348"),
                 sibling = el.nextSibling,
                 insertSvg = function (svgCode, bindFunctions) {
                     el.innerHTML = svgCode;
@@ -142,7 +142,7 @@ Use SECST to joyfully create compelling, interactive HTML documents.</code></pre
                 B-->C[fa:fa-ban forbidden]
                 B-->D(fa:fa-spinner);
             `;
-            setTimeout(() => mermaid.mermaidAPI.render("mermaidChart5929909003824907", graphDefinition, insertSvg),1000);
+            setTimeout(() => mermaid.mermaidAPI.render("mermaidChart7782632059833348", graphDefinition, insertSvg),1000);
         </script><p>            There are lots of charts to choose from:</p><p>            <ul><li> <a target="_tab" href="https://mermaid.js.org/syntax/flowchart.html">Flowchart</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/sequenceDiagram.html">Sequence Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/classDiagram.html">Class Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/stateDiagram.html">State Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/entityRelationshipDiagram.html">Entity Relationship Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/userJourney.html">User Journey</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/gantt.html">Gannt</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/pie.html">Pie Chart</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/requirementDiagram.html">Requirement Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/gitgraph.html">Gitgraph Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/c4c.html">C4C Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/mindmap.html">Mindmaps</a></li></ul><br>        </p></section><section><h3 id="questions" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Questions<span class="autohelm-nav autohelm-nav-up-down"> <a href="#mermaid-chart">&uarr;</a> <a href="#repl">&darr;</a></span></h3><p>            Questions can be used to create a quiz like experience.</p><p>            <pre class="secst"><code class="nohighlight">:question({type:"number",showanswer:true})[
   :text[What is the :code[sqrt(4)]?]
   :answer[sqrt(4)]
@@ -170,14 +170,32 @@ Use SECST to joyfully create compelling, interactive HTML documents.</code></pre
                 }
             }
         });
-</script></p><p>            Clicking on the <span>&check;</span> or leaving the input field tests the answer. If incorrect, the question will be surrounded with a red box based on the style <code class="nohighlight">secst-error</code>.</p><p>            Questions take most of the same type attribute values as <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input">input</a>. They can also take the attribute <code class="nohighlight">showanswer:true</code> if the correct answer is supposed to be shown after a user provides the wrong response.</p><p>            Questions have two required content tags, <code class="nohighlight">:text[&lt;question-body&gt;]</code> and <code class="nohighlight">:answer[&lt;some-formula&gt;]</code>, that must be provided in order. The <code class="nohighlight">&lt;question-body&gt;</code> can be just about any content that would normally go in a paragraph. Formulas are <a href="#values-and-formulas">documented later</a>. The <code class="nohighlight">:answer[]</code> tag can also take the attribute <code class="nohighlight">literal</code>, e.g. <code class="nohighlight">:answer(literal)[2]</code>.<br>        </p></section><section><h3 id="repl" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>REPL<span class="autohelm-nav autohelm-nav-up-down"> <a href="#questions">&uarr;</a> <a href="#sheet-music">&darr;</a></span></h3><p>            The <code class="nohighlight">:repl[]</code> tag (coming soon!) supports the insertion of a fully functional REPL into a document. See the <a target="_tab" href="https://medium.com/@anywhichway/how-to-host-a-repl-342bc0e15f5d">Medium article</a> for a preview.<br>        </p></section><section><h3 id="sheet-music" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Sheet Music (ABC Notation)<span class="autohelm-nav autohelm-nav-up-down"> <a href="#repl">&uarr;</a> <a href="#mentions">&darr;</a></span></h3><p>            <code class="nohighlight">:sheetMusic[]</code> is a block level element, it belongs outside of paragraphs. Just provide <a target="_tab" href="https://abcnotation.com/examples">ABC notation</a> as the content.</p><p>            <pre class="secst"><code class="nohighlight">:sheetMusic[
+</script></p><p>            Clicking on the <span>&check;</span> or leaving the input field tests the answer. If incorrect, the question will be surrounded with a red box based on the style <code class="nohighlight">secst-error</code>.</p><p>            Questions take most of the same type attribute values as <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input">input</a>. They can also take the attribute <code class="nohighlight">showanswer:true</code> if the correct answer is supposed to be shown after a user provides the wrong response.</p><p>            Questions have two required content tags, <code class="nohighlight">:text[&lt;question-body&gt;]</code> and <code class="nohighlight">:answer[&lt;some-formula&gt;]</code>, that must be provided in order. The <code class="nohighlight">&lt;question-body&gt;</code> can be just about any content that would normally go in a paragraph. Formulas are <a href="#values-and-formulas">documented later</a>. The <code class="nohighlight">:answer[]</code> tag can also take the attribute <code class="nohighlight">literal</code>, e.g. <code class="nohighlight">:answer(literal)[2]</code>.<br>        </p></section><section><h3 id="repl" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>REPL<span class="autohelm-nav autohelm-nav-up-down"> <a href="#questions">&uarr;</a> <a href="#sheet-music">&darr;</a></span></h3><p>            The <code class="nohighlight">:repl[]</code> tag supports the insertion of a REPL into a document.</p><p>            Below is what a REPL looks with all sections turned on plus line numbers.</p><p>            <code class="nohighlight">:repl({head:true,css:true,body:true,javascript:true,linenumbers:true})[]</code></p><script src="https://cdn.jsdelivr.net/npm/@anywhichway/quick-component@0.0.15" component="./repl-host"></script><repl-host head="" css="" body="" javascript="" linenumbers=""></repl-host><p>            If you drop sections, they will disappear:</p><p>            <code class="nohighlight">:repl({css:true,body:true,linenumbers:true})[]</code></p><repl-host css="" body="" linenumbers=""></repl-host><p>            Sections can be pre-populated:</p><p>            <pre class="secst"><code class="nohighlight">:repl({css:true,body:true,linenumbers:true})[
+  :slot({name:"css"})[h1 { font-size:small}]
+  :slot({name:"body"})[&lt;h1&gt;Heading One&lt;/h1&gt;]
+]</code></pre></p><repl-host css="" body="" linenumbers="">
+                  <slot name="css">h1 { font-size:small}</slot>
+                  <slot name="body">&lt;h1&gt;Heading One&lt;/h1&gt;</slot>
+            </repl-host><p>            Sections can be made readonly:</p><p>            <pre class="secst"><code class="nohighlight">:repl({css:true,body:true,linenumbers:true})[
+  :slot({name:"css",readonly:true})[h1 { font-size:small}]
+  :slot({name:"body"})[&lt;h1&gt;Heading One&lt;/h1&gt;]
+]</code></pre></p><repl-host css="" body="" linenumbers="">
+                  <slot name="css" readonly="true">h1 { font-size:small}</slot>
+                  <slot name="body">&lt;h1&gt;Heading One&lt;/h1&gt;</slot>
+            </repl-host><p>            Sections can be hidden:</p><p>            <pre class="secst"><code class="nohighlight">:repl({css:true,body:true,linenumbers:true})[
+  :slot({name:"css",hidden:true})[h1 { font-size:small}]
+  :slot({name:"body"})[&lt;h1&gt;Heading One&lt;/h1&gt;]
+]</code></pre></p><repl-host css="" body="" linenumbers="">
+                  <slot name="css" hidden="true">h1 { font-size:small}</slot>
+                  <slot name="body">&lt;h1&gt;Heading One&lt;/h1&gt;</slot>
+            </repl-host><p>            See the following for more info:</p><p>            <ul><li><a target="_tab" href="https://github.com/anywhichway/repl-host">GitHub</a></li><li><a target="_tab" href="https://www.npmjs.com/package/@anywhichway/repl-host">NPMJS</a></li><li><a target="_tab" href="https://medium.com/@anywhichway/how-to-host-a-repl-342bc0e15f5d">Medium: How to Host a REPL</a></li></ul><br>        </p></section><section><h3 id="sheet-music" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Sheet Music (ABC Notation)<span class="autohelm-nav autohelm-nav-up-down"> <a href="#repl">&uarr;</a> <a href="#mentions">&darr;</a></span></h3><p>            <code class="nohighlight">:sheetMusic[]</code> is a block level element, it belongs outside of paragraphs. Just provide <a target="_tab" href="https://abcnotation.com/examples">ABC notation</a> as the content.</p><p>            <pre class="secst"><code class="nohighlight">:sheetMusic[
   X: 1
   T: Nokia Tune
   M: 3/4
   L: 1/8
   K: Amaj
   |: e'd' f2 g2 | c'b d2 e2 | ba c2 e2 | a6 |
-]</code></pre></p><p>            renders as</p><script src="https://cdn.jsdelivr.net/npm/@anywhichway/quick-component@0.0.14/quick-component.min.js" component="https://cdn.jsdelivr.net/npm/@anywhichway/sheet-music@0.0.1"></script><sheet-music>
+]</code></pre></p><p>            renders as</p><script src="https://cdn.jsdelivr.net/npm/@anywhichway/quick-component@0.0.15" component="https://cdn.jsdelivr.net/npm/@anywhichway/sheet-music@0.0.1"></script><sheet-music>
                 X: 1
                 T: Nokia Tune
                 M: 3/4
@@ -230,302 +248,182 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
                     </dl><br>                </p></section><section><h5 id="matrix-functions" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Matrix Functions<span class="autohelm-nav autohelm-nav-up-down"> <a href="#algebraic-functions">&uarr;</a> <a href="#unit-math">&darr;</a></span></h5><p>                    <input class="secst" data-default="" data-template="multiply([[1,2],[3,4]],[[5,6],[1,1]])" value="" title="multiply([[1,2],[3,4]],[[5,6],[1,1]])" data-fitcontent=""><br>                </p></section></section><section><h4 id="unit-math" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Unit Math<span class="autohelm-nav autohelm-nav-up-down"> <a href="#basic-math">&uarr;</a> <a href="#importing-data">&darr;</a></span></h4><p>                Unit math <a target="_tab" href="https://mathjs.org/docs/datatypes/units.html">from MathJS</a> allows fro conversions using the word <code class="nohighlight">to</code>, as well as units for numbers, e.g. <code class="nohighlight">45 deg</code>.</p><p>                There are many <a target="_tab" href="https://mathjs.org/docs/datatypes/units.html#reference">supported units</a>.</p><p>                Here are a few examples:</p><p>                <code class="nohighlight">:value[2 inch to cm]</code> = <input class="secst" data-default="" data-template="2 inch to cm" value="" title="2 inch to cm" data-fitcontent=""></p><p>                <code class="nohighlight">:value[90 km/h to mi/h]</code> = <input class="secst" data-default="" data-template="90 km/h to mi/h" value="" title="90 km/h to mi/h" data-fitcontent=""></p><p>                <code class="nohighlight">:value[90 km/h to m/h]</code> = <input class="secst" data-default="" data-template="90 km/h to m/h" value="" title="90 km/h to m/h" data-fitcontent=""> <code class="nohighlight">m/h</code> is meters per hour</p><p>                <code class="nohighlight">:value[(1 week + 1 day) to days]</code> = <input class="secst" data-default="" data-template="(1 week + 1 day) to days" value="" title="(1 week + 1 day) to days" data-fitcontent=""></p><p>                <code class="nohighlight">:value[cos(45 deg)]</code> = <input class="secst" data-default="" data-template="cos(45 deg)" value="" title="cos(45 deg)" data-fitcontent=""></p><p>                <code class="nohighlight">:value[8.314 m^3 Pa / mol / K]</code> = <input class="secst" data-default="" data-template="8.314 m^3 Pa / mol / K" value="" title="8.314 m^3 Pa / mol / K" data-fitcontent=""></p><p>                Remember, if you have a value that looks like a formula, but is not, you can use the attribute <code class="nohighlight">literal</code>, e.g.  <code class="nohighlight">:value(literal)[2 inch to cm]</code> = <input class="secst" data-default="" data-template="2 inch to cm" value="2 inch to cm" title="2 inch to cm" data-literal="" data-fitcontent="" disabled="" style="width: 13ch;">.</p><p>                And, you can use <code class="nohighlight">plaintext</code> to display values without any styling, e.g. <code class="nohighlight">:value(plaintext)[90 km/h to mi/h]</code> = <span class="secst" data-default="" data-template="90 km/h to mi/h" value="" title="90 km/h to mi/h" data-plaintext="">90 km/h to mi/h</span>.</p></section><section><h4 id="importing-data" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Importing Data<span class="autohelm-nav autohelm-nav-up-down"> <a href="#unit-math">&uarr;</a> <a href="#advanced-formulas">&darr;</a></span></h4><p>                Values can included imported data using the <code class="nohighlight">src</code> attribute and a mime type provided in the <code class="nohighlight">type</code> attribute. The trailing <code class="nohighlight">[]</code> are optional.</p><p>                Values with the boolean attribute <code class="nohighlight">static</code> is import data at transpile time. If importing fails, another attempt is made at runtime.</p><p>                JSON is formatted for readability and <a target="_tab" href="https://json5.org">JSON5</a> is supported to make it easier to handle remote data.</p><p>                <pre class="secst"><code class="nohighlight">:value(https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson static {type:"application/json"})</code></pre></p><p>                <textarea class="secst" data-mime-type="application/json" data-default="" title="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson" data-fitcontent="" disabled="">{
   "type": "FeatureCollection",
   "metadata": {
-    "generated": 1671994462000,
+    "generated": 1672081501000,
     "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson",
     "title": "USGS All Earthquakes, Past Hour",
     "status": 200,
     "api": "1.10.3",
-    "count": 7
+    "count": 4
   },
   "features": [
     {
       "type": "Feature",
       "properties": {
-        "mag": 1.95,
-        "place": "6km NW of The Geysers, CA",
-        "time": 1671994040940,
-        "updated": 1671994229091,
+        "mag": 1.56,
+        "place": "3km NNW of The Geysers, CA",
+        "time": 1672081045590,
+        "updated": 1672081140797,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73824786",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73824786.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73825391",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73825391.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 58,
+        "sig": 37,
         "net": "nc",
-        "code": "73824786",
-        "ids": ",nc73824786,",
+        "code": "73825391",
+        "ids": ",nc73825391,",
         "sources": ",nc,",
-        "types": ",focal-mechanism,nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 37,
-        "dmin": null,
-        "rms": 0.03,
-        "gap": 32,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 2.0 - 6km NW of The Geysers, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.8024979,
-          38.822834,
-          3.03
-        ]
-      },
-      "id": "nc73824786"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 2.23,
-        "place": "7 km SSE of Guánica, Puerto Rico",
-        "time": 1671993319250,
-        "updated": 1671993921740,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/pr71388998",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/pr71388998.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "reviewed",
-        "tsunami": 0,
-        "sig": 77,
-        "net": "pr",
-        "code": "71388998",
-        "ids": ",pr71388998,",
-        "sources": ",pr,",
-        "types": ",origin,phase-data,",
-        "nst": 8,
-        "dmin": 0.06793,
-        "rms": 0.07,
-        "gap": 233,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 2.2 - 7 km SSE of Guánica, Puerto Rico"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -66.8758333333333,
-          17.9068333333333,
-          15.24
-        ]
-      },
-      "id": "pr71388998"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.11,
-        "place": "2km WSW of Anderson Springs, CA",
-        "time": 1671993020140,
-        "updated": 1671994211683,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73824781",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73824781.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 19,
-        "net": "nc",
-        "code": "73824781",
-        "ids": ",nc73824781,",
-        "sources": ",nc,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 10,
-        "dmin": 0.01116,
-        "rms": 0.03,
-        "gap": 109,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 1.1 - 2km WSW of Anderson Springs, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.7133331,
-          38.7701683,
-          1.76
-        ]
-      },
-      "id": "nc73824781"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 2.99,
-        "place": "Puerto Rico region",
-        "time": 1671992188890,
-        "updated": 1671993445500,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/pr71388988",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/pr71388988.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "reviewed",
-        "tsunami": 0,
-        "sig": 138,
-        "net": "pr",
-        "code": "71388988",
-        "ids": ",pr71388988,",
-        "sources": ",pr,",
-        "types": ",origin,phase-data,",
+        "types": ",nearby-cities,origin,phase-data,",
         "nst": 29,
-        "dmin": 0.08758,
-        "rms": 0.23,
-        "gap": 226,
+        "dmin": 0.009997,
+        "rms": 0.03,
+        "gap": 80,
         "magType": "md",
         "type": "earthquake",
-        "title": "M 3.0 - Puerto Rico region"
+        "title": "M 1.6 - 3km NNW of The Geysers, CA"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -66.8805,
-          17.887,
-          14.5
+          -122.7710037,
+          38.8053322,
+          1.2
         ]
       },
-      "id": "pr71388988"
+      "id": "nc73825391"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 1.79,
-        "place": "6 km WSW of Volcano, Hawaii",
-        "time": 1671991967030,
-        "updated": 1671992298870,
+        "mag": 1.35,
+        "place": "3km NNW of The Geysers, CA",
+        "time": 1672080659600,
+        "updated": 1672080754672,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73282632",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73282632.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73825381",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73825381.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 49,
-        "net": "hv",
-        "code": "73282632",
-        "ids": ",hv73282632,",
-        "sources": ",hv,",
-        "types": ",origin,phase-data,",
-        "nst": 31,
+        "sig": 28,
+        "net": "nc",
+        "code": "73825381",
+        "ids": ",nc73825381,",
+        "sources": ",nc,",
+        "types": ",nearby-cities,origin,phase-data,",
+        "nst": 22,
         "dmin": null,
-        "rms": 0.300000012,
-        "gap": 57,
+        "rms": 0.05,
+        "gap": 64,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 1.4 - 3km NNW of The Geysers, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.7698364,
+          38.8050003,
+          0.94
+        ]
+      },
+      "id": "nc73825381"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 0.51,
+        "place": "16km W of Searles Valley, CA",
+        "time": 1672080032080,
+        "updated": 1672080246832,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40150335",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40150335.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 4,
+        "net": "ci",
+        "code": "40150335",
+        "ids": ",ci40150335,",
+        "sources": ",ci,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 8,
+        "dmin": 0.04026,
+        "rms": 0.18,
+        "gap": 149,
         "magType": "ml",
         "type": "earthquake",
-        "title": "M 1.8 - 6 km WSW of Volcano, Hawaii"
+        "title": "M 0.5 - 16km W of Searles Valley, CA"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -155.287506103516,
-          19.412166595459,
-          1.9099999666214
+          -117.5823333,
+          35.7773333,
+          7.32
         ]
       },
-      "id": "hv73282632"
+      "id": "ci40150335"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 0.29,
-        "place": "2km NNE of The Geysers, CA",
-        "time": 1671991940310,
-        "updated": 1671992953559,
+        "mag": 0.89,
+        "place": "17km W of Searles Valley, CA",
+        "time": 1672078780620,
+        "updated": 1672078985974,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73824771",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73824771.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40150319",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40150319.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 1,
-        "net": "nc",
-        "code": "73824771",
-        "ids": ",nc73824771,",
-        "sources": ",nc,",
+        "sig": 12,
+        "net": "ci",
+        "code": "40150319",
+        "ids": ",ci40150319,",
+        "sources": ",ci,",
         "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 10,
-        "dmin": 0.00737,
-        "rms": 0.02,
-        "gap": 95,
-        "magType": "md",
+        "nst": 13,
+        "dmin": 0.03296,
+        "rms": 0.17,
+        "gap": 151,
+        "magType": "ml",
         "type": "earthquake",
-        "title": "M 0.3 - 2km NNE of The Geysers, CA"
+        "title": "M 0.9 - 17km W of Searles Valley, CA"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -122.7511673,
-          38.7975006,
-          2.1
+          -117.5921667,
+          35.783,
+          7.88
         ]
       },
-      "id": "nc73824771"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.29,
-        "place": "2km WSW of Anderson Springs, CA",
-        "time": 1671990922140,
-        "updated": 1671993612628,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73824766",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73824766.geojson",
-        "felt": 2,
-        "cdi": 0,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 26,
-        "net": "nc",
-        "code": "73824766",
-        "ids": ",nc73824766,",
-        "sources": ",nc,",
-        "types": ",dyfi,nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 12,
-        "dmin": 0.01105,
-        "rms": 0.02,
-        "gap": 74,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 1.3 - 2km WSW of Anderson Springs, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.7128296,
-          38.7713318,
-          1.67
-        ]
-      },
-      "id": "nc73824766"
+      "id": "ci40150319"
     }
   ],
   "bbox": [
-    -155.28750610352,
-    17.887,
-    1.67,
-    -66.875833333333,
-    38.822834,
-    15.24
+    -122.7710037,
+    35.7773333,
+    0.94,
+    -117.5823333,
+    38.8053322,
+    7.88
   ]
 }</textarea></p><p>                Imported data is readonly because it is essentially a computation. To make it editable, use the attribute <code class="nohighlight">editable</code>.</p><p>                <pre class="secst"><code class="nohighlight">:value(https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson editable {type:"application/json"})</code></pre></p><p>                <textarea class="secst" data-mime-type="application/json" data-default="" data-template="await (async () =&gt; {
                         try {
@@ -549,302 +447,182 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
                         })()" title="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson" data-editable="" data-fitcontent="" style="height: 30em; width: 80ch;">{
   "type": "FeatureCollection",
   "metadata": {
-    "generated": 1671994462000,
+    "generated": 1672081501000,
     "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson",
     "title": "USGS All Earthquakes, Past Hour",
     "status": 200,
     "api": "1.10.3",
-    "count": 7
+    "count": 4
   },
   "features": [
     {
       "type": "Feature",
       "properties": {
-        "mag": 1.95,
-        "place": "6km NW of The Geysers, CA",
-        "time": 1671994040940,
-        "updated": 1671994229091,
+        "mag": 1.56,
+        "place": "3km NNW of The Geysers, CA",
+        "time": 1672081045590,
+        "updated": 1672081140797,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73824786",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73824786.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73825391",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73825391.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 58,
+        "sig": 37,
         "net": "nc",
-        "code": "73824786",
-        "ids": ",nc73824786,",
+        "code": "73825391",
+        "ids": ",nc73825391,",
         "sources": ",nc,",
-        "types": ",focal-mechanism,nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 37,
-        "dmin": null,
-        "rms": 0.03,
-        "gap": 32,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 2.0 - 6km NW of The Geysers, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.8024979,
-          38.822834,
-          3.03
-        ]
-      },
-      "id": "nc73824786"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 2.23,
-        "place": "7 km SSE of Guánica, Puerto Rico",
-        "time": 1671993319250,
-        "updated": 1671993921740,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/pr71388998",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/pr71388998.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "reviewed",
-        "tsunami": 0,
-        "sig": 77,
-        "net": "pr",
-        "code": "71388998",
-        "ids": ",pr71388998,",
-        "sources": ",pr,",
-        "types": ",origin,phase-data,",
-        "nst": 8,
-        "dmin": 0.06793,
-        "rms": 0.07,
-        "gap": 233,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 2.2 - 7 km SSE of Guánica, Puerto Rico"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -66.8758333333333,
-          17.9068333333333,
-          15.24
-        ]
-      },
-      "id": "pr71388998"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.11,
-        "place": "2km WSW of Anderson Springs, CA",
-        "time": 1671993020140,
-        "updated": 1671994211683,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73824781",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73824781.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 19,
-        "net": "nc",
-        "code": "73824781",
-        "ids": ",nc73824781,",
-        "sources": ",nc,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 10,
-        "dmin": 0.01116,
-        "rms": 0.03,
-        "gap": 109,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 1.1 - 2km WSW of Anderson Springs, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.7133331,
-          38.7701683,
-          1.76
-        ]
-      },
-      "id": "nc73824781"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 2.99,
-        "place": "Puerto Rico region",
-        "time": 1671992188890,
-        "updated": 1671993445500,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/pr71388988",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/pr71388988.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "reviewed",
-        "tsunami": 0,
-        "sig": 138,
-        "net": "pr",
-        "code": "71388988",
-        "ids": ",pr71388988,",
-        "sources": ",pr,",
-        "types": ",origin,phase-data,",
+        "types": ",nearby-cities,origin,phase-data,",
         "nst": 29,
-        "dmin": 0.08758,
-        "rms": 0.23,
-        "gap": 226,
+        "dmin": 0.009997,
+        "rms": 0.03,
+        "gap": 80,
         "magType": "md",
         "type": "earthquake",
-        "title": "M 3.0 - Puerto Rico region"
+        "title": "M 1.6 - 3km NNW of The Geysers, CA"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -66.8805,
-          17.887,
-          14.5
+          -122.7710037,
+          38.8053322,
+          1.2
         ]
       },
-      "id": "pr71388988"
+      "id": "nc73825391"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 1.79,
-        "place": "6 km WSW of Volcano, Hawaii",
-        "time": 1671991967030,
-        "updated": 1671992298870,
+        "mag": 1.35,
+        "place": "3km NNW of The Geysers, CA",
+        "time": 1672080659600,
+        "updated": 1672080754672,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73282632",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73282632.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73825381",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73825381.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 49,
-        "net": "hv",
-        "code": "73282632",
-        "ids": ",hv73282632,",
-        "sources": ",hv,",
-        "types": ",origin,phase-data,",
-        "nst": 31,
+        "sig": 28,
+        "net": "nc",
+        "code": "73825381",
+        "ids": ",nc73825381,",
+        "sources": ",nc,",
+        "types": ",nearby-cities,origin,phase-data,",
+        "nst": 22,
         "dmin": null,
-        "rms": 0.300000012,
-        "gap": 57,
+        "rms": 0.05,
+        "gap": 64,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 1.4 - 3km NNW of The Geysers, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.7698364,
+          38.8050003,
+          0.94
+        ]
+      },
+      "id": "nc73825381"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 0.51,
+        "place": "16km W of Searles Valley, CA",
+        "time": 1672080032080,
+        "updated": 1672080246832,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40150335",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40150335.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 4,
+        "net": "ci",
+        "code": "40150335",
+        "ids": ",ci40150335,",
+        "sources": ",ci,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 8,
+        "dmin": 0.04026,
+        "rms": 0.18,
+        "gap": 149,
         "magType": "ml",
         "type": "earthquake",
-        "title": "M 1.8 - 6 km WSW of Volcano, Hawaii"
+        "title": "M 0.5 - 16km W of Searles Valley, CA"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -155.287506103516,
-          19.412166595459,
-          1.9099999666214
+          -117.5823333,
+          35.7773333,
+          7.32
         ]
       },
-      "id": "hv73282632"
+      "id": "ci40150335"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 0.29,
-        "place": "2km NNE of The Geysers, CA",
-        "time": 1671991940310,
-        "updated": 1671992953559,
+        "mag": 0.89,
+        "place": "17km W of Searles Valley, CA",
+        "time": 1672078780620,
+        "updated": 1672078985974,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73824771",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73824771.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40150319",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40150319.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 1,
-        "net": "nc",
-        "code": "73824771",
-        "ids": ",nc73824771,",
-        "sources": ",nc,",
+        "sig": 12,
+        "net": "ci",
+        "code": "40150319",
+        "ids": ",ci40150319,",
+        "sources": ",ci,",
         "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 10,
-        "dmin": 0.00737,
-        "rms": 0.02,
-        "gap": 95,
-        "magType": "md",
+        "nst": 13,
+        "dmin": 0.03296,
+        "rms": 0.17,
+        "gap": 151,
+        "magType": "ml",
         "type": "earthquake",
-        "title": "M 0.3 - 2km NNE of The Geysers, CA"
+        "title": "M 0.9 - 17km W of Searles Valley, CA"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -122.7511673,
-          38.7975006,
-          2.1
+          -117.5921667,
+          35.783,
+          7.88
         ]
       },
-      "id": "nc73824771"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.29,
-        "place": "2km WSW of Anderson Springs, CA",
-        "time": 1671990922140,
-        "updated": 1671993612628,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73824766",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73824766.geojson",
-        "felt": 2,
-        "cdi": 0,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 26,
-        "net": "nc",
-        "code": "73824766",
-        "ids": ",nc73824766,",
-        "sources": ",nc,",
-        "types": ",dyfi,nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 12,
-        "dmin": 0.01105,
-        "rms": 0.02,
-        "gap": 74,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 1.3 - 2km WSW of Anderson Springs, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.7128296,
-          38.7713318,
-          1.67
-        ]
-      },
-      "id": "nc73824766"
+      "id": "ci40150319"
     }
   ],
   "bbox": [
-    -155.28750610352,
-    17.887,
-    1.67,
-    -66.875833333333,
-    38.822834,
-    15.24
+    -122.7710037,
+    35.7773333,
+    0.94,
+    -117.5823333,
+    38.8053322,
+    7.88
   ]
 }</textarea></p><p>                If an id is added, the data can be used in a computation.</p><p>                <pre class="secst"><code class="nohighlight">:value(#earthquake-data https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson {type:"application/json"})
 
@@ -870,302 +648,182 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
                         })()" title="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson" data-fitcontent="" disabled="" style="height: 30em; width: 80ch;">{
   "type": "FeatureCollection",
   "metadata": {
-    "generated": 1671994462000,
+    "generated": 1672081501000,
     "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson",
     "title": "USGS All Earthquakes, Past Hour",
     "status": 200,
     "api": "1.10.3",
-    "count": 7
+    "count": 4
   },
   "features": [
     {
       "type": "Feature",
       "properties": {
-        "mag": 1.95,
-        "place": "6km NW of The Geysers, CA",
-        "time": 1671994040940,
-        "updated": 1671994229091,
+        "mag": 1.56,
+        "place": "3km NNW of The Geysers, CA",
+        "time": 1672081045590,
+        "updated": 1672081140797,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73824786",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73824786.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73825391",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73825391.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 58,
+        "sig": 37,
         "net": "nc",
-        "code": "73824786",
-        "ids": ",nc73824786,",
+        "code": "73825391",
+        "ids": ",nc73825391,",
         "sources": ",nc,",
-        "types": ",focal-mechanism,nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 37,
-        "dmin": null,
-        "rms": 0.03,
-        "gap": 32,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 2.0 - 6km NW of The Geysers, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.8024979,
-          38.822834,
-          3.03
-        ]
-      },
-      "id": "nc73824786"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 2.23,
-        "place": "7 km SSE of Guánica, Puerto Rico",
-        "time": 1671993319250,
-        "updated": 1671993921740,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/pr71388998",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/pr71388998.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "reviewed",
-        "tsunami": 0,
-        "sig": 77,
-        "net": "pr",
-        "code": "71388998",
-        "ids": ",pr71388998,",
-        "sources": ",pr,",
-        "types": ",origin,phase-data,",
-        "nst": 8,
-        "dmin": 0.06793,
-        "rms": 0.07,
-        "gap": 233,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 2.2 - 7 km SSE of Guánica, Puerto Rico"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -66.8758333333333,
-          17.9068333333333,
-          15.24
-        ]
-      },
-      "id": "pr71388998"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.11,
-        "place": "2km WSW of Anderson Springs, CA",
-        "time": 1671993020140,
-        "updated": 1671994211683,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73824781",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73824781.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 19,
-        "net": "nc",
-        "code": "73824781",
-        "ids": ",nc73824781,",
-        "sources": ",nc,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 10,
-        "dmin": 0.01116,
-        "rms": 0.03,
-        "gap": 109,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 1.1 - 2km WSW of Anderson Springs, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.7133331,
-          38.7701683,
-          1.76
-        ]
-      },
-      "id": "nc73824781"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 2.99,
-        "place": "Puerto Rico region",
-        "time": 1671992188890,
-        "updated": 1671993445500,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/pr71388988",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/pr71388988.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "reviewed",
-        "tsunami": 0,
-        "sig": 138,
-        "net": "pr",
-        "code": "71388988",
-        "ids": ",pr71388988,",
-        "sources": ",pr,",
-        "types": ",origin,phase-data,",
+        "types": ",nearby-cities,origin,phase-data,",
         "nst": 29,
-        "dmin": 0.08758,
-        "rms": 0.23,
-        "gap": 226,
+        "dmin": 0.009997,
+        "rms": 0.03,
+        "gap": 80,
         "magType": "md",
         "type": "earthquake",
-        "title": "M 3.0 - Puerto Rico region"
+        "title": "M 1.6 - 3km NNW of The Geysers, CA"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -66.8805,
-          17.887,
-          14.5
+          -122.7710037,
+          38.8053322,
+          1.2
         ]
       },
-      "id": "pr71388988"
+      "id": "nc73825391"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 1.79,
-        "place": "6 km WSW of Volcano, Hawaii",
-        "time": 1671991967030,
-        "updated": 1671992298870,
+        "mag": 1.35,
+        "place": "3km NNW of The Geysers, CA",
+        "time": 1672080659600,
+        "updated": 1672080754672,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73282632",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73282632.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73825381",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73825381.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 49,
-        "net": "hv",
-        "code": "73282632",
-        "ids": ",hv73282632,",
-        "sources": ",hv,",
-        "types": ",origin,phase-data,",
-        "nst": 31,
+        "sig": 28,
+        "net": "nc",
+        "code": "73825381",
+        "ids": ",nc73825381,",
+        "sources": ",nc,",
+        "types": ",nearby-cities,origin,phase-data,",
+        "nst": 22,
         "dmin": null,
-        "rms": 0.300000012,
-        "gap": 57,
+        "rms": 0.05,
+        "gap": 64,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 1.4 - 3km NNW of The Geysers, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.7698364,
+          38.8050003,
+          0.94
+        ]
+      },
+      "id": "nc73825381"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 0.51,
+        "place": "16km W of Searles Valley, CA",
+        "time": 1672080032080,
+        "updated": 1672080246832,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40150335",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40150335.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 4,
+        "net": "ci",
+        "code": "40150335",
+        "ids": ",ci40150335,",
+        "sources": ",ci,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 8,
+        "dmin": 0.04026,
+        "rms": 0.18,
+        "gap": 149,
         "magType": "ml",
         "type": "earthquake",
-        "title": "M 1.8 - 6 km WSW of Volcano, Hawaii"
+        "title": "M 0.5 - 16km W of Searles Valley, CA"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -155.287506103516,
-          19.412166595459,
-          1.9099999666214
+          -117.5823333,
+          35.7773333,
+          7.32
         ]
       },
-      "id": "hv73282632"
+      "id": "ci40150335"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 0.29,
-        "place": "2km NNE of The Geysers, CA",
-        "time": 1671991940310,
-        "updated": 1671992953559,
+        "mag": 0.89,
+        "place": "17km W of Searles Valley, CA",
+        "time": 1672078780620,
+        "updated": 1672078985974,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73824771",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73824771.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40150319",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40150319.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 1,
-        "net": "nc",
-        "code": "73824771",
-        "ids": ",nc73824771,",
-        "sources": ",nc,",
+        "sig": 12,
+        "net": "ci",
+        "code": "40150319",
+        "ids": ",ci40150319,",
+        "sources": ",ci,",
         "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 10,
-        "dmin": 0.00737,
-        "rms": 0.02,
-        "gap": 95,
-        "magType": "md",
+        "nst": 13,
+        "dmin": 0.03296,
+        "rms": 0.17,
+        "gap": 151,
+        "magType": "ml",
         "type": "earthquake",
-        "title": "M 0.3 - 2km NNE of The Geysers, CA"
+        "title": "M 0.9 - 17km W of Searles Valley, CA"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -122.7511673,
-          38.7975006,
-          2.1
+          -117.5921667,
+          35.783,
+          7.88
         ]
       },
-      "id": "nc73824771"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.29,
-        "place": "2km WSW of Anderson Springs, CA",
-        "time": 1671990922140,
-        "updated": 1671993612628,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73824766",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73824766.geojson",
-        "felt": 2,
-        "cdi": 0,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 26,
-        "net": "nc",
-        "code": "73824766",
-        "ids": ",nc73824766,",
-        "sources": ",nc,",
-        "types": ",dyfi,nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 12,
-        "dmin": 0.01105,
-        "rms": 0.02,
-        "gap": 74,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 1.3 - 2km WSW of Anderson Springs, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.7128296,
-          38.7713318,
-          1.67
-        ]
-      },
-      "id": "nc73824766"
+      "id": "ci40150319"
     }
   ],
   "bbox": [
-    -155.28750610352,
-    17.887,
-    1.67,
-    -66.875833333333,
-    38.822834,
-    15.24
+    -122.7710037,
+    35.7773333,
+    0.94,
+    -117.5823333,
+    38.8053322,
+    7.88
   ]
 }</textarea></p><p>               <textarea class="secst" data-mime-type="application/json" data-default="" data-template="$(#earthquake-data).metadata" title="$(#earthquake-data).metadata" data-fitcontent="" disabled="" style="height: 1.5em; width: 15ch;">[object Object]</textarea><br>            </p></section><section><h4 id="advanced-formulas" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Advanced Formulas<span class="autohelm-nav autohelm-nav-up-down"> <a href="#importing-data">&uarr;</a> <a href="#formulas-with-css-selectors-and-multiple-values">&darr;</a></span></h4><section><h5 id="formulas-with-css-selectors-and-multiple-values" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Formulas With CSS Selectors and Multiple Values<span class="autohelm-nav autohelm-nav-up-down"> <a href="#advanced-formulas">&uarr;</a> <a href="#macro-list-formatting">&darr;</a></span></h5><p>                    You can use almost any <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors">CSS selector</a> in place of <code class="nohighlight">#id</code> in <code class="nohighlight">$(#&lt;id&gt;)</code>. The value returned will be the contents of the value property on the element or (if not available) the value attribute or the <code class="nohighlight">innerText</code>.</p><p>                    You can use commas to select multiple identifier named elements, e.g. <code class="nohighlight">:value[$(#id1, #id2, #id3)]</code> is an array of the values associated with the elements <code class="nohighlight">:value(#id1)[3]</code>, <code class="nohighlight">:value(#id2)[2]</code>, <code class="nohighlight">:value(#id3)[1]</code> and will be <code class="nohighlight">[3,2,1]</code>.</p><p>                    A value reference <code class="nohighlight">$(css-selector)</code> can end in <code class="nohighlight">[]</code> to indicate multiple values should be returned as an array if the selector does not contain a comma. This allows tables to be treated somewhat like spreadsheets.<br>                </p></section><section><h5 id="macro-list-formatting" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Macro List Formatting<span class="autohelm-nav autohelm-nav-up-down"> <a href="#formulas-with-css-selectors-and-multiple-values">&uarr;</a> <a href="#javascript">&darr;</a></span></h5><p>                     The SECST formula evaluator supports supports some utility functions.<br>                </p></section><section><h5 id="javascript" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>JavaScript<span class="autohelm-nav autohelm-nav-up-down"> <a href="#macro-list-formatting">&uarr;</a> <a href="#seo">&darr;</a></span></h5><p>                    You can use any JavaScript that is available in <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API">WebWorkers</a> inside a macro. A special read-only <code class="nohighlight">document</code> object is also made available. This object has title, baseURI, location, and navigator properties along with a property for each meta tag name and value.<br>                </p></section></section></section></section><section><h2 id="seo" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Search Engine Optimization<span class="autohelm-nav autohelm-nav-up-down"> <a href="#markup-without-html-names">&uarr;</a> <a href="#structured-data">&darr;</a></span></h2><p>        SECST provides several features to support <abbr>SEO</abbr> Search Engine Optimization.</p><p>        <ul title="SEO features"><li><a href="#hastags">hashtags</a></li><li><a href="#meta-tags">meta tags</a></li><li><a href="#structured-data">structured data</a></li><li><a href="#server-transpilation">server transpilation</a></li></ul><br>        </p><section><h3 id="structured-data" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Structured Data<span class="autohelm-nav autohelm-nav-up-down"> <a href="#seo">&uarr;</a> <a href="#news-article">&darr;</a></span></h3><p>            For select tags, SECST can generate JSON-LD directly from SECST markup. Content, layout, and SEO optimization will always be in sync.</p><p>            This is best covered by an example based on <a target="_tab" href="https://developers.google.com/search/docs/appearance/structured-data/article">Google's documentation for a news article</a>.</p><p>            <em>Note: Only those tags documented for <code class="nohighlight">NewsArticle</code> are currently supported.</em></p><section><h4 id="news-article" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>News Article<span class="autohelm-nav autohelm-nav-up-down"> <a href="#structured-data">&uarr;</a> <a href="#styling-content">&darr;</a></span></h4><p>                The SECST tag <code class="nohighlight">:NewsArticle[]</code> can contain regular SECST as well as tags that parallel established JSON-LD schema like <code class="nohighlight">:headline[]</code>, <code class="nohighlight">:author[]</code> and <code class="nohighlight">:Person[]</code>. Where there are identical or trivially equivalent tags and attribute names, e.g. <code class="nohighlight">image</code> and <code class="nohighlight">img</code>, the native SECST tag is used.</p><p>                <pre class="secst"><code class="nohighlight">:NewsArticle[
   :headline[Pinky Conquers The World]
@@ -1342,6 +1000,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
       "img": true,
       "mermaidChart": true,
       "p": true,
+      "repl": true,
       "section": true,
       "sheetMusic": true,
       "theme": true,
@@ -1396,7 +1055,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
       "format": "transform format(value)",
       "lang": true
     },
-    "contentAllowed": "Sun Dec 25 2022 10:54:21 GMT-0800 (Pacific Standard Time)",
+    "contentAllowed": "Mon Dec 26 2022 11:05:16 GMT-0800 (Pacific Standard Time)",
     "minCount": 0,
     "maxCount": 1,
     "toText": true
@@ -1831,6 +1490,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
       "pre": true,
       "q": true,
       "question": true,
+      "repl": true,
       "samp": true,
       "section": true,
       "sheetMusic": true,
@@ -1928,9 +1588,11 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
       "pre": true,
       "q": true,
       "question": true,
+      "repl": true,
       "samp": true,
       "section": true,
       "sheetMusic": true,
+      "slot": true,
       "strike": true,
       "strong": true,
       "style": true,
@@ -2166,9 +1828,11 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
       "pre": true,
       "q": true,
       "question": true,
+      "repl": true,
       "samp": true,
       "section": true,
       "sheetMusic": true,
+      "slot": true,
       "strike": true,
       "strong": true,
       "style": true,
@@ -2554,6 +2218,43 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
     "toInnerHTML": true,
     "connected": true
   },
+  "repl": {
+    "attributesAllowed": {
+      "body": "transform body(value)",
+      "css": "transform css(value)",
+      "head": "transform head(value)",
+      "javascript": "transform javascript(value)",
+      "linenumbers": "transform linenumbers(value)",
+      "replstyle": "string"
+    },
+    "htmlDocLink": "<a target="\&quot;_tab\&quot;" href="\&quot;https://www.npmjs.com/package/@anywhichway/repl-host\&quot;">html</a>",
+    "additionalDocLinks": [
+      "<a target="\&quot;_tab\&quot;" href="\&quot;https://medium.com/@anywhichway/how-to-host-a-repl-342bc0e15f5d\&quot;">Medium: How To Host A REPL</a>"
+    ],
+    "contentAllowed": {
+      "slot": true
+    },
+    "requires": [
+      {
+        "tag": "script",
+        "attributes": {
+          "src": "https://cdn.jsdelivr.net/npm/@anywhichway/quick-component@0.0.15",
+          "component": "./repl-host"
+        }
+      }
+    ],
+    "beforeMount": true
+  },
+  "slot": {
+    "attributesAllowed": {
+      "hidden": "boolean",
+      "linenumbers": "transform linenumbers(value)",
+      "name": "string",
+      "readonly": "boolean"
+    },
+    "contentAllowed": true,
+    "htmlDocLink": "<a href="\&quot;https://developer.mozilla.org/en-US/docs/Web/HTML/Element/slot\&quot;" target="\&quot;_tab\&quot;">html</a>"
+  },
   "section": {
     "attributesAllowed": {
       "level": "number"
@@ -2580,6 +2281,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
       "macro": true,
       "mermaidChart": true,
       "p": true,
+      "repl": true,
       "section": true,
       "sheetMusic": true,
       "theme": true,
@@ -2595,7 +2297,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
       {
         "tag": "script",
         "attributes": {
-          "src": "https://cdn.jsdelivr.net/npm/@anywhichway/quick-component@0.0.14/quick-component.min.js",
+          "src": "https://cdn.jsdelivr.net/npm/@anywhichway/quick-component@0.0.15",
           "component": "https://cdn.jsdelivr.net/npm/@anywhichway/sheet-music@0.0.1"
         }
       }
@@ -2854,7 +2556,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             </dd>
             <dd><em>Attributes Allowed</em>: <pre class="secst"><code class="nohighlight">N/A</code></pre>
             </dd>
-            <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">article, author, blockquote, datePublished, footer, forEach, forEntries, h, h1, h2, h3, h4, h5, h6, h7, h8, header, headline, img, mermaidChart, p, section, sheetMusic, theme, toc</code></pre>
+            <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">article, author, blockquote, datePublished, footer, forEach, forEntries, h, h1, h2, h3, h4, h5, h6, h7, h8, header, headline, img, mermaidChart, p, repl, section, sheetMusic, theme, toc</code></pre>
             </dd>
         
             <dt><strong>article</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/article" target="_tab">html</a>  <br> <br></dt>
@@ -3332,7 +3034,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             </dd>
             <dd><em>Attributes Allowed</em>: <pre class="secst"><code class="nohighlight">N/A</code></pre>
             </dd>
-            <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">&, @facebook, @github, @linkedin, @twitter, NewsArticle, a, abbr, article, b, blockquote, bold, br, code, del, details, dl, em, emoji, escape, footer, footnote, forEach, forEntries, h, h1, h2, h3, h4, h5, h6, h7, h8, hashtag, header, hr, i, img, input, ins, italic, kbd, latex, link, listeners, macro, mark, mermaidChart, meta, ol, p, pre, q, question, samp, section, sheetMusic, strike, strong, style, sub, sup, table, textarea, theme, title, toc, transpiled, u, ul, value, var</code></pre>
+            <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">&, @facebook, @github, @linkedin, @twitter, NewsArticle, a, abbr, article, b, blockquote, bold, br, code, del, details, dl, em, emoji, escape, footer, footnote, forEach, forEntries, h, h1, h2, h3, h4, h5, h6, h7, h8, hashtag, header, hr, i, img, input, ins, italic, kbd, latex, link, listeners, macro, mark, mermaidChart, meta, ol, p, pre, q, question, repl, samp, section, sheetMusic, strike, strong, style, sub, sup, table, textarea, theme, title, toc, transpiled, u, ul, value, var</code></pre>
             </dd>
         
             <dt><strong>forEach</strong>   <br> <br></dt>
@@ -3342,7 +3044,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Attributes Allowed</em>: <pre class="secst"><code class="nohighlight">  iterable: transform iterable(value)
 </code></pre>
             </dd>
-            <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">&, @facebook, @github, @linkedin, @twitter, NewsArticle, a, abbr, answer, article, b, blockquote, bold, br, caption, class, code, dd, del, details, dl, dt, em, emoji, escape, footer, footnote, forEach, forEntries, h, h1, h2, h3, h4, h5, h6, h7, h8, hashtag, header, hr, i, img, input, ins, italic, kbd, latex, li, link, macro, mark, mermaidChart, meta, ol, p, pre, q, question, samp, section, sheetMusic, strike, strong, style, sub, summary, sup, table, tbody, td, text, textarea, tfoot, th, thead, theme, toc, tr, transpiled, u, ul, value, var</code></pre>
+            <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">&, @facebook, @github, @linkedin, @twitter, NewsArticle, a, abbr, answer, article, b, blockquote, bold, br, caption, class, code, dd, del, details, dl, dt, em, emoji, escape, footer, footnote, forEach, forEntries, h, h1, h2, h3, h4, h5, h6, h7, h8, hashtag, header, hr, i, img, input, ins, italic, kbd, latex, li, link, macro, mark, mermaidChart, meta, ol, p, pre, q, question, repl, samp, section, sheetMusic, slot, strike, strong, style, sub, summary, sup, table, tbody, td, text, textarea, tfoot, th, thead, theme, toc, tr, transpiled, u, ul, value, var</code></pre>
             </dd>
         
             <dt><strong>answer</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/answer" target="_tab">html</a>  <br> <br></dt>
@@ -3428,7 +3130,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Attributes Allowed</em>: <pre class="secst"><code class="nohighlight">  object: transform object(value)
 </code></pre>
             </dd>
-            <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">&, @facebook, @github, @linkedin, @twitter, NewsArticle, a, abbr, answer, article, b, blockquote, bold, br, caption, class, code, dd, del, details, dl, dt, em, emoji, escape, footer, footnote, forEach, forEntries, h, h1, h2, h3, h4, h5, h6, h7, h8, hashtag, header, hr, i, img, input, ins, italic, kbd, latex, li, link, macro, mark, mermaidChart, meta, ol, p, pre, q, question, samp, section, sheetMusic, strike, strong, style, sub, summary, sup, table, tbody, td, text, textarea, tfoot, th, thead, theme, toc, tr, transpiled, u, ul, value, var</code></pre>
+            <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">&, @facebook, @github, @linkedin, @twitter, NewsArticle, a, abbr, answer, article, b, blockquote, bold, br, caption, class, code, dd, del, details, dl, dt, em, emoji, escape, footer, footnote, forEach, forEntries, h, h1, h2, h3, h4, h5, h6, h7, h8, hashtag, header, hr, i, img, input, ins, italic, kbd, latex, li, link, macro, mark, mermaidChart, meta, ol, p, pre, q, question, repl, samp, section, sheetMusic, slot, strike, strong, style, sub, summary, sup, table, tbody, td, text, textarea, tfoot, th, thead, theme, toc, tr, transpiled, u, ul, value, var</code></pre>
             </dd>
         
             <dt><strong>h</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/h" target="_tab">html</a>  <br> <br></dt>
@@ -3562,6 +3264,34 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">plain text</code></pre>
             </dd>
         
+            <dt><strong>repl</strong> <a target="_tab" href="https://www.npmjs.com/package/@anywhichway/repl-host">html</a> , <a target="_tab" href="https://medium.com/@anywhichway/how-to-host-a-repl-342bc0e15f5d">Medium: How To Host A REPL</a> <br> <br></dt>
+            <dd><em>Transformation Impacts</em>:
+                N/A <br> <br>
+            </dd>
+            <dd><em>Attributes Allowed</em>: <pre class="secst"><code class="nohighlight">  body: transform body(value)
+  css: transform css(value)
+  head: transform head(value)
+  javascript: transform javascript(value)
+  linenumbers: transform linenumbers(value)
+  replstyle: string
+</code></pre>
+            </dd>
+            <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">slot</code></pre>
+            </dd>
+        
+            <dt><strong>slot</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/slot" target="_tab">html</a>  <br> <br></dt>
+            <dd><em>Transformation Impacts</em>:
+                N/A <br> <br>
+            </dd>
+            <dd><em>Attributes Allowed</em>: <pre class="secst"><code class="nohighlight">  hidden: boolean
+  linenumbers: transform linenumbers(value)
+  name: string
+  readonly: boolean
+</code></pre>
+            </dd>
+            <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">plain text</code></pre>
+            </dd>
+        
             <dt><strong>section</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/section" target="_tab">html</a>  <br> <br></dt>
             <dd><em>Transformation Impacts</em>:
                 Attributes may differ from the below since the tag is transformed and transient attributes may be deleted. See the detailed documentation for the tag. <br> <br>
@@ -3569,7 +3299,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Attributes Allowed</em>: <pre class="secst"><code class="nohighlight">  level: number
 </code></pre>
             </dd>
-            <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">NewsArticle, article, blockquote, footer, forEach, forEntries, h, h1, h2, h3, h4, h5, h6, h7, h8, header, img, macro, mermaidChart, p, section, sheetMusic, theme, toc</code></pre>
+            <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">NewsArticle, article, blockquote, footer, forEach, forEntries, h, h1, h2, h3, h4, h5, h6, h7, h8, header, img, macro, mermaidChart, p, repl, section, sheetMusic, theme, toc</code></pre>
             </dd>
         
             <dt><strong>sheetMusic</strong>   <br> <br></dt>
