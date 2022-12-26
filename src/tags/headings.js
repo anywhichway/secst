@@ -6,7 +6,11 @@ const headings = {
             ...textContent
         },
         transform(node,{level}) {
+            if(node.attributes.level) {
+                level = node.attributes.level;
+            }
             node.tag = "h" + level;
+            delete node.attributes.level;
             return node;
         }
     }

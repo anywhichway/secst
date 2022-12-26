@@ -1,5 +1,7 @@
 :header[:p({align:"left"})[:a(.#the-joy-of-secst)[SECST] Markup Language] :p({align:"right"})[:a(https://github.com/anywhichway/secst)[GitHub]]]
 :footer[:p({align:"left"})[Copyright 2022, AnyWhichWay LLC]]
+:meta({name:"keywords"})[markup, Markdown, Latex, ABC Notation]
+:title[SECST Markup]
 :section[
 
 :h[The Joy of SECST]
@@ -125,9 +127,6 @@
                 Document Item | Markdown | SECST | Example
             ]
             :tr[
-                headings | :td[:code[h# heading text]] :td[:code[h#[heading text]]] :td[]
-            ]
-            :tr[
                 bold | :td[:code[**text**]] :td[:code[:strong[text]] and :code[**text**]] :td[**text**]
             ]
             :tr[
@@ -143,15 +142,22 @@
                 code | :td[:code['the code']]  :td[:code[:code[the code]] and :code['the code']] :td[`the code`]
             ]
             :tr[
-                horizontal rule | :td[:code[***]] :td[:code[:hr] and :code[***]] :td[]
-            ]
-            :tr[
                 newline | a new line | :td[a new line or :code[:br]] :td[]
             ]
             :tr[
                 paragraph | two new lines, i.e. an empty line | :td[two new lines or :code[:p[<content>...]]]  :td[]
             ]
         ]
+
+        Headings
+
+        :code[h# heading text] or :code[:h#[heading text]]
+
+        #h6 Heading Level Six
+
+        Horizontal Rule
+
+        :code[***] or :code[:hr]
 
         ***
 
@@ -197,6 +203,12 @@
                     automatic URL linking | :td[:code[https://www.google.com]] :td[:code[:a[https://www.google.com]] and :code[https://www.google.com]] :td[https://www.google.com]
                 ]
         ]
+
+        Code Block
+
+        :code[```code block```] or :code[:code[code block]]
+
+        ```code block```
     ]
     :section[
         :h[Markdown Gaps]
@@ -519,9 +531,9 @@
         :section[
             :h[Hashtags]
 
-            Hashtags can take the form :code[#<value>[]] or :code[#[<value>...]], or :code[:hashtag[<value>...]] where :code[<value>...] is a space separated list of words to hashtag. The short form :strong[MUST] be followed by :code[[]] to distinguish them from ids used to identify :code[:value[]] and other tags in the document.
+            Hashtags can take the form :code[#<value>[]] or :code[#[<value>...]], or :code[:hashtag[<value>...]] where :code[<value>...] is a space separated list of words to hashtag.
 
-            :code[#sects-is-great[]] renders as #sects-is-great[].
+            :code[#sects-is-great[]] renders as #sects-is-great.
 
             :code[#[sects-is-great javascript-is-great]] renders as #[sects-is-great javascript-is-great].
 

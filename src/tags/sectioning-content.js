@@ -1,5 +1,8 @@
 import footer from "./footer.js";
 import header from "./header.js";
+import link from "./link.js";
+import meta from "./meta.js";
+import title from "./title.js";
 import toc from "./toc.js";
 
 
@@ -10,6 +13,8 @@ const sectioningContent = {
     },
     footer,
     header,
+    link,
+    meta,
     async NewsArticle() {
         const {NewsArticle} = await import("./json-ld/news-article.js");
         return this.article = NewsArticle;
@@ -18,6 +23,7 @@ const sectioningContent = {
         const {section} = await import("./section.js");
         return this.section = section;
     },
+    title,
     toc
 }
 
