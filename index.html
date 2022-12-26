@@ -1,5 +1,7 @@
 <!DOCTYPE html><html><head><meta name="viewport" content="width=device-width, initial-scale=1"><script src="https://cdn.jsdelivr.net/npm/@anywhichway/quick-component@0.0.14"></script><script src="./runtime.js?run"></script></head><body><header id="secst-header"><p style="float: left;"><a href="#the-joy-of-secst">SECST</a> Markup Language</p> <p style="float: right;"><a target="_tab" href="https://github.com/anywhichway/secst">GitHub</a></p></header><div id="secst-content">
 
+
+
 <section><h1 id="the-joy-of-secst" class="autohelm-heading">The Joy of SECST</h1><p>    <abbr>SECST</abbr> (<strong>S</strong>emantic, <strong>E</strong>xtensible, <strong>C</strong>omputational, <strong>S</strong>tyleable, <strong>T</strong>agged) markup is a more expressive, but easy to learn and use, partial superset and alternative to regular Markdown. It provides these features and more:</p><p>    <ul><li> Support for almost all HTML tags <a href="#tags">and then some...</a>, with <a href="#theme">themes and styles</a>.</li><li> <a href="#tables-of-contents">Table of contents</a>, <a href="#footnotes">footnote</a>, <a href="#hashtags">hashtag</a> and <a href="#mentions">social media</a> support.</li><li> Reactive <a href="#values-and-formulas">formulas and data import</a> that are as simple as Excel formulas, e.g. <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/styles/default.min.css"><code class="nohighlight">:value[2 * 2]</code> = <input class="secst" data-default="" data-template="2 * 2" value="4" title="2 * 2" data-fitcontent="" disabled="" style="width: 2ch;">.</li><li> SEO optimization via server rendering with JSON-LD <a href="#structured-data">structured data</a> for both content generation and layout.</li></ul></p><p>    Use SECST to joyfully create compelling, interactive HTML documents.</p><p>    This is the source for the introduction above:</p><p>    <pre class="secst"><code class="language-secst">:abbr[SECST] (:strong[S]emantic, :strong[E]xtensible, :strong[C]omputational, :strong[S]tyleable, :strong[T]agged) markup is a more expressive, but easy to learn and use, partial superset and alternative to regular Markdown. It provides these features and more:
 
 :ul[
@@ -19,16 +21,14 @@ Use SECST to joyfully create compelling, interactive HTML documents.</code></pre
     </dl></p><section><h2 id="html-and-markdown-issues" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>HTML and Markdown Issues<span class="autohelm-nav autohelm-nav-up-down"> <a href="#why-another-language">&uarr;</a> <a href="#secst-benefits">&darr;</a></span></h2><p>        <ul><li>HTML is verbose as a result of the need for matching open and close named tags.</li><li>Markdown's goal is simplicity, for which it sacrifices a lot of expressive power. This sacrifice is the result of a non-uniform, non-semantic syntax used to support its simplicity.</li><li>Ensuring that HTML documents are meaningful for textual analysis or supportive of assistive software is hard.</li><li>Markdown is not semantic, you must learn the different annotations to format your document and the resulting HTML is not necessarily meaningful to textual analysis or assistive software. When Markdown initially had a very limited number of ways to format documents, its syntax was a benefit, for some it is now becoming a burden.</li><li>Some Markdown syntax is invisible, e.g. spaces for line breaks</li><li>The built-in self creating document navigation capabilities of HTML and Markdown are limited.</li><li>Using HTML's computational capabilities, i.e. JavaScript, requires programming skills.</li><li>Markdown provides no intrinsic computational capability. You must use something like Jupyter Notebook to support computation.</li><li>Markdown provides no way to bundle assets for delivery. HTML supports asset bundling through the use of data URLs, but it is rather obscure and not automatic.</li><li>Both HTML and Markdown are require specialized programming skills to extend.</li><li>HTML's legacy allows the creation of documents with security flaws.</li></ul><br>   </p></section><section><h2 id="secst-benefits" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>SECST Benefits<span class="autohelm-nav autohelm-nav-up-down"> <a href="#html-and-markdown-issues">&uarr;</a> <a href="#when-to-use-secst">&darr;</a></span></h2><p>        <ul><li>A consistent, uniform compact representation.</li><li>Compatibility with most <a href="#basic-markdown">Basic Markdown</a> and some <a href="#extened-markdown">Extended Markdown</a>.</li><li>Semantic tags, which make it easier to learn and remember than Markdown and encourages more meaningful documents than straight HTML. Many tags are named after their semantic HTML counterparts to make SECST easier to learn, maintain, and extend.</li><li>Enforcement of required attributes and valid values for proper behavior or accessibility reasons.</li><li>Extensive, built-in <a href="#tables-of-contents">document navigation</a> for tables of contents and footnotes (more than Markdown).</li><li>Using SECST's built-in <a href="#values-and-formulas">computational capability</a> for math and text expressions is no harder than writing Excel formulas.</li><li>A predominantly declarative extension technique make SECTS easier to extend than HTML. Expertise in programming custom elements is not required.</li><li>Asset bundling via the use of the attribute <code class="nohighlight">static</code> on <code class="nohighlight">audio</code>, <code class="nohighlight">img</code>, <code class="nohighlight">video</code> and <code class="nohighlight">value</code> tags.</li><li>SECST is easier to extend than Markdown. Expertise in parsers or regular expressions is not required.</li><li>SECST is transpiled to safe HTML constructs to limit the chance of XSS and other attacks.</li></ul><br>    </p></section></section>
 <section><h1 id="when-to-use-secst" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>When To Use SECST<span class="autohelm-nav autohelm-nav-up-down"> <a href="#why-another-language">&uarr;</a> <a href="#basic-markdown">&darr;</a></span></h1><p>    If you only need basic Markdown, then SECST is probably not for you.</p><p>    If you need extended Markdown, then SECST may be a good option.</p><p>    If you need more than Markdown, then SECST may be your only option short of HTML, CSS, and JavaScript so long as you are focused on interactive document authoring. If you are building an application use Svelte, VUE, React or some other framework.</p><section><h2 id="basic-markdown" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Basic Markdown<span class="autohelm-nav autohelm-nav-up-down"> <a href="#when-to-use-secst">&uarr;</a> <a href="#extended-markdown">&darr;</a></span></h2><p>        See <a>https://www.markdownguide.org/basic-syntax/</a>.</p><p>        <div style="overflow: auto; margin-right: 1ch;"><table class="secst">
             <thead><tr><th>Document Item</th><th>Markdown</th><th>SECST</th><th>Example</th></tr></thead>
-            <tr><td>headings</td><td><code class="nohighlight">h# heading text</code></td><td><code class="nohighlight">h#[heading text]</code></td><td></td></tr>
             <tr><td>bold</td><td><code class="nohighlight">**text**</code></td><td><code class="nohighlight">:strong[text]</code> and <code class="nohighlight">**text**</code></td><td><b>text</b></td></tr>
             <tr><td>italics</td><td><code class="nohighlight">*text*</code></td><td><code class="nohighlight">:em[text]</code> and <code class="nohighlight">*text*</code></td><td><i>text</i></td></tr>
             <tr><td>blockquote</td><td><code class="nohighlight">&gt; quote text</code></td><td><code class="nohighlight">:blockquote[quote text]</code></td><td></td></tr>
             <tr><td>nested blockquote</td><td><code class="nohighlight">&gt; quote text</code> <kbd>Enter</kbd> <code class="nohighlight">&gt;&gt; nested quote text</code></td><td><code class="nohighlight">:blockquote[quote text :blockquote[nested quote text]]</code></td><td></td></tr>
             <tr><td>code</td><td><code class="nohighlight">'the code'</code></td><td><code class="nohighlight">:code[the code]</code> and <code class="nohighlight">'the code'</code></td><td><code class="nohighlight">the code</code></td></tr>
-            <tr><td>horizontal rule</td><td><code class="nohighlight">***</code></td><td><code class="nohighlight">:hr</code> and <code class="nohighlight">***</code></td><td></td></tr>
             <tr><td>newline</td><td>a new line</td><td>a new line or <code class="nohighlight">:br</code></td><td></td></tr>
             <tr><td>paragraph</td><td>two new lines, i.e. an empty line</td><td>two new lines or <code class="nohighlight">:p[&lt;content&gt;...]</code></td><td></td></tr>
-        </table></div><br><hr>
+        </table></div></p><p>        Headings</p><p>        <code class="nohighlight">h# heading text</code> or <code class="nohighlight">:h#[heading text]</code></p><h6> Heading Level Six</h6><p>        Horizontal Rule</p><p>        <code class="nohighlight">***</code> or <code class="nohighlight">:hr</code><br><hr>
 <br>        Also see <a href="#lists">Lists</a>, <a href="#code">Code</a>, <a href="#links">Links</a>, <a href="#images">Images</a>.<br>    </p></section><section><h2 id="extended-markdown" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Extended Markdown<span class="autohelm-nav autohelm-nav-up-down"> <a href="#basic-markdown">&uarr;</a> <a href="#markdown-gaps">&darr;</a></span></h2><p>        See <a>https://www.markdownguide.org/extended-syntax/</a>.</p><p>        <div style="overflow: auto; margin-right: 1ch;"><table class="secst">
             <thead><tr><th>Document Item</th><th>Markdown</th><th>SECST</th><th>Example</th></tr></thead>
             <tr><td><a href="#footnotes">footnotes</a></td><td><code class="nohighlight">[number]</code></td><td><code class="nohighlight">:footnote[number] or :footnote[] for automatic numbering</code></td><td></td></tr>
@@ -41,7 +41,8 @@ Use SECST to joyfully create compelling, interactive HTML documents.</code></pre
               <tr><td>subscript</td><td><code class="nohighlight">H~2~O</code></td><td><code class="nohighlight">H:sub[2]0</code></td><td>H<sub>2</sub>0</td></tr>
               <tr><td>superscript</td><td><code class="nohighlight">X^2^</code></td><td><code class="nohighlight">X:sup[2]</code></td><td>X<sup>2</sup></td></tr>
               <tr><td>automatic URL linking</td><td><code class="nohighlight">https://www.google.com</code></td><td><code class="nohighlight">:a[https://www.google.com]</code> and <code class="nohighlight">https://www.google.com</code></td><td><a href="https://www.google.com" target="_tab">https://www.google.com</a></td></tr>
-        </table></div><br>    </p></section><section><h2 id="markdown-gaps" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Markdown Gaps<span class="autohelm-nav autohelm-nav-up-down"> <a href="#extended-markdown">&uarr;</a> <a href="#authoring">&darr;</a></span></h2><p>        <ul><li><a href="#hashtags">hashtags</a></li><li><a href="#audio">audio</a></li><li><a href="#video">video</a></li><li><ins>inserted</ins> and <del>deleted</del>, see <a href="inserted-and-deleted" target="_tab">inserted and deleted</a></li><li><a href="#tables-of-contents">tables of contents</a></li><li><a href="#social-media-and-other-mentions">social media and other mentions</a></li></ul><br>    </p></section></section>
+        </table></div></p><p>        Code Block</p><p>        <code class="nohighlight">```code block```</code> or <code class="nohighlight">:code[code block]</code></p><p>        <pre class="secst"><code class="nohighlight">code block
+</code></pre><br>    </p></section><section><h2 id="markdown-gaps" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Markdown Gaps<span class="autohelm-nav autohelm-nav-up-down"> <a href="#extended-markdown">&uarr;</a> <a href="#authoring">&darr;</a></span></h2><p>        <ul><li><a href="#hashtags">hashtags</a></li><li><a href="#audio">audio</a></li><li><a href="#video">video</a></li><li><ins>inserted</ins> and <del>deleted</del>, see <a href="inserted-and-deleted" target="_tab">inserted and deleted</a></li><li><a href="#tables-of-contents">tables of contents</a></li><li><a href="#social-media-and-other-mentions">social media and other mentions</a></li></ul><br>    </p></section></section>
 <section><h1 id="authoring" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Authoring<span class="autohelm-nav autohelm-nav-up-down"> <a href="#when-to-use-secst">&uarr;</a> <a href="#markup-tags-with-html-names">&darr;</a></span></h1><p>    Authors write documents using semantic tags with the format <code class="nohighlight">&lt;tag&gt;[&lt;content&gt;]</code> or <code class="nohighlight">&lt;tag&gt;(&lt;parameters&gt;)[&lt;content&gt;]</code>.</p><p>    For example:<br>    <ul><li><code class="nohighlight">:strong[bolded important content]</code> produces <strong>bolded important content</strong></li><li><code class="nohighlight">:em[italicized emphasized content]</code> produces <em>italicized emphasized content</em></li></ul></p><section><h2 id="markup-tags-with-html-names" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Markup Tags With HTML Names<span class="autohelm-nav autohelm-nav-up-down"> <a href="#authoring">&uarr;</a> <a href="#paragraph">&darr;</a></span></h2><p>        Almost every semantic tag supported by HTML5 is one of the <a href="#tags">tags supported by SECST</a>. Most non-semantic tags are excluded from SECST, e.g. <code class="nohighlight">&lt;div&gt;</code> and <code class="nohighlight">&lt;span&gt;</code>. Exceptions are <code class="nohighlight">&lt;hr&gt;</code>, <code class="nohighlight">&lt;table&gt;</code>, <code class="nohighlight">&lt;ol&gt;</code>, <code class="nohighlight">&lt;ul&gt;</code> and <code class="nohighlight">&lt;style&gt;</code>; however, since they are so commonly used <code class="nohighlight">:b[]</code> for <b>bold</b> and <code class="nohighlight">:i[]</code> for <i>italic</i> are included, as are aliases <code class="nohighlight">:bold[]</code> and <code class="nohighlight">:italic[]</code>.</p><p>        A few tags of note are documented below to illustrate the use of SECST or highlight special features.</p><section><h3 id="paragraph" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Paragraph<span class="autohelm-nav autohelm-nav-up-down"> <a href="#markup-tags-with-html-names">&uarr;</a> <a href="#code">&darr;</a></span></h3><p>            SECST will treat two newlines in sequence as a paragraph break. There is also a paragraph tag <code class="nohighlight">:p[]</code>. Newlines inside a <code class="nohighlight">p</code> tag will produce separate HTML <code class="nohighlight">&lt;br&gt;</code> elements. A <code class="nohighlight">:p[]</code> tag is not strictly necessary for really simple content. A SECST parser/transpiler will do a reasonable job of figuring out where paragraph breaks are required; however behavior may vary from implementation to implementation.</p><p>            If you get an unexpected document layout, try putting content inside a <code class="nohighlight">:p[]</code> tag.<br>        </p></section><section><h3 id="code" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Code<span class="autohelm-nav autohelm-nav-up-down"> <a href="#paragraph">&uarr;</a> <a href="#details">&darr;</a></span></h3><p>            Contents wrapped in <code class="nohighlight">:code[]</code> will be inline unless the contents contain a newline, in which case the code will be displayed in block format.</p><p>            If you have a single line you wish to show as a block, end it with a newline.<br>        </p></section><section><h3 id="details" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Details<span class="autohelm-nav autohelm-nav-up-down"> <a href="#code">&uarr;</a> <a href="#headings">&darr;</a></span></h3><p>            The <code class="nohighlight">:details[]</code> tag supports the conditional display of content. It has one required sub-tag <code class="nohighlight">:summary[&lt;short text&gt;]</code> and the rest of the content is conditionally displayed. If a <code class="nohighlight">summary</code> tag is missing, then the first word is used as the summary.</p><p>            <code class="nohighlight">:details[:summary[See the content...] Hello there!]</code> renders as <details><summary>See the content...</summary> Hello there!</details></p><p>            <code class="nohighlight">:details[... Hello there!]</code> renders as <details><summary>...</summary>Hello there!</details><br>        </p></section><section><h3 id="headings" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Headings<span class="autohelm-nav autohelm-nav-up-down"> <a href="#details">&uarr;</a> <a href="#html-entities-and-special-characters">&darr;</a></span></h3><p>            Headings automatically get ids you can use for the destination of links. The id is the same as the text content in lower case with spaces and special characters replaced by dashes. To make it more convenient, you can also provide your own ids, e.g. <code class="nohighlight">:h1(#myheading)[My Heading]</code> with link <code class="nohighlight">:a({href:"#myheading"})[Go To My Heading]</code>.</p><p>            <em>Note: All tags can optionally take an id starting with <code class="nohighlight">#</code>. If an id is present, it must be the first parameter.</em><br>        </p></section><section><h3 id="html-entities-and-special-characters" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>HTML Entities and Special Characters<span class="autohelm-nav autohelm-nav-up-down"> <a href="#headings">&uarr;</a> <a href="#hyperlinks">&darr;</a></span></h3><p>            <a target="_tab" href="https://www.toptal.com/designers/htmlarrows/">Toptal</a> has a great reference for this.</p><p>            Special characters and symbols can be displayed using either <code class="nohighlight">&&lt;character-id&gt;</code><code class="nohighlight">;</code> or <code class="nohighlight">:&[&lt;character-id&gt;...]</code>. The second form can display multiple characters or symbols, just leave off the leading "&" and trailing ";" in the listed items.</p><p>            The code <code class="nohighlight">&#x263B;</code> renders as <span>&#x263B;</span> .</p><p>            The code <code class="nohighlight">:&[female male #9893]</code> renders as <span>&female;&male;&#9893;</span>.<br>        </p></section><section><h3 id="hyperlinks" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Hyperlinks<span class="autohelm-nav autohelm-nav-up-down"> <a href="#html-entities-and-special-characters">&uarr;</a> <a href="#inserted-and-deleted">&darr;</a></span></h3><p>            Sometimes, e.g. with hyperlinks, you need to specify more than content. This is provided using an attribute block in parentheses, e.g.</p><p>            <code class="nohighlight">:a({href:"./index.txt",target:"_tab"})[SECST]</code> yields <a href="./index.txt" target="_tab">SECST</a> , where you can access the source of this document.</p><p>            For convenience, any tag that can accept a url (either <code class="nohighlight">src</code> or <code class="nohighlight">href</code> in HTML) does not require the attribute, just provide the URL. And, single quotes can be used for attribute values, e.g.</p><p>            <code class="nohighlight">:a(./index.txt {target:'_tab'})[SECST]</code> yields <a target="_tab" href="./index.txt">SECST</a>.</p><p>            You can also use document ids prefixed with a period as targets, e.g. <code class="nohighlight">.#headings</code> for this section. The period prefix is necessary to distinguish from providing an id for the link itself.</p><p>            You can also specify hyperlinks with just a content value, e.g. <code class="nohighlight">:a({target:"_tab"})[./index.txt]</code> renders as <a>./index.txt</a>.</p><p>            By default, relative URLS and ids, i.e. those starting with a period, have a target that is the current window or tab. And, those starting with a protocol, e.g. <code class="nohighlight">https://</code> have a target of a new tab.</p><p>            All tags that take more than just content are fully documented in the <a href="#tags">complete list of tags</a>.</p></section><section><h3 id="inserted-and-deleted" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Inserted And Deleted<span class="autohelm-nav autohelm-nav-up-down"> <a href="#hyperlinks">&uarr;</a> <a href="#lists">&darr;</a></span></h3><p>            <code class="nohighlight">:ins[inserted]</code> renders as <ins>inserted</ins></p><p>            <code class="nohighlight">:del[deleted]</code> renders as <del>deleted</del><br>        </p></section><section><h3 id="lists" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Lists<span class="autohelm-nav autohelm-nav-up-down"> <a href="#inserted-and-deleted">&uarr;</a> <a href="#unordered-and-ordered-lists">&darr;</a></span></h3><section><h4 id="unordered-and-ordered-lists" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Unordered And Ordered Lists<span class="autohelm-nav autohelm-nav-up-down"> <a href="#lists">&uarr;</a> <a href="#description-lists">&darr;</a></span></h4><p>                Both ordered and unordered lists are supported using <code class="nohighlight">ol</code> and <code class="nohighlight">ul</code> tags with <code class="nohighlight">li</code> tags.</p><p>                <code class="nohighlight">:ul[:li[LinkedIn] :li[Facebook] :li[Twitter]]</code></p><p>                <ul><li>LinkedIn</li><li>Facebook</li><li>Twitter</li></ul></p><p>                There is also a shorthand:</p><p>                <pre class="secst"><code class="nohighlight">:ul[
   - LinkedIn
   - Facebook
@@ -81,7 +82,7 @@ Use SECST to joyfully create compelling, interactive HTML documents.</code></pre
   :forEach({iterable:"#a, #b, #c"})[
       :li[${item} at ${index}]
   ]
-]</code></pre></p><p>            renders as <input id="a" class="secst" hidden="" data-default="" data-template="a" value="a" title="a" data-literal="" data-fitcontent="" disabled="" style="width: 2ch;"> <input id="b" class="secst" hidden="" data-default="" data-template="b" value="b" title="b" data-literal="" data-fitcontent="" disabled="" style="width: 2ch;"> <input id="c" class="secst" hidden="" data-default="" data-template="c" value="c" title="c" data-literal="" data-fitcontent="" disabled="" style="width: 2ch;"><br>            <ol><li>a at 0</li><li>b at 1</li><li>c at 2</li></ol></p></section><section><h3 id="hashtags" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Hashtags<span class="autohelm-nav autohelm-nav-up-down"> <a href="#foreach">&uarr;</a> <a href="#latex">&darr;</a></span></h3><p>            Hashtags can take the form <code class="nohighlight">#&lt;value&gt;[]</code> or <code class="nohighlight">#[&lt;value&gt;...]</code>, or <code class="nohighlight">:hashtag[&lt;value&gt;...]</code> where <code class="nohighlight">&lt;value&gt;...</code> is a space separated list of words to hashtag. The short form <strong>MUST</strong> be followed by <code class="nohighlight">[]</code> to distinguish them from ids used to identify <code class="nohighlight">:value[]</code> and other tags in the document.</p><p>            <code class="nohighlight">#sects-is-great[]</code> renders as <span>#sects-is-great</span>.</p><p>            <code class="nohighlight">#[sects-is-great javascript-is-great]</code> renders as <span>#sects-is-great, #javascript-is-great</span>.</p><p>            <code class="nohighlight">:hashtag[sects-is-great javascript-is-great]</code> renders as <span>#sects-is-great, #javascript-is-great</span>.</p><p>            Hashtags are automatically added to the meta tags in the head of a document for indexing and SEO purposes.<br>        </p></section><section><h3 id="latex" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Latex<span class="autohelm-nav autohelm-nav-up-down"> <a href="#hashtags">&uarr;</a> <a href="#macros">&darr;</a></span></h3><p>            Math and chemical formulas can be displayed using the <code class="nohighlight">:latex[]</code> tag.</p><p>            <code class="language-latex">:latex[Lift = \frac{1}{2} \rho v^2 S C_L]</code> renders as <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css" integrity="sha384-Juol1FqnotbkyZUT5Z7gUPjQ9gzlwCENvUZTpQBAPxtusdwFLRy382PSDx5UUJ4/" crossorigin="anonymous"><script src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js" integrity="sha384-PwRUT/YqbnEjkZO0zZxNqcxACrXe+j766U2amXcgMg5457rve2Y7I6ZJSm2A0mS4" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/mhchem.min.js" integrity="sha384-RTN08a0AXIioPBcVosEqPUfKK+rPp+h1x/izR7xMkdMyuwkcZCWdxO+RSwIFtJXN" crossorigin="anonymous" async=""></script><span><script>
+]</code></pre></p><p>            renders as <input id="a" class="secst" hidden="" data-default="" data-template="a" value="a" title="a" data-literal="" data-fitcontent="" disabled="" style="width: 2ch;"> <input id="b" class="secst" hidden="" data-default="" data-template="b" value="b" title="b" data-literal="" data-fitcontent="" disabled="" style="width: 2ch;"> <input id="c" class="secst" hidden="" data-default="" data-template="c" value="c" title="c" data-literal="" data-fitcontent="" disabled="" style="width: 2ch;"><br>            <ol><li>a at 0</li><li>b at 1</li><li>c at 2</li></ol></p></section><section><h3 id="hashtags" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Hashtags<span class="autohelm-nav autohelm-nav-up-down"> <a href="#foreach">&uarr;</a> <a href="#latex">&darr;</a></span></h3><p>            Hashtags can take the form <code class="nohighlight">#&lt;value&gt;[]</code> or <code class="nohighlight">#[&lt;value&gt;...]</code>, or <code class="nohighlight">:hashtag[&lt;value&gt;...]</code> where <code class="nohighlight">&lt;value&gt;...</code> is a space separated list of words to hashtag.</p><p>            <code class="nohighlight">#sects-is-great[]</code> renders as #sects-is-great.</p><p>            <code class="nohighlight">#[sects-is-great javascript-is-great]</code> renders as<span>#sects-is-great, #javascript-is-great</span>.</p><p>            <code class="nohighlight">:hashtag[sects-is-great javascript-is-great]</code> renders as <span>#sects-is-great, #javascript-is-great</span>.</p><p>            Hashtags are automatically added to the meta tags in the head of a document for indexing and SEO purposes.<br>        </p></section><section><h3 id="latex" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Latex<span class="autohelm-nav autohelm-nav-up-down"> <a href="#hashtags">&uarr;</a> <a href="#macros">&darr;</a></span></h3><p>            Math and chemical formulas can be displayed using the <code class="nohighlight">:latex[]</code> tag.</p><p>            <code class="language-latex">:latex[Lift = \frac{1}{2} \rho v^2 S C_L]</code> renders as <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css" integrity="sha384-Juol1FqnotbkyZUT5Z7gUPjQ9gzlwCENvUZTpQBAPxtusdwFLRy382PSDx5UUJ4/" crossorigin="anonymous"><script src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js" integrity="sha384-PwRUT/YqbnEjkZO0zZxNqcxACrXe+j766U2amXcgMg5457rve2Y7I6ZJSm2A0mS4" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/mhchem.min.js" integrity="sha384-RTN08a0AXIioPBcVosEqPUfKK+rPp+h1x/izR7xMkdMyuwkcZCWdxO+RSwIFtJXN" crossorigin="anonymous" async=""></script><span><script>
                 (() => {
                      const render = (currentScript) => {
                         if(typeof(katex)!=="undefined") {
@@ -122,13 +123,13 @@ Use SECST to joyfully create compelling, interactive HTML documents.</code></pre
  A --- B
  B--&gt;C[fa:fa-ban forbidden]
  B--&gt;D(fa:fa-spinner);
-]</code></pre></p><p>            renders as</p><script src="https://cdn.jsdelivr.net/npm/mermaid@9/dist/mermaid.min.js" onload="(() =&gt; { mermaid.initialize({ startOnLoad: true }) })()"></script><pre id="mermaidChart7782632059833348" class="mermaid">
+]</code></pre></p><p>            renders as</p><script src="https://cdn.jsdelivr.net/npm/mermaid@9/dist/mermaid.min.js" onload="(() =&gt; { mermaid.initialize({ startOnLoad: true }) })()"></script><pre id="mermaidChart7360077836229706" class="mermaid">
                 graph LR
                 A --- B
                 B-->C[fa:fa-ban forbidden]
                 B-->D(fa:fa-spinner);
             </pre><script type="module">
-            const el = document.getElementById("mermaidChart7782632059833348"),
+            const el = document.getElementById("mermaidChart7360077836229706"),
                 sibling = el.nextSibling,
                 insertSvg = function (svgCode, bindFunctions) {
                     el.innerHTML = svgCode;
@@ -142,7 +143,7 @@ Use SECST to joyfully create compelling, interactive HTML documents.</code></pre
                 B-->C[fa:fa-ban forbidden]
                 B-->D(fa:fa-spinner);
             `;
-            setTimeout(() => mermaid.mermaidAPI.render("mermaidChart7782632059833348", graphDefinition, insertSvg),1000);
+            setTimeout(() => mermaid.mermaidAPI.render("mermaidChart7360077836229706", graphDefinition, insertSvg),1000);
         </script><p>            There are lots of charts to choose from:</p><p>            <ul><li> <a target="_tab" href="https://mermaid.js.org/syntax/flowchart.html">Flowchart</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/sequenceDiagram.html">Sequence Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/classDiagram.html">Class Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/stateDiagram.html">State Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/entityRelationshipDiagram.html">Entity Relationship Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/userJourney.html">User Journey</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/gantt.html">Gannt</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/pie.html">Pie Chart</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/requirementDiagram.html">Requirement Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/gitgraph.html">Gitgraph Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/c4c.html">C4C Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/mindmap.html">Mindmaps</a></li></ul><br>        </p></section><section><h3 id="questions" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Questions<span class="autohelm-nav autohelm-nav-up-down"> <a href="#mermaid-chart">&uarr;</a> <a href="#repl">&darr;</a></span></h3><p>            Questions can be used to create a quiz like experience.</p><p>            <pre class="secst"><code class="nohighlight">:question({type:"number",showanswer:true})[
   :text[What is the :code[sqrt(4)]?]
   :answer[sqrt(4)]
@@ -248,144 +249,224 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
                     </dl><br>                </p></section><section><h5 id="matrix-functions" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Matrix Functions<span class="autohelm-nav autohelm-nav-up-down"> <a href="#algebraic-functions">&uarr;</a> <a href="#unit-math">&darr;</a></span></h5><p>                    <input class="secst" data-default="" data-template="multiply([[1,2],[3,4]],[[5,6],[1,1]])" value="" title="multiply([[1,2],[3,4]],[[5,6],[1,1]])" data-fitcontent=""><br>                </p></section></section><section><h4 id="unit-math" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Unit Math<span class="autohelm-nav autohelm-nav-up-down"> <a href="#basic-math">&uarr;</a> <a href="#importing-data">&darr;</a></span></h4><p>                Unit math <a target="_tab" href="https://mathjs.org/docs/datatypes/units.html">from MathJS</a> allows fro conversions using the word <code class="nohighlight">to</code>, as well as units for numbers, e.g. <code class="nohighlight">45 deg</code>.</p><p>                There are many <a target="_tab" href="https://mathjs.org/docs/datatypes/units.html#reference">supported units</a>.</p><p>                Here are a few examples:</p><p>                <code class="nohighlight">:value[2 inch to cm]</code> = <input class="secst" data-default="" data-template="2 inch to cm" value="" title="2 inch to cm" data-fitcontent=""></p><p>                <code class="nohighlight">:value[90 km/h to mi/h]</code> = <input class="secst" data-default="" data-template="90 km/h to mi/h" value="" title="90 km/h to mi/h" data-fitcontent=""></p><p>                <code class="nohighlight">:value[90 km/h to m/h]</code> = <input class="secst" data-default="" data-template="90 km/h to m/h" value="" title="90 km/h to m/h" data-fitcontent=""> <code class="nohighlight">m/h</code> is meters per hour</p><p>                <code class="nohighlight">:value[(1 week + 1 day) to days]</code> = <input class="secst" data-default="" data-template="(1 week + 1 day) to days" value="" title="(1 week + 1 day) to days" data-fitcontent=""></p><p>                <code class="nohighlight">:value[cos(45 deg)]</code> = <input class="secst" data-default="" data-template="cos(45 deg)" value="" title="cos(45 deg)" data-fitcontent=""></p><p>                <code class="nohighlight">:value[8.314 m^3 Pa / mol / K]</code> = <input class="secst" data-default="" data-template="8.314 m^3 Pa / mol / K" value="" title="8.314 m^3 Pa / mol / K" data-fitcontent=""></p><p>                Remember, if you have a value that looks like a formula, but is not, you can use the attribute <code class="nohighlight">literal</code>, e.g.  <code class="nohighlight">:value(literal)[2 inch to cm]</code> = <input class="secst" data-default="" data-template="2 inch to cm" value="2 inch to cm" title="2 inch to cm" data-literal="" data-fitcontent="" disabled="" style="width: 13ch;">.</p><p>                And, you can use <code class="nohighlight">plaintext</code> to display values without any styling, e.g. <code class="nohighlight">:value(plaintext)[90 km/h to mi/h]</code> = <span class="secst" data-default="" data-template="90 km/h to mi/h" value="" title="90 km/h to mi/h" data-plaintext="">90 km/h to mi/h</span>.</p></section><section><h4 id="importing-data" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Importing Data<span class="autohelm-nav autohelm-nav-up-down"> <a href="#unit-math">&uarr;</a> <a href="#advanced-formulas">&darr;</a></span></h4><p>                Values can included imported data using the <code class="nohighlight">src</code> attribute and a mime type provided in the <code class="nohighlight">type</code> attribute. The trailing <code class="nohighlight">[]</code> are optional.</p><p>                Values with the boolean attribute <code class="nohighlight">static</code> is import data at transpile time. If importing fails, another attempt is made at runtime.</p><p>                JSON is formatted for readability and <a target="_tab" href="https://json5.org">JSON5</a> is supported to make it easier to handle remote data.</p><p>                <pre class="secst"><code class="nohighlight">:value(https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson static {type:"application/json"})</code></pre></p><p>                <textarea class="secst" data-mime-type="application/json" data-default="" title="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson" data-fitcontent="" disabled="">{
   "type": "FeatureCollection",
   "metadata": {
-    "generated": 1672081501000,
+    "generated": 1672099133000,
     "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson",
     "title": "USGS All Earthquakes, Past Hour",
     "status": 200,
     "api": "1.10.3",
-    "count": 4
+    "count": 9
   },
   "features": [
     {
       "type": "Feature",
       "properties": {
-        "mag": 1.56,
-        "place": "3km NNW of The Geysers, CA",
-        "time": 1672081045590,
-        "updated": 1672081140797,
+        "mag": 1.8,
+        "place": "Southern Alaska",
+        "time": 1672098125535,
+        "updated": 1672098200091,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73825391",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73825391.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022gjrex6x",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022gjrex6x.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 37,
-        "net": "nc",
-        "code": "73825391",
-        "ids": ",nc73825391,",
-        "sources": ",nc,",
-        "types": ",nearby-cities,origin,phase-data,",
-        "nst": 29,
-        "dmin": 0.009997,
-        "rms": 0.03,
-        "gap": 80,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 1.6 - 3km NNW of The Geysers, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.7710037,
-          38.8053322,
-          1.2
-        ]
-      },
-      "id": "nc73825391"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.35,
-        "place": "3km NNW of The Geysers, CA",
-        "time": 1672080659600,
-        "updated": 1672080754672,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73825381",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73825381.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 28,
-        "net": "nc",
-        "code": "73825381",
-        "ids": ",nc73825381,",
-        "sources": ",nc,",
-        "types": ",nearby-cities,origin,phase-data,",
-        "nst": 22,
+        "sig": 50,
+        "net": "ak",
+        "code": "022gjrex6x",
+        "ids": ",ak022gjrex6x,",
+        "sources": ",ak,",
+        "types": ",origin,phase-data,",
+        "nst": null,
         "dmin": null,
-        "rms": 0.05,
-        "gap": 64,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 1.4 - 3km NNW of The Geysers, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.7698364,
-          38.8050003,
-          0.94
-        ]
-      },
-      "id": "nc73825381"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 0.51,
-        "place": "16km W of Searles Valley, CA",
-        "time": 1672080032080,
-        "updated": 1672080246832,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40150335",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40150335.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 4,
-        "net": "ci",
-        "code": "40150335",
-        "ids": ",ci40150335,",
-        "sources": ",ci,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 8,
-        "dmin": 0.04026,
-        "rms": 0.18,
-        "gap": 149,
+        "rms": 0.34,
+        "gap": null,
         "magType": "ml",
         "type": "earthquake",
-        "title": "M 0.5 - 16km W of Searles Valley, CA"
+        "title": "M 1.8 - Southern Alaska"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -117.5823333,
-          35.7773333,
-          7.32
+          -149.473,
+          61.8068,
+          39
         ]
       },
-      "id": "ci40150335"
+      "id": "ak022gjrex6x"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 0.89,
-        "place": "17km W of Searles Valley, CA",
-        "time": 1672078780620,
-        "updated": 1672078985974,
+        "mag": 1,
+        "place": "6km SSE of Big Bear Lake, CA",
+        "time": 1672098030070,
+        "updated": 1672098284665,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40150319",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40150319.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40150415",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40150415.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 15,
+        "net": "ci",
+        "code": "40150415",
+        "ids": ",ci40150415,",
+        "sources": ",ci,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 9,
+        "dmin": 0.2792,
+        "rms": 0.19,
+        "gap": 185,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 1.0 - 6km SSE of Big Bear Lake, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -116.8896667,
+          34.1908333,
+          0.6
+        ]
+      },
+      "id": "ci40150415"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.05,
+        "place": "5km SSE of Pala, CA",
+        "time": 1672098026790,
+        "updated": 1672098236987,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40150423",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40150423.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 17,
+        "net": "ci",
+        "code": "40150423",
+        "ids": ",ci40150423,",
+        "sources": ",ci,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 12,
+        "dmin": 0.2968,
+        "rms": 0.33,
+        "gap": 87,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 1.1 - 5km SSE of Pala, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -117.055,
+          33.3198333,
+          29.42
+        ]
+      },
+      "id": "ci40150423"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 5.1,
+        "place": "South Sandwich Islands region",
+        "time": 1672097794835,
+        "updated": 1672098956040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000jbvh",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/us6000jbvh.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 400,
+        "net": "us",
+        "code": "6000jbvh",
+        "ids": ",us6000jbvh,",
+        "sources": ",us,",
+        "types": ",origin,phase-data,",
+        "nst": 33,
+        "dmin": 7.199,
+        "rms": 1.06,
+        "gap": 92,
+        "magType": "mb",
+        "type": "earthquake",
+        "title": "M 5.1 - South Sandwich Islands region"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -24.7523,
+          -57.0697,
+          10
+        ]
+      },
+      "id": "us6000jbvh"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 2.79,
+        "place": "Puerto Rico region",
+        "time": 1672097308850,
+        "updated": 1672098760910,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/pr71389153",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/pr71389153.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 120,
+        "net": "pr",
+        "code": "71389153",
+        "ids": ",pr71389153,",
+        "sources": ",pr,",
+        "types": ",origin,phase-data,",
+        "nst": 10,
+        "dmin": 0.3991,
+        "rms": 0.12,
+        "gap": 221,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 2.8 - Puerto Rico region"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -65.6606666666667,
+          18.6178333333333,
+          21.8
+        ]
+      },
+      "id": "pr71389153"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 0.88,
+        "place": "7km W of Cobb, CA",
+        "time": 1672096794550,
+        "updated": 1672098732899,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73825451",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73825451.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
@@ -393,37 +474,157 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
         "status": "automatic",
         "tsunami": 0,
         "sig": 12,
-        "net": "ci",
-        "code": "40150319",
-        "ids": ",ci40150319,",
-        "sources": ",ci,",
+        "net": "nc",
+        "code": "73825451",
+        "ids": ",nc73825451,",
+        "sources": ",nc,",
         "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 13,
-        "dmin": 0.03296,
-        "rms": 0.17,
-        "gap": 151,
-        "magType": "ml",
+        "nst": 14,
+        "dmin": 0.008675,
+        "rms": 0.02,
+        "gap": 79,
+        "magType": "md",
         "type": "earthquake",
-        "title": "M 0.9 - 17km W of Searles Valley, CA"
+        "title": "M 0.9 - 7km W of Cobb, CA"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -117.5921667,
-          35.783,
-          7.88
+          -122.8021698,
+          38.8294983,
+          2.11
         ]
       },
-      "id": "ci40150319"
+      "id": "nc73825451"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.28,
+        "place": "17km NE of California City, CA",
+        "time": 1672096425520,
+        "updated": 1672096637996,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40150399",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40150399.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 25,
+        "net": "ci",
+        "code": "40150399",
+        "ids": ",ci40150399,",
+        "sources": ",ci,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 22,
+        "dmin": 0.033,
+        "rms": 0.22,
+        "gap": 75,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 1.3 - 17km NE of California City, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -117.863,
+          35.2375,
+          5.92
+        ]
+      },
+      "id": "ci40150399"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 0.9,
+        "place": "88 km SE of King Salmon, Alaska",
+        "time": 1672096328956,
+        "updated": 1672096437332,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022gjr8hz3",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022gjr8hz3.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 12,
+        "net": "ak",
+        "code": "022gjr8hz3",
+        "ids": ",ak022gjr8hz3,",
+        "sources": ",ak,",
+        "types": ",origin,phase-data,",
+        "nst": null,
+        "dmin": null,
+        "rms": 0.4,
+        "gap": null,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 0.9 - 88 km SE of King Salmon, Alaska"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -155.5883,
+          58.1311,
+          18.7
+        ]
+      },
+      "id": "ak022gjr8hz3"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.4,
+        "place": "83 km SE of King Salmon, Alaska",
+        "time": 1672095839489,
+        "updated": 1672095972902,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022gjr6ofg",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022gjr6ofg.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 30,
+        "net": "ak",
+        "code": "022gjr6ofg",
+        "ids": ",ak022gjr6ofg,",
+        "sources": ",ak,",
+        "types": ",origin,phase-data,",
+        "nst": null,
+        "dmin": null,
+        "rms": 0.81,
+        "gap": null,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 1.4 - 83 km SE of King Salmon, Alaska"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -155.6912,
+          58.134,
+          46
+        ]
+      },
+      "id": "ak022gjr6ofg"
     }
   ],
   "bbox": [
-    -122.7710037,
-    35.7773333,
-    0.94,
-    -117.5823333,
-    38.8053322,
-    7.88
+    -155.6912,
+    -57.0697,
+    0.6,
+    -24.7523,
+    61.8068,
+    46
   ]
 }</textarea></p><p>                Imported data is readonly because it is essentially a computation. To make it editable, use the attribute <code class="nohighlight">editable</code>.</p><p>                <pre class="secst"><code class="nohighlight">:value(https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson editable {type:"application/json"})</code></pre></p><p>                <textarea class="secst" data-mime-type="application/json" data-default="" data-template="await (async () =&gt; {
                         try {
@@ -447,144 +648,224 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
                         })()" title="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson" data-editable="" data-fitcontent="" style="height: 30em; width: 80ch;">{
   "type": "FeatureCollection",
   "metadata": {
-    "generated": 1672081501000,
+    "generated": 1672099133000,
     "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson",
     "title": "USGS All Earthquakes, Past Hour",
     "status": 200,
     "api": "1.10.3",
-    "count": 4
+    "count": 9
   },
   "features": [
     {
       "type": "Feature",
       "properties": {
-        "mag": 1.56,
-        "place": "3km NNW of The Geysers, CA",
-        "time": 1672081045590,
-        "updated": 1672081140797,
+        "mag": 1.8,
+        "place": "Southern Alaska",
+        "time": 1672098125535,
+        "updated": 1672098200091,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73825391",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73825391.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022gjrex6x",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022gjrex6x.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 37,
-        "net": "nc",
-        "code": "73825391",
-        "ids": ",nc73825391,",
-        "sources": ",nc,",
-        "types": ",nearby-cities,origin,phase-data,",
-        "nst": 29,
-        "dmin": 0.009997,
-        "rms": 0.03,
-        "gap": 80,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 1.6 - 3km NNW of The Geysers, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.7710037,
-          38.8053322,
-          1.2
-        ]
-      },
-      "id": "nc73825391"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.35,
-        "place": "3km NNW of The Geysers, CA",
-        "time": 1672080659600,
-        "updated": 1672080754672,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73825381",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73825381.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 28,
-        "net": "nc",
-        "code": "73825381",
-        "ids": ",nc73825381,",
-        "sources": ",nc,",
-        "types": ",nearby-cities,origin,phase-data,",
-        "nst": 22,
+        "sig": 50,
+        "net": "ak",
+        "code": "022gjrex6x",
+        "ids": ",ak022gjrex6x,",
+        "sources": ",ak,",
+        "types": ",origin,phase-data,",
+        "nst": null,
         "dmin": null,
-        "rms": 0.05,
-        "gap": 64,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 1.4 - 3km NNW of The Geysers, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.7698364,
-          38.8050003,
-          0.94
-        ]
-      },
-      "id": "nc73825381"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 0.51,
-        "place": "16km W of Searles Valley, CA",
-        "time": 1672080032080,
-        "updated": 1672080246832,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40150335",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40150335.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 4,
-        "net": "ci",
-        "code": "40150335",
-        "ids": ",ci40150335,",
-        "sources": ",ci,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 8,
-        "dmin": 0.04026,
-        "rms": 0.18,
-        "gap": 149,
+        "rms": 0.34,
+        "gap": null,
         "magType": "ml",
         "type": "earthquake",
-        "title": "M 0.5 - 16km W of Searles Valley, CA"
+        "title": "M 1.8 - Southern Alaska"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -117.5823333,
-          35.7773333,
-          7.32
+          -149.473,
+          61.8068,
+          39
         ]
       },
-      "id": "ci40150335"
+      "id": "ak022gjrex6x"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 0.89,
-        "place": "17km W of Searles Valley, CA",
-        "time": 1672078780620,
-        "updated": 1672078985974,
+        "mag": 1,
+        "place": "6km SSE of Big Bear Lake, CA",
+        "time": 1672098030070,
+        "updated": 1672098284665,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40150319",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40150319.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40150415",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40150415.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 15,
+        "net": "ci",
+        "code": "40150415",
+        "ids": ",ci40150415,",
+        "sources": ",ci,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 9,
+        "dmin": 0.2792,
+        "rms": 0.19,
+        "gap": 185,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 1.0 - 6km SSE of Big Bear Lake, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -116.8896667,
+          34.1908333,
+          0.6
+        ]
+      },
+      "id": "ci40150415"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.05,
+        "place": "5km SSE of Pala, CA",
+        "time": 1672098026790,
+        "updated": 1672098236987,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40150423",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40150423.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 17,
+        "net": "ci",
+        "code": "40150423",
+        "ids": ",ci40150423,",
+        "sources": ",ci,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 12,
+        "dmin": 0.2968,
+        "rms": 0.33,
+        "gap": 87,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 1.1 - 5km SSE of Pala, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -117.055,
+          33.3198333,
+          29.42
+        ]
+      },
+      "id": "ci40150423"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 5.1,
+        "place": "South Sandwich Islands region",
+        "time": 1672097794835,
+        "updated": 1672098956040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000jbvh",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/us6000jbvh.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 400,
+        "net": "us",
+        "code": "6000jbvh",
+        "ids": ",us6000jbvh,",
+        "sources": ",us,",
+        "types": ",origin,phase-data,",
+        "nst": 33,
+        "dmin": 7.199,
+        "rms": 1.06,
+        "gap": 92,
+        "magType": "mb",
+        "type": "earthquake",
+        "title": "M 5.1 - South Sandwich Islands region"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -24.7523,
+          -57.0697,
+          10
+        ]
+      },
+      "id": "us6000jbvh"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 2.79,
+        "place": "Puerto Rico region",
+        "time": 1672097308850,
+        "updated": 1672098760910,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/pr71389153",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/pr71389153.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 120,
+        "net": "pr",
+        "code": "71389153",
+        "ids": ",pr71389153,",
+        "sources": ",pr,",
+        "types": ",origin,phase-data,",
+        "nst": 10,
+        "dmin": 0.3991,
+        "rms": 0.12,
+        "gap": 221,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 2.8 - Puerto Rico region"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -65.6606666666667,
+          18.6178333333333,
+          21.8
+        ]
+      },
+      "id": "pr71389153"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 0.88,
+        "place": "7km W of Cobb, CA",
+        "time": 1672096794550,
+        "updated": 1672098732899,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73825451",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73825451.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
@@ -592,37 +873,157 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
         "status": "automatic",
         "tsunami": 0,
         "sig": 12,
-        "net": "ci",
-        "code": "40150319",
-        "ids": ",ci40150319,",
-        "sources": ",ci,",
+        "net": "nc",
+        "code": "73825451",
+        "ids": ",nc73825451,",
+        "sources": ",nc,",
         "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 13,
-        "dmin": 0.03296,
-        "rms": 0.17,
-        "gap": 151,
-        "magType": "ml",
+        "nst": 14,
+        "dmin": 0.008675,
+        "rms": 0.02,
+        "gap": 79,
+        "magType": "md",
         "type": "earthquake",
-        "title": "M 0.9 - 17km W of Searles Valley, CA"
+        "title": "M 0.9 - 7km W of Cobb, CA"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -117.5921667,
-          35.783,
-          7.88
+          -122.8021698,
+          38.8294983,
+          2.11
         ]
       },
-      "id": "ci40150319"
+      "id": "nc73825451"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.28,
+        "place": "17km NE of California City, CA",
+        "time": 1672096425520,
+        "updated": 1672096637996,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40150399",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40150399.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 25,
+        "net": "ci",
+        "code": "40150399",
+        "ids": ",ci40150399,",
+        "sources": ",ci,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 22,
+        "dmin": 0.033,
+        "rms": 0.22,
+        "gap": 75,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 1.3 - 17km NE of California City, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -117.863,
+          35.2375,
+          5.92
+        ]
+      },
+      "id": "ci40150399"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 0.9,
+        "place": "88 km SE of King Salmon, Alaska",
+        "time": 1672096328956,
+        "updated": 1672096437332,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022gjr8hz3",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022gjr8hz3.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 12,
+        "net": "ak",
+        "code": "022gjr8hz3",
+        "ids": ",ak022gjr8hz3,",
+        "sources": ",ak,",
+        "types": ",origin,phase-data,",
+        "nst": null,
+        "dmin": null,
+        "rms": 0.4,
+        "gap": null,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 0.9 - 88 km SE of King Salmon, Alaska"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -155.5883,
+          58.1311,
+          18.7
+        ]
+      },
+      "id": "ak022gjr8hz3"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.4,
+        "place": "83 km SE of King Salmon, Alaska",
+        "time": 1672095839489,
+        "updated": 1672095972902,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022gjr6ofg",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022gjr6ofg.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 30,
+        "net": "ak",
+        "code": "022gjr6ofg",
+        "ids": ",ak022gjr6ofg,",
+        "sources": ",ak,",
+        "types": ",origin,phase-data,",
+        "nst": null,
+        "dmin": null,
+        "rms": 0.81,
+        "gap": null,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 1.4 - 83 km SE of King Salmon, Alaska"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -155.6912,
+          58.134,
+          46
+        ]
+      },
+      "id": "ak022gjr6ofg"
     }
   ],
   "bbox": [
-    -122.7710037,
-    35.7773333,
-    0.94,
-    -117.5823333,
-    38.8053322,
-    7.88
+    -155.6912,
+    -57.0697,
+    0.6,
+    -24.7523,
+    61.8068,
+    46
   ]
 }</textarea></p><p>                If an id is added, the data can be used in a computation.</p><p>                <pre class="secst"><code class="nohighlight">:value(#earthquake-data https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson {type:"application/json"})
 
@@ -648,144 +1049,224 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
                         })()" title="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson" data-fitcontent="" disabled="" style="height: 30em; width: 80ch;">{
   "type": "FeatureCollection",
   "metadata": {
-    "generated": 1672081501000,
+    "generated": 1672099133000,
     "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson",
     "title": "USGS All Earthquakes, Past Hour",
     "status": 200,
     "api": "1.10.3",
-    "count": 4
+    "count": 9
   },
   "features": [
     {
       "type": "Feature",
       "properties": {
-        "mag": 1.56,
-        "place": "3km NNW of The Geysers, CA",
-        "time": 1672081045590,
-        "updated": 1672081140797,
+        "mag": 1.8,
+        "place": "Southern Alaska",
+        "time": 1672098125535,
+        "updated": 1672098200091,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73825391",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73825391.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022gjrex6x",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022gjrex6x.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 37,
-        "net": "nc",
-        "code": "73825391",
-        "ids": ",nc73825391,",
-        "sources": ",nc,",
-        "types": ",nearby-cities,origin,phase-data,",
-        "nst": 29,
-        "dmin": 0.009997,
-        "rms": 0.03,
-        "gap": 80,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 1.6 - 3km NNW of The Geysers, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.7710037,
-          38.8053322,
-          1.2
-        ]
-      },
-      "id": "nc73825391"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.35,
-        "place": "3km NNW of The Geysers, CA",
-        "time": 1672080659600,
-        "updated": 1672080754672,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73825381",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73825381.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 28,
-        "net": "nc",
-        "code": "73825381",
-        "ids": ",nc73825381,",
-        "sources": ",nc,",
-        "types": ",nearby-cities,origin,phase-data,",
-        "nst": 22,
+        "sig": 50,
+        "net": "ak",
+        "code": "022gjrex6x",
+        "ids": ",ak022gjrex6x,",
+        "sources": ",ak,",
+        "types": ",origin,phase-data,",
+        "nst": null,
         "dmin": null,
-        "rms": 0.05,
-        "gap": 64,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 1.4 - 3km NNW of The Geysers, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.7698364,
-          38.8050003,
-          0.94
-        ]
-      },
-      "id": "nc73825381"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 0.51,
-        "place": "16km W of Searles Valley, CA",
-        "time": 1672080032080,
-        "updated": 1672080246832,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40150335",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40150335.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 4,
-        "net": "ci",
-        "code": "40150335",
-        "ids": ",ci40150335,",
-        "sources": ",ci,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 8,
-        "dmin": 0.04026,
-        "rms": 0.18,
-        "gap": 149,
+        "rms": 0.34,
+        "gap": null,
         "magType": "ml",
         "type": "earthquake",
-        "title": "M 0.5 - 16km W of Searles Valley, CA"
+        "title": "M 1.8 - Southern Alaska"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -117.5823333,
-          35.7773333,
-          7.32
+          -149.473,
+          61.8068,
+          39
         ]
       },
-      "id": "ci40150335"
+      "id": "ak022gjrex6x"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 0.89,
-        "place": "17km W of Searles Valley, CA",
-        "time": 1672078780620,
-        "updated": 1672078985974,
+        "mag": 1,
+        "place": "6km SSE of Big Bear Lake, CA",
+        "time": 1672098030070,
+        "updated": 1672098284665,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40150319",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40150319.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40150415",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40150415.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 15,
+        "net": "ci",
+        "code": "40150415",
+        "ids": ",ci40150415,",
+        "sources": ",ci,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 9,
+        "dmin": 0.2792,
+        "rms": 0.19,
+        "gap": 185,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 1.0 - 6km SSE of Big Bear Lake, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -116.8896667,
+          34.1908333,
+          0.6
+        ]
+      },
+      "id": "ci40150415"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.05,
+        "place": "5km SSE of Pala, CA",
+        "time": 1672098026790,
+        "updated": 1672098236987,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40150423",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40150423.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 17,
+        "net": "ci",
+        "code": "40150423",
+        "ids": ",ci40150423,",
+        "sources": ",ci,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 12,
+        "dmin": 0.2968,
+        "rms": 0.33,
+        "gap": 87,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 1.1 - 5km SSE of Pala, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -117.055,
+          33.3198333,
+          29.42
+        ]
+      },
+      "id": "ci40150423"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 5.1,
+        "place": "South Sandwich Islands region",
+        "time": 1672097794835,
+        "updated": 1672098956040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000jbvh",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/us6000jbvh.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 400,
+        "net": "us",
+        "code": "6000jbvh",
+        "ids": ",us6000jbvh,",
+        "sources": ",us,",
+        "types": ",origin,phase-data,",
+        "nst": 33,
+        "dmin": 7.199,
+        "rms": 1.06,
+        "gap": 92,
+        "magType": "mb",
+        "type": "earthquake",
+        "title": "M 5.1 - South Sandwich Islands region"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -24.7523,
+          -57.0697,
+          10
+        ]
+      },
+      "id": "us6000jbvh"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 2.79,
+        "place": "Puerto Rico region",
+        "time": 1672097308850,
+        "updated": 1672098760910,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/pr71389153",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/pr71389153.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 120,
+        "net": "pr",
+        "code": "71389153",
+        "ids": ",pr71389153,",
+        "sources": ",pr,",
+        "types": ",origin,phase-data,",
+        "nst": 10,
+        "dmin": 0.3991,
+        "rms": 0.12,
+        "gap": 221,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 2.8 - Puerto Rico region"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -65.6606666666667,
+          18.6178333333333,
+          21.8
+        ]
+      },
+      "id": "pr71389153"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 0.88,
+        "place": "7km W of Cobb, CA",
+        "time": 1672096794550,
+        "updated": 1672098732899,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73825451",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73825451.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
@@ -793,37 +1274,157 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
         "status": "automatic",
         "tsunami": 0,
         "sig": 12,
-        "net": "ci",
-        "code": "40150319",
-        "ids": ",ci40150319,",
-        "sources": ",ci,",
+        "net": "nc",
+        "code": "73825451",
+        "ids": ",nc73825451,",
+        "sources": ",nc,",
         "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 13,
-        "dmin": 0.03296,
-        "rms": 0.17,
-        "gap": 151,
-        "magType": "ml",
+        "nst": 14,
+        "dmin": 0.008675,
+        "rms": 0.02,
+        "gap": 79,
+        "magType": "md",
         "type": "earthquake",
-        "title": "M 0.9 - 17km W of Searles Valley, CA"
+        "title": "M 0.9 - 7km W of Cobb, CA"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -117.5921667,
-          35.783,
-          7.88
+          -122.8021698,
+          38.8294983,
+          2.11
         ]
       },
-      "id": "ci40150319"
+      "id": "nc73825451"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.28,
+        "place": "17km NE of California City, CA",
+        "time": 1672096425520,
+        "updated": 1672096637996,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40150399",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40150399.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 25,
+        "net": "ci",
+        "code": "40150399",
+        "ids": ",ci40150399,",
+        "sources": ",ci,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 22,
+        "dmin": 0.033,
+        "rms": 0.22,
+        "gap": 75,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 1.3 - 17km NE of California City, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -117.863,
+          35.2375,
+          5.92
+        ]
+      },
+      "id": "ci40150399"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 0.9,
+        "place": "88 km SE of King Salmon, Alaska",
+        "time": 1672096328956,
+        "updated": 1672096437332,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022gjr8hz3",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022gjr8hz3.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 12,
+        "net": "ak",
+        "code": "022gjr8hz3",
+        "ids": ",ak022gjr8hz3,",
+        "sources": ",ak,",
+        "types": ",origin,phase-data,",
+        "nst": null,
+        "dmin": null,
+        "rms": 0.4,
+        "gap": null,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 0.9 - 88 km SE of King Salmon, Alaska"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -155.5883,
+          58.1311,
+          18.7
+        ]
+      },
+      "id": "ak022gjr8hz3"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.4,
+        "place": "83 km SE of King Salmon, Alaska",
+        "time": 1672095839489,
+        "updated": 1672095972902,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022gjr6ofg",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022gjr6ofg.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 30,
+        "net": "ak",
+        "code": "022gjr6ofg",
+        "ids": ",ak022gjr6ofg,",
+        "sources": ",ak,",
+        "types": ",origin,phase-data,",
+        "nst": null,
+        "dmin": null,
+        "rms": 0.81,
+        "gap": null,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 1.4 - 83 km SE of King Salmon, Alaska"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -155.6912,
+          58.134,
+          46
+        ]
+      },
+      "id": "ak022gjr6ofg"
     }
   ],
   "bbox": [
-    -122.7710037,
-    35.7773333,
-    0.94,
-    -117.5823333,
-    38.8053322,
-    7.88
+    -155.6912,
+    -57.0697,
+    0.6,
+    -24.7523,
+    61.8068,
+    46
   ]
 }</textarea></p><p>               <textarea class="secst" data-mime-type="application/json" data-default="" data-template="$(#earthquake-data).metadata" title="$(#earthquake-data).metadata" data-fitcontent="" disabled="" style="height: 1.5em; width: 15ch;">[object Object]</textarea><br>            </p></section><section><h4 id="advanced-formulas" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Advanced Formulas<span class="autohelm-nav autohelm-nav-up-down"> <a href="#importing-data">&uarr;</a> <a href="#formulas-with-css-selectors-and-multiple-values">&darr;</a></span></h4><section><h5 id="formulas-with-css-selectors-and-multiple-values" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Formulas With CSS Selectors and Multiple Values<span class="autohelm-nav autohelm-nav-up-down"> <a href="#advanced-formulas">&uarr;</a> <a href="#macro-list-formatting">&darr;</a></span></h5><p>                    You can use almost any <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors">CSS selector</a> in place of <code class="nohighlight">#id</code> in <code class="nohighlight">$(#&lt;id&gt;)</code>. The value returned will be the contents of the value property on the element or (if not available) the value attribute or the <code class="nohighlight">innerText</code>.</p><p>                    You can use commas to select multiple identifier named elements, e.g. <code class="nohighlight">:value[$(#id1, #id2, #id3)]</code> is an array of the values associated with the elements <code class="nohighlight">:value(#id1)[3]</code>, <code class="nohighlight">:value(#id2)[2]</code>, <code class="nohighlight">:value(#id3)[1]</code> and will be <code class="nohighlight">[3,2,1]</code>.</p><p>                    A value reference <code class="nohighlight">$(css-selector)</code> can end in <code class="nohighlight">[]</code> to indicate multiple values should be returned as an array if the selector does not contain a comma. This allows tables to be treated somewhat like spreadsheets.<br>                </p></section><section><h5 id="macro-list-formatting" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Macro List Formatting<span class="autohelm-nav autohelm-nav-up-down"> <a href="#formulas-with-css-selectors-and-multiple-values">&uarr;</a> <a href="#javascript">&darr;</a></span></h5><p>                     The SECST formula evaluator supports supports some utility functions.<br>                </p></section><section><h5 id="javascript" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>JavaScript<span class="autohelm-nav autohelm-nav-up-down"> <a href="#macro-list-formatting">&uarr;</a> <a href="#seo">&darr;</a></span></h5><p>                    You can use any JavaScript that is available in <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API">WebWorkers</a> inside a macro. A special read-only <code class="nohighlight">document</code> object is also made available. This object has title, baseURI, location, and navigator properties along with a property for each meta tag name and value.<br>                </p></section></section></section></section><section><h2 id="seo" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Search Engine Optimization<span class="autohelm-nav autohelm-nav-up-down"> <a href="#markup-without-html-names">&uarr;</a> <a href="#structured-data">&darr;</a></span></h2><p>        SECST provides several features to support <abbr>SEO</abbr> Search Engine Optimization.</p><p>        <ul title="SEO features"><li><a href="#hastags">hashtags</a></li><li><a href="#meta-tags">meta tags</a></li><li><a href="#structured-data">structured data</a></li><li><a href="#server-transpilation">server transpilation</a></li></ul><br>        </p><section><h3 id="structured-data" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Structured Data<span class="autohelm-nav autohelm-nav-up-down"> <a href="#seo">&uarr;</a> <a href="#news-article">&darr;</a></span></h3><p>            For select tags, SECST can generate JSON-LD directly from SECST markup. Content, layout, and SEO optimization will always be in sync.</p><p>            This is best covered by an example based on <a target="_tab" href="https://developers.google.com/search/docs/appearance/structured-data/article">Google's documentation for a news article</a>.</p><p>            <em>Note: Only those tags documented for <code class="nohighlight">NewsArticle</code> are currently supported.</em></p><section><h4 id="news-article" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>News Article<span class="autohelm-nav autohelm-nav-up-down"> <a href="#structured-data">&uarr;</a> <a href="#styling-content">&darr;</a></span></h4><p>                The SECST tag <code class="nohighlight">:NewsArticle[]</code> can contain regular SECST as well as tags that parallel established JSON-LD schema like <code class="nohighlight">:headline[]</code>, <code class="nohighlight">:author[]</code> and <code class="nohighlight">:Person[]</code>. Where there are identical or trivially equivalent tags and attribute names, e.g. <code class="nohighlight">image</code> and <code class="nohighlight">img</code>, the native SECST tag is used.</p><p>                <pre class="secst"><code class="nohighlight">:NewsArticle[
   :headline[Pinky Conquers The World]
@@ -998,12 +1599,14 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
       "header": true,
       "headline": true,
       "img": true,
+      "link": true,
       "mermaidChart": true,
       "p": true,
       "repl": true,
       "section": true,
       "sheetMusic": true,
       "theme": true,
+      "title": true,
       "toc": true
     },
     "toJSONLD": true,
@@ -1055,7 +1658,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
       "format": "transform format(value)",
       "lang": true
     },
-    "contentAllowed": "Mon Dec 26 2022 11:05:16 GMT-0800 (Pacific Standard Time)",
+    "contentAllowed": "Mon Dec 26 2022 15:59:13 GMT-0800 (Pacific Standard Time)",
     "minCount": 0,
     "maxCount": 1,
     "toText": true
@@ -1608,6 +2211,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
       "th": true,
       "thead": true,
       "theme": true,
+      "title": true,
       "toc": true,
       "tr": true,
       "transpiled": true,
@@ -1848,6 +2452,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
       "th": true,
       "thead": true,
       "theme": true,
+      "title": true,
       "toc": true,
       "tr": true,
       "transpiled": true,
@@ -2278,6 +2883,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
       "h8": true,
       "header": true,
       "img": true,
+      "link": true,
       "macro": true,
       "mermaidChart": true,
       "p": true,
@@ -2285,6 +2891,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
       "section": true,
       "sheetMusic": true,
       "theme": true,
+      "title": true,
       "toc": true
     },
     "transform": true,
@@ -2319,6 +2926,11 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
     "contentAllowed": true,
     "transform": true,
     "htmlDocLink": "<a href="\&quot;https://developer.mozilla.org/en-US/docs/Web/HTML/Element/style\&quot;" target="\&quot;_tab\&quot;">html</a>"
+  },
+  "title": {
+    "contentAllowed": true,
+    "connected": true,
+    "htmlDocLink": "<a href="\&quot;https://developer.mozilla.org/en-US/docs/Web/HTML/Element/title\&quot;" target="\&quot;_tab\&quot;">html</a>"
   },
   "toc": {
     "htmlDocLink": "",
@@ -2476,11 +3088,6 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
     },
     "htmlDocLink": "<a href="\&quot;https://developer.mozilla.org/en-US/docs/Web/HTML/Element/listeners\&quot;" target="\&quot;_tab\&quot;">html</a>"
   },
-  "title": {
-    "contentAllowed": true,
-    "connected": true,
-    "htmlDocLink": "<a href="\&quot;https://developer.mozilla.org/en-US/docs/Web/HTML/Element/title\&quot;" target="\&quot;_tab\&quot;">html</a>"
-  },
   "headline": {
     "htmlDocLink": "",
     "additionalDocLinks": [
@@ -2556,7 +3163,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             </dd>
             <dd><em>Attributes Allowed</em>: <pre class="secst"><code class="nohighlight">N/A</code></pre>
             </dd>
-            <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">article, author, blockquote, datePublished, footer, forEach, forEntries, h, h1, h2, h3, h4, h5, h6, h7, h8, header, headline, img, mermaidChart, p, repl, section, sheetMusic, theme, toc</code></pre>
+            <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">article, author, blockquote, datePublished, footer, forEach, forEntries, h, h1, h2, h3, h4, h5, h6, h7, h8, header, headline, img, link, mermaidChart, p, repl, section, sheetMusic, theme, title, toc</code></pre>
             </dd>
         
             <dt><strong>article</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/article" target="_tab">html</a>  <br> <br></dt>
@@ -3044,7 +3651,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Attributes Allowed</em>: <pre class="secst"><code class="nohighlight">  iterable: transform iterable(value)
 </code></pre>
             </dd>
-            <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">&, @facebook, @github, @linkedin, @twitter, NewsArticle, a, abbr, answer, article, b, blockquote, bold, br, caption, class, code, dd, del, details, dl, dt, em, emoji, escape, footer, footnote, forEach, forEntries, h, h1, h2, h3, h4, h5, h6, h7, h8, hashtag, header, hr, i, img, input, ins, italic, kbd, latex, li, link, macro, mark, mermaidChart, meta, ol, p, pre, q, question, repl, samp, section, sheetMusic, slot, strike, strong, style, sub, summary, sup, table, tbody, td, text, textarea, tfoot, th, thead, theme, toc, tr, transpiled, u, ul, value, var</code></pre>
+            <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">&, @facebook, @github, @linkedin, @twitter, NewsArticle, a, abbr, answer, article, b, blockquote, bold, br, caption, class, code, dd, del, details, dl, dt, em, emoji, escape, footer, footnote, forEach, forEntries, h, h1, h2, h3, h4, h5, h6, h7, h8, hashtag, header, hr, i, img, input, ins, italic, kbd, latex, li, link, macro, mark, mermaidChart, meta, ol, p, pre, q, question, repl, samp, section, sheetMusic, slot, strike, strong, style, sub, summary, sup, table, tbody, td, text, textarea, tfoot, th, thead, theme, title, toc, tr, transpiled, u, ul, value, var</code></pre>
             </dd>
         
             <dt><strong>answer</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/answer" target="_tab">html</a>  <br> <br></dt>
@@ -3130,7 +3737,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Attributes Allowed</em>: <pre class="secst"><code class="nohighlight">  object: transform object(value)
 </code></pre>
             </dd>
-            <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">&, @facebook, @github, @linkedin, @twitter, NewsArticle, a, abbr, answer, article, b, blockquote, bold, br, caption, class, code, dd, del, details, dl, dt, em, emoji, escape, footer, footnote, forEach, forEntries, h, h1, h2, h3, h4, h5, h6, h7, h8, hashtag, header, hr, i, img, input, ins, italic, kbd, latex, li, link, macro, mark, mermaidChart, meta, ol, p, pre, q, question, repl, samp, section, sheetMusic, slot, strike, strong, style, sub, summary, sup, table, tbody, td, text, textarea, tfoot, th, thead, theme, toc, tr, transpiled, u, ul, value, var</code></pre>
+            <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">&, @facebook, @github, @linkedin, @twitter, NewsArticle, a, abbr, answer, article, b, blockquote, bold, br, caption, class, code, dd, del, details, dl, dt, em, emoji, escape, footer, footnote, forEach, forEntries, h, h1, h2, h3, h4, h5, h6, h7, h8, hashtag, header, hr, i, img, input, ins, italic, kbd, latex, li, link, macro, mark, mermaidChart, meta, ol, p, pre, q, question, repl, samp, section, sheetMusic, slot, strike, strong, style, sub, summary, sup, table, tbody, td, text, textarea, tfoot, th, thead, theme, title, toc, tr, transpiled, u, ul, value, var</code></pre>
             </dd>
         
             <dt><strong>h</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/h" target="_tab">html</a>  <br> <br></dt>
@@ -3299,7 +3906,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Attributes Allowed</em>: <pre class="secst"><code class="nohighlight">  level: number
 </code></pre>
             </dd>
-            <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">NewsArticle, article, blockquote, footer, forEach, forEntries, h, h1, h2, h3, h4, h5, h6, h7, h8, header, img, macro, mermaidChart, p, repl, section, sheetMusic, theme, toc</code></pre>
+            <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">NewsArticle, article, blockquote, footer, forEach, forEntries, h, h1, h2, h3, h4, h5, h6, h7, h8, header, img, link, macro, mermaidChart, p, repl, section, sheetMusic, theme, title, toc</code></pre>
             </dd>
         
             <dt><strong>sheetMusic</strong>   <br> <br></dt>
@@ -3321,6 +3928,15 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             </dd>
         
             <dt><strong>style</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/style" target="_tab">html</a>  <br> <br></dt>
+            <dd><em>Transformation Impacts</em>:
+                N/A <br> <br>
+            </dd>
+            <dd><em>Attributes Allowed</em>: <pre class="secst"><code class="nohighlight">N/A</code></pre>
+            </dd>
+            <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">plain text</code></pre>
+            </dd>
+        
+            <dt><strong>title</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/title" target="_tab">html</a>  <br> <br></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
             </dd>
@@ -3394,15 +4010,6 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">N/A</code></pre>
             </dd>
         
-            <dt><strong>title</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/title" target="_tab">html</a>  <br> <br></dt>
-            <dd><em>Transformation Impacts</em>:
-                N/A <br> <br>
-            </dd>
-            <dd><em>Attributes Allowed</em>: <pre class="secst"><code class="nohighlight">N/A</code></pre>
-            </dd>
-            <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">plain text</code></pre>
-            </dd>
-        
             <dt><strong>headline</strong>  <a target="_tab" href="https://schema.org/headline">JSON schema</a> <br> <br></dt>
             <dd><em>Transformation Impacts</em>:
                 N/A <br> <br>
@@ -3449,7 +4056,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             }
 
     content
-        = mhr / murl /italic / bold / struck / mark / backtickquoted / escape / script / code /  value / hr / br / emoji / (&colon expression _?) / [ a-z0-9_\-~!@#$%^&*()_+=\[\{\]\}|\\;:"'<,>.?/\n\r\t]i
+        = heading / mhr / murl /italic / bold / struck / mark / backtickquoted / triplebacktickquoted / escape / script / code /  value / hr / br / emoji / (&colon expression _?) / [ a-z0-9_\-~!@#$%^&*()_+=\[\{\]\}|\\;:"'<,>.?/\n\r\t]i
 
     colon
         = ":"
@@ -3458,6 +4065,11 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
         = &colon tag:tag options:options?  bracketed_SECST:bracketed_SECST  {
              const content = bracketed_SECST || [];
              return new Tag({tag,options,content,location:location()});
+        }
+
+    heading
+        = _ [#][Hh] level:[0-9] text:[^\r\n]* {
+            return new Tag({tag:"h",options:{attributes:{level}},content:[text.join("")]})
         }
 
     hr
@@ -3508,7 +4120,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
         }
 
     hashtag
-        = hash tag:[a-z0-9\-]i* options:options? content:bracketed_SECST {
+        = _ hash tag:[a-z0-9\-]i* options:options? content:bracketed_SECST {
             return new Tag({tag:"hashtag",options,content:tag.length>0 ? [tag.join("")] : content,location:location()})
         }
 
@@ -3524,12 +4136,12 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
         = "@"
 
     bracketed_SECST
-        = BRACKETOPEN value:(mhr/murl/italic/bold/struck/mark/backtickquoted/symbol/hashtag/mention/escape/script/code/value/hr/br/emoji/expression/not_bracketed/bracketed_SECST)* BRACKETCLOSE {
+        = BRACKETOPEN value:(heading/mhr/murl/italic/bold/struck/mark/backtickquoted/triplebacktickquoted/symbol/hashtag/mention/escape/script/code/value/hr/br/emoji/expression/not_bracketed/bracketed_SECST)* BRACKETCLOSE {
             if(Array.isArray(value) && value.every((item) => typeof(item)==="string")) {
                 return [value.join("")];
             }
             const result = [];
-            for(let i=0;i<value.length item="value[i];" text="[" if(typeof(result[result.length-1])!="=&quot;string&quot;)" +="" typeof(item)="==&quot;string&quot;)" prevtype="typeof(result[result.length-1]);" if(prevtype="==&quot;string&quot;" bracketed="BRACKETOPEN" not_bracketed="not:(!BRACKETCLOSE" bracketopen="[" bracketclose="" braced="BRACEOPEN" not_braced="not:(!BRACECLOSE" braceopen="{" braceclose="" bold="start:BOLDOPEN" not_bold="not:(!BOLDCLOSE" boldopen="**" boldclose="char:[^*" italic="start:ITALICOPEN" not_italic="not:(!ITALICCLOSE" italicopen="*" italicclose="char:[^*" struck="start:STRUCKOPEN" not_struck="not:(!STRUCKCLOSE" struckopen="~~" struckclose="char:[^~" mark="start:MARKOPEN" not_mark="not:(!MARKCLOSE" markopen="==" char:[^="\t\r\n]" markclose="char:[^=" '="=&#x27;" mhr="[\r\n]" murl="_" backtickquoted="BACKTICKOPEN" not_backtickquoted="not:(!BACKTICKOPEN" backtickopen="&#x60;" backtickclose="" tag="colon" options="(" o="{};" o.id="id;" o.classlist="classList;" o.attributes="JSON5.parse(attributes)" ;i++)="" {
+            for(let i=0;i<value.length item="value[i];" text="[" if(typeof(result[result.length-1])!="=&quot;string&quot;)" +="" typeof(item)="==&quot;string&quot;)" prevtype="typeof(result[result.length-1]);" if(prevtype="==&quot;string&quot;" bracketed="BRACKETOPEN" not_bracketed="not:(!BRACKETCLOSE" bracketopen="[" bracketclose="" braced="BRACEOPEN" not_braced="not:(!BRACECLOSE" braceopen="{" braceclose="" bold="start:BOLDOPEN" not_bold="not:(!BOLDCLOSE" boldopen="**" boldclose="char:[^*" italic="start:ITALICOPEN" not_italic="not:(!ITALICCLOSE" italicopen="*" italicclose="char:[^*" struck="start:STRUCKOPEN" not_struck="not:(!STRUCKCLOSE" struckopen="~~" struckclose="char:[^~" mark="start:MARKOPEN" not_mark="not:(!MARKCLOSE" markopen="==" char:[^="\t\r\n]" markclose="char:[^=" '="=&#x27;" mhr="[\r\n]" murl="_" backtickquoted="start:BACKTICKOPEN" not_backtickquoted="not:(!BACKTICKCLOSE" backtickopen="&#x60;" backtickclose="char:[^&#x60;]" triplebacktickquoted="start:TRIPLEBACKTICKOPEN" string="start+text.join(&quot;&quot;)+end;" not_triplebacktickquoted="not:(!TRIPLEBACKTICKOPEN" triplebacktickopen="&#x60;&#x60;&#x60;" triplebacktickclose="char:[^&#x60;]" tag="colon" options="(" o="{};" o.id="id;" o.classlist="classList;" o.attributes="JSON5.parse(attributes)" ;i++)="" {
 ="" const="" 
 ="" if(array.isarray(item))="" item.join("="" ")="" "]";
 ="" result.push(text);
@@ -3550,10 +4162,11 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
 ="" !struckopen.)="" char:[^~="" '~~'="" value:(not_mark/mark)*="" end:markclose="" tag({tag:"mark",content:[start+value.join("")+end]})
 ="" !markopen.)="" [="" \t]*="" '***'="" [\r\n]="" tag({tag:"hr",content:[]})
 ="" url:url="" _="" tag({tag:"a",content:[url[1]]})
-="" text:(not_backtickquoted/backtickquoted)*="" tag({tag:"code",content:[text.join("")]})
+="" text:(not_backtickquoted/backtickquoted)*="" end:backtickclose="" tag({tag:"code",content:[start+text.join("")+end]})
 ="" !backtickopen.)="" {="" not.join("");}
 
-="" token:token="" token="" id:id?="" classlist:class*="" binaryattributes:binaryattribute*="" attributes:braced?="" ")"="" var="" try="" ||="" {};
+="" char:[^`]="" '`'="" text:(not_triplebacktickquoted/triplebacktickquoted)*="" end:triplebacktickclose="" tag({tag:"code",content:[string="" (string.includes("\n")="" ?="" ""="" :="" "\n")]})
+="" !triplebacktickclose.)="" '```'="" token:token="" token="" id:id?="" classlist:class*="" binaryattributes:binaryattribute*="" attributes:braced?="" ")"="" var="" try="" ||="" {};
 ="" catch(e)="" error("unable="" to="" parse="" attributes.="" check="" for="" missing="" commas="" or="" quotes.")
 ="" binaryattributes.foreach(([key,value])="" ==""> {
                    o.attributes[key] = value;
