@@ -1,7 +1,7 @@
 const title = {
     contentAllowed: true,
     connected(el) {
-        document.head.appendChild(el);
+        el.ownerDocument.head.appendChild(el);
     }
 }
 

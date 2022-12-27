@@ -40,11 +40,10 @@ const a = {
     transform(node) {
         if(node.content[0]?.tag==="a") {
            Object.assign(node,node.content[0]);
-           return node;
         }
         let href = node.attributes.url || node.attributes.href;
         if(!href) {
-            href = node.attributes.href = (node.content[0]||"").trim();
+            href = node.attributes.href = (node.content.join("")).trim();
         }
         if(href) {
             new URL(href,document?.baseURI);

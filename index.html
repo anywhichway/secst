@@ -2,7 +2,11 @@
 
 
 
-<section><h1 id="the-joy-of-secst" class="autohelm-heading">The Joy of SECST</h1><p>    <abbr>SECST</abbr> (<b>[S]</b>emantic, <b>[E]</b>xtensible, <b>[C]</b>omputational, <b>[S]</b>tyleable, <b>[T]</b>agged) markup is a more expressive, but easy to learn and use, partial superset and alternative to regular Markdown. It provides these features and more:</p><p>    <ul><li> Support for almost all HTML tags <a href="#tags">and then some...</a>, with <a href="#theme">themes and styles</a>.</li><li> <a href="#tables-of-contents">Table of contents</a>, <a href="#footnotes">footnote</a>, <a href="#hashtags">hashtag</a> and <a href="#mentions">social media</a> support.</li><li> Reactive <a href="#values-and-formulas">formulas and data import</a> that are as simple as Excel formulas, e.g. <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/styles/default.min.css"><code class="nohighlight">[:value[2 * 2]</code> = <input class="secst" data-default="" data-template="2 * 2" value="4" title="2 * 2" data-fitcontent="" disabled="" style="width: 2ch;">.</li><li> SEO optimization via server rendering with JSON-LD <a href="#structured-data">structured data</a> for both content generation and layout.</li></ul></p><p>    Use SECST to joyfully create compelling, interactive HTML documents.</p><p>    This is the source for the introduction above:</p><p>    <pre class="secst"><code class="language-secst">:abbr[SECST] (**[S]**emantic, **[E]**xtensible, **[C]**omputational, **[S]**tyleable, **[T]**agged) markup is a more expressive, but easy to learn and use, partial superset and alternative to regular Markdown. It provides these features and more:
+
+
+
+
+<section><h1 id="the-joy-of-secst" class="autohelm-heading">The Joy of SECST</h1><p>    <abbr>SECST</abbr> (<b>[S]</b>emantic, <b>[E]</b>xtensible, <b>[C]</b>omputational, <b>[S]</b>tyleable, <b>[T]</b>agged) markup is a more expressive, but easy to learn and use, superset and alternative to regular Markdown. It provides these features and more:</p><p>    <ul><li> Support for almost all HTML tags <a href="#tags">and then some...</a>, with <a href="#theme">themes and styles</a>.</li><li> <a href="#tables-of-contents">Table of contents</a>, <a href="#footnotes">footnote</a>, <a href="#hashtags">hashtag</a> and <a href="#mentions">social media</a> support.</li><li> Reactive <a href="#values-and-formulas">formulas and data import</a> that are as simple as Excel formulas, e.g. <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/styles/default.min.css"><code class="nohighlight">[:value[2 * 2]</code> = <input class="secst" data-default="" data-template="2 * 2" value="4" title="2 * 2" data-fitcontent="" disabled="" style="width: 2ch;">.</li><li> SEO optimization via server rendering with JSON-LD <a href="#structured-data">structured data</a> for both content generation and layout.</li></ul></p><p>    Use SECST to joyfully create compelling, interactive HTML documents.</p><p>    This is the source for the introduction above:</p><p>    <pre class="secst"><code class="language-secst">:abbr[SECST] (**[S]**emantic, **[E]**xtensible, **[C]**omputational, **[S]**tyleable, **[T]**agged) markup is a more expressive, but easy to learn and use, superset and alternative to regular Markdown. It provides these features and more:
 
 :ul[
 - Support for almost all HTML tags :a(.#tags)[and then some...], with :a(.#theme)[themes and styles].
@@ -19,21 +23,19 @@ Use SECST to joyfully create compelling, interactive HTML documents.</code></pre
         <dd>A tag that has meaning beyond that used to facilitate document layout and style.</dd>
         <dd><code class="nohighlight">&lt;b&gt;</code> for bold is not semantic, but <code class="nohighlight">&lt;strong&gt;</code> for indicating importance and rendering as bold is semantic.</dd>
     </dl></p><section><h2 id="html-and-markdown-issues" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>HTML and Markdown Issues<span class="autohelm-nav autohelm-nav-up-down"> <a href="#why-another-language">&uarr;</a> <a href="#secst-benefits">&darr;</a></span></h2><p>        <ul><li>HTML is verbose as a result of the need for matching open and close named tags.</li><li>Markdown's goal is simplicity, for which it sacrifices a lot of expressive power. This sacrifice is the result of a non-uniform, non-semantic syntax used to support its simplicity.</li><li>Ensuring that HTML documents are meaningful for textual analysis or supportive of assistive software is hard.</li><li>Markdown is not semantic, you must learn the different annotations to format your document and the resulting HTML is not necessarily meaningful to textual analysis or assistive software. When Markdown initially had a very limited number of ways to format documents, its syntax was a benefit, for some it is now becoming a burden.</li><li>Some Markdown syntax is invisible, e.g. spaces for line breaks</li><li>The built-in self creating document navigation capabilities of HTML and Markdown are limited.</li><li>Using HTML's computational capabilities, i.e. JavaScript, requires programming skills.</li><li>Markdown provides no intrinsic computational capability. You must use something like Jupyter Notebook to support computation.</li><li>Markdown provides no way to bundle assets for delivery. HTML supports asset bundling through the use of data URLs, but it is rather obscure and not automatic.</li><li>Both HTML and Markdown are require specialized programming skills to extend.</li><li>HTML's legacy allows the creation of documents with security flaws.</li></ul><br>   </p></section><section><h2 id="secst-benefits" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>SECST Benefits<span class="autohelm-nav autohelm-nav-up-down"> <a href="#html-and-markdown-issues">&uarr;</a> <a href="#when-to-use-secst">&darr;</a></span></h2><p>        <ul><li>A consistent, uniform compact representation.</li><li>Compatibility with most <a href="#basic-markdown">Basic Markdown</a> and some <a href="#extened-markdown">Extended Markdown</a>.</li><li>Semantic tags, which make it easier to learn and remember than Markdown and encourages more meaningful documents than straight HTML. Many tags are named after their semantic HTML counterparts to make SECST easier to learn, maintain, and extend.</li><li>Enforcement of required attributes and valid values for proper behavior or accessibility reasons.</li><li>Extensive, built-in <a href="#tables-of-contents">document navigation</a> for tables of contents and footnotes (more than Markdown).</li><li>Using SECST's built-in <a href="#values-and-formulas">computational capability</a> for math and text expressions is no harder than writing Excel formulas.</li><li>A predominantly declarative extension technique make SECTS easier to extend than HTML. Expertise in programming custom elements is not required.</li><li>Asset bundling via the use of the attribute <code class="nohighlight">static</code> on <code class="nohighlight">audio</code>, <code class="nohighlight">img</code>, <code class="nohighlight">video</code> and <code class="nohighlight">value</code> tags.</li><li>SECST is easier to extend than Markdown. Expertise in parsers or regular expressions is not required.</li><li>SECST is transpiled to safe HTML constructs to limit the chance of XSS and other attacks.</li></ul><br>    </p></section></section>
-<section><h1 id="when-to-use-secst" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>When To Use SECST<span class="autohelm-nav autohelm-nav-up-down"> <a href="#why-another-language">&uarr;</a> <a href="#basic-markdown">&darr;</a></span></h1><p>    If you only need basic Markdown, then SECST is probably not for you.</p><p>    If you need extended Markdown, then SECST may be a good option.</p><p>    If you need more than Markdown, then SECST may be your only option short of HTML, CSS, and JavaScript so long as you are focused on interactive document authoring. If you are building an application use Svelte, VUE, React or some other framework.</p><section><h2 id="basic-markdown" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Basic Markdown<span class="autohelm-nav autohelm-nav-up-down"> <a href="#when-to-use-secst">&uarr;</a> <a href="#extended-markdown">&darr;</a></span></h2><p>        See <a>https://www.markdownguide.org/basic-syntax/</a>.</p><p>        <div style="overflow: auto; margin-right: 1ch;"><table class="secst">
+<section><h1 id="when-to-use-secst" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>When To Use SECST<span class="autohelm-nav autohelm-nav-up-down"> <a href="#why-another-language">&uarr;</a> <a href="#basic-markdown">&darr;</a></span></h1><p>    If you only need basic Markdown, then SECST is probably not for you.</p><p>    If you need extended Markdown, then SECST may be a good option.</p><p>    If you need more than Markdown, then SECST may be your only option short of HTML, CSS, and JavaScript so long as you are focused on interactive document authoring. If you are building an application use Svelte, VUE, React or some other framework.</p><section><h2 id="basic-markdown" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Basic Markdown<span class="autohelm-nav autohelm-nav-up-down"> <a href="#when-to-use-secst">&uarr;</a> <a href="#extended-markdown">&darr;</a></span></h2><p>        See <a href="https://www.markdownguide.org/basic-syntax/" target="_tab">https://www.markdownguide.org/basic-syntax/</a>.</p><p>        <div style="overflow: auto; margin-right: 1ch;"><table class="secst">
             <thead><tr><th>Document Item</th><th>Markdown</th><th>SECST</th><th>Example</th></tr></thead>
             <tr><td>bold</td><td><code class="nohighlight">**text**</code></td><td><code class="nohighlight">:strong[text]</code> and <code class="nohighlight">**text**</code></td><td><b>text</b></td></tr>
             <tr><td>italics</td><td><code class="nohighlight">*text*</code></td><td><code class="nohighlight">:em[text]</code> and <code class="nohighlight">*text*</code></td><td><i>text</i></td></tr>
-            <tr><td>blockquote</td><td><code class="nohighlight">&gt; quote text</code></td><td><code class="nohighlight">:blockquote[quote text]</code></td><td></td></tr>
-            <tr><td>nested blockquote</td><td><code class="nohighlight">&gt; quote text</code> <kbd>Enter</kbd> <code class="nohighlight">&gt;&gt; nested quote text</code></td><td><code class="nohighlight">:blockquote[quote text :blockquote[nested quote text]]</code></td><td></td></tr>
             <tr><td>code</td><td><code class="nohighlight">'the code'</code></td><td><code class="nohighlight">:code[the code]</code> and <code class="nohighlight">'the code'</code></td><td><code class="nohighlight">the code</code></td></tr>
             <tr><td>newline</td><td>a new line</td><td>a new line or <code class="nohighlight">:br</code></td><td></td></tr>
             <tr><td>paragraph</td><td>two new lines, i.e. an empty line</td><td>two new lines or <code class="nohighlight">:p[&lt;content&gt;...]</code></td><td></td></tr>
         </table></div></p><p>        Blockquote</p><p>        <code class="nohighlight">&gt; quoted text</code> or <code class="nohighlight">:blockquote[quoted text]</code></p><p>        <pre class="secst"><code class="nohighlight">&gt; quoted text line one
-&gt; quoted text line two</code></pre><blockquote>quoted text line one<br>quoted text line two</blockquote></p><p>        Nested blockquotes are supported using nested <code class="nohighlight">:blockquote[]</code>, but not using Markdown shorthand.</p><p>        Note: Shorthand blockquotes will conflict with <code class="nohighlight">:value[]</code> <a href="#values-and-formulas">formulas</a> if your formulas contain a newline before <code class="nohighlight">&gt;</code> symbols.</p><p>        Lists</p><p>        Must be wrapped in <code class="nohighlight">:ol[]</code> or <code class="nohighlight">:ul[]</code>. You can use Markdown shorthand inside the SECST tag content.</p><p>        <pre class="secst"><code class="nohighlight">:ol[
+&gt; quoted text line two</code></pre><blockquote>quoted text line one<br>quoted text line two</blockquote></p><p>        Nested blockquotes are supported using nested <code class="nohighlight">:blockquote[]</code>, but not using Markdown shorthand.</p><p>        Lists</p><p>        Must be wrapped in <code class="nohighlight">:ol[]</code> or <code class="nohighlight">:ul[]</code>. You can use Markdown shorthand inside the SECST tag content.</p><p>        <pre class="secst"><code class="nohighlight">:ol[
   1. Item One
   -  Item Two
 ]</code></pre></p><p>        <ol><li> Item One</li><li> Item Two</li></ol></p><p>        Also see <a href="#lists">Lists</a></p><p>        Headings</p><p>        <code class="nohighlight"># heading text</code> where there can be 1 - 6 <code class="nohighlight">#</code>.</p><p>        <code class="nohighlight">:h&lt;num&gt;[heading text]</code> where <code class="nohighlight">num</code> is 1 - 6.<br></p><h6>Heading Level Six</h6><p>        Horizontal Rule</p><p>        <code class="nohighlight">***</code> or <code class="nohighlight">:hr</code><br><hr>
-<br>        Also see <a href="#code">Code</a>, <a href="#links">Links</a>, <a href="#images">Images</a>.<br>    </p></section><section><h2 id="extended-markdown" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Extended Markdown<span class="autohelm-nav autohelm-nav-up-down"> <a href="#basic-markdown">&uarr;</a> <a href="#markdown-gaps">&darr;</a></span></h2><p>        See <a>https://www.markdownguide.org/extended-syntax/</a>.</p><p>        <div style="overflow: auto; margin-right: 1ch;"><table class="secst">
+<br>        Also see <a href="#code">Code</a>, <a href="#links">Links</a>, <a href="#images">Images</a>.<br>    </p></section><section><h2 id="extended-markdown" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Extended Markdown<span class="autohelm-nav autohelm-nav-up-down"> <a href="#basic-markdown">&uarr;</a> <a href="#markdown-gaps">&darr;</a></span></h2><p>        See <a href="https://www.markdownguide.org/extended-syntax/" target="_tab">https://www.markdownguide.org/extended-syntax/</a>.</p><p>        <div style="overflow: auto; margin-right: 1ch;"><table class="secst">
             <thead><tr><th>Document Item</th><th>Markdown</th><th>SECST</th><th>Example</th></tr></thead>
             <tr><td><a href="#footnotes">footnotes</a></td><td><code class="nohighlight">[number]</code></td><td><code class="nohighlight">:footnote[number] or :footnote[] for automatic numbering</code></td><td></td></tr>
             <tr><td>heading ids</td><td><code class="nohighlight"># My Heading {#my-id}</code></td><td><code class="nohighlight">:h1(#my-id)[My Heading]</code></td><td></td></tr>
@@ -42,12 +44,12 @@ Use SECST to joyfully create compelling, interactive HTML documents.</code></pre
              <tr><td>task lists</td><td>see <a href="#task-lists">task lists</a></td><td></td><td></td></tr>
              <tr><td>emojis</td><td><code class="nohighlight">:</code><code class="nohighlight">emoji-name:</code></td><td><code class="nohighlight">:emoji[emoji-name]</code> and <code class="nohighlight">:smile:</code></td><td><span>&#x1f604;</span></td></tr>
              <tr><td>highlight</td><td><code class="nohighlight">==marked words==</code></td><td><code class="nohighlight">:mark[marked words]</code> and <code class="nohighlight">==marked words==</code></td><td><mark>marked words</mark></td></tr>
-              <tr><td>subscript</td><td><code class="nohighlight">H~2~O</code></td><td><code class="nohighlight">H:sub[2]0</code></td><td>H<sub>2</sub>0</td></tr>
-              <tr><td>superscript</td><td><code class="nohighlight">X^2^</code></td><td><code class="nohighlight">X:sup[2]</code></td><td>X<sup>2</sup></td></tr>
+              <tr><td>subscript</td><td><code class="nohighlight">H~2~O</code></td><td><code class="nohighlight">H:sub[2]0</code> and <code class="nohighlight">H~2~O</code></td><td>H<sub>2</sub>O</td></tr>
+              <tr><td>superscript</td><td><code class="nohighlight">X^2^</code></td><td><code class="nohighlight">X:sup[2]</code> and <code class="nohighlight">X^2^</code></td><td>X<sup>2</sup></td></tr>
               <tr><td>automatic URL linking</td><td><code class="nohighlight">https://www.google.com</code></td><td><code class="nohighlight">:a[https://www.google.com]</code> and <code class="nohighlight">https://www.google.com</code></td><td><a href="https://www.google.com" target="_tab">https://www.google.com</a></td></tr>
         </table></div></p><p>        Code Block</p><p>        <code class="nohighlight">```code block```</code> or <code class="nohighlight">:code[code block]</code></p><p>        <pre class="secst"><code class="nohighlight">code block
 </code></pre><br>    </p></section><section><h2 id="markdown-gaps" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Markdown Gaps<span class="autohelm-nav autohelm-nav-up-down"> <a href="#extended-markdown">&uarr;</a> <a href="#authoring">&darr;</a></span></h2><p>        <ul><li><a href="#hashtags">hashtags</a></li><li><a href="#audio">audio</a></li><li><a href="#video">video</a></li><li><ins>inserted</ins> and <del>deleted</del>, see <a href="inserted-and-deleted" target="_tab">inserted and deleted</a></li><li><a href="#tables-of-contents">tables of contents</a></li><li><a href="#social-media-and-other-mentions">social media and other mentions</a></li></ul><br>    </p></section></section>
-<section><h1 id="authoring" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Authoring<span class="autohelm-nav autohelm-nav-up-down"> <a href="#when-to-use-secst">&uarr;</a> <a href="#markup-tags-with-html-names">&darr;</a></span></h1><p>    Authors write documents using semantic tags with the format <code class="nohighlight">&lt;tag&gt;[&lt;content&gt;]</code> or <code class="nohighlight">&lt;tag&gt;(&lt;parameters&gt;)[&lt;content&gt;]</code>.</p><p>    For example:<br>    <ul><li><code class="nohighlight">:strong[bolded important content]</code> produces <strong>bolded important content</strong></li><li><code class="nohighlight">:em[italicized emphasized content]</code> produces <em>italicized emphasized content</em></li></ul></p><section><h2 id="markup-tags-with-html-names" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Markup Tags With HTML Names<span class="autohelm-nav autohelm-nav-up-down"> <a href="#authoring">&uarr;</a> <a href="#paragraph">&darr;</a></span></h2><p>        Almost every semantic tag supported by HTML5 is one of the <a href="#tags">tags supported by SECST</a>. Most non-semantic tags are excluded from SECST, e.g. <code class="nohighlight">&lt;div&gt;</code> and <code class="nohighlight">&lt;span&gt;</code>. Exceptions are <code class="nohighlight">&lt;hr&gt;</code>, <code class="nohighlight">&lt;table&gt;</code>, <code class="nohighlight">&lt;ol&gt;</code>, <code class="nohighlight">&lt;ul&gt;</code> and <code class="nohighlight">&lt;style&gt;</code>; however, since they are so commonly used <code class="nohighlight">:b[]</code> for <b>bold</b> and <code class="nohighlight">:i[]</code> for <i>italic</i> are included, as are aliases <code class="nohighlight">:bold[]</code> and <code class="nohighlight">:italic[]</code>.</p><p>        A few tags of note are documented below to illustrate the use of SECST or highlight special features.</p><section><h3 id="paragraph" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Paragraph<span class="autohelm-nav autohelm-nav-up-down"> <a href="#markup-tags-with-html-names">&uarr;</a> <a href="#code">&darr;</a></span></h3><p>            SECST will treat two newlines in sequence as a paragraph break. There is also a paragraph tag <code class="nohighlight">:p[]</code>. Newlines inside a <code class="nohighlight">p</code> tag will produce separate HTML <code class="nohighlight">&lt;br&gt;</code> elements. A <code class="nohighlight">:p[]</code> tag is not strictly necessary for really simple content. A SECST parser/transpiler will do a reasonable job of figuring out where paragraph breaks are required; however behavior may vary from implementation to implementation.</p><p>            If you get an unexpected document layout, try putting content inside a <code class="nohighlight">:p[]</code> tag.<br>        </p></section><section><h3 id="code" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Code<span class="autohelm-nav autohelm-nav-up-down"> <a href="#paragraph">&uarr;</a> <a href="#details">&darr;</a></span></h3><p>            Contents wrapped in <code class="nohighlight">:code[]</code> will be inline unless the contents contain a newline, in which case the code will be displayed in block format.</p><p>            If you have a single line you wish to show as a block, end it with a newline.<br>        </p></section><section><h3 id="details" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Details<span class="autohelm-nav autohelm-nav-up-down"> <a href="#code">&uarr;</a> <a href="#headings">&darr;</a></span></h3><p>            The <code class="nohighlight">:details[]</code> tag supports the conditional display of content. It has one required sub-tag <code class="nohighlight">:summary[&lt;short text&gt;]</code> and the rest of the content is conditionally displayed. If a <code class="nohighlight">summary</code> tag is missing, then the first word is used as the summary.</p><p>            <code class="nohighlight">:details[:summary[See the content...] Hello there!]</code> renders as <details><summary>See the content...</summary> Hello there!</details></p><p>            <code class="nohighlight">:details[... Hello there!]</code> renders as <details><summary>...</summary>Hello there!</details><br>        </p></section><section><h3 id="headings" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Headings<span class="autohelm-nav autohelm-nav-up-down"> <a href="#details">&uarr;</a> <a href="#html-entities-and-special-characters">&darr;</a></span></h3><p>            Headings automatically get ids you can use for the destination of links. The id is the same as the text content in lower case with spaces and special characters replaced by dashes. To make it more convenient, you can also provide your own ids, e.g. <code class="nohighlight">:h1(#myheading)[My Heading]</code> with link <code class="nohighlight">:a({href:"#myheading"})[Go To My Heading]</code>.</p><p>            <em>Note: All tags can optionally take an id starting with <code class="nohighlight">#</code>. If an id is present, it must be the first parameter.</em><br>        </p></section><section><h3 id="html-entities-and-special-characters" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>HTML Entities and Special Characters<span class="autohelm-nav autohelm-nav-up-down"> <a href="#headings">&uarr;</a> <a href="#hyperlinks">&darr;</a></span></h3><p>            <a target="_tab" href="https://www.toptal.com/designers/htmlarrows/">Toptal</a> has a great reference for this.</p><p>            Special characters and symbols can be displayed using either <code class="nohighlight">&&lt;character-id&gt;</code><code class="nohighlight">;</code> or <code class="nohighlight">:&[&lt;character-id&gt;...]</code>. The second form can display multiple characters or symbols, just leave off the leading "&" and trailing ";" in the listed items.</p><p>            The code <code class="nohighlight">&#x263B;</code> renders as <span>&#x263B;</span> .</p><p>            The code <code class="nohighlight">:&[female male #9893]</code> renders as <span>&female;&male;&#9893;</span>.<br>        </p></section><section><h3 id="hyperlinks" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Hyperlinks<span class="autohelm-nav autohelm-nav-up-down"> <a href="#html-entities-and-special-characters">&uarr;</a> <a href="#inserted-and-deleted">&darr;</a></span></h3><p>            Sometimes, e.g. with hyperlinks, you need to specify more than content. This is provided using an attribute block in parentheses, e.g.</p><p>            <code class="nohighlight">:a({href:"./index.txt",target:"_tab"})[SECST]</code> yields <a href="./index.txt" target="_tab">SECST</a> , where you can access the source of this document.</p><p>            For convenience, any tag that can accept a url (either <code class="nohighlight">src</code> or <code class="nohighlight">href</code> in HTML) does not require the attribute, just provide the URL. And, single quotes can be used for attribute values, e.g.</p><p>            <code class="nohighlight">:a(./index.txt {target:'_tab'})[SECST]</code> yields <a target="_tab" href="./index.txt">SECST</a>.</p><p>            You can also use document ids prefixed with a period as targets, e.g. <code class="nohighlight">.#headings</code> for this section. The period prefix is necessary to distinguish from providing an id for the link itself.</p><p>            You can also specify hyperlinks with just a content value, e.g. <code class="nohighlight">:a({target:"_tab"})[./index.txt]</code> renders as <a>./index.txt</a>.</p><p>            By default, relative URLS and ids, i.e. those starting with a period, have a target that is the current window or tab. And, those starting with a protocol, e.g. <code class="nohighlight">https://</code> have a target of a new tab.</p><p>            All tags that take more than just content are fully documented in the <a href="#tags">complete list of tags</a>.</p></section><section><h3 id="inserted-and-deleted" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Inserted And Deleted<span class="autohelm-nav autohelm-nav-up-down"> <a href="#hyperlinks">&uarr;</a> <a href="#lists">&darr;</a></span></h3><p>            <code class="nohighlight">:ins[inserted]</code> renders as <ins>inserted</ins></p><p>            <code class="nohighlight">:del[deleted]</code> renders as <del>deleted</del><br>        </p></section><section><h3 id="lists" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Lists<span class="autohelm-nav autohelm-nav-up-down"> <a href="#inserted-and-deleted">&uarr;</a> <a href="#unordered-and-ordered-lists">&darr;</a></span></h3><section><h4 id="unordered-and-ordered-lists" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Unordered And Ordered Lists<span class="autohelm-nav autohelm-nav-up-down"> <a href="#lists">&uarr;</a> <a href="#description-lists">&darr;</a></span></h4><p>                Both ordered and unordered lists are supported using <code class="nohighlight">ol</code> and <code class="nohighlight">ul</code> tags with <code class="nohighlight">li</code> tags.</p><p>                <code class="nohighlight">:ul[:li[LinkedIn] :li[Facebook] :li[Twitter]]</code></p><p>                <ul><li>LinkedIn</li><li>Facebook</li><li>Twitter</li></ul></p><p>                There is also a shorthand:</p><p>                <pre class="secst"><code class="nohighlight">:ul[
+<section><h1 id="authoring" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Authoring<span class="autohelm-nav autohelm-nav-up-down"> <a href="#when-to-use-secst">&uarr;</a> <a href="#markup-tags-with-html-names">&darr;</a></span></h1><p>    Although most Markdown is supported, authors should write documents using semantic tags with the format <code class="nohighlight">&lt;tag&gt;[&lt;content&gt;]</code> or <code class="nohighlight">&lt;tag&gt;(&lt;parameters&gt;)[&lt;content&gt;]</code>.</p><p>    For example:<br>    <ul><li><code class="nohighlight">:strong[bolded important content]</code> produces <strong>bolded important content</strong></li><li><code class="nohighlight">:em[italicized emphasized content]</code> produces <em>italicized emphasized content</em></li></ul></p><section><h2 id="markup-tags-with-html-names" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Markup Tags With HTML Names<span class="autohelm-nav autohelm-nav-up-down"> <a href="#authoring">&uarr;</a> <a href="#paragraph">&darr;</a></span></h2><p>        Almost every semantic tag supported by HTML5 is one of the <a href="#tags">tags supported by SECST</a>. Most non-semantic tags are excluded from SECST, e.g. <code class="nohighlight">&lt;div&gt;</code> and <code class="nohighlight">&lt;span&gt;</code>. However, since they are so commonly used <code class="nohighlight">:b[]</code> for <b>bold</b> and <code class="nohighlight">:i[]</code> for <i>italic</i> are included, as are aliases <code class="nohighlight">:bold[]</code> and <code class="nohighlight">:italic[]</code>.</p><p>        A few tags of note are documented below to illustrate the use of SECST or highlight special features.</p><section><h3 id="paragraph" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Paragraph<span class="autohelm-nav autohelm-nav-up-down"> <a href="#markup-tags-with-html-names">&uarr;</a> <a href="#code">&darr;</a></span></h3><p>            SECST will treat two newlines in sequence as a paragraph break. There is also a paragraph tag <code class="nohighlight">:p[]</code>. Newlines inside a <code class="nohighlight">p</code> tag will produce separate HTML <code class="nohighlight">&lt;br&gt;</code> elements. A <code class="nohighlight">:p[]</code> tag is not strictly necessary for really simple content. A SECST parser/transpiler will do a reasonable job of figuring out where paragraph breaks are required; however behavior may vary from implementation to implementation.</p><p>            If you get an unexpected document layout, try putting content inside a <code class="nohighlight">:p[]</code> tag.<br>        </p></section><section><h3 id="code" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Code<span class="autohelm-nav autohelm-nav-up-down"> <a href="#paragraph">&uarr;</a> <a href="#details">&darr;</a></span></h3><p>            Contents wrapped in <code class="nohighlight">:code[]</code> will be inline unless the contents contain a newline, in which case the code will be displayed in block format.</p><p>            Both <code class="nohighlight">`code`</code> and <code class="nohighlight">```code```</code> are supported.</p><p>            If you have a single line you wish to show as a block, end it with a newline.<br>        </p></section><section><h3 id="details" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Details<span class="autohelm-nav autohelm-nav-up-down"> <a href="#code">&uarr;</a> <a href="#headings">&darr;</a></span></h3><p>            The <code class="nohighlight">:details[]</code> tag supports the conditional display of content. It has one required sub-tag <code class="nohighlight">:summary[&lt;short text&gt;]</code> and the rest of the content is conditionally displayed. If a <code class="nohighlight">summary</code> tag is missing, then the first word is used as the summary.</p><p>            <code class="nohighlight">:details[:summary[See the content...] Hello there!]</code> renders as <details><summary>See the content...</summary> Hello there!</details></p><p>            <code class="nohighlight">:details[... Hello there!]</code> renders as <details><summary>...</summary>Hello there!</details><br>        </p></section><section><h3 id="headings" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Headings<span class="autohelm-nav autohelm-nav-up-down"> <a href="#details">&uarr;</a> <a href="#html-entities-and-special-characters">&darr;</a></span></h3><p>            Headings automatically get ids you can use for the destination of links. The id is the same as the text content in lower case with spaces and special characters replaced by dashes.</p><p>            To make it more convenient, you can also provide your own ids, e.g. <code class="nohighlight">:h1(#myheading)[My Heading]</code>.</p><p>            <em>Note: All tags can optionally take an id starting with <code class="nohighlight">#</code>. If an id is present, it must be the first parameter between the parentheses.</em></p><p>            You could target this heading with the hyperlink <code class="nohighlight">:a(.#myheading)[Go To My Heading]</code>.</p><p>            Note the use of a shorthand "relative hash" (a hash starting with a period) for the destination of <code class="nohighlight">Go To My Heading</code>. This could also be specified as: <code class="nohighlight">:a({href:"#myheading"})[Go To My Heading]</code>.</p><p>            There is a special heading <code class="nohighlight">h:[]</code> with no number. If this is the first element on a <code class="nohighlight">:section[]</code>, then it will automatically get a number based on section nesting. This allws the copying and pating of sections from one place to another without worrying about updating headings.<br>        </p></section><section><h3 id="html-entities-and-special-characters" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>HTML Entities and Special Characters<span class="autohelm-nav autohelm-nav-up-down"> <a href="#headings">&uarr;</a> <a href="#hyperlinks">&darr;</a></span></h3><p>            Special characters and symbols can be displayed using either <code class="nohighlight">&&lt;character-id&gt;</code><code class="nohighlight">;</code> or <code class="nohighlight">:&[&lt;character-id&gt;...]</code>. The second form can display multiple characters or symbols, just leave off the leading "&" and trailing ";" in the listed items.</p><p>            The code <code class="nohighlight">&#x263B;</code> renders as <span>&#x263B;</span> .</p><p>            The code <code class="nohighlight">:&[female male #9893]</code> renders as <span>&female;&male;&#9893;</span>.</p><p>             <a target="_tab" href="https://www.toptal.com/designers/htmlarrows/">Toptal</a> has a great reference for for special characters.<br>        </p></section><section><h3 id="hyperlinks" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Hyperlinks<span class="autohelm-nav autohelm-nav-up-down"> <a href="#html-entities-and-special-characters">&uarr;</a> <a href="#inserted-and-deleted">&darr;</a></span></h3><p>            Sometimes, e.g. with hyperlinks, you need to specify more than content. This is provided using an attribute block in parentheses, e.g.</p><p>            <code class="nohighlight">:a({href:"./index.txt",target:"_tab"})[SECST]</code> yields <a href="./index.txt" target="_tab">SECST</a> , where you can access the source of this document.</p><p>            For convenience, any tag that can accept a url (either <code class="nohighlight">src</code> or <code class="nohighlight">href</code> in HTML) does not require the attribute, just provide the URL. And, single quotes can be used for attribute values, e.g.</p><p>            <code class="nohighlight">:a(./index.txt {target:'_tab'})[SECST]</code> yields <a target="_tab" href="./index.txt">SECST</a>.</p><p>            You can also use document ids prefixed with a period as targets, e.g. <code class="nohighlight">.#headings</code> for this section. The period prefix is necessary to distinguish from providing an id for the link itself.</p><p>            You can also specify hyperlinks with just a content value, e.g. <code class="nohighlight">:a({target:"_tab"})[./index.txt]</code> renders as <a href="./index.txt">./index.txt</a>.</p><p>            By default, relative URLS and ids, i.e. those starting with a period, have a target that is the current window or tab. And, those starting with a protocol, e.g. <code class="nohighlight">https://</code> have a target of a new tab.<br>        </p></section><section><h3 id="inserted-and-deleted" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Inserted And Deleted<span class="autohelm-nav autohelm-nav-up-down"> <a href="#hyperlinks">&uarr;</a> <a href="#lists">&darr;</a></span></h3><p>            <code class="nohighlight">:ins[inserted]</code> renders as <ins>inserted</ins></p><p>            <code class="nohighlight">:del[deleted]</code> renders as <del>deleted</del><br>        </p></section><section><h3 id="lists" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Lists<span class="autohelm-nav autohelm-nav-up-down"> <a href="#inserted-and-deleted">&uarr;</a> <a href="#unordered-and-ordered-lists">&darr;</a></span></h3><section><h4 id="unordered-and-ordered-lists" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Unordered And Ordered Lists<span class="autohelm-nav autohelm-nav-up-down"> <a href="#lists">&uarr;</a> <a href="#description-lists">&darr;</a></span></h4><p>                Both ordered and unordered lists are supported using <code class="nohighlight">ol</code> and <code class="nohighlight">ul</code> tags with <code class="nohighlight">li</code> tags.</p><p>                <code class="nohighlight">:ul[:li[LinkedIn] :li[Facebook] :li[Twitter]]</code></p><p>                <ul><li>LinkedIn</li><li>Facebook</li><li>Twitter</li></ul></p><p>                There is also a shorthand:</p><p>                <pre class="secst"><code class="nohighlight">:ul[
   - LinkedIn
   - Facebook
   - Twitter
@@ -127,13 +129,13 @@ Use SECST to joyfully create compelling, interactive HTML documents.</code></pre
  A --- B
  B--&gt;C[fa:fa-ban forbidden]
  B--&gt;D(fa:fa-spinner);
-]</code></pre></p><p>            renders as</p><script src="https://cdn.jsdelivr.net/npm/mermaid@9/dist/mermaid.min.js" onload="(() =&gt; { mermaid.initialize({ startOnLoad: true }) })()"></script><pre id="mermaidChart7375448675317968" class="mermaid">
+]</code></pre></p><p>            renders as</p><script src="https://cdn.jsdelivr.net/npm/mermaid@9/dist/mermaid.min.js" onload="(() =&gt; { mermaid.initialize({ startOnLoad: true }) })()"></script><pre id="mermaidChart3238001619467037" class="mermaid">
                 graph LR
                 A --- B
                 B-->C[fa:fa-ban forbidden]
                 B-->D(fa:fa-spinner);
             </pre><script type="module">
-            const el = document.getElementById("mermaidChart7375448675317968"),
+            const el = document.getElementById("mermaidChart3238001619467037"),
                 sibling = el.nextSibling,
                 insertSvg = function (svgCode, bindFunctions) {
                     el.innerHTML = svgCode;
@@ -147,7 +149,7 @@ Use SECST to joyfully create compelling, interactive HTML documents.</code></pre
                 B-->C[fa:fa-ban forbidden]
                 B-->D(fa:fa-spinner);
             `;
-            setTimeout(() => mermaid.mermaidAPI.render("mermaidChart7375448675317968", graphDefinition, insertSvg),1000);
+            setTimeout(() => mermaid.mermaidAPI.render("mermaidChart3238001619467037", graphDefinition, insertSvg),1000);
         </script><p>            There are lots of charts to choose from:</p><p>            <ul><li> <a target="_tab" href="https://mermaid.js.org/syntax/flowchart.html">Flowchart</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/sequenceDiagram.html">Sequence Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/classDiagram.html">Class Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/stateDiagram.html">State Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/entityRelationshipDiagram.html">Entity Relationship Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/userJourney.html">User Journey</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/gantt.html">Gannt</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/pie.html">Pie Chart</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/requirementDiagram.html">Requirement Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/gitgraph.html">Gitgraph Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/c4c.html">C4C Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/mindmap.html">Mindmaps</a></li></ul><br>        </p></section><section><h3 id="questions" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Questions<span class="autohelm-nav autohelm-nav-up-down"> <a href="#mermaid-chart">&uarr;</a> <a href="#repl">&darr;</a></span></h3><p>            Questions can be used to create a quiz like experience.</p><p>            <pre class="secst"><code class="nohighlight">:question({type:"number",showanswer:true})[
   :text[What is the :code[sqrt(4)]?]
   :answer[sqrt(4)]
@@ -253,7 +255,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
                     </dl><br>                </p></section><section><h5 id="matrix-functions" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Matrix Functions<span class="autohelm-nav autohelm-nav-up-down"> <a href="#algebraic-functions">&uarr;</a> <a href="#unit-math">&darr;</a></span></h5><p>                    <input class="secst" data-default="" data-template="multiply([[1,2],[3,4]],[[5,6],[1,1]])" value="" title="multiply([[1,2],[3,4]],[[5,6],[1,1]])" data-fitcontent=""><br>                </p></section></section><section><h4 id="unit-math" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Unit Math<span class="autohelm-nav autohelm-nav-up-down"> <a href="#basic-math">&uarr;</a> <a href="#importing-data">&darr;</a></span></h4><p>                Unit math <a target="_tab" href="https://mathjs.org/docs/datatypes/units.html">from MathJS</a> allows for conversions using the word <code class="nohighlight">to</code>, as well as units for numbers, e.g. <code class="nohighlight">45 deg</code>.</p><p>                There are many <a target="_tab" href="https://mathjs.org/docs/datatypes/units.html#reference">supported units</a>.</p><p>                Here are a few examples:</p><p>                <code class="nohighlight">:value[2 inch to cm]</code> = <input class="secst" data-default="" data-template="2 inch to cm" value="" title="2 inch to cm" data-fitcontent=""></p><p>                <code class="nohighlight">:value[90 km/h to mi/h]</code> = <input class="secst" data-default="" data-template="90 km/h to mi/h" value="" title="90 km/h to mi/h" data-fitcontent=""></p><p>                <code class="nohighlight">:value[90 km/h to m/h]</code> = <input class="secst" data-default="" data-template="90 km/h to m/h" value="" title="90 km/h to m/h" data-fitcontent=""> <code class="nohighlight">m/h</code> is meters per hour</p><p>                <code class="nohighlight">:value[(1 week + 1 day) to days]</code> = <input class="secst" data-default="" data-template="(1 week + 1 day) to days" value="" title="(1 week + 1 day) to days" data-fitcontent=""></p><p>                <code class="nohighlight">:value[cos(45 deg)]</code> = <input class="secst" data-default="" data-template="cos(45 deg)" value="" title="cos(45 deg)" data-fitcontent=""></p><p>                <code class="nohighlight">:value[8.314 m^3 Pa / mol / K]</code> = <input class="secst" data-default="" data-template="8.314 m^3 Pa / mol / K" value="" title="8.314 m^3 Pa / mol / K" data-fitcontent=""></p><p>                Remember, if you have a value that looks like a formula, but is not, you can use the attribute <code class="nohighlight">literal</code>, e.g.  <code class="nohighlight">:value(literal)[2 inch to cm]</code> = <input class="secst" data-default="" data-template="2 inch to cm" value="2 inch to cm" title="2 inch to cm" data-literal="" data-fitcontent="" disabled="" style="width: 13ch;">.</p><p>                And, you can use <code class="nohighlight">plaintext</code> to display values without any styling, e.g. <code class="nohighlight">:value(plaintext)[90 km/h to mi/h]</code> = <span class="secst" data-default="" data-template="90 km/h to mi/h" value="" title="90 km/h to mi/h" data-plaintext="">90 km/h to mi/h</span>.</p></section><section><h4 id="importing-data" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Importing Data<span class="autohelm-nav autohelm-nav-up-down"> <a href="#unit-math">&uarr;</a> <a href="#advanced-formulas">&darr;</a></span></h4><p>                Values can included imported data using the <code class="nohighlight">src</code> attribute and a mime type provided in the <code class="nohighlight">type</code> attribute. The trailing <code class="nohighlight">[]</code> are optional.</p><p>                Values with the boolean attribute <code class="nohighlight">static</code> is import data at transpile time. If importing fails, another attempt is made at runtime.</p><p>                JSON is formatted for readability and <a target="_tab" href="https://json5.org">JSON5</a> is supported to make it easier to handle remote data.</p><p>                <pre class="secst"><code class="nohighlight">:value(https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson static {type:"application/json"})</code></pre></p><p>                <textarea class="secst" data-mime-type="application/json" data-default="" title="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson" data-fitcontent="" disabled="">{
   "type": "FeatureCollection",
   "metadata": {
-    "generated": 1672160428000,
+    "generated": 1672172068000,
     "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson",
     "title": "USGS All Earthquakes, Past Hour",
     "status": 200,
@@ -264,171 +266,171 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
     {
       "type": "Feature",
       "properties": {
-        "mag": 1.98000002,
-        "place": "Hawaii region, Hawaii",
-        "time": 1672159331130,
-        "updated": 1672159521230,
+        "mag": 1.6,
+        "place": "19 km N of Fishhook, Alaska",
+        "time": 1672171081648,
+        "updated": 1672171231338,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73284782",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73284782.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022glcnyf8",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022glcnyf8.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 60,
-        "net": "hv",
-        "code": "73284782",
-        "ids": ",hv73284782,",
-        "sources": ",hv,",
-        "types": ",origin,phase-data,",
-        "nst": 32,
-        "dmin": null,
-        "rms": 0.129999995,
-        "gap": 162,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 2.0 - Hawaii region, Hawaii"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -155.390167236328,
-          19.1938323974609,
-          30.5100002288818
-        ]
-      },
-      "id": "hv73284782"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 0.8,
-        "place": "86 km NW of Karluk, Alaska",
-        "time": 1672159301341,
-        "updated": 1672159414178,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022glas3hy",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022glas3hy.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 10,
+        "sig": 39,
         "net": "ak",
-        "code": "022glas3hy",
-        "ids": ",ak022glas3hy,",
+        "code": "022glcnyf8",
+        "ids": ",ak022glcnyf8,",
         "sources": ",ak,",
         "types": ",origin,phase-data,",
         "nst": null,
         "dmin": null,
-        "rms": 0.15,
+        "rms": 0.43,
         "gap": null,
         "magType": "ml",
         "type": "earthquake",
-        "title": "M 0.8 - 86 km NW of Karluk, Alaska"
+        "title": "M 1.6 - 19 km N of Fishhook, Alaska"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -155.3926,
-          58.1657,
-          1.1
+          -149.3061,
+          61.9184,
+          41.8
         ]
       },
-      "id": "ak022glas3hy"
+      "id": "ak022glcnyf8"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 1.83000004,
-        "place": "11 km SE of Pāhala, Hawaii",
-        "time": 1672159241190,
-        "updated": 1672159425440,
+        "mag": 1.09,
+        "place": "8km NW of The Geysers, CA",
+        "time": 1672170924700,
+        "updated": 1672171018950,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73284777",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73284777.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73825821",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73825821.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 52,
-        "net": "hv",
-        "code": "73284777",
-        "ids": ",hv73284777,",
-        "sources": ",hv,",
-        "types": ",origin,phase-data,",
-        "nst": 32,
-        "dmin": null,
-        "rms": 0.129999995,
-        "gap": 182,
+        "sig": 18,
+        "net": "nc",
+        "code": "73825821",
+        "ids": ",nc73825821,",
+        "sources": ",nc,",
+        "types": ",nearby-cities,origin,phase-data,",
+        "nst": 20,
+        "dmin": 0.00948,
+        "rms": 0.02,
+        "gap": 50,
         "magType": "md",
         "type": "earthquake",
-        "title": "M 1.8 - 11 km SE of Pāhala, Hawaii"
+        "title": "M 1.1 - 8km NW of The Geysers, CA"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -155.397659301758,
-          19.1286659240723,
-          29.8199996948242
+          -122.817337,
+          38.8310013,
+          1.97
         ]
       },
-      "id": "hv73284777"
+      "id": "nc73825821"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 2.6,
-        "place": "68 km E of Port Alsworth, Alaska",
-        "time": 1672157951629,
-        "updated": 1672158179538,
+        "mag": 2,
+        "place": "76 km NW of Ninilchik, Alaska",
+        "time": 1672169731376,
+        "updated": 1672169883021,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022glanbga",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022glanbga.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022glcj38x",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022glcj38x.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 104,
+        "sig": 62,
         "net": "ak",
-        "code": "022glanbga",
-        "ids": ",ak022glanbga,",
+        "code": "022glcj38x",
+        "ids": ",ak022glcj38x,",
         "sources": ",ak,",
         "types": ",origin,phase-data,",
         "nst": null,
         "dmin": null,
-        "rms": 0.9,
+        "rms": 0.57,
         "gap": null,
         "magType": "ml",
         "type": "earthquake",
-        "title": "M 2.6 - 68 km E of Port Alsworth, Alaska"
+        "title": "M 2.0 - 76 km NW of Ninilchik, Alaska"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -153.092,
-          60.143,
-          137.4
+          -152.7601,
+          60.4639,
+          102.1
         ]
       },
-      "id": "ak022glanbga"
+      "id": "ak022glcj38x"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.4,
+        "place": "15 km WSW of Salcha, Alaska",
+        "time": 1672169623291,
+        "updated": 1672169726551,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022glcioqh",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022glcioqh.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 30,
+        "net": "ak",
+        "code": "022glcioqh",
+        "ids": ",ak022glcioqh,",
+        "sources": ",ak,",
+        "types": ",origin,phase-data,",
+        "nst": null,
+        "dmin": null,
+        "rms": 0.66,
+        "gap": null,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 1.4 - 15 km WSW of Salcha, Alaska"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -147.2016,
+          64.4793,
+          13.9
+        ]
+      },
+      "id": "ak022glcioqh"
     }
   ],
   "bbox": [
-    -155.39765930176,
-    19.128665924072,
-    1.1,
-    -153.092,
-    60.143,
-    137.4
+    -152.7601,
+    38.8310013,
+    1.97,
+    -122.817337,
+    64.4793,
+    102.1
   ]
 }</textarea></p><p>                Imported data is readonly because it is essentially a computation. To make it editable, use the attribute <code class="nohighlight">editable</code>.</p><p>                <pre class="secst"><code class="nohighlight">:value(https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson editable {type:"application/json"})</code></pre></p><p>                <textarea class="secst" data-mime-type="application/json" data-default="" data-template="await (async () =&gt; {
                         try {
@@ -452,7 +454,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
                         })()" title="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson" data-editable="" data-fitcontent="" style="height: 30em; width: 80ch;">{
   "type": "FeatureCollection",
   "metadata": {
-    "generated": 1672160428000,
+    "generated": 1672172128000,
     "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson",
     "title": "USGS All Earthquakes, Past Hour",
     "status": 200,
@@ -463,171 +465,171 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
     {
       "type": "Feature",
       "properties": {
-        "mag": 1.98000002,
-        "place": "Hawaii region, Hawaii",
-        "time": 1672159331130,
-        "updated": 1672159521230,
+        "mag": 1.6,
+        "place": "19 km N of Fishhook, Alaska",
+        "time": 1672171081648,
+        "updated": 1672171231338,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73284782",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73284782.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022glcnyf8",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022glcnyf8.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 60,
-        "net": "hv",
-        "code": "73284782",
-        "ids": ",hv73284782,",
-        "sources": ",hv,",
-        "types": ",origin,phase-data,",
-        "nst": 32,
-        "dmin": null,
-        "rms": 0.129999995,
-        "gap": 162,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 2.0 - Hawaii region, Hawaii"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -155.390167236328,
-          19.1938323974609,
-          30.5100002288818
-        ]
-      },
-      "id": "hv73284782"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 0.8,
-        "place": "86 km NW of Karluk, Alaska",
-        "time": 1672159301341,
-        "updated": 1672159414178,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022glas3hy",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022glas3hy.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 10,
+        "sig": 39,
         "net": "ak",
-        "code": "022glas3hy",
-        "ids": ",ak022glas3hy,",
+        "code": "022glcnyf8",
+        "ids": ",ak022glcnyf8,",
         "sources": ",ak,",
         "types": ",origin,phase-data,",
         "nst": null,
         "dmin": null,
-        "rms": 0.15,
+        "rms": 0.43,
         "gap": null,
         "magType": "ml",
         "type": "earthquake",
-        "title": "M 0.8 - 86 km NW of Karluk, Alaska"
+        "title": "M 1.6 - 19 km N of Fishhook, Alaska"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -155.3926,
-          58.1657,
-          1.1
+          -149.3061,
+          61.9184,
+          41.8
         ]
       },
-      "id": "ak022glas3hy"
+      "id": "ak022glcnyf8"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 1.83000004,
-        "place": "11 km SE of Pāhala, Hawaii",
-        "time": 1672159241190,
-        "updated": 1672159425440,
+        "mag": 1.09,
+        "place": "8km NW of The Geysers, CA",
+        "time": 1672170924700,
+        "updated": 1672171018950,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73284777",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73284777.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73825821",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73825821.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 52,
-        "net": "hv",
-        "code": "73284777",
-        "ids": ",hv73284777,",
-        "sources": ",hv,",
-        "types": ",origin,phase-data,",
-        "nst": 32,
-        "dmin": null,
-        "rms": 0.129999995,
-        "gap": 182,
+        "sig": 18,
+        "net": "nc",
+        "code": "73825821",
+        "ids": ",nc73825821,",
+        "sources": ",nc,",
+        "types": ",nearby-cities,origin,phase-data,",
+        "nst": 20,
+        "dmin": 0.00948,
+        "rms": 0.02,
+        "gap": 50,
         "magType": "md",
         "type": "earthquake",
-        "title": "M 1.8 - 11 km SE of Pāhala, Hawaii"
+        "title": "M 1.1 - 8km NW of The Geysers, CA"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -155.397659301758,
-          19.1286659240723,
-          29.8199996948242
+          -122.817337,
+          38.8310013,
+          1.97
         ]
       },
-      "id": "hv73284777"
+      "id": "nc73825821"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 2.6,
-        "place": "68 km E of Port Alsworth, Alaska",
-        "time": 1672157951629,
-        "updated": 1672158179538,
+        "mag": 2,
+        "place": "76 km NW of Ninilchik, Alaska",
+        "time": 1672169731376,
+        "updated": 1672169883021,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022glanbga",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022glanbga.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022glcj38x",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022glcj38x.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 104,
+        "sig": 62,
         "net": "ak",
-        "code": "022glanbga",
-        "ids": ",ak022glanbga,",
+        "code": "022glcj38x",
+        "ids": ",ak022glcj38x,",
         "sources": ",ak,",
         "types": ",origin,phase-data,",
         "nst": null,
         "dmin": null,
-        "rms": 0.9,
+        "rms": 0.57,
         "gap": null,
         "magType": "ml",
         "type": "earthquake",
-        "title": "M 2.6 - 68 km E of Port Alsworth, Alaska"
+        "title": "M 2.0 - 76 km NW of Ninilchik, Alaska"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -153.092,
-          60.143,
-          137.4
+          -152.7601,
+          60.4639,
+          102.1
         ]
       },
-      "id": "ak022glanbga"
+      "id": "ak022glcj38x"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.4,
+        "place": "15 km WSW of Salcha, Alaska",
+        "time": 1672169623291,
+        "updated": 1672169726551,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022glcioqh",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022glcioqh.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 30,
+        "net": "ak",
+        "code": "022glcioqh",
+        "ids": ",ak022glcioqh,",
+        "sources": ",ak,",
+        "types": ",origin,phase-data,",
+        "nst": null,
+        "dmin": null,
+        "rms": 0.66,
+        "gap": null,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 1.4 - 15 km WSW of Salcha, Alaska"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -147.2016,
+          64.4793,
+          13.9
+        ]
+      },
+      "id": "ak022glcioqh"
     }
   ],
   "bbox": [
-    -155.39765930176,
-    19.128665924072,
-    1.1,
-    -153.092,
-    60.143,
-    137.4
+    -152.7601,
+    38.8310013,
+    1.97,
+    -122.817337,
+    64.4793,
+    102.1
   ]
 }</textarea></p><p>                If an id is added, the data can be used in a computation.</p><p>                <pre class="secst"><code class="nohighlight">:value(#earthquake-data https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson {type:"application/json"})
 
@@ -653,7 +655,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
                         })()" title="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson" data-fitcontent="" disabled="" style="height: 30em; width: 80ch;">{
   "type": "FeatureCollection",
   "metadata": {
-    "generated": 1672160428000,
+    "generated": 1672172128000,
     "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson",
     "title": "USGS All Earthquakes, Past Hour",
     "status": 200,
@@ -664,171 +666,171 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
     {
       "type": "Feature",
       "properties": {
-        "mag": 1.98000002,
-        "place": "Hawaii region, Hawaii",
-        "time": 1672159331130,
-        "updated": 1672159521230,
+        "mag": 1.6,
+        "place": "19 km N of Fishhook, Alaska",
+        "time": 1672171081648,
+        "updated": 1672171231338,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73284782",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73284782.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022glcnyf8",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022glcnyf8.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 60,
-        "net": "hv",
-        "code": "73284782",
-        "ids": ",hv73284782,",
-        "sources": ",hv,",
-        "types": ",origin,phase-data,",
-        "nst": 32,
-        "dmin": null,
-        "rms": 0.129999995,
-        "gap": 162,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 2.0 - Hawaii region, Hawaii"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -155.390167236328,
-          19.1938323974609,
-          30.5100002288818
-        ]
-      },
-      "id": "hv73284782"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 0.8,
-        "place": "86 km NW of Karluk, Alaska",
-        "time": 1672159301341,
-        "updated": 1672159414178,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022glas3hy",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022glas3hy.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 10,
+        "sig": 39,
         "net": "ak",
-        "code": "022glas3hy",
-        "ids": ",ak022glas3hy,",
+        "code": "022glcnyf8",
+        "ids": ",ak022glcnyf8,",
         "sources": ",ak,",
         "types": ",origin,phase-data,",
         "nst": null,
         "dmin": null,
-        "rms": 0.15,
+        "rms": 0.43,
         "gap": null,
         "magType": "ml",
         "type": "earthquake",
-        "title": "M 0.8 - 86 km NW of Karluk, Alaska"
+        "title": "M 1.6 - 19 km N of Fishhook, Alaska"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -155.3926,
-          58.1657,
-          1.1
+          -149.3061,
+          61.9184,
+          41.8
         ]
       },
-      "id": "ak022glas3hy"
+      "id": "ak022glcnyf8"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 1.83000004,
-        "place": "11 km SE of Pāhala, Hawaii",
-        "time": 1672159241190,
-        "updated": 1672159425440,
+        "mag": 1.09,
+        "place": "8km NW of The Geysers, CA",
+        "time": 1672170924700,
+        "updated": 1672171018950,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73284777",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73284777.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73825821",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73825821.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 52,
-        "net": "hv",
-        "code": "73284777",
-        "ids": ",hv73284777,",
-        "sources": ",hv,",
-        "types": ",origin,phase-data,",
-        "nst": 32,
-        "dmin": null,
-        "rms": 0.129999995,
-        "gap": 182,
+        "sig": 18,
+        "net": "nc",
+        "code": "73825821",
+        "ids": ",nc73825821,",
+        "sources": ",nc,",
+        "types": ",nearby-cities,origin,phase-data,",
+        "nst": 20,
+        "dmin": 0.00948,
+        "rms": 0.02,
+        "gap": 50,
         "magType": "md",
         "type": "earthquake",
-        "title": "M 1.8 - 11 km SE of Pāhala, Hawaii"
+        "title": "M 1.1 - 8km NW of The Geysers, CA"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -155.397659301758,
-          19.1286659240723,
-          29.8199996948242
+          -122.817337,
+          38.8310013,
+          1.97
         ]
       },
-      "id": "hv73284777"
+      "id": "nc73825821"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 2.6,
-        "place": "68 km E of Port Alsworth, Alaska",
-        "time": 1672157951629,
-        "updated": 1672158179538,
+        "mag": 2,
+        "place": "76 km NW of Ninilchik, Alaska",
+        "time": 1672169731376,
+        "updated": 1672169883021,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022glanbga",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022glanbga.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022glcj38x",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022glcj38x.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 104,
+        "sig": 62,
         "net": "ak",
-        "code": "022glanbga",
-        "ids": ",ak022glanbga,",
+        "code": "022glcj38x",
+        "ids": ",ak022glcj38x,",
         "sources": ",ak,",
         "types": ",origin,phase-data,",
         "nst": null,
         "dmin": null,
-        "rms": 0.9,
+        "rms": 0.57,
         "gap": null,
         "magType": "ml",
         "type": "earthquake",
-        "title": "M 2.6 - 68 km E of Port Alsworth, Alaska"
+        "title": "M 2.0 - 76 km NW of Ninilchik, Alaska"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -153.092,
-          60.143,
-          137.4
+          -152.7601,
+          60.4639,
+          102.1
         ]
       },
-      "id": "ak022glanbga"
+      "id": "ak022glcj38x"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.4,
+        "place": "15 km WSW of Salcha, Alaska",
+        "time": 1672169623291,
+        "updated": 1672169726551,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022glcioqh",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022glcioqh.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 30,
+        "net": "ak",
+        "code": "022glcioqh",
+        "ids": ",ak022glcioqh,",
+        "sources": ",ak,",
+        "types": ",origin,phase-data,",
+        "nst": null,
+        "dmin": null,
+        "rms": 0.66,
+        "gap": null,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 1.4 - 15 km WSW of Salcha, Alaska"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -147.2016,
+          64.4793,
+          13.9
+        ]
+      },
+      "id": "ak022glcioqh"
     }
   ],
   "bbox": [
-    -155.39765930176,
-    19.128665924072,
-    1.1,
-    -153.092,
-    60.143,
-    137.4
+    -152.7601,
+    38.8310013,
+    1.97,
+    -122.817337,
+    64.4793,
+    102.1
   ]
 }</textarea></p><p>               <textarea class="secst" data-mime-type="application/json" data-default="" data-template="$(#earthquake-data).metadata" title="$(#earthquake-data).metadata" data-fitcontent="" disabled="" style="height: 1.5em; width: 15ch;">[object Object]</textarea><br>            </p></section><section><h4 id="advanced-formulas" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Advanced Formulas<span class="autohelm-nav autohelm-nav-up-down"> <a href="#importing-data">&uarr;</a> <a href="#formulas-with-css-selectors-and-multiple-values">&darr;</a></span></h4><section><h5 id="formulas-with-css-selectors-and-multiple-values" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Formulas With CSS Selectors and Multiple Values<span class="autohelm-nav autohelm-nav-up-down"> <a href="#advanced-formulas">&uarr;</a> <a href="#macro-list-formatting">&darr;</a></span></h5><p>                    You can use almost any <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors">CSS selector</a> in place of <code class="nohighlight">#id</code> in <code class="nohighlight">$(#&lt;id&gt;)</code>. The value returned will be the contents of the value property on the element or (if not available) the value attribute or the <code class="nohighlight">innerText</code>.</p><p>                    You can use commas to select multiple identifier named elements, e.g. <code class="nohighlight">:value[$(#id1, #id2, #id3)]</code> is an array of the values associated with the elements <code class="nohighlight">:value(#id1)[3]</code>, <code class="nohighlight">:value(#id2)[2]</code>, <code class="nohighlight">:value(#id3)[1]</code> and will be <code class="nohighlight">[3,2,1]</code>.</p><p>                    A value reference <code class="nohighlight">$(css-selector)</code> can end in <code class="nohighlight">[]</code> to indicate multiple values should be returned as an array if the selector does not contain a comma. This allows tables to be treated somewhat like spreadsheets.<br>                </p></section><section><h5 id="macro-list-formatting" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Macro List Formatting<span class="autohelm-nav autohelm-nav-up-down"> <a href="#formulas-with-css-selectors-and-multiple-values">&uarr;</a> <a href="#javascript">&darr;</a></span></h5><p>                     The SECST formula evaluator supports supports some utility functions.<br>                </p></section><section><h5 id="javascript" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>JavaScript<span class="autohelm-nav autohelm-nav-up-down"> <a href="#macro-list-formatting">&uarr;</a> <a href="#seo">&darr;</a></span></h5><p>                    You can use any JavaScript that is available in <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API">WebWorkers</a> inside a macro. A special read-only <code class="nohighlight">document</code> object is also made available. This object has title, baseURI, location, and navigator properties along with a property for each meta tag name and value.<br>                </p></section></section></section></section><section><h2 id="seo" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Search Engine Optimization<span class="autohelm-nav autohelm-nav-up-down"> <a href="#markup-without-html-names">&uarr;</a> <a href="#structured-data">&darr;</a></span></h2><p>        SECST provides several features to support <abbr>SEO</abbr> Search Engine Optimization.</p><p>        <ul title="SEO features"><li><a href="#hastags">hashtags</a></li><li><a href="#meta-tags">meta tags</a></li><li><a href="#structured-data">structured data</a></li><li><a href="#server-transpilation">server transpilation</a></li></ul><br>        </p><section><h3 id="structured-data" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Structured Data<span class="autohelm-nav autohelm-nav-up-down"> <a href="#seo">&uarr;</a> <a href="#news-article">&darr;</a></span></h3><p>            For select tags, SECST can generate JSON-LD directly from SECST markup. Content, layout, and SEO optimization will always be in sync.</p><p>            This is best covered by an example based on <a target="_tab" href="https://developers.google.com/search/docs/appearance/structured-data/article">Google's documentation for a news article</a>.</p><p>            <em>Note: Only those tags documented for <code class="nohighlight">NewsArticle</code> are currently supported.</em></p><section><h4 id="news-article" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>News Article<span class="autohelm-nav autohelm-nav-up-down"> <a href="#structured-data">&uarr;</a> <a href="#styling-content">&darr;</a></span></h4><p>                The SECST tag <code class="nohighlight">:NewsArticle[]</code> can contain regular SECST as well as tags that parallel established JSON-LD schema like <code class="nohighlight">:headline[]</code>, <code class="nohighlight">:author[]</code> and <code class="nohighlight">:Person[]</code>. Where there are identical or trivially equivalent tags and attribute names, e.g. <code class="nohighlight">image</code> and <code class="nohighlight">img</code>, the native SECST tag is used.</p><p>                <pre class="secst"><code class="nohighlight">:NewsArticle[
   :headline[Pinky Conquers The World]
@@ -1058,7 +1060,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
       "format": "transform format(value)",
       "lang": true
     },
-    "contentAllowed": "Tue Dec 27 2022 09:01:18 GMT-0800 (Pacific Standard Time)",
+    "contentAllowed": "Tue Dec 27 2022 12:15:19 GMT-0800 (Pacific Standard Time)",
     "minCount": 0,
     "maxCount": 1,
     "toText": true
@@ -3496,9 +3498,39 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
              return new Tag({tag:"a",content:[url[1]],location:location()})
          }
 
+     mbold
+         = "**" strike:[^*\t\r\n]+ "**" {
+             return new Tag({tag:"b",content:[strike.join("")],location:location()})
+         }
+
+     mitalic
+          = "*" italic:[^*\t\r\n]+ "*" {
+              return new Tag({tag:"i",content:[italic.join("")],location:location()})
+          }
+
     mblockquote
         = [\r\n] [ \t]* "> " text:[^\r\n]* {
             return new Tag({tag:"blockquote",content:[text.join("")],location:location()})
+        }
+
+    msubscript
+        = "~" sub:[^~  \t\r\n]+ "~" {
+            return new Tag({tag:"sub",content:[sub.join("")],location:location()})
+        }
+
+    msupscript
+        = "^" sup:[^\^  \t\r\n]+ "^" {
+            return new Tag({tag:"sup",content:[sup.join("")],location:location()})
+        }
+
+     mstruck
+        = "~~" strike:[^~\t\r\n]+ "~~" {
+            return new Tag({tag:"strike",content:[strike.join("")],location:location()})
+        }
+
+     mmark
+        = "==" mark:[^=\t\r\n]+ "==" {
+            return new Tag({tag:"mark",content:[mark.join("")],location:location()})
         }
 
     br
@@ -3560,12 +3592,12 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
         = "@"
 
     bracketed_SECST
-        = BRACKETOPEN value:(mheading/mhr/murl/italic/bold/mblockquote/struck/mark/backtickquoted/triplebacktickquoted/symbol/hashtag/mention/escape/script/code/value/hr/br/emoji/expression/not_bracketed/bracketed_SECST)* BRACKETCLOSE {
+        = BRACKETOPEN value:(mheading/mbold/mitalic/mhr/murl/msubscript/msupscript/mstruck/mblockquote/mmark/backtickquoted/triplebacktickquoted/symbol/hashtag/mention/escape/script/code/value/hr/br/emoji/expression/not_bracketed/bracketed_SECST)* BRACKETCLOSE {
             if(Array.isArray(value) && value.every((item) => typeof(item)==="string")) {
                 return [value.join("")];
             }
             const result = [];
-            for(let i=0;i<value.length item="value[i];" text="[" if(typeof(result[result.length-1])!="=&quot;string&quot;)" +="" typeof(item)="==&quot;string&quot;)" if(item.tag="==&quot;blockquote&quot;)" prev="result[result.length-1]" while(typeof(prev)="==&quot;string&quot;)" if(prev.trim().length="==0)" if(prev?.tag="==&quot;blockquote&quot;)" prev.content="[...prev.content,new" prevtype="typeof(result[result.length-1]);" if(prevtype="==&quot;string&quot;" bracketed="BRACKETOPEN" not_bracketed="not:(!BRACKETCLOSE" bracketopen="[" bracketclose="" braced="BRACEOPEN" not_braced="not:(!BRACECLOSE" braceopen="{" braceclose="" bold="start:BOLDOPEN" not_bold="not:(!BOLDCLOSE" boldopen="**" boldclose="char:[^*" italic="start:ITALICOPEN" not_italic="not:(!ITALICCLOSE" italicopen="*" italicclose="char:[^*" struck="start:STRUCKOPEN" not_struck="not:(!STRUCKCLOSE" struckopen="~~" struckclose="char:[^~" mark="start:MARKOPEN" not_mark="not:(!MARKCLOSE" markopen="==" char:[^="\t\r\n]" markclose="char:[^=" '="=&#x27;" backtickquoted="start:BACKTICKOPEN" not_backtickquoted="not:(!BACKTICKCLOSE" backtickopen="&#x60;" backtickclose="char:[^&#x60;]" triplebacktickquoted="start:TRIPLEBACKTICKOPEN" string="start+text.join(&quot;&quot;)+end;" not_triplebacktickquoted="not:(!TRIPLEBACKTICKOPEN" triplebacktickopen="&#x60;&#x60;&#x60;" triplebacktickclose="char:[^&#x60;]" tag="colon" options="(" o="{};" o.id="id;" o.classlist="classList;" o.attributes="JSON5.parse(attributes)" ;i++)="" {
+            for(let i=0;i<value.length item="value[i];" text="[" if(typeof(result[result.length-1])!="=&quot;string&quot;)" +="" typeof(item)="==&quot;string&quot;)" if(item.tag="==&quot;blockquote&quot;)" prev="result[result.length-1]" while(typeof(prev)="==&quot;string&quot;)" if(prev.trim().length="==0)" if(prev?.tag="==&quot;blockquote&quot;)" prev.content="[...prev.content,new" prevtype="typeof(result[result.length-1]);" if(prevtype="==&quot;string&quot;" bracketed="BRACKETOPEN" not_bracketed="not:(!BRACKETCLOSE" bracketopen="[" bracketclose="" braced="BRACEOPEN" not_braced="not:(!BRACECLOSE" braceopen="{" braceclose="" backtickquoted="start:BACKTICKOPEN" not_backtickquoted="not:(!BACKTICKCLOSE" backtickopen="&#x60;" backtickclose="char:[^&#x60;]" triplebacktickquoted="start:TRIPLEBACKTICKOPEN" string="start+text.join(&quot;&quot;)+end;" not_triplebacktickquoted="not:(!TRIPLEBACKTICKOPEN" triplebacktickopen="&#x60;&#x60;&#x60;" triplebacktickclose="char:[^&#x60;]" tag="colon" options="(" o="{};" o.id="id;" o.classlist="classList;" o.attributes="JSON5.parse(attributes)" ;i++)="" {
 ="" const="" 
 ="" if(array.isarray(item))="" item.join("="" ")="" "]";
 ="" result.push(text);
@@ -3583,15 +3615,14 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
 ="" 
 
 ="" value:(not_braced/braced)*="" "{"="" "}"
-="" !braceopen.)="" value:(not_bold/bold)*="" end:boldclose="" new="" tag({tag:"b",content:[start+value.join("")+end],location:location()})
-="" !boldopen.)="" char:[^*="" \t\r\n]="" char
-="" '**'="" value:(not_italic/italic)*="" end:italicclose="" tag({tag:"i",content:[start+value.join("")+end],location:location()})
-="" !italicopen.)="" '*'="" value:(not_struck/struck)*="" end:struckclose="" tag({tag:"strike",content:[start+value.join("")+end],location:location()})
-="" !struckopen.)="" char:[^~="" '~~'="" value:(not_mark/mark)*="" end:markclose="" tag({tag:"mark",content:[start+value.join("")+end],location:location()})
-="" !markopen.)="" text:(not_backtickquoted/backtickquoted)*="" end:backtickclose="" tag({tag:"code",content:[start+text.join("")+end],location:location()})
+="" !braceopen.)="" 
+
+
+="" text:(not_backtickquoted/backtickquoted)*="" end:backtickclose="" new="" tag({tag:"code",content:[start+text.join("")+end],location:location()})
 ="" !backtickopen.)="" not.join("");}
 
-="" char:[^`]="" '`'="" text:(not_triplebacktickquoted/triplebacktickquoted)*="" end:triplebacktickclose="" tag({tag:"code",content:[string="" (string.includes("\n")="" ?="" ""="" :="" "\n")]})
+="" char:[^`]="" char
+="" '`'="" text:(not_triplebacktickquoted/triplebacktickquoted)*="" end:triplebacktickclose="" tag({tag:"code",content:[string="" (string.includes("\n")="" ?="" ""="" :="" "\n")]})
 ="" !triplebacktickclose.)="" '```'="" token:token="" token="" _="" id:id?="" classlist:class*="" binaryattributes:binaryattribute*="" attributes:braced?="" ")"="" var="" try="" ||="" {};
 ="" catch(e)="" error("unable="" to="" parse="" attributes.="" check="" for="" missing="" commas="" or="" quotes.")
 ="" binaryattributes.foreach(([key,value])="" ==""> {

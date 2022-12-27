@@ -63,9 +63,39 @@
              return new Tag({tag:"a",content:[url[1]],location:location()})
          }
 
+     mbold
+         = "**" strike:[^*\t\r\n]+ "**" {
+             return new Tag({tag:"b",content:[strike.join("")],location:location()})
+         }
+
+     mitalic
+          = "*" italic:[^*\t\r\n]+ "*" {
+              return new Tag({tag:"i",content:[italic.join("")],location:location()})
+          }
+
     mblockquote
         = [\r\n] [ \t]* "> " text:[^\r\n]* {
             return new Tag({tag:"blockquote",content:[text.join("")],location:location()})
+        }
+
+    msubscript
+        = "~" sub:[^~  \t\r\n]+ "~" {
+            return new Tag({tag:"sub",content:[sub.join("")],location:location()})
+        }
+
+    msupscript
+        = "^" sup:[^\^  \t\r\n]+ "^" {
+            return new Tag({tag:"sup",content:[sup.join("")],location:location()})
+        }
+
+     mstruck
+        = "~~" strike:[^~\t\r\n]+ "~~" {
+            return new Tag({tag:"strike",content:[strike.join("")],location:location()})
+        }
+
+     mmark
+        = "==" mark:[^=\t\r\n]+ "==" {
+            return new Tag({tag:"mark",content:[mark.join("")],location:location()})
         }
 
     br
@@ -127,7 +157,7 @@
         = "@"
 
     bracketed_SECST
-        = BRACKETOPEN value:(mheading/mhr/murl/italic/bold/mblockquote/struck/mark/backtickquoted/triplebacktickquoted/symbol/hashtag/mention/escape/script/code/value/hr/br/emoji/expression/not_bracketed/bracketed_SECST)* BRACKETCLOSE {
+        = BRACKETOPEN value:(mheading/mbold/mitalic/mhr/murl/msubscript/msupscript/mstruck/mblockquote/mmark/backtickquoted/triplebacktickquoted/symbol/hashtag/mention/escape/script/code/value/hr/br/emoji/expression/not_bracketed/bracketed_SECST)* BRACKETCLOSE {
             if(Array.isArray(value) && value.every((item) => typeof(item)==="string")) {
                 return [value.join("")];
             }
@@ -196,85 +226,6 @@
 
     BRACECLOSE = '}'
 
-     bold
-            = start:BOLDOPEN value:(not_bold/bold)* end:BOLDCLOSE {
-                return new Tag({tag:"b",content:[start+value.join("")+end],location:location()})
-            }
-
-    not_bold
-        = not:(!BOLDCLOSE !BOLDOPEN.) {
-                return not.join("");
-        }
-
-    BOLDOPEN
-        = '**' char:[^* \t\r\n] {
-            return char
-        }
-
-    BOLDCLOSE
-        = char:[^* \t\r\n] '**' {
-            return char
-        }
-
-    italic
-        = start:ITALICOPEN value:(not_italic/italic)* end:ITALICCLOSE {
-            return new Tag({tag:"i",content:[start+value.join("")+end],location:location()})
-        }
-
-    not_italic
-        = not:(!ITALICCLOSE !ITALICOPEN.) {
-                return not.join("");
-        }
-
-    ITALICOPEN
-        = '*' char:[^* \t\r\n] {
-            return char
-        }
-
-    ITALICCLOSE
-        = char:[^* \t\r\n] '*' {
-            return char
-        }
-
-    struck
-        = start:STRUCKOPEN value:(not_struck/struck)* end:STRUCKCLOSE {
-            return new Tag({tag:"strike",content:[start+value.join("")+end],location:location()})
-        }
-
-    not_struck
-        = not:(!STRUCKCLOSE !STRUCKOPEN.) {
-                return not.join("");
-        }
-
-    STRUCKOPEN
-        = '~~' char:[^~ \t\r\n] {
-            return char
-        }
-
-   STRUCKCLOSE
-        = char:[^~ \t\r\n] '~~' {
-            return char
-        }
-
-   mark
-       = start:MARKOPEN value:(not_mark/mark)* end:MARKCLOSE {
-           return new Tag({tag:"mark",content:[start+value.join("")+end],location:location()})
-       }
-
-   not_mark
-       = not:(!MARKCLOSE !MARKOPEN.) {
-               return not.join("");
-       }
-
-   MARKOPEN
-       = '==' char:[^= \t\r\n] {
-           return char
-       }
-
-   MARKCLOSE
-       = char:[^= \t\r\n] '==' {
-           return char
-       }
 
     backtickquoted
             = start:BACKTICKOPEN text:(not_backtickquoted/backtickquoted)*  end:BACKTICKCLOSE {

@@ -1,11 +1,15 @@
 :header[:p({align:"left"})[:a(.#the-joy-of-secst)[SECST] Markup Language] :p({align:"right"})[:a(https://github.com/anywhichway/secst)[GitHub]]]
 :footer[:p({align:"left"})[Copyright 2022, AnyWhichWay LLC]]
 :meta({name:"keywords"})[markup, Markdown, Latex, ABC Notation]
+:meta({name:"description"})[SECST (Semantic, Extensible, Styled, Tagged) Markup is a more expressive, but easy to learn and use, superset and alternative to regular Markdown. It provides these features and more: reactive forms and data, math and other formulas, table of contents and footnote management.]
+:meta({name:"publisher"})[AnyWhichWay, LLC]
+:meta({name:"author"})[Simon Y. Blackwell]
+:meta({name:"copyright"})[Documentation: Creative Commons, Code: AGPL v3.0]
 :title[SECST Markup]
 :section[
 
 :h[The Joy of SECST]
-    :abbr[SECST] (**[S]**emantic, **[E]**xtensible, **[C]**omputational, **[S]**tyleable, **[T]**agged) markup is a more expressive, but easy to learn and use, partial superset and alternative to regular Markdown. It provides these features and more:
+    :abbr[SECST] (**[S]**emantic, **[E]**xtensible, **[C]**omputational, **[S]**tyleable, **[T]**agged) markup is a more expressive, but easy to learn and use, superset and alternative to regular Markdown. It provides these features and more:
 
     :ul[
         - Support for almost all HTML tags :a(.#tags)[and then some...], with :a(.#theme)[themes and styles].
@@ -19,7 +23,7 @@
     This is the source for the introduction above:
 
     :code({language:"secst"})[
-          :abbr[SECST] (**[S]**emantic, **[E]**xtensible, **[C]**omputational, **[S]**tyleable, **[T]**agged) markup is a more expressive, but easy to learn and use, partial superset and alternative to regular Markdown. It provides these features and more:
+          :abbr[SECST] (**[S]**emantic, **[E]**xtensible, **[C]**omputational, **[S]**tyleable, **[T]**agged) markup is a more expressive, but easy to learn and use, superset and alternative to regular Markdown. It provides these features and more:
 
         :ul[
             - Support for almost all HTML tags :a(.#tags)[and then some...], with :a(.#theme)[themes and styles].
@@ -133,12 +137,6 @@
                 italics | :td[:code[*text*]] :td[:code[:em[text]] and :code[*text*]] :td[*text*]
             ]
             :tr[
-                blockquote | :td[:code[> quote text]] :td[:code[:blockquote[quote text]]] :td[]
-            ]
-            :tr[
-                nested blockquote | :td[:code[> quote text] :kbd[Enter] :code[>> nested quote text]] :td[:code[:blockquote[quote text :blockquote[nested quote text]]]] :td[]
-            ]
-            :tr[
                 code | :td[:code['the code']]  :td[:code[:code[the code]] and :code['the code']] :td[`the code`]
             ]
             :tr[
@@ -162,8 +160,6 @@
         > quoted text line two
 
         Nested blockquotes are supported using nested :code[:blockquote[]], but not using Markdown shorthand.
-
-        Note: Shorthand blockquotes will conflict with :code[:value[]] :a(.#values-and-formulas)[formulas] if your formulas contain a newline before :code[>] symbols.
 
         Lists
 
@@ -230,10 +226,10 @@
                   highlight | :td[:code[==marked words==]] :td[:code[:mark[marked words]] and :code[==marked words==]] :td[==marked words==]
               ]
               :tr[
-                  subscript | :td[:code[H~2~O]] :td[:code[H:sub[2]0]] :td[H:sub[2]0]
+                  subscript | :td[:code[H~2~O]] :td[:code[H:sub[2]0] and :code[H~2~O]] :td[H~2~O]
               ]
               :tr[
-                  superscript | :td[:code[X^2^]] :td[:code[X:sup[2]]] :td[X:sup[2]]
+                  superscript | :td[:code[X^2^]] :td[:code[X:sup[2]] and :code[X^2^]] :td[X^2^]
               ]
               :tr[
                     automatic URL linking | :td[:code[https://www.google.com]] :td[:code[:a[https://www.google.com]] and :code[https://www.google.com]] :td[https://www.google.com]
@@ -261,7 +257,7 @@
 :section[
     :h[Authoring]
 
-    Authors write documents using semantic tags with the format :code[<tag>[<content>]] or :code[<tag>(<parameters>)[<content>]].
+    Although most Markdown is supported, authors should write documents using semantic tags with the format :code[<tag>[<content>]] or :code[<tag>(<parameters>)[<content>]].
 
     For example:
     :ul[
@@ -273,7 +269,7 @@
     :section[
         :h[Markup Tags With HTML Names]
 
-        Almost every semantic tag supported by HTML5 is one of the :a({href:"#tags"})[tags supported by SECST]. Most non-semantic tags are excluded from SECST, e.g. :code[<div>] and :code[<span>]. Exceptions are :code[<hr>], :code[<table>], :code[<ol>], :code[<ul>] and :code[<style>]; however, since they are so commonly used :code[:b[]] for :b[bold] and :code[:i[]] for :i[italic] are included, as are aliases :code[:bold[]] and :code[:italic[]].
+        Almost every semantic tag supported by HTML5 is one of the :a({href:"#tags"})[tags supported by SECST]. Most non-semantic tags are excluded from SECST, e.g. :code[<div>] and :code[<span>]. However, since they are so commonly used :code[:b[]] for :b[bold] and :code[:i[]] for :i[italic] are included, as are aliases :code[:bold[]] and :code[:italic[]].
 
         A few tags of note are documented below to illustrate the use of SECST or highlight special features.
 
@@ -289,6 +285,8 @@
 
             Contents wrapped in :code[:code[]] will be inline unless the contents contain a newline, in which case the code will be displayed in block format.
 
+            Both :code[`code`] and :code[```code```] are supported.
+
             If you have a single line you wish to show as a block, end it with a newline.
         ]
         :section[
@@ -303,20 +301,28 @@
         :section[
             :h[Headings]
 
-            Headings automatically get ids you can use for the destination of links. The id is the same as the text content in lower case with spaces and special characters replaced by dashes. To make it more convenient, you can also provide your own ids, e.g. :code[:h1(#myheading)[My Heading]] with link :code[:a({href:"#myheading"})[Go To My Heading]].
+            Headings automatically get ids you can use for the destination of links. The id is the same as the text content in lower case with spaces and special characters replaced by dashes.
 
-            :em[Note: All tags can optionally take an id starting with :code[#]. If an id is present, it must be the first parameter.]
+            To make it more convenient, you can also provide your own ids, e.g. :code[:h1(#myheading)[My Heading]].
+
+            :em[Note: All tags can optionally take an id starting with :code[#]. If an id is present, it must be the first parameter between the parentheses.]
+
+            You could target this heading with the hyperlink :code[:a(.#myheading)[Go To My Heading]].
+
+            Note the use of a shorthand "relative hash" (a hash starting with a period) for the destination of :code[Go To My Heading]. This could also be specified as: :code[:a({href:"#myheading"})[Go To My Heading]].
+
+            There is a special heading :code[h:[]] with no number. If this is the first element on a :code[:section[]], then it will automatically get a number based on section nesting. This allws the copying and pating of sections from one place to another without worrying about updating headings.
         ]
         :section[
             :h[HTML Entities and Special Characters]
-
-            :a(https://www.toptal.com/designers/htmlarrows/)[Toptal] has a great reference for this.
 
             Special characters and symbols can be displayed using either :code[&<character-id>]:code[;] or :code[:&[<character-id>...]]. The second form can display multiple characters or symbols, just leave off the leading "&" and trailing ";" in the listed items.
 
             The code :code[&#x263B;] renders as &#x263B; .
 
             The code :code[:&[female male #9893]] renders as :&[female male #9893].
+
+             :a(https://www.toptal.com/designers/htmlarrows/)[Toptal] has a great reference for for special characters.
         ]
         :section[
             :h[Hyperlinks]
@@ -334,9 +340,6 @@
             You can also specify hyperlinks with just a content value, e.g. :code[:a({target:"_tab"})[./index.txt]] renders as :a({target:"_tab"})[./index.txt].
 
             By default, relative URLS and ids, i.e. those starting with a period, have a target that is the current window or tab. And, those starting with a protocol, e.g. :code[https://] have a target of a new tab.
-
-            All tags that take more than just content are fully documented in the :a({href:"#tags"})[complete list of tags].
-
         ]
         :section[
             :h[Inserted And Deleted]
