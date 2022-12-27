@@ -1,4 +1,4 @@
-<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width, initial-scale=1"><script src="https://cdn.jsdelivr.net/npm/@anywhichway/quick-component@0.0.14"></script><script src="./runtime.js?run"></script></head><body><header id="secst-header"><p style="float: left;"><a href="#the-joy-of-secst">SECST</a> Markup Language</p> <p style="float: right;"><a target="_tab" href="https://github.com/anywhichway/secst">GitHub</a></p></header><div id="secst-content">
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width, initial-scale=1"><script src="https://cdn.jsdelivr.net/npm/@anywhichway/quick-component@0.0.14"></script><script src="./runtime.js?run"></script><meta name="keywords" content="markup, Markdown, Latex, ABC Notation"><meta name="description" content="SECST (Semantic, Extensible, Styled, Tagged) Markup is a more expressive, but easy to learn and use, superset and alternative to regular Markdown. It provides these features and more: reactive forms and data, math and other formulas, table of contents and footnote management."><meta name="publisher" content="AnyWhichWay, LLC"><meta name="author" content="Simon Y. Blackwell"><meta name="copyright" content="Documentation: Creative Commons, Code: AGPL v3.0"><title>SECST Markup</title><meta name="keywords" value="#secst-is-great, #javascript-is-great"><meta name="keywords" value="#secst-is-great, #javascript-is-great"></head><body><header id="secst-header"><p style="float: left;"><a href="#the-joy-of-secst">SECST</a> Markup Language</p> <p style="float: right;"><a target="_tab" href="https://github.com/anywhichway/secst">GitHub</a></p></header><div id="secst-content">
 
 
 
@@ -129,13 +129,13 @@ Use SECST to joyfully create compelling, interactive HTML documents.</code></pre
  A --- B
  B--&gt;C[fa:fa-ban forbidden]
  B--&gt;D(fa:fa-spinner);
-]</code></pre></p><p>            renders as</p><script src="https://cdn.jsdelivr.net/npm/mermaid@9/dist/mermaid.min.js" onload="(() =&gt; { mermaid.initialize({ startOnLoad: true }) })()"></script><pre id="mermaidChart3238001619467037" class="mermaid">
+]</code></pre></p><p>            renders as</p><script src="https://cdn.jsdelivr.net/npm/mermaid@9/dist/mermaid.min.js" onload="(() =&gt; { mermaid.initialize({ startOnLoad: true }) })()"></script><pre id="mermaidChart9369793914122464" class="mermaid">
                 graph LR
                 A --- B
                 B-->C[fa:fa-ban forbidden]
                 B-->D(fa:fa-spinner);
             </pre><script type="module">
-            const el = document.getElementById("mermaidChart3238001619467037"),
+            const el = document.getElementById("mermaidChart9369793914122464"),
                 sibling = el.nextSibling,
                 insertSvg = function (svgCode, bindFunctions) {
                     el.innerHTML = svgCode;
@@ -149,7 +149,7 @@ Use SECST to joyfully create compelling, interactive HTML documents.</code></pre
                 B-->C[fa:fa-ban forbidden]
                 B-->D(fa:fa-spinner);
             `;
-            setTimeout(() => mermaid.mermaidAPI.render("mermaidChart3238001619467037", graphDefinition, insertSvg),1000);
+            setTimeout(() => mermaid.mermaidAPI.render("mermaidChart9369793914122464", graphDefinition, insertSvg),1000);
         </script><p>            There are lots of charts to choose from:</p><p>            <ul><li> <a target="_tab" href="https://mermaid.js.org/syntax/flowchart.html">Flowchart</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/sequenceDiagram.html">Sequence Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/classDiagram.html">Class Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/stateDiagram.html">State Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/entityRelationshipDiagram.html">Entity Relationship Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/userJourney.html">User Journey</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/gantt.html">Gannt</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/pie.html">Pie Chart</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/requirementDiagram.html">Requirement Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/gitgraph.html">Gitgraph Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/c4c.html">C4C Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/mindmap.html">Mindmaps</a></li></ul><br>        </p></section><section><h3 id="questions" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Questions<span class="autohelm-nav autohelm-nav-up-down"> <a href="#mermaid-chart">&uarr;</a> <a href="#repl">&darr;</a></span></h3><p>            Questions can be used to create a quiz like experience.</p><p>            <pre class="secst"><code class="nohighlight">:question({type:"number",showanswer:true})[
   :text[What is the :code[sqrt(4)]?]
   :answer[sqrt(4)]
@@ -255,144 +255,184 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
                     </dl><br>                </p></section><section><h5 id="matrix-functions" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Matrix Functions<span class="autohelm-nav autohelm-nav-up-down"> <a href="#algebraic-functions">&uarr;</a> <a href="#unit-math">&darr;</a></span></h5><p>                    <input class="secst" data-default="" data-template="multiply([[1,2],[3,4]],[[5,6],[1,1]])" value="" title="multiply([[1,2],[3,4]],[[5,6],[1,1]])" data-fitcontent=""><br>                </p></section></section><section><h4 id="unit-math" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Unit Math<span class="autohelm-nav autohelm-nav-up-down"> <a href="#basic-math">&uarr;</a> <a href="#importing-data">&darr;</a></span></h4><p>                Unit math <a target="_tab" href="https://mathjs.org/docs/datatypes/units.html">from MathJS</a> allows for conversions using the word <code class="nohighlight">to</code>, as well as units for numbers, e.g. <code class="nohighlight">45 deg</code>.</p><p>                There are many <a target="_tab" href="https://mathjs.org/docs/datatypes/units.html#reference">supported units</a>.</p><p>                Here are a few examples:</p><p>                <code class="nohighlight">:value[2 inch to cm]</code> = <input class="secst" data-default="" data-template="2 inch to cm" value="" title="2 inch to cm" data-fitcontent=""></p><p>                <code class="nohighlight">:value[90 km/h to mi/h]</code> = <input class="secst" data-default="" data-template="90 km/h to mi/h" value="" title="90 km/h to mi/h" data-fitcontent=""></p><p>                <code class="nohighlight">:value[90 km/h to m/h]</code> = <input class="secst" data-default="" data-template="90 km/h to m/h" value="" title="90 km/h to m/h" data-fitcontent=""> <code class="nohighlight">m/h</code> is meters per hour</p><p>                <code class="nohighlight">:value[(1 week + 1 day) to days]</code> = <input class="secst" data-default="" data-template="(1 week + 1 day) to days" value="" title="(1 week + 1 day) to days" data-fitcontent=""></p><p>                <code class="nohighlight">:value[cos(45 deg)]</code> = <input class="secst" data-default="" data-template="cos(45 deg)" value="" title="cos(45 deg)" data-fitcontent=""></p><p>                <code class="nohighlight">:value[8.314 m^3 Pa / mol / K]</code> = <input class="secst" data-default="" data-template="8.314 m^3 Pa / mol / K" value="" title="8.314 m^3 Pa / mol / K" data-fitcontent=""></p><p>                Remember, if you have a value that looks like a formula, but is not, you can use the attribute <code class="nohighlight">literal</code>, e.g.  <code class="nohighlight">:value(literal)[2 inch to cm]</code> = <input class="secst" data-default="" data-template="2 inch to cm" value="2 inch to cm" title="2 inch to cm" data-literal="" data-fitcontent="" disabled="" style="width: 13ch;">.</p><p>                And, you can use <code class="nohighlight">plaintext</code> to display values without any styling, e.g. <code class="nohighlight">:value(plaintext)[90 km/h to mi/h]</code> = <span class="secst" data-default="" data-template="90 km/h to mi/h" value="" title="90 km/h to mi/h" data-plaintext="">90 km/h to mi/h</span>.</p></section><section><h4 id="importing-data" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Importing Data<span class="autohelm-nav autohelm-nav-up-down"> <a href="#unit-math">&uarr;</a> <a href="#advanced-formulas">&darr;</a></span></h4><p>                Values can included imported data using the <code class="nohighlight">src</code> attribute and a mime type provided in the <code class="nohighlight">type</code> attribute. The trailing <code class="nohighlight">[]</code> are optional.</p><p>                Values with the boolean attribute <code class="nohighlight">static</code> is import data at transpile time. If importing fails, another attempt is made at runtime.</p><p>                JSON is formatted for readability and <a target="_tab" href="https://json5.org">JSON5</a> is supported to make it easier to handle remote data.</p><p>                <pre class="secst"><code class="nohighlight">:value(https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson static {type:"application/json"})</code></pre></p><p>                <textarea class="secst" data-mime-type="application/json" data-default="" title="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson" data-fitcontent="" disabled="">{
   "type": "FeatureCollection",
   "metadata": {
-    "generated": 1672172068000,
+    "generated": 1672175008000,
     "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson",
     "title": "USGS All Earthquakes, Past Hour",
     "status": 200,
     "api": "1.10.3",
-    "count": 4
+    "count": 5
   },
   "features": [
     {
       "type": "Feature",
       "properties": {
-        "mag": 1.6,
-        "place": "19 km N of Fishhook, Alaska",
-        "time": 1672171081648,
-        "updated": 1672171231338,
+        "mag": 1.98000002,
+        "place": "11 km ENE of Pāhala, Hawaii",
+        "time": 1672174548810,
+        "updated": 1672174745830,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022glcnyf8",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022glcnyf8.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73284892",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73284892.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 39,
-        "net": "ak",
-        "code": "022glcnyf8",
-        "ids": ",ak022glcnyf8,",
-        "sources": ",ak,",
+        "sig": 60,
+        "net": "hv",
+        "code": "73284892",
+        "ids": ",hv73284892,",
+        "sources": ",hv,",
         "types": ",origin,phase-data,",
-        "nst": null,
+        "nst": 30,
         "dmin": null,
-        "rms": 0.43,
-        "gap": null,
-        "magType": "ml",
-        "type": "earthquake",
-        "title": "M 1.6 - 19 km N of Fishhook, Alaska"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.3061,
-          61.9184,
-          41.8
-        ]
-      },
-      "id": "ak022glcnyf8"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.09,
-        "place": "8km NW of The Geysers, CA",
-        "time": 1672170924700,
-        "updated": 1672171018950,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73825821",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73825821.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 18,
-        "net": "nc",
-        "code": "73825821",
-        "ids": ",nc73825821,",
-        "sources": ",nc,",
-        "types": ",nearby-cities,origin,phase-data,",
-        "nst": 20,
-        "dmin": 0.00948,
-        "rms": 0.02,
-        "gap": 50,
+        "rms": 0.119999997,
+        "gap": 133,
         "magType": "md",
         "type": "earthquake",
-        "title": "M 1.1 - 8km NW of The Geysers, CA"
+        "title": "M 2.0 - 11 km ENE of Pāhala, Hawaii"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -122.817337,
-          38.8310013,
-          1.97
+          -155.384338378906,
+          19.261833190918,
+          31.3199996948242
         ]
       },
-      "id": "nc73825821"
+      "id": "hv73284892"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 2,
-        "place": "76 km NW of Ninilchik, Alaska",
-        "time": 1672169731376,
-        "updated": 1672169883021,
+        "mag": 1.91,
+        "place": "14km E of Arvin, CA",
+        "time": 1672173257250,
+        "updated": 1672173915690,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022glcj38x",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022glcj38x.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40150671",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40150671.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 62,
-        "net": "ak",
-        "code": "022glcj38x",
-        "ids": ",ak022glcj38x,",
-        "sources": ",ak,",
-        "types": ",origin,phase-data,",
-        "nst": null,
-        "dmin": null,
-        "rms": 0.57,
-        "gap": null,
+        "sig": 56,
+        "net": "ci",
+        "code": "40150671",
+        "ids": ",ci40150671,",
+        "sources": ",ci,",
+        "types": ",focal-mechanism,nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 36,
+        "dmin": 0.0251,
+        "rms": 0.19,
+        "gap": 72,
         "magType": "ml",
         "type": "earthquake",
-        "title": "M 2.0 - 76 km NW of Ninilchik, Alaska"
+        "title": "M 1.9 - 14km E of Arvin, CA"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -152.7601,
-          60.4639,
-          102.1
+          -118.6748333,
+          35.2086667,
+          6.11
         ]
       },
-      "id": "ak022glcj38x"
+      "id": "ci40150671"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.9,
+        "place": "56 km NE of Labuan Bajo, Indonesia",
+        "time": 1672173241559,
+        "updated": 1672174291040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000j0i7",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/us7000j0i7.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 369,
+        "net": "us",
+        "code": "7000j0i7",
+        "ids": ",us7000j0i7,",
+        "sources": ",us,",
+        "types": ",origin,phase-data,",
+        "nst": 44,
+        "dmin": 2.528,
+        "rms": 1.27,
+        "gap": 68,
+        "magType": "mb",
+        "type": "earthquake",
+        "title": "M 4.9 - 56 km NE of Labuan Bajo, Indonesia"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.2317,
+          -8.1218,
+          199.68
+        ]
+      },
+      "id": "us7000j0i7"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1,
+        "place": "9km WNW of Cobb, CA",
+        "time": 1672172741060,
+        "updated": 1672174757776,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73825831",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73825831.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 15,
+        "net": "nc",
+        "code": "73825831",
+        "ids": ",nc73825831,",
+        "sources": ",nc,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 19,
+        "dmin": 0.008917,
+        "rms": 0.02,
+        "gap": 68,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 1.0 - 9km WNW of Cobb, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.8243332,
+          38.8404999,
+          1.92
+        ]
+      },
+      "id": "nc73825831"
     },
     {
       "type": "Feature",
       "properties": {
         "mag": 1.4,
-        "place": "15 km WSW of Salcha, Alaska",
-        "time": 1672169623291,
-        "updated": 1672169726551,
+        "place": "70 km WNW of Petersville, Alaska",
+        "time": 1672172212892,
+        "updated": 1672172378093,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022glcioqh",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022glcioqh.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022gld0hvy",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022gld0hvy.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
@@ -401,36 +441,36 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
         "tsunami": 0,
         "sig": 30,
         "net": "ak",
-        "code": "022glcioqh",
-        "ids": ",ak022glcioqh,",
+        "code": "022gld0hvy",
+        "ids": ",ak022gld0hvy,",
         "sources": ",ak,",
         "types": ",origin,phase-data,",
         "nst": null,
         "dmin": null,
-        "rms": 0.66,
+        "rms": 0.3,
         "gap": null,
         "magType": "ml",
         "type": "earthquake",
-        "title": "M 1.4 - 15 km WSW of Salcha, Alaska"
+        "title": "M 1.4 - 70 km WNW of Petersville, Alaska"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -147.2016,
-          64.4793,
-          13.9
+          -152.0022,
+          62.7738,
+          9.7
         ]
       },
-      "id": "ak022glcioqh"
+      "id": "ak022gld0hvy"
     }
   ],
   "bbox": [
-    -152.7601,
-    38.8310013,
-    1.97,
-    -122.817337,
-    64.4793,
-    102.1
+    -155.38433837891,
+    -8.1218,
+    1.92,
+    120.2317,
+    62.7738,
+    199.68
   ]
 }</textarea></p><p>                Imported data is readonly because it is essentially a computation. To make it editable, use the attribute <code class="nohighlight">editable</code>.</p><p>                <pre class="secst"><code class="nohighlight">:value(https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson editable {type:"application/json"})</code></pre></p><p>                <textarea class="secst" data-mime-type="application/json" data-default="" data-template="await (async () =&gt; {
                         try {
@@ -454,144 +494,184 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
                         })()" title="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson" data-editable="" data-fitcontent="" style="height: 30em; width: 80ch;">{
   "type": "FeatureCollection",
   "metadata": {
-    "generated": 1672172128000,
+    "generated": 1672175008000,
     "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson",
     "title": "USGS All Earthquakes, Past Hour",
     "status": 200,
     "api": "1.10.3",
-    "count": 4
+    "count": 5
   },
   "features": [
     {
       "type": "Feature",
       "properties": {
-        "mag": 1.6,
-        "place": "19 km N of Fishhook, Alaska",
-        "time": 1672171081648,
-        "updated": 1672171231338,
+        "mag": 1.98000002,
+        "place": "11 km ENE of Pāhala, Hawaii",
+        "time": 1672174548810,
+        "updated": 1672174745830,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022glcnyf8",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022glcnyf8.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73284892",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73284892.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 39,
-        "net": "ak",
-        "code": "022glcnyf8",
-        "ids": ",ak022glcnyf8,",
-        "sources": ",ak,",
+        "sig": 60,
+        "net": "hv",
+        "code": "73284892",
+        "ids": ",hv73284892,",
+        "sources": ",hv,",
         "types": ",origin,phase-data,",
-        "nst": null,
+        "nst": 30,
         "dmin": null,
-        "rms": 0.43,
-        "gap": null,
-        "magType": "ml",
-        "type": "earthquake",
-        "title": "M 1.6 - 19 km N of Fishhook, Alaska"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.3061,
-          61.9184,
-          41.8
-        ]
-      },
-      "id": "ak022glcnyf8"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.09,
-        "place": "8km NW of The Geysers, CA",
-        "time": 1672170924700,
-        "updated": 1672171018950,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73825821",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73825821.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 18,
-        "net": "nc",
-        "code": "73825821",
-        "ids": ",nc73825821,",
-        "sources": ",nc,",
-        "types": ",nearby-cities,origin,phase-data,",
-        "nst": 20,
-        "dmin": 0.00948,
-        "rms": 0.02,
-        "gap": 50,
+        "rms": 0.119999997,
+        "gap": 133,
         "magType": "md",
         "type": "earthquake",
-        "title": "M 1.1 - 8km NW of The Geysers, CA"
+        "title": "M 2.0 - 11 km ENE of Pāhala, Hawaii"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -122.817337,
-          38.8310013,
-          1.97
+          -155.384338378906,
+          19.261833190918,
+          31.3199996948242
         ]
       },
-      "id": "nc73825821"
+      "id": "hv73284892"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 2,
-        "place": "76 km NW of Ninilchik, Alaska",
-        "time": 1672169731376,
-        "updated": 1672169883021,
+        "mag": 1.91,
+        "place": "14km E of Arvin, CA",
+        "time": 1672173257250,
+        "updated": 1672173915690,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022glcj38x",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022glcj38x.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40150671",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40150671.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 62,
-        "net": "ak",
-        "code": "022glcj38x",
-        "ids": ",ak022glcj38x,",
-        "sources": ",ak,",
-        "types": ",origin,phase-data,",
-        "nst": null,
-        "dmin": null,
-        "rms": 0.57,
-        "gap": null,
+        "sig": 56,
+        "net": "ci",
+        "code": "40150671",
+        "ids": ",ci40150671,",
+        "sources": ",ci,",
+        "types": ",focal-mechanism,nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 36,
+        "dmin": 0.0251,
+        "rms": 0.19,
+        "gap": 72,
         "magType": "ml",
         "type": "earthquake",
-        "title": "M 2.0 - 76 km NW of Ninilchik, Alaska"
+        "title": "M 1.9 - 14km E of Arvin, CA"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -152.7601,
-          60.4639,
-          102.1
+          -118.6748333,
+          35.2086667,
+          6.11
         ]
       },
-      "id": "ak022glcj38x"
+      "id": "ci40150671"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.9,
+        "place": "56 km NE of Labuan Bajo, Indonesia",
+        "time": 1672173241559,
+        "updated": 1672174291040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000j0i7",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/us7000j0i7.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 369,
+        "net": "us",
+        "code": "7000j0i7",
+        "ids": ",us7000j0i7,",
+        "sources": ",us,",
+        "types": ",origin,phase-data,",
+        "nst": 44,
+        "dmin": 2.528,
+        "rms": 1.27,
+        "gap": 68,
+        "magType": "mb",
+        "type": "earthquake",
+        "title": "M 4.9 - 56 km NE of Labuan Bajo, Indonesia"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.2317,
+          -8.1218,
+          199.68
+        ]
+      },
+      "id": "us7000j0i7"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1,
+        "place": "9km WNW of Cobb, CA",
+        "time": 1672172741060,
+        "updated": 1672174757776,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73825831",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73825831.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 15,
+        "net": "nc",
+        "code": "73825831",
+        "ids": ",nc73825831,",
+        "sources": ",nc,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 19,
+        "dmin": 0.008917,
+        "rms": 0.02,
+        "gap": 68,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 1.0 - 9km WNW of Cobb, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.8243332,
+          38.8404999,
+          1.92
+        ]
+      },
+      "id": "nc73825831"
     },
     {
       "type": "Feature",
       "properties": {
         "mag": 1.4,
-        "place": "15 km WSW of Salcha, Alaska",
-        "time": 1672169623291,
-        "updated": 1672169726551,
+        "place": "70 km WNW of Petersville, Alaska",
+        "time": 1672172212892,
+        "updated": 1672172378093,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022glcioqh",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022glcioqh.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022gld0hvy",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022gld0hvy.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
@@ -600,36 +680,36 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
         "tsunami": 0,
         "sig": 30,
         "net": "ak",
-        "code": "022glcioqh",
-        "ids": ",ak022glcioqh,",
+        "code": "022gld0hvy",
+        "ids": ",ak022gld0hvy,",
         "sources": ",ak,",
         "types": ",origin,phase-data,",
         "nst": null,
         "dmin": null,
-        "rms": 0.66,
+        "rms": 0.3,
         "gap": null,
         "magType": "ml",
         "type": "earthquake",
-        "title": "M 1.4 - 15 km WSW of Salcha, Alaska"
+        "title": "M 1.4 - 70 km WNW of Petersville, Alaska"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -147.2016,
-          64.4793,
-          13.9
+          -152.0022,
+          62.7738,
+          9.7
         ]
       },
-      "id": "ak022glcioqh"
+      "id": "ak022gld0hvy"
     }
   ],
   "bbox": [
-    -152.7601,
-    38.8310013,
-    1.97,
-    -122.817337,
-    64.4793,
-    102.1
+    -155.38433837891,
+    -8.1218,
+    1.92,
+    120.2317,
+    62.7738,
+    199.68
   ]
 }</textarea></p><p>                If an id is added, the data can be used in a computation.</p><p>                <pre class="secst"><code class="nohighlight">:value(#earthquake-data https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson {type:"application/json"})
 
@@ -655,144 +735,184 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
                         })()" title="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson" data-fitcontent="" disabled="" style="height: 30em; width: 80ch;">{
   "type": "FeatureCollection",
   "metadata": {
-    "generated": 1672172128000,
+    "generated": 1672175008000,
     "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson",
     "title": "USGS All Earthquakes, Past Hour",
     "status": 200,
     "api": "1.10.3",
-    "count": 4
+    "count": 5
   },
   "features": [
     {
       "type": "Feature",
       "properties": {
-        "mag": 1.6,
-        "place": "19 km N of Fishhook, Alaska",
-        "time": 1672171081648,
-        "updated": 1672171231338,
+        "mag": 1.98000002,
+        "place": "11 km ENE of Pāhala, Hawaii",
+        "time": 1672174548810,
+        "updated": 1672174745830,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022glcnyf8",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022glcnyf8.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73284892",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73284892.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 39,
-        "net": "ak",
-        "code": "022glcnyf8",
-        "ids": ",ak022glcnyf8,",
-        "sources": ",ak,",
+        "sig": 60,
+        "net": "hv",
+        "code": "73284892",
+        "ids": ",hv73284892,",
+        "sources": ",hv,",
         "types": ",origin,phase-data,",
-        "nst": null,
+        "nst": 30,
         "dmin": null,
-        "rms": 0.43,
-        "gap": null,
-        "magType": "ml",
-        "type": "earthquake",
-        "title": "M 1.6 - 19 km N of Fishhook, Alaska"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.3061,
-          61.9184,
-          41.8
-        ]
-      },
-      "id": "ak022glcnyf8"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.09,
-        "place": "8km NW of The Geysers, CA",
-        "time": 1672170924700,
-        "updated": 1672171018950,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73825821",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73825821.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 18,
-        "net": "nc",
-        "code": "73825821",
-        "ids": ",nc73825821,",
-        "sources": ",nc,",
-        "types": ",nearby-cities,origin,phase-data,",
-        "nst": 20,
-        "dmin": 0.00948,
-        "rms": 0.02,
-        "gap": 50,
+        "rms": 0.119999997,
+        "gap": 133,
         "magType": "md",
         "type": "earthquake",
-        "title": "M 1.1 - 8km NW of The Geysers, CA"
+        "title": "M 2.0 - 11 km ENE of Pāhala, Hawaii"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -122.817337,
-          38.8310013,
-          1.97
+          -155.384338378906,
+          19.261833190918,
+          31.3199996948242
         ]
       },
-      "id": "nc73825821"
+      "id": "hv73284892"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 2,
-        "place": "76 km NW of Ninilchik, Alaska",
-        "time": 1672169731376,
-        "updated": 1672169883021,
+        "mag": 1.91,
+        "place": "14km E of Arvin, CA",
+        "time": 1672173257250,
+        "updated": 1672173915690,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022glcj38x",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022glcj38x.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40150671",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40150671.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 62,
-        "net": "ak",
-        "code": "022glcj38x",
-        "ids": ",ak022glcj38x,",
-        "sources": ",ak,",
-        "types": ",origin,phase-data,",
-        "nst": null,
-        "dmin": null,
-        "rms": 0.57,
-        "gap": null,
+        "sig": 56,
+        "net": "ci",
+        "code": "40150671",
+        "ids": ",ci40150671,",
+        "sources": ",ci,",
+        "types": ",focal-mechanism,nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 36,
+        "dmin": 0.0251,
+        "rms": 0.19,
+        "gap": 72,
         "magType": "ml",
         "type": "earthquake",
-        "title": "M 2.0 - 76 km NW of Ninilchik, Alaska"
+        "title": "M 1.9 - 14km E of Arvin, CA"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -152.7601,
-          60.4639,
-          102.1
+          -118.6748333,
+          35.2086667,
+          6.11
         ]
       },
-      "id": "ak022glcj38x"
+      "id": "ci40150671"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 4.9,
+        "place": "56 km NE of Labuan Bajo, Indonesia",
+        "time": 1672173241559,
+        "updated": 1672174291040,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us7000j0i7",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/us7000j0i7.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "reviewed",
+        "tsunami": 0,
+        "sig": 369,
+        "net": "us",
+        "code": "7000j0i7",
+        "ids": ",us7000j0i7,",
+        "sources": ",us,",
+        "types": ",origin,phase-data,",
+        "nst": 44,
+        "dmin": 2.528,
+        "rms": 1.27,
+        "gap": 68,
+        "magType": "mb",
+        "type": "earthquake",
+        "title": "M 4.9 - 56 km NE of Labuan Bajo, Indonesia"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.2317,
+          -8.1218,
+          199.68
+        ]
+      },
+      "id": "us7000j0i7"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1,
+        "place": "9km WNW of Cobb, CA",
+        "time": 1672172741060,
+        "updated": 1672174757776,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73825831",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73825831.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 15,
+        "net": "nc",
+        "code": "73825831",
+        "ids": ",nc73825831,",
+        "sources": ",nc,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 19,
+        "dmin": 0.008917,
+        "rms": 0.02,
+        "gap": 68,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 1.0 - 9km WNW of Cobb, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.8243332,
+          38.8404999,
+          1.92
+        ]
+      },
+      "id": "nc73825831"
     },
     {
       "type": "Feature",
       "properties": {
         "mag": 1.4,
-        "place": "15 km WSW of Salcha, Alaska",
-        "time": 1672169623291,
-        "updated": 1672169726551,
+        "place": "70 km WNW of Petersville, Alaska",
+        "time": 1672172212892,
+        "updated": 1672172378093,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022glcioqh",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022glcioqh.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022gld0hvy",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022gld0hvy.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
@@ -801,36 +921,36 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
         "tsunami": 0,
         "sig": 30,
         "net": "ak",
-        "code": "022glcioqh",
-        "ids": ",ak022glcioqh,",
+        "code": "022gld0hvy",
+        "ids": ",ak022gld0hvy,",
         "sources": ",ak,",
         "types": ",origin,phase-data,",
         "nst": null,
         "dmin": null,
-        "rms": 0.66,
+        "rms": 0.3,
         "gap": null,
         "magType": "ml",
         "type": "earthquake",
-        "title": "M 1.4 - 15 km WSW of Salcha, Alaska"
+        "title": "M 1.4 - 70 km WNW of Petersville, Alaska"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -147.2016,
-          64.4793,
-          13.9
+          -152.0022,
+          62.7738,
+          9.7
         ]
       },
-      "id": "ak022glcioqh"
+      "id": "ak022gld0hvy"
     }
   ],
   "bbox": [
-    -152.7601,
-    38.8310013,
-    1.97,
-    -122.817337,
-    64.4793,
-    102.1
+    -155.38433837891,
+    -8.1218,
+    1.92,
+    120.2317,
+    62.7738,
+    199.68
   ]
 }</textarea></p><p>               <textarea class="secst" data-mime-type="application/json" data-default="" data-template="$(#earthquake-data).metadata" title="$(#earthquake-data).metadata" data-fitcontent="" disabled="" style="height: 1.5em; width: 15ch;">[object Object]</textarea><br>            </p></section><section><h4 id="advanced-formulas" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Advanced Formulas<span class="autohelm-nav autohelm-nav-up-down"> <a href="#importing-data">&uarr;</a> <a href="#formulas-with-css-selectors-and-multiple-values">&darr;</a></span></h4><section><h5 id="formulas-with-css-selectors-and-multiple-values" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Formulas With CSS Selectors and Multiple Values<span class="autohelm-nav autohelm-nav-up-down"> <a href="#advanced-formulas">&uarr;</a> <a href="#macro-list-formatting">&darr;</a></span></h5><p>                    You can use almost any <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors">CSS selector</a> in place of <code class="nohighlight">#id</code> in <code class="nohighlight">$(#&lt;id&gt;)</code>. The value returned will be the contents of the value property on the element or (if not available) the value attribute or the <code class="nohighlight">innerText</code>.</p><p>                    You can use commas to select multiple identifier named elements, e.g. <code class="nohighlight">:value[$(#id1, #id2, #id3)]</code> is an array of the values associated with the elements <code class="nohighlight">:value(#id1)[3]</code>, <code class="nohighlight">:value(#id2)[2]</code>, <code class="nohighlight">:value(#id3)[1]</code> and will be <code class="nohighlight">[3,2,1]</code>.</p><p>                    A value reference <code class="nohighlight">$(css-selector)</code> can end in <code class="nohighlight">[]</code> to indicate multiple values should be returned as an array if the selector does not contain a comma. This allows tables to be treated somewhat like spreadsheets.<br>                </p></section><section><h5 id="macro-list-formatting" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Macro List Formatting<span class="autohelm-nav autohelm-nav-up-down"> <a href="#formulas-with-css-selectors-and-multiple-values">&uarr;</a> <a href="#javascript">&darr;</a></span></h5><p>                     The SECST formula evaluator supports supports some utility functions.<br>                </p></section><section><h5 id="javascript" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>JavaScript<span class="autohelm-nav autohelm-nav-up-down"> <a href="#macro-list-formatting">&uarr;</a> <a href="#seo">&darr;</a></span></h5><p>                    You can use any JavaScript that is available in <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API">WebWorkers</a> inside a macro. A special read-only <code class="nohighlight">document</code> object is also made available. This object has title, baseURI, location, and navigator properties along with a property for each meta tag name and value.<br>                </p></section></section></section></section><section><h2 id="seo" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Search Engine Optimization<span class="autohelm-nav autohelm-nav-up-down"> <a href="#markup-without-html-names">&uarr;</a> <a href="#structured-data">&darr;</a></span></h2><p>        SECST provides several features to support <abbr>SEO</abbr> Search Engine Optimization.</p><p>        <ul title="SEO features"><li><a href="#hastags">hashtags</a></li><li><a href="#meta-tags">meta tags</a></li><li><a href="#structured-data">structured data</a></li><li><a href="#server-transpilation">server transpilation</a></li></ul><br>        </p><section><h3 id="structured-data" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Structured Data<span class="autohelm-nav autohelm-nav-up-down"> <a href="#seo">&uarr;</a> <a href="#news-article">&darr;</a></span></h3><p>            For select tags, SECST can generate JSON-LD directly from SECST markup. Content, layout, and SEO optimization will always be in sync.</p><p>            This is best covered by an example based on <a target="_tab" href="https://developers.google.com/search/docs/appearance/structured-data/article">Google's documentation for a news article</a>.</p><p>            <em>Note: Only those tags documented for <code class="nohighlight">NewsArticle</code> are currently supported.</em></p><section><h4 id="news-article" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>News Article<span class="autohelm-nav autohelm-nav-up-down"> <a href="#structured-data">&uarr;</a> <a href="#styling-content">&darr;</a></span></h4><p>                The SECST tag <code class="nohighlight">:NewsArticle[]</code> can contain regular SECST as well as tags that parallel established JSON-LD schema like <code class="nohighlight">:headline[]</code>, <code class="nohighlight">:author[]</code> and <code class="nohighlight">:Person[]</code>. Where there are identical or trivially equivalent tags and attribute names, e.g. <code class="nohighlight">image</code> and <code class="nohighlight">img</code>, the native SECST tag is used.</p><p>                <pre class="secst"><code class="nohighlight">:NewsArticle[
   :headline[Pinky Conquers The World]
@@ -1060,7 +1180,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
       "format": "transform format(value)",
       "lang": true
     },
-    "contentAllowed": "Tue Dec 27 2022 12:15:19 GMT-0800 (Pacific Standard Time)",
+    "contentAllowed": "Tue Dec 27 2022 13:03:28 GMT-0800 (Pacific Standard Time)",
     "minCount": 0,
     "maxCount": 1,
     "toText": true

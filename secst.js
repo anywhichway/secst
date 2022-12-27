@@ -121,7 +121,7 @@ for(const path of paths) {
         await resolve(dom.body);
         parts.pop();
         const fname = parts.join(".");
-        await fs.writeFile(fname + ".html",`<!DOCTYPE html><html><head>${dom.head.innerHTML}</head><body>${dom.body.innerHTML}</body></html>`,{ encoding: 'utf8' })
+        await fs.writeFile(fname + ".html",`<!DOCTYPE html><html><head>${dom.head.innerHTML+document.head.innerHTML}</head><body>${dom.body.innerHTML}</body></html>`,{ encoding: 'utf8' })
         if(args.includes("--writeAsTxt")) {
             await fs.writeFile(fname + ".txt",section,{ encoding: 'utf8' })
         }
