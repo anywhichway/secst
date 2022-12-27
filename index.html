@@ -2,13 +2,13 @@
 
 
 
-<section><h1 id="the-joy-of-secst" class="autohelm-heading">The Joy of SECST</h1><p>    <abbr>SECST</abbr> (<strong>S</strong>emantic, <strong>E</strong>xtensible, <strong>C</strong>omputational, <strong>S</strong>tyleable, <strong>T</strong>agged) markup is a more expressive, but easy to learn and use, partial superset and alternative to regular Markdown. It provides these features and more:</p><p>    <ul><li> Support for almost all HTML tags <a href="#tags">and then some...</a>, with <a href="#theme">themes and styles</a>.</li><li> <a href="#tables-of-contents">Table of contents</a>, <a href="#footnotes">footnote</a>, <a href="#hashtags">hashtag</a> and <a href="#mentions">social media</a> support.</li><li> Reactive <a href="#values-and-formulas">formulas and data import</a> that are as simple as Excel formulas, e.g. <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/styles/default.min.css"><code class="nohighlight">:value[2 * 2]</code> = <input class="secst" data-default="" data-template="2 * 2" value="4" title="2 * 2" data-fitcontent="" disabled="" style="width: 2ch;">.</li><li> SEO optimization via server rendering with JSON-LD <a href="#structured-data">structured data</a> for both content generation and layout.</li></ul></p><p>    Use SECST to joyfully create compelling, interactive HTML documents.</p><p>    This is the source for the introduction above:</p><p>    <pre class="secst"><code class="language-secst">:abbr[SECST] (:strong[S]emantic, :strong[E]xtensible, :strong[C]omputational, :strong[S]tyleable, :strong[T]agged) markup is a more expressive, but easy to learn and use, partial superset and alternative to regular Markdown. It provides these features and more:
+<section><h1 id="the-joy-of-secst" class="autohelm-heading">The Joy of SECST</h1><p>    <abbr>SECST</abbr> (<b>[S]</b>emantic, <b>[E]</b>xtensible, <b>[C]</b>omputational, <b>[S]</b>tyleable, <b>[T]</b>agged) markup is a more expressive, but easy to learn and use, partial superset and alternative to regular Markdown. It provides these features and more:</p><p>    <ul><li> Support for almost all HTML tags <a href="#tags">and then some...</a>, with <a href="#theme">themes and styles</a>.</li><li> <a href="#tables-of-contents">Table of contents</a>, <a href="#footnotes">footnote</a>, <a href="#hashtags">hashtag</a> and <a href="#mentions">social media</a> support.</li><li> Reactive <a href="#values-and-formulas">formulas and data import</a> that are as simple as Excel formulas, e.g. <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/styles/default.min.css"><code class="nohighlight">[:value[2 * 2]</code> = <input class="secst" data-default="" data-template="2 * 2" value="4" title="2 * 2" data-fitcontent="" disabled="" style="width: 2ch;">.</li><li> SEO optimization via server rendering with JSON-LD <a href="#structured-data">structured data</a> for both content generation and layout.</li></ul></p><p>    Use SECST to joyfully create compelling, interactive HTML documents.</p><p>    This is the source for the introduction above:</p><p>    <pre class="secst"><code class="language-secst">:abbr[SECST] (**[S]**emantic, **[E]**xtensible, **[C]**omputational, **[S]**tyleable, **[T]**agged) markup is a more expressive, but easy to learn and use, partial superset and alternative to regular Markdown. It provides these features and more:
 
 :ul[
-  - Support for almost all HTML tags :a(.#tags)[and then some...], with :a(.#theme)[themes and styles].
-  - :a(.#tables-of-contents)[Table of contents], :a(.#footnotes)[footnote], :a(.#hashtags)[hashtag] and :a(.#mentions)[social media] support.
-  - Reactive :a(.#values-and-formulas)[formulas and data import] that are as simple as Excel formulas, e.g. :code[:value[2 * 2]] = :value[2 * 2].
-  - SEO optimization via server rendering with JSON-LD :a(.#structured-data)[structured data] for both content generation and layout.
+- Support for almost all HTML tags :a(.#tags)[and then some...], with :a(.#theme)[themes and styles].
+- :a(.#tables-of-contents)[Table of contents], :a(.#footnotes)[footnote], :a(.#hashtags)[hashtag] and :a(.#mentions)[social media] support.
+- Reactive :a(.#values-and-formulas)[formulas and data import] that are as simple as Excel formulas, e.g. :code[:value[2 * 2]] = :value[2 * 2].
+- SEO optimization via server rendering with JSON-LD :a(.#structured-data)[structured data] for both content generation and layout.
 ]
 
 Use SECST to joyfully create compelling, interactive HTML documents.</code></pre><br></p></section>
@@ -28,8 +28,12 @@ Use SECST to joyfully create compelling, interactive HTML documents.</code></pre
             <tr><td>code</td><td><code class="nohighlight">'the code'</code></td><td><code class="nohighlight">:code[the code]</code> and <code class="nohighlight">'the code'</code></td><td><code class="nohighlight">the code</code></td></tr>
             <tr><td>newline</td><td>a new line</td><td>a new line or <code class="nohighlight">:br</code></td><td></td></tr>
             <tr><td>paragraph</td><td>two new lines, i.e. an empty line</td><td>two new lines or <code class="nohighlight">:p[&lt;content&gt;...]</code></td><td></td></tr>
-        </table></div></p><p>        Headings</p><p>        <code class="nohighlight">h# heading text</code> or <code class="nohighlight">:h#[heading text]</code></p><h6> Heading Level Six</h6><p>        Horizontal Rule</p><p>        <code class="nohighlight">***</code> or <code class="nohighlight">:hr</code><br><hr>
-<br>        Also see <a href="#lists">Lists</a>, <a href="#code">Code</a>, <a href="#links">Links</a>, <a href="#images">Images</a>.<br>    </p></section><section><h2 id="extended-markdown" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Extended Markdown<span class="autohelm-nav autohelm-nav-up-down"> <a href="#basic-markdown">&uarr;</a> <a href="#markdown-gaps">&darr;</a></span></h2><p>        See <a>https://www.markdownguide.org/extended-syntax/</a>.</p><p>        <div style="overflow: auto; margin-right: 1ch;"><table class="secst">
+        </table></div></p><p>        Blockquote</p><p>        <code class="nohighlight">&gt; quoted text</code> or <code class="nohighlight">:blockquote[quoted text]</code></p><p>        <pre class="secst"><code class="nohighlight">&gt; quoted text line one
+&gt; quoted text line two</code></pre><blockquote>quoted text line one<br>quoted text line two</blockquote></p><p>        Nested blockquotes are supported using nested <code class="nohighlight">:blockquote[]</code>, but not using Markdown shorthand.</p><p>        Note: Shorthand blockquotes will conflict with <code class="nohighlight">:value[]</code> <a href="#values-and-formulas">formulas</a> if your formulas contain a newline before <code class="nohighlight">&gt;</code> symbols.</p><p>        Lists</p><p>        Must be wrapped in <code class="nohighlight">:ol[]</code> or <code class="nohighlight">:ul[]</code>. You can use Markdown shorthand inside the SECST tag content.</p><p>        <pre class="secst"><code class="nohighlight">:ol[
+  1. Item One
+  -  Item Two
+]</code></pre></p><p>        <ol><li> Item One</li><li> Item Two</li></ol></p><p>        Also see <a href="#lists">Lists</a></p><p>        Headings</p><p>        <code class="nohighlight"># heading text</code> where there can be 1 - 6 <code class="nohighlight">#</code>.</p><p>        <code class="nohighlight">:h&lt;num&gt;[heading text]</code> where <code class="nohighlight">num</code> is 1 - 6.<br></p><h6>Heading Level Six</h6><p>        Horizontal Rule</p><p>        <code class="nohighlight">***</code> or <code class="nohighlight">:hr</code><br><hr>
+<br>        Also see <a href="#code">Code</a>, <a href="#links">Links</a>, <a href="#images">Images</a>.<br>    </p></section><section><h2 id="extended-markdown" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Extended Markdown<span class="autohelm-nav autohelm-nav-up-down"> <a href="#basic-markdown">&uarr;</a> <a href="#markdown-gaps">&darr;</a></span></h2><p>        See <a>https://www.markdownguide.org/extended-syntax/</a>.</p><p>        <div style="overflow: auto; margin-right: 1ch;"><table class="secst">
             <thead><tr><th>Document Item</th><th>Markdown</th><th>SECST</th><th>Example</th></tr></thead>
             <tr><td><a href="#footnotes">footnotes</a></td><td><code class="nohighlight">[number]</code></td><td><code class="nohighlight">:footnote[number] or :footnote[] for automatic numbering</code></td><td></td></tr>
             <tr><td>heading ids</td><td><code class="nohighlight"># My Heading {#my-id}</code></td><td><code class="nohighlight">:h1(#my-id)[My Heading]</code></td><td></td></tr>
@@ -82,7 +86,7 @@ Use SECST to joyfully create compelling, interactive HTML documents.</code></pre
   :forEach({iterable:"#a, #b, #c"})[
       :li[${item} at ${index}]
   ]
-]</code></pre></p><p>            renders as <input id="a" class="secst" hidden="" data-default="" data-template="a" value="a" title="a" data-literal="" data-fitcontent="" disabled="" style="width: 2ch;"> <input id="b" class="secst" hidden="" data-default="" data-template="b" value="b" title="b" data-literal="" data-fitcontent="" disabled="" style="width: 2ch;"> <input id="c" class="secst" hidden="" data-default="" data-template="c" value="c" title="c" data-literal="" data-fitcontent="" disabled="" style="width: 2ch;"><br>            <ol><li>a at 0</li><li>b at 1</li><li>c at 2</li></ol></p></section><section><h3 id="hashtags" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Hashtags<span class="autohelm-nav autohelm-nav-up-down"> <a href="#foreach">&uarr;</a> <a href="#latex">&darr;</a></span></h3><p>            Hashtags can take the form <code class="nohighlight">#&lt;value&gt;[]</code> or <code class="nohighlight">#[&lt;value&gt;...]</code>, or <code class="nohighlight">:hashtag[&lt;value&gt;...]</code> where <code class="nohighlight">&lt;value&gt;...</code> is a space separated list of words to hashtag.</p><p>            <code class="nohighlight">#sects-is-great[]</code> renders as #sects-is-great.</p><p>            <code class="nohighlight">#[sects-is-great javascript-is-great]</code> renders as<span>#sects-is-great, #javascript-is-great</span>.</p><p>            <code class="nohighlight">:hashtag[sects-is-great javascript-is-great]</code> renders as <span>#sects-is-great, #javascript-is-great</span>.</p><p>            Hashtags are automatically added to the meta tags in the head of a document for indexing and SEO purposes.<br>        </p></section><section><h3 id="latex" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Latex<span class="autohelm-nav autohelm-nav-up-down"> <a href="#hashtags">&uarr;</a> <a href="#macros">&darr;</a></span></h3><p>            Math and chemical formulas can be displayed using the <code class="nohighlight">:latex[]</code> tag.</p><p>            <code class="language-latex">:latex[Lift = \frac{1}{2} \rho v^2 S C_L]</code> renders as <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css" integrity="sha384-Juol1FqnotbkyZUT5Z7gUPjQ9gzlwCENvUZTpQBAPxtusdwFLRy382PSDx5UUJ4/" crossorigin="anonymous"><script src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js" integrity="sha384-PwRUT/YqbnEjkZO0zZxNqcxACrXe+j766U2amXcgMg5457rve2Y7I6ZJSm2A0mS4" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/mhchem.min.js" integrity="sha384-RTN08a0AXIioPBcVosEqPUfKK+rPp+h1x/izR7xMkdMyuwkcZCWdxO+RSwIFtJXN" crossorigin="anonymous" async=""></script><span><script>
+]</code></pre></p><p>            renders as <input id="a" class="secst" hidden="" data-default="" data-template="a" value="a" title="a" data-literal="" data-fitcontent="" disabled="" style="width: 2ch;"> <input id="b" class="secst" hidden="" data-default="" data-template="b" value="b" title="b" data-literal="" data-fitcontent="" disabled="" style="width: 2ch;"> <input id="c" class="secst" hidden="" data-default="" data-template="c" value="c" title="c" data-literal="" data-fitcontent="" disabled="" style="width: 2ch;"><br>            <ol><li>a at 0</li><li>b at 1</li><li>c at 2</li></ol></p></section><section><h3 id="hashtags" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Hashtags<span class="autohelm-nav autohelm-nav-up-down"> <a href="#foreach">&uarr;</a> <a href="#latex">&darr;</a></span></h3><p>            Hashtags can take the form <code class="nohighlight">#&lt;value&gt;[]</code> or <code class="nohighlight">#[&lt;value&gt;...]</code>, or <code class="nohighlight">:hashtag[&lt;value&gt;...]</code> where <code class="nohighlight">&lt;value&gt;...</code> is a space separated list of words to hashtag.</p><p>            <code class="nohighlight">#secst-is-great[]</code> renders as #secst-is-great.</p><p>            <code class="nohighlight">#[secst-is-great javascript-is-great]</code> renders as<span>#secst-is-great, #javascript-is-great</span>.</p><p>            <code class="nohighlight">:hashtag[secst-is-great javascript-is-great]</code> renders as <span>#secst-is-great, #javascript-is-great</span>.</p><p>            Hashtags are automatically added to the meta tags in the head of a document for indexing and SEO purposes.<br>        </p></section><section><h3 id="latex" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Latex<span class="autohelm-nav autohelm-nav-up-down"> <a href="#hashtags">&uarr;</a> <a href="#macros">&darr;</a></span></h3><p>            Math and chemical formulas can be displayed using the <code class="nohighlight">:latex[]</code> tag.</p><p>            <code class="language-latex">:latex[Lift = \frac{1}{2} \rho v^2 S C_L]</code> renders as <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css" integrity="sha384-Juol1FqnotbkyZUT5Z7gUPjQ9gzlwCENvUZTpQBAPxtusdwFLRy382PSDx5UUJ4/" crossorigin="anonymous"><script src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js" integrity="sha384-PwRUT/YqbnEjkZO0zZxNqcxACrXe+j766U2amXcgMg5457rve2Y7I6ZJSm2A0mS4" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/mhchem.min.js" integrity="sha384-RTN08a0AXIioPBcVosEqPUfKK+rPp+h1x/izR7xMkdMyuwkcZCWdxO+RSwIFtJXN" crossorigin="anonymous" async=""></script><span><script>
                 (() => {
                      const render = (currentScript) => {
                         if(typeof(katex)!=="undefined") {
@@ -123,13 +127,13 @@ Use SECST to joyfully create compelling, interactive HTML documents.</code></pre
  A --- B
  B--&gt;C[fa:fa-ban forbidden]
  B--&gt;D(fa:fa-spinner);
-]</code></pre></p><p>            renders as</p><script src="https://cdn.jsdelivr.net/npm/mermaid@9/dist/mermaid.min.js" onload="(() =&gt; { mermaid.initialize({ startOnLoad: true }) })()"></script><pre id="mermaidChart7360077836229706" class="mermaid">
+]</code></pre></p><p>            renders as</p><script src="https://cdn.jsdelivr.net/npm/mermaid@9/dist/mermaid.min.js" onload="(() =&gt; { mermaid.initialize({ startOnLoad: true }) })()"></script><pre id="mermaidChart7375448675317968" class="mermaid">
                 graph LR
                 A --- B
                 B-->C[fa:fa-ban forbidden]
                 B-->D(fa:fa-spinner);
             </pre><script type="module">
-            const el = document.getElementById("mermaidChart7360077836229706"),
+            const el = document.getElementById("mermaidChart7375448675317968"),
                 sibling = el.nextSibling,
                 insertSvg = function (svgCode, bindFunctions) {
                     el.innerHTML = svgCode;
@@ -143,7 +147,7 @@ Use SECST to joyfully create compelling, interactive HTML documents.</code></pre
                 B-->C[fa:fa-ban forbidden]
                 B-->D(fa:fa-spinner);
             `;
-            setTimeout(() => mermaid.mermaidAPI.render("mermaidChart7360077836229706", graphDefinition, insertSvg),1000);
+            setTimeout(() => mermaid.mermaidAPI.render("mermaidChart7375448675317968", graphDefinition, insertSvg),1000);
         </script><p>            There are lots of charts to choose from:</p><p>            <ul><li> <a target="_tab" href="https://mermaid.js.org/syntax/flowchart.html">Flowchart</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/sequenceDiagram.html">Sequence Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/classDiagram.html">Class Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/stateDiagram.html">State Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/entityRelationshipDiagram.html">Entity Relationship Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/userJourney.html">User Journey</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/gantt.html">Gannt</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/pie.html">Pie Chart</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/requirementDiagram.html">Requirement Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/gitgraph.html">Gitgraph Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/c4c.html">C4C Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/mindmap.html">Mindmaps</a></li></ul><br>        </p></section><section><h3 id="questions" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Questions<span class="autohelm-nav autohelm-nav-up-down"> <a href="#mermaid-chart">&uarr;</a> <a href="#repl">&darr;</a></span></h3><p>            Questions can be used to create a quiz like experience.</p><p>            <pre class="secst"><code class="nohighlight">:question({type:"number",showanswer:true})[
   :text[What is the :code[sqrt(4)]?]
   :answer[sqrt(4)]
@@ -213,7 +217,7 @@ Use SECST to joyfully create compelling, interactive HTML documents.</code></pre
                T: Paper
                K:D
                | DDAA | BBA2|
-            </sheet-music></section><section><h3 id="mentions" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Social Media And Other Mentions<span class="autohelm-nav autohelm-nav-up-down"> <a href="#sheet-music">&uarr;</a> <a href="#tables-of-contents">&darr;</a></span></h3><p>            Several platforms provide <code class="nohighlight">@mention</code> capability, but only for their users, e.g. GitHub and StackExchange. SECST allows you to mention people on any platform, although they do not get notified.</p><p>            Mentions take the form <code class="nohighlight">@&lt;platform&gt;[&lt;space separated profile-names&gt;]</code>. The target for mentions will always be another browser tab, unless a <code class="nohighlight">target</code> attribute is provided.</p><p>            The mark-up <code class="nohighlight">@github[anywhichway]</code> renders as <a target="_tab" href="https://github.com/anywhichway">anywhichway@github</a>.</p><p>            Alternatively you can name the user and provide your own content, e.g. <code class="nohighlight">@github({user:"anywhichway"})[AnyWhichWay]</code> renders as <a target="_tab" href="https://github.com/anywhichway">AnyWhichWay</a>.</p><p>            The supported platforms are:<br>            <ul><li> LinkedIn</li><li> Facebook</li><li> GitHub</li><li> Twitter</li></ul><br>        </p></section><section><h3 id="tables-of-contents" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Tables of Contents<span class="autohelm-nav autohelm-nav-up-down"> <a href="#mentions">&uarr;</a> <a href="#theme">&darr;</a></span></h3><p>            Tables of contents are placed at the location of the tag <code class="nohighlight">toc[&lt;title&gt;]</code>. The <code class="nohighlight">:toc[]</code> tag should occur at the same level, i.e. outside of, <code class="nohighlight">:section[]</code>.</p><p>            If you do not provide a title, "Table of Contents" is used. All content after the tag is analyzed for sections with a heading as the first child tag. These are used for the table.</p><p>            Levels are determined based on section nesting. You can use the heading tag <code class="nohighlight">:h[]</code> that has no number and the headings will be automatically sized.</p><p>            Only the first occurrence of <code class="nohighlight">toc</code> is used, others are ignored.</p><p>            After transpilation, each heading in the document will have an <span>&#9783;</span> icon preceding it. When this icon is clicked, the table of contents will hover over the heading until something in the document is clicked.</p><p>            Each heading will have up and down arrows placed after it to facilitate jumping to the previous and next section.</p><p>            The tag can take the boolean attribute <code class="nohighlight">toggle</code> to collapse the table of contents into an <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details">HTML details element</a>.<br>        </p></section><section><h3 id="theme" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Theme<span class="autohelm-nav autohelm-nav-up-down"> <a href="#tables-of-contents">&uarr;</a> <a href="#transpiled-secst">&darr;</a></span></h3><p>            If a <code class="nohighlight">:theme[]</code> tag with a URL or <code class="nohighlight">:link</code> content exists in document, then the default theme of <a target="_tab" href="./assets/themes/secst.css">sects.css</a> is not applied.</p><p>            The theme <code class="nohighlight">:theme(./assets/themes/html.css)[]</code> provides only those styles dependent on the <code class="nohighlight">.secst</code> class. Default browser HTML styling is used elsewhere. It is kind of ugly!</p><p>            The content of a theme can be any tag, except most have a special interpretation. The tag content is the CSS to apply to the tag, e.g. <code class="nohighlight">:theme[:p[border:solid black 1px;]]</code> will put a black border around all paragraphs.</p><p>            The theme content tags permitted but not treated in a special way are <code class="nohighlight">:link[]</code>, <code class="nohighlight">:style[]</code>, and <code class="nohighlight">:class[]</code> (which is unique to <code class="nohighlight">:theme[]</code>).</p><p>            The tag <code class="nohighlight">:class[]</code> takes a name attribute (without a prefixed period) and the content is the CSS, e.g. <code class="nohighlight">:theme[:class({name:"italic-paragraph"})[font-style:italic;]]</code> creates a class <code class="nohighlight">.italic-paragraph</code>.</p><p>            Theme tags can exist as <a href="#body-content">Body Content</a> or <a href="#block-content">Block Content</a>. They should be placed as close to the top of the document as possible.</p><p>            Themes can be scoped using the scope attribute, the value of which is a CSS selector string, e.g. <code class="nohighlight">:theme({scope:#special-section})[:p[border:solid black 1px;]]</code> will only put borders around paragraphs that are inside a <code class="nohighlight">:section(#special-section)[]</code>.</p><p>            <pre class="secst"><code class="nohighlight">:theme[:class({name:"italic-paragraph"})[font-style:italic;]]
+            </sheet-music></section><section><h3 id="mentions" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Social Media And Other Mentions<span class="autohelm-nav autohelm-nav-up-down"> <a href="#sheet-music">&uarr;</a> <a href="#tables-of-contents">&darr;</a></span></h3><p>            Several platforms provide <code class="nohighlight">@mention</code> capability, but only for their users, e.g. GitHub and StackExchange. SECST allows you to mention people on any platform, although they do not get notified.</p><p>            Mentions take the form <code class="nohighlight">@&lt;platform&gt;[&lt;space separated profile-names&gt;]</code>. The target for mentions will always be another browser tab, unless a <code class="nohighlight">target</code> attribute is provided.</p><p>            The mark-up <code class="nohighlight">@github[anywhichway]</code> renders as <a target="_tab" href="https://github.com/anywhichway">anywhichway@github</a>.</p><p>            Alternatively you can name the user and provide your own content, e.g. <code class="nohighlight">@github({user:"anywhichway"})[AnyWhichWay]</code> renders as <a target="_tab" href="https://github.com/anywhichway">AnyWhichWay</a>.</p><p>            The supported platforms are:<br>            <ul><li> LinkedIn</li><li> Facebook</li><li> GitHub</li><li> Twitter</li></ul><br>        </p></section><section><h3 id="tables-of-contents" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Tables of Contents<span class="autohelm-nav autohelm-nav-up-down"> <a href="#mentions">&uarr;</a> <a href="#theme">&darr;</a></span></h3><p>            Tables of contents are placed at the location of the tag <code class="nohighlight">toc[&lt;title&gt;]</code>. The <code class="nohighlight">:toc[]</code> tag should occur at the same level, i.e. outside of, <code class="nohighlight">:section[]</code>.</p><p>            If you do not provide a title, "Table of Contents" is used. All content after the tag is analyzed for sections with a heading as the first child tag. These are used for the table.</p><p>            Levels are determined based on section nesting. You can use the heading tag <code class="nohighlight">:h[]</code> that has no number and the headings will be automatically sized.</p><p>            Only the first occurrence of <code class="nohighlight">toc</code> is used, others are ignored.</p><p>            After transpilation, each heading in the document will have an <span>&#9783;</span> icon preceding it. When this icon is clicked, the table of contents will hover over the heading until something in the document is clicked.</p><p>            Each heading will have up and down arrows placed after it to facilitate jumping to the previous and next section.</p><p>            The tag can take the boolean attribute <code class="nohighlight">toggle</code> to collapse the table of contents into an <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details">HTML details element</a>.<br>        </p></section><section><h3 id="theme" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Theme<span class="autohelm-nav autohelm-nav-up-down"> <a href="#tables-of-contents">&uarr;</a> <a href="#transpiled-secst">&darr;</a></span></h3><p>            If a <code class="nohighlight">:theme[]</code> tag with a URL or <code class="nohighlight">:link</code> content exists in document, then the default theme of <a target="_tab" href="./assets/themes/secst.css">secst.css</a> is not applied.</p><p>            The theme <code class="nohighlight">:theme(./assets/themes/html.css)[]</code> provides only those styles dependent on the <code class="nohighlight">.secst</code> class. Default browser HTML styling is used elsewhere. It is kind of ugly!</p><p>            The content of a theme can be any tag, except most have a special interpretation. The tag content is the CSS to apply to the tag, e.g. <code class="nohighlight">:theme[:p[border:solid black 1px;]]</code> will put a black border around all paragraphs.</p><p>            The theme content tags permitted but not treated in a special way are <code class="nohighlight">:link[]</code>, <code class="nohighlight">:style[]</code>, and <code class="nohighlight">:class[]</code> (which is unique to <code class="nohighlight">:theme[]</code>).</p><p>            The tag <code class="nohighlight">:class[]</code> takes a name attribute (without a prefixed period) and the content is the CSS, e.g. <code class="nohighlight">:theme[:class({name:"italic-paragraph"})[font-style:italic;]]</code> creates a class <code class="nohighlight">.italic-paragraph</code>.</p><p>            Theme tags can exist as <a href="#body-content">Body Content</a> or <a href="#block-content">Block Content</a>. They should be placed as close to the top of the document as possible.</p><p>            Themes can be scoped using the scope attribute, the value of which is a CSS selector string, e.g. <code class="nohighlight">:theme({scope:#special-section})[:p[border:solid black 1px;]]</code> will only put borders around paragraphs that are inside a <code class="nohighlight">:section(#special-section)[]</code>.</p><p>            <pre class="secst"><code class="nohighlight">:theme[:class({name:"italic-paragraph"})[font-style:italic;]]
 :theme({scope:"#special-section"})[:p[border:solid black 1px;]]
 :section[
  :p(.italic-paragraph)[Italic paragraph with no border.]
@@ -246,385 +250,185 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
                             <br> <br>
                             The derivative of <input id="formula" class="secst" data-default="" data-template="x^2 + x" value="x^2 + x" title="x^2 + x" data-literal="" data-editable="" data-fitcontent="" style="width: 8ch;"> for <input id="variable" class="secst" data-default="" data-template="x" value="x" title="x" data-literal="" data-editable="" data-fitcontent="" style="width: 2ch;"> is <input class="secst" data-default="" data-template="derivative($(#formula),$(#variable))" value="" title="derivative($(#formula),$(#variable))" data-fitcontent="">
                         </dd>
-                    </dl><br>                </p></section><section><h5 id="matrix-functions" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Matrix Functions<span class="autohelm-nav autohelm-nav-up-down"> <a href="#algebraic-functions">&uarr;</a> <a href="#unit-math">&darr;</a></span></h5><p>                    <input class="secst" data-default="" data-template="multiply([[1,2],[3,4]],[[5,6],[1,1]])" value="" title="multiply([[1,2],[3,4]],[[5,6],[1,1]])" data-fitcontent=""><br>                </p></section></section><section><h4 id="unit-math" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Unit Math<span class="autohelm-nav autohelm-nav-up-down"> <a href="#basic-math">&uarr;</a> <a href="#importing-data">&darr;</a></span></h4><p>                Unit math <a target="_tab" href="https://mathjs.org/docs/datatypes/units.html">from MathJS</a> allows fro conversions using the word <code class="nohighlight">to</code>, as well as units for numbers, e.g. <code class="nohighlight">45 deg</code>.</p><p>                There are many <a target="_tab" href="https://mathjs.org/docs/datatypes/units.html#reference">supported units</a>.</p><p>                Here are a few examples:</p><p>                <code class="nohighlight">:value[2 inch to cm]</code> = <input class="secst" data-default="" data-template="2 inch to cm" value="" title="2 inch to cm" data-fitcontent=""></p><p>                <code class="nohighlight">:value[90 km/h to mi/h]</code> = <input class="secst" data-default="" data-template="90 km/h to mi/h" value="" title="90 km/h to mi/h" data-fitcontent=""></p><p>                <code class="nohighlight">:value[90 km/h to m/h]</code> = <input class="secst" data-default="" data-template="90 km/h to m/h" value="" title="90 km/h to m/h" data-fitcontent=""> <code class="nohighlight">m/h</code> is meters per hour</p><p>                <code class="nohighlight">:value[(1 week + 1 day) to days]</code> = <input class="secst" data-default="" data-template="(1 week + 1 day) to days" value="" title="(1 week + 1 day) to days" data-fitcontent=""></p><p>                <code class="nohighlight">:value[cos(45 deg)]</code> = <input class="secst" data-default="" data-template="cos(45 deg)" value="" title="cos(45 deg)" data-fitcontent=""></p><p>                <code class="nohighlight">:value[8.314 m^3 Pa / mol / K]</code> = <input class="secst" data-default="" data-template="8.314 m^3 Pa / mol / K" value="" title="8.314 m^3 Pa / mol / K" data-fitcontent=""></p><p>                Remember, if you have a value that looks like a formula, but is not, you can use the attribute <code class="nohighlight">literal</code>, e.g.  <code class="nohighlight">:value(literal)[2 inch to cm]</code> = <input class="secst" data-default="" data-template="2 inch to cm" value="2 inch to cm" title="2 inch to cm" data-literal="" data-fitcontent="" disabled="" style="width: 13ch;">.</p><p>                And, you can use <code class="nohighlight">plaintext</code> to display values without any styling, e.g. <code class="nohighlight">:value(plaintext)[90 km/h to mi/h]</code> = <span class="secst" data-default="" data-template="90 km/h to mi/h" value="" title="90 km/h to mi/h" data-plaintext="">90 km/h to mi/h</span>.</p></section><section><h4 id="importing-data" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Importing Data<span class="autohelm-nav autohelm-nav-up-down"> <a href="#unit-math">&uarr;</a> <a href="#advanced-formulas">&darr;</a></span></h4><p>                Values can included imported data using the <code class="nohighlight">src</code> attribute and a mime type provided in the <code class="nohighlight">type</code> attribute. The trailing <code class="nohighlight">[]</code> are optional.</p><p>                Values with the boolean attribute <code class="nohighlight">static</code> is import data at transpile time. If importing fails, another attempt is made at runtime.</p><p>                JSON is formatted for readability and <a target="_tab" href="https://json5.org">JSON5</a> is supported to make it easier to handle remote data.</p><p>                <pre class="secst"><code class="nohighlight">:value(https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson static {type:"application/json"})</code></pre></p><p>                <textarea class="secst" data-mime-type="application/json" data-default="" title="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson" data-fitcontent="" disabled="">{
+                    </dl><br>                </p></section><section><h5 id="matrix-functions" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Matrix Functions<span class="autohelm-nav autohelm-nav-up-down"> <a href="#algebraic-functions">&uarr;</a> <a href="#unit-math">&darr;</a></span></h5><p>                    <input class="secst" data-default="" data-template="multiply([[1,2],[3,4]],[[5,6],[1,1]])" value="" title="multiply([[1,2],[3,4]],[[5,6],[1,1]])" data-fitcontent=""><br>                </p></section></section><section><h4 id="unit-math" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Unit Math<span class="autohelm-nav autohelm-nav-up-down"> <a href="#basic-math">&uarr;</a> <a href="#importing-data">&darr;</a></span></h4><p>                Unit math <a target="_tab" href="https://mathjs.org/docs/datatypes/units.html">from MathJS</a> allows for conversions using the word <code class="nohighlight">to</code>, as well as units for numbers, e.g. <code class="nohighlight">45 deg</code>.</p><p>                There are many <a target="_tab" href="https://mathjs.org/docs/datatypes/units.html#reference">supported units</a>.</p><p>                Here are a few examples:</p><p>                <code class="nohighlight">:value[2 inch to cm]</code> = <input class="secst" data-default="" data-template="2 inch to cm" value="" title="2 inch to cm" data-fitcontent=""></p><p>                <code class="nohighlight">:value[90 km/h to mi/h]</code> = <input class="secst" data-default="" data-template="90 km/h to mi/h" value="" title="90 km/h to mi/h" data-fitcontent=""></p><p>                <code class="nohighlight">:value[90 km/h to m/h]</code> = <input class="secst" data-default="" data-template="90 km/h to m/h" value="" title="90 km/h to m/h" data-fitcontent=""> <code class="nohighlight">m/h</code> is meters per hour</p><p>                <code class="nohighlight">:value[(1 week + 1 day) to days]</code> = <input class="secst" data-default="" data-template="(1 week + 1 day) to days" value="" title="(1 week + 1 day) to days" data-fitcontent=""></p><p>                <code class="nohighlight">:value[cos(45 deg)]</code> = <input class="secst" data-default="" data-template="cos(45 deg)" value="" title="cos(45 deg)" data-fitcontent=""></p><p>                <code class="nohighlight">:value[8.314 m^3 Pa / mol / K]</code> = <input class="secst" data-default="" data-template="8.314 m^3 Pa / mol / K" value="" title="8.314 m^3 Pa / mol / K" data-fitcontent=""></p><p>                Remember, if you have a value that looks like a formula, but is not, you can use the attribute <code class="nohighlight">literal</code>, e.g.  <code class="nohighlight">:value(literal)[2 inch to cm]</code> = <input class="secst" data-default="" data-template="2 inch to cm" value="2 inch to cm" title="2 inch to cm" data-literal="" data-fitcontent="" disabled="" style="width: 13ch;">.</p><p>                And, you can use <code class="nohighlight">plaintext</code> to display values without any styling, e.g. <code class="nohighlight">:value(plaintext)[90 km/h to mi/h]</code> = <span class="secst" data-default="" data-template="90 km/h to mi/h" value="" title="90 km/h to mi/h" data-plaintext="">90 km/h to mi/h</span>.</p></section><section><h4 id="importing-data" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Importing Data<span class="autohelm-nav autohelm-nav-up-down"> <a href="#unit-math">&uarr;</a> <a href="#advanced-formulas">&darr;</a></span></h4><p>                Values can included imported data using the <code class="nohighlight">src</code> attribute and a mime type provided in the <code class="nohighlight">type</code> attribute. The trailing <code class="nohighlight">[]</code> are optional.</p><p>                Values with the boolean attribute <code class="nohighlight">static</code> is import data at transpile time. If importing fails, another attempt is made at runtime.</p><p>                JSON is formatted for readability and <a target="_tab" href="https://json5.org">JSON5</a> is supported to make it easier to handle remote data.</p><p>                <pre class="secst"><code class="nohighlight">:value(https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson static {type:"application/json"})</code></pre></p><p>                <textarea class="secst" data-mime-type="application/json" data-default="" title="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson" data-fitcontent="" disabled="">{
   "type": "FeatureCollection",
   "metadata": {
-    "generated": 1672099133000,
+    "generated": 1672160428000,
     "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson",
     "title": "USGS All Earthquakes, Past Hour",
     "status": 200,
     "api": "1.10.3",
-    "count": 9
+    "count": 4
   },
   "features": [
     {
       "type": "Feature",
       "properties": {
-        "mag": 1.8,
-        "place": "Southern Alaska",
-        "time": 1672098125535,
-        "updated": 1672098200091,
+        "mag": 1.98000002,
+        "place": "Hawaii region, Hawaii",
+        "time": 1672159331130,
+        "updated": 1672159521230,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022gjrex6x",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022gjrex6x.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73284782",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73284782.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 50,
-        "net": "ak",
-        "code": "022gjrex6x",
-        "ids": ",ak022gjrex6x,",
-        "sources": ",ak,",
+        "sig": 60,
+        "net": "hv",
+        "code": "73284782",
+        "ids": ",hv73284782,",
+        "sources": ",hv,",
         "types": ",origin,phase-data,",
-        "nst": null,
+        "nst": 32,
         "dmin": null,
-        "rms": 0.34,
-        "gap": null,
-        "magType": "ml",
-        "type": "earthquake",
-        "title": "M 1.8 - Southern Alaska"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.473,
-          61.8068,
-          39
-        ]
-      },
-      "id": "ak022gjrex6x"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1,
-        "place": "6km SSE of Big Bear Lake, CA",
-        "time": 1672098030070,
-        "updated": 1672098284665,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40150415",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40150415.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 15,
-        "net": "ci",
-        "code": "40150415",
-        "ids": ",ci40150415,",
-        "sources": ",ci,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 9,
-        "dmin": 0.2792,
-        "rms": 0.19,
-        "gap": 185,
-        "magType": "ml",
-        "type": "earthquake",
-        "title": "M 1.0 - 6km SSE of Big Bear Lake, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -116.8896667,
-          34.1908333,
-          0.6
-        ]
-      },
-      "id": "ci40150415"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.05,
-        "place": "5km SSE of Pala, CA",
-        "time": 1672098026790,
-        "updated": 1672098236987,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40150423",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40150423.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 17,
-        "net": "ci",
-        "code": "40150423",
-        "ids": ",ci40150423,",
-        "sources": ",ci,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 12,
-        "dmin": 0.2968,
-        "rms": 0.33,
-        "gap": 87,
-        "magType": "ml",
-        "type": "earthquake",
-        "title": "M 1.1 - 5km SSE of Pala, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -117.055,
-          33.3198333,
-          29.42
-        ]
-      },
-      "id": "ci40150423"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 5.1,
-        "place": "South Sandwich Islands region",
-        "time": 1672097794835,
-        "updated": 1672098956040,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000jbvh",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/us6000jbvh.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "reviewed",
-        "tsunami": 0,
-        "sig": 400,
-        "net": "us",
-        "code": "6000jbvh",
-        "ids": ",us6000jbvh,",
-        "sources": ",us,",
-        "types": ",origin,phase-data,",
-        "nst": 33,
-        "dmin": 7.199,
-        "rms": 1.06,
-        "gap": 92,
-        "magType": "mb",
-        "type": "earthquake",
-        "title": "M 5.1 - South Sandwich Islands region"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -24.7523,
-          -57.0697,
-          10
-        ]
-      },
-      "id": "us6000jbvh"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 2.79,
-        "place": "Puerto Rico region",
-        "time": 1672097308850,
-        "updated": 1672098760910,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/pr71389153",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/pr71389153.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "reviewed",
-        "tsunami": 0,
-        "sig": 120,
-        "net": "pr",
-        "code": "71389153",
-        "ids": ",pr71389153,",
-        "sources": ",pr,",
-        "types": ",origin,phase-data,",
-        "nst": 10,
-        "dmin": 0.3991,
-        "rms": 0.12,
-        "gap": 221,
+        "rms": 0.129999995,
+        "gap": 162,
         "magType": "md",
         "type": "earthquake",
-        "title": "M 2.8 - Puerto Rico region"
+        "title": "M 2.0 - Hawaii region, Hawaii"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -65.6606666666667,
-          18.6178333333333,
-          21.8
+          -155.390167236328,
+          19.1938323974609,
+          30.5100002288818
         ]
       },
-      "id": "pr71389153"
+      "id": "hv73284782"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 0.88,
-        "place": "7km W of Cobb, CA",
-        "time": 1672096794550,
-        "updated": 1672098732899,
+        "mag": 0.8,
+        "place": "86 km NW of Karluk, Alaska",
+        "time": 1672159301341,
+        "updated": 1672159414178,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73825451",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73825451.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022glas3hy",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022glas3hy.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 12,
-        "net": "nc",
-        "code": "73825451",
-        "ids": ",nc73825451,",
-        "sources": ",nc,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 14,
-        "dmin": 0.008675,
-        "rms": 0.02,
-        "gap": 79,
+        "sig": 10,
+        "net": "ak",
+        "code": "022glas3hy",
+        "ids": ",ak022glas3hy,",
+        "sources": ",ak,",
+        "types": ",origin,phase-data,",
+        "nst": null,
+        "dmin": null,
+        "rms": 0.15,
+        "gap": null,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 0.8 - 86 km NW of Karluk, Alaska"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -155.3926,
+          58.1657,
+          1.1
+        ]
+      },
+      "id": "ak022glas3hy"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.83000004,
+        "place": "11 km SE of Pāhala, Hawaii",
+        "time": 1672159241190,
+        "updated": 1672159425440,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73284777",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73284777.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 52,
+        "net": "hv",
+        "code": "73284777",
+        "ids": ",hv73284777,",
+        "sources": ",hv,",
+        "types": ",origin,phase-data,",
+        "nst": 32,
+        "dmin": null,
+        "rms": 0.129999995,
+        "gap": 182,
         "magType": "md",
         "type": "earthquake",
-        "title": "M 0.9 - 7km W of Cobb, CA"
+        "title": "M 1.8 - 11 km SE of Pāhala, Hawaii"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -122.8021698,
-          38.8294983,
-          2.11
+          -155.397659301758,
+          19.1286659240723,
+          29.8199996948242
         ]
       },
-      "id": "nc73825451"
+      "id": "hv73284777"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 1.28,
-        "place": "17km NE of California City, CA",
-        "time": 1672096425520,
-        "updated": 1672096637996,
+        "mag": 2.6,
+        "place": "68 km E of Port Alsworth, Alaska",
+        "time": 1672157951629,
+        "updated": 1672158179538,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40150399",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40150399.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022glanbga",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022glanbga.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 25,
-        "net": "ci",
-        "code": "40150399",
-        "ids": ",ci40150399,",
-        "sources": ",ci,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 22,
-        "dmin": 0.033,
-        "rms": 0.22,
-        "gap": 75,
-        "magType": "ml",
-        "type": "earthquake",
-        "title": "M 1.3 - 17km NE of California City, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -117.863,
-          35.2375,
-          5.92
-        ]
-      },
-      "id": "ci40150399"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 0.9,
-        "place": "88 km SE of King Salmon, Alaska",
-        "time": 1672096328956,
-        "updated": 1672096437332,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022gjr8hz3",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022gjr8hz3.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 12,
+        "sig": 104,
         "net": "ak",
-        "code": "022gjr8hz3",
-        "ids": ",ak022gjr8hz3,",
+        "code": "022glanbga",
+        "ids": ",ak022glanbga,",
         "sources": ",ak,",
         "types": ",origin,phase-data,",
         "nst": null,
         "dmin": null,
-        "rms": 0.4,
+        "rms": 0.9,
         "gap": null,
         "magType": "ml",
         "type": "earthquake",
-        "title": "M 0.9 - 88 km SE of King Salmon, Alaska"
+        "title": "M 2.6 - 68 km E of Port Alsworth, Alaska"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -155.5883,
-          58.1311,
-          18.7
+          -153.092,
+          60.143,
+          137.4
         ]
       },
-      "id": "ak022gjr8hz3"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.4,
-        "place": "83 km SE of King Salmon, Alaska",
-        "time": 1672095839489,
-        "updated": 1672095972902,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022gjr6ofg",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022gjr6ofg.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 30,
-        "net": "ak",
-        "code": "022gjr6ofg",
-        "ids": ",ak022gjr6ofg,",
-        "sources": ",ak,",
-        "types": ",origin,phase-data,",
-        "nst": null,
-        "dmin": null,
-        "rms": 0.81,
-        "gap": null,
-        "magType": "ml",
-        "type": "earthquake",
-        "title": "M 1.4 - 83 km SE of King Salmon, Alaska"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -155.6912,
-          58.134,
-          46
-        ]
-      },
-      "id": "ak022gjr6ofg"
+      "id": "ak022glanbga"
     }
   ],
   "bbox": [
-    -155.6912,
-    -57.0697,
-    0.6,
-    -24.7523,
-    61.8068,
-    46
+    -155.39765930176,
+    19.128665924072,
+    1.1,
+    -153.092,
+    60.143,
+    137.4
   ]
 }</textarea></p><p>                Imported data is readonly because it is essentially a computation. To make it editable, use the attribute <code class="nohighlight">editable</code>.</p><p>                <pre class="secst"><code class="nohighlight">:value(https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson editable {type:"application/json"})</code></pre></p><p>                <textarea class="secst" data-mime-type="application/json" data-default="" data-template="await (async () =&gt; {
                         try {
@@ -648,382 +452,182 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
                         })()" title="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson" data-editable="" data-fitcontent="" style="height: 30em; width: 80ch;">{
   "type": "FeatureCollection",
   "metadata": {
-    "generated": 1672099133000,
+    "generated": 1672160428000,
     "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson",
     "title": "USGS All Earthquakes, Past Hour",
     "status": 200,
     "api": "1.10.3",
-    "count": 9
+    "count": 4
   },
   "features": [
     {
       "type": "Feature",
       "properties": {
-        "mag": 1.8,
-        "place": "Southern Alaska",
-        "time": 1672098125535,
-        "updated": 1672098200091,
+        "mag": 1.98000002,
+        "place": "Hawaii region, Hawaii",
+        "time": 1672159331130,
+        "updated": 1672159521230,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022gjrex6x",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022gjrex6x.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73284782",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73284782.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 50,
-        "net": "ak",
-        "code": "022gjrex6x",
-        "ids": ",ak022gjrex6x,",
-        "sources": ",ak,",
+        "sig": 60,
+        "net": "hv",
+        "code": "73284782",
+        "ids": ",hv73284782,",
+        "sources": ",hv,",
         "types": ",origin,phase-data,",
-        "nst": null,
+        "nst": 32,
         "dmin": null,
-        "rms": 0.34,
-        "gap": null,
-        "magType": "ml",
-        "type": "earthquake",
-        "title": "M 1.8 - Southern Alaska"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.473,
-          61.8068,
-          39
-        ]
-      },
-      "id": "ak022gjrex6x"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1,
-        "place": "6km SSE of Big Bear Lake, CA",
-        "time": 1672098030070,
-        "updated": 1672098284665,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40150415",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40150415.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 15,
-        "net": "ci",
-        "code": "40150415",
-        "ids": ",ci40150415,",
-        "sources": ",ci,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 9,
-        "dmin": 0.2792,
-        "rms": 0.19,
-        "gap": 185,
-        "magType": "ml",
-        "type": "earthquake",
-        "title": "M 1.0 - 6km SSE of Big Bear Lake, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -116.8896667,
-          34.1908333,
-          0.6
-        ]
-      },
-      "id": "ci40150415"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.05,
-        "place": "5km SSE of Pala, CA",
-        "time": 1672098026790,
-        "updated": 1672098236987,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40150423",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40150423.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 17,
-        "net": "ci",
-        "code": "40150423",
-        "ids": ",ci40150423,",
-        "sources": ",ci,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 12,
-        "dmin": 0.2968,
-        "rms": 0.33,
-        "gap": 87,
-        "magType": "ml",
-        "type": "earthquake",
-        "title": "M 1.1 - 5km SSE of Pala, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -117.055,
-          33.3198333,
-          29.42
-        ]
-      },
-      "id": "ci40150423"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 5.1,
-        "place": "South Sandwich Islands region",
-        "time": 1672097794835,
-        "updated": 1672098956040,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000jbvh",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/us6000jbvh.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "reviewed",
-        "tsunami": 0,
-        "sig": 400,
-        "net": "us",
-        "code": "6000jbvh",
-        "ids": ",us6000jbvh,",
-        "sources": ",us,",
-        "types": ",origin,phase-data,",
-        "nst": 33,
-        "dmin": 7.199,
-        "rms": 1.06,
-        "gap": 92,
-        "magType": "mb",
-        "type": "earthquake",
-        "title": "M 5.1 - South Sandwich Islands region"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -24.7523,
-          -57.0697,
-          10
-        ]
-      },
-      "id": "us6000jbvh"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 2.79,
-        "place": "Puerto Rico region",
-        "time": 1672097308850,
-        "updated": 1672098760910,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/pr71389153",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/pr71389153.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "reviewed",
-        "tsunami": 0,
-        "sig": 120,
-        "net": "pr",
-        "code": "71389153",
-        "ids": ",pr71389153,",
-        "sources": ",pr,",
-        "types": ",origin,phase-data,",
-        "nst": 10,
-        "dmin": 0.3991,
-        "rms": 0.12,
-        "gap": 221,
+        "rms": 0.129999995,
+        "gap": 162,
         "magType": "md",
         "type": "earthquake",
-        "title": "M 2.8 - Puerto Rico region"
+        "title": "M 2.0 - Hawaii region, Hawaii"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -65.6606666666667,
-          18.6178333333333,
-          21.8
+          -155.390167236328,
+          19.1938323974609,
+          30.5100002288818
         ]
       },
-      "id": "pr71389153"
+      "id": "hv73284782"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 0.88,
-        "place": "7km W of Cobb, CA",
-        "time": 1672096794550,
-        "updated": 1672098732899,
+        "mag": 0.8,
+        "place": "86 km NW of Karluk, Alaska",
+        "time": 1672159301341,
+        "updated": 1672159414178,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73825451",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73825451.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022glas3hy",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022glas3hy.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 12,
-        "net": "nc",
-        "code": "73825451",
-        "ids": ",nc73825451,",
-        "sources": ",nc,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 14,
-        "dmin": 0.008675,
-        "rms": 0.02,
-        "gap": 79,
+        "sig": 10,
+        "net": "ak",
+        "code": "022glas3hy",
+        "ids": ",ak022glas3hy,",
+        "sources": ",ak,",
+        "types": ",origin,phase-data,",
+        "nst": null,
+        "dmin": null,
+        "rms": 0.15,
+        "gap": null,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 0.8 - 86 km NW of Karluk, Alaska"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -155.3926,
+          58.1657,
+          1.1
+        ]
+      },
+      "id": "ak022glas3hy"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.83000004,
+        "place": "11 km SE of Pāhala, Hawaii",
+        "time": 1672159241190,
+        "updated": 1672159425440,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73284777",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73284777.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 52,
+        "net": "hv",
+        "code": "73284777",
+        "ids": ",hv73284777,",
+        "sources": ",hv,",
+        "types": ",origin,phase-data,",
+        "nst": 32,
+        "dmin": null,
+        "rms": 0.129999995,
+        "gap": 182,
         "magType": "md",
         "type": "earthquake",
-        "title": "M 0.9 - 7km W of Cobb, CA"
+        "title": "M 1.8 - 11 km SE of Pāhala, Hawaii"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -122.8021698,
-          38.8294983,
-          2.11
+          -155.397659301758,
+          19.1286659240723,
+          29.8199996948242
         ]
       },
-      "id": "nc73825451"
+      "id": "hv73284777"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 1.28,
-        "place": "17km NE of California City, CA",
-        "time": 1672096425520,
-        "updated": 1672096637996,
+        "mag": 2.6,
+        "place": "68 km E of Port Alsworth, Alaska",
+        "time": 1672157951629,
+        "updated": 1672158179538,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40150399",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40150399.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022glanbga",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022glanbga.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 25,
-        "net": "ci",
-        "code": "40150399",
-        "ids": ",ci40150399,",
-        "sources": ",ci,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 22,
-        "dmin": 0.033,
-        "rms": 0.22,
-        "gap": 75,
-        "magType": "ml",
-        "type": "earthquake",
-        "title": "M 1.3 - 17km NE of California City, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -117.863,
-          35.2375,
-          5.92
-        ]
-      },
-      "id": "ci40150399"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 0.9,
-        "place": "88 km SE of King Salmon, Alaska",
-        "time": 1672096328956,
-        "updated": 1672096437332,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022gjr8hz3",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022gjr8hz3.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 12,
+        "sig": 104,
         "net": "ak",
-        "code": "022gjr8hz3",
-        "ids": ",ak022gjr8hz3,",
+        "code": "022glanbga",
+        "ids": ",ak022glanbga,",
         "sources": ",ak,",
         "types": ",origin,phase-data,",
         "nst": null,
         "dmin": null,
-        "rms": 0.4,
+        "rms": 0.9,
         "gap": null,
         "magType": "ml",
         "type": "earthquake",
-        "title": "M 0.9 - 88 km SE of King Salmon, Alaska"
+        "title": "M 2.6 - 68 km E of Port Alsworth, Alaska"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -155.5883,
-          58.1311,
-          18.7
+          -153.092,
+          60.143,
+          137.4
         ]
       },
-      "id": "ak022gjr8hz3"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.4,
-        "place": "83 km SE of King Salmon, Alaska",
-        "time": 1672095839489,
-        "updated": 1672095972902,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022gjr6ofg",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022gjr6ofg.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 30,
-        "net": "ak",
-        "code": "022gjr6ofg",
-        "ids": ",ak022gjr6ofg,",
-        "sources": ",ak,",
-        "types": ",origin,phase-data,",
-        "nst": null,
-        "dmin": null,
-        "rms": 0.81,
-        "gap": null,
-        "magType": "ml",
-        "type": "earthquake",
-        "title": "M 1.4 - 83 km SE of King Salmon, Alaska"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -155.6912,
-          58.134,
-          46
-        ]
-      },
-      "id": "ak022gjr6ofg"
+      "id": "ak022glanbga"
     }
   ],
   "bbox": [
-    -155.6912,
-    -57.0697,
-    0.6,
-    -24.7523,
-    61.8068,
-    46
+    -155.39765930176,
+    19.128665924072,
+    1.1,
+    -153.092,
+    60.143,
+    137.4
   ]
 }</textarea></p><p>                If an id is added, the data can be used in a computation.</p><p>                <pre class="secst"><code class="nohighlight">:value(#earthquake-data https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson {type:"application/json"})
 
@@ -1049,382 +653,182 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
                         })()" title="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson" data-fitcontent="" disabled="" style="height: 30em; width: 80ch;">{
   "type": "FeatureCollection",
   "metadata": {
-    "generated": 1672099133000,
+    "generated": 1672160428000,
     "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson",
     "title": "USGS All Earthquakes, Past Hour",
     "status": 200,
     "api": "1.10.3",
-    "count": 9
+    "count": 4
   },
   "features": [
     {
       "type": "Feature",
       "properties": {
-        "mag": 1.8,
-        "place": "Southern Alaska",
-        "time": 1672098125535,
-        "updated": 1672098200091,
+        "mag": 1.98000002,
+        "place": "Hawaii region, Hawaii",
+        "time": 1672159331130,
+        "updated": 1672159521230,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022gjrex6x",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022gjrex6x.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73284782",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73284782.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 50,
-        "net": "ak",
-        "code": "022gjrex6x",
-        "ids": ",ak022gjrex6x,",
-        "sources": ",ak,",
+        "sig": 60,
+        "net": "hv",
+        "code": "73284782",
+        "ids": ",hv73284782,",
+        "sources": ",hv,",
         "types": ",origin,phase-data,",
-        "nst": null,
+        "nst": 32,
         "dmin": null,
-        "rms": 0.34,
-        "gap": null,
-        "magType": "ml",
-        "type": "earthquake",
-        "title": "M 1.8 - Southern Alaska"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -149.473,
-          61.8068,
-          39
-        ]
-      },
-      "id": "ak022gjrex6x"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1,
-        "place": "6km SSE of Big Bear Lake, CA",
-        "time": 1672098030070,
-        "updated": 1672098284665,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40150415",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40150415.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 15,
-        "net": "ci",
-        "code": "40150415",
-        "ids": ",ci40150415,",
-        "sources": ",ci,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 9,
-        "dmin": 0.2792,
-        "rms": 0.19,
-        "gap": 185,
-        "magType": "ml",
-        "type": "earthquake",
-        "title": "M 1.0 - 6km SSE of Big Bear Lake, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -116.8896667,
-          34.1908333,
-          0.6
-        ]
-      },
-      "id": "ci40150415"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.05,
-        "place": "5km SSE of Pala, CA",
-        "time": 1672098026790,
-        "updated": 1672098236987,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40150423",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40150423.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 17,
-        "net": "ci",
-        "code": "40150423",
-        "ids": ",ci40150423,",
-        "sources": ",ci,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 12,
-        "dmin": 0.2968,
-        "rms": 0.33,
-        "gap": 87,
-        "magType": "ml",
-        "type": "earthquake",
-        "title": "M 1.1 - 5km SSE of Pala, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -117.055,
-          33.3198333,
-          29.42
-        ]
-      },
-      "id": "ci40150423"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 5.1,
-        "place": "South Sandwich Islands region",
-        "time": 1672097794835,
-        "updated": 1672098956040,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000jbvh",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/us6000jbvh.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "reviewed",
-        "tsunami": 0,
-        "sig": 400,
-        "net": "us",
-        "code": "6000jbvh",
-        "ids": ",us6000jbvh,",
-        "sources": ",us,",
-        "types": ",origin,phase-data,",
-        "nst": 33,
-        "dmin": 7.199,
-        "rms": 1.06,
-        "gap": 92,
-        "magType": "mb",
-        "type": "earthquake",
-        "title": "M 5.1 - South Sandwich Islands region"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -24.7523,
-          -57.0697,
-          10
-        ]
-      },
-      "id": "us6000jbvh"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 2.79,
-        "place": "Puerto Rico region",
-        "time": 1672097308850,
-        "updated": 1672098760910,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/pr71389153",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/pr71389153.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "reviewed",
-        "tsunami": 0,
-        "sig": 120,
-        "net": "pr",
-        "code": "71389153",
-        "ids": ",pr71389153,",
-        "sources": ",pr,",
-        "types": ",origin,phase-data,",
-        "nst": 10,
-        "dmin": 0.3991,
-        "rms": 0.12,
-        "gap": 221,
+        "rms": 0.129999995,
+        "gap": 162,
         "magType": "md",
         "type": "earthquake",
-        "title": "M 2.8 - Puerto Rico region"
+        "title": "M 2.0 - Hawaii region, Hawaii"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -65.6606666666667,
-          18.6178333333333,
-          21.8
+          -155.390167236328,
+          19.1938323974609,
+          30.5100002288818
         ]
       },
-      "id": "pr71389153"
+      "id": "hv73284782"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 0.88,
-        "place": "7km W of Cobb, CA",
-        "time": 1672096794550,
-        "updated": 1672098732899,
+        "mag": 0.8,
+        "place": "86 km NW of Karluk, Alaska",
+        "time": 1672159301341,
+        "updated": 1672159414178,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73825451",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73825451.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022glas3hy",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022glas3hy.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 12,
-        "net": "nc",
-        "code": "73825451",
-        "ids": ",nc73825451,",
-        "sources": ",nc,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 14,
-        "dmin": 0.008675,
-        "rms": 0.02,
-        "gap": 79,
+        "sig": 10,
+        "net": "ak",
+        "code": "022glas3hy",
+        "ids": ",ak022glas3hy,",
+        "sources": ",ak,",
+        "types": ",origin,phase-data,",
+        "nst": null,
+        "dmin": null,
+        "rms": 0.15,
+        "gap": null,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 0.8 - 86 km NW of Karluk, Alaska"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -155.3926,
+          58.1657,
+          1.1
+        ]
+      },
+      "id": "ak022glas3hy"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.83000004,
+        "place": "11 km SE of Pāhala, Hawaii",
+        "time": 1672159241190,
+        "updated": 1672159425440,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73284777",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73284777.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 52,
+        "net": "hv",
+        "code": "73284777",
+        "ids": ",hv73284777,",
+        "sources": ",hv,",
+        "types": ",origin,phase-data,",
+        "nst": 32,
+        "dmin": null,
+        "rms": 0.129999995,
+        "gap": 182,
         "magType": "md",
         "type": "earthquake",
-        "title": "M 0.9 - 7km W of Cobb, CA"
+        "title": "M 1.8 - 11 km SE of Pāhala, Hawaii"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -122.8021698,
-          38.8294983,
-          2.11
+          -155.397659301758,
+          19.1286659240723,
+          29.8199996948242
         ]
       },
-      "id": "nc73825451"
+      "id": "hv73284777"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 1.28,
-        "place": "17km NE of California City, CA",
-        "time": 1672096425520,
-        "updated": 1672096637996,
+        "mag": 2.6,
+        "place": "68 km E of Port Alsworth, Alaska",
+        "time": 1672157951629,
+        "updated": 1672158179538,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40150399",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40150399.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022glanbga",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022glanbga.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 25,
-        "net": "ci",
-        "code": "40150399",
-        "ids": ",ci40150399,",
-        "sources": ",ci,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 22,
-        "dmin": 0.033,
-        "rms": 0.22,
-        "gap": 75,
-        "magType": "ml",
-        "type": "earthquake",
-        "title": "M 1.3 - 17km NE of California City, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -117.863,
-          35.2375,
-          5.92
-        ]
-      },
-      "id": "ci40150399"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 0.9,
-        "place": "88 km SE of King Salmon, Alaska",
-        "time": 1672096328956,
-        "updated": 1672096437332,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022gjr8hz3",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022gjr8hz3.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 12,
+        "sig": 104,
         "net": "ak",
-        "code": "022gjr8hz3",
-        "ids": ",ak022gjr8hz3,",
+        "code": "022glanbga",
+        "ids": ",ak022glanbga,",
         "sources": ",ak,",
         "types": ",origin,phase-data,",
         "nst": null,
         "dmin": null,
-        "rms": 0.4,
+        "rms": 0.9,
         "gap": null,
         "magType": "ml",
         "type": "earthquake",
-        "title": "M 0.9 - 88 km SE of King Salmon, Alaska"
+        "title": "M 2.6 - 68 km E of Port Alsworth, Alaska"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -155.5883,
-          58.1311,
-          18.7
+          -153.092,
+          60.143,
+          137.4
         ]
       },
-      "id": "ak022gjr8hz3"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.4,
-        "place": "83 km SE of King Salmon, Alaska",
-        "time": 1672095839489,
-        "updated": 1672095972902,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022gjr6ofg",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022gjr6ofg.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 30,
-        "net": "ak",
-        "code": "022gjr6ofg",
-        "ids": ",ak022gjr6ofg,",
-        "sources": ",ak,",
-        "types": ",origin,phase-data,",
-        "nst": null,
-        "dmin": null,
-        "rms": 0.81,
-        "gap": null,
-        "magType": "ml",
-        "type": "earthquake",
-        "title": "M 1.4 - 83 km SE of King Salmon, Alaska"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -155.6912,
-          58.134,
-          46
-        ]
-      },
-      "id": "ak022gjr6ofg"
+      "id": "ak022glanbga"
     }
   ],
   "bbox": [
-    -155.6912,
-    -57.0697,
-    0.6,
-    -24.7523,
-    61.8068,
-    46
+    -155.39765930176,
+    19.128665924072,
+    1.1,
+    -153.092,
+    60.143,
+    137.4
   ]
 }</textarea></p><p>               <textarea class="secst" data-mime-type="application/json" data-default="" data-template="$(#earthquake-data).metadata" title="$(#earthquake-data).metadata" data-fitcontent="" disabled="" style="height: 1.5em; width: 15ch;">[object Object]</textarea><br>            </p></section><section><h4 id="advanced-formulas" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Advanced Formulas<span class="autohelm-nav autohelm-nav-up-down"> <a href="#importing-data">&uarr;</a> <a href="#formulas-with-css-selectors-and-multiple-values">&darr;</a></span></h4><section><h5 id="formulas-with-css-selectors-and-multiple-values" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Formulas With CSS Selectors and Multiple Values<span class="autohelm-nav autohelm-nav-up-down"> <a href="#advanced-formulas">&uarr;</a> <a href="#macro-list-formatting">&darr;</a></span></h5><p>                    You can use almost any <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors">CSS selector</a> in place of <code class="nohighlight">#id</code> in <code class="nohighlight">$(#&lt;id&gt;)</code>. The value returned will be the contents of the value property on the element or (if not available) the value attribute or the <code class="nohighlight">innerText</code>.</p><p>                    You can use commas to select multiple identifier named elements, e.g. <code class="nohighlight">:value[$(#id1, #id2, #id3)]</code> is an array of the values associated with the elements <code class="nohighlight">:value(#id1)[3]</code>, <code class="nohighlight">:value(#id2)[2]</code>, <code class="nohighlight">:value(#id3)[1]</code> and will be <code class="nohighlight">[3,2,1]</code>.</p><p>                    A value reference <code class="nohighlight">$(css-selector)</code> can end in <code class="nohighlight">[]</code> to indicate multiple values should be returned as an array if the selector does not contain a comma. This allows tables to be treated somewhat like spreadsheets.<br>                </p></section><section><h5 id="macro-list-formatting" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Macro List Formatting<span class="autohelm-nav autohelm-nav-up-down"> <a href="#formulas-with-css-selectors-and-multiple-values">&uarr;</a> <a href="#javascript">&darr;</a></span></h5><p>                     The SECST formula evaluator supports supports some utility functions.<br>                </p></section><section><h5 id="javascript" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>JavaScript<span class="autohelm-nav autohelm-nav-up-down"> <a href="#macro-list-formatting">&uarr;</a> <a href="#seo">&darr;</a></span></h5><p>                    You can use any JavaScript that is available in <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API">WebWorkers</a> inside a macro. A special read-only <code class="nohighlight">document</code> object is also made available. This object has title, baseURI, location, and navigator properties along with a property for each meta tag name and value.<br>                </p></section></section></section></section><section><h2 id="seo" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Search Engine Optimization<span class="autohelm-nav autohelm-nav-up-down"> <a href="#markup-without-html-names">&uarr;</a> <a href="#structured-data">&darr;</a></span></h2><p>        SECST provides several features to support <abbr>SEO</abbr> Search Engine Optimization.</p><p>        <ul title="SEO features"><li><a href="#hastags">hashtags</a></li><li><a href="#meta-tags">meta tags</a></li><li><a href="#structured-data">structured data</a></li><li><a href="#server-transpilation">server transpilation</a></li></ul><br>        </p><section><h3 id="structured-data" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Structured Data<span class="autohelm-nav autohelm-nav-up-down"> <a href="#seo">&uarr;</a> <a href="#news-article">&darr;</a></span></h3><p>            For select tags, SECST can generate JSON-LD directly from SECST markup. Content, layout, and SEO optimization will always be in sync.</p><p>            This is best covered by an example based on <a target="_tab" href="https://developers.google.com/search/docs/appearance/structured-data/article">Google's documentation for a news article</a>.</p><p>            <em>Note: Only those tags documented for <code class="nohighlight">NewsArticle</code> are currently supported.</em></p><section><h4 id="news-article" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>News Article<span class="autohelm-nav autohelm-nav-up-down"> <a href="#structured-data">&uarr;</a> <a href="#styling-content">&darr;</a></span></h4><p>                The SECST tag <code class="nohighlight">:NewsArticle[]</code> can contain regular SECST as well as tags that parallel established JSON-LD schema like <code class="nohighlight">:headline[]</code>, <code class="nohighlight">:author[]</code> and <code class="nohighlight">:Person[]</code>. Where there are identical or trivially equivalent tags and attribute names, e.g. <code class="nohighlight">image</code> and <code class="nohighlight">img</code>, the native SECST tag is used.</p><p>                <pre class="secst"><code class="nohighlight">:NewsArticle[
   :headline[Pinky Conquers The World]
@@ -1528,7 +932,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
   <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>                            <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">height</span>=<span class="hljs-string">&quot;50&quot;</span> <span class="hljs-attr">align</span>=<span class="hljs-string">&quot;left&quot;</span> <span class="hljs-attr">title</span>=<span class="hljs-string">&quot;Mars&quot;</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;Mars&quot;</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;./assets/images/mars.jpg&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">br</span>&gt;</span>                            We, Pinky and The Brain, will soon announce plans to partner with one of the world&#x27;s billionaires to take over Mars.<span class="hljs-tag">&lt;<span class="hljs-name">br</span>&gt;</span>                        <span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre><br>            </p></section></section></section><section><h2 id="styling-content" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Styling Content<span class="autohelm-nav autohelm-nav-up-down"> <a href="#seo">&uarr;</a> <a href="#transpiling">&darr;</a></span></h2><p>        The ability to use styling can be configured using API options and command line arguments. See <a id="document-programming" href="document programming" target="_tab">document programming</a> below. Hence, not all styling may be available in all environments that provide a SECST editor.</p><p>        Content can be styled using CSS classes loaded using the <code class="nohighlight">style[]</code> tag. This tag can be used in multiple ways. If a url is provided, i.e. <code class="nohighlight">style(./my-css-url.css)[]</code>, then an HTML link element of type style is created behind the scenes. If CSS is placed between the square braces, i.e. <code class="nohighlight">style[.my-class { background-color: red}]</code>, then a style element with CSS content is created behind the scenes. If both are provided, then two elements are generated, one of each. <code class="nohighlight">link(&lt;some url&gt; type='style')[]</code> tag.</p><p>        CSS classes are applied to content using <code class="nohighlight">.&lt;class-name&gt;</code> inside the parenthetical configuration part of a tag, e.g. <code class="nohighlight">:p(.my-class1 .my-class2)[My content]</code>.</p><p>        Style can also be applied using the <code class="nohighlight">style</code> attribute of a tag. The style attribute can be in string or JSON format. If in JSON format, should use camelCase versions of CSS property names. For example, <code class="nohighlight">:p(style='width:200px;text-align:right;float:right')[My right content]</code>  and <code class="nohighlight">:p({style:{width:"200px";textAlign:"right",float:"right"}}')[My right content]</code> produce the same output.</p><p>My right content</p><p>        Left Content<br>        More left content<br>        </p></section></section>
 
-<section><h1 id="transpiling" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Transpiling<span class="autohelm-nav autohelm-nav-up-down"> <a href="#authoring">&uarr;</a> <a href="#client-processing">&darr;</a></span></h1><section><h2 id="client-processing" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Client Processing<span class="autohelm-nav autohelm-nav-up-down"> <a href="#transpiling">&uarr;</a> <a href="#server-processing">&darr;</a></span></h2><p>        See the file <code class="nohighlight">./preview.html</code> in the root of the project directory.<br>    </p></section><section><h2 id="server-processing" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Server Processing<span class="autohelm-nav autohelm-nav-up-down"> <a href="#client-processing">&uarr;</a> <a href="#configuring--extending--and-programming">&darr;</a></span></h2><p>        The command line <code class="nohighlight">node secst.js</code> will convert any files in the root directory with the extension <code class="nohighlight">.sct</code> into <code class="nohighlight">HTML</code> files.</p><p>        If a wild card Glob pattern is used, then all matching files with a <code class="nohighlight">.sct</code> extension will be transpiled.</p><p>        The command can be run as part of your build process to generate a static website.</p><p>        There is not yet an Express route or Service Worker, but the code in <code class="nohighlight">sects.js</code> could be used as a starting point.</p><p>        An SPD (Single Page Document) capability that takes multiple <code class="nohighlight">.sct</code> files in a directory tree that parallels the desired section structure and creates a single HTML file is under development.</p><p>        A multi-page processor that will split a single <code class="nohighlight">.sct</code> files into multiple files based on its section structure and patch links accordingly is also under consideration.<br>    </p></section></section>
+<section><h1 id="transpiling" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Transpiling<span class="autohelm-nav autohelm-nav-up-down"> <a href="#authoring">&uarr;</a> <a href="#client-processing">&darr;</a></span></h1><section><h2 id="client-processing" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Client Processing<span class="autohelm-nav autohelm-nav-up-down"> <a href="#transpiling">&uarr;</a> <a href="#server-processing">&darr;</a></span></h2><p>        See the file <code class="nohighlight">./preview.html</code> in the root of the project directory.<br>    </p></section><section><h2 id="server-processing" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Server Processing<span class="autohelm-nav autohelm-nav-up-down"> <a href="#client-processing">&uarr;</a> <a href="#configuring--extending--and-programming">&darr;</a></span></h2><p>        The command line <code class="nohighlight">node secst.js</code> will convert any files in the root directory with the extension <code class="nohighlight">.sct</code> into <code class="nohighlight">HTML</code> files.</p><p>        If a wild card Glob pattern is used, then all matching files with a <code class="nohighlight">.sct</code> extension will be transpiled.</p><p>        The command can be run as part of your build process to generate a static website.</p><p>        There is not yet an Express route or Service Worker, but the code in <code class="nohighlight">secst.js</code> could be used as a starting point.</p><p>        An SPD (Single Page Document) capability that takes multiple <code class="nohighlight">.sct</code> files in a directory tree that parallels the desired section structure and creates a single HTML file is under development.</p><p>        A multi-page processor that will split a single <code class="nohighlight">.sct</code> files into multiple files based on its section structure and patch links accordingly is also under consideration.<br>    </p></section></section>
 <section><h1 id="configuring--extending--and-programming" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Configuring, Extending, And Programming<span class="autohelm-nav autohelm-nav-up-down"> <a href="#transpiling">&uarr;</a> <a href="#basic-configuration">&darr;</a></span></h1><section><h2 id="basic-configuration" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Basic Configuration<span class="autohelm-nav autohelm-nav-up-down"> <a href="#configuring--extending--and-programming">&uarr;</a> <a href="#semantic-options">&darr;</a></span></h2><section><h3 id="semantic-options" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Semantic Options<span class="autohelm-nav autohelm-nav-up-down"> <a href="#basic-configuration">&uarr;</a> <a href="#error-handling">&darr;</a></span></h3></section><section><h3 id="error-handling" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Error Handling<span class="autohelm-nav autohelm-nav-up-down"> <a href="#semantic-options">&uarr;</a> <a href="#tag-configuration">&darr;</a></span></h3><p>            Depending on your use case, the reference transpiler can be set to do one of the following when errors are encountered.</p><p>            <ul><li> cancel, stop processing and throw an error when the first problem is detected</li><li> collect, collect all the errors and return them with line numbers (if you are writing an editor)</li><li> leave the text version of the error generating mark-up in place (also collects the errors)</li><li> try to correct the errors (collects the errors and also returns a parse tree with corrected markup)</li></ul><br>        </p></section></section><section><h2 id="tag-configuration" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Tag Configuration<span class="autohelm-nav autohelm-nav-up-down"> <a href="#basic-configuration">&uarr;</a> <a href="#custom-tags">&darr;</a></span></h2></section><section><h2 id="custom-tags" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Custom Tags<span class="autohelm-nav autohelm-nav-up-down"> <a href="#tag-configuration">&uarr;</a> <a href="#custom-methods">&darr;</a></span></h2></section><section><h2 id="custom-methods" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Custom Methods<span class="autohelm-nav autohelm-nav-up-down"> <a href="#custom-tags">&uarr;</a> <a href="#event-listeners">&darr;</a></span></h2></section><section><h2 id="event-listeners" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Event Listeners<span class="autohelm-nav autohelm-nav-up-down"> <a href="#custom-methods">&uarr;</a> <a href="#tags">&darr;</a></span></h2></section></section>
 <section><h1 id="tags" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Complete List Of Tags<span class="autohelm-nav autohelm-nav-up-down"> <a href="#configuring--extending--and-programming">&uarr;</a> <a href="#design-objectives">&darr;</a></span></h1><p>        <textarea id="tagSpecs" class="secst" hidden="" data-default="" data-template="" title="" data-mime-type="application/json" data-literal="" data-global-this="SECST.tagSpecs" data-fitcontent="">{
   "&": {
@@ -1582,7 +986,6 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
     "contentAllowed": {
       "article": true,
       "author": true,
-      "blockquote": true,
       "datePublished": true,
       "footer": true,
       "forEach": true,
@@ -1646,9 +1049,6 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
     "toJSONLD": true,
     "htmlDocLink": "<a href="\&quot;https://developer.mozilla.org/en-US/docs/Web/HTML/Element/name\&quot;" target="\&quot;_tab\&quot;">html</a>"
   },
-  "blockquote": {
-    "htmlDocLink": "<a href="\&quot;https://developer.mozilla.org/en-US/docs/Web/HTML/Element/blockquote\&quot;" target="\&quot;_tab\&quot;">html</a>"
-  },
   "datePublished": {
     "htmlDocLink": "",
     "additionalDocLinks": [
@@ -1658,7 +1058,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
       "format": "transform format(value)",
       "lang": true
     },
-    "contentAllowed": "Mon Dec 26 2022 15:59:13 GMT-0800 (Pacific Standard Time)",
+    "contentAllowed": "Tue Dec 27 2022 09:01:18 GMT-0800 (Pacific Standard Time)",
     "minCount": 0,
     "maxCount": 1,
     "toText": true
@@ -1746,6 +1146,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
       "a": true,
       "abbr": true,
       "b": true,
+      "blockquote": true,
       "bold": true,
       "br": true,
       "code": true,
@@ -1787,6 +1188,9 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
     "transform": true,
     "mounted": true,
     "htmlDocLink": "<a href="\&quot;https://developer.mozilla.org/en-US/docs/Web/HTML/Element/p\&quot;" target="\&quot;_tab\&quot;">html</a>"
+  },
+  "blockquote": {
+    "htmlDocLink": "<a href="\&quot;https://developer.mozilla.org/en-US/docs/Web/HTML/Element/blockquote\&quot;" target="\&quot;_tab\&quot;">html</a>"
   },
   "br": {
     "htmlDocLink": "<a href="\&quot;https://developer.mozilla.org/en-US/docs/Web/HTML/Element/br\&quot;" target="\&quot;_tab\&quot;">html</a>"
@@ -1986,6 +1390,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
       "a": true,
       "abbr": true,
       "b": true,
+      "blockquote": true,
       "bold": true,
       "br": true,
       "code": true,
@@ -2249,6 +1654,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
       "a": true,
       "abbr": true,
       "b": true,
+      "blockquote": true,
       "bold": true,
       "br": true,
       "code": true,
@@ -2328,6 +1734,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
       "a": true,
       "abbr": true,
       "b": true,
+      "blockquote": true,
       "bold": true,
       "br": true,
       "code": true,
@@ -2751,6 +2158,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
       "a": true,
       "abbr": true,
       "b": true,
+      "blockquote": true,
       "bold": true,
       "br": true,
       "code": true,
@@ -2868,7 +2276,6 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
     "contentAllowed": {
       "NewsArticle": true,
       "article": true,
-      "blockquote": true,
       "footer": true,
       "forEach": true,
       "forEntries": true,
@@ -2977,6 +2384,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
       "a": true,
       "abbr": true,
       "b": true,
+      "blockquote": true,
       "bold": true,
       "br": true,
       "code": true,
@@ -3035,6 +2443,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
       "a": true,
       "abbr": true,
       "b": true,
+      "blockquote": true,
       "bold": true,
       "br": true,
       "code": true,
@@ -3163,7 +2572,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             </dd>
             <dd><em>Attributes Allowed</em>: <pre class="secst"><code class="nohighlight">N/A</code></pre>
             </dd>
-            <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">article, author, blockquote, datePublished, footer, forEach, forEntries, h, h1, h2, h3, h4, h5, h6, h7, h8, header, headline, img, link, mermaidChart, p, repl, section, sheetMusic, theme, title, toc</code></pre>
+            <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">article, author, datePublished, footer, forEach, forEntries, h, h1, h2, h3, h4, h5, h6, h7, h8, header, headline, img, link, mermaidChart, p, repl, section, sheetMusic, theme, title, toc</code></pre>
             </dd>
         
             <dt><strong>article</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/article" target="_tab">html</a>  <br> <br></dt>
@@ -3200,15 +2609,6 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Attributes Allowed</em>: <pre class="secst"><code class="nohighlight">N/A</code></pre>
             </dd>
             <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">plain text</code></pre>
-            </dd>
-        
-            <dt><strong>blockquote</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/blockquote" target="_tab">html</a>  <br> <br></dt>
-            <dd><em>Transformation Impacts</em>:
-                N/A <br> <br>
-            </dd>
-            <dd><em>Attributes Allowed</em>: <pre class="secst"><code class="nohighlight">N/A</code></pre>
-            </dd>
-            <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">N/A</code></pre>
             </dd>
         
             <dt><strong>datePublished</strong>  <a target="_tab" href="https://schema.org/datePublished">JSON schema</a> <br> <br></dt>
@@ -3356,7 +2756,16 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
   textAlign: one of [left, center, right, justify]
 </code></pre>
             </dd>
-            <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">&, @facebook, @github, @linkedin, @twitter, a, abbr, b, bold, br, code, del, details, dl, em, emoji, escape, footnote, hashtag, hr, i, img, input, ins, italic, kbd, latex, mark, meta, ol, pre, q, question, samp, strike, strong, sub, sup, table, textarea, transpiled, u, ul, value, var</code></pre>
+            <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">&, @facebook, @github, @linkedin, @twitter, a, abbr, b, blockquote, bold, br, code, del, details, dl, em, emoji, escape, footnote, hashtag, hr, i, img, input, ins, italic, kbd, latex, mark, meta, ol, pre, q, question, samp, strike, strong, sub, sup, table, textarea, transpiled, u, ul, value, var</code></pre>
+            </dd>
+        
+            <dt><strong>blockquote</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/blockquote" target="_tab">html</a>  <br> <br></dt>
+            <dd><em>Transformation Impacts</em>:
+                N/A <br> <br>
+            </dd>
+            <dd><em>Attributes Allowed</em>: <pre class="secst"><code class="nohighlight">N/A</code></pre>
+            </dd>
+            <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">N/A</code></pre>
             </dd>
         
             <dt><strong>br</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/br" target="_tab">html</a>  <br> <br></dt>
@@ -3620,7 +3029,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Attributes Allowed</em>: <pre class="secst"><code class="nohighlight">  colspan: transform colspan(value)
 </code></pre>
             </dd>
-            <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">&, @facebook, @github, @linkedin, @twitter, a, abbr, b, bold, br, code, del, details, dl, em, emoji, escape, footnote, hashtag, hr, i, img, input, ins, italic, kbd, latex, mark, meta, ol, pre, q, question, samp, strike, strong, sub, sup, table, textarea, transpiled, u, ul, value, var</code></pre>
+            <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">&, @facebook, @github, @linkedin, @twitter, a, abbr, b, blockquote, bold, br, code, del, details, dl, em, emoji, escape, footnote, hashtag, hr, i, img, input, ins, italic, kbd, latex, mark, meta, ol, pre, q, question, samp, strike, strong, sub, sup, table, textarea, transpiled, u, ul, value, var</code></pre>
             </dd>
         
             <dt><strong>textarea</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea" target="_tab">html</a>  <br> <br></dt>
@@ -3682,7 +3091,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             </dd>
             <dd><em>Attributes Allowed</em>: <pre class="secst"><code class="nohighlight">N/A</code></pre>
             </dd>
-            <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">&, @facebook, @github, @linkedin, @twitter, a, abbr, b, bold, br, code, del, details, em, emoji, escape, footnote, hashtag, hr, i, img, input, ins, italic, kbd, latex, mark, meta, ol, pre, q, question, samp, strike, strong, sub, sup, table, textarea, transpiled, u, ul, value, var</code></pre>
+            <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">&, @facebook, @github, @linkedin, @twitter, a, abbr, b, blockquote, bold, br, code, del, details, em, emoji, escape, footnote, hashtag, hr, i, img, input, ins, italic, kbd, latex, mark, meta, ol, pre, q, question, samp, strike, strong, sub, sup, table, textarea, transpiled, u, ul, value, var</code></pre>
             </dd>
         
             <dt><strong>ul</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul" target="_tab">html</a>  <br> <br></dt>
@@ -3727,7 +3136,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             </dd>
             <dd><em>Attributes Allowed</em>: <pre class="secst"><code class="nohighlight">N/A</code></pre>
             </dd>
-            <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">&, @facebook, @github, @linkedin, @twitter, a, abbr, b, bold, br, code, del, details, em, emoji, escape, footnote, hashtag, hr, i, img, input, ins, italic, kbd, latex, mark, meta, ol, pre, q, question, samp, strike, strong, sub, sup, table, textarea, transpiled, u, ul, value, var</code></pre>
+            <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">&, @facebook, @github, @linkedin, @twitter, a, abbr, b, blockquote, bold, br, code, del, details, em, emoji, escape, footnote, hashtag, hr, i, img, input, ins, italic, kbd, latex, mark, meta, ol, pre, q, question, samp, strike, strong, sub, sup, table, textarea, transpiled, u, ul, value, var</code></pre>
             </dd>
         
             <dt><strong>forEntries</strong>   <br> <br></dt>
@@ -3838,7 +3247,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
   value: transform value(value)
 </code></pre>
             </dd>
-            <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">&, @facebook, @github, @linkedin, @twitter, a, abbr, b, bold, br, code, del, details, dl, em, emoji, escape, footnote, hashtag, hr, i, img, input, ins, italic, kbd, latex, mark, meta, ol, pre, q, question, samp, strike, strong, sub, sup, table, textarea, transpiled, u, ul, value, var</code></pre>
+            <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">&, @facebook, @github, @linkedin, @twitter, a, abbr, b, blockquote, bold, br, code, del, details, dl, em, emoji, escape, footnote, hashtag, hr, i, img, input, ins, italic, kbd, latex, mark, meta, ol, pre, q, question, samp, strike, strong, sub, sup, table, textarea, transpiled, u, ul, value, var</code></pre>
             </dd>
         
             <dt><strong>link</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link" target="_tab">html</a>  <br> <br></dt>
@@ -3906,7 +3315,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Attributes Allowed</em>: <pre class="secst"><code class="nohighlight">  level: number
 </code></pre>
             </dd>
-            <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">NewsArticle, article, blockquote, footer, forEach, forEntries, h, h1, h2, h3, h4, h5, h6, h7, h8, header, img, link, macro, mermaidChart, p, repl, section, sheetMusic, theme, title, toc</code></pre>
+            <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">NewsArticle, article, footer, forEach, forEntries, h, h1, h2, h3, h4, h5, h6, h7, h8, header, img, link, macro, mermaidChart, p, repl, section, sheetMusic, theme, title, toc</code></pre>
             </dd>
         
             <dt><strong>sheetMusic</strong>   <br> <br></dt>
@@ -3970,7 +3379,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             </dd>
             <dd><em>Attributes Allowed</em>: <pre class="secst"><code class="nohighlight">N/A</code></pre>
             </dd>
-            <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">&, @facebook, @github, @linkedin, @twitter, a, abbr, b, bold, br, code, del, details, dl, em, emoji, escape, footnote, hashtag, hr, i, img, input, ins, italic, kbd, latex, mark, meta, ol, pre, q, question, samp, strike, strong, sub, sup, table, textarea, transpiled, u, ul, value, var</code></pre>
+            <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">&, @facebook, @github, @linkedin, @twitter, a, abbr, b, blockquote, bold, br, code, del, details, dl, em, emoji, escape, footnote, hashtag, hr, i, img, input, ins, italic, kbd, latex, mark, meta, ol, pre, q, question, samp, strike, strong, sub, sup, table, textarea, transpiled, u, ul, value, var</code></pre>
             </dd>
         
             <dt><strong>tfoot</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/tfoot" target="_tab">html</a>  <br> <br></dt>
@@ -3989,7 +3398,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             <dd><em>Attributes Allowed</em>: <pre class="secst"><code class="nohighlight">  colspan: transform colspan(value)
 </code></pre>
             </dd>
-            <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">&, @facebook, @github, @linkedin, @twitter, a, abbr, b, bold, br, code, del, details, dl, em, emoji, escape, footnote, hashtag, hr, i, img, input, ins, italic, kbd, latex, mark, meta, ol, pre, q, question, samp, strike, strong, sub, sup, table, textarea, transpiled, u, ul, value, var</code></pre>
+            <dd><em>Content Allowed</em>: <pre class="secst"><code class="nohighlight" wrap="true" style="white-space: pre-wrap;">&, @facebook, @github, @linkedin, @twitter, a, abbr, b, blockquote, bold, br, code, del, details, dl, em, emoji, escape, footnote, hashtag, hr, i, img, input, ins, italic, kbd, latex, mark, meta, ol, pre, q, question, samp, strike, strong, sub, sup, table, textarea, transpiled, u, ul, value, var</code></pre>
             </dd>
         
             <dt><strong>thead</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/thead" target="_tab">html</a>  <br> <br></dt>
@@ -4056,7 +3465,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
             }
 
     content
-        = heading / mhr / murl /italic / bold / struck / mark / backtickquoted / triplebacktickquoted / escape / script / code /  value / hr / br / emoji / (&colon expression _?) / [ a-z0-9_\-~!@#$%^&*()_+=\[\{\]\}|\\;:"'<,>.?/\n\r\t]i
+        = (&colon expression _?) / [ a-z0-9_\-~!@#$%^&*()_+=\[\{\]\}|\\;:"'<,>.?/\n\r\t]i
 
     colon
         = ":"
@@ -4067,15 +3476,30 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
              return new Tag({tag,options,content,location:location()});
         }
 
-    heading
-        = _ [#][Hh] level:[0-9] text:[^\r\n]* {
-            return new Tag({tag:"h",options:{attributes:{level}},content:[text.join("")]})
-        }
+      mheading
+            = [\r\n] [ \t]* hashes:[#]+ " " text:[^\r\n]* {
+                return new Tag({tag:"h",options:{attributes:{level:Math.min(hashes.length,6)}},content:[text.join("")]})
+            }
 
     hr
      = ":hr" options:options? bracketed_SECST:bracketed_SECST? {
         return new Tag({tag:"hr",options,location:location()})
      }
+
+     mhr
+         = [\r\n] [ \t]* '***' [ \t]* [\r\n] {
+             return new Tag({tag:"hr",content:[],location:location()})
+         }
+
+     murl
+         = _ url:url _ {
+             return new Tag({tag:"a",content:[url[1]],location:location()})
+         }
+
+    mblockquote
+        = [\r\n] [ \t]* "> " text:[^\r\n]* {
+            return new Tag({tag:"blockquote",content:[text.join("")],location:location()})
+        }
 
     br
       = ":br" options:options? bracketed_SECST:bracketed_SECST? {
@@ -4116,7 +3540,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
 
     emoji
         = colon first:[a-z] rest:[a-z0-9]i* colon {
-            return new Tag({tag:"emoji",content:[first+rest.join("")]})
+            return new Tag({tag:"emoji",content:[first+rest.join("")],location:location()})
         }
 
     hashtag
@@ -4136,17 +3560,21 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
         = "@"
 
     bracketed_SECST
-        = BRACKETOPEN value:(heading/mhr/murl/italic/bold/struck/mark/backtickquoted/triplebacktickquoted/symbol/hashtag/mention/escape/script/code/value/hr/br/emoji/expression/not_bracketed/bracketed_SECST)* BRACKETCLOSE {
+        = BRACKETOPEN value:(mheading/mhr/murl/italic/bold/mblockquote/struck/mark/backtickquoted/triplebacktickquoted/symbol/hashtag/mention/escape/script/code/value/hr/br/emoji/expression/not_bracketed/bracketed_SECST)* BRACKETCLOSE {
             if(Array.isArray(value) && value.every((item) => typeof(item)==="string")) {
                 return [value.join("")];
             }
             const result = [];
-            for(let i=0;i<value.length item="value[i];" text="[" if(typeof(result[result.length-1])!="=&quot;string&quot;)" +="" typeof(item)="==&quot;string&quot;)" prevtype="typeof(result[result.length-1]);" if(prevtype="==&quot;string&quot;" bracketed="BRACKETOPEN" not_bracketed="not:(!BRACKETCLOSE" bracketopen="[" bracketclose="" braced="BRACEOPEN" not_braced="not:(!BRACECLOSE" braceopen="{" braceclose="" bold="start:BOLDOPEN" not_bold="not:(!BOLDCLOSE" boldopen="**" boldclose="char:[^*" italic="start:ITALICOPEN" not_italic="not:(!ITALICCLOSE" italicopen="*" italicclose="char:[^*" struck="start:STRUCKOPEN" not_struck="not:(!STRUCKCLOSE" struckopen="~~" struckclose="char:[^~" mark="start:MARKOPEN" not_mark="not:(!MARKCLOSE" markopen="==" char:[^="\t\r\n]" markclose="char:[^=" '="=&#x27;" mhr="[\r\n]" murl="_" backtickquoted="start:BACKTICKOPEN" not_backtickquoted="not:(!BACKTICKCLOSE" backtickopen="&#x60;" backtickclose="char:[^&#x60;]" triplebacktickquoted="start:TRIPLEBACKTICKOPEN" string="start+text.join(&quot;&quot;)+end;" not_triplebacktickquoted="not:(!TRIPLEBACKTICKOPEN" triplebacktickopen="&#x60;&#x60;&#x60;" triplebacktickclose="char:[^&#x60;]" tag="colon" options="(" o="{};" o.id="id;" o.classlist="classList;" o.attributes="JSON5.parse(attributes)" ;i++)="" {
+            for(let i=0;i<value.length item="value[i];" text="[" if(typeof(result[result.length-1])!="=&quot;string&quot;)" +="" typeof(item)="==&quot;string&quot;)" if(item.tag="==&quot;blockquote&quot;)" prev="result[result.length-1]" while(typeof(prev)="==&quot;string&quot;)" if(prev.trim().length="==0)" if(prev?.tag="==&quot;blockquote&quot;)" prev.content="[...prev.content,new" prevtype="typeof(result[result.length-1]);" if(prevtype="==&quot;string&quot;" bracketed="BRACKETOPEN" not_bracketed="not:(!BRACKETCLOSE" bracketopen="[" bracketclose="" braced="BRACEOPEN" not_braced="not:(!BRACECLOSE" braceopen="{" braceclose="" bold="start:BOLDOPEN" not_bold="not:(!BOLDCLOSE" boldopen="**" boldclose="char:[^*" italic="start:ITALICOPEN" not_italic="not:(!ITALICCLOSE" italicopen="*" italicclose="char:[^*" struck="start:STRUCKOPEN" not_struck="not:(!STRUCKCLOSE" struckopen="~~" struckclose="char:[^~" mark="start:MARKOPEN" not_mark="not:(!MARKCLOSE" markopen="==" char:[^="\t\r\n]" markclose="char:[^=" '="=&#x27;" backtickquoted="start:BACKTICKOPEN" not_backtickquoted="not:(!BACKTICKCLOSE" backtickopen="&#x60;" backtickclose="char:[^&#x60;]" triplebacktickquoted="start:TRIPLEBACKTICKOPEN" string="start+text.join(&quot;&quot;)+end;" not_triplebacktickquoted="not:(!TRIPLEBACKTICKOPEN" triplebacktickopen="&#x60;&#x60;&#x60;" triplebacktickclose="char:[^&#x60;]" tag="colon" options="(" o="{};" o.id="id;" o.classlist="classList;" o.attributes="JSON5.parse(attributes)" ;i++)="" {
 ="" const="" 
 ="" if(array.isarray(item))="" item.join("="" ")="" "]";
 ="" result.push(text);
 ="" }="" else="" result[result.length-1]="" }
-="" if(item="" &&="" result.push(item);
+="" if(item="" &&="" {="" //="" combine="" sequential="" block="" quotes
+="" let="" result.pop();
+="" tag({tag:"br"}),...item.content]
+="" result.push(item);
+="" strings
 ="" return="" result;
 ="" }
 
@@ -4155,18 +3583,16 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
 ="" 
 
 ="" value:(not_braced/braced)*="" "{"="" "}"
-="" !braceopen.)="" value:(not_bold/bold)*="" end:boldclose="" new="" tag({tag:"b",content:[start+value.join("")+end]})
+="" !braceopen.)="" value:(not_bold/bold)*="" end:boldclose="" new="" tag({tag:"b",content:[start+value.join("")+end],location:location()})
 ="" !boldopen.)="" char:[^*="" \t\r\n]="" char
-="" '**'="" value:(not_italic/italic)*="" end:italicclose="" tag({tag:"i",content:[start+value.join("")+end]})
-="" !italicopen.)="" '*'="" value:(not_struck/struck)*="" end:struckclose="" tag({tag:"strike",content:[start+value.join("")+end]})
-="" !struckopen.)="" char:[^~="" '~~'="" value:(not_mark/mark)*="" end:markclose="" tag({tag:"mark",content:[start+value.join("")+end]})
-="" !markopen.)="" [="" \t]*="" '***'="" [\r\n]="" tag({tag:"hr",content:[]})
-="" url:url="" _="" tag({tag:"a",content:[url[1]]})
-="" text:(not_backtickquoted/backtickquoted)*="" end:backtickclose="" tag({tag:"code",content:[start+text.join("")+end]})
-="" !backtickopen.)="" {="" not.join("");}
+="" '**'="" value:(not_italic/italic)*="" end:italicclose="" tag({tag:"i",content:[start+value.join("")+end],location:location()})
+="" !italicopen.)="" '*'="" value:(not_struck/struck)*="" end:struckclose="" tag({tag:"strike",content:[start+value.join("")+end],location:location()})
+="" !struckopen.)="" char:[^~="" '~~'="" value:(not_mark/mark)*="" end:markclose="" tag({tag:"mark",content:[start+value.join("")+end],location:location()})
+="" !markopen.)="" text:(not_backtickquoted/backtickquoted)*="" end:backtickclose="" tag({tag:"code",content:[start+text.join("")+end],location:location()})
+="" !backtickopen.)="" not.join("");}
 
 ="" char:[^`]="" '`'="" text:(not_triplebacktickquoted/triplebacktickquoted)*="" end:triplebacktickclose="" tag({tag:"code",content:[string="" (string.includes("\n")="" ?="" ""="" :="" "\n")]})
-="" !triplebacktickclose.)="" '```'="" token:token="" token="" id:id?="" classlist:class*="" binaryattributes:binaryattribute*="" attributes:braced?="" ")"="" var="" try="" ||="" {};
+="" !triplebacktickclose.)="" '```'="" token:token="" token="" _="" id:id?="" classlist:class*="" binaryattributes:binaryattribute*="" attributes:braced?="" ")"="" var="" try="" ||="" {};
 ="" catch(e)="" error("unable="" to="" parse="" attributes.="" check="" for="" missing="" commas="" or="" quotes.")
 ="" binaryattributes.foreach(([key,value])="" ==""> {
                    o.attributes[key] = value;
@@ -4266,7 +3692,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
 
     _ "whitespace"
         = whitespace:[ \t\n\r]* { return whitespace.join("") }</value.length></textarea><br></p></section>
-<section><h1 id="architecture" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Architecture<span class="autohelm-nav autohelm-nav-up-down"> <a href="#grammar">&uarr;</a> <a href="#semantic-architecture">&darr;</a></span></h1><section><h2 id="semantic-architecture" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Semantic Architecture<span class="autohelm-nav autohelm-nav-up-down"> <a href="#architecture">&uarr;</a> <a href="#data-architecture">&darr;</a></span></h2><p>        The Mozilla Development Network, a.k.a. , documents several HTML tag content categories:</p><p>        <ul><li> <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#metadata_content"><em id="metadata-content">Metadata content</em></a>, e.g. <code class="nohighlight">&lt;link&gt;</code>, <code class="nohighlight">&lt;style</code>.</li><li> <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#flow_content"><em id="flow-content">Flow content</em></a>, most elements that can go inside <code class="nohighlight">&lt;body&gt;</code>.</li><li> <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#sectioning_content"><em id="sectioning-content">Sectioning Content</em></a>, e.g. <code class="nohighlight">&lt;section&gt;</code>, <code class="nohighlight">&lt;article&gt;</code>.</li><li> <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#heading_content"><em id="heading-content">Heading Content</em></a>, e.g, <code class="nohighlight">&lt;h1&gt;</code>, <code class="nohighlight">&lt;h2&gt;</code>.</li><li> <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#phrasing_content"><em id="phrasing-content">Phrasing Content</em></a>, i.e. anything that can go in a paragraph, <code class="nohighlight">&lt;p&gt;</code>.</li><li> <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#embedded_content"><em id="embedded-content">Embedded Content</em></a>, e.g. <code class="nohighlight">&lt;img&gt;</code>, <code class="nohighlight">audio</code>, that cab be used in the same places as flow content.</li><li> <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#interactive_content"><em id="interactive-content">Interactive Content</em></a>, i.e. that specifically designed to support user interaction, e.g. <code class="nohighlight">&lt;a&gt;</code>, <code class="nohighlight">&lt;input&gt;</code>.</li><li> <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#form-associated_content"><em id="form-associated-content">Form Associated Content</em></a>, i.e. elements that are usually seen inside a form, but might not support interaction, e.g. <code class="nohighlight">&lt;progress&gt;</code>.</li></ul></p><p>        SECST uses these content types to determine what types of tags can exists inside other tags with a few enhancements or exceptions:</p><p>        <ul><li>A content category <em id="text-content">Text Content</em>, a sub-set of <a href="#phrasing-content"><em>Phrasing Content</em></a> that is typically displayed inline and does not allow a tag to be nested inside itself because it would be redundant, e.g. <code class="nohighlight">&lt;strong&gt;</code>.</li><li> A content category <em id="block-content">Block Content</em>, includes all <a href="#flow-content"><em>Flow Content</em></a> that is not included in <em>Text Content</em>, e.g. <code class="nohighlight">&lt;table&gt;</code>.</li><li> A content category <em id="body-content">Body Content</em>, enumerates tags allowed in a <code class="nohighlight">&lt;body&gt;</code>, including <code class="nohighlight">&lt;style&gt;</code> and <code class="nohighlight">&lt;link&gt;</code> which are usually in a <code class="nohighlight">&lt;head&gt;</code> section, but may exist in a <code class="nohighlight">&lt;body&gt;</code>.</li><li> All <a href="#flow-content"><em>Flow Content</em></a><span>&nbsp;</span><strong>MUST</strong> be inside of <a href="#sectioning-content"><em>Sectioning Content</em></a>. The tags <code class="nohighlight">:article[]</code> and <code class="nohighlight">:section[]</code> are both <a href="#sectioning-content"><em>Sectioning Content</em></a> and  <a href="#flow-content"><em>Flow Content</em></a>, so they can be nested.</li><li> Common cases where browsers support elements in an alternate context that makes semantic sense, e.g. <code class="nohighlight">:progress[]</code> can exist outside a <code class="nohighlight">&lt;form&gt;</code>.</li><li> JSON-LD tags, which are treated as <a href="#sectioning-content"><em>Sectioning Content</em></a>.</li></ul></p></section><section><h2 id="data-architecture" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Data Architecture<span class="autohelm-nav autohelm-nav-up-down"> <a href="#semantic-architecture">&uarr;</a> <a href="#project-architecture">&darr;</a></span></h2><p>        The relationship between tags is represented as a cyclical JSON structure. The bulk of of the structure is static, but some of it is dynamic and memoized to address its cyclical nature.</p><p>        Tags are defined with the following parts:</p><p>        <pre class="secst"><code class="nohighlight">{
+<section><h1 id="architecture" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Architecture<span class="autohelm-nav autohelm-nav-up-down"> <a href="#grammar">&uarr;</a> <a href="#semantic-architecture">&darr;</a></span></h1><section><h2 id="semantic-architecture" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Semantic Architecture<span class="autohelm-nav autohelm-nav-up-down"> <a href="#architecture">&uarr;</a> <a href="#data-architecture">&darr;</a></span></h2><p>        The Mozilla Development Network, a.k.a. <abbr>MDN</abbr>, documents several HTML tag content categories:</p><p>        <ul><li> <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#metadata_content"><em id="metadata-content">Metadata content</em></a>, e.g. <code class="nohighlight">&lt;link&gt;</code>, <code class="nohighlight">&lt;style</code>.</li><li> <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#flow_content"><em id="flow-content">Flow content</em></a>, most elements that can go inside <code class="nohighlight">&lt;body&gt;</code>.</li><li> <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#sectioning_content"><em id="sectioning-content">Sectioning Content</em></a>, e.g. <code class="nohighlight">&lt;section&gt;</code>, <code class="nohighlight">&lt;article&gt;</code>.</li><li> <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#heading_content"><em id="heading-content">Heading Content</em></a>, e.g, <code class="nohighlight">&lt;h1&gt;</code>, <code class="nohighlight">&lt;h2&gt;</code>.</li><li> <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#phrasing_content"><em id="phrasing-content">Phrasing Content</em></a>, i.e. anything that can go in a paragraph, <code class="nohighlight">&lt;p&gt;</code>.</li><li> <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#embedded_content"><em id="embedded-content">Embedded Content</em></a>, e.g. <code class="nohighlight">&lt;img&gt;</code>, <code class="nohighlight">audio</code>, that cab be used in the same places as flow content.</li><li> <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#interactive_content"><em id="interactive-content">Interactive Content</em></a>, i.e. that specifically designed to support user interaction, e.g. <code class="nohighlight">&lt;a&gt;</code>, <code class="nohighlight">&lt;input&gt;</code>.</li><li> <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#form-associated_content"><em id="form-associated-content">Form Associated Content</em></a>, i.e. elements that are usually seen inside a form, but might not support interaction, e.g. <code class="nohighlight">&lt;progress&gt;</code>.</li></ul></p><p>        SECST uses these content types to determine what types of tags can exists inside other tags with a few enhancements or exceptions:</p><p>        <ul><li>A content category <em id="text-content">Text Content</em>, a sub-set of <a href="#phrasing-content"><em>Phrasing Content</em></a> that is typically displayed inline and does not allow a tag to be nested inside itself because it would be redundant, e.g. <code class="nohighlight">&lt;strong&gt;</code>.</li><li> A content category <em id="block-content">Block Content</em>, includes all <a href="#flow-content"><em>Flow Content</em></a> that is not included in <em>Text Content</em>, e.g. <code class="nohighlight">&lt;table&gt;</code>.</li><li> A content category <em id="body-content">Body Content</em>, enumerates tags allowed in a <code class="nohighlight">&lt;body&gt;</code>, including <code class="nohighlight">&lt;style&gt;</code> and <code class="nohighlight">&lt;link&gt;</code> which are usually in a <code class="nohighlight">&lt;head&gt;</code> section, but may exist in a <code class="nohighlight">&lt;body&gt;</code>.</li><li> All <a href="#flow-content"><em>Flow Content</em></a><span>&nbsp;</span><strong>MUST</strong> be inside of <a href="#sectioning-content"><em>Sectioning Content</em></a>. The tags <code class="nohighlight">:article[]</code> and <code class="nohighlight">:section[]</code> are both <a href="#sectioning-content"><em>Sectioning Content</em></a> and  <a href="#flow-content"><em>Flow Content</em></a>, so they can be nested.</li><li> Common cases where browsers support elements in an alternate context that makes semantic sense, e.g. <code class="nohighlight">:progress[]</code> can exist outside a <code class="nohighlight">&lt;form&gt;</code>.</li><li> JSON-LD tags, which are treated as <a href="#sectioning-content"><em>Sectioning Content</em></a>.</li></ul></p></section><section><h2 id="data-architecture" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Data Architecture<span class="autohelm-nav autohelm-nav-up-down"> <a href="#semantic-architecture">&uarr;</a> <a href="#project-architecture">&darr;</a></span></h2><p>        The relationship between tags is represented as a cyclical JSON structure. The bulk of of the structure is static, but some of it is dynamic and memoized to address its cyclical nature.</p><p>        Tags are defined with the following parts:</p><p>        <pre class="secst"><code class="nohighlight">{
   attributesAllowed: { // optional
       &lt;attributeName&gt;: true || "&lt;primitive-type&gt;" : function, // the function can validate or transform the attribute
       ...

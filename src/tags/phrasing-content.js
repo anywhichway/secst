@@ -18,6 +18,7 @@ const phrasingContent = {
     ...textContent,
     "&": async function() { const {characterEntity} = await import("./character-entity.js"); return this["&"] = characterEntity; },
     br,
+    async blockquote() { const {blockquote} = await import("./blockquote.js"); return this.blockquote = blockquote; },
     async code() { const {code} = await import("./code.js"); return this.code = code; },
     async details() { const {details} = await import("./details.js"); return this.details = details; },
     async dl() { const {dl} = await import("./dl.js"); return this.dl = dl; },

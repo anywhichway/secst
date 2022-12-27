@@ -32,7 +32,7 @@
             }
 
     content
-        = heading / mhr / murl /italic / bold / struck / mark / backtickquoted / triplebacktickquoted / escape / script / code /  value / hr / br / emoji / (&colon expression _?) / [ a-z0-9_\-~!@#$%^&*()_+=\[\{\]\}|\\;:"'<,>.?/\n\r\t]i
+        = (&colon expression _?) / [ a-z0-9_\-~!@#$%^&*()_+=\[\{\]\}|\\;:"'<,>.?/\n\r\t]i
 
     colon
         = ":"
@@ -43,15 +43,30 @@
              return new Tag({tag,options,content,location:location()});
         }
 
-    heading
-        = _ [#][Hh] level:[0-9] text:[^\r\n]* {
-            return new Tag({tag:"h",options:{attributes:{level}},content:[text.join("")]})
-        }
+      mheading
+            = [\r\n] [ \t]* hashes:[#]+ " " text:[^\r\n]* {
+                return new Tag({tag:"h",options:{attributes:{level:Math.min(hashes.length,6)}},content:[text.join("")]})
+            }
 
     hr
      = ":hr" options:options? bracketed_SECST:bracketed_SECST? {
         return new Tag({tag:"hr",options,location:location()})
      }
+
+     mhr
+         = [\r\n] [ \t]* '***' [ \t]* [\r\n] {
+             return new Tag({tag:"hr",content:[],location:location()})
+         }
+
+     murl
+         = _ url:url _ {
+             return new Tag({tag:"a",content:[url[1]],location:location()})
+         }
+
+    mblockquote
+        = [\r\n] [ \t]* "> " text:[^\r\n]* {
+            return new Tag({tag:"blockquote",content:[text.join("")],location:location()})
+        }
 
     br
       = ":br" options:options? bracketed_SECST:bracketed_SECST? {
@@ -92,7 +107,7 @@
 
     emoji
         = colon first:[a-z] rest:[a-z0-9]i* colon {
-            return new Tag({tag:"emoji",content:[first+rest.join("")]})
+            return new Tag({tag:"emoji",content:[first+rest.join("")],location:location()})
         }
 
     hashtag
@@ -112,7 +127,7 @@
         = "@"
 
     bracketed_SECST
-        = BRACKETOPEN value:(heading/mhr/murl/italic/bold/struck/mark/backtickquoted/triplebacktickquoted/symbol/hashtag/mention/escape/script/code/value/hr/br/emoji/expression/not_bracketed/bracketed_SECST)* BRACKETCLOSE {
+        = BRACKETOPEN value:(mheading/mhr/murl/italic/bold/mblockquote/struck/mark/backtickquoted/triplebacktickquoted/symbol/hashtag/mention/escape/script/code/value/hr/br/emoji/expression/not_bracketed/bracketed_SECST)* BRACKETCLOSE {
             if(Array.isArray(value) && value.every((item) => typeof(item)==="string")) {
                 return [value.join("")];
             }
@@ -127,10 +142,23 @@
                          result[result.length-1] += text;
                     }
                 } else if(item && typeof(item)==="object") {
-                    result.push(item);
+                    if(item.tag==="blockquote") { // combine sequential block quotes
+                        let prev = result[result.length-1];
+                        while(typeof(prev)==="string") {
+                            if(prev.trim().length===0) result.pop();
+                            prev = result[result.length-1]
+                        }
+                        if(prev?.tag==="blockquote") {
+                            prev.content = [...prev.content,new Tag({tag:"br"}),...item.content]
+                        } else {
+                            result.push(item);
+                        }
+                    } else {
+                         result.push(item);
+                    }
                 } else {
                     const prevtype = typeof(result[result.length-1]);
-                    if(prevtype==="string" && typeof(item)==="string") {
+                    if(prevtype==="string" && typeof(item)==="string") { // combine sequential strings
                         result[result.length-1] += item;
                     } else {
                         result.push(item);
@@ -170,7 +198,7 @@
 
      bold
             = start:BOLDOPEN value:(not_bold/bold)* end:BOLDCLOSE {
-                return new Tag({tag:"b",content:[start+value.join("")+end]})
+                return new Tag({tag:"b",content:[start+value.join("")+end],location:location()})
             }
 
     not_bold
@@ -190,7 +218,7 @@
 
     italic
         = start:ITALICOPEN value:(not_italic/italic)* end:ITALICCLOSE {
-            return new Tag({tag:"i",content:[start+value.join("")+end]})
+            return new Tag({tag:"i",content:[start+value.join("")+end],location:location()})
         }
 
     not_italic
@@ -210,7 +238,7 @@
 
     struck
         = start:STRUCKOPEN value:(not_struck/struck)* end:STRUCKCLOSE {
-            return new Tag({tag:"strike",content:[start+value.join("")+end]})
+            return new Tag({tag:"strike",content:[start+value.join("")+end],location:location()})
         }
 
     not_struck
@@ -230,7 +258,7 @@
 
    mark
        = start:MARKOPEN value:(not_mark/mark)* end:MARKCLOSE {
-           return new Tag({tag:"mark",content:[start+value.join("")+end]})
+           return new Tag({tag:"mark",content:[start+value.join("")+end],location:location()})
        }
 
    not_mark
@@ -248,19 +276,9 @@
            return char
        }
 
-    mhr
-        = [\r\n] [ \t]* '***' [ \t]* [\r\n] {
-            return new Tag({tag:"hr",content:[]})
-        }
-
-    murl
-        = _ url:url _ {
-            return new Tag({tag:"a",content:[url[1]]})
-        }
-
     backtickquoted
             = start:BACKTICKOPEN text:(not_backtickquoted/backtickquoted)*  end:BACKTICKCLOSE {
-                 return new Tag({tag:"code",content:[start+text.join("")+end]})
+                 return new Tag({tag:"code",content:[start+text.join("")+end],location:location()})
             }
 
         not_backtickquoted

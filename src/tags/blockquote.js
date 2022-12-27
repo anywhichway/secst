@@ -8,6 +8,9 @@ const blockquote = {
         cite(value) {
             new URL(value)
         }
+    },
+    transform(node) {
+        return node;
     }
 }
 delete blockquote.contentAllowed.blockquote;

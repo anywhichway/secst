@@ -167,7 +167,8 @@ const toElement = async (node,{parent,connects,parentConfig}) => {
 }
 
 import {macro as MACRO} from "./tags/macro.js";
-const validateNode = async ({parser,node,path=[],contentAllowed=bodyContent,errors=[],level=0}) => {
+const validateNode = async ({parser,node,path=[],parent={tag:"body",contentAllowed:bodyContent},errors=[],level=0}) => {
+    let { contentAllowed } = parent
     if(!node || typeof(node)!=="object") {
         return;
     }
@@ -182,21 +183,23 @@ const validateNode = async ({parser,node,path=[],contentAllowed=bodyContent,erro
     node.attributes ||= {};
     node.classList ||= [];
     node.content ||= [];
-    let tag = node.tag,
-        config = contentAllowed[tag];
-    if(!config) {
+    let tag = node.tag;
+    const childConfig = contentAllowed[tag];
+    if(!childConfig) {
         node.drop = true;
-        errors.push(new parser.SyntaxError(`Dropping unknown tag ${tag}`,null,null,node.location));
+        errors.push(new parser.SyntaxError(`Dropping unknown tag ${tag} in ${parent.tag} ${JSON.stringify(path)}`,null,null,node.location));
         return {node,errors};
     }
+    let config = childConfig;
     if(typeof(config)==="function") {
         config = await config.call(contentAllowed);
     }
-    if(config.parentRequired && (path.length===0 || !config.parentRequired.includes(path[path.length-1].tag))) {
+    config.tag = tag;
+    /*if(config.parentRequired && (path.length===0 || !config.parentRequired.includes(path[path.length-1].tag))) {
         node.drop = true;
         errors.push(new parser.SyntaxError(`${tag} required parent to be one of`,JSON.stringify(config.parentRequired),path[path.length-1].tag,node.location));
         return {node,errors};
-    }
+    }*/
     if(typeof(config.contentAllowed)==="function") {
         config.contentAllowed = await config.contentAllowed();
     }
@@ -220,7 +223,7 @@ const validateNode = async ({parser,node,path=[],contentAllowed=bodyContent,erro
             if(typeof(config)==="function") {
                 config = await config.call(contentAllowed);
             }
-            return validateNode({parser,node:transformed,path,contentAllowed,errors,level})
+            return validateNode({parser,node:transformed,path,parent,errors,level})
         }
     }
     if(node.content.length>0 && !config.contentAllowed) {
@@ -232,7 +235,7 @@ const validateNode = async ({parser,node,path=[],contentAllowed=bodyContent,erro
             node.content.shift();
         }
         if(node.content.length>0) {
-            errors.push(new parser.SyntaxError(`${tag} is not permitted to have any content. Dropping content.`,null,JSON.stringify(node.content),node.location));
+            errors.push(new parser.SyntaxError(`${tag} is not permitted to have any content in ${parent.tag} ${JSON.stringify(path)}. Dropping content.`,null,JSON.stringify(node.content),node.location));
             node.content = [];
         }
     }
@@ -244,7 +247,7 @@ const validateNode = async ({parser,node,path=[],contentAllowed=bodyContent,erro
                 if(config.contentAllowed) {
                     content.push(child);
                 } else {
-                    errors.push(new parser.SyntaxError(`${tag} does not allow string child. Dropping child.`,null,child,node.location))
+                    errors.push(new parser.SyntaxError(`${tag} does not allow string child in ${parent.tag} ${JSON.stringify(path)}. Dropping child.`,null,child,node.location))
                 }
             } else if(child && type==="object") {
                 const macro = MACRO.macros.get(child.tag);
@@ -252,17 +255,17 @@ const validateNode = async ({parser,node,path=[],contentAllowed=bodyContent,erro
                     child = MACRO.resolve(macro,child);
                 }
                 if(!config.contentAllowed || (config.contentAllowed!=="*" && !config.contentAllowed[child.tag])) {
-                    errors.push(new parser.SyntaxError(`${tag} does not allow child ${child.tag}.`,null,JSON.stringify(child),node.location));
+                    errors.push(new parser.SyntaxError(`${tag} does not allow child ${child.tag} in ${parent.tag} ${JSON.stringify(path)}.`,null,JSON.stringify(child),node.location));
                     child.tag = "error";
                 } else {
-                    const result = await validateNode({parser,node:child,path:[...path,node],contentAllowed:config.contentAllowed,errors,level:level+1});
+                    const result = await validateNode({parser,node:child,path:[...path,node.tag],parent:config,errors,level:level+1});
                     child = result.node;
                     if(!child.drop)  {
                         content.push(child);
                     }
                 }
             } else {
-                errors.push(new parser.SyntaxError(`${tag} has unexpected child type ${type} ${child}. Dropping child.`,null,JSON.stringify(child),node.location));
+                errors.push(new parser.SyntaxError(`${tag} has unexpected child type ${type} ${child} in ${parent.tag} ${JSON.stringify(path)}. Dropping child.`,null,JSON.stringify(child),node.location));
             }
         }
         node.content = content;
@@ -327,7 +330,7 @@ const validateNode = async ({parser,node,path=[],contentAllowed=bodyContent,erro
             node.attributes.style = styleAllowed(node.attributes.style,node);
         } else if(!styleAllowed) {
             delete node.attributes.style;
-            errors.push(new parser.SyntaxError(`${tag} does not allow styling. Dropping style`,null,null,node.location))
+            errors.push(new parser.SyntaxError(`${tag} does not allow styling in ${parent.tag} ${JSON.stringify(path)}. Dropping style`,null,null,node.location))
         }
     }
     return {node,errors};
@@ -383,8 +386,13 @@ const transform = async (parser,text,{styleAllowed}={}) => {
     const parsed = JSON.parse(JSON.stringify(transformed));
     const errors = await transformed.reduce(async (errors,node) => {
         if(typeof(node)==="string") return errors;
-        const result = await validateNode({parser,node})
-        return [...await errors,...result.errors]
+        try {
+            const result = await validateNode({parser,node});
+            return [...await errors,...result.errors]
+        } catch(e) {
+            node.drop = true;
+            return [...await errors,new parser.SyntaxError(e.message,null,null,node.location)]
+        }
     },[]);
     const dom = document.createDocumentFragment();
     dom.appendChild(dom.head = document.createElement("head"));
@@ -412,7 +420,9 @@ const transform = async (parser,text,{styleAllowed}={}) => {
         dom.body.appendChild(link);
     }
     for(const node of transformed) {
-        await toElement(node,{parent:content,parentConfig:{contentAllowed:bodyContent}})
+        if(!node.drop) {
+            await toElement(node,{parent:content,parentConfig:{contentAllowed:bodyContent}})
+        }
     }
     connect(dom,document);
     try {

@@ -5,12 +5,12 @@
 :section[
 
 :h[The Joy of SECST]
-    :abbr[SECST] (:strong[S]emantic, :strong[E]xtensible, :strong[C]omputational, :strong[S]tyleable, :strong[T]agged) markup is a more expressive, but easy to learn and use, partial superset and alternative to regular Markdown. It provides these features and more:
+    :abbr[SECST] (**[S]**emantic, **[E]**xtensible, **[C]**omputational, **[S]**tyleable, **[T]**agged) markup is a more expressive, but easy to learn and use, partial superset and alternative to regular Markdown. It provides these features and more:
 
     :ul[
         - Support for almost all HTML tags :a(.#tags)[and then some...], with :a(.#theme)[themes and styles].
         - :a(.#tables-of-contents)[Table of contents], :a(.#footnotes)[footnote], :a(.#hashtags)[hashtag] and :a(.#mentions)[social media] support.
-        - Reactive :a(.#values-and-formulas)[formulas and data import] that are as simple as Excel formulas, e.g. :code[:value[2 * 2]] = :value[2 * 2].
+        - Reactive :a(.#values-and-formulas)[formulas and data import] that are as simple as Excel formulas, e.g. `[:value[2 * 2]` = :value[2 * 2].
         - SEO optimization via server rendering with JSON-LD :a(.#structured-data)[structured data] for both content generation and layout.
     ]
 
@@ -19,7 +19,7 @@
     This is the source for the introduction above:
 
     :code({language:"secst"})[
-        :abbr[SECST] (:strong[S]emantic, :strong[E]xtensible, :strong[C]omputational, :strong[S]tyleable, :strong[T]agged) markup is a more expressive, but easy to learn and use, partial superset and alternative to regular Markdown. It provides these features and more:
+          :abbr[SECST] (**[S]**emantic, **[E]**xtensible, **[C]**omputational, **[S]**tyleable, **[T]**agged) markup is a more expressive, but easy to learn and use, partial superset and alternative to regular Markdown. It provides these features and more:
 
         :ul[
             - Support for almost all HTML tags :a(.#tags)[and then some...], with :a(.#theme)[themes and styles].
@@ -149,11 +149,47 @@
             ]
         ]
 
+        Blockquote
+
+        :code[> quoted text] or :code[:blockquote[quoted text]]
+
+        :code[
+            > quoted text line one
+            > quoted text line two
+        ]
+
+        > quoted text line one
+        > quoted text line two
+
+        Nested blockquotes are supported using nested :code[:blockquote[]], but not using Markdown shorthand.
+
+        Note: Shorthand blockquotes will conflict with :code[:value[]] :a(.#values-and-formulas)[formulas] if your formulas contain a newline before :code[>] symbols.
+
+        Lists
+
+        Must be wrapped in :code[:ol[]] or :code[:ul[]]. You can use Markdown shorthand inside the SECST tag content.
+
+        :code[
+            :ol[
+                1. Item One
+                -  Item Two
+            ]
+        ]
+
+        :ol[
+            1. Item One
+            -  Item Two
+        ]
+
+        Also see :a(.#lists)[Lists]
+
         Headings
 
-        :code[h# heading text] or :code[:h#[heading text]]
+        :code[# heading text] where there can be 1 - 6 :code[#].
 
-        #h6 Heading Level Six
+        :code[:h<num>[heading text]] where :code[num] is 1 - 6.
+
+        ####### Heading Level Six
 
         Horizontal Rule
 
@@ -161,7 +197,7 @@
 
         ***
 
-        Also see :a({href:"#lists"})[Lists], :a({href:"#code"})[Code], :a({href:"#links"})[Links], :a({href:"#images"})[Images].
+        Also see :a({href:"#code"})[Code], :a({href:"#links"})[Links], :a({href:"#images"})[Images].
     ]
     :section[
         :h[Extended Markdown]
@@ -533,11 +569,11 @@
 
             Hashtags can take the form :code[#<value>[]] or :code[#[<value>...]], or :code[:hashtag[<value>...]] where :code[<value>...] is a space separated list of words to hashtag.
 
-            :code[#sects-is-great[]] renders as #sects-is-great.
+            :code[#secst-is-great[]] renders as #secst-is-great.
 
-            :code[#[sects-is-great javascript-is-great]] renders as #[sects-is-great javascript-is-great].
+            :code[#[secst-is-great javascript-is-great]] renders as #[secst-is-great javascript-is-great].
 
-            :code[:hashtag[sects-is-great javascript-is-great]] renders as :hashtag[sects-is-great javascript-is-great].
+            :code[:hashtag[secst-is-great javascript-is-great]] renders as :hashtag[secst-is-great javascript-is-great].
 
             Hashtags are automatically added to the meta tags in the head of a document for indexing and SEO purposes.
         ]
@@ -802,7 +838,7 @@
         :section[
             :h[Theme]
 
-            If a :code[:theme[]] tag with a URL or :code[:link] content exists in document, then the default theme of :a(./assets/themes/secst.css {target:"_tab"})[sects.css] is not applied.
+            If a :code[:theme[]] tag with a URL or :code[:link] content exists in document, then the default theme of :a(./assets/themes/secst.css {target:"_tab"})[secst.css] is not applied.
 
             The theme :code[:theme(./assets/themes/html.css)[]] provides only those styles dependent on the :code[.secst] class. Default browser HTML styling is used elsewhere. It is kind of ugly!
 
@@ -965,7 +1001,7 @@
              :section[
                 :h[Unit Math]
 
-                Unit math :a(https://mathjs.org/docs/datatypes/units.html)[from MathJS] allows fro conversions using the word :code[to], as well as units for numbers, e.g. :code[45 deg].
+                Unit math :a(https://mathjs.org/docs/datatypes/units.html)[from MathJS] allows for conversions using the word :code[to], as well as units for numbers, e.g. :code[45 deg].
 
                 There are many :a(https://mathjs.org/docs/datatypes/units.html#reference)[supported units].
 
@@ -1270,7 +1306,7 @@
 
         The command can be run as part of your build process to generate a static website.
 
-        There is not yet an Express route or Service Worker, but the code in :code[sects.js] could be used as a starting point.
+        There is not yet an Express route or Service Worker, but the code in :code[secst.js] could be used as a starting point.
 
         An SPD (Single Page Document) capability that takes multiple :code[.sct] files in a directory tree that parallels the desired section structure and creates a single HTML file is under development.
 
@@ -1375,7 +1411,7 @@
 :h[Architecture]
     :section[
         :h[Semantic Architecture]
-        The Mozilla Development Network, a.k.a. :abbrev[MDN], documents several HTML tag content categories:
+        The Mozilla Development Network, a.k.a. :abbr[MDN], documents several HTML tag content categories:
 
         :ul[
             - :a(https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#metadata_content)[:em(#metadata-content)[Metadata content]], e.g. :code[<link>], :code[<style].

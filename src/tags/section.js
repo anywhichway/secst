@@ -42,7 +42,8 @@ const section = {
                 const macro = MACRO.macros.get(item.tag);
                 content.add(MACRO.resolve(macro,item));
              } else {
-                 console.log("err")
+                 throw new TypeError(`Unexpected content in section: ${item}`);
+                 //console.log("err")
              }
             if(p) {
                 content.add(p);
