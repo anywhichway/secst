@@ -31,8 +31,9 @@ const theme = {
             return keep;
         },[]);
         if(node.attributes.url) {
-            node.content.push(new Tag({tag:"link",options:{attributes:{rel:"stylesheet",href:node.attributes.url}}}));
+            node.content.push(new Tag({tag:"link",options:{attributes:{rel:"stylesheet",href:node.attributes.url,static:node.attributes.static}}}));
             delete node.attributes.url;
+            delete node.attributes.static;
         }
         if(css.length>0) {
             node.content.push(new Tag({tag:"style",content:[css]}));

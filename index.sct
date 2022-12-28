@@ -6,6 +6,7 @@
 :meta({name:"author"})[Simon Y. Blackwell]
 :meta({name:"copyright"})[Documentation: Creative Commons, Code: AGPL v3.0]
 :title[SECST Markup]
+:theme(./assets/themes/secst.css static)[]
 :section[
 
 :h[The Joy of SECST]
@@ -1033,7 +1034,7 @@
         :section[
             :h[Theme]
 
-            If a :code[:theme[]] tag with a URL exists in document, then the default theme of :a(./assets/themes/secst.css {target:"_tab"})[secst.css] is not applied.
+            If a :code[:theme[]] tag with a URL exists in document, then the default CCS file :a(./assets/themes/secst.css {target:"_tab"})[secst.css] is not applied.
 
             The theme :a({target:"_tab"})[./assets/themes/html.css] provides only those styles dependent on the :code[.secst] class and a few structural defaults. Default browser HTML styling is used elsewhere. It is kind of ugly!
 
@@ -1048,6 +1049,8 @@
             Theme tags can exist as :a(.#body-content)[Body Content] or :a(.#block-content)[Block Content]. They should be placed as close to the top of the document as possible.
 
             Themes can be scoped using the scope attribute, the value of which is a CSS selector string, e.g. :code[:theme({scope:#special-section})[:p[border:solid black 1px;]]] will only put borders around paragraphs that are inside a :code[:section(#special-section)[]].
+
+            Themes associated with a URL can be statically loaded as HTML :code[style] tags by using the attribute :code[static].
 
             :code[
                 :theme[:class({name:"italic-paragraph"})[font-style:italic;]]

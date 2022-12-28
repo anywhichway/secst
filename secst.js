@@ -101,6 +101,7 @@ async function getPaths(target) {
 
 const {transform} = await import("./src/transform.js"),
     grammar = await fs.readFile("./src/secst.peg",{ encoding: 'utf8' }),
+    runtime = await fs.readFile("./runtime.js",{encoding: 'utf8'}),
     parser = peg.generate(grammar);
 let [_,path,target="*.sct",...args] = process.argv;
 let isdir;
@@ -114,14 +115,12 @@ for(const path of paths) {
             text = await fs.readFile(path,{ encoding: 'utf8' }),
             section = isdir ? `:section({level:${level}})[${text}]` : text;
         spd += section + "\n";
-        const {dom,errors,parsed,transformed} = await transform(parser,section,{styleAllowed:true}),
-            script = document.createElement("script");
-        script.setAttribute("src","./runtime.js?run");
-        dom.head.appendChild(script);
+        const {dom,errors,parsed,transformed} = await transform(parser,section,{styleAllowed:true});
+        //dom.head.appendChild(script);
         await resolve(dom.body);
         parts.pop();
         const fname = parts.join(".");
-        await fs.writeFile(fname + ".html",`<!DOCTYPE html><html><head>${dom.head.innerHTML+document.head.innerHTML}</head><body>${dom.body.innerHTML}</body></html>`,{ encoding: 'utf8' })
+        await fs.writeFile(fname + ".html",`<!DOCTYPE html><html><head>${dom.head.innerHTML+document.head.innerHTML}<script async type="application/javascript">${runtime}</script></head><body>${dom.body.innerHTML}</body></html>`,{ encoding: 'utf8' })
         if(args.includes("--writeAsTxt")) {
             await fs.writeFile(fname + ".txt",section,{ encoding: 'utf8' })
         }

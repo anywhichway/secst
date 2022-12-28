@@ -215,9 +215,6 @@ const validateNode = async ({parser,node,path=[],parent={tag:"body",contentAllow
     let transformed;
     if(config.transform && !node.transformed) {
         const transformed = await config.transform(node,{path,level});
-        if(transformed===undefined) {
-            debugger;
-        }
         node.transformed = true;
         if(transformed.tag!==node.tag && config.contentAllowed!=="*") {
             config = contentAllowed[transformed.tag];
@@ -227,7 +224,7 @@ const validateNode = async ({parser,node,path=[],parent={tag:"body",contentAllow
             return validateNode({parser,node:transformed,path,parent,errors,level,styleAllowed})
         }
     }
-    if(node.content.length>0 && !config.contentAllowed) {
+    if(!node.skipContent && node.content.length>0 && !config.contentAllowed) {
         while(node.content.length) { // try remove whitespace
             const item = node.content[0];
             if(typeof(item)!=="string" || item.trim().length!==0) {
@@ -375,7 +372,7 @@ const transform = async (parser,text,{styleAllowed}={}) => {
     },[]);
     const dom = document.createDocumentFragment();
     dom.appendChild(dom.head = document.createElement("head"));
-    dom.head.innerHTML = `<meta name="viewport" content="width=device-width, initial-scale=1" /><script src="https://cdn.jsdelivr.net/npm/@anywhichway/quick-component@0.0.14"></script>`;
+    dom.head.innerHTML = `<meta name="viewport" content="width=device-width, initial-scale=1" /></script>`;
     dom.appendChild(dom.body = document.createElement("body"));
     const header = document.createElement("header"),
         content = document.createElement("div"),
@@ -389,10 +386,7 @@ const transform = async (parser,text,{styleAllowed}={}) => {
             display: none
         }
      */
-    if(!transformed.some((node) => {
-        (node.tag==="theme" && !node.content.some((node) => node.tag==="link" && node.attributes.rel==="stylesheet")) ||
-        !getTagsByName(node,"theme").some((node) => node.tag==="link" && node.attributes.rel==="stylesheet")
-    })) {
+    if(!transformed.some((node) => node.tag==="theme" || getTagsByName(node,"theme").length>0)) {
         const link = document.createElement("link");
         link.setAttribute("rel","stylesheet");
         link.setAttribute("href","./assets/themes/secst.css");
