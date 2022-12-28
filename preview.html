@@ -19,7 +19,7 @@
         const render = async () => {
             const newmarkup = await fetch("./index.sct").then((response) => response.text());
             if(markup!==newmarkup) {
-                const {dom,errors} = await transform(await parser(),markup=newmarkup,{styleAllowed:"*"});
+                const {dom,errors} = await transform(await parser(),markup=newmarkup,{styleAllowed:true});
                 console.log(errors);
                 await SECST.resolve(dom.body);
                 document.body.innerHTML = "";

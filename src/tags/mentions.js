@@ -2,8 +2,10 @@ const mentions = {
     "@facebook": {
         htmlDocLink: "",
         attributesAllowed: {
-            href: true,
-            target: true
+            href(value) {
+                new URL(value)
+            },
+            target: "string"
         },
         contentAllowed: true,
         transform(node) {
@@ -21,8 +23,10 @@ const mentions = {
     "@github": {
         htmlDocLink: "",
         attributesAllowed: {
-            href: true,
-            target: true
+            href(value) {
+                new URL(value)
+            },
+            target: "string"
         },
         contentAllowed: true,
         transform(node) {
@@ -40,8 +44,10 @@ const mentions = {
     "@linkedin": {
         htmlDocLink: "",
         attributesAllowed: {
-            href: true,
-            target: true
+            href(value) {
+                new URL(value)
+            },
+            target: "string"
         },
         contentAllowed: true,
         transform(node) {
@@ -59,8 +65,10 @@ const mentions = {
     "@twitter": {
         htmlDocLink: "",
         attributesAllowed: {
-            href: true,
-            target: true
+            href(value) {
+                new URL(value)
+            },
+            target: "string"
         },
         contentAllowed: true,
         transform(node) {

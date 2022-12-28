@@ -24,8 +24,8 @@ const datePublished = {
     htmlDocLink: "",
     additionalDocLinks: ['<a target="_tab" href="https://schema.org/datePublished">JSON schema</a>'],
     attributesAllowed:{
-        "data-format": true,
-        lang: true,
+        "data-format": "string",
+        lang: "string",
         format(value) {
             return {
                 "data-format": value

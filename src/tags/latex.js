@@ -6,8 +6,8 @@ const latex = {
             tag: "link",
             attributes: {
                 rel: "stylesheet",
-                href: "https://cdn.jsdelivr.net/npm/katex@0.16.3/dist/katex.min.css",
-                integrity: "sha384-Juol1FqnotbkyZUT5Z7gUPjQ9gzlwCENvUZTpQBAPxtusdwFLRy382PSDx5UUJ4/",
+                href: "https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css",
+                integrity: "sha256-gMRN4/6qeELzO1wbFa8qQLU8kfuF2dnAPiUoI0ATjx8=",
                 crossOrigin: "anonymous"
             }
         },
@@ -24,8 +24,7 @@ const latex = {
             attributes: {
                 src: "https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/mhchem.min.js",
                 integrity: "sha384-RTN08a0AXIioPBcVosEqPUfKK+rPp+h1x/izR7xMkdMyuwkcZCWdxO+RSwIFtJXN",
-                crossOrigin: "anonymous",
-                async: ""
+                crossOrigin: "anonymous"
             }
         }
     ],

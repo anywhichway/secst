@@ -114,7 +114,7 @@ for(const path of paths) {
             text = await fs.readFile(path,{ encoding: 'utf8' }),
             section = isdir ? `:section({level:${level}})[${text}]` : text;
         spd += section + "\n";
-        const {dom,errors,parsed,transformed} = await transform(parser,section,{styleAllowed:"*"}),
+        const {dom,errors,parsed,transformed} = await transform(parser,section,{styleAllowed:true}),
             script = document.createElement("script");
         script.setAttribute("src","./runtime.js?run");
         dom.head.appendChild(script);

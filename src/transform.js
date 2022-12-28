@@ -167,7 +167,7 @@ const toElement = async (node,{parent,connects,parentConfig}) => {
 }
 
 import {macro as MACRO} from "./tags/macro.js";
-const validateNode = async ({parser,node,path=[],parent={tag:"body",contentAllowed:bodyContent},errors=[],level=0}) => {
+const validateNode = async ({parser,node,path=[],parent={tag:"body",contentAllowed:bodyContent},errors=[],level=0,styleAllowed}) => {
     let { contentAllowed } = parent
     if(!node || typeof(node)!=="object") {
         return;
@@ -223,7 +223,7 @@ const validateNode = async ({parser,node,path=[],parent={tag:"body",contentAllow
             if(typeof(config)==="function") {
                 config = await config.call(contentAllowed);
             }
-            return validateNode({parser,node:transformed,path,parent,errors,level})
+            return validateNode({parser,node:transformed,path,parent,errors,level,styleAllowed})
         }
     }
     if(node.content.length>0 && !config.contentAllowed) {
@@ -258,7 +258,7 @@ const validateNode = async ({parser,node,path=[],parent={tag:"body",contentAllow
                     errors.push(new parser.SyntaxError(`${tag} does not allow child ${child.tag} in ${parent.tag} ${JSON.stringify(path)}.`,null,JSON.stringify(child),node.location));
                     child.tag = "error";
                 } else {
-                    const result = await validateNode({parser,node:child,path:[...path,node.tag],parent:config,errors,level:level+1});
+                    const result = await validateNode({parser,node:child,path:[...path,node.tag],parent:config,errors,level:level+1,styleAllowed});
                     child = result.node;
                     if(!child.drop)  {
                         content.push(child);
@@ -324,14 +324,9 @@ const validateNode = async ({parser,node,path=[],parent={tag:"body",contentAllow
             errors.push(new parser.SyntaxError(`${tag}:${key} ${e.message}`,null,JSON.stringify(value),node.location))
         }
     })
-    if(node.attributes.style) {
-        const styleAllowed = config.styleAllowed;
-        if(typeof(styleAllowed)==="function") {
-            node.attributes.style = styleAllowed(node.attributes.style,node);
-        } else if(!styleAllowed) {
-            delete node.attributes.style;
-            errors.push(new parser.SyntaxError(`${tag} does not allow styling in ${parent.tag} ${JSON.stringify(path)}. Dropping style`,null,null,node.location))
-        }
+    if(!styleAllowed && node.attributes.style!=null) {
+        delete node.attributes.style;
+        errors.push(new parser.SyntaxError(`${tag} does not allow styling in ${parent.tag} ${JSON.stringify(path)}. Dropping style`,null,null,node.location))
     }
     return {node,errors};
 };
@@ -350,44 +345,13 @@ const connect = async (el,parent) => {
     }
 }
 
-const configureStyles = (tags,styleAllowed) => {
-        if(styleAllowed==="*") {
-            Object.values(tags).forEach((config) => {
-                config.styleAllowed ||= true;
-                config.attributesAllowed ||= {};
-                config.attributesAllowed.style = true;
-            })
-        } else if(typeof(styleAllowed)==="function") {
-            Object.values(tags).forEach((config) => {
-                config.styleAllowed ||= styleAllowed;
-            })
-        } else {
-            Object.entries(styleAllowed||[]).forEach(([key,value]) => {
-                let config;
-                if(typeof(value)==="function") {
-                    config = tags[key];
-                    config.styleAllowed ||= value;
-                } else {
-                    config = tags[value];
-                    config.styleAllowed ||= true;
-                }
-                if(!config) {
-                    console.error(new parser.SyntaxError(`${key} is not a defined tag and can't be styled`,null,null,node.location))
-                }
-            })
-        }
-    };
-
 const transform = async (parser,text,{styleAllowed}={}) => {
-    /*if(styleAllowed) {
-        configureStyles(tags,styleAllowed);
-    }*/
     const transformed = parser.parse(text,{Tag,JSON5}); //patchTopLevel(parser.parse(text,{Tag,JSON5}));
     const parsed = JSON.parse(JSON.stringify(transformed));
     const errors = await transformed.reduce(async (errors,node) => {
         if(typeof(node)==="string") return errors;
         try {
-            const result = await validateNode({parser,node});
+            const result = await validateNode({parser,node,styleAllowed});
             return [...await errors,...result.errors]
         } catch(e) {
             node.drop = true;

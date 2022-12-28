@@ -1,8 +1,26 @@
 import Tag from "../tag.js";
 import phrasingContent from "./phrasing-content.js";
+import sanitizeCSS from "../sanitize-css.js";
 
 const p = {
     attributesAllowed: {
+        style(value) {
+            try {
+                const o = JSON.parse(value),
+                    div = document.createElement("div");
+                div.setAttribute("style","");
+                Object.entries(o).forEach(([key,value]) => {
+                    div.style[key] = value;
+                });
+                value = div.getAttribute("style");
+            } catch(e) {
+                // ignore
+            }
+            const css = sanitizeCSS(`p {${value}}`)
+            return {
+                style: css.substring(css.indexOf("{")+1,css.lastIndexOf("}")).trim()
+            }
+        },
         align:["left","right"],
         textAlign:["left","center","right","justify"]
     },

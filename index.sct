@@ -15,7 +15,7 @@
         - Support for almost all HTML tags :a(.#tags)[and then some...], with :a(.#theme)[themes and styles].
         - :a(.#tables-of-contents)[Table of contents], :a(.#footnotes)[footnote], :a(.#hashtags)[hashtag] and :a(.#mentions)[social media] support.
         - Reactive :a(.#values-and-formulas)[formulas and data import] that are as simple as Excel formulas, e.g. `[:value[2 * 2]` = :value[2 * 2].
-        - SEO optimization via server rendering with JSON-LD :a(.#structured-data)[structured data] for both content generation and layout.
+        - SEO optimization via :a(.#server-processing)[server rendering], :a(.#meta-tags)[meta tags], and JSON-LD :a(.#structured-data)[structured data] for both content generation and layout.
     ]
 
     Use SECST to joyfully create compelling, interactive HTML documents.
@@ -29,7 +29,7 @@
             - Support for almost all HTML tags :a(.#tags)[and then some...], with :a(.#theme)[themes and styles].
             - :a(.#tables-of-contents)[Table of contents], :a(.#footnotes)[footnote], :a(.#hashtags)[hashtag] and :a(.#mentions)[social media] support.
             - Reactive :a(.#values-and-formulas)[formulas and data import] that are as simple as Excel formulas, e.g. :code[:value[2 * 2]] = :value[2 * 2].
-            - SEO optimization via server rendering with JSON-LD :a(.#structured-data)[structured data] for both content generation and layout.
+            - SEO optimization via :a(.#server-processing)[server rendering], :a(.#meta-tags)[meta tags], and JSON-LD :a(.#structured-data)[structured data] for both content generation and layout.
         ]
 
         Use SECST to joyfully create compelling, interactive HTML documents.
@@ -274,20 +274,11 @@
         A few tags of note are documented below to illustrate the use of SECST or highlight special features.
 
         :section[
-            :h[Paragraph]
-
-            SECST will treat two newlines in sequence as a paragraph break. There is also a paragraph tag :code[:p[]]. Newlines inside a :code[p] tag will produce separate HTML :code[<br>] elements. A :code[:p[]] tag is not strictly necessary for really simple content. A SECST parser/transpiler will do a reasonable job of figuring out where paragraph breaks are required; however behavior may vary from implementation to implementation.
-
-            If you get an unexpected document layout, try putting content inside a :code[:p[]] tag.
-        ]
-        :section[
             :h[Code]
 
             Contents wrapped in :code[:code[]] will be inline unless the contents contain a newline, in which case the code will be displayed in block format.
 
             Both :code[`code`] and :code[```code```] are supported.
-
-            If you have a single line you wish to show as a block, end it with a newline.
         ]
         :section[
             :h[Details]
@@ -455,7 +446,7 @@
                 - :em[robots] with the comma separated values of :code[index] or :code[noindex] and :code[follow] or :code[nofollow].
             ]
 
-            Also see the section :a(.#structured-data)[Structured Data] under :a(.#seo)[SEO].
+            Also see the section :a(.#structured-data)[Structured Data].
         ]
         :section[
             :h[Multimedia]
@@ -482,6 +473,34 @@
             :section[
                 :h[Video]
             ]
+        ]
+        :section[
+            :h(#p)[Paragraph]
+
+            The :code[:p[]] tag wraps paragraph content. It accepts plain text and :a(https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#phrasing_content)[phrasing content], i.e. most other tags.
+
+             Inside the content of a :code[:section[]], SECST will treat two newlines in sequence as a paragraph break. Newlines inside a :code[p] tag will produce separate HTML :code[<br>] elements. A :code[:p[]] tag is not strictly necessary for really simple content. A SECST parser/transpiler will do a reasonable job of figuring out where paragraph breaks are required; however behavior may vary from implementation to implementation.
+
+            If you get an unexpected document layout, try putting content inside a :code[:p[]] tag.
+
+            :code[:p[]] allows three attributes:
+
+            :ol[
+                :li[style, see :a(.#styling-content)[Styling Content].]
+                :li[align, which floats the paragraph "left" or "right" of adjacent :a(.#block-content)[block content].]
+                :li[textAlign, which aligns the contents inside the paragraph to the "left","justified", or "right".]
+            ]
+
+            Also see the :a(.#spec-p)[technical documentation].
+        ]
+        :section[
+            :h[Style]
+
+            The content of the :code[:style[]] tag is CSS. The CSS is automatically sanitized.
+
+            The tag can tag one attribute :code[selector] which will prefix all styles in the style block with the selector to limit their scope of application.
+
+            Also see the :a(.#theme)[theme] tag, which is much more powerful and :a(.#styling-content)[Styling Content].
         ]
     ]
     :section[
@@ -822,6 +841,179 @@
             ]
         ]
         :section[
+            :h[Structured Data]
+
+            For select tags, SECST can generate JSON-LD directly from SECST markup. Content, layout, and SEO optimization will always be in sync.
+
+            This is best covered by an example based on :a(https://developers.google.com/search/docs/appearance/structured-data/article)[Google's documentation for a news article].
+
+            :em[Note: Only those tags documented for :code[NewsArticle] are currently supported.]
+
+            :section[
+                :h[News Article]
+
+                The SECST tag :code[:NewsArticle[]] can contain regular SECST as well as tags that parallel established JSON-LD schema like :code[:headline[]], :code[:author[]] and :code[:Person[]]. Where there are identical or trivially equivalent tags and attribute names, e.g. :code[image] and :code[img], the native SECST tag is used.
+
+                :code[
+                    :NewsArticle[
+                        :headline[Pinky Conquers The World]
+                        :img(./assets/images/The_Blue_Marble.jpg {height:50})[Earth]
+                        :p[
+                            Today Pinky finally conquered the world! Next up will be Mars. Watch out billionaires!
+                        ]
+                        :author[The Brain]
+                        :datePublished({format:""})[2022-12-20T08:00:00+08:00]
+                    ]
+                ]
+
+                Where JSON-LD names elements accept sub-types, e.g. :code[:Person[]], those can also be used:
+
+                :code[
+                    :NewsArticle[
+                        :headline[Pinky Conquers The World]
+                        :img(./assets/images/The_Blue_Marble.jpg {height:50,align:"left"})[Earth]
+                        :p[
+                           Today Pinky finally conquered the world! Next up will be Mars. Watch out billionaires!
+                        ]
+                        :author[
+                            :Person[
+                                :name[The Brain]
+                            ]
+                        ]
+                        :datePublished({format:""})[2022-12-20T08:00:00+08:00]
+                    ]
+                ]
+
+                renders as
+
+                :NewsArticle[
+                    :headline[Pinky Conquers The World]
+                    :img(./assets/images/The_Blue_Marble.jpg {height:50,align:"left"})[Earth]
+                   :p[
+                       Today Pinky finally conquered the world! Next up will be Mars. Watch out billionaires!
+                   ]
+                    :author[
+                        :Person[
+                            :name[The Brain]
+                        ]
+                    ]
+                    :datePublished[2022-12-20T08:00:00+08:00]
+                ]
+
+                SECST knows which tags to collect into arrays for JSON-LD and how to map similar SECST or HTML semantics to JSON-LD. It ignores tags that are not part of JSON-LD schema unless they have been mapped to JSON-LD schema internally.
+
+                Some JSON-LD attributes mapped to tags can have attributes, e.g. :code[:heading({level:2})[]].
+
+                Also note the use of Date formatting below based on :a(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat)[Javascript date and time format functionality].
+
+                 :code[
+                    :NewsArticle[
+                        :headline({level:2})[Pinky and The Brain Plan For Mars]
+                        :img(./assets/images/mars.jpg {height:50,align:"left"})[Mars]
+                        :p[
+                            We, Pinky and The Brain, will soon announce plans to partner with one of the world's billionaires to take over Mars.
+                        ]
+                        :Author[
+                            :Person[
+                                :name[Pinky]
+                            ],
+                            :Person[
+                                :name[The Brain]
+                            ]
+                        ]
+                        :datePublished({format:"{dateStyle:'full',timeStyle:'long'}"})[2022-12-20T08:00:00+08:00]
+                    ]
+                ]
+
+                will generate this JSON-LD and insert it into the head of the document:
+
+                :code[
+                    <script type="application/ld+json">
+                    {
+                      "@context": "https://schema.org",
+                      "@type": "NewsArticle",
+                      "headline": "Pinky and The Brain Plan For Mars",
+                      "image": [
+                        "./assets/images/mars.jpg"
+                       ],
+                      "datePublished": "2022-12-20T08:00:00+08:00",
+                      "author": [{
+                          "@type": "Person",
+                          "name": "Pinky",
+                        },{
+                          "@type": "Person",
+                          "name": "The Brain"
+                      }]
+                    }
+                    </script>
+                ]
+
+                while rendering this content
+
+                :NewsArticle[
+                    :headline({level:2})[Pinky and The Brain Plan For Mars]
+                    :img(./assets/images/mars.jpg {height:50,align:"left"})[Mars]
+                    :p[
+                        We, Pinky and The Brain, will soon announce plans to partner with one of the world's billionaires to take over Mars.
+                    ]
+                    :author[
+                        :Person[:name[Pinky]],
+                        :Person[:name[The Brain]]
+                    ]
+                    :datePublished({format:"{dateStyle:'full',timeStyle:'long'}"})[2022-12-20T08:00:00+08:00]
+                ]
+
+                The ordering of the tags inside :code[:NewsArticle[]] is only relevant to the display layout. This generates equivalent JSON-LD:
+
+                :code[
+                    :NewsArticle[
+                        :headline({level:4})[Pinky and The Brain Plan For Mars]
+                        :author[
+                            :Person[:name[Pinky]],
+                            :Person[:name[The Brain]]
+                        ]
+                        :datePublished({format:"{dateStyle:'full',timeStyle:'long'}"})[2022-12-20T08:00:00+08:00]
+                        :img(./assets/images/mars.jpg {height:50,align:"left"})[Mars]
+                        :p[
+                            We, Pinky and The Brain, will soon announce plans to partner with one of the world's billionaires to take over Mars.
+                        ]
+                    ]
+                ]
+
+                but renders with a smaller heading and the attribution at the start:
+
+                 :NewsArticle[
+                    :headline({level:4})[Pinky and The Brain Plan For Mars]
+                    :author[
+                        :Person[:name[Pinky]],
+                        :Person[:name[The Brain]]
+                    ]
+                    :datePublished({format:"{dateStyle:'full',timeStyle:'long'}"})[2022-12-20T08:00:00+08:00]
+                    :p[]
+                    :img(./assets/images/mars.jpg {height:50,align:"left"})[Mars]
+                    :p[
+                        We, Pinky and The Brain, will soon announce plans to partner with one of the world's billionaires to take over Mars.
+                    ]
+                ]
+                The generated HTML also contains styles, so a style sheet can be used to modify the displayed content.
+
+                :transpiled[
+                    :NewsArticle[
+                        :headline[Pinky and The Brain Plan For Mars]
+                        :author[
+                            :Person[:name[Pinky]],
+                            :Person[:name[The Brain]]
+                        ]
+                        :datePublished({format:"{dateStyle:'full',timeStyle:'long'}"})[2022-12-20T08:00:00+08:00]
+                        :p[
+                            :img(./assets/images/mars.jpg {height:50,align:"left"})[Mars]
+                            We, Pinky and The Brain, will soon announce plans to partner with one of the world's billionaires to take over Mars.
+                        ]
+                    ]
+                ]
+            ]
+        ]
+        :section[
             :h(#tables-of-contents)[Tables of Contents]
 
             Tables of contents are placed at the location of the tag :code[toc[<title>]]. The :code[:toc[]] tag should occur at the same level, i.e. outside of, :code[:section[]].
@@ -841,20 +1033,21 @@
         :section[
             :h[Theme]
 
-            If a :code[:theme[]] tag with a URL or :code[:link] content exists in document, then the default theme of :a(./assets/themes/secst.css {target:"_tab"})[secst.css] is not applied.
+            If a :code[:theme[]] tag with a URL exists in document, then the default theme of :a(./assets/themes/secst.css {target:"_tab"})[secst.css] is not applied.
 
-            The theme :code[:theme(./assets/themes/html.css)[]] provides only those styles dependent on the :code[.secst] class. Default browser HTML styling is used elsewhere. It is kind of ugly!
+            The theme :a({target:"_tab"})[./assets/themes/html.css] provides only those styles dependent on the :code[.secst] class and a few structural defaults. Default browser HTML styling is used elsewhere. It is kind of ugly!
+
+            Only one theme tag is usually used, but it is possible to use multiple theme tags.
 
             The content of a theme can be any tag, except most have a special interpretation. The tag content is the CSS to apply to the tag, e.g. :code[:theme[:p[border:solid black 1px;]]] will put a black border around all paragraphs.
 
             The theme content tags permitted but not treated in a special way are :code[:link[]], :code[:style[]], and :code[:class[]] (which is unique to :code[:theme[]]).
 
-            The tag :code[:class[]] takes a name attribute (without a prefixed period) and the content is the CSS, e.g. :code[:theme[:class({name:"italic-paragraph"})[font-style:italic;]]] creates a class :code[.italic-paragraph].
+            The tag :code[:class[]] takes a name attribute (without a prefixed period) and the content is the CSS, e.g. :code[:theme[:class({name:"italic-paragraph"})[font-style:italic;]]] creates a class :code[.italic-paragraph]. These classes can be added to the parenthetical part of tags, e.g. :code[:p(.italic-paragraph)[Paragraph in italics]].
 
             Theme tags can exist as :a(.#body-content)[Body Content] or :a(.#block-content)[Block Content]. They should be placed as close to the top of the document as possible.
 
             Themes can be scoped using the scope attribute, the value of which is a CSS selector string, e.g. :code[:theme({scope:#special-section})[:p[border:solid black 1px;]]] will only put borders around paragraphs that are inside a :code[:section(#special-section)[]].
-
 
             :code[
                 :theme[:class({name:"italic-paragraph"})[font-style:italic;]]
@@ -1089,206 +1282,39 @@
         ]
     ]
     :section[
-        :h(#seo)[Search Engine Optimization]
-
-        SECST provides several features to support :abbr[SEO] Search Engine Optimization.
-
-        :ul({title:"SEO features"})[
-            :li[:a({href:"#hastags"})[hashtags]]
-            :li[:a({href:"#meta-tags"})[meta tags]]
-            :li[:a({href:"#structured-data"})[structured data]]
-            :li[:a({href:"#server-transpilation"})[server transpilation]]
-        ]
-        :section[
-            :h[Structured Data]
-
-            For select tags, SECST can generate JSON-LD directly from SECST markup. Content, layout, and SEO optimization will always be in sync.
-
-            This is best covered by an example based on :a(https://developers.google.com/search/docs/appearance/structured-data/article)[Google's documentation for a news article].
-
-            :em[Note: Only those tags documented for :code[NewsArticle] are currently supported.]
-
-            :section[
-                :h[News Article]
-
-                The SECST tag :code[:NewsArticle[]] can contain regular SECST as well as tags that parallel established JSON-LD schema like :code[:headline[]], :code[:author[]] and :code[:Person[]]. Where there are identical or trivially equivalent tags and attribute names, e.g. :code[image] and :code[img], the native SECST tag is used.
-
-                :code[
-                    :NewsArticle[
-                        :headline[Pinky Conquers The World]
-                        :img(./assets/images/The_Blue_Marble.jpg {height:50})[Earth]
-                        :p[
-                            Today Pinky finally conquered the world! Next up will be Mars. Watch out billionaires!
-                        ]
-                        :author[The Brain]
-                        :datePublished({format:""})[2022-12-20T08:00:00+08:00]
-                    ]
-                ]
-
-                Where JSON-LD names elements accept sub-types, e.g. :code[:Person[]], those can also be used:
-
-                :code[
-                    :NewsArticle[
-                        :headline[Pinky Conquers The World]
-                        :img(./assets/images/The_Blue_Marble.jpg {height:50,align:"left"})[Earth]
-                        :p[
-                           Today Pinky finally conquered the world! Next up will be Mars. Watch out billionaires!
-                        ]
-                        :author[
-                            :Person[
-                                :name[The Brain]
-                            ]
-                        ]
-                        :datePublished({format:""})[2022-12-20T08:00:00+08:00]
-                    ]
-                ]
-
-                renders as
-
-                :NewsArticle[
-                    :headline[Pinky Conquers The World]
-                    :img(./assets/images/The_Blue_Marble.jpg {height:50,align:"left"})[Earth]
-                   :p[
-                       Today Pinky finally conquered the world! Next up will be Mars. Watch out billionaires!
-                   ]
-                    :author[
-                        :Person[
-                            :name[The Brain]
-                        ]
-                    ]
-                    :datePublished[2022-12-20T08:00:00+08:00]
-                ]
-
-                SECST knows which tags to collect into arrays for JSON-LD and how to map similar SECST or HTML semantics to JSON-LD. It ignores tags that are not part of JSON-LD schema unless they have been mapped to JSON-LD schema internally.
-
-                Some JSON-LD attributes mapped to tags can have attributes, e.g. :code[:heading({level:2})[]].
-
-                Also note the use of Date formatting below based on :a(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat)[Javascript date and time format functionality].
-
-                 :code[
-                    :NewsArticle[
-                        :headline({level:2})[Pinky and The Brain Plan For Mars]
-                        :img(./assets/images/mars.jpg {height:50,align:"left"})[Mars]
-                        :p[
-                            We, Pinky and The Brain, will soon announce plans to partner with one of the world's billionaires to take over Mars.
-                        ]
-                        :Author[
-                            :Person[
-                                :name[Pinky]
-                            ],
-                            :Person[
-                                :name[The Brain]
-                            ]
-                        ]
-                        :datePublished({format:"{dateStyle:'full',timeStyle:'long'}"})[2022-12-20T08:00:00+08:00]
-                    ]
-                ]
-
-                will generate this JSON-LD and insert it into the head of the document:
-
-                :code[
-                    <script type="application/ld+json">
-                    {
-                      "@context": "https://schema.org",
-                      "@type": "NewsArticle",
-                      "headline": "Pinky and The Brain Plan For Mars",
-                      "image": [
-                        "./assets/images/mars.jpg"
-                       ],
-                      "datePublished": "2022-12-20T08:00:00+08:00",
-                      "author": [{
-                          "@type": "Person",
-                          "name": "Pinky",
-                        },{
-                          "@type": "Person",
-                          "name": "The Brain"
-                      }]
-                    }
-                    </script>
-                ]
-
-                while rendering this content
-
-                :NewsArticle[
-                    :headline({level:2})[Pinky and The Brain Plan For Mars]
-                    :img(./assets/images/mars.jpg {height:50,align:"left"})[Mars]
-                    :p[
-                        We, Pinky and The Brain, will soon announce plans to partner with one of the world's billionaires to take over Mars.
-                    ]
-                    :author[
-                        :Person[:name[Pinky]],
-                        :Person[:name[The Brain]]
-                    ]
-                    :datePublished({format:"{dateStyle:'full',timeStyle:'long'}"})[2022-12-20T08:00:00+08:00]
-                ]
-
-                The ordering of the tags inside :code[:NewsArticle[]] is only relevant to the display layout. This generates equivalent JSON-LD:
-
-                :code[
-                    :NewsArticle[
-                        :headline({level:4})[Pinky and The Brain Plan For Mars]
-                        :author[
-                            :Person[:name[Pinky]],
-                            :Person[:name[The Brain]]
-                        ]
-                        :datePublished({format:"{dateStyle:'full',timeStyle:'long'}"})[2022-12-20T08:00:00+08:00]
-                        :img(./assets/images/mars.jpg {height:50,align:"left"})[Mars]
-                        :p[
-                            We, Pinky and The Brain, will soon announce plans to partner with one of the world's billionaires to take over Mars.
-                        ]
-                    ]
-                ]
-
-                but renders with a smaller heading and the attribution at the start:
-
-                 :NewsArticle[
-                    :headline({level:4})[Pinky and The Brain Plan For Mars]
-                    :author[
-                        :Person[:name[Pinky]],
-                        :Person[:name[The Brain]]
-                    ]
-                    :datePublished({format:"{dateStyle:'full',timeStyle:'long'}"})[2022-12-20T08:00:00+08:00]
-                    :p[]
-                    :img(./assets/images/mars.jpg {height:50,align:"left"})[Mars]
-                    :p[
-                        We, Pinky and The Brain, will soon announce plans to partner with one of the world's billionaires to take over Mars.
-                    ]
-                ]
-                The generated HTML also contains styles, so a style sheet can be used to modify the displayed content.
-
-                :transpiled[
-                    :NewsArticle[
-                        :headline[Pinky and The Brain Plan For Mars]
-                        :author[
-                            :Person[:name[Pinky]],
-                            :Person[:name[The Brain]]
-                        ]
-                        :datePublished({format:"{dateStyle:'full',timeStyle:'long'}"})[2022-12-20T08:00:00+08:00]
-                        :p[
-                            :img(./assets/images/mars.jpg {height:50,align:"left"})[Mars]
-                            We, Pinky and The Brain, will soon announce plans to partner with one of the world's billionaires to take over Mars.
-                        ]
-                    ]
-                ]
-            ]
-        ]
-    ]
-    :section[
         :h[Styling Content]
 
-        The ability to use styling can be configured using API options and command line arguments. See :a(#document-programming)[document programming] below. Hence, not all styling may be available in all environments that provide a SECST editor.
-
-        Content can be styled using CSS classes loaded using the :code[style[]] tag. This tag can be used in multiple ways. If a url is provided, i.e. :code[style(./my-css-url.css)[]], then an HTML link element of type style is created behind the scenes. If CSS is placed between the square braces, i.e. :code[style[.my-class { background-color: red}]], then a style element with CSS content is created behind the scenes. If both are provided, then two elements are generated, one of each. :code[link(<some url> type='style')[]] tag.
+        Content can be styled using CSS classes loaded using the :a(.#theme)[theme tag].
 
         CSS classes are applied to content using :code[.<class-name>] inside the parenthetical configuration part of a tag, e.g. :code[:p(.my-class1 .my-class2)[My content]].
 
-        Style can also be applied using the :code[style] attribute of a tag. The style attribute can be in string or JSON format. If in JSON format, should use camelCase versions of CSS property names. For example, :code[:p(style='width:200px;text-align:right;float:right')[My right content]]  and :code[:p({style:{width:"200px";textAlign:"right",float:"right"}}')[My right content]] produce the same output.
+        Also see the :a(.#style)[style tag].
 
-        :p({style:"text-align:left;float:right"})[My right content]
-        :p[
-        Left Content
-        More left content
+        Style can be applied at the element level using the :code[style] attribute of a tag if the tag supports the style attribute. Currently only the :code[p[]] tag supports the :code[style] attribute. Using the :code[theme[]] or :code[:style[]] tag with an id selector is suggested.
+
+        The style attribute can be in string or JSON format. If in JSON format, it should use camelCase versions of CSS property names. For example, :code[:p({style:"width:200px;text-align:right;float:right"})[My right content]]  and :code[:p({style:{width:"200px";textAlign:"right",float:"right"}}')[My right content]] produce the same output.
+
+        :code[
+            :p({style:"text-align:left;float:right"})[
+                My right content
+            ]
+            :p[
+                Left Content
+                More left content
+            ]
         ]
+
+        renders as
+
+        :p({style:"text-align:left;float:right"})[
+            My right content
+        ]
+        :p[
+            Left Content
+            More left content
+        ]
+
+        :em[Note: the :a(.#p)[p tag] supports the attributes :code[align] and :code[textAlign], so using style in the manner above is not actually necessary.]
     ]
 ]
 
@@ -1359,7 +1385,7 @@
 
     :dl[
         :forEntries({object:"#tagSpecs"})[
-            :dt[:strong[${key}] ${unescapeHTML(value.htmlDocLink)} ${value.additionalDocLinks?.length>0 ? (value.htmlDocLink ? ", " : "") + value.additionalDocLinks.map((link) => unescapeHTML(link)).join(", ") : ""} :br :br]
+            :dt[:strong[${key}] ${unescapeHTML('<a id="spec-')+key+unescapeHTML('"></a>')} ${unescapeHTML(value.htmlDocLink)} ${value.additionalDocLinks?.length>0 ? (value.htmlDocLink ? ", " : "") + value.additionalDocLinks.map((link) => unescapeHTML(link)).join(", ") : ""} :br :br]
             :dd[:em[Transformation Impacts]:
                 ${value.transform && value.attributesAllowed ? "Attributes may differ from the below since the tag is transformed and transient attributes may be deleted. See the detailed documentation for the tag." : "N/A"} :br :br
             ]
@@ -1550,7 +1576,9 @@
     :h[Copyright and License]
     Copyright 2022, AnyWhichWay LLC
 
-    License: :a(https://www.gnu.org/licenses/agpl-3.0.en.html)[AGPL-3.0]
+    Documentation License: :a(https://creativecommons.org/licenses/by/4.0/)[Creative Commons Attribution v4.0]
+
+    Code License: :a(https://www.gnu.org/licenses/agpl-3.0.en.html)[AGPL-3.0]
 
     Visit :a(https://github.com/anywhichway/secst)[SECST on GitHub] to participate in SECST's further development.
 ]

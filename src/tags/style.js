@@ -1,16 +1,20 @@
-import textContent from "./text-content.js";
+import sanitizeCSS from "../sanitize-css.js";
 
 const style = {
+    attributesAllowed: {
+        selector: true
+    },
     contentAllowed: true,
     transform(node) {
+        const css = sanitizeCSS(node.content.join(";"));
         if(node.attributes.selector) {
-            node.content = [`${node.attributes.selector} { ${node.content.join(";")} }`]
+            node.content = [`${node.attributes.selector} { ${css} }`]
             delete node.attributes.selector;
-        } else if(node.id) {
-            node.content = [`#${node.id} { ${node.content.join(";")} }`]
-            delete node.id;
+        } else if(node.attributes.url && node.attributes.startsWith(".#")) {
+            node.content = [`$node.attributes.url.substring(1)} { ${css} }`]
+            deletenode.attributes.url;
         } else {
-            node.content = [node.content.join(";")]
+            node.content = [css]
         }
         return node;
     }
