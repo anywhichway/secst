@@ -137,7 +137,8 @@ const toElement = async (node,{parent,connects,parentConfig}) => {
         }
         parent.appendChild(el);
         if(node.mounted) {
-            node.mounted(el,{...node});  // todo make the node copy a deepcopy?
+            //node.mounted(el,{...node});  // todo make the node copy a deepcopy?
+            el.mounted = async () => await node.mounted(el,{...node});
         }
         if(node.connected) {
             el.connected = async () => await node.connected(el,{...node}); // todo make the node copy a deepcopy?
@@ -331,6 +332,20 @@ const validateNode = async ({parser,node,path=[],parent={tag:"body",contentAllow
     return {node,errors};
 };
 
+const mount = async (el) => {
+    //if(!el.isConnected && [Node.TEXT_NODE,Node.ELEMENT_NODE,Node.COMMENT_NODE,Node.CDATA_SECTION_NODE].includes(el.nodeType)) {
+    //    parent.appendChild(el);
+    //}
+    if([Node.ELEMENT_NODE,Node.DOCUMENT_FRAGMENT_NODE].includes(el.nodeType)) {
+        for(const child of [...el.childNodes]) {
+            await mount(child);
+        }
+    }
+    if(el.mounted) {
+        await el.mounted();
+    }
+}
+
 const connect = async (el,parent) => {
     if(!el.isConnected && [Node.TEXT_NODE,Node.ELEMENT_NODE,Node.COMMENT_NODE,Node.CDATA_SECTION_NODE].includes(el.nodeType)) {
         parent.appendChild(el);
@@ -388,7 +403,8 @@ const transform = async (parser,text,{styleAllowed}={}) => {
             await toElement(node,{parent:content,parentConfig:{contentAllowed:bodyContent}})
         }
     }
-    connect(dom,document);
+    await mount(dom);
+    await connect(dom,document);
     try {
         autohelm.init({tocSelector:".toc",dom:content,useSections:true});
     } catch(e) {

@@ -9,8 +9,8 @@ const meta = {
         node.content = [];
         return node;
     },
-    connected(el) {
-        el.ownerDocument.head.appendChild(el);
+    mounted(el) {
+        document.head.appendChild(el);
     }
 }
 

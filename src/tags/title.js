@@ -1,7 +1,11 @@
 const title = {
     contentAllowed: true,
-    connected(el) {
-        el.ownerDocument.head.appendChild(el);
+    mounted(el) {
+        let root = el.parentNode;
+        while(root.parentNode) {
+            root = root.parentNode;
+        }
+        root.head.appendChild(el);
     }
 }
 

@@ -11,7 +11,7 @@ const hashtag = {
             return tags;
         },[]).join(", ")
     },
-    connected(el) {
+    mounted(el) {
         const tags = el.innerText.split(","),
             meta = document.createElement("meta");
         meta.setAttribute("name","keywords");
