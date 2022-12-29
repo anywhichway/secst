@@ -245,13 +245,13 @@ Use SECST to joyfully create compelling, interactive HTML documents.</code></pre
  A --- B
  B--&gt;C[fa:fa-ban forbidden]
  B--&gt;D(fa:fa-spinner);
-]</code></pre></p><p>            renders as</p><script src="https://cdn.jsdelivr.net/npm/mermaid@9/dist/mermaid.min.js" onload="(() =&gt; { mermaid.initialize({ startOnLoad: true }) })()"></script><pre id="mermaidChart5666075522916392" class="mermaid">
+]</code></pre></p><p>            renders as</p><script src="https://cdn.jsdelivr.net/npm/mermaid@9/dist/mermaid.min.js" onload="(() =&gt; { mermaid.initialize({ startOnLoad: true }) })()"></script><pre id="mermaidChart31595070140236525" class="mermaid">
                 graph LR
                 A --- B
                 B-->C[fa:fa-ban forbidden]
                 B-->D(fa:fa-spinner);
             </pre><script type="module">
-            const el = document.getElementById("mermaidChart5666075522916392"),
+            const el = document.getElementById("mermaidChart31595070140236525"),
                 sibling = el.nextSibling,
                 insertSvg = function (svgCode, bindFunctions) {
                     el.innerHTML = svgCode;
@@ -265,7 +265,7 @@ Use SECST to joyfully create compelling, interactive HTML documents.</code></pre
                 B-->C[fa:fa-ban forbidden]
                 B-->D(fa:fa-spinner);
             `;
-            setTimeout(() => mermaid.mermaidAPI.render("mermaidChart5666075522916392", graphDefinition, insertSvg),1000);
+            setTimeout(() => mermaid.mermaidAPI.render("mermaidChart31595070140236525", graphDefinition, insertSvg),1000);
         </script><p>            There are lots of charts to choose from:</p><p>            <ul><li> <a target="_tab" href="https://mermaid.js.org/syntax/flowchart.html">Flowchart</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/sequenceDiagram.html">Sequence Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/classDiagram.html">Class Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/stateDiagram.html">State Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/entityRelationshipDiagram.html">Entity Relationship Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/userJourney.html">User Journey</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/gantt.html">Gannt</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/pie.html">Pie Chart</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/requirementDiagram.html">Requirement Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/gitgraph.html">Gitgraph Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/c4c.html">C4C Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/mindmap.html">Mindmaps</a></li></ul><br>        </p></section><section><h3 id="questions" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Questions<span class="autohelm-nav autohelm-nav-up-down"> <a href="#mermaid-chart">&uarr;</a> <a href="#repl">&darr;</a></span></h3><p>            Questions can be used to create a quiz like experience.</p><p>            <pre class="secst"><code class="nohighlight">:question({type:"number",showanswer:true})[
   :text[What is the :code[sqrt(4)]?]
   :answer[sqrt(4)]
@@ -471,262 +471,142 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
                     </dl><br>                </p></section><section><h5 id="matrix-functions" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Matrix Functions<span class="autohelm-nav autohelm-nav-up-down"> <a href="#algebraic-functions">&uarr;</a> <a href="#unit-math">&darr;</a></span></h5><p>                    <input class="secst" data-default="" data-template="multiply([[1,2],[3,4]],[[5,6],[1,1]])" value="" title="multiply([[1,2],[3,4]],[[5,6],[1,1]])" data-fitcontent=""><br>                </p></section></section><section><h4 id="unit-math" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Unit Math<span class="autohelm-nav autohelm-nav-up-down"> <a href="#basic-math">&uarr;</a> <a href="#importing-data">&darr;</a></span></h4><p>                Unit math <a target="_tab" href="https://mathjs.org/docs/datatypes/units.html">from MathJS</a> allows for conversions using the word <code class="nohighlight">to</code>, as well as units for numbers, e.g. <code class="nohighlight">45 deg</code>.</p><p>                There are many <a target="_tab" href="https://mathjs.org/docs/datatypes/units.html#reference">supported units</a>.</p><p>                Here are a few examples:</p><p>                <code class="nohighlight">:value[2 inch to cm]</code> = <input class="secst" data-default="" data-template="2 inch to cm" value="" title="2 inch to cm" data-fitcontent=""></p><p>                <code class="nohighlight">:value[90 km/h to mi/h]</code> = <input class="secst" data-default="" data-template="90 km/h to mi/h" value="" title="90 km/h to mi/h" data-fitcontent=""></p><p>                <code class="nohighlight">:value[90 km/h to m/h]</code> = <input class="secst" data-default="" data-template="90 km/h to m/h" value="" title="90 km/h to m/h" data-fitcontent=""> <code class="nohighlight">m/h</code> is meters per hour</p><p>                <code class="nohighlight">:value[(1 week + 1 day) to days]</code> = <input class="secst" data-default="" data-template="(1 week + 1 day) to days" value="" title="(1 week + 1 day) to days" data-fitcontent=""></p><p>                <code class="nohighlight">:value[cos(45 deg)]</code> = <input class="secst" data-default="" data-template="cos(45 deg)" value="" title="cos(45 deg)" data-fitcontent=""></p><p>                <code class="nohighlight">:value[8.314 m^3 Pa / mol / K]</code> = <input class="secst" data-default="" data-template="8.314 m^3 Pa / mol / K" value="" title="8.314 m^3 Pa / mol / K" data-fitcontent=""></p><p>                Remember, if you have a value that looks like a formula, but is not, you can use the attribute <code class="nohighlight">literal</code>, e.g.  <code class="nohighlight">:value(literal)[2 inch to cm]</code> = <input class="secst" data-default="" data-template="2 inch to cm" value="2 inch to cm" title="2 inch to cm" data-literal="" data-fitcontent="" disabled="" style="width: 13ch;">.</p><p>                And, you can use <code class="nohighlight">plaintext</code> to display values without any styling, e.g. <code class="nohighlight">:value(plaintext)[90 km/h to mi/h]</code> = <span class="secst" data-default="" data-template="90 km/h to mi/h" value="" title="90 km/h to mi/h" data-plaintext="">90 km/h to mi/h</span>.</p></section><section><h4 id="importing-data" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Importing Data<span class="autohelm-nav autohelm-nav-up-down"> <a href="#unit-math">&uarr;</a> <a href="#advanced-formulas">&darr;</a></span></h4><p>                Values can included imported data using the <code class="nohighlight">src</code> attribute and a mime type provided in the <code class="nohighlight">type</code> attribute. The trailing <code class="nohighlight">[]</code> are optional.</p><p>                Values with the boolean attribute <code class="nohighlight">static</code> is import data at transpile time. If importing fails, another attempt is made at runtime.</p><p>                JSON is formatted for readability and <a target="_tab" href="https://json5.org">JSON5</a> is supported to make it easier to handle remote data.</p><p>                <pre class="secst"><code class="nohighlight">:value(https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson static {type:"application/json"})</code></pre></p><p>                <textarea class="secst" data-mime-type="application/json" data-default="" title="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson" data-fitcontent="" disabled="">{
   "type": "FeatureCollection",
   "metadata": {
-    "generated": 1672259248000,
+    "generated": 1672272480000,
     "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson",
     "title": "USGS All Earthquakes, Past Hour",
     "status": 200,
     "api": "1.10.3",
-    "count": 6
+    "count": 3
   },
   "features": [
     {
       "type": "Feature",
       "properties": {
-        "mag": 0.8,
-        "place": "47 km NNW of Pahrump, Nevada",
-        "time": 1672258237297,
-        "updated": 1672258377190,
+        "mag": 2.76,
+        "place": "21km ESE of Yosemite Valley, CA",
+        "time": 1672271666390,
+        "updated": 1672272250034,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nn00854287",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nn00854287.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73826151",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73826151.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 10,
-        "net": "nn",
-        "code": "00854287",
-        "ids": ",nn00854287,",
-        "sources": ",nn,",
-        "types": ",origin,phase-data,",
-        "nst": 12,
-        "dmin": 0.099,
-        "rms": 0.2285,
-        "gap": 138.6,
-        "magType": "ml",
-        "type": "earthquake",
-        "title": "M 0.8 - 47 km NNW of Pahrump, Nevada"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -116.2422,
-          36.5846,
-          4.2
-        ]
-      },
-      "id": "nn00854287"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 2.61,
-        "place": "2 km SSE of Monte Grande, Puerto Rico",
-        "time": 1672257752080,
-        "updated": 1672258672060,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/pr71389428",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/pr71389428.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "reviewed",
-        "tsunami": 0,
-        "sig": 105,
-        "net": "pr",
-        "code": "71389428",
-        "ids": ",pr71389428,",
-        "sources": ",pr,",
-        "types": ",origin,phase-data,",
-        "nst": 9,
-        "dmin": 0.0447,
-        "rms": 0.12,
-        "gap": 126,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 2.6 - 2 km SSE of Monte Grande, Puerto Rico"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -67.1023333333333,
-          18.0651666666667,
-          19.24
-        ]
-      },
-      "id": "pr71389428"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.17,
-        "place": "17km NE of Borrego Springs, CA",
-        "time": 1672256543280,
-        "updated": 1672256756886,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40150903",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40150903.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 21,
-        "net": "ci",
-        "code": "40150903",
-        "ids": ",ci40150903,",
-        "sources": ",ci,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 27,
-        "dmin": 0.0563,
-        "rms": 0.25,
-        "gap": 69,
-        "magType": "ml",
-        "type": "earthquake",
-        "title": "M 1.2 - 17km NE of Borrego Springs, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -116.2423333,
-          33.3628333,
-          10.52
-        ]
-      },
-      "id": "ci40150903"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.87,
-        "place": "2km ENE of Aromas, CA",
-        "time": 1672256411070,
-        "updated": 1672258573484,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73826056",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73826056.geojson",
-        "felt": 1,
-        "cdi": 2.7,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 54,
+        "sig": 117,
         "net": "nc",
-        "code": "73826056",
-        "ids": ",nc73826056,",
-        "sources": ",nc,",
-        "types": ",dyfi,nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 12,
-        "dmin": 0.02299,
-        "rms": 0.09,
-        "gap": 71,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 1.9 - 2km ENE of Aromas, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -121.6188354,
-          36.8925018,
-          0.46
-        ]
-      },
-      "id": "nc73826056"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.18,
-        "place": "3km ESE of Pleasant Hill, CA",
-        "time": 1672255865190,
-        "updated": 1672257915428,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73826051",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73826051.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 21,
-        "net": "nc",
-        "code": "73826051",
-        "ids": ",nc73826051,",
+        "code": "73826151",
+        "ids": ",nc73826151,",
         "sources": ",nc,",
         "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 9,
-        "dmin": 0.08602,
-        "rms": 0.05,
-        "gap": 122,
+        "nst": 10,
+        "dmin": 0.2677,
+        "rms": 0.08,
+        "gap": 143,
         "magType": "md",
         "type": "earthquake",
-        "title": "M 1.2 - 3km ESE of Pleasant Hill, CA"
+        "title": "M 2.8 - 21km ESE of Yosemite Valley, CA"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -122.0273361,
-          37.9404984,
-          10.28
+          -119.3601685,
+          37.6591682,
+          19.56
         ]
       },
-      "id": "nc73826051"
+      "id": "nc73826151"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 2.1,
-        "place": "62 km ESE of Denali Park, Alaska",
-        "time": 1672255858409,
-        "updated": 1672255974967,
+        "mag": 1.19,
+        "place": "6km NW of The Geysers, CA",
+        "time": 1672271464390,
+        "updated": 1672272249919,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022gn01f8w",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022gn01f8w.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73826146",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73826146.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 68,
-        "net": "ak",
-        "code": "022gn01f8w",
-        "ids": ",ak022gn01f8w,",
-        "sources": ",ak,",
+        "sig": 22,
+        "net": "nc",
+        "code": "73826146",
+        "ids": ",nc73826146,",
+        "sources": ",nc,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 7,
+        "dmin": 0.015,
+        "rms": 0.04,
+        "gap": 151,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 1.2 - 6km NW of The Geysers, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.8144989,
+          38.8079987,
+          15.43
+        ]
+      },
+      "id": "nc73826146"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.77999997,
+        "place": "Island of Hawaii, Hawaii",
+        "time": 1672270536390,
+        "updated": 1672270708160,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73285822",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73285822.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 49,
+        "net": "hv",
+        "code": "73285822",
+        "ids": ",hv73285822,",
+        "sources": ",hv,",
         "types": ",origin,phase-data,",
-        "nst": null,
+        "nst": 6,
         "dmin": null,
-        "rms": 0.41,
-        "gap": null,
-        "magType": "ml",
+        "rms": 0.119999997,
+        "gap": 127,
+        "magType": "md",
         "type": "earthquake",
-        "title": "M 2.1 - 62 km ESE of Denali Park, Alaska"
+        "title": "M 1.8 - Island of Hawaii, Hawaii"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -147.7295,
-          63.5432,
-          4.3
+          -155.29817199707,
+          19.3696670532227,
+          1.77999997138977
         ]
       },
-      "id": "ak022gn01f8w"
+      "id": "hv73285822"
     }
   ],
   "bbox": [
-    -147.7295,
-    18.065166666667,
-    0.46,
-    -67.102333333333,
-    63.5432,
-    19.24
+    -155.29817199707,
+    19.369667053223,
+    1.7799999713898,
+    -119.3601685,
+    38.8079987,
+    19.56
   ]
 }</textarea></p><p>                Imported data is readonly because it is essentially a computation. To make it editable, use the attribute <code class="nohighlight">editable</code>.</p><p>                <pre class="secst"><code class="nohighlight">:value(https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson editable {type:"application/json"})</code></pre></p><p>                <textarea class="secst" data-mime-type="application/json" data-default="" data-template="await (async () =&gt; {
                         try {
@@ -750,262 +630,142 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
                         })()" title="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson" data-editable="" data-fitcontent="" style="height: 30em; width: 80ch;">{
   "type": "FeatureCollection",
   "metadata": {
-    "generated": 1672259248000,
+    "generated": 1672272480000,
     "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson",
     "title": "USGS All Earthquakes, Past Hour",
     "status": 200,
     "api": "1.10.3",
-    "count": 6
+    "count": 3
   },
   "features": [
     {
       "type": "Feature",
       "properties": {
-        "mag": 0.8,
-        "place": "47 km NNW of Pahrump, Nevada",
-        "time": 1672258237297,
-        "updated": 1672258377190,
+        "mag": 2.76,
+        "place": "21km ESE of Yosemite Valley, CA",
+        "time": 1672271666390,
+        "updated": 1672272250034,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nn00854287",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nn00854287.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73826151",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73826151.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 10,
-        "net": "nn",
-        "code": "00854287",
-        "ids": ",nn00854287,",
-        "sources": ",nn,",
-        "types": ",origin,phase-data,",
-        "nst": 12,
-        "dmin": 0.099,
-        "rms": 0.2285,
-        "gap": 138.6,
-        "magType": "ml",
-        "type": "earthquake",
-        "title": "M 0.8 - 47 km NNW of Pahrump, Nevada"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -116.2422,
-          36.5846,
-          4.2
-        ]
-      },
-      "id": "nn00854287"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 2.61,
-        "place": "2 km SSE of Monte Grande, Puerto Rico",
-        "time": 1672257752080,
-        "updated": 1672258672060,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/pr71389428",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/pr71389428.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "reviewed",
-        "tsunami": 0,
-        "sig": 105,
-        "net": "pr",
-        "code": "71389428",
-        "ids": ",pr71389428,",
-        "sources": ",pr,",
-        "types": ",origin,phase-data,",
-        "nst": 9,
-        "dmin": 0.0447,
-        "rms": 0.12,
-        "gap": 126,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 2.6 - 2 km SSE of Monte Grande, Puerto Rico"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -67.1023333333333,
-          18.0651666666667,
-          19.24
-        ]
-      },
-      "id": "pr71389428"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.17,
-        "place": "17km NE of Borrego Springs, CA",
-        "time": 1672256543280,
-        "updated": 1672256756886,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40150903",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40150903.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 21,
-        "net": "ci",
-        "code": "40150903",
-        "ids": ",ci40150903,",
-        "sources": ",ci,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 27,
-        "dmin": 0.0563,
-        "rms": 0.25,
-        "gap": 69,
-        "magType": "ml",
-        "type": "earthquake",
-        "title": "M 1.2 - 17km NE of Borrego Springs, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -116.2423333,
-          33.3628333,
-          10.52
-        ]
-      },
-      "id": "ci40150903"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.87,
-        "place": "2km ENE of Aromas, CA",
-        "time": 1672256411070,
-        "updated": 1672258573484,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73826056",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73826056.geojson",
-        "felt": 1,
-        "cdi": 2.7,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 54,
+        "sig": 117,
         "net": "nc",
-        "code": "73826056",
-        "ids": ",nc73826056,",
-        "sources": ",nc,",
-        "types": ",dyfi,nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 12,
-        "dmin": 0.02299,
-        "rms": 0.09,
-        "gap": 71,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 1.9 - 2km ENE of Aromas, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -121.6188354,
-          36.8925018,
-          0.46
-        ]
-      },
-      "id": "nc73826056"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.18,
-        "place": "3km ESE of Pleasant Hill, CA",
-        "time": 1672255865190,
-        "updated": 1672257915428,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73826051",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73826051.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 21,
-        "net": "nc",
-        "code": "73826051",
-        "ids": ",nc73826051,",
+        "code": "73826151",
+        "ids": ",nc73826151,",
         "sources": ",nc,",
         "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 9,
-        "dmin": 0.08602,
-        "rms": 0.05,
-        "gap": 122,
+        "nst": 10,
+        "dmin": 0.2677,
+        "rms": 0.08,
+        "gap": 143,
         "magType": "md",
         "type": "earthquake",
-        "title": "M 1.2 - 3km ESE of Pleasant Hill, CA"
+        "title": "M 2.8 - 21km ESE of Yosemite Valley, CA"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -122.0273361,
-          37.9404984,
-          10.28
+          -119.3601685,
+          37.6591682,
+          19.56
         ]
       },
-      "id": "nc73826051"
+      "id": "nc73826151"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 2.1,
-        "place": "62 km ESE of Denali Park, Alaska",
-        "time": 1672255858409,
-        "updated": 1672255974967,
+        "mag": 1.19,
+        "place": "6km NW of The Geysers, CA",
+        "time": 1672271464390,
+        "updated": 1672272249919,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022gn01f8w",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022gn01f8w.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73826146",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73826146.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 68,
-        "net": "ak",
-        "code": "022gn01f8w",
-        "ids": ",ak022gn01f8w,",
-        "sources": ",ak,",
+        "sig": 22,
+        "net": "nc",
+        "code": "73826146",
+        "ids": ",nc73826146,",
+        "sources": ",nc,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 7,
+        "dmin": 0.015,
+        "rms": 0.04,
+        "gap": 151,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 1.2 - 6km NW of The Geysers, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.8144989,
+          38.8079987,
+          15.43
+        ]
+      },
+      "id": "nc73826146"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.77999997,
+        "place": "Island of Hawaii, Hawaii",
+        "time": 1672270536390,
+        "updated": 1672270708160,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73285822",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73285822.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 49,
+        "net": "hv",
+        "code": "73285822",
+        "ids": ",hv73285822,",
+        "sources": ",hv,",
         "types": ",origin,phase-data,",
-        "nst": null,
+        "nst": 6,
         "dmin": null,
-        "rms": 0.41,
-        "gap": null,
-        "magType": "ml",
+        "rms": 0.119999997,
+        "gap": 127,
+        "magType": "md",
         "type": "earthquake",
-        "title": "M 2.1 - 62 km ESE of Denali Park, Alaska"
+        "title": "M 1.8 - Island of Hawaii, Hawaii"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -147.7295,
-          63.5432,
-          4.3
+          -155.29817199707,
+          19.3696670532227,
+          1.77999997138977
         ]
       },
-      "id": "ak022gn01f8w"
+      "id": "hv73285822"
     }
   ],
   "bbox": [
-    -147.7295,
-    18.065166666667,
-    0.46,
-    -67.102333333333,
-    63.5432,
-    19.24
+    -155.29817199707,
+    19.369667053223,
+    1.7799999713898,
+    -119.3601685,
+    38.8079987,
+    19.56
   ]
 }</textarea></p><p>                If an id is added, the data can be used in a computation.</p><p>                <pre class="secst"><code class="nohighlight">:value(#earthquake-data https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson {type:"application/json"})
 
@@ -1031,262 +791,142 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
                         })()" title="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson" data-fitcontent="" disabled="" style="height: 30em; width: 80ch;">{
   "type": "FeatureCollection",
   "metadata": {
-    "generated": 1672259248000,
+    "generated": 1672272480000,
     "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson",
     "title": "USGS All Earthquakes, Past Hour",
     "status": 200,
     "api": "1.10.3",
-    "count": 6
+    "count": 3
   },
   "features": [
     {
       "type": "Feature",
       "properties": {
-        "mag": 0.8,
-        "place": "47 km NNW of Pahrump, Nevada",
-        "time": 1672258237297,
-        "updated": 1672258377190,
+        "mag": 2.76,
+        "place": "21km ESE of Yosemite Valley, CA",
+        "time": 1672271666390,
+        "updated": 1672272250034,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nn00854287",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nn00854287.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73826151",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73826151.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 10,
-        "net": "nn",
-        "code": "00854287",
-        "ids": ",nn00854287,",
-        "sources": ",nn,",
-        "types": ",origin,phase-data,",
-        "nst": 12,
-        "dmin": 0.099,
-        "rms": 0.2285,
-        "gap": 138.6,
-        "magType": "ml",
-        "type": "earthquake",
-        "title": "M 0.8 - 47 km NNW of Pahrump, Nevada"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -116.2422,
-          36.5846,
-          4.2
-        ]
-      },
-      "id": "nn00854287"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 2.61,
-        "place": "2 km SSE of Monte Grande, Puerto Rico",
-        "time": 1672257752080,
-        "updated": 1672258672060,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/pr71389428",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/pr71389428.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "reviewed",
-        "tsunami": 0,
-        "sig": 105,
-        "net": "pr",
-        "code": "71389428",
-        "ids": ",pr71389428,",
-        "sources": ",pr,",
-        "types": ",origin,phase-data,",
-        "nst": 9,
-        "dmin": 0.0447,
-        "rms": 0.12,
-        "gap": 126,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 2.6 - 2 km SSE of Monte Grande, Puerto Rico"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -67.1023333333333,
-          18.0651666666667,
-          19.24
-        ]
-      },
-      "id": "pr71389428"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.17,
-        "place": "17km NE of Borrego Springs, CA",
-        "time": 1672256543280,
-        "updated": 1672256756886,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40150903",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40150903.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 21,
-        "net": "ci",
-        "code": "40150903",
-        "ids": ",ci40150903,",
-        "sources": ",ci,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 27,
-        "dmin": 0.0563,
-        "rms": 0.25,
-        "gap": 69,
-        "magType": "ml",
-        "type": "earthquake",
-        "title": "M 1.2 - 17km NE of Borrego Springs, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -116.2423333,
-          33.3628333,
-          10.52
-        ]
-      },
-      "id": "ci40150903"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.87,
-        "place": "2km ENE of Aromas, CA",
-        "time": 1672256411070,
-        "updated": 1672258573484,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73826056",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73826056.geojson",
-        "felt": 1,
-        "cdi": 2.7,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 54,
+        "sig": 117,
         "net": "nc",
-        "code": "73826056",
-        "ids": ",nc73826056,",
-        "sources": ",nc,",
-        "types": ",dyfi,nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 12,
-        "dmin": 0.02299,
-        "rms": 0.09,
-        "gap": 71,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 1.9 - 2km ENE of Aromas, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -121.6188354,
-          36.8925018,
-          0.46
-        ]
-      },
-      "id": "nc73826056"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.18,
-        "place": "3km ESE of Pleasant Hill, CA",
-        "time": 1672255865190,
-        "updated": 1672257915428,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73826051",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73826051.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 21,
-        "net": "nc",
-        "code": "73826051",
-        "ids": ",nc73826051,",
+        "code": "73826151",
+        "ids": ",nc73826151,",
         "sources": ",nc,",
         "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 9,
-        "dmin": 0.08602,
-        "rms": 0.05,
-        "gap": 122,
+        "nst": 10,
+        "dmin": 0.2677,
+        "rms": 0.08,
+        "gap": 143,
         "magType": "md",
         "type": "earthquake",
-        "title": "M 1.2 - 3km ESE of Pleasant Hill, CA"
+        "title": "M 2.8 - 21km ESE of Yosemite Valley, CA"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -122.0273361,
-          37.9404984,
-          10.28
+          -119.3601685,
+          37.6591682,
+          19.56
         ]
       },
-      "id": "nc73826051"
+      "id": "nc73826151"
     },
     {
       "type": "Feature",
       "properties": {
-        "mag": 2.1,
-        "place": "62 km ESE of Denali Park, Alaska",
-        "time": 1672255858409,
-        "updated": 1672255974967,
+        "mag": 1.19,
+        "place": "6km NW of The Geysers, CA",
+        "time": 1672271464390,
+        "updated": 1672272249919,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022gn01f8w",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022gn01f8w.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73826146",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73826146.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 68,
-        "net": "ak",
-        "code": "022gn01f8w",
-        "ids": ",ak022gn01f8w,",
-        "sources": ",ak,",
+        "sig": 22,
+        "net": "nc",
+        "code": "73826146",
+        "ids": ",nc73826146,",
+        "sources": ",nc,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 7,
+        "dmin": 0.015,
+        "rms": 0.04,
+        "gap": 151,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 1.2 - 6km NW of The Geysers, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -122.8144989,
+          38.8079987,
+          15.43
+        ]
+      },
+      "id": "nc73826146"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.77999997,
+        "place": "Island of Hawaii, Hawaii",
+        "time": 1672270536390,
+        "updated": 1672270708160,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73285822",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73285822.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 49,
+        "net": "hv",
+        "code": "73285822",
+        "ids": ",hv73285822,",
+        "sources": ",hv,",
         "types": ",origin,phase-data,",
-        "nst": null,
+        "nst": 6,
         "dmin": null,
-        "rms": 0.41,
-        "gap": null,
-        "magType": "ml",
+        "rms": 0.119999997,
+        "gap": 127,
+        "magType": "md",
         "type": "earthquake",
-        "title": "M 2.1 - 62 km ESE of Denali Park, Alaska"
+        "title": "M 1.8 - Island of Hawaii, Hawaii"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -147.7295,
-          63.5432,
-          4.3
+          -155.29817199707,
+          19.3696670532227,
+          1.77999997138977
         ]
       },
-      "id": "ak022gn01f8w"
+      "id": "hv73285822"
     }
   ],
   "bbox": [
-    -147.7295,
-    18.065166666667,
-    0.46,
-    -67.102333333333,
-    63.5432,
-    19.24
+    -155.29817199707,
+    19.369667053223,
+    1.7799999713898,
+    -119.3601685,
+    38.8079987,
+    19.56
   ]
 }</textarea></p><p>               <textarea class="secst" data-mime-type="application/json" data-default="" data-template="$(#earthquake-data).metadata" title="$(#earthquake-data).metadata" data-fitcontent="" disabled="" style="height: 1.5em; width: 15ch;">[object Object]</textarea><br>            </p></section><section><h4 id="advanced-formulas" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Advanced Formulas<span class="autohelm-nav autohelm-nav-up-down"> <a href="#importing-data">&uarr;</a> <a href="#formulas-with-css-selectors-and-multiple-values">&darr;</a></span></h4><section><h5 id="formulas-with-css-selectors-and-multiple-values" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Formulas With CSS Selectors and Multiple Values<span class="autohelm-nav autohelm-nav-up-down"> <a href="#advanced-formulas">&uarr;</a> <a href="#macro-list-formatting">&darr;</a></span></h5><p>                    You can use almost any <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors">CSS selector</a> in place of <code class="nohighlight">#id</code> in <code class="nohighlight">$(#&lt;id&gt;)</code>. The value returned will be the contents of the value property on the element or (if not available) the value attribute or the <code class="nohighlight">innerText</code>.</p><p>                    You can use commas to select multiple identifier named elements, e.g. <code class="nohighlight">:value[$(#id1, #id2, #id3)]</code> is an array of the values associated with the elements <code class="nohighlight">:value(#id1)[3]</code>, <code class="nohighlight">:value(#id2)[2]</code>, <code class="nohighlight">:value(#id3)[1]</code> and will be <code class="nohighlight">[3,2,1]</code>.</p><p>                    A value reference <code class="nohighlight">$(css-selector)</code> can end in <code class="nohighlight">[]</code> to indicate multiple values should be returned as an array if the selector does not contain a comma. This allows tables to be treated somewhat like spreadsheets.<br>                </p></section><section><h5 id="macro-list-formatting" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Macro List Formatting<span class="autohelm-nav autohelm-nav-up-down"> <a href="#formulas-with-css-selectors-and-multiple-values">&uarr;</a> <a href="#javascript">&darr;</a></span></h5><p>                     The SECST formula evaluator supports supports some utility functions.<br>                </p></section><section><h5 id="javascript" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>JavaScript<span class="autohelm-nav autohelm-nav-up-down"> <a href="#macro-list-formatting">&uarr;</a> <a href="#styling-content">&darr;</a></span></h5><p>                    You can use any JavaScript that is available in <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API">WebWorkers</a> inside a macro. A special read-only <code class="nohighlight">document</code> object is also made available. This object has title, baseURI, location, and navigator properties along with a property for each meta tag name and value.<br>                </p></section></section></section></section><section><h2 id="styling-content" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Styling Content<span class="autohelm-nav autohelm-nav-up-down"> <a href="#markup-without-html-names">&uarr;</a> <a href="#transpiling">&darr;</a></span></h2><p>        Content can be styled using CSS classes loaded using the <a href="#theme">theme tag</a>.</p><p>        CSS classes are applied to content using <code class="nohighlight">.&lt;class-name&gt;</code> inside the parenthetical configuration part of a tag, e.g. <code class="nohighlight">:p(.my-class1 .my-class2)[My content]</code>.</p><p>        Also see the <a href="#style">style tag</a>.</p><p>        Style can be applied at the element level using the <code class="nohighlight">style</code> attribute of a tag if the tag supports the style attribute. Currently only the <code class="nohighlight">p[]</code> tag supports the <code class="nohighlight">style</code> attribute. Using the <code class="nohighlight">theme[]</code> or <code class="nohighlight">:style[]</code> tag with an id selector is suggested.</p><p>        The style attribute can be in string or JSON format. If in JSON format, it should use camelCase versions of CSS property names. For example, <code class="nohighlight">:p({style:"width:200px;text-align:right;float:right"})[My right content]</code>  and <code class="nohighlight">:p({style:{width:"200px";textAlign:"right",float:"right"}}')[My right content]</code> produce the same output.</p><p>        <pre class="secst"><code class="nohighlight">:p({style:"text-align:left;float:right"})[
   My right content
@@ -1422,7 +1062,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
       "format": "transform format(value)",
       "lang": "string"
     },
-    "contentAllowed": "Wed Dec 28 2022 12:27:58 GMT-0800 (Pacific Standard Time)",
+    "contentAllowed": "Wed Dec 28 2022 16:08:38 GMT-0800 (Pacific Standard Time)",
     "minCount": 0,
     "maxCount": 1,
     "toText": true

@@ -1,5 +1,6 @@
 import fs from "fs/promises";
 import url from "node:url";
+import toArrayBuffer from "./src/to-array-buffer.js";
 
 import JSON5 from "json5";
 global.JSON5 = JSON5;
@@ -18,7 +19,36 @@ global.window = new Window(),
     global.document = window.document;
 global.URL = URL;
 global.fetch = async (url,...args) => {
-    try {
+    if(url.startsWith(".")) {
+        const mimeTypes = {
+                png: "image/png",
+                jpg: "image/jpg",
+                gif: "image/gif",
+                html: "text/html",
+                htm: "text/plain",
+                txt: "text/plain",
+                css: "text/css"
+            },
+            ext = (new URL(url,document.baseURI)).pathname.split(".").pop(),
+            type = mimeTypes[ext] || "",
+            data = await fs.readFile(url);
+        return {
+            status: 200,
+            text() {
+                return data.toString("utf-8")
+            },
+            blob() {
+                return {
+                    size: data.length,
+                    type,
+                    arrayBuffer() {
+                        return toArrayBuffer(data)
+                    }
+                }
+            }
+        }
+    }
+    /*try {
         const response = await window.fetch((new URL(url,"http://localhost:63342/secst/")).href,...args);
         if(response.status===200) {
             return response;
@@ -26,7 +56,8 @@ global.fetch = async (url,...args) => {
     } catch(e) {
 
     }
-    return window.fetch((new URL(url, "https://sects.org/")).href,...args);
+    return window.fetch((new URL(url, "https://sects.org/")).href,...args);*/
+    return window.fetch(url,...args);
 }
 
 global.Text = window.Text;
