@@ -456,13 +456,13 @@
 
                 Since SECST has a focus on semantics, images must be specified with alt text braces, even if they contain no content.
 
-                :code[:img(static ./anywhichway_mobius_138.png)] will not transpile.
+                :code[:img(static ./assets/images/anywhichway_mobius_138.png)] will not transpile.
 
                 Images can be loaded statically at transpile time and delivered bundled into the output HTML.
                 :ul[
-                    :li[The tag :code[:img(static ./anywhichway_mobius_138.png)[Test]]]
-                    :li[renders as :img(static ./anywhichway_mobius_138.png)[Test]]
-                    :li[instead of a reference there is a data url in :code[src] attribute of the :details[:summary[generated HTML.]  :transpiled[:img(static ./anywhichway_mobius_138.png)[Test]]]]
+                    :li[The tag :code[:img(static ./assets/images/anywhichway_mobius_138.png)[Test]]]
+                    :li[renders as :img(static ./assets/images/anywhichway_mobius_138.png)[Test]]
+                    :li[instead of a reference there is a data url in :code[src] attribute of the :details[:summary[generated HTML.]  :transpiled[:img(static ./assets/images/anywhichway_mobius_138.png)[Test]]]]
                 ]
                 If static loading fails, the standard link will stay in place and dynamic loading may still render the image.
 
@@ -1332,13 +1332,16 @@
 
     :section[
         :h[Server Processing]
-        The command line :code[node secst.js] will convert any files in the root directory with the extension :code[.sct] into :code[HTML] files.
+
+        Install `secst` as a dev dependency in your project: `npm install --save-dev secst`.
+
+        The command line :code[node ./node_modules/secst/secst.js] will convert any files in the root directory with the extension :code[.sct] into :code[HTML] files.
 
         If a wild card Glob pattern is used, then all matching files with a :code[.sct] extension will be transpiled.
 
         The command can be run as part of your build process to generate a static website.
 
-        There is not yet an Express route or Service Worker, but the code in :code[secst.js] could be used as a starting point.
+        There is not yet an Express route or Service Worker, but the code in :code[./node_modules/secst/secst.js] could be used as a starting point.
 
         An SPD (Single Page Document) capability that takes multiple :code[.sct] files in a directory tree that parallels the desired section structure and creates a single HTML file is under development.
 

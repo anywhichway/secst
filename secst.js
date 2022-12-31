@@ -1,6 +1,12 @@
 import fs from "fs/promises";
 import url from "node:url";
 import toArrayBuffer from "./src/to-array-buffer.js";
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+let __dirname = dirname(fileURLToPath(new URL(import.meta.url))).replace(/.*:/g,"").replace(/\\/g,"/");
+console.log(__dirname)
+
 
 import JSON5 from "json5";
 global.JSON5 = JSON5;
@@ -130,9 +136,9 @@ async function getPaths(target) {
 
 // this will work for file conversions at the moment, but SPD generation will require rework as a recursive function
 
-const {transform} = await import("./src/transform.js"),
-    grammar = await fs.readFile("./src/secst.peg",{ encoding: 'utf8' }),
-    runtime = await fs.readFile("./runtime.js",{encoding: 'utf8'}),
+const {transform} = await import(__dirname + "/src/transform.js"),
+    grammar = await fs.readFile(__dirname + "/src/secst.peg",{ encoding: 'utf8' }),
+    runtime = await fs.readFile(__dirname + "/runtime.js",{encoding: 'utf8'}),
     parser = peg.generate(grammar);
 let [_,path,target="*.sct",...args] = process.argv;
 let isdir;
@@ -167,14 +173,8 @@ if(isdir) {
         await fs.writeFile(fname + ".txt",spd,{encoding: 'utf8'} );
     }
     if(args.includes("--writeRootAsHTML")) {
-        const {dom,errors,parsed,transformed} = await transform(parser,spd,{styleAllowed:"*"}),
-            script = document.createElement("script");
-        script.setAttribute("src","./runtime.js?run");
-        dom.head.appendChild(script);
+        const {dom,errors,parsed,transformed} = await transform(parser,spd,{styleAllowed:"*"});
         await resolve(dom.body);
-        await fs.writeFile(fname + ".html",`<!DOCTYPE html><html><head>${dom.head.innerHTML}</head><body>${dom.body.innerHTML}</body></html>`,{ encoding: 'utf8' })
+        await fs.writeFile(fname + ".html",`<!DOCTYPE html><html><head>${dom.head.innerHTML}<script async type="application/javascript">${runtime}</script></head><body>${dom.body.innerHTML}</body></html>`,{ encoding: 'utf8' })
     }
 }
-
-
-

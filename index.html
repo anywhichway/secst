@@ -195,7 +195,7 @@ Use SECST to joyfully create compelling, interactive HTML documents.</code></pre
 
                     <dt>Owlman</dt>
                     <dd>A giant owl-like creature.</dd>
-                </dl><br>            </p></section><section><h4 id="task-lists" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Task Lists<span class="autohelm-nav autohelm-nav-up-down"> <a href="#description-lists">&uarr;</a> <a href="#meta-tags">&darr;</a></span></h4></section></section><section><h3 id="meta-tags" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Meta Tags<span class="autohelm-nav autohelm-nav-up-down"> <a href="#lists">&uarr;</a> <a href="#multimedia">&darr;</a></span></h3><p>            The <code class="nohighlight">:meta[]</code> tag inserts values into the head of a document. It takes the form <code class="nohighlight">:meta({name:"my-name"})[my value]</code>, e.g. <code class="nohighlight">:meta({name:"author"})[John Jones]</code> injects the HTML <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/styles/default.min.css"><code class="hljs language-html"></code>.</p><p>            Suggested meta tag names include:</p><p>            <ul title="suggested meta tag names"><li> <em>keywords</em>, comma separated key words, but consider using <a href="#hashtags">Hashtags</a></li><li> <em>description</em> for a description of the document</li><li> <em>publisher</em> for the publisher of the document</li><li> <em>author</em> for the author of the document</li><li> <em>copyright</em> for a copyright notice of the document</li><li> <em>robots</em> with the comma separated values of <code class="nohighlight">index</code> or <code class="nohighlight">noindex</code> and <code class="nohighlight">follow</code> or <code class="nohighlight">nofollow</code>.</li></ul></p><p>            Also see the section <a href="#structured-data">Structured Data</a>.<br>        </p></section><section><h3 id="multimedia" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Multimedia<span class="autohelm-nav autohelm-nav-up-down"> <a href="#meta-tags">&uarr;</a> <a href="#images">&darr;</a></span></h3><section><h4 id="images" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Images<span class="autohelm-nav autohelm-nav-up-down"> <a href="#multimedia">&uarr;</a> <a href="#audio">&darr;</a></span></h4><p>                Since SECST has a focus on semantics, images must be specified with alt text braces, even if they contain no content.</p><p>                <code class="nohighlight">:img(static ./anywhichway_mobius_138.png)</code> will not transpile.</p><p>                Images can be loaded statically at transpile time and delivered bundled into the output HTML.<br>                <ul><li>The tag <code class="nohighlight">:img(static ./anywhichway_mobius_138.png)[Test]</code></li><li>renders as <img title="Test" alt="Test" src="data:image/png;base64,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"></li><li>instead of a reference there is a data url in <code class="nohighlight">src</code> attribute of the <details><summary>generated HTML.</summary>  <code class="hljs language-html"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">title</span>=<span class="hljs-string">&quot;Test&quot;</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;Test&quot;</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;data:image/png;base64,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&quot;</span>&gt;</span></code></details></li></ul><br>                If static loading fails, the standard link will stay in place and dynamic loading may still render the image.</p><p>                The callout for the generated HTML above is implemented using the <a href="#details">details tag</a>.<br>            </p></section><section><h4 id="audio" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Audio<span class="autohelm-nav autohelm-nav-up-down"> <a href="#images">&uarr;</a> <a href="#video">&darr;</a></span></h4></section><section><h4 id="video" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Video<span class="autohelm-nav autohelm-nav-up-down"> <a href="#audio">&uarr;</a> <a href="#p">&darr;</a></span></h4></section></section><section><h3 id="p" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Paragraph<span class="autohelm-nav autohelm-nav-up-down"> <a href="#multimedia">&uarr;</a> <a href="#style">&darr;</a></span></h3><p>            The <code class="nohighlight">:p[]</code> tag wraps paragraph content. It accepts plain text and <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#phrasing_content">phrasing content</a>, i.e. most other tags.</p><p>             Inside the content of a <code class="nohighlight">:section[]</code>, SECST will treat two newlines in sequence as a paragraph break. Newlines inside a <code class="nohighlight">p</code> tag will produce separate HTML <code class="nohighlight">&lt;br&gt;</code> elements. A <code class="nohighlight">:p[]</code> tag is not strictly necessary for really simple content. A SECST parser/transpiler will do a reasonable job of figuring out where paragraph breaks are required; however behavior may vary from implementation to implementation.</p><p>            If you get an unexpected document layout, try putting content inside a <code class="nohighlight">:p[]</code> tag.</p><p>            <code class="nohighlight">:p[]</code> allows three attributes:</p><p>            <ol><li>style, see <a href="#styling-content">Styling Content</a>.</li><li>align, which floats the paragraph "left" or "right" of adjacent <a href="#block-content">block content</a>.</li><li>textAlign, which aligns the contents inside the paragraph to the "left","justified", or "right".</li></ol></p><p>            Also see the <a href="#spec-p">technical documentation</a>.<br>        </p></section><section><h3 id="style" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Style<span class="autohelm-nav autohelm-nav-up-down"> <a href="#p">&uarr;</a> <a href="#markup-without-html-names">&darr;</a></span></h3><p>            The content of the <code class="nohighlight">:style[]</code> tag is CSS. The CSS is automatically sanitized.</p><p>            The tag can tag one attribute <code class="nohighlight">selector</code> which will prefix all styles in the style block with the selector to limit their scope of application.</p><p>            Also see the <a href="#theme">theme</a> tag, which is much more powerful and <a href="#styling-content">Styling Content</a>.<br>        </p></section></section><section><h2 id="markup-without-html-names" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Markup Without HTML Names<span class="autohelm-nav autohelm-nav-up-down"> <a href="#markup-tags-with-html-names">&uarr;</a> <a href="#escaping-secst">&darr;</a></span></h2><section><h3 id="escaping-secst" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Escaping SECST<span class="autohelm-nav autohelm-nav-up-down"> <a href="#markup-without-html-names">&uarr;</a> <a href="#emojis">&darr;</a></span></h3><p>            SECST tagging inside of <code class="nohighlight">:code[]</code> is automatically escaped. If you wish to escape it elsewhere use the tag <code class="nohighlight">:escape[]</code>.</p><p>            <code class="nohighlight">:code[:strong[text]]</code> renders as <code class="nohighlight">:strong[text]</code>.</p><p>            <code class="nohighlight">:escape[:strong[text]]</code> renders as <span>:strong[text]</span>.<br>        </p></section><section><h3 id="emojis" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Emojis<span class="autohelm-nav autohelm-nav-up-down"> <a href="#escaping-secst">&uarr;</a> <a href="#footnotes-endnotes">&darr;</a></span></h3><p>            Emojis can take the form <code class="nohighlight">:emoji[&lt;emoji-name&gt;...]</code>, where <code class="nohighlight">&lt;emoji-name&gt;...</code> is a space separated list of emoji names or the short form, <code class="nohighlight">:&lt;emoji-name&gt;:</code> can be used.</p><p>            There are over 1,800 emojis. If a match for the emoji name can't be found, it is displayed as plain text.</p><p>            See <a target="_tab" href="https://missiveapp.com/open/emoji-mart">EmjoiMart</a> to find just the right emoji.</p><p>            <code class="nohighlight">:emoji[smile]</code> and <code class="nohighlight">:smile:</code> both render as <span>&#x1f604;</span>.</p><p>            <code class="nohighlight">:emoji[smile frowning jumping]</code> renders as <span>&#x1f604; &#x1f626; :jumping</span>.</p><p>            Most emoji's are colored. You can use grayscale emojis by providing the attribute <code class="nohighlight">grayscale</code>.</p><p>            <code class="nohighlight">:emoji(grayscale)[smile]</code> renders as <span style="filter: grayscale(100%);">&#x1f604;</span>.</p><p>            <code class="nohighlight">:emoji(grayscale)[smile frowning jumping]</code> renders as <span style="filter: grayscale(100%);">&#x1f604; &#x1f626; :jumping</span>.<br>        </p></section><section><h3 id="footnotes-endnotes" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Footnotes/Endnotes<span class="autohelm-nav autohelm-nav-up-down"> <a href="#emojis">&uarr;</a> <a href="#foreach">&darr;</a></span></h3><p>            Footnotes are inserted with the <code class="nohighlight">:footnote[&lt;footnote-text&gt;]</code> tag. The content between the braces is used as the footnote and placed at the end of the document. Auto-numbering is done so that authors do not have to keep updating footnotes as the document changes. <span id="autohelm-footnote-ref1" class="autohelm-footnote"><a href="#markdown-footnote">1</a></span></p><p>            The source for the above footnote is:</p><p>            <pre class="secst"><code class="nohighlight">:footnote(#markdown-footnote)[Markdown does not autonumber footnotes, which makes them hard to maintain. Although, it does create back-references.]</code></pre>.</p><p>            To re-use a footnote, give the first occurrence an id. Then, give the subsequent uses an <code class="nohighlight">href</code> attribute or shorthand relative URL reference using the id and leave the content section between the braces empty. This will override the anchors for numbered links generated by the SECST transpiler, but not break ordering. <span class="autohelm-footnote" id="autohelm-footnote-ref2"><a href="#markdown-footnote">2</a></span> If you do provide content when reusing, it will be ignored.</p><p>            The source for the second footnote is: <code class="nohighlight">:footnote(.#markdown-footnote)</code>.</p><p>            And, here is a third, <code class="nohighlight">:footnote[Footnote management does not get much easier!]</code>, that just gets numbered. <span class="autohelm-footnote" id="autohelm-footnote-ref3"><a href="#autohelm-footnote3">3</a></span><br>        </p></section><section><h3 id="foreach" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>forEach<span class="autohelm-nav autohelm-nav-up-down"> <a href="#footnotes-endnotes">&uarr;</a> <a href="#hashtags">&darr;</a></span></h3><p>            The <code class="nohighlight">:forEach[]</code> tag supports repeating content based on an iterable object, typically an array or the results of using a CSS selector to gather values from a document.</p><p>            The variables <code class="nohighlight">item</code>, <code class="nohighlight">index</code>, <code class="nohighlight">iterable</code> are available to string template literals in the content.</p><p>            <pre class="secst"><code class="nohighlight">:ol[
+                </dl><br>            </p></section><section><h4 id="task-lists" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Task Lists<span class="autohelm-nav autohelm-nav-up-down"> <a href="#description-lists">&uarr;</a> <a href="#meta-tags">&darr;</a></span></h4></section></section><section><h3 id="meta-tags" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Meta Tags<span class="autohelm-nav autohelm-nav-up-down"> <a href="#lists">&uarr;</a> <a href="#multimedia">&darr;</a></span></h3><p>            The <code class="nohighlight">:meta[]</code> tag inserts values into the head of a document. It takes the form <code class="nohighlight">:meta({name:"my-name"})[my value]</code>, e.g. <code class="nohighlight">:meta({name:"author"})[John Jones]</code> injects the HTML <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/styles/default.min.css"><code class="hljs language-html"></code>.</p><p>            Suggested meta tag names include:</p><p>            <ul title="suggested meta tag names"><li> <em>keywords</em>, comma separated key words, but consider using <a href="#hashtags">Hashtags</a></li><li> <em>description</em> for a description of the document</li><li> <em>publisher</em> for the publisher of the document</li><li> <em>author</em> for the author of the document</li><li> <em>copyright</em> for a copyright notice of the document</li><li> <em>robots</em> with the comma separated values of <code class="nohighlight">index</code> or <code class="nohighlight">noindex</code> and <code class="nohighlight">follow</code> or <code class="nohighlight">nofollow</code>.</li></ul></p><p>            Also see the section <a href="#structured-data">Structured Data</a>.<br>        </p></section><section><h3 id="multimedia" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Multimedia<span class="autohelm-nav autohelm-nav-up-down"> <a href="#meta-tags">&uarr;</a> <a href="#images">&darr;</a></span></h3><section><h4 id="images" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Images<span class="autohelm-nav autohelm-nav-up-down"> <a href="#multimedia">&uarr;</a> <a href="#audio">&darr;</a></span></h4><p>                Since SECST has a focus on semantics, images must be specified with alt text braces, even if they contain no content.</p><p>                <code class="nohighlight">:img(static ./assets/images/anywhichway_mobius_138.png)</code> will not transpile.</p><p>                Images can be loaded statically at transpile time and delivered bundled into the output HTML.<br>                <ul><li>The tag <code class="nohighlight">:img(static ./assets/images/anywhichway_mobius_138.png)[Test]</code></li><li>renders as <img title="Test" alt="Test" src="data:image/png;base64,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"></li><li>instead of a reference there is a data url in <code class="nohighlight">src</code> attribute of the <details><summary>generated HTML.</summary>  <code class="hljs language-html"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">title</span>=<span class="hljs-string">&quot;Test&quot;</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;Test&quot;</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;data:image/png;base64,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&quot;</span>&gt;</span></code></details></li></ul><br>                If static loading fails, the standard link will stay in place and dynamic loading may still render the image.</p><p>                The callout for the generated HTML above is implemented using the <a href="#details">details tag</a>.<br>            </p></section><section><h4 id="audio" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Audio<span class="autohelm-nav autohelm-nav-up-down"> <a href="#images">&uarr;</a> <a href="#video">&darr;</a></span></h4></section><section><h4 id="video" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Video<span class="autohelm-nav autohelm-nav-up-down"> <a href="#audio">&uarr;</a> <a href="#p">&darr;</a></span></h4></section></section><section><h3 id="p" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Paragraph<span class="autohelm-nav autohelm-nav-up-down"> <a href="#multimedia">&uarr;</a> <a href="#style">&darr;</a></span></h3><p>            The <code class="nohighlight">:p[]</code> tag wraps paragraph content. It accepts plain text and <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Content_categories#phrasing_content">phrasing content</a>, i.e. most other tags.</p><p>             Inside the content of a <code class="nohighlight">:section[]</code>, SECST will treat two newlines in sequence as a paragraph break. Newlines inside a <code class="nohighlight">p</code> tag will produce separate HTML <code class="nohighlight">&lt;br&gt;</code> elements. A <code class="nohighlight">:p[]</code> tag is not strictly necessary for really simple content. A SECST parser/transpiler will do a reasonable job of figuring out where paragraph breaks are required; however behavior may vary from implementation to implementation.</p><p>            If you get an unexpected document layout, try putting content inside a <code class="nohighlight">:p[]</code> tag.</p><p>            <code class="nohighlight">:p[]</code> allows three attributes:</p><p>            <ol><li>style, see <a href="#styling-content">Styling Content</a>.</li><li>align, which floats the paragraph "left" or "right" of adjacent <a href="#block-content">block content</a>.</li><li>textAlign, which aligns the contents inside the paragraph to the "left","justified", or "right".</li></ol></p><p>            Also see the <a href="#spec-p">technical documentation</a>.<br>        </p></section><section><h3 id="style" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Style<span class="autohelm-nav autohelm-nav-up-down"> <a href="#p">&uarr;</a> <a href="#markup-without-html-names">&darr;</a></span></h3><p>            The content of the <code class="nohighlight">:style[]</code> tag is CSS. The CSS is automatically sanitized.</p><p>            The tag can tag one attribute <code class="nohighlight">selector</code> which will prefix all styles in the style block with the selector to limit their scope of application.</p><p>            Also see the <a href="#theme">theme</a> tag, which is much more powerful and <a href="#styling-content">Styling Content</a>.<br>        </p></section></section><section><h2 id="markup-without-html-names" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Markup Without HTML Names<span class="autohelm-nav autohelm-nav-up-down"> <a href="#markup-tags-with-html-names">&uarr;</a> <a href="#escaping-secst">&darr;</a></span></h2><section><h3 id="escaping-secst" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Escaping SECST<span class="autohelm-nav autohelm-nav-up-down"> <a href="#markup-without-html-names">&uarr;</a> <a href="#emojis">&darr;</a></span></h3><p>            SECST tagging inside of <code class="nohighlight">:code[]</code> is automatically escaped. If you wish to escape it elsewhere use the tag <code class="nohighlight">:escape[]</code>.</p><p>            <code class="nohighlight">:code[:strong[text]]</code> renders as <code class="nohighlight">:strong[text]</code>.</p><p>            <code class="nohighlight">:escape[:strong[text]]</code> renders as <span>:strong[text]</span>.<br>        </p></section><section><h3 id="emojis" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Emojis<span class="autohelm-nav autohelm-nav-up-down"> <a href="#escaping-secst">&uarr;</a> <a href="#footnotes-endnotes">&darr;</a></span></h3><p>            Emojis can take the form <code class="nohighlight">:emoji[&lt;emoji-name&gt;...]</code>, where <code class="nohighlight">&lt;emoji-name&gt;...</code> is a space separated list of emoji names or the short form, <code class="nohighlight">:&lt;emoji-name&gt;:</code> can be used.</p><p>            There are over 1,800 emojis. If a match for the emoji name can't be found, it is displayed as plain text.</p><p>            See <a target="_tab" href="https://missiveapp.com/open/emoji-mart">EmjoiMart</a> to find just the right emoji.</p><p>            <code class="nohighlight">:emoji[smile]</code> and <code class="nohighlight">:smile:</code> both render as <span>&#x1f604;</span>.</p><p>            <code class="nohighlight">:emoji[smile frowning jumping]</code> renders as <span>&#x1f604; &#x1f626; :jumping</span>.</p><p>            Most emoji's are colored. You can use grayscale emojis by providing the attribute <code class="nohighlight">grayscale</code>.</p><p>            <code class="nohighlight">:emoji(grayscale)[smile]</code> renders as <span style="filter: grayscale(100%);">&#x1f604;</span>.</p><p>            <code class="nohighlight">:emoji(grayscale)[smile frowning jumping]</code> renders as <span style="filter: grayscale(100%);">&#x1f604; &#x1f626; :jumping</span>.<br>        </p></section><section><h3 id="footnotes-endnotes" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Footnotes/Endnotes<span class="autohelm-nav autohelm-nav-up-down"> <a href="#emojis">&uarr;</a> <a href="#foreach">&darr;</a></span></h3><p>            Footnotes are inserted with the <code class="nohighlight">:footnote[&lt;footnote-text&gt;]</code> tag. The content between the braces is used as the footnote and placed at the end of the document. Auto-numbering is done so that authors do not have to keep updating footnotes as the document changes. <span id="autohelm-footnote-ref1" class="autohelm-footnote"><a href="#markdown-footnote">1</a></span></p><p>            The source for the above footnote is:</p><p>            <pre class="secst"><code class="nohighlight">:footnote(#markdown-footnote)[Markdown does not autonumber footnotes, which makes them hard to maintain. Although, it does create back-references.]</code></pre>.</p><p>            To re-use a footnote, give the first occurrence an id. Then, give the subsequent uses an <code class="nohighlight">href</code> attribute or shorthand relative URL reference using the id and leave the content section between the braces empty. This will override the anchors for numbered links generated by the SECST transpiler, but not break ordering. <span class="autohelm-footnote" id="autohelm-footnote-ref2"><a href="#markdown-footnote">2</a></span> If you do provide content when reusing, it will be ignored.</p><p>            The source for the second footnote is: <code class="nohighlight">:footnote(.#markdown-footnote)</code>.</p><p>            And, here is a third, <code class="nohighlight">:footnote[Footnote management does not get much easier!]</code>, that just gets numbered. <span class="autohelm-footnote" id="autohelm-footnote-ref3"><a href="#autohelm-footnote3">3</a></span><br>        </p></section><section><h3 id="foreach" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>forEach<span class="autohelm-nav autohelm-nav-up-down"> <a href="#footnotes-endnotes">&uarr;</a> <a href="#hashtags">&darr;</a></span></h3><p>            The <code class="nohighlight">:forEach[]</code> tag supports repeating content based on an iterable object, typically an array or the results of using a CSS selector to gather values from a document.</p><p>            The variables <code class="nohighlight">item</code>, <code class="nohighlight">index</code>, <code class="nohighlight">iterable</code> are available to string template literals in the content.</p><p>            <pre class="secst"><code class="nohighlight">:ol[
   :forEach({iterable:["a","b","c"]})[
       :li[${item} at ${index}]
   ]
@@ -245,13 +245,13 @@ Use SECST to joyfully create compelling, interactive HTML documents.</code></pre
  A --- B
  B--&gt;C[fa:fa-ban forbidden]
  B--&gt;D(fa:fa-spinner);
-]</code></pre></p><p>            renders as</p><script src="https://cdn.jsdelivr.net/npm/mermaid@9/dist/mermaid.min.js" onload="(() =&gt; { mermaid.initialize({ startOnLoad: true }) })()"></script><pre id="mermaidChart31595070140236525" class="mermaid">
+]</code></pre></p><p>            renders as</p><script src="https://cdn.jsdelivr.net/npm/mermaid@9/dist/mermaid.min.js" onload="(() =&gt; { mermaid.initialize({ startOnLoad: true }) })()"></script><pre id="mermaidChart8932401195997888" class="mermaid">
                 graph LR
                 A --- B
                 B-->C[fa:fa-ban forbidden]
                 B-->D(fa:fa-spinner);
             </pre><script type="module">
-            const el = document.getElementById("mermaidChart31595070140236525"),
+            const el = document.getElementById("mermaidChart8932401195997888"),
                 sibling = el.nextSibling,
                 insertSvg = function (svgCode, bindFunctions) {
                     el.innerHTML = svgCode;
@@ -265,7 +265,7 @@ Use SECST to joyfully create compelling, interactive HTML documents.</code></pre
                 B-->C[fa:fa-ban forbidden]
                 B-->D(fa:fa-spinner);
             `;
-            setTimeout(() => mermaid.mermaidAPI.render("mermaidChart31595070140236525", graphDefinition, insertSvg),1000);
+            setTimeout(() => mermaid.mermaidAPI.render("mermaidChart8932401195997888", graphDefinition, insertSvg),1000);
         </script><p>            There are lots of charts to choose from:</p><p>            <ul><li> <a target="_tab" href="https://mermaid.js.org/syntax/flowchart.html">Flowchart</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/sequenceDiagram.html">Sequence Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/classDiagram.html">Class Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/stateDiagram.html">State Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/entityRelationshipDiagram.html">Entity Relationship Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/userJourney.html">User Journey</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/gantt.html">Gannt</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/pie.html">Pie Chart</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/requirementDiagram.html">Requirement Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/gitgraph.html">Gitgraph Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/c4c.html">C4C Diagram</a></li><li> <a target="_tab" href="https://mermaid.js.org/syntax/mindmap.html">Mindmaps</a></li></ul><br>        </p></section><section><h3 id="questions" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Questions<span class="autohelm-nav autohelm-nav-up-down"> <a href="#mermaid-chart">&uarr;</a> <a href="#repl">&darr;</a></span></h3><p>            Questions can be used to create a quiz like experience.</p><p>            <pre class="secst"><code class="nohighlight">:question({type:"number",showanswer:true})[
   :text[What is the :code[sqrt(4)]?]
   :answer[sqrt(4)]
@@ -471,142 +471,502 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
                     </dl><br>                </p></section><section><h5 id="matrix-functions" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Matrix Functions<span class="autohelm-nav autohelm-nav-up-down"> <a href="#algebraic-functions">&uarr;</a> <a href="#unit-math">&darr;</a></span></h5><p>                    <input class="secst" data-default="" data-template="multiply([[1,2],[3,4]],[[5,6],[1,1]])" value="" title="multiply([[1,2],[3,4]],[[5,6],[1,1]])" data-fitcontent=""><br>                </p></section></section><section><h4 id="unit-math" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Unit Math<span class="autohelm-nav autohelm-nav-up-down"> <a href="#basic-math">&uarr;</a> <a href="#importing-data">&darr;</a></span></h4><p>                Unit math <a target="_tab" href="https://mathjs.org/docs/datatypes/units.html">from MathJS</a> allows for conversions using the word <code class="nohighlight">to</code>, as well as units for numbers, e.g. <code class="nohighlight">45 deg</code>.</p><p>                There are many <a target="_tab" href="https://mathjs.org/docs/datatypes/units.html#reference">supported units</a>.</p><p>                Here are a few examples:</p><p>                <code class="nohighlight">:value[2 inch to cm]</code> = <input class="secst" data-default="" data-template="2 inch to cm" value="" title="2 inch to cm" data-fitcontent=""></p><p>                <code class="nohighlight">:value[90 km/h to mi/h]</code> = <input class="secst" data-default="" data-template="90 km/h to mi/h" value="" title="90 km/h to mi/h" data-fitcontent=""></p><p>                <code class="nohighlight">:value[90 km/h to m/h]</code> = <input class="secst" data-default="" data-template="90 km/h to m/h" value="" title="90 km/h to m/h" data-fitcontent=""> <code class="nohighlight">m/h</code> is meters per hour</p><p>                <code class="nohighlight">:value[(1 week + 1 day) to days]</code> = <input class="secst" data-default="" data-template="(1 week + 1 day) to days" value="" title="(1 week + 1 day) to days" data-fitcontent=""></p><p>                <code class="nohighlight">:value[cos(45 deg)]</code> = <input class="secst" data-default="" data-template="cos(45 deg)" value="" title="cos(45 deg)" data-fitcontent=""></p><p>                <code class="nohighlight">:value[8.314 m^3 Pa / mol / K]</code> = <input class="secst" data-default="" data-template="8.314 m^3 Pa / mol / K" value="" title="8.314 m^3 Pa / mol / K" data-fitcontent=""></p><p>                Remember, if you have a value that looks like a formula, but is not, you can use the attribute <code class="nohighlight">literal</code>, e.g.  <code class="nohighlight">:value(literal)[2 inch to cm]</code> = <input class="secst" data-default="" data-template="2 inch to cm" value="2 inch to cm" title="2 inch to cm" data-literal="" data-fitcontent="" disabled="" style="width: 13ch;">.</p><p>                And, you can use <code class="nohighlight">plaintext</code> to display values without any styling, e.g. <code class="nohighlight">:value(plaintext)[90 km/h to mi/h]</code> = <span class="secst" data-default="" data-template="90 km/h to mi/h" value="" title="90 km/h to mi/h" data-plaintext="">90 km/h to mi/h</span>.</p></section><section><h4 id="importing-data" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Importing Data<span class="autohelm-nav autohelm-nav-up-down"> <a href="#unit-math">&uarr;</a> <a href="#advanced-formulas">&darr;</a></span></h4><p>                Values can included imported data using the <code class="nohighlight">src</code> attribute and a mime type provided in the <code class="nohighlight">type</code> attribute. The trailing <code class="nohighlight">[]</code> are optional.</p><p>                Values with the boolean attribute <code class="nohighlight">static</code> is import data at transpile time. If importing fails, another attempt is made at runtime.</p><p>                JSON is formatted for readability and <a target="_tab" href="https://json5.org">JSON5</a> is supported to make it easier to handle remote data.</p><p>                <pre class="secst"><code class="nohighlight">:value(https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson static {type:"application/json"})</code></pre></p><p>                <textarea class="secst" data-mime-type="application/json" data-default="" title="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson" data-fitcontent="" disabled="">{
   "type": "FeatureCollection",
   "metadata": {
-    "generated": 1672272480000,
+    "generated": 1672508400000,
     "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson",
     "title": "USGS All Earthquakes, Past Hour",
     "status": 200,
     "api": "1.10.3",
-    "count": 3
+    "count": 12
   },
   "features": [
     {
       "type": "Feature",
       "properties": {
-        "mag": 2.76,
-        "place": "21km ESE of Yosemite Valley, CA",
-        "time": 1672271666390,
-        "updated": 1672272250034,
+        "mag": 1.4,
+        "place": "2 km ENE of Big Lake, Alaska",
+        "time": 1672508159604,
+        "updated": 1672508279718,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73826151",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73826151.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022grxho6w",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022grxho6w.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 117,
-        "net": "nc",
-        "code": "73826151",
-        "ids": ",nc73826151,",
-        "sources": ",nc,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 10,
-        "dmin": 0.2677,
-        "rms": 0.08,
-        "gap": 143,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 2.8 - 21km ESE of Yosemite Valley, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -119.3601685,
-          37.6591682,
-          19.56
-        ]
-      },
-      "id": "nc73826151"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.19,
-        "place": "6km NW of The Geysers, CA",
-        "time": 1672271464390,
-        "updated": 1672272249919,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73826146",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73826146.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 22,
-        "net": "nc",
-        "code": "73826146",
-        "ids": ",nc73826146,",
-        "sources": ",nc,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 7,
-        "dmin": 0.015,
-        "rms": 0.04,
-        "gap": 151,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 1.2 - 6km NW of The Geysers, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.8144989,
-          38.8079987,
-          15.43
-        ]
-      },
-      "id": "nc73826146"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.77999997,
-        "place": "Island of Hawaii, Hawaii",
-        "time": 1672270536390,
-        "updated": 1672270708160,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73285822",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73285822.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 49,
-        "net": "hv",
-        "code": "73285822",
-        "ids": ",hv73285822,",
-        "sources": ",hv,",
+        "sig": 30,
+        "net": "ak",
+        "code": "022grxho6w",
+        "ids": ",ak022grxho6w,",
+        "sources": ",ak,",
         "types": ",origin,phase-data,",
-        "nst": 6,
+        "nst": null,
         "dmin": null,
-        "rms": 0.119999997,
-        "gap": 127,
-        "magType": "md",
+        "rms": 0.57,
+        "gap": null,
+        "magType": "ml",
         "type": "earthquake",
-        "title": "M 1.8 - Island of Hawaii, Hawaii"
+        "title": "M 1.4 - 2 km ENE of Big Lake, Alaska"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -155.29817199707,
-          19.3696670532227,
-          1.77999997138977
+          -149.9083,
+          61.5353,
+          41.1
         ]
       },
-      "id": "hv73285822"
+      "id": "ak022grxho6w"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1,
+        "place": "58 km WNW of Ninilchik, Alaska",
+        "time": 1672507850406,
+        "updated": 1672507939715,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022grxgkwg",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022grxgkwg.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 15,
+        "net": "ak",
+        "code": "022grxgkwg",
+        "ids": ",ak022grxgkwg,",
+        "sources": ",ak,",
+        "types": ",origin,phase-data,",
+        "nst": null,
+        "dmin": null,
+        "rms": 0.26,
+        "gap": null,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 1.0 - 58 km WNW of Ninilchik, Alaska"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -152.6495,
+          60.2449,
+          97.8
+        ]
+      },
+      "id": "ak022grxgkwg"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 0.81,
+        "place": "16km N of Borrego Springs, CA",
+        "time": 1672507053210,
+        "updated": 1672507268907,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40152271",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40152271.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 10,
+        "net": "ci",
+        "code": "40152271",
+        "ids": ",ci40152271,",
+        "sources": ",ci,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 18,
+        "dmin": 0.139,
+        "rms": 0.17,
+        "gap": 164,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 0.8 - 16km N of Borrego Springs, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -116.368,
+          33.4013333,
+          2.91
+        ]
+      },
+      "id": "ci40152271"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 0.95,
+        "place": "16km N of Borrego Springs, CA",
+        "time": 1672507001320,
+        "updated": 1672507246052,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40152263",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40152263.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 14,
+        "net": "ci",
+        "code": "40152263",
+        "ids": ",ci40152263,",
+        "sources": ",ci,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 31,
+        "dmin": 0.138,
+        "rms": 0.25,
+        "gap": 66,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 1.0 - 16km N of Borrego Springs, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -116.3846667,
+          33.4038333,
+          1.73
+        ]
+      },
+      "id": "ci40152263"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 2.1,
+        "place": "45 km N of Larsen Bay, Alaska",
+        "time": 1672506952112,
+        "updated": 1672507100909,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022grxddaj",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022grxddaj.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 68,
+        "net": "ak",
+        "code": "022grxddaj",
+        "ids": ",ak022grxddaj,",
+        "sources": ",ak,",
+        "types": ",origin,phase-data,",
+        "nst": null,
+        "dmin": null,
+        "rms": 0.74,
+        "gap": null,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 2.1 - 45 km N of Larsen Bay, Alaska"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -154.0782,
+          57.9422,
+          7.7
+        ]
+      },
+      "id": "ak022grxddaj"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.6,
+        "place": "77 km N of Chickaloon, Alaska",
+        "time": 1672506731221,
+        "updated": 1672506868719,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022grxcmzm",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022grxcmzm.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 39,
+        "net": "ak",
+        "code": "022grxcmzm",
+        "ids": ",ak022grxcmzm,",
+        "sources": ",ak,",
+        "types": ",origin,phase-data,",
+        "nst": null,
+        "dmin": null,
+        "rms": 0.51,
+        "gap": null,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 1.6 - 77 km N of Chickaloon, Alaska"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -148.2308,
+          62.4823,
+          41.9
+        ]
+      },
+      "id": "ak022grxcmzm"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.4,
+        "place": "19 km N of Four Mile Road, Alaska",
+        "time": 1672506522901,
+        "updated": 1672506627565,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022grxbuki",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022grxbuki.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 30,
+        "net": "ak",
+        "code": "022grxbuki",
+        "ids": ",ak022grxbuki,",
+        "sources": ",ak,",
+        "types": ",origin,phase-data,",
+        "nst": null,
+        "dmin": null,
+        "rms": 0.14,
+        "gap": null,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 1.4 - 19 km N of Four Mile Road, Alaska"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.1113,
+          64.7752,
+          16.4
+        ]
+      },
+      "id": "ak022grxbuki"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.1,
+        "place": "17km N of Borrego Springs, CA",
+        "time": 1672506179190,
+        "updated": 1672506386076,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40152255",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40152255.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 19,
+        "net": "ci",
+        "code": "40152255",
+        "ids": ",ci40152255,",
+        "sources": ",ci,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 35,
+        "dmin": 0.1394,
+        "rms": 0.25,
+        "gap": 67,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 1.1 - 17km N of Borrego Springs, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -116.383,
+          33.405,
+          1.99
+        ]
+      },
+      "id": "ci40152255"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 0.56,
+        "place": "13km SE of Anza, CA",
+        "time": 1672506038560,
+        "updated": 1672506260729,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40152247",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40152247.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 5,
+        "net": "ci",
+        "code": "40152247",
+        "ids": ",ci40152247,",
+        "sources": ",ci,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 16,
+        "dmin": 0.03438,
+        "rms": 0.24,
+        "gap": 98,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 0.6 - 13km SE of Anza, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -116.5615,
+          33.4896667,
+          5.37
+        ]
+      },
+      "id": "ci40152247"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 2.02,
+        "place": "10km S of Laytonville, CA",
+        "time": 1672505649740,
+        "updated": 1672507452747,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73827281",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73827281.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 63,
+        "net": "nc",
+        "code": "73827281",
+        "ids": ",nc73827281,",
+        "sources": ",nc,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 6,
+        "dmin": 0.06896,
+        "rms": 0.07,
+        "gap": 185,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 2.0 - 10km S of Laytonville, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.4981689,
+          39.5991669,
+          4.59
+        ]
+      },
+      "id": "nc73827281"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.23,
+        "place": "16km N of Borrego Springs, CA",
+        "time": 1672504853660,
+        "updated": 1672505505190,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40152239",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40152239.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 23,
+        "net": "ci",
+        "code": "40152239",
+        "ids": ",ci40152239,",
+        "sources": ",ci,",
+        "types": ",focal-mechanism,nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 46,
+        "dmin": 0.1253,
+        "rms": 0.23,
+        "gap": 66,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 1.2 - 16km N of Borrego Springs, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -116.3873333,
+          33.402,
+          1.85
+        ]
+      },
+      "id": "ci40152239"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 2.02,
+        "place": "17km N of Borrego Springs, CA",
+        "time": 1672504807350,
+        "updated": 1672505454310,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40152231",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40152231.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 63,
+        "net": "ci",
+        "code": "40152231",
+        "ids": ",ci40152231,",
+        "sources": ",ci,",
+        "types": ",focal-mechanism,nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 76,
+        "dmin": 0.12,
+        "rms": 0.22,
+        "gap": 30,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 2.0 - 17km N of Borrego Springs, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -116.3963333,
+          33.4056667,
+          2
+        ]
+      },
+      "id": "ci40152231"
     }
   ],
   "bbox": [
-    -155.29817199707,
-    19.369667053223,
-    1.7799999713898,
-    -119.3601685,
-    38.8079987,
-    19.56
+    -154.0782,
+    33.4013333,
+    1.73,
+    -116.368,
+    64.7752,
+    97.8
   ]
 }</textarea></p><p>                Imported data is readonly because it is essentially a computation. To make it editable, use the attribute <code class="nohighlight">editable</code>.</p><p>                <pre class="secst"><code class="nohighlight">:value(https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson editable {type:"application/json"})</code></pre></p><p>                <textarea class="secst" data-mime-type="application/json" data-default="" data-template="await (async () =&gt; {
                         try {
@@ -630,142 +990,502 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
                         })()" title="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson" data-editable="" data-fitcontent="" style="height: 30em; width: 80ch;">{
   "type": "FeatureCollection",
   "metadata": {
-    "generated": 1672272480000,
+    "generated": 1672508400000,
     "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson",
     "title": "USGS All Earthquakes, Past Hour",
     "status": 200,
     "api": "1.10.3",
-    "count": 3
+    "count": 12
   },
   "features": [
     {
       "type": "Feature",
       "properties": {
-        "mag": 2.76,
-        "place": "21km ESE of Yosemite Valley, CA",
-        "time": 1672271666390,
-        "updated": 1672272250034,
+        "mag": 1.4,
+        "place": "2 km ENE of Big Lake, Alaska",
+        "time": 1672508159604,
+        "updated": 1672508279718,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73826151",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73826151.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022grxho6w",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022grxho6w.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 117,
-        "net": "nc",
-        "code": "73826151",
-        "ids": ",nc73826151,",
-        "sources": ",nc,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 10,
-        "dmin": 0.2677,
-        "rms": 0.08,
-        "gap": 143,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 2.8 - 21km ESE of Yosemite Valley, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -119.3601685,
-          37.6591682,
-          19.56
-        ]
-      },
-      "id": "nc73826151"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.19,
-        "place": "6km NW of The Geysers, CA",
-        "time": 1672271464390,
-        "updated": 1672272249919,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73826146",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73826146.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 22,
-        "net": "nc",
-        "code": "73826146",
-        "ids": ",nc73826146,",
-        "sources": ",nc,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 7,
-        "dmin": 0.015,
-        "rms": 0.04,
-        "gap": 151,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 1.2 - 6km NW of The Geysers, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.8144989,
-          38.8079987,
-          15.43
-        ]
-      },
-      "id": "nc73826146"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.77999997,
-        "place": "Island of Hawaii, Hawaii",
-        "time": 1672270536390,
-        "updated": 1672270708160,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73285822",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73285822.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 49,
-        "net": "hv",
-        "code": "73285822",
-        "ids": ",hv73285822,",
-        "sources": ",hv,",
+        "sig": 30,
+        "net": "ak",
+        "code": "022grxho6w",
+        "ids": ",ak022grxho6w,",
+        "sources": ",ak,",
         "types": ",origin,phase-data,",
-        "nst": 6,
+        "nst": null,
         "dmin": null,
-        "rms": 0.119999997,
-        "gap": 127,
-        "magType": "md",
+        "rms": 0.57,
+        "gap": null,
+        "magType": "ml",
         "type": "earthquake",
-        "title": "M 1.8 - Island of Hawaii, Hawaii"
+        "title": "M 1.4 - 2 km ENE of Big Lake, Alaska"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -155.29817199707,
-          19.3696670532227,
-          1.77999997138977
+          -149.9083,
+          61.5353,
+          41.1
         ]
       },
-      "id": "hv73285822"
+      "id": "ak022grxho6w"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1,
+        "place": "58 km WNW of Ninilchik, Alaska",
+        "time": 1672507850406,
+        "updated": 1672507939715,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022grxgkwg",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022grxgkwg.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 15,
+        "net": "ak",
+        "code": "022grxgkwg",
+        "ids": ",ak022grxgkwg,",
+        "sources": ",ak,",
+        "types": ",origin,phase-data,",
+        "nst": null,
+        "dmin": null,
+        "rms": 0.26,
+        "gap": null,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 1.0 - 58 km WNW of Ninilchik, Alaska"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -152.6495,
+          60.2449,
+          97.8
+        ]
+      },
+      "id": "ak022grxgkwg"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 0.81,
+        "place": "16km N of Borrego Springs, CA",
+        "time": 1672507053210,
+        "updated": 1672507268907,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40152271",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40152271.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 10,
+        "net": "ci",
+        "code": "40152271",
+        "ids": ",ci40152271,",
+        "sources": ",ci,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 18,
+        "dmin": 0.139,
+        "rms": 0.17,
+        "gap": 164,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 0.8 - 16km N of Borrego Springs, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -116.368,
+          33.4013333,
+          2.91
+        ]
+      },
+      "id": "ci40152271"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 0.95,
+        "place": "16km N of Borrego Springs, CA",
+        "time": 1672507001320,
+        "updated": 1672507246052,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40152263",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40152263.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 14,
+        "net": "ci",
+        "code": "40152263",
+        "ids": ",ci40152263,",
+        "sources": ",ci,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 31,
+        "dmin": 0.138,
+        "rms": 0.25,
+        "gap": 66,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 1.0 - 16km N of Borrego Springs, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -116.3846667,
+          33.4038333,
+          1.73
+        ]
+      },
+      "id": "ci40152263"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 2.1,
+        "place": "45 km N of Larsen Bay, Alaska",
+        "time": 1672506952112,
+        "updated": 1672507100909,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022grxddaj",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022grxddaj.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 68,
+        "net": "ak",
+        "code": "022grxddaj",
+        "ids": ",ak022grxddaj,",
+        "sources": ",ak,",
+        "types": ",origin,phase-data,",
+        "nst": null,
+        "dmin": null,
+        "rms": 0.74,
+        "gap": null,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 2.1 - 45 km N of Larsen Bay, Alaska"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -154.0782,
+          57.9422,
+          7.7
+        ]
+      },
+      "id": "ak022grxddaj"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.6,
+        "place": "77 km N of Chickaloon, Alaska",
+        "time": 1672506731221,
+        "updated": 1672506868719,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022grxcmzm",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022grxcmzm.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 39,
+        "net": "ak",
+        "code": "022grxcmzm",
+        "ids": ",ak022grxcmzm,",
+        "sources": ",ak,",
+        "types": ",origin,phase-data,",
+        "nst": null,
+        "dmin": null,
+        "rms": 0.51,
+        "gap": null,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 1.6 - 77 km N of Chickaloon, Alaska"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -148.2308,
+          62.4823,
+          41.9
+        ]
+      },
+      "id": "ak022grxcmzm"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.4,
+        "place": "19 km N of Four Mile Road, Alaska",
+        "time": 1672506522901,
+        "updated": 1672506627565,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022grxbuki",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022grxbuki.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 30,
+        "net": "ak",
+        "code": "022grxbuki",
+        "ids": ",ak022grxbuki,",
+        "sources": ",ak,",
+        "types": ",origin,phase-data,",
+        "nst": null,
+        "dmin": null,
+        "rms": 0.14,
+        "gap": null,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 1.4 - 19 km N of Four Mile Road, Alaska"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.1113,
+          64.7752,
+          16.4
+        ]
+      },
+      "id": "ak022grxbuki"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.1,
+        "place": "17km N of Borrego Springs, CA",
+        "time": 1672506179190,
+        "updated": 1672506386076,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40152255",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40152255.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 19,
+        "net": "ci",
+        "code": "40152255",
+        "ids": ",ci40152255,",
+        "sources": ",ci,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 35,
+        "dmin": 0.1394,
+        "rms": 0.25,
+        "gap": 67,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 1.1 - 17km N of Borrego Springs, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -116.383,
+          33.405,
+          1.99
+        ]
+      },
+      "id": "ci40152255"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 0.56,
+        "place": "13km SE of Anza, CA",
+        "time": 1672506038560,
+        "updated": 1672506260729,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40152247",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40152247.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 5,
+        "net": "ci",
+        "code": "40152247",
+        "ids": ",ci40152247,",
+        "sources": ",ci,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 16,
+        "dmin": 0.03438,
+        "rms": 0.24,
+        "gap": 98,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 0.6 - 13km SE of Anza, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -116.5615,
+          33.4896667,
+          5.37
+        ]
+      },
+      "id": "ci40152247"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 2.02,
+        "place": "10km S of Laytonville, CA",
+        "time": 1672505649740,
+        "updated": 1672507452747,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73827281",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73827281.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 63,
+        "net": "nc",
+        "code": "73827281",
+        "ids": ",nc73827281,",
+        "sources": ",nc,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 6,
+        "dmin": 0.06896,
+        "rms": 0.07,
+        "gap": 185,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 2.0 - 10km S of Laytonville, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.4981689,
+          39.5991669,
+          4.59
+        ]
+      },
+      "id": "nc73827281"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.23,
+        "place": "16km N of Borrego Springs, CA",
+        "time": 1672504853660,
+        "updated": 1672505505190,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40152239",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40152239.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 23,
+        "net": "ci",
+        "code": "40152239",
+        "ids": ",ci40152239,",
+        "sources": ",ci,",
+        "types": ",focal-mechanism,nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 46,
+        "dmin": 0.1253,
+        "rms": 0.23,
+        "gap": 66,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 1.2 - 16km N of Borrego Springs, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -116.3873333,
+          33.402,
+          1.85
+        ]
+      },
+      "id": "ci40152239"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 2.02,
+        "place": "17km N of Borrego Springs, CA",
+        "time": 1672504807350,
+        "updated": 1672505454310,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40152231",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40152231.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 63,
+        "net": "ci",
+        "code": "40152231",
+        "ids": ",ci40152231,",
+        "sources": ",ci,",
+        "types": ",focal-mechanism,nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 76,
+        "dmin": 0.12,
+        "rms": 0.22,
+        "gap": 30,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 2.0 - 17km N of Borrego Springs, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -116.3963333,
+          33.4056667,
+          2
+        ]
+      },
+      "id": "ci40152231"
     }
   ],
   "bbox": [
-    -155.29817199707,
-    19.369667053223,
-    1.7799999713898,
-    -119.3601685,
-    38.8079987,
-    19.56
+    -154.0782,
+    33.4013333,
+    1.73,
+    -116.368,
+    64.7752,
+    97.8
   ]
 }</textarea></p><p>                If an id is added, the data can be used in a computation.</p><p>                <pre class="secst"><code class="nohighlight">:value(#earthquake-data https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson {type:"application/json"})
 
@@ -791,142 +1511,502 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
                         })()" title="https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson" data-fitcontent="" disabled="" style="height: 30em; width: 80ch;">{
   "type": "FeatureCollection",
   "metadata": {
-    "generated": 1672272480000,
+    "generated": 1672508400000,
     "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson",
     "title": "USGS All Earthquakes, Past Hour",
     "status": 200,
     "api": "1.10.3",
-    "count": 3
+    "count": 12
   },
   "features": [
     {
       "type": "Feature",
       "properties": {
-        "mag": 2.76,
-        "place": "21km ESE of Yosemite Valley, CA",
-        "time": 1672271666390,
-        "updated": 1672272250034,
+        "mag": 1.4,
+        "place": "2 km ENE of Big Lake, Alaska",
+        "time": 1672508159604,
+        "updated": 1672508279718,
         "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73826151",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73826151.geojson",
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022grxho6w",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022grxho6w.geojson",
         "felt": null,
         "cdi": null,
         "mmi": null,
         "alert": null,
         "status": "automatic",
         "tsunami": 0,
-        "sig": 117,
-        "net": "nc",
-        "code": "73826151",
-        "ids": ",nc73826151,",
-        "sources": ",nc,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 10,
-        "dmin": 0.2677,
-        "rms": 0.08,
-        "gap": 143,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 2.8 - 21km ESE of Yosemite Valley, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -119.3601685,
-          37.6591682,
-          19.56
-        ]
-      },
-      "id": "nc73826151"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.19,
-        "place": "6km NW of The Geysers, CA",
-        "time": 1672271464390,
-        "updated": 1672272249919,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73826146",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73826146.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 22,
-        "net": "nc",
-        "code": "73826146",
-        "ids": ",nc73826146,",
-        "sources": ",nc,",
-        "types": ",nearby-cities,origin,phase-data,scitech-link,",
-        "nst": 7,
-        "dmin": 0.015,
-        "rms": 0.04,
-        "gap": 151,
-        "magType": "md",
-        "type": "earthquake",
-        "title": "M 1.2 - 6km NW of The Geysers, CA"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          -122.8144989,
-          38.8079987,
-          15.43
-        ]
-      },
-      "id": "nc73826146"
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "mag": 1.77999997,
-        "place": "Island of Hawaii, Hawaii",
-        "time": 1672270536390,
-        "updated": 1672270708160,
-        "tz": null,
-        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/hv73285822",
-        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/hv73285822.geojson",
-        "felt": null,
-        "cdi": null,
-        "mmi": null,
-        "alert": null,
-        "status": "automatic",
-        "tsunami": 0,
-        "sig": 49,
-        "net": "hv",
-        "code": "73285822",
-        "ids": ",hv73285822,",
-        "sources": ",hv,",
+        "sig": 30,
+        "net": "ak",
+        "code": "022grxho6w",
+        "ids": ",ak022grxho6w,",
+        "sources": ",ak,",
         "types": ",origin,phase-data,",
-        "nst": 6,
+        "nst": null,
         "dmin": null,
-        "rms": 0.119999997,
-        "gap": 127,
-        "magType": "md",
+        "rms": 0.57,
+        "gap": null,
+        "magType": "ml",
         "type": "earthquake",
-        "title": "M 1.8 - Island of Hawaii, Hawaii"
+        "title": "M 1.4 - 2 km ENE of Big Lake, Alaska"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -155.29817199707,
-          19.3696670532227,
-          1.77999997138977
+          -149.9083,
+          61.5353,
+          41.1
         ]
       },
-      "id": "hv73285822"
+      "id": "ak022grxho6w"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1,
+        "place": "58 km WNW of Ninilchik, Alaska",
+        "time": 1672507850406,
+        "updated": 1672507939715,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022grxgkwg",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022grxgkwg.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 15,
+        "net": "ak",
+        "code": "022grxgkwg",
+        "ids": ",ak022grxgkwg,",
+        "sources": ",ak,",
+        "types": ",origin,phase-data,",
+        "nst": null,
+        "dmin": null,
+        "rms": 0.26,
+        "gap": null,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 1.0 - 58 km WNW of Ninilchik, Alaska"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -152.6495,
+          60.2449,
+          97.8
+        ]
+      },
+      "id": "ak022grxgkwg"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 0.81,
+        "place": "16km N of Borrego Springs, CA",
+        "time": 1672507053210,
+        "updated": 1672507268907,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40152271",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40152271.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 10,
+        "net": "ci",
+        "code": "40152271",
+        "ids": ",ci40152271,",
+        "sources": ",ci,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 18,
+        "dmin": 0.139,
+        "rms": 0.17,
+        "gap": 164,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 0.8 - 16km N of Borrego Springs, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -116.368,
+          33.4013333,
+          2.91
+        ]
+      },
+      "id": "ci40152271"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 0.95,
+        "place": "16km N of Borrego Springs, CA",
+        "time": 1672507001320,
+        "updated": 1672507246052,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40152263",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40152263.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 14,
+        "net": "ci",
+        "code": "40152263",
+        "ids": ",ci40152263,",
+        "sources": ",ci,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 31,
+        "dmin": 0.138,
+        "rms": 0.25,
+        "gap": 66,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 1.0 - 16km N of Borrego Springs, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -116.3846667,
+          33.4038333,
+          1.73
+        ]
+      },
+      "id": "ci40152263"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 2.1,
+        "place": "45 km N of Larsen Bay, Alaska",
+        "time": 1672506952112,
+        "updated": 1672507100909,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022grxddaj",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022grxddaj.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 68,
+        "net": "ak",
+        "code": "022grxddaj",
+        "ids": ",ak022grxddaj,",
+        "sources": ",ak,",
+        "types": ",origin,phase-data,",
+        "nst": null,
+        "dmin": null,
+        "rms": 0.74,
+        "gap": null,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 2.1 - 45 km N of Larsen Bay, Alaska"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -154.0782,
+          57.9422,
+          7.7
+        ]
+      },
+      "id": "ak022grxddaj"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.6,
+        "place": "77 km N of Chickaloon, Alaska",
+        "time": 1672506731221,
+        "updated": 1672506868719,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022grxcmzm",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022grxcmzm.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 39,
+        "net": "ak",
+        "code": "022grxcmzm",
+        "ids": ",ak022grxcmzm,",
+        "sources": ",ak,",
+        "types": ",origin,phase-data,",
+        "nst": null,
+        "dmin": null,
+        "rms": 0.51,
+        "gap": null,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 1.6 - 77 km N of Chickaloon, Alaska"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -148.2308,
+          62.4823,
+          41.9
+        ]
+      },
+      "id": "ak022grxcmzm"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.4,
+        "place": "19 km N of Four Mile Road, Alaska",
+        "time": 1672506522901,
+        "updated": 1672506627565,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ak022grxbuki",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ak022grxbuki.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 30,
+        "net": "ak",
+        "code": "022grxbuki",
+        "ids": ",ak022grxbuki,",
+        "sources": ",ak,",
+        "types": ",origin,phase-data,",
+        "nst": null,
+        "dmin": null,
+        "rms": 0.14,
+        "gap": null,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 1.4 - 19 km N of Four Mile Road, Alaska"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -149.1113,
+          64.7752,
+          16.4
+        ]
+      },
+      "id": "ak022grxbuki"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.1,
+        "place": "17km N of Borrego Springs, CA",
+        "time": 1672506179190,
+        "updated": 1672506386076,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40152255",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40152255.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 19,
+        "net": "ci",
+        "code": "40152255",
+        "ids": ",ci40152255,",
+        "sources": ",ci,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 35,
+        "dmin": 0.1394,
+        "rms": 0.25,
+        "gap": 67,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 1.1 - 17km N of Borrego Springs, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -116.383,
+          33.405,
+          1.99
+        ]
+      },
+      "id": "ci40152255"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 0.56,
+        "place": "13km SE of Anza, CA",
+        "time": 1672506038560,
+        "updated": 1672506260729,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40152247",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40152247.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 5,
+        "net": "ci",
+        "code": "40152247",
+        "ids": ",ci40152247,",
+        "sources": ",ci,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 16,
+        "dmin": 0.03438,
+        "rms": 0.24,
+        "gap": 98,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 0.6 - 13km SE of Anza, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -116.5615,
+          33.4896667,
+          5.37
+        ]
+      },
+      "id": "ci40152247"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 2.02,
+        "place": "10km S of Laytonville, CA",
+        "time": 1672505649740,
+        "updated": 1672507452747,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nc73827281",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/nc73827281.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 63,
+        "net": "nc",
+        "code": "73827281",
+        "ids": ",nc73827281,",
+        "sources": ",nc,",
+        "types": ",nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 6,
+        "dmin": 0.06896,
+        "rms": 0.07,
+        "gap": 185,
+        "magType": "md",
+        "type": "earthquake",
+        "title": "M 2.0 - 10km S of Laytonville, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -123.4981689,
+          39.5991669,
+          4.59
+        ]
+      },
+      "id": "nc73827281"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 1.23,
+        "place": "16km N of Borrego Springs, CA",
+        "time": 1672504853660,
+        "updated": 1672505505190,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40152239",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40152239.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 23,
+        "net": "ci",
+        "code": "40152239",
+        "ids": ",ci40152239,",
+        "sources": ",ci,",
+        "types": ",focal-mechanism,nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 46,
+        "dmin": 0.1253,
+        "rms": 0.23,
+        "gap": 66,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 1.2 - 16km N of Borrego Springs, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -116.3873333,
+          33.402,
+          1.85
+        ]
+      },
+      "id": "ci40152239"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "mag": 2.02,
+        "place": "17km N of Borrego Springs, CA",
+        "time": 1672504807350,
+        "updated": 1672505454310,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/ci40152231",
+        "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci40152231.geojson",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 63,
+        "net": "ci",
+        "code": "40152231",
+        "ids": ",ci40152231,",
+        "sources": ",ci,",
+        "types": ",focal-mechanism,nearby-cities,origin,phase-data,scitech-link,",
+        "nst": 76,
+        "dmin": 0.12,
+        "rms": 0.22,
+        "gap": 30,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 2.0 - 17km N of Borrego Springs, CA"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -116.3963333,
+          33.4056667,
+          2
+        ]
+      },
+      "id": "ci40152231"
     }
   ],
   "bbox": [
-    -155.29817199707,
-    19.369667053223,
-    1.7799999713898,
-    -119.3601685,
-    38.8079987,
-    19.56
+    -154.0782,
+    33.4013333,
+    1.73,
+    -116.368,
+    64.7752,
+    97.8
   ]
 }</textarea></p><p>               <textarea class="secst" data-mime-type="application/json" data-default="" data-template="$(#earthquake-data).metadata" title="$(#earthquake-data).metadata" data-fitcontent="" disabled="" style="height: 1.5em; width: 15ch;">[object Object]</textarea><br>            </p></section><section><h4 id="advanced-formulas" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Advanced Formulas<span class="autohelm-nav autohelm-nav-up-down"> <a href="#importing-data">&uarr;</a> <a href="#formulas-with-css-selectors-and-multiple-values">&darr;</a></span></h4><section><h5 id="formulas-with-css-selectors-and-multiple-values" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Formulas With CSS Selectors and Multiple Values<span class="autohelm-nav autohelm-nav-up-down"> <a href="#advanced-formulas">&uarr;</a> <a href="#macro-list-formatting">&darr;</a></span></h5><p>                    You can use almost any <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors">CSS selector</a> in place of <code class="nohighlight">#id</code> in <code class="nohighlight">$(#&lt;id&gt;)</code>. The value returned will be the contents of the value property on the element or (if not available) the value attribute or the <code class="nohighlight">innerText</code>.</p><p>                    You can use commas to select multiple identifier named elements, e.g. <code class="nohighlight">:value[$(#id1, #id2, #id3)]</code> is an array of the values associated with the elements <code class="nohighlight">:value(#id1)[3]</code>, <code class="nohighlight">:value(#id2)[2]</code>, <code class="nohighlight">:value(#id3)[1]</code> and will be <code class="nohighlight">[3,2,1]</code>.</p><p>                    A value reference <code class="nohighlight">$(css-selector)</code> can end in <code class="nohighlight">[]</code> to indicate multiple values should be returned as an array if the selector does not contain a comma. This allows tables to be treated somewhat like spreadsheets.<br>                </p></section><section><h5 id="macro-list-formatting" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Macro List Formatting<span class="autohelm-nav autohelm-nav-up-down"> <a href="#formulas-with-css-selectors-and-multiple-values">&uarr;</a> <a href="#javascript">&darr;</a></span></h5><p>                     The SECST formula evaluator supports supports some utility functions.<br>                </p></section><section><h5 id="javascript" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>JavaScript<span class="autohelm-nav autohelm-nav-up-down"> <a href="#macro-list-formatting">&uarr;</a> <a href="#styling-content">&darr;</a></span></h5><p>                    You can use any JavaScript that is available in <a target="_tab" href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API">WebWorkers</a> inside a macro. A special read-only <code class="nohighlight">document</code> object is also made available. This object has title, baseURI, location, and navigator properties along with a property for each meta tag name and value.<br>                </p></section></section></section></section><section><h2 id="styling-content" class="autohelm-heading"><span class="autohelm-nav autohelm-toc"><a href="#table-of-contents">&#9783;</a> </span>Styling Content<span class="autohelm-nav autohelm-nav-up-down"> <a href="#markup-without-html-names">&uarr;</a> <a href="#transpiling">&darr;</a></span></h2><p>        Content can be styled using CSS classes loaded using the <a href="#theme">theme tag</a>.</p><p>        CSS classes are applied to content using <code class="nohighlight">.&lt;class-name&gt;</code> inside the parenthetical configuration part of a tag, e.g. <code class="nohighlight">:p(.my-class1 .my-class2)[My content]</code>.</p><p>        Also see the <a href="#style">style tag</a>.</p><p>        Style can be applied at the element level using the <code class="nohighlight">style</code> attribute of a tag if the tag supports the style attribute. Currently only the <code class="nohighlight">p[]</code> tag supports the <code class="nohighlight">style</code> attribute. Using the <code class="nohighlight">theme[]</code> or <code class="nohighlight">:style[]</code> tag with an id selector is suggested.</p><p>        The style attribute can be in string or JSON format. If in JSON format, it should use camelCase versions of CSS property names. For example, <code class="nohighlight">:p({style:"width:200px;text-align:right;float:right"})[My right content]</code>  and <code class="nohighlight">:p({style:{width:"200px";textAlign:"right",float:"right"}}')[My right content]</code> produce the same output.</p><p>        <pre class="secst"><code class="nohighlight">:p({style:"text-align:left;float:right"})[
   My right content
@@ -1062,7 +2142,7 @@ is :value[derivative($(#formula),$(#variable))]</code></pre>
       "format": "transform format(value)",
       "lang": "string"
     },
-    "contentAllowed": "Wed Dec 28 2022 16:08:38 GMT-0800 (Pacific Standard Time)",
+    "contentAllowed": "Sat Dec 31 2022 09:40:30 GMT-0800 (Pacific Standard Time)",
     "minCount": 0,
     "maxCount": 1,
     "toText": true

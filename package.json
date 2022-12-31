@@ -1,6 +1,6 @@
 {
   "name": "secst",
-  "version": "0.0.1a",
+  "version": "0.0.2a",
   "description": "SECST is a semantic, extensible, computational, styleable tagged markup language. You can use it to joyfully create compelling, interactive documents backed by HTML.",
   "type": "module",
   "main": "index.js",
