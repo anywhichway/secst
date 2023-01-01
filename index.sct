@@ -1579,6 +1579,11 @@
     ]
 ]
 :section[
+    :h(#release-history)[Release History (Reverse Chronological Order)]
+
+    2023-01-01 v0.0.3a - Started publishing release history. Documented use of command line when :code[secst] is installed as a dev dependency.
+]
+:section[
     :h[Copyright and License]
     Copyright 2022, AnyWhichWay LLC
 
